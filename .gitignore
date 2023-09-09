@@ -29,3 +29,6 @@ bin/*
 # Ignore release folder
 Release/
 node_modules
+
+# Ignore pycache
+__pycache__
