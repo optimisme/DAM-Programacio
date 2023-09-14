@@ -1,0 +1,15 @@
+Cada exercici té un comentari amb l'enunciat
+
+Respòn després del comentari que té l'enunciat
+
+A Visual Studio Code, apreta el botó 'play' de dalt a la dreta.
+
+Recorda que també pots executar els arxius '.py' des del 'Terminal':
+
+    - Situar-te a la carpeta on es troba aquest arxiu:
+    cd Practiques/P01
+
+    - Executar el programa:
+    python Ex01.py
+
+    Pot ser Ex01.py, Ex02.py, Ex03.py ... segons l'exercici
