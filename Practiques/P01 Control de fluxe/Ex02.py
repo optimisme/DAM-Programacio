@@ -5,7 +5,7 @@ Un programa ha de llegir un any per teclat i ha de dir si és un any de traspàs
 
 Per calcular si un any és de traspàs és: 
 
-- El residu (mòdul) de l'any dividit entre 4 ha de ser 0
+- El residu (mòdul) de l'any dividit entre 4 ha de ser 0 
 
 - A més: el residu de l'any entre 100 ha de ser diferent de 0 o el residu de l'any entre 400 ha de ser 0
 
