@@ -1,5 +1,5 @@
 """
-Exercici 2
+Exercici 1
 
 Escriure un programa que pregunti a l’usuari:
 

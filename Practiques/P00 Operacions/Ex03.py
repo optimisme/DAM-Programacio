@@ -1,5 +1,5 @@
 """
-Exercici 4
+Exercici 3
 
 Escriure un programa que li pregunti a l’usuari una quantitat de diners, una tassa d’interès i un número de anys. 
 

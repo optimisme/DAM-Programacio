@@ -1,5 +1,5 @@
 """
-Exercici 5
+Exercici 4
 
 Implementar un programa que demani dos números i calculi:
 
