@@ -6,6 +6,8 @@ Fes un programa per convertir divises.
 El programa mostrarà aquest menú:
 
 ----------------------------------
+| Conversió de divises           |
+----------------------------------
 | 1. Euros a Dòlars              |
 | 2. Dòlars a Euros              |
 | 3. Euros a Yens                |
