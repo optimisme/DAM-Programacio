@@ -2,6 +2,7 @@ from IPython.display import display, HTML, Javascript
 
 class CanvasContext:
 
+    js_response = None
     js_src = ""
 
     PROPERTIES = {
@@ -52,13 +53,28 @@ class CanvasContext:
     def display(self):
         display(Javascript(CanvasContext.js_src))
 
+    def normalizeText(text):
+        if "${" in text:
+            return "`" + text.replace("`", "\\`") + "`"
+        else:
+            return text
+
+    def normalizeNumbers(value):
+        if isinstance(value, (int, float)):
+            return str(value)
+        elif "${" in value:
+            return "`" + value.replace("`", "\\`") + "`"
+        elif isinstance(value, str):
+            return value
+        else:
+            raise TypeError("Wrong value")
+
     def _set_property(self, prop_name, value):
         meta = self.PROPERTIES[prop_name]
         if meta["type"] == "string":
             value = f"'{value}'"
         elif meta["type"] == "number":
-            value = str(value)  # Convertim el número a string per a la interpolació
-        # Si es necessiten altres conversions de tipus, es poden afegir aquí
+            value = str(value)
 
         setattr(self, f"_{prop_name}", value)
         js_code = f"""
@@ -69,25 +85,49 @@ class CanvasContext:
     def _get_property(self, prop_name):
         return getattr(self, f"_{prop_name}")
 
-    def measureText(self, text):
-        # TODO
-        return float(0.0)
+    def addVariable(self, destinationVariable, value):
+        if isinstance(value, str):
+            value = value.replace('`', '\\`')
+            value = f'`{value}`'
+        js_code = f"""
+        var {destinationVariable} = {value};
+        """
+        CanvasContext.js_src += js_code
 
-    def isPointInPath(self, x, y):
-        # TODO
-        return bool(True)
+    def measureText(self, destinatinVariableName, text):
+        text_value = CanvasContext.normalizeText(text)
+        js_code = f"""
+        {destinatinVariableName} = ctx.measureText('{text_value}');
+        """
+        CanvasContext.js_src += js_code
 
-    def isPointInStroke(self, x, y):
-        # TODO
-        return bool(True)
+    def isPointInPath(self, destinationVariable, x, y):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        js_code = f"""
+        {destinationVariable} = ctx.isPointInPath({x_value} , {y_value});
+        """
+        CanvasContext.js_src += js_code
 
-    def getTransform(self):
-        # TODO
-        return []
+    def isPointInStroke(self, destinationVariable, x, y):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        js_code = f"""
+        {destinationVariable} = ctx.isPointInStroke({x_value} , {y_value});
+        """
+        CanvasContext.js_src += js_code
 
-    def getLineDash(self):
-        # TODO
-        return []
+    def getTransform(self, destinationVariable):
+        js_code = f"""
+        {destinationVariable} = ctx.getTransform();
+        """
+        CanvasContext.js_src += js_code
+
+    def getLineDash(self, destinationVariable):
+        js_code = f"""
+        {destinationVariable} = ctx.getLineDash();
+        """
+        CanvasContext.js_src += js_code
 
     def save(self):
         js_code = f"""
@@ -102,40 +142,68 @@ class CanvasContext:
         CanvasContext.js_src += js_code
 
     def rectangle(self, x, y, ample, alt):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        ample_value = CanvasContext.normalizeNumbers(ample)
+        alt_value = CanvasContext.normalizeNumbers(alt)
         js_code = f"""
-        ctx.rect({x}, {y}, {ample}, {alt});
+        ctx.rect({x_value}, {y_value}, {ample_value}, {alt_value});
         """
         CanvasContext.js_src += js_code
 
     def fillRect(self, x, y, ample, alt):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        ample_value = CanvasContext.normalizeNumbers(ample)
+        alt_value = CanvasContext.normalizeNumbers(alt)
         js_code = f"""
-        ctx.fillRect({x}, {y}, {ample}, {alt});
+        ctx.fillRect({x_value}, {y_value}, {ample_value}, {alt_value});
         """
         CanvasContext.js_src += js_code
 
     def clearRect(self, x, y, ample, alt):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        ample_value = CanvasContext.normalizeNumbers(ample)
+        alt_value = CanvasContext.normalizeNumbers(alt)
         js_code = f"""
-        ctx.clearRect({x}, {y}, {ample}, {alt});
+        ctx.clearRect({x_value}, {y_value}, {ample_value}, {alt_value});
         """
         CanvasContext.js_src += js_code
 
     def strokeRect(self, x, y, ample, alt):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        ample_value = CanvasContext.normalizeNumbers(ample)
+        alt_value = CanvasContext.normalizeNumbers(alt)
         js_code = f"""
-        ctx.strokeRect({x}, {y}, {ample}, {alt});
+        ctx.strokeRect({x_value}, {y_value}, {ample_value}, {alt_value});
         """
         CanvasContext.js_src += js_code
 
     def fillText(self, text, x, y, maxAmple=None):
-        maxAmpleStr = f", {maxAmple}" if maxAmple else ""
+        text_value = CanvasContext.normalizeText(text)
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        maxA_value = ""
+        if (maxAmple):
+            maxA_value = CanvasContext.normalizeNumbers(maxAmple)
+            maxA_value = f", {maxA_value}"
         js_code = f"""
-        ctx.fillText('{text}', {x}, {y}{maxAmpleStr});
+        ctx.fillText({text_value}, {x_value}, {y_value}{maxA_value});
         """
         CanvasContext.js_src += js_code
 
     def strokeText(self, text, x, y, maxAmple=None):
-        maxAmpleStr = f", {maxAmple}" if maxAmple else ""
+        text_value = CanvasContext.normalizeText(text)
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        maxA_value = ""
+        if (maxAmple):
+            maxA_value = CanvasContext.normalizeNumbers(maxAmple)
+            maxA_value = f", {maxA_value}"
         js_code = f"""
-        ctx.strokeText('{text}', {x}, {y}{maxAmpleStr});
+        ctx.strokeText({text_value}, {x_value}, {y_value}{maxA_value});
         """
         CanvasContext.js_src += js_code
 
@@ -152,51 +220,86 @@ class CanvasContext:
         CanvasContext.js_src += js_code
 
     def moveTo(self, x, y):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
         js_code = f"""
-        ctx.moveTo({x}, {y});
+        ctx.moveTo({x_value}, {y_value});
         """
         CanvasContext.js_src += js_code
 
     def lineTo(self, x, y):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
         js_code = f"""
-        ctx.lineTo({x}, {y});
+        ctx.lineTo({x_value}, {y_value});
         """
         CanvasContext.js_src += js_code
 
     def bezierCurveTo(self, cp1x, cp1y, cp2x, cp2y, x, y):
+        cp1x_value = CanvasContext.normalizeNumbers(cp1x)
+        cp1y_value = CanvasContext.normalizeNumbers(cp1y)
+        cp2x_value = CanvasContext.normalizeNumbers(cp2x)
+        cp2y_value = CanvasContext.normalizeNumbers(cp2y)
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
         js_code = f"""
-        ctx.bezierCurveTo({cp1x}, {cp1y}, {cp2x}, {cp2y}, {x}, {y});
+        ctx.bezierCurveTo({cp1x_value}, {cp1y_value}, {cp2x_value}, {cp2y_value}, {x_value}, {y_value});
         """
         CanvasContext.js_src += js_code
 
     def quadraticCurveTo(self, cpx, cpy, x, y):
+        cpx_value = CanvasContext.normalizeNumbers(cpx)
+        cpy_value = CanvasContext.normalizeNumbers(cpy)
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
         js_code = f"""
-        ctx.quadraticCurveTo({cpx}, {cpy}, {x}, {y});
+        ctx.quadraticCurveTo({cpx_value}, {cpy_value}, {x_value}, {y_value});
         """
         CanvasContext.js_src += js_code
 
     def arc(self, x, y, radius, startAngle, endAngle, anticlockwise=False):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        radius_value = CanvasContext.normalizeNumbers(radius)
+        startAngle_value = CanvasContext.normalizeNumbers(startAngle)
+        endAngle_value = CanvasContext.normalizeNumbers(endAngle)
         js_code = f"""
-        ctx.arc({x}, {y}, {radius}, {startAngle}, {endAngle}, {str(anticlockwise).lower()});
+        ctx.arc({x_value}, {y_value}, {radius_value}, {startAngle_value}, {endAngle_value}, {str(anticlockwise).lower()});
         """
         CanvasContext.js_src += js_code
 
     def arcTo(self, x1, y1, x2, y2, radius):
+        x1_value = CanvasContext.normalizeNumbers(x1)
+        y1_value = CanvasContext.normalizeNumbers(y1)
+        x2_value = CanvasContext.normalizeNumbers(x2)
+        y2_value = CanvasContext.normalizeNumbers(y2)
+        radius_value = CanvasContext.normalizeNumbers(radius)
         js_code = f"""
-        ctx.arcTo({x1}, {y1}, {x2}, {y2}, {radius});
+        ctx.arcTo({x1_value}, {y1_value}, {x2_value}, {y2_value}, {radius_value});
         """
         CanvasContext.js_src += js_code
 
     def ellipse(self, x, y, radiusX, radiusY, rotation, startAngle, endAngle, anticlockwise=False):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        radiusX_value = CanvasContext.normalizeNumbers(radiusX)
+        radiusY_value = CanvasContext.normalizeNumbers(radiusY)
+        rotation_value = CanvasContext.normalizeNumbers(rotation)
+        startAngle_value = CanvasContext.normalizeNumbers(startAngle)
+        endAngle_value = CanvasContext.normalizeNumbers(endAngle)
         js_code = f"""
-        ctx.ellipse({x}, {y}, {radiusX}, {radiusY}, {rotation}, {startAngle}, {endAngle}, {str(anticlockwise).lower()});
+        ctx.ellipse({x_value}, {y_value}, {radiusX_value}, {radiusY_value}, {rotation_value}, {startAngle_value}, {endAngle_value}, {str(anticlockwise).lower()});
         """
         CanvasContext.js_src += js_code
 
     def roundRect(self, x, y, width, height, radius):
-        # Implementació de rectangle amb cantons arrodonits amb un radi determinat
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
+        width_value = CanvasContext.normalizeNumbers(width)
+        height_value = CanvasContext.normalizeNumbers(height)
+        radius_value = CanvasContext.normalizeNumbers(radius)
         js_code = f"""
-        ctx.roundRect({x}, {y} , {width}, {height}, {radius});
+        ctx.roundRect({x_value}, {y_value} , {width_value}, {height_value}, {radius_value});
         """
         CanvasContext.js_src += js_code
 
@@ -219,32 +322,49 @@ class CanvasContext:
         CanvasContext.js_src += js_code
 
     def rotate(self, angle):
+        angle_value = CanvasContext.normalizeNumbers(angle)
         js_code = f"""
-        ctx.rotate({angle});
+        ctx.rotate({angle_value});
         """
         CanvasContext.js_src += js_code
 
     def scale(self, scaleX, scaleY):
+        scaleX_value = CanvasContext.normalizeNumbers(scaleX)
+        scaleY_value = CanvasContext.normalizeNumbers(scaleY)
         js_code = f"""
-        ctx.scale({scaleX}, {scaleY});
+        ctx.scale({scaleX_value}, {scaleY_value});
         """
         CanvasContext.js_src += js_code
 
     def translate(self, x, y):
+        x_value = CanvasContext.normalizeNumbers(x)
+        y_value = CanvasContext.normalizeNumbers(y)
         js_code = f"""
-        ctx.translate({x}, {y});
+        ctx.translate({x_value}, {y_value});
         """
         CanvasContext.js_src += js_code
 
     def transform(self, a, b, c, d, e, f):
+        a_value = CanvasContext.normalizeNumbers(a)
+        b_value = CanvasContext.normalizeNumbers(b)
+        c_value = CanvasContext.normalizeNumbers(c)
+        d_value = CanvasContext.normalizeNumbers(d)
+        e_value = CanvasContext.normalizeNumbers(e)
+        f_value = CanvasContext.normalizeNumbers(f)
         js_code = f"""
-        ctx.transform({a}, {b}, {c}, {d}, {e}, {f});
+        ctx.transform({a_value}, {b_value}, {c_value}, {d_value}, {e_value}, {f_value});
         """
         CanvasContext.js_src += js_code
 
     def setTransform(self, a, b, c, d, e, f):
+        a_value = CanvasContext.normalizeNumbers(a)
+        b_value = CanvasContext.normalizeNumbers(b)
+        c_value = CanvasContext.normalizeNumbers(c)
+        d_value = CanvasContext.normalizeNumbers(d)
+        e_value = CanvasContext.normalizeNumbers(e)
+        f_value = CanvasContext.normalizeNumbers(f)
         js_code = f"""
-        ctx.setTransform({a}, {b}, {c}, {d}, {e}, {f});
+        ctx.setTransform({a_value}, {b_value}, {c_value}, {d_value}, {e_value}, {f_value});
         """
         CanvasContext.js_src += js_code
 
@@ -255,19 +375,29 @@ class CanvasContext:
         CanvasContext.js_src += js_code
 
     def drawImage(self, source, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight):
+        sx_value = CanvasContext.normalizeNumbers(sx)
+        sy_value = CanvasContext.normalizeNumbers(sy)
+        sWidth_value = CanvasContext.normalizeNumbers(sWidth)
+        sHeight_value = CanvasContext.normalizeNumbers(sHeight)
+        dx_value = CanvasContext.normalizeNumbers(dx)
+        dy_value = CanvasContext.normalizeNumbers(dy)
+        dWidth_value = CanvasContext.normalizeNumbers(dWidth)
+        dHeight_value = CanvasContext.normalizeNumbers(dHeight)
         js_code = f"""
         var img = new Image();
         img.src = '{source}';
         img.onload = function() {{
-            ctx.drawImage(img, {sx}, {sy}, {sWidth}, {sHeight}, {dx}, {dy}, {dWidth}, {dHeight});
+            ctx.drawImage(img, {sx_value}, {sy_value}, {sWidth_value}, {sHeight_value}, {dx_value}, {dy_value}, {dWidth_value}, {dHeight_value});
         }};
         """
         CanvasContext.js_src += js_code
 
     def putImageData(self, imageData, dx, dy):
         # Aquí, imageData hauria de ser una cadena que representi les dades de la imatge
+        dx_value = CanvasContext.normalizeNumbers(dx)
+        dy_value = CanvasContext.normalizeNumbers(dy)
         js_code = f"""
-        ctx.putImageData({imageData}, {dx}, {dy});
+        ctx.putImageData({imageData}, {dx_value}, {dy_value});
         """
         CanvasContext.js_src += js_code
 
