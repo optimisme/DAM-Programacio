@@ -51,30 +51,24 @@ class CanvasContext:
         CanvasContext.js_src += js_code
 
     def display(self):
+        # print(CanvasContext.js_src) 
         display(Javascript(CanvasContext.js_src))
 
     def normalizeText(text):
-        if "${" in text:
-            return "`" + text.replace("`", "\\`") + "`"
-        else:
-            return text
+        return "`" + text.replace("`", "\\`") + "`"
 
     def normalizeNumbers(value):
         if isinstance(value, (int, float)):
             return str(value)
-        elif "${" in value:
-            return "`" + value.replace("`", "\\`") + "`"
-        elif isinstance(value, str):
-            return value
         else:
-            raise TypeError("Wrong value")
+            return "`" + value.replace("`", "\\`") + "`"
 
     def _set_property(self, prop_name, value):
         meta = self.PROPERTIES[prop_name]
         if meta["type"] == "string":
-            value = f"'{value}'"
+            value = CanvasContext.normalizeText(value)
         elif meta["type"] == "number":
-            value = str(value)
+            value = CanvasContext.normalizeNumbers(value)
 
         setattr(self, f"_{prop_name}", value)
         js_code = f"""
@@ -97,7 +91,7 @@ class CanvasContext:
     def measureText(self, destinatinVariableName, text):
         text_value = CanvasContext.normalizeText(text)
         js_code = f"""
-        {destinatinVariableName} = ctx.measureText('{text_value}');
+        {destinatinVariableName} = ctx.measureText({text_value});
         """
         CanvasContext.js_src += js_code
 
@@ -433,7 +427,6 @@ class CanvasContext:
                 ctx.fillText(x.toString(), x, 10);
             }}
         }}
-
         for (let y = 0; y <= ctx.canvas.height; y += 25) {{
             ctx.strokeStyle = (y % 50 === 0) ? "#888888" : "#cccccc";
             ctx.beginPath();
