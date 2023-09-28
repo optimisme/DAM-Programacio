@@ -427,6 +427,7 @@ class CanvasContext:
         self.drawWhiteBackground()
         js_code = f"""
         ctx.save();
+        ctx.lineWidth = 1
         for (let x = 0; x <= ctx.canvas.width; x += 25) {{
             ctx.strokeStyle = (x % 50 === 0) ? "#888888" : "#cccccc";
             ctx.beginPath();
