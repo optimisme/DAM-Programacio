@@ -1,24 +1,20 @@
 """
-Exercici 2
+Exercici 11
 
-Fes un programa que mostri el següent menú:
+Fes un programa que pregunti dos numeros "segments" i "repeticions"
 
-    CALCULADORA
-    Menú Principal
+El programa ha de dibuixar un patró de segments de la següent manera:
 
-    1 - Sumar
-    2 - Restar
-    3 - Multiplicar
-    4 - Dividir
-    0 - Sortir
+3 segments, 4 repeticions (dibuixa 3 asteriscs separats per 3 espais, 4 vegades):
 
-    Opció: 
+***   ***   ***   ***
 
-L'usuari escriu el número d'opció, si s'escull una opció no coneguda 
-es mostra el menú de nou amb el text "Opció incorrecta" a sobre de la línia "Opció: "
+5 segments, 3 repeticions (dibuixa 5 asteriscs separats per 5 espais, 3 vegades):
 
-Un cop escollida una opció correcta, si és la 0 s'acaba el programa.
+*****     *****     *****
 
-Si és una altra opció, el programa demana dos números i mostra el resultat de l'operació.
+7 segments, 2 repeticions (dibuixa 7 asteriscs separats per 7 espais, 2 vegades):
+
+*******       *******
 
 """

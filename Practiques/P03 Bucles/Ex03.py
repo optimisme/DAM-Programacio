@@ -1,7 +1,7 @@
 """
 Exercici 3
 
-Fes u nprograma que calcula el número de la sort d'una persona.
+Fes un programa que calcula el número de la sort d'una persona.
 
 Primer demana la data de naixement en format dd/mm/aaaa.
 

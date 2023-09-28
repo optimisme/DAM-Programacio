@@ -1,16 +1,18 @@
 """
-Exercici 6
+Exercici 10
 
-Fes un programa que compti els múltiples de 7 entre 1 i 1000
+Fes un programa que pregunti quants nombres es volen generar.
 
-Nota, els múltiples de 7 dónen 0 com a residu quan es divideixen entre 7.
+Si l'usuari introdueix un valor incorrecte, el torna a demanar.
 
-Per exemple:
+Després ha de generar 'x' nombres aleatoris (on x és el valor que ha demanat l'usuari)
 
-7 / 7 = 1 i residu 0, és múltiple de 7
-14 / 7 = 2 i residu 0, és múltiple de 7
-15 / 7 = 2 i residu 1, no és múltiple de 7
-21 / 7 = 3 i residu 0, és múltiple de 7
-27 / 7 = 3 i residu 6, no és múltiple de 7
+Per cada nombre generat, mostra els següents missatges segons correspongui:
+
+- El nombre X és diferent de l'anterior Y
+
+- En nombre X és igual a l'anterior
+
+I així fins que hagi generat tots els nombres.
 
 """
