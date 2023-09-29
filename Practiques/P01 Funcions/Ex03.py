@@ -16,5 +16,3 @@ El resultat ha de ser de l'estil:
 - "Has guanyat tu, he tret paper i tu has escollit tissores"
 
 """
-import mysql.connector
-
