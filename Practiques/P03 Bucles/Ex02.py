@@ -1,5 +1,4 @@
 """
-Exercici 11
 
 Fes un programa que pregunti dos numeros "segments" i "repeticions"
 

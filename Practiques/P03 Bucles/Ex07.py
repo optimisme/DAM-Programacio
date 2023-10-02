@@ -1,5 +1,4 @@
 """
-Exercici 7
 
 Escriu un programa que demani un número i escrigui els seus divisors.
 

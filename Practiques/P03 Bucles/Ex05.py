@@ -1,5 +1,4 @@
 """
-Exercici 5
 
 Fes un programa que demani dos números positius a l'usuari, anomenats 'base' i 'exponent'
 

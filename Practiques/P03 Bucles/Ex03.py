@@ -1,5 +1,4 @@
 """
-Exercici 3
 
 Fes un programa que calcula el número de la sort d'una persona.
 

@@ -1,5 +1,4 @@
 """
-Exercici 9
 
 Fes un programa que sumi tots els números primers entre 1 i 100
 

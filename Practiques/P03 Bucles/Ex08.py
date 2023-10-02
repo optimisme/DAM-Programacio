@@ -1,5 +1,4 @@
 """
-Exercici 8
 
 Fes un programa que demani a l'usuari un número múltiple de 10.
 

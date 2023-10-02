@@ -1,5 +1,4 @@
 """
-Exercici 10
 
 Fes un programa que pregunti quants nombres es volen generar.
 

@@ -1,5 +1,4 @@
 """
-Exercici 1
 
 Genera un programa que simuli una partida entre l'Ana i en Bernat.
 

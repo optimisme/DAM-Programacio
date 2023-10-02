@@ -1,5 +1,4 @@
 """
-Exercici 4
 
 Fes un programa que demani l'ample i l'alt d'un programa i el dibuixi amb asteriscs.
 
