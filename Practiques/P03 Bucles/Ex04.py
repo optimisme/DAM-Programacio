@@ -1,6 +1,6 @@
 """
 
-Fes un programa que demani l'ample i l'alt d'un programa i el dibuixi amb asteriscs.
+Fes un programa que demani l'ample i l'alt d'un rectangle i el dibuixi amb asteriscs.
 
 Exemple de sortida:
 
