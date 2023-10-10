@@ -11,9 +11,7 @@ sumant tots els números d'aquest resultat i així fins que s'obté un número d
 
 Per exemple:
 
-29091981
-2 + 9 + 0 + 9 + 1 + 9 + 8 + 1 = 39
-3 + 9 = 12
-1 + 2 = 3
+29/09/1981 > 2 + 9 + 0 + 9 + 1 + 9 + 8 + 1 = 39
+01/07/1979 > 0 + 1 + 0 + 7 + 1 + 9 + 7 + 9 = 34
 
 """
