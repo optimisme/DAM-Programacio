@@ -1,6 +1,7 @@
 import os
 import platform
 import random
+import json
 
 """
 Jocs, El Rellotge
@@ -92,6 +93,7 @@ La funció ha de:
   - Si el número de la carta coincideix amb el comptador
       - El jugador agafa totes les cartes de la taula 
       - Les cartes de la taula es queden buides
+  - S'escriu la jugada per fer el seguiment pel terminal
     
 
 """
@@ -110,7 +112,7 @@ Fes una funció (joc_del_rellotge) que:
 - Inicialitzi el guanyador a -1
 - Inicialitzi les cartes de la taula a [], perquè no n'hi ha cap
 
-- Comença el joc, que no acaba fins que hi ha un jugador (while)
+- Comença el joc, que no acaba fins que hi ha un guanyador (while)
     - Per cada jugador:
         - Fa una jugada amb la funció (jugada)
         - Si el jugador s'ha quedat sense cartes:
@@ -121,6 +123,7 @@ Fes una funció (joc_del_rellotge) que:
     - Escriu qui ha guanyat
 
 """
+
 # Fes aquí el codi de l'exercici 4
 
 # Cridar aquí la funció per iniciar el joc

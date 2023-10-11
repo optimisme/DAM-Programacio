@@ -1,6 +1,7 @@
 import os
 import platform
 import random
+import json
 
 """
 Jocs, El Rellotge
@@ -20,15 +21,8 @@ En aquest apartat, farem el joc del "Rellotge" amb cartes.
 - El joc acaba quan un jugador es queda sense cartes.
 
 """
-
-# Aquesta funció neteja la pantalla, no la modifiquis
-def clear_screen():
-    sistema = platform.system()
-    if sistema == "Windows":
-        os.system('cls')
-    else:
-        os.system('clear')
-
+def diccionari_bonic(dic):
+    return json.dumps(dic, indent = 4)
 """
 -------------------------------------------------------------------------------
 Exercici 0
@@ -41,15 +35,15 @@ Les cartes han d'estar en un array, on la posició 0 és el número i la 1 el pa
 [1, "espases"]
 
 """
+# Fes aquí el codi de l'exercici 0
 def genera_cartes():
-    cartes = []
-    valors = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
-    pals = ["oros", "copes", "bastos", "espases"]
-    for pal in pals:
-        for valor in valors:
-            cartes.append([valor, pal])
-    return cartes
-
+    baralla = []
+    pals = ["espases", "oros", "bastons", "copes"]
+    for cnt_pal in range(0, len(pals)):
+        pal = pals[cnt_pal]
+        for cnt_num in range(1, 13):
+            baralla.append([cnt_num, pal])
+    return baralla
 """
 -------------------------------------------------------------------------------
 Exercici 1
@@ -58,8 +52,10 @@ Exercici 1
 Fes una funció (barreja_cartes) que retorni una baralla de cartes desordenada
 
 """
+# Fes aquí el codi de l'exercici 1
 def barreja_cartes(baralla):
     random.shuffle(baralla)
+    return baralla
 
 """
 -------------------------------------------------------------------------------
@@ -82,21 +78,25 @@ Ha de retornar:
 Abans de repartir, ha de barrejar les cartes
 
 """
+# Fes aquí el codi de l'exercici 2
 def reparteix_cartes(baralla, num_jugadors, num_cartes_per_jugador):
     if num_jugadors * num_cartes_per_jugador > len(baralla):
-        print("No hi ha prou cartes a la baralla per al repartiment.")
-        return baralla, []
-    
-    barreja_cartes(baralla)
-    mans_jugadors = []
-    for i in range(num_jugadors):
+        print("No hi ha prou cartes")
+        return  baralla, []
+    baralla = barreja_cartes(baralla)
+    mans = []
+    for cnt in range(0, num_jugadors):
         cartes_jugador = []
-        for j in range(num_cartes_per_jugador):
+        for cnt_cartes_jugador in range (0, num_cartes_per_jugador):
             carta = baralla.pop()
             cartes_jugador.append(carta)
-        mans_jugadors.append(cartes_jugador)
-    return baralla, mans_jugadors
-
+        mans.append(cartes_jugador)
+    return baralla, mans
+baralla = genera_cartes()
+baralla, mans = reparteix_cartes(baralla, 4, 12)
+print(baralla)
+print(mans[2])
+print(mans[2][2])
 """
 -------------------------------------------------------------------------------
 Exercici 3
@@ -124,15 +124,19 @@ La funció ha de:
     
 
 """
+# Fes aquí el codi de l'exercici 3
 def jugada(comptador, numero_jugador, cartes_jugador, cartes_taula):
-    carta_jugador = cartes_jugador.pop(0)
-    cartes_taula.append(carta_jugador)
-    print(f"{comptador}: Jugador {numero_jugador} posa la carta {carta_jugador} al centre (ara en té {len(cartes_jugador)}).")
-    if carta_jugador[0] == comptador:
-        cartes_jugador.extend(cartes_taula)
-        print(f"{comptador}: El comptador ({comptador}) coincideix amb la carta, el jugador {numero_jugador} agafa les cartes de la taula (ara en té {len(cartes_jugador)}).")
+    carta = cartes_jugador.pop()
+    cartes_taula.append(carta)
+    if carta[0] == comptador:
+        cartes_jugador = cartes_jugador + cartes_taula
         cartes_taula = []
+        print(f"{comptador}: El comptador ({comptador}) coincideix amb la carta, el jugador {numero_jugador} agafa les cartes de la taula (ara en té {len(cartes_jugador)}).")
+    else:
+        print(f"{comptador}: El jugador {numero_jugador} ha tirat {carta} li queden {len(cartes_jugador)}")
     return cartes_jugador, cartes_taula
+
+
 
 """
 -------------------------------------------------------------------------------
@@ -147,7 +151,7 @@ Fes una funció (joc_del_rellotge) que:
 - Inicialitzi el guanyador a -1
 - Inicialitzi les cartes de la taula a [], perquè no n'hi ha cap
 
-- Comença el joc, que no acaba fins que hi ha un jugador (while)
+- Comença el joc, que no acaba fins que hi ha un guanyador (while)
     - Per cada jugador:
         - Fa una jugada amb la funció (jugada)
         - Si el jugador s'ha quedat sense cartes:
@@ -158,6 +162,7 @@ Fes una funció (joc_del_rellotge) que:
     - Escriu qui ha guanyat
 
 """
+# Fes aquí el codi de l'exercici 4
 def joc_del_rellotge():
     baralla = genera_cartes()
     cartes_block, mans_jugadors = reparteix_cartes(baralla, 4, 12)
@@ -166,18 +171,18 @@ def joc_del_rellotge():
     guanyador = -1
 
     while guanyador == -1:
-        for numero_jugador in range(len(mans_jugadors)):
-            cartes_jugador = mans_jugadors[numero_jugador]
-            cartes_jugador, cartes_taula = jugada(comptador, numero_jugador, mans_jugadors[numero_jugador], cartes_taula)
+        for cnt_jugador in range(0, len(mans_jugadors)):
+            cartes_jugador = mans_jugadors[cnt_jugador]
+            cartes_jugador, cartes_taula = jugada(comptador, cnt_jugador, cartes_jugador, cartes_taula)
             if len(cartes_jugador) == 0:
-                guanyador = numero_jugador
-                break
+                guanyador = cnt_jugador
+                return guanyador
+            # Actualitzar el valor original de les mans d'aquest jugador
+            mans_jugadors[cnt_jugador] = cartes_jugador
             comptador = comptador + 1
             if comptador > 12:
                 comptador = 1
 
-    print(f"Jugador {guanyador} guanya la partida!")
-
 # Cridar aquí la funció per iniciar el joc
-clear_screen()
-joc_del_rellotge()
+guanyador = joc_del_rellotge()
+print(f"Ha guanyat el jugador {guanyador}")
