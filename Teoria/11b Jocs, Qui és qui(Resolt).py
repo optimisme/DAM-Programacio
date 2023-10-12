@@ -43,7 +43,10 @@ Fes una funció "genera_noms" que retorna:
 
 """
 # Fes aquí el codi de l'exercici 0
-
+def genera_noms():
+    noms = ["Phillip", "Susan", "Herman", "Anne", "Claire", "Richard", "Tom", "Max", "Sam", "Anita", "Joe", "Maria"]
+    random.shuffle(noms)
+    return noms
 
 """
 -------------------------------------------------------------------------------
@@ -57,6 +60,10 @@ Fes una funció "escull_carta" que:
 
 """
 # Fes aquí el codi de l'exercici 1
+def escull_carta():
+    baralla = genera_noms()
+    carta = baralla.pop()
+    return carta
 
 """
 -------------------------------------------------------------------------------
@@ -75,7 +82,15 @@ Fes una funció "genera_tauler" que retorna:
 (És un exemple, perquè els noms han d'estar barrejats aleatòriament)
 """
 # Fes aquí el codi de l'exercici 2
-
+def genera_tauler():
+    noms = genera_noms()
+    tauler = []  
+    for cnt_columna in range(0, 3):
+        fila = []
+        for cnt_fila in range(0, 4):
+            fila.append(noms.pop())
+        tauler.append(fila)
+    return tauler
 
 """
 -------------------------------------------------------------------------------
@@ -91,7 +106,17 @@ Fes una funció "genera_partida" que retorna un array amb:
 
 """
 # Fes aquí el codi de l'exercici 3
-
+def genera_partida():
+    resultat = []
+    personatgeUsuari = escull_carta()
+    personatgeOrdinador = escull_carta()
+    taulerUsuari = genera_tauler()
+    taulerOrdinador = genera_tauler()
+    resultat.append(personatgeUsuari)
+    resultat.append(personatgeOrdinador)
+    resultat.append(taulerUsuari)
+    resultat.append(taulerOrdinador)
+    return resultat
 
 """
 -------------------------------------------------------------------------------
@@ -115,6 +140,17 @@ Perquè quedi clar:
 
 """
 # Fes aquí el codi de l'exercici 4
+def escriu_nom():
+    clear_screen()
+    while True:
+        nom = input("Escriu el teu nom: ")
+        valid = True
+        for cnt in range(0, len(nom)):
+            lletra = nom[cnt]
+            if not lletra.isalpha():
+                valid = False
+        if valid:
+            return nom
 
 """
 -------------------------------------------------------------------------------
@@ -138,6 +174,16 @@ Fes una funció "selecciona_oponent" que retorna un oponent escollit per l'usuar
 
 """
 # Fes aquí el codi de l'exercici 5
+def selecciona_oponent():
+    clear_screen()
+    oponents = ["Romulus", "Tarpeia", "Horatius", "Cloelia", "Brutus", "Lucretia"]
+    while True:
+        print(", ".join(oponents))
+        oponent = input("Selecciona oponent: ")
+        if (oponent in oponents):
+            return oponent
+        clear_screen()
+        print("El nom escollit no és vàlid")
 
 """
 -------------------------------------------------------------------------------
@@ -157,6 +203,25 @@ C X X ? X
 
 """
 # Fes aquí el codi de l'exercici 6
+def dibuixa_tauler_secret(tauler):
+    print("  0 1 2 3")
+    lletres = "ABC"
+    for cnt_fila in range(0, len(tauler)):
+        txt = lletres[cnt_fila] + " "
+        for cnt_columna in range(0, len(tauler[0])):
+            casella = tauler[cnt_fila][cnt_columna]
+            if casella == "":
+                txt = txt + "X "
+            else:
+                txt = txt + "? "
+        print(txt)
+
+"""
+tauler = genera_tauler()
+tauler[1][2] = ""
+tauler[0][0] = ""
+dibuixa_tauler_secret(tauler)
+"""
 
 """
 -------------------------------------------------------------------------------
@@ -176,6 +241,29 @@ Fes una funció "posicio_valida" que:
 
 """
 # Fes aquí el codi de l'exercici 7
+def fila_columna(posicio):
+    lletres = "ABC"
+    txt_fila = posicio[0]
+    txt_columna = posicio[1]
+    if (txt_fila in lletres):
+        num_fila = lletres.index(txt_fila)
+    else:
+        num_fila = -1
+    num_columna = int(txt_columna)
+    if num_columna < 0 or num_columna > 3:
+        num_columna = -1
+    return num_fila, num_columna
+
+def posicio_valida(posicio, tauler):
+    num_fila, num_columna = fila_columna(posicio)
+    if num_fila == -1 or num_columna == -1:
+        return False
+    if tauler[num_fila][num_columna] == "":
+        return False
+    return True
+
+# print(posicio_valida("B2", tauler))
+# print(posicio_valida("A1", tauler))
 
 """
 -------------------------------------------------------------------------------
@@ -194,6 +282,16 @@ Fes una funció "jugada_usuari" que:
   
 """
 # Fes aquí el codi de l'exercici 8
+def jugada_usuari(nom_usuari, tauler):
+    while True:
+        print(f"Tauler {nom_usuari}:")
+        dibuixa_tauler_secret(tauler)
+        posicio = input("Escriu la posició per descobrir (per exemple A0): ")
+        if posicio_valida(posicio, tauler):
+            num_fila, num_columna = fila_columna(posicio)
+            return tauler[num_fila][num_columna]
+
+# print(jugada_usuari(tauler)) # Posar B2 ha de tornar a demanar, posar A1 ha de donar un nom
 
 """
 -------------------------------------------------------------------------------
@@ -209,6 +307,21 @@ Fes una funció "jugada_oponent" que:
 
 """
 # Fes aquí el codi de l'exercici 9
+def jugada_oponent(nom_oponent, tauler):
+    lletres = "ABC"
+    while True:
+        clear_screen()
+        print(f"Tauler {nom_oponent}:")
+        dibuixa_tauler_secret(tauler)
+        txt_fila = lletres[random.randint(0, 2)]
+        txt_columna = str(random.randint(0, 4))
+        posicio = txt_fila + txt_columna
+        print(posicio)
+        if posicio_valida(posicio, tauler):
+            num_fila, num_columna = fila_columna(posicio)
+            return tauler[num_fila][num_columna]
+
+# print(jugada_oponent(tauler))
 
 """
 -------------------------------------------------------------------------------
@@ -232,6 +345,31 @@ Fes una funció "joc_del_qui_es_qui" que:
 
 """
 # Fes aquí el codi de l'exercici 10
+def esborra_del_tauler(nom, tauler):
+    for cnt_fila in range(0, len(tauler)):
+        for cnt_columna in range(0, len(tauler[0])):
+            nom_tauler = tauler[cnt_fila][cnt_columna]
+            if nom_tauler == nom:
+                tauler[cnt_fila][cnt_columna] = ""
+    return tauler
+
+def joc_del_qui_es_qui(nom_usuari, nom_oponent):
+    partida = genera_partida()
+    guanyador = ""
+    while guanyador == "":
+        personatge_usuari = jugada_usuari(nom_oponent, partida[3])
+        if personatge_usuari == partida[0]:
+            guanyador = nom_usuari
+            break
+        personatge_oponent = jugada_oponent(nom_usuari, partida[2])
+        if personatge_oponent == partida[1]:
+            guanyador = nom_oponent
+            break
+        partida[2] = esborra_del_tauler(personatge_oponent, partida[2])
+        partida[3] = esborra_del_tauler(personatge_usuari, partida[3])
+    return guanyador
+
+# joc_del_qui_es_qui("Albert", "Skynet")
 
 """
 -------------------------------------------------------------------------------
@@ -262,3 +400,28 @@ Escull una opció:
 
 """
 # Fes aquí el codi de l'exercici 11
+def mostra_menu():
+    nom = ""
+    oponent = ""
+    guanyador = ""
+    while True:
+        clear_screen()
+        if (guanyador != ""):
+            print(f"Ha guanyat: {guanyador}")
+        print("""Qui és qui?
+        1) Escull el teu nom
+        2) Escull el nom de l'oponent
+        3) Juga
+        0) Sortir
+        """)
+        opcio = int(input("Escull una opció: "))
+        if opcio == 0:
+            break
+        if opcio == 1:
+            nom = escriu_nom()
+        if opcio == 2:
+            oponent = selecciona_oponent()
+        if opcio == 3:
+            guanyador = joc_del_qui_es_qui(nom, oponent)
+
+mostra_menu()
