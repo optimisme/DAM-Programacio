@@ -211,17 +211,17 @@ def joc_del_tres_en_ratlla():
     while True:
         tauler = jugada_usuari(tauler)
         guanyador = busca_guanyador(tauler)
+        if guanyador == "X":
+            break
         if taulell_complet(tauler):
             guanyador = "Empat"
-            break
-        if guanyador == "X":
             break
         tauler = jugada_ordinador(tauler)
         guanyador = busca_guanyador(tauler)
+        if guanyador == "O":
+            break
         if taulell_complet(tauler):
             guanyador = "Empat"
-            break
-        if guanyador == "O":
             break
     dibuixa_tauler(tauler)
     print("Ha guanyat: " + guanyador)
