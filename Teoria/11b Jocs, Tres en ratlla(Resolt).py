@@ -55,7 +55,7 @@ C · · O
 # Fes aquí el codi de l'exercici 1
 def dibuixa_tauler(tauler):
     clear_screen()
-    lletres = "ABC"
+    lletres = ["A", "B", "C"]
     print("  0 1 2 ")
     for cnt_fila in range(0, len(lletres)):
         txt_fila = lletres[cnt_fila] + " "
@@ -83,7 +83,7 @@ Fes una funció "posicio_valida" que:
 # Fes aquí el codi de l'exercici 2
 
 def fila_columna(posicio):
-    lletres = "ABC"
+    lletres = ["A", "B", "C"]
     txt_fila = posicio[0]
     txt_columna = posicio[1]
     if (txt_fila in lletres):
@@ -146,12 +146,15 @@ Fes una funció "jugada_ordinador" que:
 """
 # Fes aquí el codi de l'exercici 4
 def jugada_ordinador(tauler):
+    lletres = ["A", "B", "C"]
     while True:
         num_fila = random.randint(0, 2)
-        num_columna = random.randint(0, 2)
-        if tauler[num_fila][num_columna] == "·":
+        num_columna = int(random.randint(0, 2))
+        posicio = lletres[num_fila] + str(num_columna)
+        if posicio_valida(posicio, tauler):
+            tauler[num_fila][num_columna] = "O"
             break
-    tauler[num_fila][num_columna] = "O"
+ 
     dibuixa_tauler(tauler)
     return tauler
 
@@ -171,14 +174,14 @@ Fes una funció "busca_guanyador" que:
 
 def busca_guanyador(tauler):
     for cnt_fila in range(0, 3):
-        if tauler[cnt_fila][0] == tauler[cnt_fila][1] == tauler[cnt_fila][2]:
+        if tauler[cnt_fila][0] != "·" and tauler[cnt_fila][0] == tauler[cnt_fila][1] == tauler[cnt_fila][2]:
             return tauler[cnt_fila][0]
     for cnt_columna in range(0, 3):
-        if tauler[0][cnt_columna] == tauler[1][cnt_columna] == tauler[2][cnt_columna]:
+        if tauler[0][cnt_columna] != "·" and tauler[0][cnt_columna] == tauler[1][cnt_columna] == tauler[2][cnt_columna]:
             return tauler[0][cnt_columna]
-    if tauler[0][0] == tauler[1][1] == tauler[2][2]:
+    if tauler[0][0] != "·" and tauler[0][0] == tauler[1][1] and tauler[1][1] == tauler[2][2]:
         return tauler[0][0]
-    if tauler[0][2] == tauler[1][1] == tauler[2][0]:
+    if tauler[0][2] != "·" and tauler[0][2] == tauler[1][1] and tauler[1][1] == tauler[2][0]:
         return tauler[0][2]
     return "·"
 
@@ -194,17 +197,31 @@ Fes una funció "joc_del_tres_en_ratlla" que permet fer una partida al:
 
 """
 # Fes aquí el codi de l'exercici 6
+def taulell_complet(tauler):
+    for cnt_fila in range(0, 3):
+        for cnt_columna in range(0, 3):
+            if tauler[cnt_fila][cnt_columna] == "·":
+                return False
+    return True
+
 def joc_del_tres_en_ratlla():
     tauler = genera_tauler()
     while True:
         tauler = jugada_usuari(tauler)
         guanyador = busca_guanyador(tauler)
-        if guanyador != "·":
+        if taulell_complet(tauler):
+            guanyador = "Empat"
+            break
+        if guanyador == "X":
             break
         tauler = jugada_ordinador(tauler)
         guanyador = busca_guanyador(tauler)
-        if guanyador != "·":
+        if taulell_complet(tauler):
+            guanyador = "Empat"
             break
+        if guanyador == "O":
+            break
+    dibuixa_tauler(tauler)
     print("Ha guanyat: " + guanyador)
 
 # Finalment, crida la funció "joc_del_tres_en_ratlla()" per començar el programa

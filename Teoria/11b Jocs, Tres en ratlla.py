@@ -54,7 +54,7 @@ Exercici 2
 Fes una funció "fila_columna" que:
 
 * A partir d'una posició tipus "A0" retorni la fila i la columna
-* Si la posició no és vàlida retorna -1
+* Si la posició no és vàlida retorna -1,-1
 
 Fes una funció "posicio_valida" que:
 
@@ -64,7 +64,7 @@ Fes una funció "posicio_valida" que:
 
 """
 # Fes aquí el codi de l'exercici 2
-
+    
 """
 -------------------------------------------------------------------------------
 Exercici 3
@@ -72,7 +72,7 @@ Exercici 3
 
 Fes una funció "jugada_usuari" que:
 
-* Dibuixa el tauler de l'oponent amb la funció "dibuixa_tauler"
+* Dibuixa el tauler amb la funció "dibuixa_tauler"
 * L'usuari ha d'escriure una posició:
     "Escriu la posició a descobrir (per exemple A0): "
 * Si la posició no és vàlida:
