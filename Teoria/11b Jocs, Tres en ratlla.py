@@ -120,6 +120,8 @@ Fes una funció "joc_del_tres_en_ratlla" que permet fer una partida al:
 
 - Primer sempre juga l'usuari
 - Després sempre juga l'ordinador
+- Tingues en compte que poden empatar
+- Al final mostra el taulell i el guanyador
 
 """
 # Fes aquí el codi de l'exercici 6
