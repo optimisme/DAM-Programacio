@@ -424,4 +424,5 @@ def mostra_menu():
         if opcio == 3:
             guanyador = joc_del_qui_es_qui(nom, oponent)
 
+# Finalment, crida la funció "mostra_menu()" per començar el programa
 mostra_menu()

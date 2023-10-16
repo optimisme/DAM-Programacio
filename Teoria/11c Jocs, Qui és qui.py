@@ -262,3 +262,6 @@ Escull una opció:
 
 """
 # Fes aquí el codi de l'exercici 11
+
+
+# Finalment, crida la funció "mostra_menu()" per començar el programa
