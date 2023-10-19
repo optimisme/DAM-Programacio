@@ -44,7 +44,6 @@ Fes una funció "genera_noms" que retorna:
 """
 # Fes aquí el codi de l'exercici 0
 
-
 """
 -------------------------------------------------------------------------------
 Exercici 1
@@ -76,7 +75,6 @@ Fes una funció "genera_tauler" que retorna:
 """
 # Fes aquí el codi de l'exercici 2
 
-
 """
 -------------------------------------------------------------------------------
 Exercici 3
@@ -91,7 +89,6 @@ Fes una funció "genera_partida" que retorna un array amb:
 
 """
 # Fes aquí el codi de l'exercici 3
-
 
 """
 -------------------------------------------------------------------------------

@@ -282,9 +282,9 @@ Fes una funció "jugada_usuari" que:
   
 """
 # Fes aquí el codi de l'exercici 8
-def jugada_usuari(nom_usuari, tauler):
+def jugada_usuari(nom, tauler):
     while True:
-        print(f"Tauler {nom_usuari}:")
+        print(f"Tauler {nom}:")
         dibuixa_tauler_secret(tauler)
         posicio = input("Escriu la posició per descobrir (per exemple A0): ")
         if posicio_valida(posicio, tauler):
@@ -307,11 +307,11 @@ Fes una funció "jugada_oponent" que:
 
 """
 # Fes aquí el codi de l'exercici 9
-def jugada_oponent(nom_oponent, tauler):
+def jugada_oponent(nom, tauler):
     lletres = "ABC"
     while True:
         clear_screen()
-        print(f"Tauler {nom_oponent}:")
+        print(f"Tauler {nom}:")
         dibuixa_tauler_secret(tauler)
         txt_fila = lletres[random.randint(0, 2)]
         txt_columna = str(random.randint(0, 4))
