@@ -7,7 +7,7 @@ Aquest joc consisteix en:
 
 - Es tiren 50 vegades cadascun els daus i el que major puntuació treu, guanya.
 
-- Si guanya l'usuari, s'afegeix el jugador i pa seva puntuació al ranking.
+- Si guanya l'usuari, s'afegeix el jugador i la seva puntuació al ranking.
 
 - El ranking haurà d’estar ordenat.
 
@@ -18,6 +18,9 @@ En aquesta versió el ranking es guarda en una llista d'aquest estil:
 [["pepe",150],["Juan",100],["Pablo",50]]
 
 """
+import os
+import platform
+import random
 
 # Aquesta funció neteja la pantalla, no la modifiquis
 def clear_screen():

@@ -19,6 +19,9 @@ En aquesta versió el ranking es guarda en un text d'aquest estil:
 
 No es pot fer servir arrays de cap manera
 """
+import os
+import platform
+import random
 
 # Aquesta funció neteja la pantalla, no la modifiquis
 def clear_screen():
