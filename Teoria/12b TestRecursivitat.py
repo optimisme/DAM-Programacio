@@ -1,0 +1,119 @@
+import unittest
+import importlib.util
+import sys
+
+class TestStudentCode(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        # Camí a l'arxiu dels estudiants
+        module_path = '12b Recursivitat.py'
+
+        # Carregar dinàmicament el mòdul
+        spec = importlib.util.spec_from_file_location("m", module_path)
+        module = importlib.util.module_from_spec(spec)
+        sys.modules["m"] = module
+        spec.loader.exec_module(module)
+
+        cls.module = module
+
+    def test_fraseLletraFinal(self):
+        self.assertEqual(self.module.fraseLletraFinal("Hola món", "m"), "món")
+        self.assertEqual(self.module.fraseLletraFinal("Test", "s"), "st")
+        self.assertEqual(self.module.fraseLletraFinal("Test", "z"), "")
+
+    def test_fraseLletraInicial(self):
+        self.assertEqual(self.module.fraseLletraInicial("Hola món", "m"), "Hola m")
+        self.assertEqual(self.module.fraseLletraInicial("Test", "e"), "Te")
+        self.assertEqual(self.module.fraseLletraInicial("Test", "z"), "")
+
+    def test_comptaVocals(self):
+        self.assertEqual(self.module.comptaVocals("Hola mon", "o"), 2)
+        self.assertEqual(self.module.comptaVocals("Test", "e"), 1)
+
+    def test_ordenaVocals(self):
+        self.assertEqual(self.module.ordenaVocals("Hola mon"), "oaonm lH")
+        self.assertEqual(self.module.ordenaVocals("adeu Marianu"), "aeuaiaunrM d")
+
+    def test_fraseVocalsMayusConsonantsMinus(self):
+        self.assertEqual(self.module.fraseVocalsMayusConsonantsMinus("Hola mon"), "hOlA mOn")
+        self.assertEqual(self.module.fraseVocalsMayusConsonantsMinus("adeu Marianu"), "AdEU mArIAnU")
+
+    def test_sumaLlista(self):
+        self.assertEqual(self.module.sumaLlista([1, 2, 3, 4]), 10)
+        self.assertEqual(self.module.sumaLlista([]), 0)
+        self.assertEqual(self.module.sumaLlista([-1, 1]), 0)
+
+    def test_inverteixLlista(self):
+        self.assertEqual(self.module.inverteixLlista([1, 2, 3, 4]), [4, 3, 2, 1])
+        self.assertEqual(self.module.inverteixLlista([]), [])
+        self.assertEqual(self.module.inverteixLlista(['a', 'b', 'c']), ['c', 'b', 'a'])
+
+    def test_comptaElements(self):
+        self.assertEqual(self.module.comptaElements([1, 2, 3, 2], 2), 2)
+        self.assertEqual(self.module.comptaElements([], 5), 0)
+        self.assertEqual(self.module.comptaElements(['a', 'b', 'a'], 'a'), 2)
+
+    def test_filtraParelles(self):
+        self.assertEqual(self.module.filtraParells([1, 2, 3, 4]), [2, 4])
+        self.assertEqual(self.module.filtraParells([1, 3, 5]), [])
+        self.assertEqual(self.module.filtraParells([22, 24, 26]), [22, 24, 26])
+        self.assertEqual(self.module.filtraParells([]), [])
+
+    def test_maximElement(self):
+        self.assertEqual(self.module.maximElement([1, 2, 3, 4]), 4)
+        self.assertEqual(self.module.maximElement([10]), 10)
+
+
+    def test_trobaSubllista(self):
+        self.assertTrue(self.module.trobaSubllista([1, 2, 3, 4], [2, 3]))
+        self.assertFalse(self.module.trobaSubllista([1, 2, 4, 5], [2, 3]))
+        self.assertTrue(self.module.trobaSubllista([1, 2, 3, 4], []))
+        self.assertFalse(self.module.trobaSubllista([], [1, 2]))
+
+    def test_eliminaDuplicats(self):
+        self.assertEqual(self.module.eliminaDuplicats([1, 2, 2, 3, 3, 3, 4]), [1, 2, 3, 4])
+        self.assertEqual(self.module.eliminaDuplicats([]), [])
+        self.assertEqual(self.module.eliminaDuplicats([1, 1, 1, 1]), [1])
+
+    def test_permutacionsLlista(self):
+        result = self.module.permutacionsLlista([1, 2, 3])
+        expected = [[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]]
+        for perm in expected:
+            self.assertIn(perm, result)
+        self.assertEqual(len(result), len(expected))
+        self.assertEqual(self.module.permutacionsLlista([]), [[]])
+
+    def test_comptaElementsDicc(self):
+        self.assertEqual(self.module.comptaElementsDicc({"a": 1, "b": 2, "c": 3}), 3)
+        self.assertEqual(self.module.comptaElementsDicc({"a": 1, "b": {"c": 2, "d": 3}}), 4)
+        self.assertEqual(self.module.comptaElementsDicc({}), 0)
+
+    def test_sumaValorsDicc(self):
+        self.assertEqual(self.module.sumaValorsDicc({"a": 1, "b": 2, "c": 3}), 6)
+        self.assertEqual(self.module.sumaValorsDicc({"a": 1, "b": {"c": 2, "d": 3}}), 6)
+        self.assertEqual(self.module.sumaValorsDicc({}), 0)
+
+    def test_buscarReemplaçar(self):
+        dicc = {"a": 1, "b": {"c": 2, "d": 3}}
+        self.module.buscarReemplaçar(dicc, "c", 10)
+        self.assertEqual(dicc, {"a": 1, "b": {"c": 10, "d": 3}})
+
+    def test_fusionaDiccionaris(self):
+        dicc1 = {"a": 1, "b": 2}
+        dicc2 = {"b": 3, "c": 4}
+        result = self.module.fusionaDiccionaris(dicc1, dicc2)
+        self.assertEqual(result, {"a": 1, "b": 3, "c": 4})
+
+        dicc1 = {"a": {"b": 1}, "c": 3}
+        dicc2 = {"a": {"d": 2}, "c": 4}
+        result = self.module.fusionaDiccionaris(dicc1, dicc2)
+        self.assertEqual(result, {"a": {"b": 1, "d": 2}, "c": 4})
+
+    def test_invertirDiccionari(self):
+        self.assertEqual(self.module.invertirDiccionari({"a": 1, "b": 2}), {1: "a", 2: "b"})
+        self.assertEqual(self.module.invertirDiccionari({1: "a", 2: "b"}), {"a": 1, "b": 2})
+        self.assertEqual(self.module.invertirDiccionari({}), {})
+
+if __name__ == '__main__':
+    unittest.main()
