@@ -1,4 +1,4 @@
-
+import random
 
 # Executa el test amb
 # python "12b TestRecursivitat.py"
@@ -312,3 +312,185 @@ def invertirDiccionari(dicc):
         if isinstance(value, dict):
             dicc_invertit[key] = invertirDiccionari(value)
     return dicc_invertit
+
+
+"""
+Pregunta 18
+Fes la funció recursiva 'divisoPerRestesSuccessives(divident, divisor)' que permeti
+fer la divisió per restes successives.
+
+L'algoritme és el següent:
+- Si el divisor és 0, retorna 0.
+- Si el divisor és major que el divident, retorna 0.
+- Si el divisor és igual al divident, retorna 1.
+- Altrament, retorna 1 + divisoPerRestesSuccessives(divident - divisor, divisor)
+
+Per exemple:
+divisoPerRestesSuccessives(10, 3) = 3
+divisoPerRestesSuccessives(10, 2) = 5
+"""
+def divisoPerRestesSuccessives(divident, divisor):
+    if divisor == 0:
+        return 0
+    elif divisor > divident:
+        return 0
+    elif divisor == divident:
+        return 1
+    else:
+        return 1 + divisoPerRestesSuccessives(divident - divisor, divisor)
+
+
+"""
+Pregunta 19
+Fes la funció recursiva 'sumaDigits(numero)' que permeti sumar els dígits d’un número.
+
+Per exemple:
+sumaDigits(123) = 6
+sumaDigits(1234) = 10
+"""
+def sumaDigits(numero):
+    if numero == 0:
+        return 0
+    else:
+        return numero % 10 + sumaDigits(numero // 10)
+
+
+"""
+Pregunta 20
+Fes una funció recursiva 'multiplicaLlista(llista)' que permeti multiplicar els elements d’una llista.
+
+Per exemple:
+multiplicaLlista([1, 2, 3]) = 6
+multiplicaLlista([1, 2, 3, 4]) = 24
+"""
+def multiplicaLlista(llista):
+    if len(llista) == 0:
+        return 1
+    else:
+        return llista[0] * multiplicaLlista(llista[1:])
+
+
+"""
+Pregunta 21
+Fes una funció recursiva 'indexCoincideix(llista)' que retorna la llista
+dels índexs que coincideixen amb el seu valor.
+
+Per exemple:
+indexCoincideix([0, 1, 2, 3]) = [0, 1, 2, 3]
+indexCoincideix([1, 0, 2, 3]) = [2, 3]
+indexCoincideix([0, 2, 1, 3]) = [0, 3]
+"""
+def indexCoincideix(llista, index=0):
+    if index >= len(llista):
+        return []
+    if llista[index] == index:
+        return [index] + indexCoincideix(llista, index + 1)
+    else:
+        return indexCoincideix(llista, index + 1)
+
+
+"""
+Pregunta 22
+Fes una funció recursiva 'dinsRang(llista, valor)' que retorna cert si 
+el valor es troba dins del rang de valors de la llista.
+
+Per exemple:
+dinsRang([1, 2, 3], 2) = True
+dinsRang([1, 2, 3], 4) = False
+"""
+def dinsRang(llista, valor):
+    if len(llista) == 0:
+        return False
+    if llista[0] == valor:
+        return True
+    return dinsRang(llista[1:], valor)
+
+"""
+Pregunta 23
+Fes una funció recursiva 'insereixAleatoris(llista)' que
+insereixi valors aleatoris en una llista, sense repetició.
+
+El rang és de 0 a 9 inclusivament.
+
+Per exemple:
+insereixAleatoris([1, 2, 3]) = [1, 2, 3, 8, 4]
+"""
+def insereixAleatoris(llista, vistos=None):
+    if vistos is None:
+        vistos = set(llista)
+
+    if len(vistos) == 10:  # Tots els números del 0 al 9 ja estan presents
+        return llista
+
+    nou_valor = random.randint(0, 9)
+    if nou_valor not in vistos:
+        llista.append(nou_valor)
+        vistos.add(nou_valor)
+
+    return insereixAleatoris(llista, vistos)
+
+"""
+Pregunta 24
+Fes la funció recursiva 'multiplicacioRusa(A,B)' que permeti fer una multiplicació,
+utilitzant el mètode Rus. Consisteix en:
+
+- Escriure els números (A i B) que es desitja multiplicar a la part superior de les columnes.
+- Dividir A entre 2, successivament, ignorant la resta, fins a arribar a la unitat. Escriure
+els resultats en la columna A.
+- Multiplicar B per 2 tantes vegades com vegades s’ha dividit A entre 2. Escriure els
+resultats successius en la columna B.
+- Sumar tots els números de la columna B que estan al costat d’un número senar de la
+columna A.
+- Per exemple:
+multiplicacioRusa(27, 82) = 2214
+A   B     SUMES
+27  82    82
+13  164   164
+6   328
+3   656   656
+1   1312  1312
+RESULTAT: 2214
+"""
+def multiplicacioRusa(A, B):
+    if A == 0:
+        return 0
+    elif A % 2 == 1:
+        return B + multiplicacioRusa(A // 2, B * 2)
+    else:
+        return multiplicacioRusa(A // 2, B * 2)
+
+"""
+Pregunta 25
+Fes una funció recursiva 'separaParaules(frase)' que separi les paraules 
+d'una frase i les mostri una a una.
+"""
+def separaParaules(frase):
+    if frase == "":
+        return []
+    else:
+        paraules = frase.split()
+        return [paraules[0]] + separaParaules(" ".join(paraules[1:]))
+
+
+"""
+Pregunta 26
+Fes una funció recursiva 'generaArbre(paraula)' que generi un arbre
+a partir de cada lletra d'una paraula.
+
+Si l’usuari escriu Benvinguts, la funció ha de mostrar:
+B
+Be
+Ben
+Benv
+Benvi
+Benvin
+Benving
+Benvingu
+Benvingut
+Benvinguts
+"""
+def generaArbre(paraula):
+    if not paraula:
+        return []
+    else:
+        return [paraula] + generaArbre(paraula[:-1])

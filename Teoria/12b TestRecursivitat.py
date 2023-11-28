@@ -115,5 +115,57 @@ class TestStudentCode(unittest.TestCase):
         self.assertEqual(self.module.invertirDiccionari({1: "a", 2: "b"}), {"a": 1, "b": 2})
         self.assertEqual(self.module.invertirDiccionari({}), {})
 
+    def test_divisoPerRestesSuccessives(self):
+        self.assertEqual(self.module.divisoPerRestesSuccessives(10, 3), 3)
+        self.assertEqual(self.module.divisoPerRestesSuccessives(10, 2), 5)
+        self.assertEqual(self.module.divisoPerRestesSuccessives(10, 0), 0)
+        self.assertEqual(self.module.divisoPerRestesSuccessives(10, 11), 0)
+
+    def test_sumaDigits(self):
+        self.assertEqual(self.module.sumaDigits(123), 6)
+        self.assertEqual(self.module.sumaDigits(1234), 10)
+        self.assertEqual(self.module.sumaDigits(0), 0)
+
+    def test_multiplicaLlista(self):
+        self.assertEqual(self.module.multiplicaLlista([1, 2, 3]), 6)
+        self.assertEqual(self.module.multiplicaLlista([1, 2, 3, 4]), 24)
+        self.assertEqual(self.module.multiplicaLlista([1]), 1)
+        self.assertEqual(self.module.multiplicaLlista([]), 1)
+
+    def test_indexCoincideix(self):
+        self.assertEqual(self.module.indexCoincideix([0, 1, 2, 3]), [0, 1, 2, 3])
+        self.assertEqual(self.module.indexCoincideix([1, 0, 2, 3]), [2, 3])
+        self.assertEqual(self.module.indexCoincideix([0, 2, 1, 3]), [0, 3])
+        self.assertEqual(self.module.indexCoincideix([]), [])
+
+    def test_dinsRang(self):
+        self.assertTrue(self.module.dinsRang([1, 2, 3], 2))
+        self.assertFalse(self.module.dinsRang([1, 2, 3], 4))
+        self.assertFalse(self.module.dinsRang([], 1))
+
+    def test_insereixAleatoris(self):
+        llista_original = [1, 2, 3]
+        llista_ampliada = self.module.insereixAleatoris(llista_original[:])
+        self.assertTrue(all(0 <= elem <= 9 for elem in llista_ampliada))
+        self.assertEqual(len(llista_ampliada), len(set(llista_ampliada)))  # No duplicats
+        self.assertTrue(all(elem in llista_ampliada for elem in llista_original))
+
+        # Comprovant si la llista s'amplia fins a tenir tots els elements de 0 a 9
+        self.assertEqual(len(llista_ampliada), 10)
+
+    def test_multiplicacioRusa(self):
+        self.assertEqual(self.module.multiplicacioRusa(27, 82), 2214)
+        self.assertEqual(self.module.multiplicacioRusa(6, 7), 42)
+        self.assertEqual(self.module.multiplicacioRusa(0, 82), 0)
+        self.assertEqual(self.module.multiplicacioRusa(27, 0), 0)
+
+    def test_separaParaules(self):
+        self.assertEqual(self.module.separaParaules("Hola món"), ["Hola", "món"])
+        self.assertEqual(self.module.separaParaules(""), [])
+
+    def test_generaArbre(self):
+        self.assertEqual(self.module.generaArbre("Benvinguts"), ["Benvinguts", "Benvingut", "Benvingu", "Benving", "Benvin", "Benvi", "Benv", "Ben", "Be", "B"])
+        self.assertEqual(self.module.generaArbre(""), [])
+
 if __name__ == '__main__':
     unittest.main()
