@@ -11,7 +11,13 @@ que donada una frase i una lletra, retorna la frase des de la lletra fins al fin
 Per exemple:
 "Test", "s" = "st"
 """
-
+def fraseLletraFinal(frase, lletra):
+    if frase == "" or lletra not in frase:
+        return ""
+    if lletra == frase[0]:
+        return frase
+    else:
+        return fraseLletraFinal(frase[1:], lletra)
 
 """
 Pregunta 1
@@ -21,7 +27,13 @@ que donada una frase i una lletra, retorna la frase des del principi fins a la l
 Per exemple:
 "Test", "e" = "Te"
 """
-
+def fraseLletraInicial(frase, lletra):
+    if frase == "" or lletra not in frase:
+        return ""
+    if lletra == frase[0]:
+        return lletra
+    else:
+        return frase[0] + fraseLletraInicial(frase[1:], lletra)
 
 """
 Pregunta 2
@@ -40,6 +52,16 @@ Fes la funció recursiva 'ordenaVocals(frase)'
 que donada una frase, retorna la mateixa frase amb les vocals al principi i les consonants al final.
 "adeu Marianu"), "aeuaiaunrM d"
 """
+def ordenaVocals(frase):
+    frase = frase.lower()
+    if frase == "":
+        return ""
+    if frase[0] in ["a","e","i","o","u"]:
+        vocal = frase[0]
+        return vocal + ordenaVocals(frase[1:])
+    else:
+        consonant = frase[0]
+        return ordenaVocals(frase[1:]) + consonant
 
 
 
@@ -54,6 +76,7 @@ Per exemple:
 """
 
 
+
 """
 Pregunta 5
 
@@ -63,7 +86,6 @@ Per exemple:
 [-1, 1] = 0
 """
 
-
 """
 Pregunta 6
 
@@ -72,7 +94,15 @@ que retorni una nova llista amb els elements de l'original però en ordre invers
 Per exemple:
 ['a', 'b', 'c'] = ['c', 'b', 'a']
 """
+def inverteixLlista(llista):
+    if len(llista) == 0: 
+        return []
+    elif len(llista) ==1:
+        return llista
+    else:
+        return [llista[-1]] + inverteixLlista(llista[0:-1])
 
+print(inverteixLlista(["q","a","e","i"]))
 
 """
 Pregunta 7
@@ -81,7 +111,16 @@ que compti quantes vegades apareix un element donat en una llista.
 Per exemple:
 ['a', 'b', 'a'], 'a' = 2
 """
+def comptaElements(llista, element):
+    if len(llista) == 0:
+        return 0
+    else:
+        if llista[0] == element:
+            return 1 + comptaElements(llista[1:], element)
+        else: 
+            return comptaElements(llista[1:], element)
 
+print(comptaElements(["a", "b", "a", "c"], "a"))
 
 """
 Pregunta 8
@@ -90,7 +129,16 @@ que retorni una nova llista només amb els números parells de la llista origina
 Per exemple:
 [22, 24, 26] = [22, 24, 26]
 """
+def filtraParells(llista):
+    if not llista:
+        return []
 
+    if llista[0] % 2 == 0:
+        return [llista[0]] + filtraParells(llista[1:])
+    else:
+        return filtraParells(llista[1:])
+
+print(filtraParells([22, 23, 24, 26, 27, 28]))
 
 """
 Pregunta 9
@@ -99,8 +147,16 @@ que trobi i retorni l'element més gran d'una llista d'enters.
 Per exemple:
 [1, 2, 3, 4] = 4
 """
-
-
+def maximElement(llista):
+    if len(llista) == 1:
+        return llista[0]
+    else:
+        sub_max = maximElement(llista[1:])
+        rst = llista[0]
+        if llista[0] <= sub_max:
+            rst = sub_max
+        return rst
+print(maximElement([1, 2, 3, 4, 3, 2, 1]))
 """
 Pregunta 10
 Fes una funció recursiva trobaSubllista(llista, subllista) 
@@ -117,6 +173,16 @@ que retorni una nova llista sense elements duplicats de la llista original.
 Per exemple:
 [1, 2, 2, 3, 3, 3, 4] = [1, 2, 3, 4]
 """
+def eliminaDuplicats(llista):
+    if not llista:
+        return []
+    if llista[0] in llista[1:]:
+        return eliminaDuplicats(llista[1:])
+    else:
+        return [llista[0]] + eliminaDuplicats(llista[1:])
+    
+print(eliminaDuplicats([1, 2, 2, 3, 3, 3, 4]))
+
 
 
 """
@@ -127,7 +193,16 @@ Per exemple:
 permutacionsLlista([1,2,3]) = [[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]
 """
 
-
+def permutacionsLlista(llista):
+    if len(llista) <= 1:
+        return [llista]
+    else:
+        perms = []
+        for i in range(len(llista)):
+            subperms = permutacionsLlista(llista[:i] + llista[i+1:])
+            for subperm in subperms:
+                perms.append([llista[i]] + subperm)
+        return perms
 """
 Pregunta 13
 Fes una funció recursiva comptaElementsDicc(dicc) 
@@ -139,7 +214,13 @@ Et farà falta validar que un element és un diccionari amb isinstance(element, 
 Per exemple:
 {"a": 1, "b": {"c": 2, "d": 3}} = 4
 """
-
+def comptaElementsDicc(dicc):
+    total_claus = 0
+    for clau, valor in dicc.items():
+        total_claus += 1
+        if isinstance(valor, dict):
+            total_claus += comptaElementsDicc(valor)
+    return total_claus
 
 
 """
@@ -152,6 +233,15 @@ Et farà falta validar que un element és un diccionari amb isinstance(element, 
 
 {"a": 1, "b": {"c": 2, "d": 3}} = 6
 """
+def sumaValorsDicc(dicc):
+    sumaKeys = 0
+    for value in dicc.values():
+        if isinstance(value, dict):
+            sumaKeys += sumaValorsDicc(value)
+        else:
+            sumaKeys += value
+            print(sumaKeys, value)
+    return sumaKeys
 
 
 """
@@ -165,7 +255,15 @@ Et farà falta validar que un element és un diccionari amb isinstance(element, 
 Per exemple:
 {"a": 1, "b": {"c": 2, "d": 3}},  "c", 10 = {"a": 1, "b": {"c": 10, "d": 3}}
 """
+def buscarReemplaçar(dicc, clau, valorNou):
+    for k, v in dicc.items():
+        if k == clau:
+            dicc[k] = valorNou
+        elif isinstance(v, dict):
+            buscarReemplaçar(v, clau, valorNou)
+    return dicc
 
+print(buscarReemplaçar({"a": 1, "b": {"c": 2, "d": 3},"e": {"c": 2, "d": 3}}, "c", "Paco"))
 
 
 """

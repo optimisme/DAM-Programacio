@@ -152,6 +152,16 @@ def compta_nodes(arbre):
         return 0
     return 1 + compta_nodes(arbre['esquerra']) + compta_nodes(arbre['dreta'])
 
+def compta_nodes(arbre):
+    if arbre["esquerra"] == None and arbre["dreta"] == None:
+        return 1
+    elif arbre["esquerra"] == None:
+        return 1 + compta_nodes(arbre["dreta"])
+    elif arbre["dreta"] == None:
+        return 1 + compta_nodes(arbre["esquerra"])
+    else:
+        return 1 + compta_nodes(arbre["esquerra"]) + compta_nodes(arbre["dreta"])
+print(compta_nodes(animals))
 
 """
 Pregunta 2
@@ -192,12 +202,25 @@ Pregunta 4
 Fes una funció recursiva suma_nivell(arbre, nivell) que sumi els valors 
 de tots els nodes que es troben a un cert nivell en un arbre binari.
 """
-def suma_nivell(arbre, nivell):
-    if not arbre or nivell < 0:
-        return 0
-    if nivell == 0:
-        return arbre['node']
-    return suma_nivell(arbre['esquerra'], nivell - 1) + suma_nivell(arbre['dreta'], nivell - 1)
+
+def suma_nivell(arbre,nivell):
+    suma = 0
+    if(nivell > 0):
+        if(isinstance(arbre["esquerra"],dict) and isinstance(arbre["dreta"],dict)):
+            return suma_nivell(arbre["esquerra"],nivell-1) + suma_nivell(arbre["dreta"],nivell-1)
+        if(isinstance(arbre["esquerra"],dict)):
+            return suma_nivell(arbre["esquerra"],nivell-1)
+        if(isinstance(arbre["dreta"],dict)):
+            return suma_nivell(arbre["dreta"],nivell-1)
+        else:
+            return 0
+    else:
+        if(isinstance(arbre["node"],int)):
+            return arbre["node"]
+        else:
+            return 0
+
+print(suma_nivell(numeros,1))
 
 """
 Pregunta 5
