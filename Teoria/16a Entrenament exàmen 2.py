@@ -78,7 +78,7 @@ missatges d'error diferents, no val un de genèric.
 """
 Exercici 2
 
-Crearem una funció amb el nom new_item_id(). Que no rebrà cap paràmetre.
+Crearem una funció amb el nom 'new_item_id()'. Que no rebrà cap paràmetre.
 
 En cridar a aquesta funció, ens demanarà un ID darticle. Aquest id ha de ser numèric.
 
@@ -114,7 +114,7 @@ tornant a demanar un stock a lusuari.
 """
 Exercici 4
 
-Crearem una funció amb el 'nom new_item_price()'. Que no rebrà cap paràmetre.
+Crearem una funció amb el nom 'new_item_price()'. Que no rebrà cap paràmetre.
 
 En cridar a aquesta funció, ens demanarà un preu que ha de ser un enter positiu, 
 i en cas de ser correcte, ens ho retornarà.
@@ -149,7 +149,7 @@ tornant a demanar un nom a l'usuari.
 """
 Exercici 6
 
-Crearem una funció amb el nom find_item_id(). Que no rebrà cap paràmetre.
+Crearem una funció amb el nom 'find_item_id()'. Que no rebrà cap paràmetre.
 
 En cridar a aquesta funció, ens demanarà un ID darticle. Aquest id ha 
 de ser numèric i ha d'existir al diccionari d'articles.
@@ -171,7 +171,7 @@ tornant a demanar un ID a l'usuari.
 """
 Exercici 7
 
-Crearem una funció amb el nom print_item(id,**values). Que rebrà un id 
+Crearem una funció amb el nom 'print_item(id,**values)'. Que rebrà un id 
 d’article i opcionalment una sèrie de paràmetres del tipus clau=valor.
 
 En cridar a aquesta funció, ens imprimirà les propietats 
