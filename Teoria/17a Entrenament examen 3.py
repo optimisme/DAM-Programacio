@@ -116,3 +116,41 @@ Si la funció rep ([1, 2, 3, 4, 5], [2, 4, 6, 8, 10]), hauria de retornar [1, 3,
 """
 
 # Resol aquí el codi de l'exercici 3
+
+
+"""
+
+Exercici 4
+
+Fes una funció auto_menu que opera de la següent manera:
+
+Entrada:
+
+La funció ha de rebre un nombre indeterminat de paràmetres.
+Els paràmetres han de ser de tipus numèric (per exemple, int, float).
+
+Funcionament:
+
+La funció ha de generar un menú a partir dels paràmetres rebuts. Cada paràmetre representa una opció en el menú.
+Exemple de menú generat:
+
+Options:
+1. Option amb valor 5
+2. Option amb valor 8
+3. Option amb valor 14
+4. Option amb valor 19
+0. Sortir
+Choose an option or a value:
+
+Condicions i Excepcions:
+
+Si es rep un paràmetre que no és de tipus numèric, la funció ha de llançar una excepció TypeError amb el missatge: 'auto_menu requires numeric parameters only'.
+Si es reben més de 4 paràmetres, la funció ha de llançar una excepció genèrica amb el missatge: 'auto_menu supports a maximum of 4 options'.
+Si l'usuari escull un número que no correspon a una opció vàlida (incloent opcions fora del rang definit pels paràmetres), la funció ha de llançar una excepció IndexError amb el missatge: 'auto_menu invalid option'.
+Si l'usuari escull una opció vàlida (excepte 0), la funció ha de retornar el valor numèric associat a aquesta opció.
+Si l'usuari escull 0, la funció finalitza normalment sense llançar cap excepció.
+
+"""
+
+# Resol aquí el codi de l'exercici 4
+
