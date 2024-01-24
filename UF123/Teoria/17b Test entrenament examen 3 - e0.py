@@ -22,7 +22,7 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
         result = self.module.genera_info_canco(
             titols=['Cançó 1', 'Cançó 2'],
             artistes=['Artista 1', 'Artista 2'],
-            duracion=[3, 4]
+            duracio=[3, 4]
         )
         self.assertEqual(result, ['Artista 1 - Cançó 1 - 3 minuts', 'Artista 2 - Cançó 2 - 4 minuts'])
 
@@ -30,7 +30,7 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
         """Prova sense els titols."""
         result = self.module.genera_info_canco(
             artistes=['Artista 1', 'Artista 2'],
-            duracion=[3, 4]
+            duracio=[3, 4]
         )
         self.assertEqual(result, ['Artista 1 - 3 minuts', 'Artista 2 - 4 minuts'])
 
@@ -50,7 +50,7 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
     def test_error_tipus_duracio(self):
         """Prova amb un tipus incorrecte per duracio."""
         with self.assertRaises(TypeError):
-            self.module.genera_info_canco(titols=['Cançó 1', 'Cançó 2'], artistes=['Artista 1', 'Artista 2'], duracion="No és una llista")
+            self.module.genera_info_canco(titols=['Cançó 1', 'Cançó 2'], artistes=['Artista 1', 'Artista 2'], duracio="No és una llista")
 
     def test_error_longitud(self):
         """Prova amb llistes de longituds diferents."""
@@ -58,7 +58,7 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
             self.module.genera_info_canco(
                 titols=['Cançó 1'],
                 artistes=['Artista 1', 'Artista 2'],
-                duracion=[3, 4]
+                duracio=[3, 4]
             )
 
 # Executar les proves (només en cas de ser executat com a script principal)

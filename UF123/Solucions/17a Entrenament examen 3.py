@@ -35,19 +35,19 @@ Si només es proporciona artistes = ['Artista 1', 'Artista 2'], la sortida seria
 
 # Resol aquí el codi de l'exercici 0
 
-def genera_info_canco(titols=None, artistes=None, duracion=None):
+def genera_info_canco(titols=None, artistes=None, duracio=None):
     # Validacions
     if titols is not None and not isinstance(titols, list):
         raise TypeError('titols ha de ser una llista o None')
     if artistes is not None and not isinstance(artistes, list):
         raise TypeError('artistes ha de ser una llista')
-    if duracion is not None and not isinstance(duracion, list):
-        raise TypeError('duracion ha de ser una llista o None')
+    if duracio is not None and not isinstance(duracio, list):
+        raise TypeError('duracio ha de ser una llista o None')
 
     # Comprova que totes les llistes (si estan proporcionades) tinguin la mateixa longitud
-    if titols is not None and duracion is not None and len(titols) != len(duracion):
+    if titols is not None and duracio is not None and len(titols) != len(duracio):
         raise ValueError('Totes les llistes proporcionades han de tenir la mateixa longitud')
-    if artistes is not None and duracion is not None and len(artistes) != len(duracion):
+    if artistes is not None and duracio is not None and len(artistes) != len(duracio):
         raise ValueError('Totes les llistes proporcionades han de tenir la mateixa longitud')
     if artistes is not None and titols is not None and len(artistes) != len(titols):
         raise ValueError('Totes les llistes proporcionades han de tenir la mateixa longitud')
@@ -59,8 +59,8 @@ def genera_info_canco(titols=None, artistes=None, duracion=None):
             info = artistes[i]
             if titols is not None and i < len(titols):
                 info += f" - {titols[i]}"
-            if duracion is not None and i < len(duracion):
-                info += f" - {duracion[i]} minuts"
+            if duracio is not None and i < len(duracio):
+                info += f" - {duracio[i]} minuts"
             info_canco.append(info)
 
     return info_canco
