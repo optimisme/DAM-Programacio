@@ -21,25 +21,25 @@ class TestAutoMenuFromModule(unittest.TestCase):
     @patch('builtins.input', return_value='2')
     @patch('builtins.print')
     def test_auto_menu_numeric_params(self, mock_print, mock_input):
-        """Test amb paràmetres numèrics vàlids."""
+        #Prova amb paràmetres numèrics vàlids.
         self.assertEqual(self.module.auto_menu(5, 10, 15), 10)
 
     @patch('builtins.print')
     def test_auto_menu_non_numeric_params(self, mock_print):
-        """Test amb paràmetres no numèrics."""
+        #Prova amb paràmetres no numèrics.
         with self.assertRaises(TypeError):
             self.module.auto_menu(5, 'a', 15)
 
     @patch('builtins.print')
     def test_auto_menu_too_many_params(self, mock_print):
-        """Test amb més de 4 paràmetres."""
+        #Prova amb més de 4 paràmetres.
         with self.assertRaises(Exception):
             self.module.auto_menu(5, 10, 15, 20, 25)
 
     @patch('builtins.input', return_value='5')
     @patch('builtins.print')
     def test_auto_menu_invalid_option(self, mock_print, mock_input):
-        """Test amb una opció no vàlida."""
+        #Prova amb una opció no vàlida.
         with self.assertRaises(IndexError):
             self.module.auto_menu(5, 10, 15)
 

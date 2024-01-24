@@ -18,7 +18,7 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
         cls.module = module
 
     def test_info_completa(self):
-        """Prova amb tota la informació disponible."""
+        #Prova amb tota la informació disponible.
         result = self.module.genera_info_canco(
             titols=['Cançó 1', 'Cançó 2'],
             artistes=['Artista 1', 'Artista 2'],
@@ -27,7 +27,7 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
         self.assertEqual(result, ['Artista 1 - Cançó 1 - 3 minuts', 'Artista 2 - Cançó 2 - 4 minuts'])
 
     def test_sense_titols(self):
-        """Prova sense els titols."""
+        #Prova sense els titols.
         result = self.module.genera_info_canco(
             artistes=['Artista 1', 'Artista 2'],
             duracio=[3, 4]
@@ -35,7 +35,7 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
         self.assertEqual(result, ['Artista 1 - 3 minuts', 'Artista 2 - 4 minuts'])
 
     def test_sense_duracio(self):
-        """Prova sense la duracio."""
+        #Prova sense la duracio.
         result = self.module.genera_info_canco(
             titols=['Cançó 1', 'Cançó 2'],
             artistes=['Artista 1', 'Artista 2']
@@ -43,17 +43,17 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
         self.assertEqual(result, ['Artista 1 - Cançó 1', 'Artista 2 - Cançó 2'])
 
     def test_error_tipus_titols(self):
-        """Prova amb un tipus incorrecte per titols."""
+        #Prova amb un tipus incorrecte per titols.
         with self.assertRaises(TypeError):
             self.module.genera_info_canco(titols="No és una llista", artistes=['Artista 1', 'Artista 2'])
 
     def test_error_tipus_duracio(self):
-        """Prova amb un tipus incorrecte per duracio."""
+        #Prova amb un tipus incorrecte per duracio.
         with self.assertRaises(TypeError):
             self.module.genera_info_canco(titols=['Cançó 1', 'Cançó 2'], artistes=['Artista 1', 'Artista 2'], duracio="No és una llista")
 
     def test_error_longitud(self):
-        """Prova amb llistes de longituds diferents."""
+        #Prova amb llistes de longituds diferents.
         with self.assertRaises(ValueError):
             self.module.genera_info_canco(
                 titols=['Cançó 1'],

@@ -18,22 +18,22 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
         cls.module = module
 
     def test_suma_normal(self):
-        """Prova amb llistes de la mateixa longitud."""
+        #Prova amb llistes de la mateixa longitud.
         result = self.module.suma_llistes([1, 2, 3], [4, 5, 6], [7, 8, 9])
         self.assertEqual(result, [12, 15, 18])
 
     def test_suma_diferent_longitud(self):
-        """Prova amb llistes de longituds diferents."""
+        #Prova amb llistes de longituds diferents.
         result = self.module.suma_llistes([1, 2], [3, 4, 5], [6])
         self.assertEqual(result, [10, 6, 5])
 
     def test_error_valor_minim(self):
-        """Prova amb menys de 2 llistes."""
+        #Prova amb menys de 2 llistes.
         with self.assertRaises(ValueError):
             self.module.suma_llistes([1, 2])
 
     def test_error_tipus_dada(self):
-        """Prova amb un tipus de dada incorrecte."""
+        #Prova amb un tipus de dada incorrecte.
         with self.assertRaises(TypeError):
             self.module.suma_llistes([1, 2], [3, 4], "no és una llista")
 

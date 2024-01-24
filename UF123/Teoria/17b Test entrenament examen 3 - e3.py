@@ -18,31 +18,31 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
         cls.module = module
 
     def test_amb_elements_unics(self):
-        """Prova amb elements únics en ambdues llistes."""
+        #Prova amb elements únics en ambdues llistes.
         result = self.module.combina_unics_recursiu([1, 3, 5], [2, 4, 6])
         expected_result = [1, 3, 5, 2, 4, 6]
         self.assertEqual(sorted(result), sorted(expected_result))
 
     def test_amb_elements_repetits(self):
-        """Prova amb alguns elements repetits en ambdues llistes."""
+        #Prova amb alguns elements repetits en ambdues llistes.
         result = self.module.combina_unics_recursiu([1, 2, 3], [2, 3, 4])
         expected_result = [1, 4]
         self.assertEqual(sorted(result), sorted(expected_result))
 
     def test_llistes_buides(self):
-        """Prova amb llistes buides."""
+        #Prova amb llistes buides.
         result = self.module.combina_unics_recursiu([], [])
         expected_result = []
         self.assertEqual(result, expected_result)
 
     def test_una_llista_buida(self):
-        """Prova amb una llista buida i una amb elements."""
+        #Prova amb una llista buida i una amb elements.
         result = self.module.combina_unics_recursiu([], [1, 2, 3])
         expected_result = [1, 2, 3]
         self.assertEqual(result, expected_result)
 
     def test_tots_elements_repetits(self):
-        """Prova amb totes les llistes tenint els mateixos elements."""
+        #Prova amb totes les llistes tenint els mateixos elements.
         result = self.module.combina_unics_recursiu([1, 2, 3], [1, 2, 3])
         expected_result = []
         self.assertEqual(result, expected_result)
