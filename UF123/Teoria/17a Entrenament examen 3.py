@@ -168,7 +168,7 @@ A més, la funció ha de complir amb els següents requisits de maneig d'errors:
 
 Si el primer o el segon paràmetre no són enters, llença una excepció TypeError amb el missatge 'calculadora_basica: els paràmetres 1 i 2 han de ser enters'.
 Si el tercer paràmetre no és una cadena de text, llença una excepció TypeError amb el missatge 'calculadora_basica: el paràmetre 3 no és una cadena de text'.
-Si l'operació especificada no és suma, resta, multiplicació o divisió, llença una excepció ValueError amb el missatge 'calculadora_basica: operació no vàlida'.
+Si l'operació especificada no és suma, resta, llença una excepció ValueError amb el missatge 'calculadora_basica: operació no vàlida'.
 
 Exemples d'ús:
 

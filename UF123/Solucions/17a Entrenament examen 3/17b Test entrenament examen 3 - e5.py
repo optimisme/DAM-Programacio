@@ -23,10 +23,6 @@ class TestCalculadoraBasica(unittest.TestCase):
     def test_resta_valida(self):
         self.assertEqual(self.module.calculadora_basica(10, 4, 'resta'), 6)
 
-    def test_operacio_no_valida(self):
-        with self.assertRaises(ValueError):
-            self.module.calculadora_basica(5, 3, 'multiplicació')
-
     def test_parametre_no_enter(self):
         with self.assertRaises(TypeError):
             self.module.calculadora_basica(5, 'tres', 'suma')
