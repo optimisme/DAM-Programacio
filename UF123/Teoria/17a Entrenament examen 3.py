@@ -35,36 +35,6 @@ Si només es proporciona artistes = ['Artista 1', 'Artista 2'], la sortida seria
 
 # Resol aquí el codi de l'exercici 0
 
-def genera_info_canco(titols=None, artistes=None, duracio=None):
-    # Validacions
-    if titols is not None and not isinstance(titols, list):
-        raise TypeError('titols ha de ser una llista o None')
-    if artistes is not None and not isinstance(artistes, list):
-        raise TypeError('artistes ha de ser una llista')
-    if duracio is not None and not isinstance(duracio, list):
-        raise TypeError('duracio ha de ser una llista o None')
-
-    # Comprova que totes les llistes (si estan proporcionades) tinguin la mateixa longitud
-    if titols is not None and duracio is not None and len(titols) != len(duracio):
-        raise ValueError('Totes les llistes proporcionades han de tenir la mateixa longitud')
-    if artistes is not None and duracio is not None and len(artistes) != len(duracio):
-        raise ValueError('Totes les llistes proporcionades han de tenir la mateixa longitud')
-    if artistes is not None and titols is not None and len(artistes) != len(titols):
-        raise ValueError('Totes les llistes proporcionades han de tenir la mateixa longitud')
-
-    # Genera la llista de informació de les cançons
-    info_canco = []
-    if artistes is not None:
-        for i in range(len(artistes)):
-            info = artistes[i]
-            if titols is not None and i < len(titols):
-                info += f" - {titols[i]}"
-            if duracio is not None and i < len(duracio):
-                info += f" - {duracio[i]} minuts"
-            info_canco.append(info)
-
-    return info_canco
-
 """
 
 Exercici 1
@@ -91,33 +61,6 @@ Si la funció rep ([1, 2, 3], [4, 5, 6], [7, 8]), hauria de retornar [12, 15, 9]
 """
 
 # Resol aquí el codi de l'exercici 1
-
-def suma_llistes(*llistes):
-    # Comprova si hi ha almenys 2 llistes
-    if len(llistes) < 2:
-        raise ValueError('suma_llistes necessita almenys 2 llistes')
-
-    # Comprova si tots els paràmetres són llistes de números enters
-    for llista in llistes:
-        if not all(isinstance(elem, int) for elem in llista):
-            raise TypeError('tot els paràmetres han de ser llistes de números enters')
-
-    # Troba la longitud màxima de les llistes
-    max_length = max(len(llista) for llista in llistes)
-
-    # Inicialitza la llista de resultats
-    suma = [0] * max_length
-
-    # Suma els elements de totes les llistes
-    for llista in llistes:
-        for i in range(len(llista)):
-            suma[i] += llista[i]
-
-        # Omplir amb zeros si la llista és més curta que la màxima longitud
-        for i in range(len(llista), max_length):
-            suma[i] += 0
-
-    return suma
 
 """
 
@@ -148,18 +91,6 @@ d: sí - 3.14
 
 # Resol aquí el codi de l'exercici 2
 
-def mostra_info_params(**kwargs):
-    result = []
-    for param_name, value in kwargs.items():
-        # Determina si el valor és numèric (int, float, complex)
-        es_numeric = isinstance(value, (int, float, complex))
-
-        # Afegeix la informació al resultat
-        result.append(f"{param_name}: {'sí' if es_numeric else 'no'} - {value}")
-
-    # Uneix tots els elements en un string, separats per salts de línia
-    return '\n'.join(result)
-
 """
 
 Exercici 3
@@ -182,49 +113,6 @@ Si la funció rep ([1, 2, 3, 4, 5], [2, 4, 6, 8, 10]), hauria de retornar [1, 3,
 """
 
 # Resol aquí el codi de l'exercici 3
-
-def combina_unics_recursiu(llista1, llista2):
-    # Cas base: si una de les llistes està buida, retorna l'altra llista completa
-    if not llista1:
-        return [x for x in llista2 if x not in llista1]
-    if not llista2:
-        return [x for x in llista1 if x not in llista2]
-
-    # Prendre el primer element de la primera llista
-    cap = llista1[0]
-
-    # Si el cap no està en la segona llista, l'afegim a la llista resultant
-    if cap not in llista2:
-        return [cap] + combina_unics_recursiu(llista1[1:], llista2)
-    else:
-        # Si el cap està en la segona llista, l'ometem i seguim amb la resta de la llista
-        return combina_unics_recursiu(llista1[1:], [x for x in llista2 if x != cap])
-
-def auto_menu(*args):
-    # Comprova si tots els arguments són numèrics
-    if not all(isinstance(arg, (int, float)) for arg in args):
-        raise TypeError('auto_menu requires numeric parameters only')
-
-    # Comprova si hi ha més de 4 arguments
-    if len(args) > 4:
-        raise Exception('auto_menu supports a maximum of 4 options')
-
-    # Mostra les opcions del menú
-    print("Options:")
-    for i, value in enumerate(args, start=1):
-        print(f"{i}. Option amb valor {value}")
-    print("0. Sortir")
-    
-    # Llegeix l'opció de l'usuari
-    user_choice = int(input("Choose an option or a value:"))
-
-    if user_choice == 0:
-        return "Sortida"
-    elif 1 <= user_choice <= len(args):
-        return args[user_choice - 1]
-    else:
-        raise IndexError('auto_menu invalid option')
-
 
 
 """
@@ -255,26 +143,6 @@ calculadora_basica(2, 3, 'resta') retorna -1
 
 """
 
-def calculadora_basica(x, y, operacio):
-    # Comprovar si els paràmetres x i y són enters
-    if not isinstance(x, int) or not isinstance(y, int):
-        raise TypeError('calculadora_basica: els paràmetres 1 i 2 han de ser enters')
-
-    # Comprovar si el paràmetre operacio és una cadena de text
-    if not isinstance(operacio, str):
-        raise TypeError('calculadora_basica: el paràmetre 3 no és una cadena de text')
-
-    # Realitzar la operació especificada
-    if operacio == 'suma':
-        return x + y
-    elif operacio == 'resta':
-        return x - y
-    else:
-        # Llençar una excepció si l'operació no és ni suma ni resta
-        raise ValueError('calculadora_basica: operació no vàlida')
-
-
-
 """
 
 Exercici 6 
@@ -294,23 +162,6 @@ recursive_difference([1, 2, 3, 4, 5], [2, 4, 6, 8, 10])
 Retorna: [1, 3, 5]
 
 """
-
-def recursive_difference(list1, list2):
-    # Cas base: si la primera llista està buida, retorna una llista buida
-    if not list1:
-        return []
-
-    # Prendre el primer element de la primera llista
-    first_element = list1[0]
-
-    # Comprovar si el primer element no està a la segona llista
-    if first_element not in list2:
-        # Incloure l'element a la llista resultant i fer una crida recursiva amb la resta de la llista
-        return [first_element] + recursive_difference(list1[1:], list2)
-    else:
-        # Fer una crida recursiva sense incloure l'element actual
-        return recursive_difference(list1[1:], list2)
-
 
 """
 Exercici 7
@@ -350,21 +201,6 @@ Per exemple, en aquest cas, el resultat seria:
 
 """
 
-def suma_profunditat(arbre, profunditat_actual=0):
-    # Si l'arbre està buit, retorna 0
-    if arbre is None:
-        return 0
-
-    # Sumar la profunditat actual al node actual
-    suma_actual = profunditat_actual
-
-    # Sumar recursivament la profunditat dels subarbres esquerra i dret
-    suma_esquerra = suma_profunditat(arbre["esquerra"], profunditat_actual + 1)
-    suma_dreta = suma_profunditat(arbre["dreta"], profunditat_actual + 1)
-
-    # Retornar la suma total
-    return suma_actual + suma_esquerra + suma_dreta
-
 """
 
 Exercici 8:
@@ -382,23 +218,3 @@ Si es captura una excepció TypeError, imprimeix el missatge 'error_process Type
 Si es captura una excepció KeyError, imprimeix el missatge 'error_process KeyError'.
 
 """
-
-def error_log(input_value):
-    """Genera excepcions basades en l'entrada."""
-    if input_value == 'a':
-        raise TypeError('error_log TypeError')
-    elif input_value == 'b':
-        raise KeyError('error_log KeyError')
-
-def error_process(func):
-    """Crida la funció func amb diferents valors i gestiona les excepcions."""
-    try:
-        func('a')
-    except TypeError:
-        print('error_process TypeError')
-
-    try:
-        func('b')
-    except KeyError:
-        print('error_process KeyError')
-
