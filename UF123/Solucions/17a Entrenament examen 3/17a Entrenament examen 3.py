@@ -200,31 +200,6 @@ def combina_unics_recursiu(llista1, llista2):
         # Si el cap està en la segona llista, l'ometem i seguim amb la resta de la llista
         return combina_unics_recursiu(llista1[1:], [x for x in llista2 if x != cap])
 
-def auto_menu(*args):
-    # Comprova si tots els arguments són numèrics
-    if not all(isinstance(arg, (int, float)) for arg in args):
-        raise TypeError('auto_menu requires numeric parameters only')
-
-    # Comprova si hi ha més de 4 arguments
-    if len(args) > 4:
-        raise Exception('auto_menu supports a maximum of 4 options')
-
-    # Mostra les opcions del menú
-    print("Options:")
-    for i, value in enumerate(args, start=1):
-        print(f"{i}. Option amb valor {value}")
-    print("0. Sortir")
-    
-    # Llegeix l'opció de l'usuari
-    user_choice = int(input("Choose an option or a value:"))
-
-    if user_choice == 0:
-        return "Sortida"
-    elif 1 <= user_choice <= len(args):
-        return args[user_choice - 1]
-    else:
-        raise IndexError('auto_menu invalid option')
-
 
 """
 
@@ -261,23 +236,6 @@ Si l'usuari escull 0, la funció finalitza normalment sense llançar cap excepci
 """
 
 # Resol aquí el codi de l'exercici 4
-
-def combina_unics_recursiu(llista1, llista2):
-    # Cas base: si una de les llistes està buida, retorna l'altra llista completa
-    if not llista1:
-        return [x for x in llista2 if x not in llista1]
-    if not llista2:
-        return [x for x in llista1 if x not in llista2]
-
-    # Prendre el primer element de la primera llista
-    cap = llista1[0]
-
-    # Si el cap no està en la segona llista, l'afegim a la llista resultant
-    if cap not in llista2:
-        return [cap] + combina_unics_recursiu(llista1[1:], llista2)
-    else:
-        # Si el cap està en la segona llista, l'ometem i seguim amb la resta de la llista
-        return combina_unics_recursiu(llista1[1:], [x for x in llista2 if x != cap])
 
 def auto_menu(*args):
     # Comprova si tots els arguments són numèrics
