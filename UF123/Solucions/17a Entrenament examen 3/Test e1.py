@@ -8,7 +8,7 @@ class TestGeneraInfoCancoFromModule(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
         # Camí a l'arxiu del mòdul extern
-        module_path = '17a Entrenament examen 3.py'
+        module_path = 'Entrenament.py'
 
         # Carregar dinàmicament el mòdul
         spec = importlib.util.spec_from_file_location(module_path, module_path)

@@ -1,7 +1,7 @@
 
 # Fer anar els testos amb:
-# python "17b Test entrenament examen 3.py"
-# python "17b Test entrenament examen 3 - e5.py"
+# python "Test.py"
+# python "Test e5.py"
 
 """
 
