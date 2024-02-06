@@ -2,6 +2,8 @@
 # Fer anar els testos amb:
 # python "Test.py"
 # python "Test e5.py"
+import pickle
+from pprint import pprint
 
 """
 
@@ -131,6 +133,116 @@ def e2_combina_arxius(path_a, path_b):
 
 Exercici 3
 
+Fes una funció e3_esborra, que esborra un arxiu d'una carpeta i totes les carpetes filles.
+Paràmetres: nom de l'arxiu a esborrar, nom de la carpeta.
+
+"""
+
+import os
+
+def e3_esborra(nom_arxiu, directori_inicial='.'):
+    arxiu_esborrat = False
+
+    def esborrar_arxiu(directori):
+        nonlocal arxiu_esborrat
+        for element in os.listdir(directori):
+            cami_complet = os.path.join(directori, element)
+            if os.path.isdir(cami_complet):
+                esborrar_arxiu(cami_complet)
+            elif element == nom_arxiu:
+                try:
+                    os.remove(cami_complet)
+                    print(f"L'arxiu '{cami_complet}' ha estat esborrat amb èxit.")
+                    arxiu_esborrat = True
+                except Exception as e:
+                    print(f"S'ha produït un error en intentar esborrar l'arxiu '{cami_complet}': {e}")
+
+    esborrar_arxiu(directori_inicial)
+
+    if not arxiu_esborrat:
+        print(f"L'arxiu '{nom_arxiu}' no s'ha trobat en cap carpeta.")
 
 
 """
+
+Exercici 4
+
+Fes una funció "e4_busca_arxius" que busca tots els arxius amb una extensió determinada dins d'una carpeta i les seves subcarpetes.
+Paràmetres: extensió de l'arxiu a buscar, nom de la carpeta.
+
+"""
+
+import os
+
+def e4_busca_arxius(extensio, carpeta):
+    arxius_trobats = []
+
+    def busca_arxius(directori):
+        for element in os.listdir(directori):
+            cami_complet = os.path.join(directori, element)
+            if os.path.isdir(cami_complet):
+                busca_arxius(cami_complet)
+            elif element.endswith(extensio):
+                arxius_trobats.append(cami_complet)
+
+    busca_arxius(carpeta)
+    return arxius_trobats
+
+"""
+
+Exercici 5
+
+Fes la funció "e5_genera_carpetes" que a partir d'una cadena de text tipus així:
+
+carpeta1/carpetaA/carpeta3, carpeta4/carpeta5, carpeta6, carpeta1/carpeta8/carpeta9, carpeta6/carpeta7, carpeta1/carpetaA/carpetaB
+
+Generi les carpetes i subcarpetes especificades a la cadena de text.
+
+"""
+
+import os
+
+def e5_genera_carpetes(cadena_carpetes):
+    # Separar la cadena de text en una llista de rutes de carpetes
+    llista_carpetes = cadena_carpetes.split(', ')
+
+    # Recórrer la llista i crear les carpetes i subcarpetes necessàries
+    for ruta in llista_carpetes:
+        os.makedirs(ruta, exist_ok=True)
+        print(f"S'ha creat la carpeta: {ruta}")
+
+"""
+
+Exercici 6
+
+Fes una funció "e6_guarda_arxiu_bin" que guarda una estructura de dades complexa en un arxiu binari.
+
+Fes una funció "e6_llegeix_arxiu_bin" que llegeix l'arxiu binari i mostra per pantalla el contingut amb el format de l'exemple.
+
+Prova-ho amb una estructura així:
+
+{
+    "nom": "Pepito",
+    "edat": 25,
+    "adreça": {
+        "carrer": "Carrer de la Falsa",
+        "número": 123,
+        "població": "Falsburg"
+    },
+    aficions: ["futbol", "tennis", "cine"],
+    "dades_extra": {
+        "altura": 1.75,
+        "pes": 70
+    }
+}
+
+"""
+
+def e6_guarda_arxiu_bin(dades, nom_arxiu):
+    with open(nom_arxiu, 'wb') as arxiu:
+        pickle.dump(dades, arxiu)
+
+def e6_llegeix_arxiu_bin(nom_arxiu):
+    with open(nom_arxiu, 'rb') as arxiu:
+        dades = pickle.load(arxiu)
+        pprint(dades)
