@@ -202,14 +202,18 @@ Generi les carpetes i subcarpetes especificades a la cadena de text.
 
 import os
 
-def e5_genera_carpetes(cadena_carpetes):
-    # Separar la cadena de text en una llista de rutes de carpetes
-    llista_carpetes = cadena_carpetes.split(', ')
-
-    # Recórrer la llista i crear les carpetes i subcarpetes necessàries
-    for ruta in llista_carpetes:
-        os.makedirs(ruta, exist_ok=True)
-        print(f"S'ha creat la carpeta: {ruta}")
+def e5_genera_carpetes(cadena):
+    # Separar les carpetes i subcarpetes per comes
+    carpetes = cadena.split(",")
+    
+    # Crear les carpetes i subcarpetes especificades
+    for carpeta in carpetes:
+        # Eliminar els espais al principi i final de la cadena
+        carpeta = carpeta.strip()
+        
+        # Crear la carpeta si no existeix
+        if not os.path.exists(carpeta):
+            os.makedirs(carpeta)
 
 """
 
