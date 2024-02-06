@@ -22,6 +22,8 @@ La funció rep com a paràmetres les dades actualitzades i el nom de l'arxiu de 
 
 """
 
+# Resol aquí l'exercici 0
+
 """
 
 Exercici 1
@@ -38,6 +40,7 @@ La funció rep com a paràmetre el nom de l'arxiu a llegir.
 
 """
 
+# Resol aquí l'exercici 1
 
 """
 
@@ -58,6 +61,8 @@ segons si són linies parelles o senars.
 
 """
 
+# Resol aquí l'exercici 2
+
 """
 
 Exercici 3
@@ -67,6 +72,8 @@ Paràmetres: nom de l'arxiu a esborrar, nom de la carpeta.
 
 """
 
+# Resol aquí l'exercici 3
+
 """
 
 Exercici 4
@@ -75,6 +82,8 @@ Fes una funció "e4_busca_arxius" que busca tots els arxius amb una extensió de
 Paràmetres: extensió de l'arxiu a buscar, nom de la carpeta.
 
 """
+
+# Resol aquí l'exercici 4
 
 """
 
@@ -87,6 +96,8 @@ carpeta1/carpetaA/carpeta3, carpeta4/carpeta5, carpeta6, carpeta1/carpeta8/carpe
 Generi les carpetes i subcarpetes especificades a la cadena de text.
 
 """
+
+# Resol aquí l'exercici 5
 
 """
 
@@ -114,3 +125,5 @@ Prova-ho amb una estructura així:
 }
 
 """
+
+# Resol aquí l'exercici 6
