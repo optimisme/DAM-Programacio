@@ -53,13 +53,9 @@ class TestCsvFunctionsFromModule(unittest.TestCase):
         anys_vida_esperats_tigre = round(20 * (1 + increment_percentatge / 100))
         self.assertEqual(int(dades_actualitzades[2][2]), anys_vida_esperats_tigre)
 
-        # Netejar: eliminar l'arxiu temporal després del test
-        os.remove(nom_arxiu)
-
-
     def test_e0_guardar_csv(self):
         dades = [['nom', 'espècie', 'anys_vida', 'hàbitat'], ['Animal Test', 'Especie Test', '22', 'Hàbitat Test']]
-        nom_arxiu_sortida = 'test_output.csv'
+        nom_arxiu_sortida = 'E0-out.csv'
         self.module.e0_guardar_csv(dades, nom_arxiu_sortida)
         self.assertTrue(os.path.exists(nom_arxiu_sortida))
         # Llegir el contingut de l'arxiu per verificar les dades
