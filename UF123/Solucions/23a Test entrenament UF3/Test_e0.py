@@ -29,7 +29,6 @@ class TestCsvFunctionsFromModule(unittest.TestCase):
         ]
         mock_print.assert_has_calls(expected_calls, any_order=False)
 
-
     def test_e0_transforma_csv(self):
         nom_arxiu = 'E0.csv'  # Asumim que aquest arxiu conté dades que coneixem
         increment_percentatge = 10  # Increment del 10%
