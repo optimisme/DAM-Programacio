@@ -36,7 +36,11 @@ class TestCsvFunctionsFromModule(unittest.TestCase):
         # Crear un arxiu CSV temporal amb contingut conegut
         contingut_conegut = "nom,espècie,anys_vida,hàbitat\n" \
                             "Elefant Africà,Loxodonta africana,60,Savana\n" \
-                            "Tigre de Bengala,Panthera tigris tigris,20,Boscos\n"
+                            "Tigre de Bengala,Panthera tigris tigris,20,Boscos\n" \
+                            "Tortuga Gegant,Galapagos gigantea,100,Islles Galápagos\n" \
+                            "Llop Gris,Canis lupus,13,Boscos i planes\n" \
+                            "Papagai Amazònic,Amazona,50,Selva tropical"
+
         # Escriure aquest contingut a un arxiu temporal
         with open(nom_arxiu, 'w', encoding='utf-8') as tmp_arxiu:
             tmp_arxiu.write(contingut_conegut)
