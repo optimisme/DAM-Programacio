@@ -31,14 +31,32 @@ class TestCsvFunctionsFromModule(unittest.TestCase):
 
 
     def test_e0_transforma_csv(self):
-        nom_arxiu = 'E0.csv'
-        increment_percentatge = 10
+        nom_arxiu = 'E0.csv'  # Asumim que aquest arxiu conté dades que coneixem
+        increment_percentatge = 10  # Increment del 10%
+
+        # Crear un arxiu CSV temporal amb contingut conegut
+        contingut_conegut = "nom,espècie,anys_vida,hàbitat\n" \
+                            "Elefant Africà,Loxodonta africana,60,Savana\n" \
+                            "Tigre de Bengala,Panthera tigris tigris,20,Boscos\n"
+        # Escriure aquest contingut a un arxiu temporal
+        with open(nom_arxiu, 'w', encoding='utf-8') as tmp_arxiu:
+            tmp_arxiu.write(contingut_conegut)
+
+        # Executar la funció de transformació
         dades_actualitzades = self.module.e0_transforma_csv(nom_arxiu, increment_percentatge)
-        # Suposant que la columna amb índex 2 sigui convertible i necessiti l'increment
-        # Verificar la transformació; l'exemple següent depèn de les dades específiques del teu CSV
-        valor_original = float(dades_actualitzades[1][2]) / (1 + increment_percentatge / 100)
-        valor_esperat = round(valor_original * (1 + increment_percentatge / 100))
-        self.assertEqual(float(dades_actualitzades[1][2]), valor_esperat)
+
+        # Comprovar els resultats
+        # Aquí comprovem que l'any de vida de l'Elefant Africà ha estat incrementat correctament
+        anys_vida_esperats = round(60 * (1 + increment_percentatge / 100))
+        self.assertEqual(int(dades_actualitzades[1][2]), anys_vida_esperats)
+
+        # Comprovar l'increment per al Tigre de Bengala
+        anys_vida_esperats_tigre = round(20 * (1 + increment_percentatge / 100))
+        self.assertEqual(int(dades_actualitzades[2][2]), anys_vida_esperats_tigre)
+
+        # Netejar: eliminar l'arxiu temporal després del test
+        os.remove(nom_arxiu)
+
 
     def test_e0_guardar_csv(self):
         dades = [['nom', 'espècie', 'anys_vida', 'hàbitat'], ['Animal Test', 'Especie Test', '22', 'Hàbitat Test']]
