@@ -1,15 +1,11 @@
 package com.project;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
     
-        // Demanar a l'usuari la seva edat
-        System.out.println("Introdueix la teva edat:");
-        int edat = scanner.nextInt();
+        // Posar aquí una edat, per exemple 10, 25 o 81
+        int edat = 25;
 
         // Comprovar si la persona pot conduir basant-se en la seva edat
         if (edat >= 18 && edat <= 80) {
@@ -19,8 +15,5 @@ public class Main {
         } else {
             System.out.println("No pots conduir perquè no tens l'edat suficient.");
         }
-
-        // Tancar el scanner
-        scanner.close();
     }
 }
