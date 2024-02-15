@@ -1,0 +1,22 @@
+[
+    {
+        "id": 0,
+        "nom": "Curs: A - Mates"
+    },
+    {
+        "id": 1,
+        "nom": "Curs: B - Socials"
+    },
+    {
+        "id": 2,
+        "nom": "Curs: C - Català"
+    },
+    {
+        "id": 3,
+        "nom": "Curs: D - Història"
+    },
+    {
+        "id": 4,
+        "nom": "Curs: E - Filo"
+    }
+]
