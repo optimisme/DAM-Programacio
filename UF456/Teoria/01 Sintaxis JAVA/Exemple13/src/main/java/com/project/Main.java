@@ -21,9 +21,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String arxiu = "/assets/cursos.json"; // Els arxius de la carpeta './src/main/resources' s'empaqueten amb el projecte
+        // String arxiu = "/assets/cursos.json"; // Els arxius de la carpeta './src/main/resources/assets' s'empaqueten amb el projecte
 
-        // String arxiu = "./data/cursos.json"; // Els arxius de la carpate './data' són arxius normals del sistema que no s'empaqueten
+        String arxiu = "./data/cursos.json"; // Els arxius de la carpate './data' són arxius normals del sistema que no s'empaqueten
 
         CompletableFuture<Void> future = loadData(arxiu, (receivedData) -> {
             if (receivedData == null) {
