@@ -20,13 +20,31 @@ public class Main {
             try {
                 double numero = Double.parseDouble(input);
                 suma += numero;
-                // Aquesta línia que neteja el terminal no funcionarà a Java de manera estàndard
-                // i s'ha omès de l'exemple.
+                clearScreen();
             } catch (NumberFormatException e) {
-                System.out.println("Escriu un número o 'sortir'");
+                System.out.println("Error, cal escriure un número o 'sortir'");
+            } catch (Exception e) {
+                System.out.println(e);
             }
         }
 
         scanner.close();
+    }
+
+    public static void clearScreen() {
+        try {
+            String sistemaOperatiu = System.getProperty("os.name");
+
+            if (sistemaOperatiu.contains("Windows")) {
+                // Comanda per a Windows
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                // Comanda per a Unix/Linux/Mac
+                // Aquesta línia pot no netejar la pantalla en alguns terminals o IDEs
+                new ProcessBuilder("clear").inheritIO().start().waitFor();
+            }
+        } catch (Exception e) {
+            System.out.println("No es pot netejar la pantalla: " + e.getMessage());
+        }
     }
 }
