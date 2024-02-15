@@ -1,77 +1,64 @@
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.Reader;
-import java.nio.charset.StandardCharsets;
-import java.io.IOException;
-import java.util.function.Consumer;
-import java.util.concurrent.CompletableFuture;
+package com.project;
+
+import java.io.*;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.io.IOException;
 
 public class Main {
-
-    public static void main(String[] args) {
+   public static void main(String[] args) {
 
         // Els arxius de la carpeta './src/main/resources/assets' s'empaqueten amb el projecte
         // String arxiu = "/assets/cursos.json"; 
 
         // Els arxius de la carpate './data' són arxius normals del sistema que no s'empaqueten
         String arxiu = "./data/cursos.json"; 
+   
+        try {
 
-
-        loadData(arxiu, (receivedData) -> {
-            if (receivedData == null) {
-                System.out.println("Error al carregar les dades");
+            // Preparar l'stream de lectura
+            InputStream is;
+            if (arxiu.startsWith("/assets")) {
+                is = Main.class.getResourceAsStream(arxiu);
+                if (is == null) {
+                    throw new FileNotFoundException("El fitxer no s'ha trobat dins del JAR: " + arxiu);
+                }
             } else {
-                JSONArray dadesCursos = new JSONArray(receivedData);
-                if (dadesCursos != null) {
-                    for (int i = 0; i < dadesCursos.length(); i++) {
-                        JSONObject curs = dadesCursos.getJSONObject(i);
-                        System.out.println("ID: " + curs.getInt("id") + ", Nom: " + curs.getString("nom"));
-                    }
+                File file = new File(arxiu);
+                if (!file.exists()) {
+                    throw new FileNotFoundException("El fitxer no s'ha trobat en el sistema de fitxers: " + file.getAbsolutePath());
                 }
+                is = new FileInputStream(file);
             }
-        });  // Espera que les dades estiguin carregades
-    }
+            Reader reader = new InputStreamReader(is);
 
-    public static CompletableFuture<Void> loadData(String dataFile, Consumer<String> callBack) {
-        return CompletableFuture.supplyAsync(() -> {
-            StringBuilder content = new StringBuilder();
-            try {
-                InputStream is;
-                if (dataFile.startsWith("/assets")) {
-                    // Càrrega d'un recurs empaquetat dins del JAR
-                    is = Main.class.getResourceAsStream(dataFile);
-                    if (is == null) {
-                        throw new FileNotFoundException("El fitxer no s'ha trobat dins del JAR: " + dataFile);
-                    }
-                } else {
-                    // Càrrega d'un fitxer del sistema de fitxers
-                    File file = new File(dataFile);
-                    if (!file.exists()) {
-                        throw new FileNotFoundException("El fitxer no s'ha trobat en el sistema de fitxers: " + file.getAbsolutePath());
-                    }
-                    is = new FileInputStream(file);
+            // Llegir el contingut del fitxer com a String
+            StringBuilder contentBuilder = new StringBuilder();
+            try (BufferedReader bufferedReader = new BufferedReader(reader)) {
+                String line;
+                while ((line = bufferedReader.readLine()) != null) {
+                    contentBuilder.append(line).append("\n"); // Afegeix un salt de línia per mantenir el format
                 }
-                Reader reader = new InputStreamReader(is, StandardCharsets.UTF_8);
-                char[] buffer = new char[1024];
-                int bytesRead;
-                while ((bytesRead = reader.read(buffer)) != -1) {
-                    content.append(buffer, 0, bytesRead);
-                }
-                return content.toString();
             } catch (IOException e) {
                 e.printStackTrace();
-                return null;
+                // Maneja l'error com consideris necessari
             }
-        }).thenApply(content -> {
-            callBack.accept(content);
-            return null;
-        });
+            String content = contentBuilder.toString();
+
+            // Crear un JSONArray a partir del contingut del fitxer
+            JSONArray cursos = new JSONArray(content);
+
+            // Iterar sobre els elements de l'JSONArray
+            for (int i = 0; i < cursos.length(); i++) {
+                JSONObject curs = cursos.getJSONObject(i);
+                System.out.println("ID: " + curs.getInt("id") + ", Nom: " + curs.getString("nom"));
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

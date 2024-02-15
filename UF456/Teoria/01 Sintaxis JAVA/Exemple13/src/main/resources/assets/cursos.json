@@ -1,22 +1,22 @@
 [
     {
         "id": 0,
-        "nom": "Curs: 0 - Curs: 0 - Matemàtiques"
+        "nom": "Curs: A - Mates"
     },
     {
         "id": 1,
-        "nom": "Curs: 1 - Curs: 1 - Física"
+        "nom": "Curs: B - Socials"
     },
     {
         "id": 2,
-        "nom": "Curs: 2 - Curs: 2 - Química"
+        "nom": "Curs: C - Català"
     },
     {
         "id": 3,
-        "nom": "Curs: 3 - Curs: 3 - Biologia"
+        "nom": "Curs: D - Història"
     },
     {
         "id": 4,
-        "nom": "Curs: 4 - Curs: 4 - Genètica"
+        "nom": "Curs: E - Filo"
     }
 ]
