@@ -1,5 +1,3 @@
-package com.project;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -17,36 +15,30 @@ import org.json.JSONObject;
 
 public class Main {
 
-    public static JSONArray dadesCursos = null;
-
     public static void main(String[] args) {
 
-        // String arxiu = "/assets/cursos.json"; // Els arxius de la carpeta './src/main/resources/assets' s'empaqueten amb el projecte
+        // Els arxius de la carpeta './src/main/resources/assets' s'empaqueten amb el projecte
+        // String arxiu = "/assets/cursos.json"; 
 
-        String arxiu = "./data/cursos.json"; // Els arxius de la carpate './data' són arxius normals del sistema que no s'empaqueten
+        // Els arxius de la carpate './data' són arxius normals del sistema que no s'empaqueten
+        String arxiu = "./data/cursos.json"; 
 
-        CompletableFuture<Void> future = loadData(arxiu, (receivedData) -> {
+
+        loadData(arxiu, (receivedData) -> {
             if (receivedData == null) {
                 System.out.println("Error al carregar les dades");
-                return;
             } else {
-                dadesCursos = new JSONArray(receivedData);
-                // Processar i mostrar les dades aquí si és necessari
+                JSONArray dadesCursos = new JSONArray(receivedData);
+                if (dadesCursos != null) {
+                    for (int i = 0; i < dadesCursos.length(); i++) {
+                        JSONObject curs = dadesCursos.getJSONObject(i);
+                        System.out.println("ID: " + curs.getInt("id") + ", Nom: " + curs.getString("nom"));
+                    }
+                }
             }
-        });
-    
-        // Espera que les dades estiguin carregades
-        future.join(); // (Bloqueja el procés)
-    
-        // Ara podem accedir a dadesCursos de manera segura
-        if (dadesCursos != null) {
-            for (int i = 0; i < dadesCursos.length(); i++) {
-                JSONObject curs = dadesCursos.getJSONObject(i);
-                System.out.println("ID: " + curs.getInt("id") + ", Nom: " + curs.getString("nom"));
-            }
-        }
+        });  // Espera que les dades estiguin carregades
     }
-    
+
     public static CompletableFuture<Void> loadData(String dataFile, Consumer<String> callBack) {
         return CompletableFuture.supplyAsync(() -> {
             StringBuilder content = new StringBuilder();
