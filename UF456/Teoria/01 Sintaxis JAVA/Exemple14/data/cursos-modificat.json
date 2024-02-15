@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1000,
+        "nom": "Curs: 0 - Matemàtiques"
+    },
+    {
+        "id": 1001,
+        "nom": "Curs: 1 - Física"
+    },
+    {
+        "id": 1002,
+        "nom": "Curs: 2 - Química"
+    },
+    {
+        "id": 1003,
+        "nom": "Curs: 3 - Biologia"
+    },
+    {
+        "id": 1004,
+        "nom": "Curs: 4 - Genètica"
+    }
+]
