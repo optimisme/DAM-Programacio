@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Exemple de funcionament: ./runTest.sh com.project.TestMain
+# on 'TestMain' és el test que volem executar
+
+# Si hi ha múltiples tests i només en volem executar un:
+# Exemple d'executar només un test: ./runTest.sh com.project.TestMain#testMainOutput
+# on 'TestMain#testMainOutput' és el test i la funció de test que volem executar
+
 # run.sh
 
 # Set MAVEN_OPTS environment variable
@@ -10,12 +17,6 @@ export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.
 # Check for the first argument and set it as the main class
 mainClass=$1
 
-echo "Setting MAVEN_OPTS to: $MAVEN_OPTS"
-echo "Main Class: $mainClass"
-
-# Execute mvn command with the profile and main class as arguments
-execArg="-PrunMain -Dexec.mainClass=$mainClass"
-echo "Exec args: $mainClass"
-
 # Execute mvn command
-mvn -Dtest=com.project.TestMain test
+# mvn -q clean test-compile exec:java $execArg 
+mvn -Dtest=$mainClass test

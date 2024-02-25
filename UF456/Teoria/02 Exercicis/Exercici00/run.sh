@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Exemple de funcionament: ./run.sh com.project.Main
+# on 'Main' és la classe amb 'main' que volem executar
+
 # run.sh
 
 # Set MAVEN_OPTS environment variable

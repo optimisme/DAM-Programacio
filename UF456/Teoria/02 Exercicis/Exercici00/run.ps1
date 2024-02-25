@@ -1,5 +1,8 @@
 # run.ps1
 
+# Exemple de funcionament: .\run.ps1 com.project.Main
+# on 'Main' és la classe amb 'main' que volem executar
+
 # Change to the directory where the script is located
 Set-Location $PSScriptRoot
 
