@@ -32,6 +32,7 @@ node_modules
 
 target/classes
 target/maven-status
+*.class
 
 # Ignore pycache
 __pycache__

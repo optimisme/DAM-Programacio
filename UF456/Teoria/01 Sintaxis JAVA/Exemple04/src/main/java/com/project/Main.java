@@ -11,12 +11,12 @@ public class Main {
         System.out.println("La suma de 5 i 7 és: " + suma);
     }
 
-    // Funció sense paràmetres que imprimeix "Hello, World!"
+    // Funció sense paràmetres que imprimeix "Hello, World!" i no retorna res (void)
     public static void imprimirSalutacio() {
         System.out.println("Hello, World!");
     }
 
-    // Funció amb paràmetres que realitza una suma i retorna el resultat
+    // Funció amb paràmetres que realitza una suma i retorna un 'int' com a resultat
     public static int sumar(int num1, int num2) {
         return num1 + num2;
     }
