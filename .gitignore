@@ -33,6 +33,7 @@ node_modules
 target/
 target/classes
 target/maven-status
+target/surefire-reports
 *.class
 
 # Ignore pycache
