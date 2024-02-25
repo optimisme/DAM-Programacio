@@ -16,6 +16,11 @@ public class TestMain {
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "El resultat de la divisió és 21.015625\nEl resultat arrodonit de la divisió és 21,02";
-        assertTrue(text.contains(expectedOutput));
+        assertTrue(text.contains(expectedOutput), 
+            ">>>>>>>>>> >>>>>>>>>>\n" +
+            "El missatge de sortida no coincideix amb l'esperat. \n" +
+            "Esperat: \n" + expectedOutput + "\n" + 
+            "Obtingut: \n" + text + 
+            "<<<<<<<<<<< <<<<<<<<<<\n");
     }
 }
