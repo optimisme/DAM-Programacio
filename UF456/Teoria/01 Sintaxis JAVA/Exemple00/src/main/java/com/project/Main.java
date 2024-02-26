@@ -12,16 +12,19 @@ public class Main {
         double numeroDecimalsGran = 1.79769313486231570e+308d;
 
         // Capçaleres de columnes
-        System.out.printf("%-10s %-20s %-30s %n", "Tipus", "Nom", "Valor");
+        System.out.printf("%-10s %-20s %30s %n", "Tipus", "Nom", "Valor");
         System.out.println("---------------------------------------------------------------");
         
         // Imprimir informació de cada variable amb amplades fixes
-        System.out.printf("%-10s %-20s %-30s %n", "boolean", "varBoleana", varBoleana);
-        System.out.printf("%-10s %-20s %-30c %n", "char", "nomesUnCaracter", nomesUnCaracter);
-        System.out.printf("%-10s %-20s %-30s %n", "String", "cadenaText", cadenaText);
-        System.out.printf("%-10s %-20s %-30d %n", "int", "numeroEnter", numeroEnter);
-        System.out.printf("%-10s %-20s %-30d %n", "long", "numeroEnterGran", numeroEnterGran);
-        System.out.printf("%-10s %-20s %-30f %n", "float", "numeroDecimalsPetit", numeroDecimalsPetit);
-        System.out.printf("%-10s %-20s %-30e %n", "double", "numeroDecimalsGran", numeroDecimalsGran);
+        System.out.printf("%-10s %-20s %30s %n", "boolean", "varBoleana", varBoleana);
+        System.out.printf("%-10s %-20s %30c %n", "char", "nomesUnCaracter", nomesUnCaracter);
+        System.out.printf("%-10s %-20s %30s %n", "String", "cadenaText", cadenaText);
+        System.out.printf("%-10s %-20s %30d %n", "int", "numeroEnter", numeroEnter);
+        System.out.printf("%-10s %-20s %30d %n", "long", "numeroEnterGran", numeroEnterGran);
+        System.out.printf("%-10s %-20s %30f %n", "float", "numeroDecimalsPetit", numeroDecimalsPetit);
+        System.out.printf("%-10s %-20s %30e %n", "double", "numeroDecimalsGran", numeroDecimalsGran);
+
+        // %-10s significa que s'imprimirà justificant a l'esquerra (amb '-'), una cadena de text 's' i ocuparà 10 caràcters
+        // %30e significa que s'imprimirà justificant a la dreta (sense '-'), un número en format científic 'e' i ocuparà 30 caràcters
     }
 }
