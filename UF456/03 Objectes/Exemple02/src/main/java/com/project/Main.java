@@ -6,13 +6,13 @@ public class Main {
         Calculadora calc0 = new Calculadora(2, 3);
         Calculadora calc1 = new Calculadora(20, 30);
 
-        System.out.println(calc0.toString()); // Escriu: Compartit:0; a = 2; b = 3
-        System.out.println(calc1.toString()); // Escriu: Compartit:0; a = 20; b = 30
+        System.out.println(calc0); // Escriu: Compartit:0; a = 2; b = 3
+        System.out.println(calc1); // Escriu: Compartit:0; a = 20; b = 30
 
         Calculadora.valorCompartit = 2;
 
-        System.out.println(calc0.toString()); // Escriu: Compartit:2; a = 2; b = 3
-        System.out.println(calc1.toString()); // Escriu: Compartit:2; a = 20; b = 30
+        System.out.println(calc0); // Escriu: Compartit:2; a = 2; b = 3
+        System.out.println(calc1); // Escriu: Compartit:2; a = 20; b = 30
 
         System.out.println("Suma calc0: " + calc0.sumaValorsInstancia()); // Escriu: Suma calc0: 5
         System.out.println("Suma calc1: " + calc1.sumaValorsInstancia()); // Escriu: Suma calc1: 50

@@ -7,8 +7,8 @@ public class Main {
         SingletonDades instanciaVale = SingletonDades.getInstance("Vale");
         SingletonDades instanciaAdeu = SingletonDades.getInstance("Adeu");
 
-        System.out.println(instanciaHola.toString()); // Escriu: Valor: Hola
-        System.out.println(instanciaVale.toString()); // Escriu: Valor: Hola
-        System.out.println(instanciaAdeu.toString()); // Escriu: Valor: Hola
+        System.out.println(instanciaHola); // Escriu: Valor: Hola
+        System.out.println(instanciaVale); // Escriu: Valor: Hola
+        System.out.println(instanciaAdeu); // Escriu: Valor: Hola
     }
 }

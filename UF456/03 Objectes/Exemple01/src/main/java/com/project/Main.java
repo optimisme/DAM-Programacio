@@ -8,7 +8,7 @@ public class Main {
         joan.setEdat(40);
 
         
-        System.out.println(joan.toString()); // Imprimeix "Nom: Joanito, Edat: 40"
+        System.out.println(joan); // Imprimeix "Nom: Joanito, Edat: 40"
         System.out.println(joan.getNom()); // Imprimeix "Juanito"
     }
 }
