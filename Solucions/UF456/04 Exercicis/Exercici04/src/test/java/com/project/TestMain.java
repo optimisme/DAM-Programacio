@@ -19,6 +19,7 @@ public class TestMain {
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             Main.main(args);
         });
+        text = text.replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "Joan - Nota Mitjana: 4.75\n" + 
