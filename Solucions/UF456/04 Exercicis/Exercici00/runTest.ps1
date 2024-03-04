@@ -17,4 +17,4 @@ $env:MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.ba
 $mainClass = $args[0]
 
 # mvn -q clean test-compile exec:java -PrunMain $execArg
-mvn -Dtest=$mainClass test
+mvn -Dtest="$mainClass" test
