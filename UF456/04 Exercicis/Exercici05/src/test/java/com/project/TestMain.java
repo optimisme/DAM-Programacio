@@ -18,6 +18,7 @@ public class TestMain {
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             Main.main(args);
         });
+        text = text.replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "Llibre: Cien años de soledad - Autor: Gabriel García Márquez (Colombiana)\n" + 
