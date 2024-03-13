@@ -35,6 +35,25 @@ public class TestMain {
             "<<<<<<<<<<< <<<<<<<<<<\n");
     }
 
+    private void assertStringEqualsWithDetail(String expected, String actual) {
+        if (!expected.equals(actual)) {
+            for (int i = 0; i < Math.min(expected.length(), actual.length()); i++) {
+                if (expected.charAt(i) != actual.charAt(i)) {
+                    throw new AssertionError("Les cadenes difereixen a la posició " + i + 
+                                             ". Esperat: '" + expected.charAt(i) + 
+                                             "' (" + (int)expected.charAt(i) + 
+                                             "), obtingut: '" + actual.charAt(i) + 
+                                             "' (" + (int)actual.charAt(i) + ").");
+                }
+            }
+            if (expected.length() != actual.length()) {
+                throw new AssertionError("Les cadenes tenen longituds diferents. Esperat: " + 
+                                         expected.length() + " caràcters, obtingut: " + 
+                                         actual.length() + " caràcters.");
+            }
+        }
+    }
+    
     @Test
     public void testMainValidation() throws Exception {
         // Crea un nou pilot amb dades diferents
@@ -56,18 +75,22 @@ public class TestMain {
             System.out.println(pilot);
             pilot.checkIn();
         });
-        assertEquals(expectedPilotOutput, outputPilot, "La sortida per al pilot no coincideix amb l'esperada.");
         
         String outputClient1 = SystemLambda.tapSystemOut(() -> {
             System.out.println(client1);
             client1.checkIn();
         });
-        assertEquals(expectedClient1Output, outputClient1, "La sortida per al client1 no coincideix amb l'esperada.");
         
         String outputClient2 = SystemLambda.tapSystemOut(() -> {
             System.out.println(client2);
             client2.checkIn();
         });
+
+        assertStringEqualsWithDetail(expectedPilotOutput, outputPilot);
+        assertStringEqualsWithDetail(expectedClient1Output, outputClient1);
+        assertStringEqualsWithDetail(expectedClient2Output, outputClient2);
+        assertEquals(expectedPilotOutput, outputPilot, "La sortida per al pilot no coincideix amb l'esperada.");
+        assertEquals(expectedClient1Output, outputClient1, "La sortida per al client1 no coincideix amb l'esperada.");
         assertEquals(expectedClient2Output, outputClient2, "La sortida per al client2 no coincideix amb l'esperada.");
     }
     
