@@ -1,9 +1,12 @@
 #!/bin/bash
 
+# Exemple de funcionament: ./run.sh com.project.Main
+# on 'Main' és la classe amb 'main' que volem executar
+
 # run.sh
 
 # Set MAVEN_OPTS environment variable
-export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED"
+export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED -Dfile.encoding=UTF8"
 
 # Resta de l'script
 
