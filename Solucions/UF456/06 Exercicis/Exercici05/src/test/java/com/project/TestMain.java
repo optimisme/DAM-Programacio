@@ -26,9 +26,11 @@ public class TestMain {
             "Carregant 300kg en el cotxe.\n" +
             "El cotxe Toyota Corolla s'ha aturat.\n" +
             "Vehicle{marca='Toyota', model='Corolla'}\n" +
+            "Furgoneta{marca='Ford', model='Transit', volumCarrega=15m³}\n" +
             "La furgoneta Ford Transit s'està iniciant.\n" +
             "Carregant 1000kg a la furgoneta.\n" +
             "La furgoneta Ford Transit s'ha aturat.\n" +
+            "Vehicle{marca='Ford', model='Transit'}, volumCarrega=15m³\n" +
             "Bicicleta{marca='BH', model='Speedrom'}\n" +
             "La bicicleta BH Speedrom està preparada per a ser utilitzada.\n" +
             "La bicicleta BH Speedrom s'ha aturat.\n" +
