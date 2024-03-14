@@ -58,7 +58,7 @@ public class TestMain {
         };
 
         for (int i = 0; i < empleats.size(); i++) {
-            assertEquals(descripcionsEsperades[i], empleats.get(i).toString(), "La descripció de l'empleat no coincideix amb l'esperada.");
+            assertEquals(descripcionsEsperades[i], empleats.get(i).toString().replace("\r\n", "\n"), "La descripció de l'empleat no coincideix amb l'esperada.");
         }
     }
     

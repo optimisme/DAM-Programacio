@@ -71,7 +71,7 @@ public class TestMain {
         String outputRentadora = SystemLambda.tapSystemOut(() -> {
             System.out.println(rentadora);
         });
-        assertTrue(outputRentadora.trim().equals(expectedOutputRentadora), "La sortida de mostrarInformacio per Rentadora no és l'esperada");
+        assertTrue(outputRentadora.trim().equals(expectedOutputRentadora.replace("\r\n", "\n")), "La sortida de mostrarInformacio per Rentadora no és l'esperada");
     }
     
     @Test
