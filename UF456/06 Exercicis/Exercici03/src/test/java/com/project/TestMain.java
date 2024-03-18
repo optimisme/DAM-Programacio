@@ -50,7 +50,7 @@ public class TestMain {
             pagamentTargeta.autoritzarPagament();
             pagamentTargeta.processarPagament();
         });
-        assertEquals(expectedTargetaOutput, targetaOutput, "La sortida per a pagament amb targeta no és l'esperada.");
+        assertEquals(expectedTargetaOutput, targetaOutput.replace("\r\n", "\n"), "La sortida per a pagament amb targeta no és l'esperada.");
     
         // Capturem i validem l'output de processarPagament i autoritzarPagament per PagamentDigital
         String expectedDigitalOutput = "El pagament digital ha estat autoritzat.\nEl pagament digital ha estat processat.\n";
@@ -58,7 +58,7 @@ public class TestMain {
             pagamentDigital.autoritzarPagament();
             pagamentDigital.processarPagament();
         });
-        assertEquals(expectedDigitalOutput, digitalOutput, "La sortida per a pagament digital no és l'esperada.");
+        assertEquals(expectedDigitalOutput, digitalOutput.replace("\r\n", "\n"), "La sortida per a pagament digital no és l'esperada.");
     
         // Assegurem-nos que les classes implementen les interfícies esperades
         assertTrue(pagamentEfectiu instanceof Pagable, "PagamentEfectiu hauria d'implementar Pagable");
