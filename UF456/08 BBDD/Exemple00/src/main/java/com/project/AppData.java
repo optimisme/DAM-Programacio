@@ -11,9 +11,11 @@ class AppData {
     private Connection conn;
 
     private AppData() {
+        // Connecta al crear la primera instància
         connect();
     }
 
+    // Singleton
     public static AppData getInstance() {
         if (instance == null) {
             instance = new AppData();
@@ -22,7 +24,7 @@ class AppData {
     }
 
     private void connect() {
-        String url = "jdbc:sqlite:dades.sqlite";
+        String url = "jdbc:sqlite:dades.sqlite"; // Nom de l'arxiu amb les dades 'dades.sqlite'
         try {
             conn = DriverManager.getConnection(url);
         } catch (SQLException e) {

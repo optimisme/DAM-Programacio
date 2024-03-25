@@ -11,9 +11,11 @@ class AppData {
     private Connection conn;
 
     private AppData() {
+        // Connecta al crear la primera instància
         connect();
     }
 
+    // Singleton
     public static AppData getInstance() {
         if (instance == null) {
             instance = new AppData();
