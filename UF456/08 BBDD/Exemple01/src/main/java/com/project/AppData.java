@@ -22,11 +22,21 @@ class AppData {
     }
 
     private void connect() {
-        String url = "jdbc:sqlite:dades.sqlite";
+        // Canvia aquestes variables per les teves credencials reals
+        String url = "jdbc:mysql://localhost:3308/world?useSSL=false"; // Utilitza el port 3308 i la base de dades 'world'
+        String user = "root"; // El teu usuari de MySQL
+        String password = "pwd"; // La teva contrasenya de MySQL
+
         try {
-            conn = DriverManager.getConnection(url);
+            // Assegura't que el controlador JDBC de MySQL estigui carregat
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, user, password);
+        } catch (ClassNotFoundException e) {
+            System.out.println("No es pot trobar el controlador JDBC de MySQL.");
+            e.printStackTrace();
         } catch (SQLException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Error connectant a la base de dades MySQL.");
+            e.printStackTrace();
         }
     }
 
@@ -46,8 +56,6 @@ class AppData {
         }
     }
 
-    // Aquesta funció transforma el ResultSet en un Map<String, Object>
-    // per fer l'accés a la informació més genèric
     public List<Map<String, Object>> query(String sql) {
         List<Map<String, Object>> resultList = new ArrayList<>();
         try (Statement stmt = conn.createStatement();
