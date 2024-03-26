@@ -52,6 +52,8 @@ class AppData {
     // per fer l'accés a la informació més genèric
     public List<Map<String, Object>> query(String sql) {
         List<Map<String, Object>> resultList = new ArrayList<>();
+
+        // try-with-resources tancarà el ResultSet quan acabi el bloc
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             ResultSetMetaData metaData = rs.getMetaData();

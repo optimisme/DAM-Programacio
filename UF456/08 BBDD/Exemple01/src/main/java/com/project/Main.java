@@ -17,6 +17,10 @@ public class Main {
 
         // Tancar la connexió amb la base de dades (del singleton)
         db.close();
+
+        // Forçar la sortida del programa per no esperar a tancar la connexió amb 'MySQL'
+        // Assegura't que en aquest punt totes les dades s'han guardat correctament
+        System.exit(0);
     }
 
     public static void llistarTaules() {
