@@ -27,6 +27,7 @@ class AppData {
         String url = "jdbc:sqlite:dades.sqlite"; // Nom de l'arxiu amb les dades 'dades.sqlite'
         try {
             conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(false); // Desactiva l'autocommit per permetre control manual de transaccions
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -43,8 +44,15 @@ class AppData {
     public void update(String sql) {
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(sql);
+            conn.commit(); // Confirma els canvis
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            try {
+                conn.rollback(); // Reverteix els canvis en cas d'error
+            } catch (SQLException ex) {
+                System.out.println("Error en fer rollback.");
+                ex.printStackTrace();
+            }
         }
     }
 
