@@ -37,5 +37,7 @@ target/surefire-reports
 *.class
 dades.sqlite
 
+.continue
+
 # Ignore pycache
 __pycache__
