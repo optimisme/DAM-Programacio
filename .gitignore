@@ -35,6 +35,7 @@ target/classes
 target/maven-status
 target/surefire-reports
 *.class
+dades.sqlite
 
 # Ignore pycache
 __pycache__

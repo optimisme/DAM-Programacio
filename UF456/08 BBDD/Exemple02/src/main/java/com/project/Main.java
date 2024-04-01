@@ -6,7 +6,7 @@ public class Main {
 
     public static void main(String[] args) {
 
-        String url = "jdbc:mysql://localhost:3308/persones";
+        String url = "jdbc:mysql://localhost:3308/persones?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "root"; // El teu usuari de MySQL
         String password = "pwd"; // La teva contrasenya de MySQL
 
@@ -33,12 +33,15 @@ public class Main {
 
         // Forçar la sortida del programa per no esperar a tancar la connexió amb 'MySQL'
         // Assegura't que en aquest punt totes les dades s'han guardat correctament
-        System.exit(0);
+        if (!"test".equals(System.getProperty("enviroment"))) {
+            System.exit(0);
+        }
     }
 
     public static void initData(Connection conn) {
         try (Statement stmt = conn.createStatement()) {
             // Esborrar la taula 'persones' si existeix
+            stmt.execute("SET FOREIGN_KEY_CHECKS=0;");
             stmt.execute("DROP TABLE IF EXISTS persones");
     
             // Crear la taula 'persones'
