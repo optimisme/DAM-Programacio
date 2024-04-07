@@ -18,7 +18,7 @@ public class MainWindow extends JFrame {
         setMenu();
     
         // Definir els elements del panel
-        setContent();   
+        initComponents();   
     }
 
     private void modificaComptador(int valor) {
@@ -55,7 +55,7 @@ public class MainWindow extends JFrame {
         this.setJMenuBar(barraMenu);
     }
 
-    private void setContent () {
+    private void initComponents () {
         // Crea un panell com a contenidor amb BoxLayout alineat al eix Y
         JPanel panell = new JPanel();
         panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));

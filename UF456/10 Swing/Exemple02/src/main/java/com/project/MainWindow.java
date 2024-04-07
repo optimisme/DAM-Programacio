@@ -1,7 +1,7 @@
 package com.project;
 
-import javax.swing.*;
 import java.awt.*;
+import javax.swing.*;
 
 public class MainWindow extends JFrame {
 
@@ -23,21 +23,26 @@ public class MainWindow extends JFrame {
         setSize(300, 200);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-            // Afegeix les vistes al CardLayout
-            vForm = new ViewForm();
-            cards.add(vForm, "FORM");
+        initComponents();
 
-            vInfo = new ViewInfo();
-            cards.add(vInfo, "INFO");
-            
-            // Definir quina vista es mostra per defecte (FORM)
-            cardLayout.show(cards, "FORM");
+        // Iniciar el controlador
+        controller = new Controller(model, vForm, vInfo, cardLayout, cards);
+        controller.start();
+    }
+
+    private void initComponents() {
+
+        // Afegeix les vistes al CardLayout
+        vForm = new ViewForm();
+        cards.add(vForm, "FORM");
+
+        vInfo = new ViewInfo();
+        cards.add(vInfo, "INFO");
+        
+        // Definir quina vista es mostra per defecte (FORM)
+        cardLayout.show(cards, "FORM");
 
         // Afegir les vistes al panell de la finestra
         add(cards);
-
-        // Configurar i iniciar el controlador
-        controller = new Controller(model, vForm, vInfo, cardLayout, cards);
-        controller.start();
     }
 }

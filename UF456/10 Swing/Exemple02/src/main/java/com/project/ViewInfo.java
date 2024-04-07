@@ -2,18 +2,17 @@ package com.project;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class ViewInfo extends JPanel {
 
-    private JLabel nameLabel = new JLabel("Name: ");
-    private JLabel nameValueLabel = new JLabel(); // Aquest label mostrarà el valor de nom
+    public JLabel nameLabel = new JLabel("Name: ");
+    public JLabel nameValueLabel = new JLabel(); // Aquest label mostrarà el valor de nom
 
-    private JLabel ageLabel = new JLabel("Age: ");
-    private JLabel ageValueLabel = new JLabel(); // Aquest label mostrarà el valor d'edat
+    public JLabel ageLabel = new JLabel("Age: ");
+    public JLabel ageValueLabel = new JLabel(); // Aquest label mostrarà el valor d'edat
 
-    private JButton backButton = new JButton("Torna");
-    private JButton randomInfoButton = new JButton("Informació Aleatòria");
+    public JButton backButton = new JButton("Torna");
+    public JButton randomInfoButton = new JButton("Informació Aleatòria");
 
     public ViewInfo() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -49,21 +48,5 @@ public class ViewInfo extends JPanel {
         buttonPanel.add(backButton);
         buttonPanel.add(randomInfoButton);
         add(buttonPanel);
-    }
-
-    // Mètode per mostrar la informació de l'usuari
-    public void displayUserInfo(String name, int age) {
-        nameValueLabel.setText(name);
-        ageValueLabel.setText(String.valueOf(age));
-    }
-
-    // Funció per definir quina acció fa el botó 'backButton' de del controller
-    public void setBackButtonAction(ActionListener action) {
-        backButton.addActionListener(action);
-    }
-
-    // Funció per definir quina acció fa el botó 'randomInfoButton' de del controller
-    public void setRandomButtonAction(ActionListener action) {
-        randomInfoButton.addActionListener(action);
     }
 }

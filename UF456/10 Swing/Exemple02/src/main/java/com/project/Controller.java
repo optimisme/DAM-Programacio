@@ -19,16 +19,22 @@ public class Controller {
         this.vInfo = vInfo;
         this.cardLayout = cardLayout;
         this.cards = cards;
+    }
 
+    // Accions per iniciar el controlador
+    public void start() {
+        updateModelWithRandomInfo();
+        setupActionListeners();
+    }
+
+    private void setupActionListeners() {
         // Definir les funcions que es criden al fer 'click' als botons
-        this.vForm.setInfoButtonAction(this::controllerInfoButtonAction);
-        this.vInfo.setBackButtonAction(this::controllerBackButtonAction);
-        this.vInfo.setRandomButtonAction(this::controllerRandomButtonAction);
+        vForm.infoButton.addActionListener(this::controllerInfoButtonAction);
+        vInfo.backButton.addActionListener(this::controllerBackButtonAction);
+        vInfo.randomInfoButton.addActionListener(this::controllerRandomButtonAction);
 
     /*  Aquestes últimes crides signifiquen:
-        - La funció 'setInfoButtonAction' defineix quina funció cal cridar
-          quan s'apreta el botó 'infoButton' de l'objecte 'ViewForm'.
-        - Aleshores, quan s'apreti el botó 'infoButton' de l'objecte 'ViewForm'
+        - Quan s'apreti el botó 'infoButton' de l'objecte 'ViewForm'
           s'executa el codi de la funció 'controllerInfoButtonAction' de l'objecte 'Controller'
     */
     }
@@ -52,11 +58,6 @@ public class Controller {
         updateModelWithRandomInfo();
     }
 
-    // Accions per iniciar el controlador
-    public void start() {
-        updateModelWithRandomInfo();
-    }
-
     // Canvia a la vista FORM
     private void showFormView() {
         cardLayout.show(cards, "FORM");
@@ -76,7 +77,7 @@ public class Controller {
         int tmpAge = 0;
         Boolean wrongAge = false;
         try {
-            tmpAge = Integer.parseInt(vForm.getFormAge());
+            tmpAge = Integer.parseInt(vForm.ageField.getText());
             if (tmpAge < 0) {
                 wrongAge = true;
             }
@@ -87,14 +88,14 @@ public class Controller {
 
         // Si l'edat és errònia mostrar l'error i definir l'edat com a -1
         if (!wrongAge) {
-            vForm.setAgeErrorLabelVisible(false);
+            vForm.ageErrorLabel.setVisible(false);
         } else {
-            vForm.setAgeErrorLabelVisible(true);
+            vForm.ageErrorLabel.setVisible(true);
             tmpAge = -1;
         }
 
         // Definir els valors de 'nom' i 'edat' un cop validats
-        model.setName(vForm.getFormName());
+        model.setName(vForm.nameField.getText());
         model.setAge(tmpAge);
     }
 
@@ -103,9 +104,10 @@ public class Controller {
         String name = model.getName();
         int age = model.getAge();
 
-        vForm.setFormName(name);
-        vForm.setFormAge(age);
-        vInfo.displayUserInfo(name, age);
+        vForm.nameField.setText(name);
+        vForm.ageField.setText(String.valueOf(age));
+        vInfo.nameValueLabel.setText(name);
+        vInfo.ageValueLabel.setText(String.valueOf(age));
     }
 
     // Genera informació aleatòria i actualitza les vistes

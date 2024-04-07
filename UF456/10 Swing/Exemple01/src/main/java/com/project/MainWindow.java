@@ -21,13 +21,13 @@ public class MainWindow extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     
         // Definir els elements del panel
-        setContent();
+        initComponents();
         
         // Inicia els elements
         updateLabelFromSlider();
     }
 
-    private void setContent () {
+    private void initComponents () {
         // Crea un panell com a contenidor amb BoxLayout alineat al eix Y
         JPanel panell = new JPanel();
         panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));

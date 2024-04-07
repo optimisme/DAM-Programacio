@@ -2,14 +2,13 @@ package com.project;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 public class ViewForm extends JPanel {
 
-    private JTextField nameField = new JTextField(20);
-    private JTextField ageField = new JTextField(20);
-    private JLabel ageErrorLabel;
-    private JButton infoButton = new JButton("Mostra Info");
+    public JTextField nameField = new JTextField(20);
+    public JTextField ageField = new JTextField(20);
+    public JLabel ageErrorLabel;
+    public JButton infoButton = new JButton("Mostra Info");
 
     public ViewForm() {
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -53,35 +52,5 @@ public class ViewForm extends JPanel {
         panel.add(textField);
         
         return panel;
-    }
-
-    // Defineix el valor del camp de text 'nameField' amb el valor 'name'
-    public void setFormName(String name) {
-        nameField.setText(name);
-    }
-    
-    // Defineix el valor del camp de text 'ageField' amb el valor 'age'
-    public void setFormAge(int age) {
-        ageField.setText(String.valueOf(age));
-    }
-
-    // Obté el valor del camp de text 'nameField'
-    public String getFormName() {
-        return nameField.getText();
-    }
-
-    // Obté el valor del camp de text 'ageField'
-    public String getFormAge() {
-        return ageField.getText();
-    }
-
-    // Mostrar o amagar el missatge d'edat errònia
-    public void setAgeErrorLabelVisible(Boolean value) {
-        ageErrorLabel.setVisible(value);
-    }
-
-    // Funció per definir quina acció fa el botó de del controller
-    public void setInfoButtonAction(ActionListener action) {
-        infoButton.addActionListener(action);
     }
 }
