@@ -15,23 +15,22 @@ public class MainWindow extends JFrame {
     
     private JButton openButton;
     private JLabel imageLabel;
+    private JLabel fileNameLabel; 
     private JTextArea textArea;
     private JScrollPane scrollPane;
 
     public MainWindow() {
-
         // Títol i mida de la finestra
         super("SWING Exemple 04");
         setSize(600, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
-   
+
         // Definir els elements del panel
-        initComponents();   
+        initComponents();
     }
 
-    private void initComponents () {
-
+    private void initComponents() {
         openButton = new JButton("Obre Arxiu");
         openButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -45,7 +44,12 @@ public class MainWindow extends JFrame {
         scrollPane = new JScrollPane(textArea);
         scrollPane.setVisible(false);
 
+        // Inicialitzar i afegir la nova etiqueta
+        fileNameLabel = new JLabel("Cap arxiu seleccionat.");
+        fileNameLabel.setForeground(Color.BLUE); // Opcional: Canviar el color del text.
+
         add(openButton);
+        add(fileNameLabel); // Assegurar que aquesta etiqueta s'afegeix a la finestra.
         add(imageLabel);
         add(scrollPane);
     }
@@ -55,6 +59,7 @@ public class MainWindow extends JFrame {
         int result = fileChooser.showOpenDialog(this);
         if (result == JFileChooser.APPROVE_OPTION) {
             File selectedFile = fileChooser.getSelectedFile();
+            fileNameLabel.setText("Arxiu seleccionat: " + selectedFile.getName());
             displayFile(selectedFile);
         }
     }
@@ -69,10 +74,10 @@ public class MainWindow extends JFrame {
                 imageLabel.setVisible(true);
             } else if (isTextFile(file)) { 
                 BufferedReader reader = new BufferedReader(new FileReader(file));
-                textArea.setText(""); // Netejar el textArea abans de carregar nou contingut.
+                textArea.setText("");
                 textArea.read(reader, null);
                 reader.close();
-                imageLabel.setIcon(null); // Això neteja l'última imatge mostrada.
+                imageLabel.setIcon(null);
                 imageLabel.setVisible(false);
                 scrollPane.setVisible(true);
             }
@@ -82,8 +87,8 @@ public class MainWindow extends JFrame {
     }
 
     private boolean isTextFile(File file) {
-        String[] imageExtensions = new String[]{"txt", "xml", "java", "py", "yaml", "json"};
-        for (String extension : imageExtensions) {
+        String[] textExtensions = new String[]{"txt", "xml", "java", "py", "yaml", "json", "sh", "csv"};
+        for (String extension : textExtensions) {
             if (file.getName().toLowerCase().endsWith(extension)) {
                 return true;
             }
