@@ -36,17 +36,18 @@ public class CategoriaDAO {
         db.update(sql);
     }
 
-    public static ArrayList<String> getAllStrings() {
-        // Retorna una llista amb tots els noms de categoria amb format 'id-nom'
+    public static ArrayList<CategoriaModel> getAll() {
+        // Retorna una llista amb totes les categories
         String sql = "SELECT id, nom FROM categories";
         AppData db = AppData.getInstance();
-        ArrayList<String> categoryList = new ArrayList<>();
+        ArrayList<CategoriaModel> list = new ArrayList<>();
         List<Map<String, Object>> results = db.query(sql);
         
         for (Map<String, Object> row : results) {
-            String categoryEntry = row.get("id") + "-" + row.get("nom");
-            categoryList.add(categoryEntry);
+            int id = (Integer) row.get("id");
+            String nom = (String) row.get("nom");
+            list.add(new CategoriaModel(id, nom));
         }
-        return categoryList;
+        return list;
     }
 }

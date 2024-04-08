@@ -37,7 +37,8 @@ public class ViewForm extends JPanel {
         add(infoButton);
     }
 
-    private JPanel createLabeledField(String labelText, JTextField textField) {
+    // Crea una fila amb una etiqueta i un component interactiu SWING
+    private JPanel createLabeledField(String labelText, JComponent component) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.X_AXIS));
         JLabel label = new JLabel(labelText);
@@ -45,11 +46,11 @@ public class ViewForm extends JPanel {
         label.setHorizontalAlignment(SwingConstants.RIGHT);
         
         // Ajusta les dimensions màximes del camp de text per evitar l'expansió vertical
-        textField.setMaximumSize(new Dimension(Integer.MAX_VALUE, textField.getPreferredSize().height));
+        component.setMaximumSize(new Dimension(Integer.MAX_VALUE, component.getPreferredSize().height));
         
         panel.add(label);
         panel.add(Box.createRigidArea(new Dimension(5, 0))); // Espai entre el label i el camp de text
-        panel.add(textField);
+        panel.add(component);
         
         return panel;
     }

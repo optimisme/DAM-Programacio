@@ -80,9 +80,9 @@ public class Main {
         db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Controlador MIDI Novation', 'Controlador MIDI compacte i portàtil per a productors musicals.', 199.99, 3)");
         db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Micròfon Shure SM58', 'El micròfon estàndard de la indústria per a vocals en directe.', 99.99, 4)");
         db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Mesa de Mescles Yamaha', 'Mesa de mescles de 12 canals per a actuacions en directe i gravacions.', 299.99, 4)");
-        db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Interfície d\'Àudio Focusrite', 'Interfície d’àudio USB per a gravacions d’alta qualitat a casa.', 109.99, 4)");
-        db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Afinador de Clip Korg', 'Afinador compacte i fàcil d\'usar per a qualsevol instrument.', 14.99, 5)");
-        db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Pedal d\'Efectes Boss', 'Pedal d\'efectes de guitarra per a distorsió, delay, i més.', 89.99, 5)");
+        db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Interfície d´Àudio Focusrite', 'Interfície d’àudio USB per a gravacions d’alta qualitat a casa.', 109.99, 4)");
+        db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Afinador de Clip Korg', 'Afinador compacte i fàcil d´usar per a qualsevol instrument.', 14.99, 5)");
+        db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Pedal d´Efectes Boss', 'Pedal d´efectes de guitarra per a distorsió, delay, i més.', 89.99, 5)");
         db.update("INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('Suport de Guitarra Hercules', 'Suport robust i fiable per a qualsevol tipus de guitarra.', 29.99, 5)");
     }
 }

@@ -2,6 +2,7 @@ package com.project;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 public class ProducteDAO {
@@ -25,8 +26,8 @@ public class ProducteDAO {
     }
 
     public static void addItem(ProducteModel product) {
-        String sql = String.format(
-            "INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('%s', '%s', %f, %d)",
+        String sql = String.format(Locale.US,
+            "INSERT INTO productes (nom, descripcio, preu, categoriaId) VALUES ('%s', '%s', %.2f, %d)",
             product.getNom(), product.getDescripcio(), product.getPreu(), product.getCategoriaId()
         );
         AppData db = AppData.getInstance();
@@ -34,7 +35,7 @@ public class ProducteDAO {
     }
 
     public static void updateItem(ProducteModel product) {
-        String sql = String.format(
+        String sql = String.format(Locale.US,
             "UPDATE productes SET nom = '%s', descripcio = '%s', preu = %f, categoriaId = %d WHERE id = %d",
             product.getNom(), product.getDescripcio(), product.getPreu(), product.getCategoriaId(), product.getId()
         );
@@ -48,17 +49,21 @@ public class ProducteDAO {
         db.update(sql);
     }
 
-    public static ArrayList<String> getAllStrings() {
-        // Retorna una llista amb tots els noms de producte amb format 'id-nom'
-        String sql = "SELECT id, nom FROM productes";
+    public static ArrayList<ProducteModel> getAll() {
+        // Retorna una llista amb tots els productes
+        String sql = "SELECT id, nom, descripcio, preu, categoriaId FROM productes";
         AppData db = AppData.getInstance();
-        ArrayList<String> productes = new ArrayList<>();
+        ArrayList<ProducteModel> list = new ArrayList<>();
         List<Map<String, Object>> results = db.query(sql);
         
         for (Map<String, Object> row : results) {
-            String categoryEntry = row.get("id") + "-" + row.get("nom");
-            productes.add(categoryEntry);
+            int id = (Integer) row.get("id");
+            String nom = (String) row.get("nom");
+            String descripcio = (String) row.get("descripcio");
+            double preu = (Double) row.get("preu");
+            int categoryId = (Integer) row.get("categoriaId");
+            list.add(new ProducteModel(id, nom, descripcio, preu, categoryId));
         }
-        return productes;
+        return list;
     }
 }
