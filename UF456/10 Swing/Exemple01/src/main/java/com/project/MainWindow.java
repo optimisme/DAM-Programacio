@@ -29,13 +29,13 @@ public class MainWindow extends JFrame {
 
     private void initComponents () {
         // Crea un panell com a contenidor amb BoxLayout alineat al eix Y
-        JPanel panell = new JPanel();
-        panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));
-        panell.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(panell);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(panel);
     
         // Espaiador vertical
-        panell.add(Box.createVerticalStrut(10));
+        panel.add(Box.createVerticalStrut(10));
     
         // Crea i configura el slider
         slider = new JSlider(0, 100, 25);
@@ -43,25 +43,25 @@ public class MainWindow extends JFrame {
         slider.setPaintTicks(true);
         slider.setPaintLabels(true);
         slider.addChangeListener(this::updateSliderLabel);
-        panell.add(slider);
+        panel.add(slider);
 
         // Etiqueta per mostrar el valor del slider
         sliderValueLabel = new JLabel("");
-        panell.add(sliderValueLabel);
+        panel.add(sliderValueLabel);
 
         // Espaiador vertical
-        panell.add(Box.createVerticalStrut(10));
+        panel.add(Box.createVerticalStrut(10));
 
         // Checkbox per activar/desactivar el botó
         checkBox = new JCheckBox("Activa botó");
         checkBox.addActionListener(this::updateCheckBox);
-        panell.add(checkBox);
+        panel.add(checkBox);
 
         // Botó per mostrar un nom aleatori
         randomNumberButton = new JButton("Número aleatori");
         randomNumberButton.setEnabled(false); // Desactivat per defecte
         randomNumberButton.addActionListener(this::updateRandomly);
-        panell.add(randomNumberButton);
+        panel.add(randomNumberButton);
     }
 
     // Funció que es crida junt amb l'event al modificar el valor del slider

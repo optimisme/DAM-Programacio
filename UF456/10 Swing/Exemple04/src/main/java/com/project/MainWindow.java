@@ -37,20 +37,20 @@ public class MainWindow extends JFrame {
                 chooseFile();
             }
         });
+        add(openButton);
+
+        // Inicialitzar i afegir la nova etiqueta
+        fileNameLabel = new JLabel("Cap arxiu seleccionat.");
+        fileNameLabel.setForeground(Color.BLUE); 
+        add(fileNameLabel);
 
         imageLabel = new JLabel();
+        add(imageLabel);
+
         textArea = new JTextArea(20, 50);
         textArea.setEditable(false);
         scrollPane = new JScrollPane(textArea);
         scrollPane.setVisible(false);
-
-        // Inicialitzar i afegir la nova etiqueta
-        fileNameLabel = new JLabel("Cap arxiu seleccionat.");
-        fileNameLabel.setForeground(Color.BLUE); // Opcional: Canviar el color del text.
-
-        add(openButton);
-        add(fileNameLabel); // Assegurar que aquesta etiqueta s'afegeix a la finestra.
-        add(imageLabel);
         add(scrollPane);
     }
 

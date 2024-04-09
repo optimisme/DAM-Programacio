@@ -57,23 +57,23 @@ public class MainWindow extends JFrame {
 
     private void initComponents () {
         // Crea un panell com a contenidor amb BoxLayout alineat al eix Y
-        JPanel panell = new JPanel();
-        panell.setLayout(new BoxLayout(panell, BoxLayout.Y_AXIS));
-        panell.setAlignmentX(Component.CENTER_ALIGNMENT);
-        add(panell);
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        add(panel);
     
         // Espaiador vertical
-        panell.add(Box.createVerticalStrut(50));
+        panel.add(Box.createVerticalStrut(50));
     
         // Crear i afegir l'etiqueta al panell, centrant-la horitzontalment
         etiquetaComptador = new JLabel("0");
         etiquetaComptador.setAlignmentX(Component.CENTER_ALIGNMENT);
-        panell.add(etiquetaComptador);
+        panel.add(etiquetaComptador);
     
         // Crear botó, centrant-lo horitzontalment, i afegir al panell
         JButton boto = new JButton("Clica'm");
         boto.setAlignmentX(Component.CENTER_ALIGNMENT);
         boto.addActionListener(e -> modificaComptador(1));
-        panell.add(boto);
+        panel.add(boto);
     }
 }
