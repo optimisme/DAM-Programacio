@@ -13,7 +13,9 @@ public class Controller {
     public Controller(View vBasic) {
         this.view = vBasic;
         this.model = new DefaultListModel<>();
-        this.view.setListModel(model); // Passa el model a la vista
+
+        // Defineix el model del JList de la vista
+        this.view.taskList.setModel(model);
     }
 
     // Accions per iniciar el controlador

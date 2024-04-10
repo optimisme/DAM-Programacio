@@ -32,9 +32,4 @@ public class View extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
         add(deleteButton, BorderLayout.SOUTH);
     }
-
-    // Mètode per establir el model de la JList des del controlador
-    public void setListModel(DefaultListModel<String> model) {
-        taskList.setModel(model);
-    }
 }
