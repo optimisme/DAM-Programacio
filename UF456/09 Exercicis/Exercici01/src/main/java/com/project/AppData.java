@@ -56,6 +56,26 @@ class AppData {
         }
     }
 
+    public int insertAndGetId(String sql) {
+        int generatedId = -1;
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getInt(1); // Obtenir el primer camp com a ID generat
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+                System.out.println("Error en fer rollback.");
+                ex.printStackTrace();
+            }
+        }
+        return generatedId;
+    }
+
     // Aquesta funció transforma el ResultSet en un Map<String, Object>
     // per fer l'accés a la informació més genèric
     public List<Map<String, Object>> query(String sql) {
