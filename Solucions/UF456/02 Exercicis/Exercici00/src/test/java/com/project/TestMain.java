@@ -13,6 +13,7 @@ public class TestMain {
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             Main.main(args);
         });
+        text = text.replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "El resultat de la divisió és 21.015625\nEl resultat arrodonit de la divisió és 21,02";
