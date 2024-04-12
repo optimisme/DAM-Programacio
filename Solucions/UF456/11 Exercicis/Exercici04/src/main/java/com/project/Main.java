@@ -52,8 +52,8 @@ public class Main {
                           "FOREIGN KEY (receptaId) REFERENCES receptes(id))");
 
         // Inserció de receptes
-        db.update("INSERT INTO receptes (nom, temps, procediment, esFavorita) VALUES ('Paella', '45 minuts', 'Començar sofregint la ceba i l'allet, afegir l'arròs, després el caldo i el safrà. Cuinar durant 18 minuts.', 0);");
-        db.update("INSERT INTO receptes (nom, temps, procediment, esFavorita) VALUES ('Pizza Margarita', '30 minuts', 'Estendre la massa, afegir salsa de tomàquet, mozzarella i fulles de basilic. Coure a 220ºC durant 10-12 minuts.', 0);");
+        db.update("INSERT INTO receptes (nom, temps, procediment, esFavorita) VALUES ('Paella', '45 minuts', 'Començar sofregint la ceba i l´allet, afegir l´arròs, després el caldo i el safrà. Cuinar durant 18 minuts.', 0);");
+        db.update("INSERT INTO receptes (nom, temps, procediment, esFavorita) VALUES ('Pizza Margarita', '30 minuts', 'Estendre la massa, afegir salsa de tomàquet, mozzarella i fulles de basilic. Coure a 220ºC durant 10-12 minuts.', 1);");
         db.update("INSERT INTO receptes (nom, temps, procediment, esFavorita) VALUES ('Amanida Cèsar', '20 minuts', 'Barrejar lletugues, afegir pollastre a la graella, crostons, parmesà i amanir amb salsa Cèsar.', 0);");
         db.update("INSERT INTO receptes (nom, temps, procediment, esFavorita) VALUES ('Pastís de xocolata', '1 hora', 'Barrejar ingredients secs, afegir els líquids, coure al forn a 180ºC durant 35 minuts. Decorar amb glacejat de xocolata.', 0);");
                                 

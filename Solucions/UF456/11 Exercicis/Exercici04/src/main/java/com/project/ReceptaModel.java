@@ -73,4 +73,11 @@ public class ReceptaModel {
     public void addIngredient(IngredientModel ingredient) {
         this.ingredients.add(ingredient);
     }
+
+    @Override
+    public String toString() {
+        String text = id + ": " + (nom.length() > 30 ? nom.substring(0, 25) + "..." : nom);
+        if (esFavorita) text = text + " ♥";
+        return text;
+    }
 }

@@ -43,14 +43,14 @@ public class ProducteController {
 
     public void loadData() {
 
-        int oldStatus = status;
-
-        // Desactiva tots els elements i mostra el 'Carregant ...'
-        setStatus(STATUS_LOADING);
-
         // Gestionar dades del DAO en una tasca paral·lela
         UtilsSwingThread.run(
             () -> {
+                int oldStatus = status;
+
+                // Desactiva tots els elements i mostra el 'Carregant ...'
+                setStatus(STATUS_LOADING);
+
                 // Actualitzem les llistes
                 listCategories = CategoriaDAO.getAll();
                 listProducts = ProducteDAO.getAll();
@@ -147,18 +147,19 @@ public class ProducteController {
 
     // Estableix l'acció del botó 'afegir'
     private void controllerAddButtonAction(ActionEvent e) {
-        String nom = view.itemNameField.getText();
-        String descripcio = view.itemDescriptionField.getText();
-        double preu = Double.parseDouble(view.itemPriceField.getText());
-        String selectedCategoryName = (String) view.categoryComboBox.getSelectedItem();
-        int categoryId = getCategoryIDFromName(selectedCategoryName);
-        ProducteModel newModel = new ProducteModel(nom, descripcio, preu, categoryId);
-
-        setStatus(STATUS_MODIFY);
 
         // Gestionar dades del DAO en una tasca paral·lela
         UtilsSwingThread.run(
             () -> {
+                String nom = view.itemNameField.getText();
+                String descripcio = view.itemDescriptionField.getText();
+                double preu = Double.parseDouble(view.itemPriceField.getText());
+                String selectedCategoryName = (String) view.categoryComboBox.getSelectedItem();
+                int categoryId = getCategoryIDFromName(selectedCategoryName);
+                ProducteModel newModel = new ProducteModel(nom, descripcio, preu, categoryId);
+        
+                setStatus(STATUS_MODIFY);
+
                 ProducteDAO.addItem(newModel);
 
                 // Actualitzar també el comboBox amb el nou nom 
@@ -177,23 +178,23 @@ public class ProducteController {
 
     // Estableix l'acció del botó 'modificar'
     private void controllerModifyButtonAction(ActionEvent e) {
-        String nom = view.itemNameField.getText();
-        String descripcio = view.itemDescriptionField.getText();
-        double preu = Double.parseDouble(view.itemPriceField.getText());
-        String selectedCategoryName = (String) view.categoryComboBox.getSelectedItem();
-        int categoryId = getCategoryIDFromName(selectedCategoryName);
-        int index = view.itemComboBox.getSelectedIndex();
-
-        // Crear un producte amb les dades modificades
-        ProducteModel modifiedModel = getModelFromComboBoxIndex(index);
-        modifiedModel.setNom(nom);
-        modifiedModel.setDescripcio(descripcio);
-        modifiedModel.setPreu(preu);
-        modifiedModel.setCategoriaId(categoryId);
-
         // Gestionar dades del DAO en una tasca paral·lela
         UtilsSwingThread.run(
             () -> {
+                String nom = view.itemNameField.getText();
+                String descripcio = view.itemDescriptionField.getText();
+                double preu = Double.parseDouble(view.itemPriceField.getText());
+                String selectedCategoryName = (String) view.categoryComboBox.getSelectedItem();
+                int categoryId = getCategoryIDFromName(selectedCategoryName);
+                int index = view.itemComboBox.getSelectedIndex();
+        
+                // Crear un producte amb les dades modificades
+                ProducteModel modifiedModel = getModelFromComboBoxIndex(index);
+                modifiedModel.setNom(nom);
+                modifiedModel.setDescripcio(descripcio);
+                modifiedModel.setPreu(preu);
+                modifiedModel.setCategoriaId(categoryId);
+
                 ProducteDAO.updateItem(modifiedModel);
 
                 // Actualitzar també el comboBox amb el nou nom 
@@ -211,12 +212,12 @@ public class ProducteController {
 
     // Estableix l'acció del botó 'borrar'
     private void controllerDeleteButtonAction(ActionEvent e) {
-        int index = view.itemComboBox.getSelectedIndex();
-        ProducteModel modifiedModel = getModelFromComboBoxIndex(index);
-
         // Gestionar dades del DAO en una tasca paral·lela
         UtilsSwingThread.run(
             () -> {
+                int index = view.itemComboBox.getSelectedIndex();
+                ProducteModel modifiedModel = getModelFromComboBoxIndex(index);
+
                 ProducteDAO.deleteItem(modifiedModel.getId());
 
                 // Actualitzar les dades normalment

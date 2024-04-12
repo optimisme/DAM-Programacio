@@ -3,7 +3,6 @@ package com.project;
 import java.awt.*;
 import javax.swing.*;
 
-
 public class MainWindow extends JFrame {
     
     // CardLayout no és un component visible
@@ -11,40 +10,36 @@ public class MainWindow extends JFrame {
     private CardLayout cardLayout = new CardLayout();
     private JPanel cards = new JPanel(cardLayout);
 
-    private ViewForm vForm;
-    private ViewLoading vLoading;
-    private ViewInfo vInfo;
+    private ViewList vList;
+    private ViewItem vItem;
 
     private Controller controller;
 
     public MainWindow() {
         // Títol i mida de la finestra
-        super("Real Time events");
-        setSize(400, 350);
+        super("Receptes");
+        setSize(400, 250);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
    
         // Definir els elements del panel
         initComponents();   
 
         // Iniciar el controlador
-        controller = new Controller(vForm, vLoading, vInfo, cardLayout, cards);
+        controller = new Controller(vList, vItem, cardLayout, cards);
         controller.start();
     }
 
     private void initComponents() {
 
         // Afegeix les vistes al CardLayout
-        vForm = new ViewForm();
-        cards.add(vForm, "FORM");
+        vList = new ViewList();
+        cards.add(vList, "LIST");
 
-        vLoading = new ViewLoading();
-        cards.add(vLoading, "LOADING");
-
-        vInfo = new ViewInfo();
-        cards.add(vInfo, "INFO");
+        vItem = new ViewItem();
+        cards.add(vItem, "ITEM");
         
         // Definir quina vista es mostra per defecte (FORM)
-        cardLayout.show(cards, "FORM");
+        cardLayout.show(cards, "LIST");
 
         // Afegir les vistes al panell de la finestra
         add(cards);
