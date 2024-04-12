@@ -45,7 +45,7 @@ public class ReceptaDAO {
                             + recepta.getNom() + "', '" 
                             + recepta.getTemps() + "', '" 
                             + recepta.getProcediment() + "', " 
-                            + (recepta.isFavorita() ? 1 : 0) + ")";
+                            + (recepta.getEsFavorita() ? 1 : 0) + ")";
         AppData db = AppData.getInstance();
         int receptaId = db.insertAndGetId(sqlRecepta);
 
@@ -63,7 +63,7 @@ public class ReceptaDAO {
         String sqlRecepta = "UPDATE receptes SET nom = '" + recepta.getNom() 
                             + "', temps = '" + recepta.getTemps() 
                             + "', procediment = '" + recepta.getProcediment() 
-                            + "', esFavorita = " + (recepta.isFavorita() ? 1 : 0) 
+                            + "', esFavorita = " + (recepta.getEsFavorita() ? 1 : 0) 
                             + " WHERE id = " + recepta.getId();
         AppData db = AppData.getInstance();
         db.update(sqlRecepta);

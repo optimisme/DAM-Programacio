@@ -53,11 +53,11 @@ public class ReceptaModel {
         this.procediment = procediment;
     }
 
-    public boolean isFavorita() {
+    public boolean getEsFavorita() {
         return esFavorita;
     }
 
-    public void setFavorita(boolean esFavorita) {
+    public void setEsFavorita(boolean esFavorita) {
         this.esFavorita = esFavorita;
     }
 

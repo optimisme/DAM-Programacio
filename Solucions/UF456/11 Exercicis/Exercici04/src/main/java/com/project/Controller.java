@@ -104,7 +104,11 @@ public class Controller {
         htmlContent = htmlContent + ".nom { font-size: 20px; font-weight: bold; }";
         htmlContent = htmlContent + "</style>";
         htmlContent = htmlContent + "<body>";
-        htmlContent = htmlContent + "<div class='subtitol'>" + recepta.getId() + "</div>";
+        if (recepta.getEsFavorita()) {
+            htmlContent = htmlContent + "<div class='subtitol'>" + recepta.getId() + " ♥</div>";
+        } else {
+            htmlContent = htmlContent + "<div class='subtitol'>" + recepta.getId() + "</div>";
+        }
         htmlContent = htmlContent + "<br/>";
         htmlContent = htmlContent + "<div class='nom'>" + recepta.getNom() + "</div>";
         htmlContent = htmlContent + "<br/>";
