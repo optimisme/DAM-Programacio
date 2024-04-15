@@ -21,7 +21,7 @@ SET @old_autocommit=@@autocommit;
 --
 
 /*!40000 DROP DATABASE IF EXISTS `world`*/;
-
+DROP DATABASE IF EXISTS `world`;
 CREATE DATABASE `world` DEFAULT CHARACTER SET utf8mb4;
 
 USE `world`;
