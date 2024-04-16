@@ -36,22 +36,11 @@ public class TestMain {
     }
 
     private void assertStringEqualsWithDetail(String expected, String actual) {
-        if (!expected.equals(actual)) {
-            for (int i = 0; i < Math.min(expected.length(), actual.length()); i++) {
-                if (expected.charAt(i) != actual.charAt(i)) {
-                    throw new AssertionError("Les cadenes difereixen a la posició " + i + 
-                                             ". Esperat: '" + expected.charAt(i) + 
-                                             "' (" + (int)expected.charAt(i) + 
-                                             "), obtingut: '" + actual.charAt(i) + 
-                                             "' (" + (int)actual.charAt(i) + ").");
-                }
-            }
-            if (expected.length() != actual.length()) {
-                throw new AssertionError("Les cadenes tenen longituds diferents. Esperat: " + 
-                                         expected.length() + " caràcters, obtingut: " + 
-                                         actual.length() + " caràcters.");
-            }
-        }
+        String diff = TestStringUtils.findFirstDifference(expected, actual);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
     
     @Test

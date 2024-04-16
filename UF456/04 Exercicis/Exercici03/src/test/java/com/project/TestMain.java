@@ -22,14 +22,14 @@ public class TestMain {
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "Temperatura mitjana: 21.75°C\n" + 
-                        "Nova temperatura mitjana (20): 21.0°C\n" + 
-                        "Nova temperatura mitjana (25): 22.5°C";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Nova temperatura mitjana (20): 21.0°C\n" + 
+            "Nova temperatura mitjana (25): 22.5°C" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+            assertTrue(diff.compareTo("identical") == 0, 
+                "\n>>>>>>>>>> >>>>>>>>>>\n" +
+                diff +
+                "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

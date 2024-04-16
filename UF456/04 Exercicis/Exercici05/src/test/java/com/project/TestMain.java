@@ -22,19 +22,19 @@ public class TestMain {
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "Llibre: Cien años de soledad - Autor: Gabriel García Márquez (Colombiana)\n" + 
-                        "Data de Prestec: 01/01/2024 - Data de retorn: 31/01/2024\n" + 
-                        "Està en termini? true\n" + 
-                        "-----\n" + 
-                        "Llibre: Harry Potter y la piedra filosofal - Autor: J.K. Rowling (Britànica)\n" + 
-                        "Data de Prestec: 15/01/2024 - Data de retorn: 15/02/2024\n" + 
-                        "Està en termini? true\n" + 
-                        "-----";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Data de Prestec: 01/01/2024 - Data de retorn: 31/01/2024\n" + 
+            "Està en termini? true\n" + 
+            "-----\n" + 
+            "Llibre: Harry Potter y la piedra filosofal - Autor: J.K. Rowling (Britànica)\n" + 
+            "Data de Prestec: 15/01/2024 - Data de retorn: 15/02/2024\n" + 
+            "Està en termini? true\n" + 
+            "-----" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+            assertTrue(diff.compareTo("identical") == 0, 
+                "\n>>>>>>>>>> >>>>>>>>>>\n" +
+                diff +
+                "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
