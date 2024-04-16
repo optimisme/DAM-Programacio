@@ -26,13 +26,13 @@ public class TestMain {
             "Restaurants al parc:\n" +
             "Restaurant[nom=El Gran Chef, tipusCuina=Italiana, capacitat=100]\n\n" +
             "Botigues al parc:\n" +
-            "Botiga[nom=Records del Parc, tipusProducte=Souvenirs]";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Botiga[nom=Records del Parc, tipusProducte=Souvenirs]" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

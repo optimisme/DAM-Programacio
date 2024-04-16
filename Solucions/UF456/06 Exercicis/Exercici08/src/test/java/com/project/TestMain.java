@@ -25,13 +25,13 @@ public class TestMain {
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "Empleat{nom='Anna', identificador='DEV001'}, llenguatge='Java'\n" +
             "Empleat{nom='Carlos', identificador='MAN001'}, departament='TI'\n" +
-            "Empleat{nom='Berta', identificador='DEV002'}, llenguatge='C#'";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Empleat{nom='Berta', identificador='DEV002'}, llenguatge='C#'" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

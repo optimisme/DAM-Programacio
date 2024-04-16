@@ -24,13 +24,13 @@ public class TestMain {
         String expectedOutput = "Electrodomèstic de la marca Samsung amb un consum energètic de 120 watts.\n" +
             "Aquesta nevera té una capacitat de 350 litres.\n" +
             "Electrodomèstic de la marca LG amb un consum energètic de 200 watts.\n" +
-            "Aquesta rentadora té una capacitat de càrrega de 8 kg.";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Aquesta rentadora té una capacitat de càrrega de 8 kg." +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

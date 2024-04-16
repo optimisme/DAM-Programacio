@@ -21,13 +21,13 @@ public class TestMain {
         text = text.replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
-        String expectedOutput = "Model: SEAT 127; Color: Verd; Cilindrada: 1438cc; Any: 1972\nModel: CITROEN DS; Color: Gris; Cilindrada: 2175cc; Any: 1959";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+        String expectedOutput = "Model: SEAT 127; Color: Verd; Cilindrada: 1438cc; Any: 1972\nModel: CITROEN DS; Color: Gris; Cilindrada: 2175cc; Any: 1959" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+            assertTrue(diff.compareTo("identical") == 0, 
+                "\n>>>>>>>>>> >>>>>>>>>>\n" +
+                diff +
+                "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

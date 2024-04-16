@@ -94,13 +94,13 @@ public class TestMain {
         "\nLlista de Fauna de l'Ecosistema 3:" +
         "\nFauna { Id: 1, Nom Comú: \"Koala\", Nom Científic: \"Phascolarctos cinereus\", Pais: 4, Habitat: \"Boscos d'eucaliptus\" }" +
         "\nFauna { Id: 2, Nom Comú: \"Panda\", Nom Científic: \"Ailuropoda melanoleuca\", Pais: 6, Habitat: \"Boscos de muntanya rics en bambú\" }" +
-        "\nFauna { Id: 3, Nom Comú: \"Àguila calva\", Nom Científic: \"Haliaeetus leucocephalus\", Pais: 7, Habitat: \"Zones amb llacs i rius\" }";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+        "\nFauna { Id: 3, Nom Comú: \"Àguila calva\", Nom Científic: \"Haliaeetus leucocephalus\", Pais: 7, Habitat: \"Zones amb llacs i rius\" }" +
+        "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
