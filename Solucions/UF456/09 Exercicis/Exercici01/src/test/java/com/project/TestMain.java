@@ -15,7 +15,7 @@ public class TestMain {
     @Test
     public void testMainOutput() throws Exception {
 
-        System.setProperty("enviroment", "test");
+        System.setProperty("environment", "test");
 
         String text = SystemLambda.tapSystemOut(() -> {
             // Executa el main per a provar la seva sortida
@@ -47,7 +47,7 @@ public class TestMain {
     @Test
     public void testMainTables() throws SQLException {
 
-        System.setProperty("enviroment", "test");
+        System.setProperty("environment", "test");
 
         // Comprova l'existència de l'arxiu dades.sqlite
         String url = "jdbc:sqlite:dades.sqlite";

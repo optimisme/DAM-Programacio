@@ -15,7 +15,7 @@ public class TestMain {
     @Test
     public void testMainOutput() throws Exception {
 
-        System.setProperty("enviroment", "test");
+        System.setProperty("environment", "test");
 
         String text = SystemLambda.tapSystemOut(() -> {
             // Executa el main per a provar la seva sortida
