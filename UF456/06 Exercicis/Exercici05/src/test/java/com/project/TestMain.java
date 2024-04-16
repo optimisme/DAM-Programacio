@@ -34,13 +34,13 @@ public class TestMain {
             "Bicicleta{marca='BH', model='Speedrom'}\n" +
             "La bicicleta BH Speedrom està preparada per a ser utilitzada.\n" +
             "La bicicleta BH Speedrom s'ha aturat.\n" +
-            "Vehicle{marca='BH', model='Speedrom'}";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Vehicle{marca='BH', model='Speedrom'}" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
@@ -59,7 +59,7 @@ public class TestMain {
             cotxe2.carregar(200);
             cotxe2.aturarVehicle();
         });
-        assertEquals(expectedCotxeOutput, cotxeOutput.replace("\r\n", "\n"), "La sortida per a cotxe2 no és l'esperada.");
+        assertEquals(expectedCotxeOutput, cotxeOutput, "La sortida per a cotxe2 no és l'esperada.");
     
         // Capturar i validar les sortides esperades per les operacions de furgoneta2
         String expectedFurgonetaOutput = "La furgoneta Mercedes Sprinter s'està iniciant.\n" +
@@ -70,7 +70,7 @@ public class TestMain {
             furgoneta2.carregar(1500);
             furgoneta2.aturarVehicle();
         });
-        assertEquals(expectedFurgonetaOutput, furgonetaOutput.replace("\r\n", "\n"), "La sortida per a furgoneta2 no és l'esperada.");
+        assertEquals(expectedFurgonetaOutput, furgonetaOutput, "La sortida per a furgoneta2 no és l'esperada.");
     
         // Capturar i validar les sortides esperades per les operacions de bicicleta2
         String expectedBicicletaOutput = "La bicicleta Trek Marlin 5 està preparada per a ser utilitzada.\n" +
@@ -79,7 +79,7 @@ public class TestMain {
             bicicleta2.iniciarVehicle();
             bicicleta2.aturarVehicle();
         });
-        assertEquals(expectedBicicletaOutput, bicicletaOutput.replace("\r\n", "\n"), "La sortida per a bicicleta2 no és l'esperada.");
+        assertEquals(expectedBicicletaOutput, bicicletaOutput, "La sortida per a bicicleta2 no és l'esperada.");
     }
     
     @Test

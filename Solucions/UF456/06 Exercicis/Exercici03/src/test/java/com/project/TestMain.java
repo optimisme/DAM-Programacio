@@ -28,13 +28,13 @@ public class TestMain {
             "El pagament amb targeta ha estat processat.\n\n" +
             "Processant un pagament digital:\n" +
             "El pagament digital ha estat autoritzat.\n" +
-            "El pagament digital ha estat processat.";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "El pagament digital ha estat processat." +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

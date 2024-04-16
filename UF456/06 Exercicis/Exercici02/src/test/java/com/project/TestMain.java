@@ -26,15 +26,23 @@ public class TestMain {
             "Persona{nom='Joan Martí', dni='87654321J'}, vol='VOL001'\n" +
             "Facturació de client completada. Preparat per embarcar al vol VOL001. Benvingut a bord!\n\n" +
             "Persona{nom='Anna Lopez', dni='23456789A'}, vol='VOL002'\n" +
-            "Facturació de client completada. Preparat per embarcar al vol VOL002. Benvingut a bord!\n";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Facturació de client completada. Preparat per embarcar al vol VOL002. Benvingut a bord!" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
+    private void assertStringEqualsWithDetail(String expected, String actual) {
+        String diff = TestStringUtils.findFirstDifference(expected, actual);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
+    }
+    
     @Test
     public void testMainValidation() throws Exception {
         // Crea un nou pilot amb dades diferents
@@ -56,19 +64,23 @@ public class TestMain {
             System.out.println(pilot);
             pilot.checkIn();
         });
-        assertEquals(expectedPilotOutput, outputPilot.replace("\r\n", "\n"), "La sortida per al pilot no coincideix amb l'esperada.");
         
         String outputClient1 = SystemLambda.tapSystemOut(() -> {
             System.out.println(client1);
             client1.checkIn();
         });
-        assertEquals(expectedClient1Output, outputClient1.replace("\r\n", "\n"), "La sortida per al client1 no coincideix amb l'esperada.");
         
         String outputClient2 = SystemLambda.tapSystemOut(() -> {
             System.out.println(client2);
             client2.checkIn();
         });
-        assertEquals(expectedClient2Output, outputClient2.replace("\r\n", "\n"), "La sortida per al client2 no coincideix amb l'esperada.");
+
+        assertStringEqualsWithDetail(expectedPilotOutput, outputPilot);
+        assertStringEqualsWithDetail(expectedClient1Output, outputClient1);
+        assertStringEqualsWithDetail(expectedClient2Output, outputClient2);
+        assertEquals(expectedPilotOutput, outputPilot, "La sortida per al pilot no coincideix amb l'esperada.");
+        assertEquals(expectedClient1Output, outputClient1, "La sortida per al client1 no coincideix amb l'esperada.");
+        assertEquals(expectedClient2Output, outputClient2, "La sortida per al client2 no coincideix amb l'esperada.");
     }
     
     @Test

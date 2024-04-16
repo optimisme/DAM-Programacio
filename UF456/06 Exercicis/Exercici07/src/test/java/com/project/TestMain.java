@@ -29,13 +29,13 @@ public class TestMain {
             "Publicacio{titol='El Senyor dels Anells', anyPublicacio=1954}\n" +
             "Publicacio{titol='Dune', anyPublicacio=1965}\n\n" +
             "Revistes:\n" +
-            "Publicacio{titol='National Geographic', anyPublicacio=2020}";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Publicacio{titol='National Geographic', anyPublicacio=2020}" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

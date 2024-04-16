@@ -34,13 +34,13 @@ public class TestMain {
             "Bicicleta{marca='BH', model='Speedrom'}\n" +
             "La bicicleta BH Speedrom està preparada per a ser utilitzada.\n" +
             "La bicicleta BH Speedrom s'ha aturat.\n" +
-            "Vehicle{marca='BH', model='Speedrom'}";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Vehicle{marca='BH', model='Speedrom'}" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

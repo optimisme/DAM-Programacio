@@ -1,3 +1,3 @@
--- Crea la base de dades si no existeix
+DROP DATABASE IF EXISTS school;
 CREATE DATABASE IF NOT EXISTS school;
 USE school;

@@ -53,11 +53,11 @@ public class ReceptaModel {
         this.procediment = procediment;
     }
 
-    public boolean isFavorita() {
+    public boolean getEsFavorita() {
         return esFavorita;
     }
 
-    public void setFavorita(boolean esFavorita) {
+    public void setEsFavorita(boolean esFavorita) {
         this.esFavorita = esFavorita;
     }
 
@@ -72,5 +72,12 @@ public class ReceptaModel {
     // Mètode per afegir ingredients a la llista
     public void addIngredient(IngredientModel ingredient) {
         this.ingredients.add(ingredient);
+    }
+
+    @Override
+    public String toString() {
+        String text = id + ": " + (nom.length() > 30 ? nom.substring(0, 25) + "..." : nom);
+        if (esFavorita) text = text + " ♥";
+        return text;
     }
 }

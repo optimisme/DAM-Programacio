@@ -26,32 +26,21 @@ public class TestMain {
             "Persona{nom='Joan Martí', dni='87654321J'}, vol='VOL001'\n" +
             "Facturació de client completada. Preparat per embarcar al vol VOL001. Benvingut a bord!\n\n" +
             "Persona{nom='Anna Lopez', dni='23456789A'}, vol='VOL002'\n" +
-            "Facturació de client completada. Preparat per embarcar al vol VOL002. Benvingut a bord!\n";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Facturació de client completada. Preparat per embarcar al vol VOL002. Benvingut a bord!" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     private void assertStringEqualsWithDetail(String expected, String actual) {
-        if (!expected.equals(actual)) {
-            for (int i = 0; i < Math.min(expected.length(), actual.length()); i++) {
-                if (expected.charAt(i) != actual.charAt(i)) {
-                    throw new AssertionError("Les cadenes difereixen a la posició " + i + 
-                                             ". Esperat: '" + expected.charAt(i) + 
-                                             "' (" + (int)expected.charAt(i) + 
-                                             "), obtingut: '" + actual.charAt(i) + 
-                                             "' (" + (int)actual.charAt(i) + ").");
-                }
-            }
-            if (expected.length() != actual.length()) {
-                throw new AssertionError("Les cadenes tenen longituds diferents. Esperat: " + 
-                                         expected.length() + " caràcters, obtingut: " + 
-                                         actual.length() + " caràcters.");
-            }
-        }
+        String diff = TestStringUtils.findFirstDifference(expected, actual);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
     
     @Test

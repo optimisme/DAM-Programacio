@@ -22,13 +22,13 @@ public class TestMain {
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "Idioma: Castellà, Zona Horaria: CET\n" + 
-                        "Configurant sistema amb idioma Castellà i zona horària CET";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Configurant sistema amb idioma Castellà i zona horària CET" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+            assertTrue(diff.compareTo("identical") == 0, 
+                "\n>>>>>>>>>> >>>>>>>>>>\n" +
+                diff +
+                "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

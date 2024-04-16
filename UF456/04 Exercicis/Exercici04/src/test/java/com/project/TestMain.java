@@ -23,13 +23,13 @@ public class TestMain {
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "Joan - Nota Mitjana: 4.75\n" + 
-                        "Maria - Nota Mitjana: 4.0";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Maria - Nota Mitjana: 4.0" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+            assertTrue(diff.compareTo("identical") == 0, 
+                "\n>>>>>>>>>> >>>>>>>>>>\n" +
+                diff +
+                "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

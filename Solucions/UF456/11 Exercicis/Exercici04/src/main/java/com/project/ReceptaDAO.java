@@ -45,16 +45,16 @@ public class ReceptaDAO {
                             + recepta.getNom() + "', '" 
                             + recepta.getTemps() + "', '" 
                             + recepta.getProcediment() + "', " 
-                            + (recepta.isFavorita() ? 1 : 0) + ")";
+                            + (recepta.getEsFavorita() ? 1 : 0) + ")";
         AppData db = AppData.getInstance();
-        int receptaId = db.update(sqlRecepta);
+        int receptaId = db.insertAndGetId(sqlRecepta);
 
         for (IngredientModel ingredient : recepta.getIngredients()) {
             String sqlIngredient = "INSERT INTO ingredients (nom, quantitat, receptaId) VALUES ('" 
-                                   + ingredient.getNom() + "', '" 
-                                   + ingredient.getQuantitat() + "', " 
-                                   + receptaId + ")";
-            db.update(sqlIngredient);
+                                + ingredient.getNom() + "', '" 
+                                + ingredient.getQuantitat() + "', " 
+                                + receptaId + ")";
+            db.update(sqlIngredient); // Suposant que `update` és adequat per a operacions que no necessiten retornar ID
         }
     }
 
@@ -63,7 +63,7 @@ public class ReceptaDAO {
         String sqlRecepta = "UPDATE receptes SET nom = '" + recepta.getNom() 
                             + "', temps = '" + recepta.getTemps() 
                             + "', procediment = '" + recepta.getProcediment() 
-                            + "', esFavorita = " + (recepta.isFavorita() ? 1 : 0) 
+                            + "', esFavorita = " + (recepta.getEsFavorita() ? 1 : 0) 
                             + " WHERE id = " + recepta.getId();
         AppData db = AppData.getInstance();
         db.update(sqlRecepta);
@@ -89,7 +89,7 @@ public class ReceptaDAO {
         db.update("DELETE FROM receptes WHERE id = " + id);
     }
 
-    // Llistar totes les receptes disponibles
+    // Llistar totes les receptes disponibles, incloent els seus ingredients
     public static ArrayList<ReceptaModel> getAll() {
         String sql = "SELECT id, nom, temps, procediment, esFavorita FROM receptes";
         AppData db = AppData.getInstance();
@@ -97,15 +97,35 @@ public class ReceptaDAO {
         List<Map<String, Object>> results = db.query(sql);
         
         for (Map<String, Object> row : results) {
+            int receptaId = (int) row.get("id");
             ReceptaModel recepta = new ReceptaModel(
-                (int)row.get("id"), 
-                (String)row.get("nom"), 
-                (String)row.get("temps"), 
-                (String)row.get("procediment"),
-                (boolean)row.get("esFavorita")
+                receptaId,
+                (String) row.get("nom"),
+                (String) row.get("temps"),
+                (String) row.get("procediment"),
+                (boolean) row.get("esFavorita").equals(1) // Aquí podria haver un error, es revisarà després
             );
+
+            // Crida a una funció per recuperar i afegir els ingredients a la recepta
+            addIngredientsToRecepta(receptaId, recepta, db);
+
             list.add(recepta);
         }
         return list;
+    }
+
+    // Funció auxiliar per afegir ingredients a una recepta
+    private static void addIngredientsToRecepta(int receptaId, ReceptaModel recepta, AppData db) {
+        String sqlIngredients = "SELECT id, nom, quantitat FROM ingredients WHERE receptaId = " + receptaId;
+        List<Map<String, Object>> resultsIngredients = db.query(sqlIngredients);
+        for (Map<String, Object> rowIngredient : resultsIngredients) {
+            IngredientModel ingredient = new IngredientModel(
+                (int) rowIngredient.get("id"),
+                (String) rowIngredient.get("nom"),
+                (String) rowIngredient.get("quantitat"),
+                receptaId
+            );
+            recepta.addIngredient(ingredient);
+        }
     }
 }

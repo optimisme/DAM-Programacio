@@ -24,13 +24,13 @@ public class TestMain {
         String expectedOutput = "OcellVolador{nom='Piolín', edat=2}, colorPlomatge='groc'\n" +
             "Piolín està volant!\n" +
             "Dofi{nom='Flipper', edat=5}, tipusPelatge='suau'\n" +
-            "Flipper està nedant!";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Flipper està nedant!" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
@@ -44,21 +44,21 @@ public class TestMain {
         String ocellOutput = SystemLambda.tapSystemOut(() -> {
             ocell2.volar();
         });
-        assertEquals(expectedOcellOutput, ocellOutput.replace("\r\n", "\n"), "La sortida per al mètode volar de l'OcellVolador no és l'esperada.");
+        assertEquals(expectedOcellOutput, ocellOutput, "La sortida per al mètode volar de l'OcellVolador no és l'esperada.");
     
         // Capturar i validar la sortida del mètode nadar del dofi2
         String expectedDofiOutput = "Dolly està nedant!\n";
         String dofiOutput = SystemLambda.tapSystemOut(() -> {
             dofi2.nedar();
         });
-        assertEquals(expectedDofiOutput, dofiOutput.replace("\r\n", "\n"), "La sortida per al mètode nadar del Dofi no és l'esperada.");
+        assertEquals(expectedDofiOutput, dofiOutput, "La sortida per al mètode nadar del Dofi no és l'esperada.");
     
         // Validar la sobreescriptura correcta del mètode toString per a ocell2 i dofi2
         String expectedOcellToString = "OcellVolador{nom='Corb', edat=4}, colorPlomatge='negre'";
-        assertEquals(expectedOcellToString, ocell2.toString().replace("\r\n", "\n"), "El mètode toString de l'OcellVolador no retorna el resultat esperat.");
+        assertEquals(expectedOcellToString, ocell2.toString(), "El mètode toString de l'OcellVolador no retorna el resultat esperat.");
     
         String expectedDofiToString = "Dofi{nom='Dolly', edat=8}, tipusPelatge='llis'";
-        assertEquals(expectedDofiToString, dofi2.toString().replace("\r\n", "\n"), "El mètode toString del Dofi no retorna el resultat esperat.");
+        assertEquals(expectedDofiToString, dofi2.toString(), "El mètode toString del Dofi no retorna el resultat esperat.");
     }
     
     

@@ -23,22 +23,22 @@ public class TestMain {
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "El Senyor dels Anells, J.R.R. Tolkien; 1954 - Disponible\n" + 
-                        "1984, George Orwell; 1949 - Disponible\n" + 
-                        "El Petit Príncep, Antoine de Saint-Exupéry; 1943 - Disponible\n" + 
-                        "\n" + 
-                        "Després dels préstecs:\n" + 
-                        "El Senyor dels Anells, J.R.R. Tolkien; 1954 - En préstec\n" + 
-                        "1984, George Orwell; 1949 - En préstec\n" + 
-                        "El Petit Príncep, Antoine de Saint-Exupéry; 1943 - Disponible\n" + 
-                        "\n" + 
-                        "Després de retornar el llibre1:\n" + 
-                        "El Senyor dels Anells, J.R.R. Tolkien; 1954 - Disponible";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "1984, George Orwell; 1949 - Disponible\n" + 
+            "El Petit Príncep, Antoine de Saint-Exupéry; 1943 - Disponible\n" + 
+            "\n" + 
+            "Després dels préstecs:\n" + 
+            "El Senyor dels Anells, J.R.R. Tolkien; 1954 - En préstec\n" + 
+            "1984, George Orwell; 1949 - En préstec\n" + 
+            "El Petit Príncep, Antoine de Saint-Exupéry; 1943 - Disponible\n" + 
+            "\n" + 
+            "Després de retornar el llibre1:\n" + 
+            "El Senyor dels Anells, J.R.R. Tolkien; 1954 - Disponible" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+            assertTrue(diff.compareTo("identical") == 0, 
+                "\n>>>>>>>>>> >>>>>>>>>>\n" +
+                diff +
+                "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
 @Test

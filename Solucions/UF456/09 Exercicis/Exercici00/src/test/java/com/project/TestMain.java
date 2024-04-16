@@ -40,13 +40,13 @@ public class TestMain {
             "\nID: 5, Títol: Cinquè manuscrit, Autor: Autor E, Any: 2022, Editorial: Editorial Alpha" +
             "\nID: 6, Títol: Sisè document, Autor: Autor F, Any: 2023, Editorial: Beta Publishers" +
             "\n\nInformació del Llibre: 5" + 
-            "\nID: 5, Títol: Cinquè manuscrit, Autor: Autor E, Any de Publicació: 2022, Editorial: Editorial Alpha";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "\nID: 5, Títol: Cinquè manuscrit, Autor: Autor E, Any de Publicació: 2022, Editorial: Editorial Alpha" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

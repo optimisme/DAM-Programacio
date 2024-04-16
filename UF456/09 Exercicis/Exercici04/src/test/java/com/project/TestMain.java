@@ -3,23 +3,18 @@ package com.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.*;
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 import java.math.BigDecimal;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
-import java.sql.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-import java.io.File;
 import java.sql.*;
-import java.util.function.Consumer;
 
-import org.mockito.Mockito;
 import static org.mockito.Mockito.*;
 
 public class TestMain {
@@ -45,13 +40,13 @@ public class TestMain {
             "\nTarifa: Passi Premium" +
             "\nÀrea: Zona Arcade" +
             "\nÀrea: Zona Arcade" +
-            "\nÀrea: Zona VR";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "\nÀrea: Zona VR" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

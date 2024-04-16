@@ -10,6 +10,7 @@ public class Controller {
     private Model model;
     private ViewForm vForm;
     private ViewInfo vInfo;
+    
     private CardLayout cardLayout;
     private JPanel cards; // Contenidor de CardLayout
 

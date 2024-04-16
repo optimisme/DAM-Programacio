@@ -24,13 +24,13 @@ public class TestMain {
         String expectedOutput = "OcellVolador{nom='Piolín', edat=2}, colorPlomatge='groc'\n" +
             "Piolín està volant!\n" +
             "Dofi{nom='Flipper', edat=5}, tipusPelatge='suau'\n" +
-            "Flipper està nedant!";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Flipper està nedant!" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test

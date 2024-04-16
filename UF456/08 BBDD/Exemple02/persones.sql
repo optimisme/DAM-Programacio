@@ -1,4 +1,4 @@
--- Crea la base de dades si no existeix
+DROP DATABASE IF EXISTS persones;
 CREATE DATABASE IF NOT EXISTS persones;
 USE persones;
 

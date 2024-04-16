@@ -24,13 +24,13 @@ public class TestMain {
         String expectedOutput = "Maria Lopez - Salari Anual: 30000.0\n" +
             "Després de l'increment: 33000.0\n" +
             "Carlos Garcia [TI] - Salari Anual: 50000.0\n" +
-            "Després de l'increment: 55000.0";
-        assertTrue(text.contains(expectedOutput), 
-            ">>>>>>>>>> >>>>>>>>>>\n" +
-            "El missatge de sortida no coincideix amb l'esperat. \n" +
-            "Esperat: \n" + expectedOutput + "\n" + 
-            "Obtingut: \n" + text + 
-            "<<<<<<<<<<< <<<<<<<<<<\n");
+            "Després de l'increment: 55000.0" +
+            "\n";
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
