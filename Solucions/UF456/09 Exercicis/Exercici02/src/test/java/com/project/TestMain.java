@@ -25,35 +25,40 @@ public class TestMain {
         text = text.replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
-        String expectedOutput = "Professors:" + 
-        "\nID: 1, Nom: Maria Garcia, Especialitat: Matemàtiques" + 
-        "\nID: 2, Nom: Jordi Pozo, Especialitat: Literatura" + 
-        "\nID: 3, Nom: Anna Molina, Especialitat: Ciències" + 
-        "\n\nAssignatures:" + 
-        "\nID: 1, Nom: Maria Garcia, Hores Setmanals: 4, Professor: null" + 
-        "\nID: 2, Nom: Jordi Pozo, Hores Setmanals: 3, Professor: null" + 
-        "\nID: 3, Nom: Anna Molina, Hores Setmanals: 5, Professor: null" + 
-        "\n\nAules:" + 
-        "\nID: 1, Nom: A101, Capacitat: 30" + 
-        "\nID: 2, Nom: A102, Capacitat: 25" + 
-        "\nID: 3, Nom: B201, Capacitat: 20" + 
-        "\n\nAssignatures:" + 
-        "\nAssignatures per l'alumne ID 1:" + 
-        "\n- Algebra" + 
-        "\nAssignatures per l'alumne ID 3:" + 
-        "\n- Algebra" + 
-        "\n- Literatura Catalana" + 
-        "\n- Biologia" + 
-        "\n\nAlumnes per assignatura:" + 
-        "\nAlumnes inscrits a l'assignatura ID 1:" + 
-        "\n- Marc Soler" + 
-        "\n- Iván Coll" + 
-        "\nAlumnes inscrits a l'assignatura ID 2:" + 
-        "\n- Laura Vidal" + 
-        "\n- Iván Coll" + 
-        "\nAlumnes inscrits a l'assignatura ID 3:" + 
-        "\n- Iván Coll" +
-        "\n";
+        String expectedOutput = """
+            Professors:
+            ID: 1, Nom: Maria Garcia, Especialitat: Matemàtiques
+            ID: 2, Nom: Jordi Pozo, Especialitat: Literatura
+            ID: 3, Nom: Anna Molina, Especialitat: Ciències
+            
+            Assignatures:
+            ID: 1, Nom: Algebra, Hores Setmanals: 4, Professor: Maria Garcia
+            ID: 2, Nom: Literatura Catalana, Hores Setmanals: 3, Professor: Jordi Pozo
+            ID: 3, Nom: Biologia, Hores Setmanals: 5, Professor: Anna Molina
+            
+            Aules:
+            ID: 1, Nom: A101, Capacitat: 30
+            ID: 2, Nom: A102, Capacitat: 25
+            ID: 3, Nom: B201, Capacitat: 20
+            
+            Assignatures:
+            Assignatures per l'alumne ID 1:
+            - Algebra
+            Assignatures per l'alumne ID 3:
+            - Algebra
+            - Literatura Catalana
+            - Biologia
+            
+            Alumnes per assignatura:
+            Alumnes inscrits a l'assignatura ID 1:
+            - Marc Soler
+            - Iván Coll
+            Alumnes inscrits a l'assignatura ID 2:
+            - Laura Vidal
+            - Iván Coll
+            Alumnes inscrits a l'assignatura ID 3:
+            - Iván Coll
+            """.replace("\r\n", "\n").replace("            ","");      
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
         assertTrue(diff.compareTo("identical") == 0, 
             "\n>>>>>>>>>> >>>>>>>>>>\n" +
