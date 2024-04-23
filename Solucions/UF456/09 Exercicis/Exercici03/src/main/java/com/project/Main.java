@@ -1,94 +1,94 @@
 package com.project;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.sql.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Locale;
 
 public class Main {
 
-    private static List<Pais> paisos = new ArrayList<>();
-    private static List<Flora> flora = new ArrayList<>();
-    private static List<Fauna> fauna = new ArrayList<>();
-    private static List<Ecosistema> ecosistemes = new ArrayList<>();
-    private static Map<Integer, Integer> floraEcosistema = new HashMap<>();
-    private static Map<Integer, Integer> faunaEcosistema = new HashMap<>();
-
     public static void main(String[] args) {
+
+        Locale.setDefault(Locale.US);
+
         AppData db = AppData.getInstance();
 
-        // Crear les taules necessàries
+        // Crear les taules
         crearTaules();
 
-        // Afegir dades
-        int idEspanya = afegirPais("xEspanya"); 
-        int idCanada = afegirPais("Canadà"); 
-        int idBrasil = afegirPais("Brasil"); 
-        int idAustralia = afegirPais("Austràlia"); 
-        int idSudAfrica = afegirPais("Sud-àfrica"); 
-        int idXina = afegirPais("Xina"); 
-        int idEUA = afegirPais("Estats Units"); 
-        int idAntartida = afegirPais("Antàrtida"); 
+        // Afegir Professors
+        afegirProfessor("Maria Garcia", "Matemàtiques");
+        int idMaria = obtenirIdProfessorPerNom("Maria Garcia");
 
-        int idSelva = afegirEcosistema("xSelva", idBrasil, "La selva tropical rica en biodiversitat.");
-        int idDesert = afegirEcosistema("Desert", idAustralia, "El desert càlid més caracteritzat per extensions de dunes de sorra.");
-        int idBosc = afegirEcosistema("Bosc", idCanada, "Extensos boscos de coníferes amb hiverns llargs i freds.");
-        int idOcea = afegirEcosistema("Oceà Antàrtic", idAntartida, "Habitat de milers d'espècies marines.");
+        afegirProfessor("Jordi Pozo", "Literatura");
+        int idJordi = obtenirIdProfessorPerNom("Jordi Pozo");
 
-        int idDalia = afegirFlora("xDàlia", "Dahlia pinnata", idEUA, "Jardins i zones cultivades", "Planta amb flors colorides que varien en forma i mida.", idDesert);
-        afegirFlora("Eucaliptus", "Eucalyptus globulus", idAustralia, "Boscos oberts i zones costaneres", "Àrbre alt amb fulles aromàtiques utilitzades en medicina.", idBosc);
-        afegirFlora("Orquídia", "Orchidaceae", idEspanya, "Selva tropical, terres baixes humides i muntanyes", "Família extensa de plantes florals amb flors simètriques i variades.", idSelva);
-        int idBaobab = afegirFlora("Baobab", "Adansonia", idSudAfrica, "Savanes àrides i terres semiàrides", "Àrbre gros i robust conegut per la seva capacitat de conservar aigua dins del seu tronc.", idDesert);
-        afegirFlora("Sequoia", "Sequoiadendron giganteum", idEUA, "Boscos humits temperats", "Un dels arbres més alts i longeus del món", idBosc);
-        afegirFlora("Lavanda", "Lavandula", idCanada, "Terrenys assolellats, secs i calcaris", "Arbust conegut per les seves flors aromàtiques i propietats relaxants", idDesert);
-        afegirFlora("Safrà", "Crocus sativus", idXina, "Terres semiàrides cultivades", "Conreat per les seves flors de les quals s'extreu l'espècia de safrà", idDesert);
-        int idMaple = afegirFlora("Maple", "Acer", idCanada, "Zones humides i planes", "Arbres caducifolis coneguts pel seu sirop dolç", idDesert);
+        afegirProfessor("Anna Molina", "Ciències");
+        int idAnna = obtenirIdProfessorPerNom("Anna Molina");
 
-        int idKoala = afegirFauna("xKoala", "Phascolarctos cinereus", idAustralia, "Boscos d'eucaliptus", "Marsupial arborícola conegut per la seva dieta basada en fulles d'eucaliptus.", idBosc);
-        int idPanda = afegirFauna("Panda", "Ailuropoda melanoleuca", idXina, "Boscos de muntanya rics en bambú", "Gran mamífer conegut per la seva dieta principalment de bambú i el seu pelatge distintiu blanc i negre", idBosc);
-        afegirFauna("Àguila calva", "Haliaeetus leucocephalus", idEUA, "Zones amb llacs i rius", "Gran au de presa, símbol nacional dels Estats Units, reconeguda pel seu cap blanc", idBosc);
-        afegirFauna("Lleopard de les neus", "Panthera uncia", idXina, "Terreny rocos muntanyenc", "Felí de muntanya adaptat a viure en l'altitud elevada de les muntanyes de l'Himàlaia", idDesert);
-        afegirFauna("Tucà", "Ramphastos", idBrasil, "Selves tropicals i boscos humits", "Ocell tropical conegut pel seu gran bec colorit", idSelva);
-        int idPingui = afegirFauna("Pingüí emperador", "Aptenodytes forsteri", idAntartida, "Zones d'aigües fredes", "El més gran i pesat de tots els pingüins vius, conegut per la seva capacitat de reproduir-se durant l'hivern antàrtic més dur", idBosc);
+        // Afegir Aules
+        afegirAula("A101", 30);
+        afegirAula("A102", 25);
+        afegirAula("B201", 20);
 
-        // Comprovar funcions 'obtenir'
-        int idObtenirCanada = obtenirIdPaisPerNom("Canadà");
-        int idObtenirDesert = obtenirIdEcosistemaPerNom("Desert");
-        int idObtenirBaobab = obtenirIdFloraPerNomComu("Baobab");
-        int idObtenirPanda = obtenirIdFaunaPerNomComu("Panda");
-        System.out.println("id Canada: " + idCanada + ":" + idObtenirCanada + " > " + (idCanada == idObtenirCanada));
-        System.out.println("id Desert: " + idDesert + ":" + idObtenirDesert + " > " + (idDesert == idObtenirDesert));
-        System.out.println("id Baobab: " + idBaobab + ":" + idObtenirBaobab + " > " + (idBaobab == idObtenirBaobab));
-        System.out.println("id Panda: " + idPanda + ":" + idObtenirPanda + " > " + (idPanda == idObtenirPanda));
+        // Afegir Assignatures
+        if (idMaria != -1) {
+            afegirAssignatura("Algebra", 4, idMaria);
+        }
+        int idAlgebra = obtenirIdAssignaturaPerNom("Algebra");
 
-        // Modificar dades
-        Pais refEspanya = (Pais) obtenirReferencia(idEspanya, paisos);
-        refEspanya.setNom("Espanya");
-        refEspanya.save();
+        if (idJordi != -1) {
+            afegirAssignatura("Literatura Catalana", 3, idJordi);
+        }
+        int idLiteraturaCatalana = obtenirIdAssignaturaPerNom("Literatura Catalana");
 
-        Ecosistema refSelva = (Ecosistema) obtenirReferencia(idSelva, ecosistemes);
-        refSelva.setNom("Selva");
-        refSelva.save();
+        if (idAnna != -1) {
+            afegirAssignatura("Biologia", 5, idAnna);
+        }
+        int idBiologia = obtenirIdAssignaturaPerNom("Biologia");
 
-        Flora refDalia = (Flora) obtenirReferencia(idDalia, flora);
-        refDalia.setNomComu("Dàlia");
-        refDalia.save();
+        // Afegir Alumnes
+        afegirAlumne("Marc", "Soler", Date.valueOf("2005-03-15"));
+        int idMarc = obtenirIdAlumnePerNom("Marc", "Soler");
 
-        Fauna refKoala = (Fauna) obtenirReferencia(idKoala, fauna);
-        refKoala.setNomComu("Koala");
-        refKoala.save();
-        
-        // Modificar associacions
-        associarFloraAEcosistema(idMaple, idBosc);
-        associarFaunaAEcosistema(idPingui, idOcea);
-       
-        // Mostrar dades dels objectes
-        llistarPaisos();
-        llistarEcosistemes();
-        llistarFlora();
-        llistarFauna();
-        llistarFloraEcosistema(idSelva);
-        llistarFaunaEcosistema(idBosc);
+        afegirAlumne("Laura", "Vidal", Date.valueOf("2004-07-22"));
+        int idLaura = obtenirIdAlumnePerNom("Laura", "Vidal");
+
+        afegirAlumne("Iván", "Coll", Date.valueOf("2004-06-10"));
+        int idIvan = obtenirIdAlumnePerNom("Iván", "Coll");
+
+        // Inscripcions, comprovant que tant els alumnes com les assignatures existeixen
+        if (idMarc != -1 && idAlgebra != -1) {
+            inscriureAlumneAssignatura(idMarc, idAlgebra);
+        }
+        if (idLaura != -1 && idLiteraturaCatalana != -1) {
+            inscriureAlumneAssignatura(idLaura, idLiteraturaCatalana);
+        }
+        if (idIvan != -1) {
+            if (idAlgebra != -1) inscriureAlumneAssignatura(idIvan, idAlgebra);
+            if (idLiteraturaCatalana != -1) inscriureAlumneAssignatura(idIvan, idLiteraturaCatalana);
+            if (idBiologia != -1) inscriureAlumneAssignatura(idIvan, idBiologia);
+        }
+
+
+        // Llistar informació
+        System.out.println("Professors:");
+        llistarProfessors();
+
+        System.out.println("\nAssignatures:");
+        llistarAssignatures();
+
+        System.out.println("\nAules:");
+        llistarAules();
+
+        System.out.println("\nAssignatures:");
+        llistarAssignaturesAlumne(1);
+        llistarAssignaturesAlumne(3);
+
+        System.out.println("\nAlumnes per assignatura:");
+        llistarAlumnesAssignatura(1);
+        llistarAlumnesAssignatura(2);
+        llistarAlumnesAssignatura(3);
 
         // Tancar la connexió amb la base de dades
         db.close();
@@ -101,270 +101,163 @@ public class Main {
     }
 
     private static void crearTaules() {
+    
         AppData db = AppData.getInstance();
         db.update("SET FOREIGN_KEY_CHECKS=0;");
-    
-        // Crear taula paisos
-        db.update("DROP TABLE IF EXISTS paisos");
-        db.update("CREATE TABLE paisos (" +
-                  "id INTEGER AUTO_INCREMENT," +
-                  "nom TEXT," +
-                  "PRIMARY KEY (id))");
-    
-        // Crear taula flora
-        db.update("DROP TABLE IF EXISTS flora");
-        db.update("CREATE TABLE flora (" +
-                  "id INTEGER AUTO_INCREMENT," +
-                  "nom_comu TEXT," +
-                  "nom_cientific TEXT," +
-                  "id_pais INTEGER," +
-                  "descripcio TEXT," +
-                  "habitat TEXT," +
-                  "PRIMARY KEY (id)," +
-                  "FOREIGN KEY (id_pais) REFERENCES paisos(id))");
-    
-        // Crear taula fauna
-        db.update("DROP TABLE IF EXISTS fauna");
-        db.update("CREATE TABLE fauna (" +
-                  "id INTEGER AUTO_INCREMENT," +
-                  "nom_comu TEXT," +
-                  "nom_cientific TEXT," +
-                  "id_pais INTEGER," +
-                  "descripcio TEXT," +
-                  "habitat TEXT," +
-                  "PRIMARY KEY (id)," +
-                  "FOREIGN KEY (id_pais) REFERENCES paisos(id))");
-    
-        // Crear taula ecosistemes
-        db.update("DROP TABLE IF EXISTS ecosistemes");
-        db.update("CREATE TABLE ecosistemes (" +
-                  "id INTEGER AUTO_INCREMENT," +
-                  "nom TEXT," +
-                  "caracteristiques TEXT," +
-                  "id_pais INTEGER," +
-                  "PRIMARY KEY (id)," +
-                  "FOREIGN KEY (id_pais) REFERENCES paisos(id))");
-    
-        // Crear taula floraEcosistema
-        db.update("DROP TABLE IF EXISTS floraEcosistema");
-        db.update("CREATE TABLE floraEcosistema (" +
-                  "id_flora INTEGER," +
-                  "id_ecosistema INTEGER," +
-                  "FOREIGN KEY (id_flora) REFERENCES flora(id)," +
-                  "FOREIGN KEY (id_ecosistema) REFERENCES ecosistemes(id))");
-    
-        // Crear taula faunaEcosistema
-        db.update("DROP TABLE IF EXISTS faunaEcosistema");
-        db.update("CREATE TABLE faunaEcosistema (" +
-                  "id_fauna INTEGER," +
-                  "id_ecosistema INTEGER," +
-                  "FOREIGN KEY (id_fauna) REFERENCES fauna(id)," +
-                  "FOREIGN KEY (id_ecosistema) REFERENCES ecosistemes(id))");
-    
-        db.update("SET FOREIGN_KEY_CHECKS=1;");
-    }
 
-    private static int afegirPais(String nomPais) {
-        Pais nouPais = new Pais(0, nomPais); // Assumim que el constructor accepta un ID de 0 per a nous països
-        nouPais.save();
-        int idPais = obtenirIdPaisPerNom(nomPais);
-        if (idPais != -1) {
-            nouPais.setId(idPais); // Actualitzar l'ID amb el valor obtingut de la BD
-            paisos.add(nouPais);
-        }
-        return idPais;
-    }
 
-    private static int afegirFlora(String nom, String nomCientific, int idPais, String habitat, String descripcio, int idEcosistema) {
-        Flora novaFlora = new Flora(0, nom, nomCientific, idPais, descripcio, habitat);
-        novaFlora.save();
-        int idFlora = obtenirIdFloraPerNomComu(nom);
-        if (idFlora != -1) {
-            flora.add(novaFlora);
-            floraEcosistema.put(idFlora, idEcosistema);
-        }
-        return idFlora;
-    }
+        // Crear taula alumnes
+        db.update("DROP TABLE IF EXISTS alumnes");
+        db.update("CREATE TABLE alumnes (" +
+                "id_alumne INTEGER AUTO_INCREMENT," +
+                "nom TEXT," +
+                "cognoms TEXT," +
+                "data_naixement DATE," +
+                "PRIMARY KEY (id_alumne))");
     
-    private static int afegirFauna(String nom, String nomCientific, int idPais, String habitat, String descripcio, int idEcosistema) {
-        Fauna novaFauna = new Fauna(0, nom, nomCientific, idPais, descripcio, habitat);
-        novaFauna.save();
-        int idFauna = obtenirIdFaunaPerNomComu(nom);
-        if (idFauna != -1) {
-            fauna.add(novaFauna);
-            faunaEcosistema.put(idFauna, idEcosistema);
-        }
-        return idFauna;
-    }
+        // Crear taula professors
+        db.update("DROP TABLE IF EXISTS professors");
+        db.update("CREATE TABLE professors (" +
+                "id_professor INTEGER AUTO_INCREMENT," +
+                "nom TEXT," +
+                "especialitat TEXT," +
+                "PRIMARY KEY (id_professor))");
     
-    private static int afegirEcosistema(String nom, int idPais, String caracteristiques) {
-        Ecosistema nouEcosistema = new Ecosistema(0, nom, idPais, caracteristiques);
-        nouEcosistema.save();
-        int idEcosistema = obtenirIdEcosistemaPerNom(nom);
-        if (idEcosistema != -1) {
-            ecosistemes.add(nouEcosistema);
-        }
-        return idEcosistema;
-    }
-
-    private static void associarFloraAEcosistema(int idFlora, int idEcosistema) {
-        // Suposant que existeix una manera de comprovar si ja hi ha una entrada
-        // Aquest exemple simplement fa l'actualització sense comprovació prèvia
-        String sql = "INSERT INTO floraEcosistema (id_flora, id_ecosistema) VALUES (" + idFlora + ", " + idEcosistema + ")";
-        AppData.getInstance().update(sql);
-        floraEcosistema.put(idFlora, idEcosistema); // Assegura l'actualització del mapa
-    }
+        // Crear taula assignatures
+        db.update("DROP TABLE IF EXISTS assignatures");
+        db.update("CREATE TABLE assignatures (" +
+                "id_assignatura INTEGER AUTO_INCREMENT," +
+                "nom TEXT," +
+                "hores_setmanals INTEGER," +
+                "id_professor INTEGER," +
+                "PRIMARY KEY (id_assignatura)," +
+                "FOREIGN KEY (id_professor) REFERENCES professors(id_professor))");
     
-    private static void associarFaunaAEcosistema(int idFauna, int idEcosistema) {
-        // Igual que amb flora, s'actualitza sense comprovació prèvia
-        String sql = "INSERT INTO faunaEcosistema (id_fauna, id_ecosistema) VALUES (" + idFauna + ", " + idEcosistema + ")";
-        AppData.getInstance().update(sql);
-        faunaEcosistema.put(idFauna, idEcosistema); // Assegura l'actualització del mapa
-    }
+        // Crear taula aules
+        db.update("DROP TABLE IF EXISTS aules");
+        db.update("CREATE TABLE aules (" +
+                "id_aula INTEGER AUTO_INCREMENT," +
+                "nom TEXT," +
+                "capacitat INTEGER," +
+                "PRIMARY KEY (id_aula))");
     
-    public static int obtenirIdPaisPerNom(String nomPais) {
-        String sql = "SELECT id FROM paisos WHERE nom = '" + nomPais + "'";
-        List<Map<String, Object>> resultats = AppData.getInstance().query(sql);
-        if (!resultats.isEmpty()) {
-            return (int) resultats.get(0).get("id");
-        }
-        return -1;
-    }
+        // Crear taula alumne_assignatura
+        db.update("DROP TABLE IF EXISTS alumne_assignatura");
+        db.update("CREATE TABLE alumne_assignatura (" +
+                "id_alumne INTEGER," +
+                "id_assignatura INTEGER," +
+                "FOREIGN KEY (id_alumne) REFERENCES alumnes(id_alumne)," +
+                "FOREIGN KEY (id_assignatura) REFERENCES assignatures(id_assignatura))");
+    }    
 
-    public static int obtenirIdFloraPerNomComu(String nomComu) {
-        String sql = "SELECT id FROM flora WHERE nom_comu = \"" + nomComu + "\"";
-        List<Map<String, Object>> resultats = AppData.getInstance().query(sql);
-        if (!resultats.isEmpty()) {
-            return (int) resultats.get(0).get("id");
-        }
-        return -1; // Retorna -1 si no es troba la flora
-    }
-
-    public static int obtenirIdFaunaPerNomComu(String nomComu) {
-        String sql = "SELECT id FROM fauna WHERE nom_comu = \"" + nomComu + "\"";
-        List<Map<String, Object>> resultats = AppData.getInstance().query(sql);
-        if (!resultats.isEmpty()) {
-            return (int) resultats.get(0).get("id");
-        }
-        return -1; // Retorna -1 si no es troba la fauna
-    }
-
-    public static int obtenirIdEcosistemaPerNom(String nom) {
-        String sql = "SELECT id FROM ecosistemes WHERE nom = \"" + nom + "\"";
-        List<Map<String, Object>> resultats = AppData.getInstance().query(sql);
-        if (!resultats.isEmpty()) {
-            return (int) resultats.get(0).get("id");
-        }
-        return -1; // Retorna -1 si no es troba l'ecosistema
-    }
-
-    private static void llistarPaisos() {
-        System.out.println("Llista de Paisos:");
-        for (Pais pais : paisos) {
-            System.out.println(pais.toString());
-        }
-
-        System.out.println("Llista de Paisos de la base de dades:");
+    private static void afegirAlumne(String nom, String cognoms, Date dataNaixement) {
         AppData db = AppData.getInstance();
-        String sql = "SELECT * FROM paisos";
-        List<Map<String, Object>> result = db.query(sql);
-        for (Map<String, Object> row : result) {
-            int id = (int) row.get("id");
-            String nom = (String) row.get("nom");
-            System.out.println("Pais { Id: " + id + ", Nom: \"" + nom + "\" }");
-        }
+        db.update("INSERT INTO alumnes (nom, cognoms, data_naixement) VALUES ('" + nom + "', '" + cognoms + "', '" + dataNaixement + "')");
     }
-    
-    private static void llistarFlora() {
-        System.out.println("Llista de Flora:");
-        for (Flora planta : flora) {
-            System.out.println(planta.toString());
-        }
-    
-        System.out.println("Llista de Flora de la base de dades:");
+
+    private static void afegirProfessor(String nom, String especialitat) {
         AppData db = AppData.getInstance();
-        String sql = "SELECT * FROM flora";
-        List<Map<String, Object>> result = db.query(sql);
-        for (Map<String, Object> row : result) {
-            int id = (int) row.get("id");
-            String nomComu = (String) row.get("nom_comu");
-            String nomCientific = (String) row.get("nom_cientific");
-            int idPais = (int) row.get("id_pais");
-            String habitat = (String) row.get("habitat");
-            System.out.println("Flora { Id: " + id + ", Nom Comú: \"" + nomComu + "\", Nom Científic: \"" + nomCientific +
-                               "\", Pais: " + idPais + ", Habitat: \"" + habitat + "\" }");
-        }
+        db.update("INSERT INTO professors (nom, especialitat) VALUES ('" + nom + "', '" + especialitat + "')");
     }
-    
-    private static void llistarFauna() {
-        System.out.println("Llista de Fauna:");
-        for (Fauna animal : fauna) {
-            System.out.println(animal.toString());
-        }
-    
-        System.out.println("Llista de Fauna de la base de dades:");
+
+    private static void afegirAssignatura(String nom, int horesSetmanals, int idProfessor) {
         AppData db = AppData.getInstance();
-        String sql = "SELECT * FROM fauna";
-        List<Map<String, Object>> result = db.query(sql);
-        for (Map<String, Object> row : result) {
-            int id = (int) row.get("id");
-            String nomComu = (String) row.get("nom_comu");
-            String nomCientific = (String) row.get("nom_cientific");
-            int idPais = (int) row.get("id_pais");
-            String habitat = (String) row.get("habitat");
-            System.out.println("Fauna { Id: " + id + ", Nom Comú: \"" + nomComu + "\", Nom Científic: \"" + nomCientific +
-                               "\", Pais: " + idPais + ", Habitat: \"" + habitat + "\" }");
-        }
+        db.update("INSERT INTO assignatures (nom, hores_setmanals, id_professor) VALUES ('" + nom + "', " + horesSetmanals + ", " + idProfessor + ")");
     }
-    
-    private static void llistarEcosistemes() {
-        System.out.println("Llista d'Ecosistemes:");
-        for (Ecosistema ecosistema : ecosistemes) {
-            System.out.println(ecosistema.toString());
-        }
-    
-        System.out.println("Llista d'Ecosistemes de la base de dades:");
+
+    private static void afegirAula(String nom, int capacitat) {
         AppData db = AppData.getInstance();
-        String sql = "SELECT * FROM ecosistemes";
-        List<Map<String, Object>> result = db.query(sql);
+        db.update("INSERT INTO aules (nom, capacitat) VALUES ('" + nom + "', " + capacitat + ")");
+    }
+
+    private static void inscriureAlumneAssignatura(int idAlumne, int idAssignatura) {
+        AppData db = AppData.getInstance();
+        db.update("INSERT INTO alumne_assignatura (id_alumne, id_assignatura) VALUES (" + idAlumne + ", " + idAssignatura + ")");
+    }
+
+    private static void llistarAlumnes() {
+        AppData db = AppData.getInstance();
+        List<Map<String, Object>> result = db.query("SELECT * FROM alumnes");
         for (Map<String, Object> row : result) {
-            int id = (int) row.get("id");
-            String nom = (String) row.get("nom");
-            int idPais = (int) row.get("id_pais");
-            System.out.println("Ecosistema { Id: " + id + ", Nom: \"" + nom + "\", Id Pais: " + idPais + " }");
+            System.out.println("ID: " + row.get("id_alumne") + ", Nom: " + row.get("nom") + ", Cognoms: " + row.get("cognoms") + ", Data de Naixement: " + row.get("data_naixement"));
         }
     }
     
-    private static void llistarFloraEcosistema(int idEcosistema) {
-        System.out.println("Llista de Flora de l'Ecosistema " + idEcosistema + ":");
-        for (Map.Entry<Integer, Integer> entrada : floraEcosistema.entrySet()) {
-            if (entrada.getValue().equals(idEcosistema)) {
-                Flora planta = flora.stream().filter(f -> f.getId() == entrada.getKey()).findFirst().orElse(null);
-                if (planta != null) {
-                    System.out.println(planta.toString());
-                }
-            }
+    private static void llistarProfessors() {
+        AppData db = AppData.getInstance();
+        List<Map<String, Object>> result = db.query("SELECT * FROM professors");
+        for (Map<String, Object> row : result) {
+            System.out.println("ID: " + row.get("id_professor") + ", Nom: " + row.get("nom") + ", Especialitat: " + row.get("especialitat"));
         }
     }
     
-    private static void llistarFaunaEcosistema(int idEcosistema) {
-        System.out.println("Llista de Fauna de l'Ecosistema " + idEcosistema + ":");
-        for (Map.Entry<Integer, Integer> entrada : faunaEcosistema.entrySet()) {
-            if (entrada.getValue().equals(idEcosistema)) {
-                Fauna animal = fauna.stream().filter(f -> f.getId() == entrada.getKey()).findFirst().orElse(null);
-                if (animal != null) {
-                    System.out.println(animal.toString());
-                }
-            }
+    private static void llistarAssignatures() {
+        AppData db = AppData.getInstance();
+        List<Map<String, Object>> result = db.query("SELECT a.*, p.nom AS nom_professor FROM assignatures a LEFT JOIN professors p ON a.id_professor = p.id_professor");
+        for (Map<String, Object> row : result) {
+            System.out.println("ID: " + row.get("id_assignatura") + ", Nom: " + row.get("nom") + ", Hores Setmanals: " + row.get("hores_setmanals") + ", Professor: " + row.get("nom_professor"));
+        }
+    }
+    
+    private static void llistarAules() {
+        AppData db = AppData.getInstance();
+        List<Map<String, Object>> result = db.query("SELECT * FROM aules");
+        for (Map<String, Object> row : result) {
+            System.out.println("ID: " + row.get("id_aula") + ", Nom: " + row.get("nom") + ", Capacitat: " + row.get("capacitat"));
+        }
+    }
+    
+    private static void llistarAssignaturesAlumne(int idAlumne) {
+        AppData db = AppData.getInstance();
+        List<Map<String, Object>> result = db.query("SELECT a.nom FROM assignatures a JOIN alumne_assignatura aa ON a.id_assignatura = aa.id_assignatura WHERE aa.id_alumne = " + idAlumne);
+        System.out.println("Assignatures per l'alumne ID " + idAlumne + ":");
+        for (Map<String, Object> row : result) {
+            System.out.println("- " + row.get("nom"));
+        }
+    }
+    
+    private static void llistarAlumnesAssignatura(int idAssignatura) {
+        AppData db = AppData.getInstance();
+        List<Map<String, Object>> result = db.query("SELECT al.nom, al.cognoms FROM alumnes al JOIN alumne_assignatura aa ON al.id_alumne = aa.id_alumne WHERE aa.id_assignatura = " + idAssignatura);
+        System.out.println("Alumnes inscrits a l'assignatura ID " + idAssignatura + ":");
+        for (Map<String, Object> row : result) {
+            System.out.println("- " + row.get("nom") + " " + row.get("cognoms"));
         }
     }
 
-    private static Identifiable obtenirReferencia(int id, List<? extends Identifiable> llista) {
-        for (Identifiable item : llista) {
-            if (item.getId() == id) {
-                return item;
-            }
+    private static int obtenirIdAlumnePerNom(String nom, String cognoms) {
+        AppData db = AppData.getInstance();
+        String sql = "SELECT id_alumne FROM alumnes WHERE nom = '" + nom + "' AND cognoms = '" + cognoms + "'";
+        List<Map<String, Object>> result = db.query(sql);
+        if (result.isEmpty()) {
+            System.out.println("No s'ha trobat cap alumne amb el nom: " + nom + " " + cognoms);
+            return -1;
+        } else {
+            return (int) result.get(0).get("id_alumne");
         }
-        return null;
-    }   
+    }
+    
+    private static int obtenirIdAssignaturaPerNom(String nomAssignatura) {
+        AppData db = AppData.getInstance();
+        String sql = "SELECT id_assignatura FROM assignatures WHERE nom = '" + nomAssignatura + "'";
+        List<Map<String, Object>> result = db.query(sql);
+        if (result.isEmpty()) {
+            System.out.println("No s'ha trobat cap assignatura amb el nom: " + nomAssignatura);
+            return -1;
+        } else {
+            return (int) result.get(0).get("id_assignatura");
+        }
+    }  
+    
+    private static int obtenirIdProfessorPerNom(String nomProfessor) {
+        AppData db = AppData.getInstance();
+        String sql = "SELECT id_professor FROM professors WHERE nom = '" + nomProfessor + "'";
+        List<Map<String, Object>> result = db.query(sql);
+        if (result.isEmpty()) {
+            System.out.println("No s'ha trobat cap professor amb el nom: " + nomProfessor);
+            return -1;
+        } else {
+            return (int) result.get(0).get("id_professor"); // Corregit de 'id_assignatura' a 'id_professor'
+        }
+    }    
 }

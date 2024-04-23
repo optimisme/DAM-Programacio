@@ -1,6 +1,6 @@
 package com.project;
 
-import java.sql.Date;
+import java.util.Locale;
 import java.util.List;
 import java.util.Map;
 
@@ -8,253 +8,236 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Locale.setDefault(Locale.US);
+        
         AppData db = AppData.getInstance();
+        
+        // Create tables
+        createTables();
 
-        // Crear les taules
-        crearTaules();
+        // Add restaurants
+        addRestaurant("The Gourmet Kitchen", "Italian", 10, "High");
+        addRestaurant("Casual Diner", "American", 5, "Medium");
+        addRestaurant("Seafood Paradise", "Seafood", 8, "High");
+        addRestaurant("Veggie Delight", "Vegetarian", 12, "Medium");
+        addRestaurant("Sushi Corner", "Japanese", 15, "High");
 
-        // Afegir Professors
-        afegirProfessor("Maria Garcia", "Matemàtiques");
-        int idMaria = obtenirIdProfessorPerNom("Maria Garcia");
+        // Add clients
+        addClient("John Doe", "1985-02-15", true);
+        addClient("Jane Smith", "1990-07-23", false);
+        addClient("Alice Johnson", "1975-11-30", false);
+        addClient("Bob Lee", "1988-06-15", true);
+        addClient("Charlie Brown", "1993-03-12", false);
+        addClient("Emma Wilson", "1981-09-25", true);
+        addClient("Noah Miller", "1994-04-14", false);
+        addClient("Olivia Davis", "1979-12-05", true);
 
-        afegirProfessor("Jordi Pozo", "Literatura");
-        int idJordi = obtenirIdProfessorPerNom("Jordi Pozo");
+        // Add services
+        addService(1, 1, "2023-04-01", 120.50);
+        addService(2, 2, "2023-04-02", 45.0);
+        addService(3, 3, "2023-05-10", 200.0);
+        addService(4, 4, "2023-05-11", 150.0);
+        addService(5, 5, "2023-05-12", 200.0);
+        addService(5, 5, "2023-05-14", 250.0);
+        addService(5, 5, "2023-05-16", 350.0);
+        addService(5, 5, "2023-05-18", 300.0);
+        addService(1, 6, "2023-05-15", 220.0);
+        addService(2, 7, "2023-05-16", 50.0);
+        addService(1, 8, "2023-05-17", 180.0);
+        addService(1, 1, "2023-06-01", 135.0); 
+        addService(1, 2, "2023-06-02", 95.0);
+        addService(2, 1, "2023-06-03", 78.0);
+        addService(2, 3, "2023-06-04", 120.0);
+        addService(1, 4, "2023-06-05", 200.0); 
+        addService(2, 2, "2023-07-01", 60.0);
+        addService(3, 2, "2023-07-02", 130.0);
+        addService(5, 2, "2023-07-03", 140.0);
+        addService(5, 2, "2023-07-05", 100.0);
+        addService(1, 4, "2023-07-04", 160.0);
+        addService(4, 4, "2023-07-05", 70.0);
+        addService(4, 4, "2023-07-06", 50.0);
+        addService(2, 4, "2023-07-06", 40.0);
+        addService(1, 6, "2023-07-07", 100.0);
+        addService(5, 6, "2023-07-08", 360.0);
+        addService(5, 6, "2023-07-09", 280.0);
+        addService(4, 6, "2023-07-09", 60.0);
+        addService(4, 6, "2023-07-10", 80.0);
 
-        afegirProfessor("Anna Molina", "Ciències");
-        int idAnna = obtenirIdProfessorPerNom("Anna Molina");
+        // List entries
+        System.out.println("\nRestaurants:");
+        listRestaurants();
 
-        // Afegir Aules
-        afegirAula("A101", 30);
-        afegirAula("A102", 25);
-        afegirAula("B201", 20);
+        System.out.println("\nClients:");
+        listClients();
 
-        // Afegir Assignatures
-        if (idMaria != -1) {
-            afegirAssignatura("Algebra", 4, idMaria);
-        }
-        int idAlgebra = obtenirIdAssignaturaPerNom("Algebra");
+        System.out.println("\nServices:");
+        listServices();
 
-        if (idJordi != -1) {
-            afegirAssignatura("Literatura Catalana", 3, idJordi);
-        }
-        int idLiteraturaCatalana = obtenirIdAssignaturaPerNom("Literatura Catalana");
+        System.out.println("\nClient 1 services:");
+        listClientServices(1);
 
-        if (idAnna != -1) {
-            afegirAssignatura("Biologia", 5, idAnna);
-        }
-        int idBiologia = obtenirIdAssignaturaPerNom("Biologia");
+        System.out.println("\nClient 4 services:");
+        listClientServices(4);
 
-        // Afegir Alumnes
-        afegirAlumne("Marc", "Soler", Date.valueOf("2005-03-15"));
-        int idMarc = obtenirIdAlumnePerNom("Marc", "Soler");
+        System.out.println("\nClient 6 services:");
+        listClientServices(6);
 
-        afegirAlumne("Laura", "Vidal", Date.valueOf("2004-07-22"));
-        int idLaura = obtenirIdAlumnePerNom("Laura", "Vidal");
+        System.out.println("\nRestaurant 1 clients:");
+        listRestaurantClients(1);
 
-        afegirAlumne("Iván", "Coll", Date.valueOf("2004-06-10"));
-        int idIvan = obtenirIdAlumnePerNom("Iván", "Coll");
+        System.out.println("\nRestaurant 4 clients:");
+        listRestaurantClients(4);
 
-        // Inscripcions, comprovant que tant els alumnes com les assignatures existeixen
-        if (idMarc != -1 && idAlgebra != -1) {
-            inscriureAlumneAssignatura(idMarc, idAlgebra);
-        }
-        if (idLaura != -1 && idLiteraturaCatalana != -1) {
-            inscriureAlumneAssignatura(idLaura, idLiteraturaCatalana);
-        }
-        if (idIvan != -1) {
-            if (idAlgebra != -1) inscriureAlumneAssignatura(idIvan, idAlgebra);
-            if (idLiteraturaCatalana != -1) inscriureAlumneAssignatura(idIvan, idLiteraturaCatalana);
-            if (idBiologia != -1) inscriureAlumneAssignatura(idIvan, idBiologia);
-        }
+        System.out.println("\nRestaurant 5 clients:");
+        listRestaurantClients(5);
 
-
-        // Llistar informació
-        System.out.println("Professors:");
-        llistarProfessors();
-
-        System.out.println("\nAssignatures:");
-        llistarAssignatures();
-
-        System.out.println("\nAules:");
-        llistarAules();
-
-        System.out.println("\nAssignatures:");
-        llistarAssignaturesAlumne(1);
-        llistarAssignaturesAlumne(3);
-
-        System.out.println("\nAlumnes per assignatura:");
-        llistarAlumnesAssignatura(1);
-        llistarAlumnesAssignatura(2);
-        llistarAlumnesAssignatura(3);
-
-        // Tancar la connexió amb la base de dades
+        // Close the database connection
         db.close();
+    }
 
-        // Forçar la sortida del programa per no esperar a tancar la connexió amb 'MySQL'
-        // Assegura't que en aquest punt totes les dades s'han guardat correctament
-        if (!"test".equals(System.getProperty("environment"))) {
-            System.exit(0);
+    public static void createTables() {
+        AppData db = AppData.getInstance();
+
+        String sql = "CREATE TABLE IF NOT EXISTS restaurants (" +
+                     "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                     "name TEXT NOT NULL, " +
+                     "kind TEXT NOT NULL, " +
+                     "tables INTEGER NOT NULL, " +
+                     "pricing TEXT NOT NULL)";
+        db.update("DROP TABLE IF EXISTS restaurants");
+        db.update(sql);
+
+        sql = "CREATE TABLE IF NOT EXISTS clients (" +
+              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+              "name TEXT NOT NULL, " +
+              "birth DATE NOT NULL, " +
+              "isVIP BOOLEAN NOT NULL)";
+        db.update("DROP TABLE IF EXISTS clients");
+        db.update(sql);
+
+        sql = "CREATE TABLE IF NOT EXISTS services (" +
+              "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+              "id_restaurant INTEGER NOT NULL, " +
+              "id_client INTEGER NOT NULL, " +
+              "date DATE NOT NULL, " +
+              "expenditure REAL NOT NULL, " +
+              "FOREIGN KEY(id_restaurant) REFERENCES restaurants(id), " +
+              "FOREIGN KEY(id_client) REFERENCES clients(id))";
+        db.update("DROP TABLE IF EXISTS services");
+        db.update(sql);
+    }
+
+    public static void addRestaurant(String name, String kind, int tables, String pricing) {
+        String sql = "INSERT INTO restaurants (name, kind, tables, pricing) VALUES ('" + 
+                     name + "', '" + kind + "', " + tables + ", '" + pricing + "')";
+        AppData.getInstance().update(sql);
+    }
+
+    public static void addClient(String name, String birth, boolean isVIP) {
+        String sql = "INSERT INTO clients (name, birth, isVIP) VALUES ('" + 
+                     name + "', '" + birth + "', " + (isVIP ? "1" : "0") + ")";
+        AppData.getInstance().update(sql);
+    }
+
+    public static void addService(int idRestaurant, int idClient, String date, double expenditure) {
+        String sql = "INSERT INTO services (id_restaurant, id_client, date, expenditure) VALUES (" + 
+                     idRestaurant + ", " + idClient + ", '" + date + "', " + expenditure + ")";
+        AppData.getInstance().update(sql);
+    }
+
+    public static void listRestaurants() {
+        String sql = "SELECT * FROM restaurants";
+        List<Map<String, Object>> restaurants = AppData.getInstance().query(sql);
+        for (Map<String, Object> restaurant : restaurants) {
+            System.out.println("ID: " + restaurant.get("id") + ", Name: " + restaurant.get("name") + 
+                               ", Kind: " + restaurant.get("kind") + ", Tables: " + restaurant.get("tables") +
+                               ", Pricing: " + restaurant.get("pricing"));
         }
     }
 
-    private static void crearTaules() {
-    
-        AppData db = AppData.getInstance();
-        db.update("SET FOREIGN_KEY_CHECKS=0;");
-
-
-        // Crear taula alumnes
-        db.update("DROP TABLE IF EXISTS alumnes");
-        db.update("CREATE TABLE alumnes (" +
-                "id_alumne INTEGER AUTO_INCREMENT," +
-                "nom TEXT," +
-                "cognoms TEXT," +
-                "data_naixement DATE," +
-                "PRIMARY KEY (id_alumne))");
-    
-        // Crear taula professors
-        db.update("DROP TABLE IF EXISTS professors");
-        db.update("CREATE TABLE professors (" +
-                "id_professor INTEGER AUTO_INCREMENT," +
-                "nom TEXT," +
-                "especialitat TEXT," +
-                "PRIMARY KEY (id_professor))");
-    
-        // Crear taula assignatures
-        db.update("DROP TABLE IF EXISTS assignatures");
-        db.update("CREATE TABLE assignatures (" +
-                "id_assignatura INTEGER AUTO_INCREMENT," +
-                "nom TEXT," +
-                "hores_setmanals INTEGER," +
-                "id_professor INTEGER," +
-                "PRIMARY KEY (id_assignatura)," +
-                "FOREIGN KEY (id_professor) REFERENCES professors(id_professor))");
-    
-        // Crear taula aules
-        db.update("DROP TABLE IF EXISTS aules");
-        db.update("CREATE TABLE aules (" +
-                "id_aula INTEGER AUTO_INCREMENT," +
-                "nom TEXT," +
-                "capacitat INTEGER," +
-                "PRIMARY KEY (id_aula))");
-    
-        // Crear taula alumne_assignatura
-        db.update("DROP TABLE IF EXISTS alumne_assignatura");
-        db.update("CREATE TABLE alumne_assignatura (" +
-                "id_alumne INTEGER," +
-                "id_assignatura INTEGER," +
-                "FOREIGN KEY (id_alumne) REFERENCES alumnes(id_alumne)," +
-                "FOREIGN KEY (id_assignatura) REFERENCES assignatures(id_assignatura))");
-    }    
-
-    private static void afegirAlumne(String nom, String cognoms, Date dataNaixement) {
-        AppData db = AppData.getInstance();
-        db.update("INSERT INTO alumnes (nom, cognoms, data_naixement) VALUES ('" + nom + "', '" + cognoms + "', '" + dataNaixement + "')");
-    }
-
-    private static void afegirProfessor(String nom, String especialitat) {
-        AppData db = AppData.getInstance();
-        db.update("INSERT INTO professors (nom, especialitat) VALUES ('" + nom + "', '" + especialitat + "')");
-    }
-
-    private static void afegirAssignatura(String nom, int horesSetmanals, int idProfessor) {
-        AppData db = AppData.getInstance();
-        db.update("INSERT INTO assignatures (nom, hores_setmanals, id_professor) VALUES ('" + nom + "', " + horesSetmanals + ", " + idProfessor + ")");
-    }
-
-    private static void afegirAula(String nom, int capacitat) {
-        AppData db = AppData.getInstance();
-        db.update("INSERT INTO aules (nom, capacitat) VALUES ('" + nom + "', " + capacitat + ")");
-    }
-
-    private static void inscriureAlumneAssignatura(int idAlumne, int idAssignatura) {
-        AppData db = AppData.getInstance();
-        db.update("INSERT INTO alumne_assignatura (id_alumne, id_assignatura) VALUES (" + idAlumne + ", " + idAssignatura + ")");
-    }
-
-    private static void llistarAlumnes() {
-        AppData db = AppData.getInstance();
-        List<Map<String, Object>> result = db.query("SELECT * FROM alumnes");
-        for (Map<String, Object> row : result) {
-            System.out.println("ID: " + row.get("id_alumne") + ", Nom: " + row.get("nom") + ", Cognoms: " + row.get("cognoms") + ", Data de Naixement: " + row.get("data_naixement"));
-        }
-    }
-    
-    private static void llistarProfessors() {
-        AppData db = AppData.getInstance();
-        List<Map<String, Object>> result = db.query("SELECT * FROM professors");
-        for (Map<String, Object> row : result) {
-            System.out.println("ID: " + row.get("id_professor") + ", Nom: " + row.get("nom") + ", Especialitat: " + row.get("especialitat"));
-        }
-    }
-    
-    private static void llistarAssignatures() {
-        AppData db = AppData.getInstance();
-        List<Map<String, Object>> result = db.query("SELECT a.*, p.nom AS nom_professor FROM assignatures a LEFT JOIN professors p ON a.id_professor = p.id_professor");
-        for (Map<String, Object> row : result) {
-            System.out.println("ID: " + row.get("id_assignatura") + ", Nom: " + row.get("nom") + ", Hores Setmanals: " + row.get("hores_setmanals") + ", Professor: " + row.get("nom_professor"));
-        }
-    }
-    
-    private static void llistarAules() {
-        AppData db = AppData.getInstance();
-        List<Map<String, Object>> result = db.query("SELECT * FROM aules");
-        for (Map<String, Object> row : result) {
-            System.out.println("ID: " + row.get("id_aula") + ", Nom: " + row.get("nom") + ", Capacitat: " + row.get("capacitat"));
-        }
-    }
-    
-    private static void llistarAssignaturesAlumne(int idAlumne) {
-        AppData db = AppData.getInstance();
-        List<Map<String, Object>> result = db.query("SELECT a.nom FROM assignatures a JOIN alumne_assignatura aa ON a.id_assignatura = aa.id_assignatura WHERE aa.id_alumne = " + idAlumne);
-        System.out.println("Assignatures per l'alumne ID " + idAlumne + ":");
-        for (Map<String, Object> row : result) {
-            System.out.println("- " + row.get("nom"));
-        }
-    }
-    
-    private static void llistarAlumnesAssignatura(int idAssignatura) {
-        AppData db = AppData.getInstance();
-        List<Map<String, Object>> result = db.query("SELECT al.nom, al.cognoms FROM alumnes al JOIN alumne_assignatura aa ON al.id_alumne = aa.id_alumne WHERE aa.id_assignatura = " + idAssignatura);
-        System.out.println("Alumnes inscrits a l'assignatura ID " + idAssignatura + ":");
-        for (Map<String, Object> row : result) {
-            System.out.println("- " + row.get("nom") + " " + row.get("cognoms"));
+    public static void listClients() {
+        String sql = "SELECT * FROM clients";
+        List<Map<String, Object>> clients = AppData.getInstance().query(sql);
+        for (Map<String, Object> client : clients) {
+            System.out.println("ID: " + client.get("id") + ", Name: " + client.get("name") + 
+                               ", Birth: " + client.get("birth") + ", VIP: " + (((int)client.get("isVIP")) == 1 ? "Yes" : "No"));
         }
     }
 
-    private static int obtenirIdAlumnePerNom(String nom, String cognoms) {
-        AppData db = AppData.getInstance();
-        String sql = "SELECT id_alumne FROM alumnes WHERE nom = '" + nom + "' AND cognoms = '" + cognoms + "'";
-        List<Map<String, Object>> result = db.query(sql);
-        if (result.isEmpty()) {
-            System.out.println("No s'ha trobat cap alumne amb el nom: " + nom + " " + cognoms);
-            return -1;
-        } else {
-            return (int) result.get(0).get("id_alumne");
+    public static void listServices() {
+        String sql = "SELECT * FROM services";
+        List<Map<String, Object>> services = AppData.getInstance().query(sql);
+        for (Map<String, Object> service : services) {
+            System.out.println("Service ID: " + service.get("id") + ", Restaurant ID: " + service.get("id_restaurant") + 
+                               ", Client ID: " + service.get("id_client") + ", Date: " + service.get("date") + 
+                               ", Expenditure: " + service.get("expenditure"));
         }
     }
-    
-    private static int obtenirIdAssignaturaPerNom(String nomAssignatura) {
+
+    public static void listClientServices(int clientId) {
         AppData db = AppData.getInstance();
-        String sql = "SELECT id_assignatura FROM assignatures WHERE nom = '" + nomAssignatura + "'";
-        List<Map<String, Object>> result = db.query(sql);
-        if (result.isEmpty()) {
-            System.out.println("No s'ha trobat cap assignatura amb el nom: " + nomAssignatura);
-            return -1;
-        } else {
-            return (int) result.get(0).get("id_assignatura");
+        
+        String sql = "SELECT c.id AS clientId, c.name AS clientName, s.date, s.expenditure, " +
+                     "r.name AS restaurantName, r.kind AS restaurantKind, r.pricing AS pricing " +
+                     "FROM services s " +
+                     "JOIN clients c ON s.id_client = c.id " +
+                     "JOIN restaurants r ON s.id_restaurant = r.id " +
+                     "WHERE c.id = " + clientId;
+
+        List<Map<String, Object>> results = db.query(sql);
+        for (Map<String, Object> row : results) {
+            double expenditure = Double.parseDouble(row.get("expenditure").toString());
+            String pricing = row.get("pricing").toString();
+            String priceComparison = comparePrice(expenditure, pricing);
+
+            System.out.println("Client ID: " + row.get("clientId") +
+                               ", Client Name: " + row.get("clientName") +
+                               ", Date: " + row.get("date") +
+                               ", Expenditure: " + expenditure +
+                               ", Restaurant Name: " + row.get("restaurantName") +
+                               ", Restaurant Kind: " + row.get("restaurantKind") +
+                               ", " + priceComparison + " PKT average price");
         }
-    }  
-    
-    private static int obtenirIdProfessorPerNom(String nomProfessor) {
+    }
+
+    public static String comparePrice(double expenditure, String pricing) {
+        // Dummy function for price comparison based on pricing level, customize as needed
+        double averagePrice;
+        switch (pricing) {
+            case "High":
+                averagePrice = 150; // Assume average high pricing
+                break;
+            case "Medium":
+                averagePrice = 75; // Assume average medium pricing
+                break;
+            case "Low":
+                averagePrice = 30; // Assume average low pricing
+                break;
+            default:
+                averagePrice = 50; // Default average pricing
+                break;
+        }
+        return expenditure >= averagePrice ? "above" : "below";
+    }
+
+    public static void listRestaurantClients(int restaurantId) {
         AppData db = AppData.getInstance();
-        String sql = "SELECT id_professor FROM professors WHERE nom = '" + nomProfessor + "'";
-        List<Map<String, Object>> result = db.query(sql);
-        if (result.isEmpty()) {
-            System.out.println("No s'ha trobat cap professor amb el nom: " + nomProfessor);
-            return -1;
-        } else {
-            return (int) result.get(0).get("id_professor"); // Corregit de 'id_assignatura' a 'id_professor'
+        
+        String sql = "SELECT c.id AS clientId, c.name AS clientName, AVG(s.expenditure) AS averageExpenditure " +
+                     "FROM services s " +
+                     "JOIN clients c ON s.id_client = c.id " +
+                     "WHERE s.id_restaurant = " + restaurantId + " " +
+                     "GROUP BY c.id, c.name";
+    
+        List<Map<String, Object>> results = db.query(sql);
+        for (Map<String, Object> row : results) {
+            int clientId = Integer.parseInt(row.get("clientId").toString());
+            String clientName = row.get("clientName").toString();
+            double averageExpenditure = Double.parseDouble(row.get("averageExpenditure").toString());
+            
+            System.out.println("Client ID: " + clientId +
+                               ", Client Name: " + clientName +
+                               ", Average expenditure: " + String.valueOf(averageExpenditure));
         }
-    }    
+    }
 }

@@ -5,9 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.sql.Date;
 import java.sql.*;
 
 public class TestMain {
@@ -25,77 +25,40 @@ public class TestMain {
         text = text.replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
-        String expectedOutput = "id Canada: 2:2 > true" +
-        "\nid Desert: 2:2 > true" +
-        "\nid Baobab: 4:4 > true" +
-        "\nid Panda: 2:2 > true" +
-        "\nLlista de Paisos:" +
-        "\nPais { Id: 1, Nom: \"Espanya\" }" +
-        "\nPais { Id: 2, Nom: \"Canadà\" }" +
-        "\nPais { Id: 3, Nom: \"Brasil\" }" +
-        "\nPais { Id: 4, Nom: \"Austràlia\" }" +
-        "\nPais { Id: 5, Nom: \"Sud-àfrica\" }" +
-        "\nPais { Id: 6, Nom: \"Xina\" }" +
-        "\nPais { Id: 7, Nom: \"Estats Units\" }" +
-        "\nPais { Id: 8, Nom: \"Antàrtida\" }" +
-        "\nLlista de Paisos de la base de dades:" +
-        "\nPais { Id: 1, Nom: \"Espanya\" }" +
-        "\nPais { Id: 2, Nom: \"Canadà\" }" +
-        "\nPais { Id: 3, Nom: \"Brasil\" }" +
-        "\nPais { Id: 4, Nom: \"Austràlia\" }" +
-        "\nPais { Id: 5, Nom: \"Sud-àfrica\" }" +
-        "\nPais { Id: 6, Nom: \"Xina\" }" +
-        "\nPais { Id: 7, Nom: \"Estats Units\" }" +
-        "\nPais { Id: 8, Nom: \"Antàrtida\" }" +
-        "\nLlista d'Ecosistemes:" +
-        "\nEcosistema { Id: 1, Nom: \"Selva\", Id Pais: 3 }" +
-        "\nEcosistema { Id: 2, Nom: \"Desert\", Id Pais: 4 }" +
-        "\nEcosistema { Id: 3, Nom: \"Bosc\", Id Pais: 2 }" +
-        "\nEcosistema { Id: 4, Nom: \"Oceà Antàrtic\", Id Pais: 8 }" +
-        "\nLlista d'Ecosistemes de la base de dades:" +
-        "\nEcosistema { Id: 1, Nom: \"Selva\", Id Pais: 3 }" +
-        "\nEcosistema { Id: 2, Nom: \"Desert\", Id Pais: 4 }" +
-        "\nEcosistema { Id: 3, Nom: \"Bosc\", Id Pais: 2 }" +
-        "\nEcosistema { Id: 4, Nom: \"Oceà Antàrtic\", Id Pais: 8 }" +
-        "\nLlista de Flora:" +
-        "\nFlora { Id: 1, Nom Comú: \"Dàlia\", Nom Científic: \"Dahlia pinnata\", Pais: 7, Habitat: \"Jardins i zones cultivades\" }" +
-        "\nFlora { Id: 2, Nom Comú: \"Eucaliptus\", Nom Científic: \"Eucalyptus globulus\", Pais: 4, Habitat: \"Boscos oberts i zones costaneres\" }" +
-        "\nFlora { Id: 3, Nom Comú: \"Orquídia\", Nom Científic: \"Orchidaceae\", Pais: 1, Habitat: \"Selva tropical, terres baixes humides i muntanyes\" }" +
-        "\nFlora { Id: 4, Nom Comú: \"Baobab\", Nom Científic: \"Adansonia\", Pais: 5, Habitat: \"Savanes àrides i terres semiàrides\" }" +
-        "\nFlora { Id: 5, Nom Comú: \"Sequoia\", Nom Científic: \"Sequoiadendron giganteum\", Pais: 7, Habitat: \"Boscos humits temperats\" }" +
-        "\nFlora { Id: 6, Nom Comú: \"Lavanda\", Nom Científic: \"Lavandula\", Pais: 2, Habitat: \"Terrenys assolellats, secs i calcaris\" }" +
-        "\nFlora { Id: 7, Nom Comú: \"Safrà\", Nom Científic: \"Crocus sativus\", Pais: 6, Habitat: \"Terres semiàrides cultivades\" }" +
-        "\nFlora { Id: 8, Nom Comú: \"Maple\", Nom Científic: \"Acer\", Pais: 2, Habitat: \"Zones humides i planes\" }" +
-        "\nLlista de Flora de la base de dades:" +
-        "\nFlora { Id: 1, Nom Comú: \"Dàlia\", Nom Científic: \"Dahlia pinnata\", Pais: 7, Habitat: \"Jardins i zones cultivades\" }" +
-        "\nFlora { Id: 2, Nom Comú: \"Eucaliptus\", Nom Científic: \"Eucalyptus globulus\", Pais: 4, Habitat: \"Boscos oberts i zones costaneres\" }" +
-        "\nFlora { Id: 3, Nom Comú: \"Orquídia\", Nom Científic: \"Orchidaceae\", Pais: 1, Habitat: \"Selva tropical, terres baixes humides i muntanyes\" }" +
-        "\nFlora { Id: 4, Nom Comú: \"Baobab\", Nom Científic: \"Adansonia\", Pais: 5, Habitat: \"Savanes àrides i terres semiàrides\" }" +
-        "\nFlora { Id: 5, Nom Comú: \"Sequoia\", Nom Científic: \"Sequoiadendron giganteum\", Pais: 7, Habitat: \"Boscos humits temperats\" }" +
-        "\nFlora { Id: 6, Nom Comú: \"Lavanda\", Nom Científic: \"Lavandula\", Pais: 2, Habitat: \"Terrenys assolellats, secs i calcaris\" }" +
-        "\nFlora { Id: 7, Nom Comú: \"Safrà\", Nom Científic: \"Crocus sativus\", Pais: 6, Habitat: \"Terres semiàrides cultivades\" }" +
-        "\nFlora { Id: 8, Nom Comú: \"Maple\", Nom Científic: \"Acer\", Pais: 2, Habitat: \"Zones humides i planes\" }" +
-        "\nLlista de Fauna:" +
-        "\nFauna { Id: 1, Nom Comú: \"Koala\", Nom Científic: \"Phascolarctos cinereus\", Pais: 4, Habitat: \"Boscos d'eucaliptus\" }" +
-        "\nFauna { Id: 2, Nom Comú: \"Panda\", Nom Científic: \"Ailuropoda melanoleuca\", Pais: 6, Habitat: \"Boscos de muntanya rics en bambú\" }" +
-        "\nFauna { Id: 3, Nom Comú: \"Àguila calva\", Nom Científic: \"Haliaeetus leucocephalus\", Pais: 7, Habitat: \"Zones amb llacs i rius\" }" +
-        "\nFauna { Id: 4, Nom Comú: \"Lleopard de les neus\", Nom Científic: \"Panthera uncia\", Pais: 6, Habitat: \"Terreny rocos muntanyenc\" }" +
-        "\nFauna { Id: 5, Nom Comú: \"Tucà\", Nom Científic: \"Ramphastos\", Pais: 3, Habitat: \"Selves tropicals i boscos humits\" }" +
-        "\nFauna { Id: 6, Nom Comú: \"Pingüí emperador\", Nom Científic: \"Aptenodytes forsteri\", Pais: 8, Habitat: \"Zones d'aigües fredes\" }" +
-        "\nLlista de Fauna de la base de dades:" +
-        "\nFauna { Id: 1, Nom Comú: \"Koala\", Nom Científic: \"Phascolarctos cinereus\", Pais: 4, Habitat: \"Boscos d'eucaliptus\" }" +
-        "\nFauna { Id: 2, Nom Comú: \"Panda\", Nom Científic: \"Ailuropoda melanoleuca\", Pais: 6, Habitat: \"Boscos de muntanya rics en bambú\" }" +
-        "\nFauna { Id: 3, Nom Comú: \"Àguila calva\", Nom Científic: \"Haliaeetus leucocephalus\", Pais: 7, Habitat: \"Zones amb llacs i rius\" }" +
-        "\nFauna { Id: 4, Nom Comú: \"Lleopard de les neus\", Nom Científic: \"Panthera uncia\", Pais: 6, Habitat: \"Terreny rocos muntanyenc\" }" +
-        "\nFauna { Id: 5, Nom Comú: \"Tucà\", Nom Científic: \"Ramphastos\", Pais: 3, Habitat: \"Selves tropicals i boscos humits\" }" +
-        "\nFauna { Id: 6, Nom Comú: \"Pingüí emperador\", Nom Científic: \"Aptenodytes forsteri\", Pais: 8, Habitat: \"Zones d'aigües fredes\" }" +
-        "\nLlista de Flora de l'Ecosistema 1:" +
-        "\nFlora { Id: 3, Nom Comú: \"Orquídia\", Nom Científic: \"Orchidaceae\", Pais: 1, Habitat: \"Selva tropical, terres baixes humides i muntanyes\" }" +
-        "\nLlista de Fauna de l'Ecosistema 3:" +
-        "\nFauna { Id: 1, Nom Comú: \"Koala\", Nom Científic: \"Phascolarctos cinereus\", Pais: 4, Habitat: \"Boscos d'eucaliptus\" }" +
-        "\nFauna { Id: 2, Nom Comú: \"Panda\", Nom Científic: \"Ailuropoda melanoleuca\", Pais: 6, Habitat: \"Boscos de muntanya rics en bambú\" }" +
-        "\nFauna { Id: 3, Nom Comú: \"Àguila calva\", Nom Científic: \"Haliaeetus leucocephalus\", Pais: 7, Habitat: \"Zones amb llacs i rius\" }" +
-        "\n";
+        String expectedOutput = """
+            Professors:
+            ID: 1, Nom: Maria Garcia, Especialitat: Matemàtiques
+            ID: 2, Nom: Jordi Pozo, Especialitat: Literatura
+            ID: 3, Nom: Anna Molina, Especialitat: Ciències
+            
+            Assignatures:
+            ID: 1, Nom: Algebra, Hores Setmanals: 4, Professor: Maria Garcia
+            ID: 2, Nom: Literatura Catalana, Hores Setmanals: 3, Professor: Jordi Pozo
+            ID: 3, Nom: Biologia, Hores Setmanals: 5, Professor: Anna Molina
+            
+            Aules:
+            ID: 1, Nom: A101, Capacitat: 30
+            ID: 2, Nom: A102, Capacitat: 25
+            ID: 3, Nom: B201, Capacitat: 20
+            
+            Assignatures:
+            Assignatures per l'alumne ID 1:
+            - Algebra
+            Assignatures per l'alumne ID 3:
+            - Algebra
+            - Literatura Catalana
+            - Biologia
+            
+            Alumnes per assignatura:
+            Alumnes inscrits a l'assignatura ID 1:
+            - Marc Soler
+            - Iván Coll
+            Alumnes inscrits a l'assignatura ID 2:
+            - Laura Vidal
+            - Iván Coll
+            Alumnes inscrits a l'assignatura ID 3:
+            - Iván Coll
+            """.replace("\r\n", "\n").replace("            ","");      
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
         assertTrue(diff.compareTo("identical") == 0, 
             "\n>>>>>>>>>> >>>>>>>>>>\n" +
@@ -104,65 +67,24 @@ public class TestMain {
     }
 
     @Test
-    public void testMainPrivateAttributes() {
-        // Obtenim tots els camps de la classe Cotxe
-        Field[] fields = Ecosistema.class.getDeclaredFields();
-
-        // Iterem per cada camp per verificar que sigui privat
-        for (Field field : fields) {
-            assertTrue(Modifier.isPrivate(field.getModifiers()), "El camp " + field.getName() + " (Ecosistema) hauria de ser privat");
-        }
-
-        fields = Fauna.class.getDeclaredFields();
-
-        // Iterem per cada camp per verificar que sigui privat
-        for (Field field : fields) {
-            assertTrue(Modifier.isPrivate(field.getModifiers()), "El camp " + field.getName() + " (Fauna) hauria de ser privat");
-        }
-
-        fields = Flora.class.getDeclaredFields();
-
-        // Iterem per cada camp per verificar que sigui privat
-        for (Field field : fields) {
-            assertTrue(Modifier.isPrivate(field.getModifiers()), "El camp " + field.getName() + " (Flora) hauria de ser privat");
-        }
-
-        fields = Pais.class.getDeclaredFields();
-
-        // Iterem per cada camp per verificar que sigui privat
-        for (Field field : fields) {
-            assertTrue(Modifier.isPrivate(field.getModifiers()), "El camp " + field.getName() + " (Pais) hauria de ser privat");
-        }
-    }
-
-    @Test
     public void testMainTables() throws SQLException {
         // Ajusta aquesta URL amb els teus detalls de connexió a MySQL
-        String url = "jdbc:mysql://localhost:3308/natura?user=root&password=pwd";
+        String url = "jdbc:mysql://localhost:3308/school?user=root&password=pwd";
         try (Connection conn = DriverManager.getConnection(url)) {
             DatabaseMetaData dbMetaData = conn.getMetaData();
+    
+            // Comprova l'existència i columnes de cada taula
+            checkTableExistsAndColumns(dbMetaData, "alumnes", new String[]{"id_alumne", "nom", "cognoms", "data_naixement"});
+            checkTableExistsAndColumns(dbMetaData, "professors", new String[]{"id_professor", "nom", "especialitat"});
+            checkTableExistsAndColumns(dbMetaData, "assignatures", new String[]{"id_assignatura", "nom", "hores_setmanals", "id_professor"});
+            checkTableExistsAndColumns(dbMetaData, "aules", new String[]{"id_aula", "nom", "capacitat"});
+            // Aquesta taula no té columnes pròpies a comprovar a part de les claus foranes
+            checkTableExists(dbMetaData, "alumne_assignatura");
     
             // Comprova les relacions (claus foranes)
             checkForeignKey(dbMetaData, "alumne_assignatura", "alumnes", "id_alumne");
             checkForeignKey(dbMetaData, "alumne_assignatura", "assignatures", "id_assignatura");
             checkForeignKey(dbMetaData, "assignatures", "professors", "id_professor");
-    
-            // Comprova les taules relacionades amb la natura
-            checkTableExistsAndColumns(dbMetaData, "paisos", new String[]{"id", "nom"});
-            checkTableExistsAndColumns(dbMetaData, "flora", new String[]{"id", "nom_comu", "nom_cientific", "id_pais", "descripcio", "habitat"});
-            checkTableExistsAndColumns(dbMetaData, "fauna", new String[]{"id", "nom_comu", "nom_cientific", "id_pais", "descripcio", "habitat"});
-            checkTableExistsAndColumns(dbMetaData, "ecosistemes", new String[]{"id", "nom", "caracteristiques", "id_pais"});
-            checkTableExistsAndColumns(dbMetaData, "floraEcosistema", new String[]{"id_flora", "id_ecosistema"});
-            checkTableExistsAndColumns(dbMetaData, "faunaEcosistema", new String[]{"id_fauna", "id_ecosistema"});
-    
-            // Comprova les relacions (claus foranes) entre les taules relacionades amb la natura
-            checkForeignKey(dbMetaData, "flora", "paisos", "id_pais");
-            checkForeignKey(dbMetaData, "fauna", "paisos", "id_pais");
-            checkForeignKey(dbMetaData, "ecosistemes", "paisos", "id_pais");
-            checkForeignKey(dbMetaData, "floraEcosistema", "flora", "id_flora");
-            checkForeignKey(dbMetaData, "floraEcosistema", "ecosistemes", "id_ecosistema");
-            checkForeignKey(dbMetaData, "faunaEcosistema", "fauna", "id_fauna");
-            checkForeignKey(dbMetaData, "faunaEcosistema", "ecosistemes", "id_ecosistema");
         }
     }
     
@@ -198,28 +120,28 @@ public class TestMain {
     @Test
     public void testMainCalls() throws Exception {
         Class<Main> clazz = Main.class;
-    
+
         // Comprova que els mètodes esperats existeixen i tenen els modificadors correctes
         assertMethod(clazz, "crearTaules", true, true, "Error amb la definició de la funció crearTaules.");
-    
-        assertMethod(clazz, "afegirPais", true, true, "Error amb la definició de la funció afegirPais.", String.class);
-        assertMethod(clazz, "afegirFlora", true, true, "Error amb la definició de la funció afegirFlora.", String.class, String.class, int.class, String.class, String.class, int.class);
-        assertMethod(clazz, "afegirFauna", true, true, "Error amb la definició de la funció afegirFauna.", String.class, String.class, int.class, String.class, String.class, int.class);
-        assertMethod(clazz, "afegirEcosistema", true, true, "Error amb la definició de la funció afegirEcosistema.", String.class, int.class, String.class);
-        assertMethod(clazz, "associarFloraAEcosistema", true, true, "Error amb la definició de la funció associarFloraAEcosistema.", int.class, int.class);
-        assertMethod(clazz, "associarFaunaAEcosistema", true, true, "Error amb la definició de la funció associarFaunaAEcosistema.", int.class, int.class);
-        assertMethod(clazz, "obtenirIdPaisPerNom", true, false, "Error amb la definició de la funció obtenirIdPaisPerNom.", String.class);
-        assertMethod(clazz, "obtenirIdFloraPerNomComu", true, false, "Error amb la definició de la funció obtenirIdFloraPerNomComu.", String.class);
-        assertMethod(clazz, "obtenirIdFaunaPerNomComu", true, false, "Error amb la definició de la funció obtenirIdFaunaPerNomComu.", String.class);
-        assertMethod(clazz, "obtenirIdEcosistemaPerNom", true, false, "Error amb la definició de la funció obtenirIdEcosistemaPerNom.", String.class);
-        assertMethod(clazz, "llistarPaisos", true, true, "Error amb la definició de la funció llistarPaisos.");
-        assertMethod(clazz, "llistarFlora", true, true, "Error amb la definició de la funció llistarFlora.");
-        assertMethod(clazz, "llistarFauna", true, true, "Error amb la definició de la funció llistarFauna.");
-        assertMethod(clazz, "llistarEcosistemes", true, true, "Error amb la definició de la funció llistarEcosistemes.");
-        assertMethod(clazz, "llistarFloraEcosistema", true, true, "Error amb la definició de la funció llistarFloraEcosistema.", int.class);
-        assertMethod(clazz, "llistarFaunaEcosistema", true, true, "Error amb la definició de la funció llistarFaunaEcosistema.", int.class);
+
+        assertMethod(clazz, "afegirAlumne", true, true, "Error amb la definició de la funció afegirAlumne.", String.class, String.class, Date.class);
+        assertMethod(clazz, "afegirProfessor", true, true, "Error amb la definició de la funció afegirProfessor.", String.class, String.class);
+        assertMethod(clazz, "afegirAssignatura", true, true, "Error amb la definició de la funció afegirAssignatura.", String.class, int.class, int.class);
+        assertMethod(clazz, "afegirAula", true, true, "Error amb la definició de la funció afegirAula.", String.class, int.class);
+        assertMethod(clazz, "inscriureAlumneAssignatura", true, true, "El mètode inscriureAlumneAssignatura.", int.class, int.class);
+
+        assertMethod(clazz, "llistarAlumnes", true, true, "Error amb la definició de la funció llistarAlumnes.");
+        assertMethod(clazz, "llistarProfessors", true, true, "Error amb la definició de la funció llistarProfessors.");
+        assertMethod(clazz, "llistarAssignatures", true, true, "Error amb la definició de la funció llistarAssignatures.");
+        assertMethod(clazz, "llistarAules", true, true, "Error amb la definició de la funció llistarAules.");
+        assertMethod(clazz, "llistarAssignaturesAlumne", true, true, "Error amb la definició de la funció llistarAssignaturesAlumne.", int.class);
+        assertMethod(clazz, "llistarAlumnesAssignatura", true, true, "Error amb la definició de la funció llistarAlumnesAssignatura.", int.class);
+
+        assertMethod(clazz, "obtenirIdAlumnePerNom", true, true, "Error amb la definició de la funció obtenirIdAlumnePerNom.", String.class, String.class);
+        assertMethod(clazz, "obtenirIdAssignaturaPerNom", true, true, "Error amb la definició de la funció obtenirIdAssignaturaPerNom.", String.class);
+        assertMethod(clazz, "obtenirIdProfessorPerNom", true, true, "Error amb la definició de la funció obtenirIdProfessorPerNom.", String.class);
     }
-    
+
     private void assertMethod(Class<?> clazz, String methodName, boolean shouldBeStatic, boolean shouldBePrivate, String message, Class<?>... parameterTypes) throws NoSuchMethodException {
         // Utilitza getDeclaredMethod per accedir a mètodes privats
         Method method = clazz.getDeclaredMethod(methodName, parameterTypes);

@@ -2,10 +2,13 @@ package com.project;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Locale;
 
 public class Main {
 
     public static void main(String[] args) {
+
+        Locale.setDefault(Locale.US);
 
         AppData db = AppData.getInstance();
 

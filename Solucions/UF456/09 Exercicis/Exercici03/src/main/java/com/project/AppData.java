@@ -24,7 +24,7 @@ class AppData {
     }
 
     private void connect() {
-        String url = "jdbc:mysql://localhost:3308/natura?useSSL=false&allowPublicKeyRetrieval=true";
+        String url = "jdbc:mysql://localhost:3308/school?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "root";
         String password = "pwd";
 
