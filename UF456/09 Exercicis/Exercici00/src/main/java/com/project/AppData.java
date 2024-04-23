@@ -55,7 +55,7 @@ class AppData {
             }
         }
     }
-
+    
     public int insertAndGetId(String sql) {
         int generatedId = -1;
         try (Statement stmt = conn.createStatement()) {
@@ -75,7 +75,7 @@ class AppData {
         }
         return generatedId;
     }
-
+    
     // Aquesta funció transforma el ResultSet en un Map<String, Object>
     // per fer l'accés a la informació més genèric
     public List<Map<String, Object>> query(String sql) {

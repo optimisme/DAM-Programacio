@@ -24,25 +24,18 @@ class AppData {
     }
 
     private void connect() {
-        String url = "jdbc:mysql://localhost:3308/school?useSSL=false&allowPublicKeyRetrieval=true";
-        String user = "root";
-        String password = "pwd";
-
+        String url = "jdbc:sqlite:dades.sqlite"; // Nom de l'arxiu amb les dades 'dades.sqlite'
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, user, password);
+            conn = DriverManager.getConnection(url);
             conn.setAutoCommit(false); // Desactiva l'autocommit per permetre control manual de transaccions
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Error connectant a la base de dades MySQL.");
-            e.printStackTrace();
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     public void close() {
         try {
-            if (conn != null) {
-                conn.close();
-            }
+            if (conn != null) conn.close();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -62,6 +55,7 @@ class AppData {
             }
         }
     }
+
     public int insertAndGetId(String sql) {
         int generatedId = -1;
         try (Statement stmt = conn.createStatement()) {
@@ -82,9 +76,12 @@ class AppData {
         return generatedId;
     }
 
+    // Aquesta funció transforma el ResultSet en un Map<String, Object>
+    // per fer l'accés a la informació més genèric
     public List<Map<String, Object>> query(String sql) {
         List<Map<String, Object>> resultList = new ArrayList<>();
 
+        // try-with-resources tancarà el ResultSet quan acabi el bloc
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             ResultSetMetaData metaData = rs.getMetaData();

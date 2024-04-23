@@ -24,7 +24,7 @@ class AppData {
     }
 
     private void connect() {
-        String url = "jdbc:mysql://localhost:3308/natura?useSSL=false&allowPublicKeyRetrieval=true";
+        String url = "jdbc:mysql://localhost:3308/school?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "root";
         String password = "pwd";
 
@@ -62,7 +62,7 @@ class AppData {
             }
         }
     }
-
+    
     public int insertAndGetId(String sql) {
         int generatedId = -1;
         try (Statement stmt = conn.createStatement()) {
@@ -82,7 +82,7 @@ class AppData {
         }
         return generatedId;
     }
-   
+    
     public List<Map<String, Object>> query(String sql) {
         List<Map<String, Object>> resultList = new ArrayList<>();
 
