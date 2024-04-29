@@ -56,6 +56,31 @@ class AppData {
         }
     }
 
+    public int insertAndGetId(String sql) {
+        int generatedId = -1;
+        try (Statement stmt = conn.createStatement()) {
+            // Execute the update
+            stmt.executeUpdate(sql);
+            conn.commit();  // Make sure to commit the transaction if auto-commit is disabled
+    
+            // Query the last inserted row ID
+            try (ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid()")) {
+                if (rs.next()) {
+                    generatedId = rs.getInt(1); // Retrieve the last inserted ID
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            try {
+                conn.rollback(); // Rollback the transaction in case of error
+            } catch (SQLException ex) {
+                System.out.println("Error during rollback.");
+                ex.printStackTrace();
+            }
+        }
+        return generatedId;
+    }
+    
     // Aquesta funció transforma el ResultSet en un Map<String, Object>
     // per fer l'accés a la informació més genèric
     public List<Map<String, Object>> query(String sql) {

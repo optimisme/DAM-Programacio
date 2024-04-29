@@ -70,7 +70,6 @@ public class Main {
             if (idBiologia != -1) inscriureAlumneAssignatura(idIvan, idBiologia);
         }
 
-
         // Llistar informació
         System.out.println("Professors:");
         llistarProfessors();
