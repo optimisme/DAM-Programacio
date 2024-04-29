@@ -6,4 +6,4 @@ Només cal obrir els arxius ".ipynb" amb qualsevol visor 'Jupyter', com per exem
 
 O si només s'han de visualitzar, el propi GitHub permet veure'ls. Per exemple:
 
-[Funcions](https://github.com/optimisme/DAM-MP03-Programacio/blob/main/Teoria/04a%20Funcions.ipynb)
+[Bucles for](https://github.com/optimisme/DAM-MP03-Programacio/blob/main/UF123/07%20Bucles%20(while%20for)/B%20for.ipynb)
