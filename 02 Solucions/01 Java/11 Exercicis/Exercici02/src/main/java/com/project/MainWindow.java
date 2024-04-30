@@ -37,7 +37,7 @@ public class MainWindow extends JFrame {
             JMenuItem menuQuit = new JMenuItem("Sortir");
             menuQuit.addActionListener(e -> closeApp());
             menuFile.add(menuQuit);
-        menuBar.add(menuFile);
+            menuBar.add(menuFile);
 
         // Menú per fer Càlculs
         JMenu menuOp = new JMenu("Operacions");
