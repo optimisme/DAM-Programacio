@@ -143,32 +143,32 @@ Swing ofereix diversos gestors de disposició (Layout Managers) que permeten org
 
 Cada un d'aquests gestors de disposició té les seves pròpies característiques i millors usos. La tria entre ells depèn de les necessitats específiques de la teva interfície d'usuari i com vols que es comportin i es visualitzin els teus components. 
 
-**BorderLayout**: Divideix el contenidor en cinc àrees: Nord (NORTH), Sud (SOUTH), Est (EAST), Oest (WEST), i Centre (CENTER). Cada component afegit al contenidor s'assigna a una d'aquestes àrees. BorderLayout és útil per a disposicions generales on vols que certs components sempre estiguin alineats als marges o al centre.
+[**BorderLayout**](https://docs.oracle.com/javase/8/docs/api/java/awt/BorderLayout.html): Divideix el contenidor en cinc àrees: Nord (NORTH), Sud (SOUTH), Est (EAST), Oest (WEST), i Centre (CENTER). Cada component afegit al contenidor s'assigna a una d'aquestes àrees. BorderLayout és útil per a disposicions generales on vols que certs components sempre estiguin alineats als marges o al centre.
 
 <center><img src="../assets/swing03.png" height="150" alt="Imatge borderlayout" style="max-height: 150px;"></center>
 
 
-**GridLayout**: Organitza els components en una graella rectangular, on tots els components tenen la mateixa mida. Els components s'omplen de dalt a baix i d'esquerra a dreta, basant-se en el nombre de files i columnes especificades. És útil quan necessites una disposició regular per als teus components, com en una calculadora.
+[**GridLayout**](https://docs.oracle.com/javase/8/docs/api/java/awt/GridLayout.html): Organitza els components en una graella rectangular, on tots els components tenen la mateixa mida. Els components s'omplen de dalt a baix i d'esquerra a dreta, basant-se en el nombre de files i columnes especificades. És útil quan necessites una disposició regular per als teus components, com en una calculadora.
 
 <center><img src="../assets/swing04.jpeg" height="150" alt="Imatge gridlayout" style="max-height: 150px;"></center>
 
 
-**GridBagLayout**: És una de les disposicions més flexibles i complexes, permetent als components ocupar múltiples files i columnes de la graella, especificar l'espai entre components, alineació, etc. Malgrat la seva complexitat, GridBagLayout permet un control molt detallat sobre la disposició dels components, sent ideal per a dissenys sofisticats d'interfícies d'usuari.
+[**GridBagLayout**](https://docs.oracle.com/javase/8/docs/api/java/awt/GridBagLayout.html): És una de les disposicions més flexibles i complexes, permetent als components ocupar múltiples files i columnes de la graella, especificar l'espai entre components, alineació, etc. Malgrat la seva complexitat, GridBagLayout permet un control molt detallat sobre la disposició dels components, sent ideal per a dissenys sofisticats d'interfícies d'usuari.
 
 <center><img src="../assets/swing05.gif" height="150" alt="Imatge gridbaglayout" style="max-height: 150px;"></center>
 
 
-**CardLayout**: Permet que els components siguin com cartes d'una baralla, on només una carta (component) és visible al mateix temps. És útil per a implementar processos de múltiples passos on l'usuari ha de veure una pantalla (o "carta") cada vegada, com en un assistent d'instal·lació.
+[**CardLayout**](https://docs.oracle.com/javase/8/docs/api/java/awt/CardLayout.html): Permet que els components siguin com cartes d'una baralla, on només una carta (component) és visible al mateix temps. És útil per a implementar processos de múltiples passos on l'usuari ha de veure una pantalla (o "carta") cada vegada, com en un assistent d'instal·lació.
 
 <center><img src="../assets/swing06.png" height="150" alt="Imatge cardlayout" style="max-height: 150px;"></center>
 
 
-**SpringLayout**: Basat en restriccions de muelles (springs) i espais (struts) entre els components i els marges del contenidor. Permet un control molt afinat sobre la disposició, però pot ser complex de configurar. És útil quan es necessiten disposicions molt específiques que no es poden aconseguir fàcilment amb altres gestors.
+[**SpringLayout**](https://docs.oracle.com/javase/8/docs/api/javax/swing/SpringLayout.html): Basat en restriccions de muelles (springs) i espais (struts) entre els components i els marges del contenidor. Permet un control molt afinat sobre la disposició, però pot ser complex de configurar. És útil quan es necessiten disposicions molt específiques que no es poden aconseguir fàcilment amb altres gestors.
 
 <center><img src="../assets/swing07.png" height="150" alt="Imatge cardlayout" style="max-height: 150px;"></center>
 
 
-**BoxLayout** Permet disposar els components en una única fila o columna, similar a com CSSFlexbox maneja els seus contenidors amb flex-direction: row o flex-direction: column. Amb BoxLayout, pots afegir espai entre components i alinear-los, però sense l'ample espectre de capacitats d'ajust i alineació que ofereix Flexbox.
+[**BoxLayout**](https://docs.oracle.com/javase/8/docs/api/javax/swing/BoxLayout.html) Permet disposar els components en una única fila o columna, similar a com CSSFlexbox maneja els seus contenidors amb flex-direction: row o flex-direction: column. Amb BoxLayout, pots afegir espai entre components i alinear-los, però sense l'ample espectre de capacitats d'ajust i alineació que ofereix Flexbox.
 
 <center><img src="../assets/swing08.jpeg" height="150" alt="Imatge cardlayout" style="max-height: 150px;"></center>
 
