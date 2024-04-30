@@ -1,4 +1,4 @@
-<table style="width:100%; border: none;">
+<table style="width:100%;" border="0" cellpadding="0" cellspacing="0">
     <tr>
         <td style="width: 50%; border: none;">
             © Albert Palacios Jiménez, 2023
