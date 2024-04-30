@@ -1,6 +1,8 @@
 import json
 import os
 
+# Transforma tots els arxius '.ipynb' a markdown '.md'
+
 def ipynb_to_md(ipynb_path, md_path):
     # Obrir el fitxer IPYNB i llegir les dades
     with open(ipynb_path, 'r', encoding='utf-8') as file:
