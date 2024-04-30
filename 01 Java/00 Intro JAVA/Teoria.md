@@ -1,4 +1,4 @@
-<div style="display: flex; width: 100%;">
+<div data-mime-type="text/markdown" style="display: flex; width: 100%;">
     <div style="flex: 1; padding: 0px;">
         <p>© Albert Palacios Jiménez, 2023</p>
     </div>
