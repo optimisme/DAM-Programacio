@@ -10,7 +10,7 @@
 
 
 
-### Exercici 2 
+### Exercici 2 (originalment un exercici d'exàmen)
 
 ##### Puntuació
 

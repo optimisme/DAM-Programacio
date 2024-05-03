@@ -8,7 +8,7 @@
 </div>
 <hr/>
 
-### Exercici 9 
+### Exercici 9 (originalment un exercici d'exàmen)
 
 ##### Puntuació
 
