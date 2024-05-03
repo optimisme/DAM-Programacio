@@ -61,6 +61,7 @@ public class MainB {
         // Checking deletion effect on missions
         System.out.println("\nListing missions after deletion of a species...");
         MainB.listMissions();
+        
         // Close the database connection
         db.close();
     }
