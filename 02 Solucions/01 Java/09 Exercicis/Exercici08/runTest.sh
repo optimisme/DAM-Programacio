@@ -18,11 +18,5 @@ export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.
 mainClass=$1
 
 # Execute mvn command
-if [[ "$mainClass" =~ .*\#.* ]]; then
-    # Extract test class and method name
-    testClass=$(echo "$mainClass" | cut -d "#" -f 1)
-    testMethod=$(echo "$mainClass" | cut -d "#" -f 2)
-    mvn -Dtest="$testClass#$testMethod" test
-else
-    mvn -Dtest="$mainClass" test
-fi
+# mvn -q clean test-compile exec:java $execArg 
+mvn -Dtest=$mainClass test
