@@ -8,14 +8,14 @@ public class MainWindow extends JFrame {
     
     // CardLayout no és un component visible
     // només gestiona la visibilitat d'un component al mateix temps
-    private CardLayout cardLayout = new CardLayout();
-    private JPanel cards = new JPanel(cardLayout);
+    public CardLayout cardLayout = new CardLayout();
+    public JPanel cards = new JPanel(cardLayout);
 
-    private ViewForm vForm;
-    private ViewLoading vLoading;
-    private ViewInfo vInfo;
+    public ViewForm vForm;
+    public ViewLoading vLoading;
+    public ViewInfo vInfo;
 
-    private Controller controller;
+    public Controller controller;
 
     public MainWindow() {
         // Títol i mida de la finestra

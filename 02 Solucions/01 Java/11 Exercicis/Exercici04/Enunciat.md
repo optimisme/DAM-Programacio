@@ -20,3 +20,4 @@ Cal que facis servir dos models i un sol DAO: 'ReceptaModel', 'IngredientModel',
 
 <center><img src="./captura.gif" height="250" alt="Calculadora" style="max-height: 250px;"></center>
 
+**Nota:** Aquest exerci no té test.

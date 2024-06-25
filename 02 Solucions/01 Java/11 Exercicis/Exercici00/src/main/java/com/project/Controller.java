@@ -61,7 +61,7 @@ public class Controller {
         updateConfigDisplay();
     }
 
-    private void updateConfigDisplay() {
+    public void updateConfigDisplay() {
         String selectedOption = view.option1.isSelected() ? "Opció 1" : view.option2.isSelected() ? "Opció 2" : "Opció 3";
         int volumeLevel = view.volumeSlider.getValue();
         String text = view.textField.getText();

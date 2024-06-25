@@ -34,3 +34,22 @@ Mira la documentació als enllaços anteriors.
 
 <center><img src="./captura.gif" height="250" alt="Calculadora" style="max-height: 250px;"></center>
 
+
+Per tal que passi el test, cal que:
+
+A l'objecte 'MainWindow' la vista i el controlador han de ser públics:
+
+```java
+    public View view;
+    public Controller controller;
+```
+
+Al 'View.java' hi hagi els següents elements:
+
+```java
+    JTextField taskInput;
+    JButton addButton;
+    JButton deleteButton;
+    JList<String> taskList;
+    JScrollPane scrollPane;
+```

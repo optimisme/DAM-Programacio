@@ -4,8 +4,8 @@ import javax.swing.*;
 
 public class MainWindow extends JFrame {
     
-    private View view;
-    private Controller controller;
+    public View view;
+    public Controller controller;
 
     public MainWindow() {
         // Títol i mida de la finestra

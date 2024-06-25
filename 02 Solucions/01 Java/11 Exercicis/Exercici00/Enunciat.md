@@ -19,3 +19,22 @@ Fent servir SWING bàsic i el model MVC, fes una panell de configuració com el 
 
 <center><img src="./captura.gif" height="250" alt="Calculadora" style="max-height: 250px;"></center>
 
+
+Per tal que passi el test, cal que:
+
+A l'objecte 'MainWindow' la vista i el controlador han de ser públics:
+
+```java
+    public View view;
+    public Controller controller;
+```
+
+Al 'View.java' hi hagi els següents elements:
+
+```java
+    public JRadioButton option1, option2, option3;
+    public JSlider volumeSlider;
+    public JTextField textField; 
+    public JLabel configDisplay;
+    public JButton resetButton;
+```

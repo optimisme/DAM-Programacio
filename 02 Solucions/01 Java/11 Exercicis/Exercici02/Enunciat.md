@@ -42,3 +42,27 @@ El funcionament és el següent:
 
 <center><img src="./captura.png" height="250" alt="Calculadora" style="max-height: 250px;"></center>
 
+
+Per tal que passi el test, cal que:
+
+A l'objecte 'MainWindow' la vista i el controlador han de ser públics:
+
+```java
+    public View view;
+    public Controller controller;
+```
+
+Al 'View.java' hi hagi els següents elements:
+
+```java
+    public JTextField result;
+    public JButton bC;
+    public JButton bAdd;
+    public JButton bSub;
+    public JButton bMul;
+    public JButton bDiv;
+    public JButton bEqual;
+    public JButton b0;
+    public JButton b1;
+    // Altres botons
+```

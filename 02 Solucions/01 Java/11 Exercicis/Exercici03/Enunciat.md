@@ -22,3 +22,39 @@ El canvi de vistes s'ha de fer amb una 'CardLayout', i l'actualització de la ba
 
 <center><img src="./captura.gif" height="250" alt="Calculadora" style="max-height: 250px;"></center>
 
+
+Per tal que passi el test, cal que:
+
+A l'objecte 'MainWindow' la vista i el controlador han de ser públics:
+
+```java
+    public CardLayout cardLayout;
+    public JPanel;
+
+    public ViewForm vForm;
+    public ViewLoading vLoading;
+    public ViewInfo vInfo;
+```
+
+Al 'ViewForm.java' hi hagi els següents elements:
+
+```java
+    public JTextField nameField;
+    public JTextField phoneNumberField;
+    public JTextField ageField;
+    public JTextField emailField;
+    public JButton sendButton;
+```
+
+Al 'ViewInfo.java' hi hagi els següents elements:
+
+```java
+    public JTextArea dataArea;
+```
+
+Al 'ViewLoading.java' hi hagi els següents elements:
+
+```java
+    public JProgressBar progressBar;
+    private JLabel loadingLabe;
+```
