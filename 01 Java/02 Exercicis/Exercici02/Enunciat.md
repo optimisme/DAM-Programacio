@@ -18,5 +18,15 @@ Com a sortida ha de mostrar: "El resultat de calcular X - Y és Z", on:
 * Y és el segon valor escrit
 * Z és el resultat de restar-los
 
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida el test:
+```bash
+./runTest.sh com.project.TestMain
+```
+
 
 

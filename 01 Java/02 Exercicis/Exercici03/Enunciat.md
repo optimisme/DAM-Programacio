@@ -20,3 +20,12 @@ Fes un programa que guardi:
 
 Finalment es mostren els continguts de subjecte, verb i objecte separats per una ", "
 
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida el test:
+```bash
+./runTest.sh com.project.TestMain
+```

@@ -22,3 +22,18 @@ Finalment, el programa ha de mostrar dos textos:
 
 'El resultat arrodonit de la divisió és ?', on ? mostra el resultat de la operació anterior amb 2 decimals
 
+Exemple:
+```text
+El resultat de la divisió és 21.015625
+El resultat arrodonit de la divisió és 21,02
+```
+
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida el test:
+```bash
+./runTest.sh com.project.TestMain
+```

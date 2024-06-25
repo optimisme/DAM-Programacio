@@ -1,0 +1,9 @@
+{
+    "workbench.colorTheme": "Default Light+",
+    "notebook.lineNumbers": "on",
+    "files.encoding": "utf8",
+    "java.inlayHints.parameterNames.enabled": "none",
+    "workbench.editorAssociations": {   
+        "*.md": "vscode.markdown.preview.editor",
+    }
+}

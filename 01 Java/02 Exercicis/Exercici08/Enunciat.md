@@ -24,3 +24,12 @@ Aleshores fes servir una variable temporal, per intercanviar el valor de les bas
 
 Finalment mostra: "L'àrea del trapèzi amb les bases intercanviades és: ?" on ? és el valor de la nova àera
 
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida el test:
+```bash
+./runTest.sh com.project.TestMain
+```

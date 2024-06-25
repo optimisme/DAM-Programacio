@@ -21,3 +21,12 @@ La operació és senzilla, simplement és multiplicar els euros pel valor de la 
 
 On X són els euros introduits i Y el resultat de la conversió.
 
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida el test:
+```bash
+./runTest.sh com.project.TestMain
+```

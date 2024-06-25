@@ -20,3 +20,12 @@ Finalment ha de mostrar el resultat: "X graus Celsius són Y graus Fahrenheit"
 
 On X són els graus introduits i Y són els graus resultants del càlcul.
 
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida el test:
+```bash
+./runTest.sh com.project.TestMain
+```

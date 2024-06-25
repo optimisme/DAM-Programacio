@@ -16,3 +16,18 @@ Per calcular l'edat de 'gos', multiplica l'edat humana per 7
 
 Com a sortida mostra: "Si fossis un gos, tindries X anys", on X és el resultat del càlcul anterior
 
+Exemple:
+```text
+Quina edat tens? 18
+Si fossis un gos, tindries 126 anys
+```
+
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida el test:
+```bash
+./runTest.sh com.project.TestMain
+```

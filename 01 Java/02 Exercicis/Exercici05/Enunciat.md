@@ -14,3 +14,13 @@ Fes un programa que a partir de demanar el pes i l'altura, calculi l'índex de m
 
 Aquest càlcul es fa així: imc = pes / (altura ^ 2)
 
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida el test:
+```bash
+./runTest.sh com.project.TestMain
+```
+
