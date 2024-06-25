@@ -10,12 +10,12 @@
 
 ### Exercici 2
 
-Fent servir SWING i el model MVC, fes una calculadora com la imatge.
+Fent servir SWING bàsic i el model MVC, fes una calculadora com la imatge.
 
 * El menú 'Arxiu' ha de tenir la opció 'Sortir'
 * El menú 'Operacions' ha de tenir les opcions 'Netejar' (equival a C) i 'Igual'
 
-**Òbivament ha de funcionar!**
+Òbivament ha de funcionar.
 
 Cal fer una 'View.java' i un 'Controller.java'
 
@@ -25,7 +25,7 @@ Cal fer una 'View.java' i un 'Controller.java'
 
 ```java
     public void controllerButtonAction(ActionEvent e) {
-        String command = e.getActionCommand(); // Això retorna el text del botó
+        String command = e.getActionCommand();
         runCommand(command);
     }
 ```
@@ -42,3 +42,27 @@ El funcionament és el següent:
 
 <center><img src="./captura.png" height="250" alt="Calculadora" style="max-height: 250px;"></center>
 
+
+Per tal que passi el test, cal que:
+
+A l'objecte 'MainWindow' la vista i el controlador han de ser públics:
+
+```java
+    public View view;
+    public Controller controller;
+```
+
+Al 'View.java' hi hagi els següents elements:
+
+```java
+    public JTextField result;
+    public JButton bC;
+    public JButton bAdd;
+    public JButton bSub;
+    public JButton bMul;
+    public JButton bDiv;
+    public JButton bEqual;
+    public JButton b0;
+    public JButton b1;
+    // Altres botons
+```

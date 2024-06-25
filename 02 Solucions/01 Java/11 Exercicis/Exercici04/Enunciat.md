@@ -19,5 +19,3 @@ Fent servir SWING bàsic i el model MVC, fes una aplicació per llistar i mostra
 Cal que facis servir dos models i un sol DAO: 'ReceptaModel', 'IngredientModel', 'ReceptaDAO'
 
 <center><img src="./captura.gif" height="250" alt="Calculadora" style="max-height: 250px;"></center>
-
-**Nota:** Aquest exerci no té test.
