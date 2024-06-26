@@ -63,6 +63,13 @@ Exemples per comprovar:
 * Sala estàndard, 15 convidats, menú premium, màgia: 800€
 
 
+Exemple
+```text
+Jardí amb piscina, 40 convidats, menú bàsic, música en directe: 1300,00€
+Saló gran amb escenari, 70 convidats, menú premium, música en directe: 2895,00€
+Sala estàndard, 15 convidats, menú premium, màgia: 800,00€
+```
+
 Executa el programa:
 ```bash
 ./run.sh com.project.Main
