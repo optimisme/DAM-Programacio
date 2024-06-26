@@ -155,7 +155,7 @@ Persona joan = new Persona("Joan", 25);
 System.out.println(joan); // Escriu: Nom: Joan, Edat: 25
 ```
 
-## Exemple00
+## Exemple 0300
 
 Exemple de com fer servir l'objecte 'Persona':
 
@@ -241,7 +241,7 @@ persona.setNom("Joan");
 
 
 
-## Exemple01
+## Exemple 0301
 
 Exemple de com fer servir l'objecte 'Persona' amb Getters i Setters
 
@@ -313,7 +313,7 @@ En aquest exemple tenim un objecte calculadora que:
 
 Per accedir als atributs i funcions **'static'**, es fa directament amb el nom de l'objecte, per exemple: **'Calculadora.sumaValors(1, 2)'**
 
-## Exemple02
+## Exemple 0302
 
 Exemple de com fer servir l'objecte 'Persona' amb Getters i Setters
 
@@ -384,7 +384,7 @@ public class SingletonDades {
  }
 ```
 
-## Exemple03
+## Exemple 0303
 
 Exemple de singleton:
 

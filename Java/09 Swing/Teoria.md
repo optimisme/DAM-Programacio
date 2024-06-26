@@ -216,7 +216,7 @@ Java Swing proporciona una àmplia varietat de components per construir interfí
 
 [**JTabbedPane**](https://docs.oracle.com/javase/8/docs/api/javax/swing/JTabbedPane.html): Permet mostrar múltiples panells en un únic espai, amb pestanyes per canviar entre ells.
 
-### Exemple 00
+### Exemple 0900
 
 Aquest exemple mostra una aplicació bàsica que fa servir SWING per mostrar un comptador.
 
@@ -313,7 +313,7 @@ public class MainWindow extends JFrame {
 
 <center><img src="../assets/swingEx00.png" height="250" alt="Exemple SWING" style="max-height: 250px;"></center>
 
-### Exemple 01
+### Exemple 0901
 
 En aquest exemple hi ha diversos elements SWING que s'actualitzen i modifiquen l'estat entre ells fent servir els **Action Listeners**
 
@@ -522,7 +522,7 @@ Idealment cada controlador fa referència a un model i diverses vistes. I gestio
 - Si l'usuari interacciona amb les vistes provocant canvis de dades el controlador actualitza les dades al model
 
 
-### Exemple 02
+### Exemple 0902
 
 Cal mirar en detall aquest exemple i la separació que fa del model MVC
 
@@ -729,7 +729,7 @@ public class ProducteDAO {
 ```
 
 
-### Exemple 03
+### Exemple 0903
 
 L'Exemple 03 mostra una aplicació que fa ús de SQLite i SWING. Aplica el model MVC i fa que la gestió de dades entre l'aplicació tipus MVC i la base de dades es faci a través de DAO (fent servir el singleton AppData per simplificar les operacions).
 
@@ -779,7 +779,7 @@ La clau per mostrar una imatge en una finestra SWING és fer servir el component
     imageLabel.setVisible(true);
 ```
 
-### Exemple 04
+### Exemple 0904
 
 L'Exemple 04 permet carregar arxius de text o d'imatge i mostrar el seu contingut a l'aplicació.
 

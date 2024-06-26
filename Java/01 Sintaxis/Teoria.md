@@ -66,7 +66,7 @@ Per declarar les variables: primer cal dir el tipus, després el nom de la varia
 ```
 
 
-### Exemple00
+### Exemple 0100
 
 ```java
 public static void main(String[] args) {
@@ -138,7 +138,7 @@ int f = 10 + 2 - 5;
     // 12 - 5 = 7
 ```
 
-### Exemple01
+### Exemple 0101
 
 ```java
 public static void main(String[] args) {
@@ -172,7 +172,7 @@ public static void main(String[] args) {
 
 JAVA té moltes funcions i objectes per manipular cadenes de text.
 
-### Exemple02
+### Exemple 0102
 
 ```java
 public class Main {
@@ -233,7 +233,7 @@ public class Main {
 
 JAVA té la funció 'random()' de l'objecte Math, que ens dóna números aleatòris entre 0 (inclòs) i 1  (no inclòs)
 
-### Exemple03
+### Exemple 0103
 
 ```java
 public static void main(String[] args) {
@@ -264,7 +264,7 @@ Igualment cal indicar què retorna la funció, es fa amb el tipus abans del nom 
 
 En cas que no retorni res, indiquem que el tipus és **void**
 
-### Exemple04
+### Exemple 0104
 
 ```java
 public class Main {
@@ -300,7 +300,7 @@ En JAVA el funcionament de 'if' i 'else' és molt semblant a Python, però cal t
 
 **Nota:** Per netedat, us recomano fer servir claus, també per si en un futur cal afegir línies de codi a la condició
 
-### Exemple05
+### Exemple 0105
 
 En aquest exemple, fixeu-vos com fa servir l'objecte 'Scanner' per demanar informació a l'usuari. 
 
@@ -340,7 +340,7 @@ El bucle 'for' té 3 paràmetres:
 
 - La operació que apliquem al contador, a cada iteració del bucle (a l'exemple sumem un 1 a i a cada iteració)
 
-### Exemple06
+### Exemple 0106
 
 Aquest exemple mostra la sintaxis bàsica de com fer bucles while i for.
 
@@ -390,7 +390,7 @@ Perquè s'entengui:
 
 <center><img src="../assets/01doWhile.png" height="256" alt="Logo de IETI" style="max-height: 256px;"></center>
 
-### Exemple07
+### Exemple 0107
 
 ```java
 package com.project;
@@ -414,7 +414,7 @@ JAVA facilita el treball amb llistes a través de l'objecte 'ArrayList'.
 
 Les llistes només poden contenir un mateix tipus de dades, i per aquest motiu el tipus s'indica entre < i > al definir la variable de la llista.
 
-### Exemple08
+### Exemple 0108
 
 ```java
 package com.project;
@@ -570,7 +570,7 @@ Map<String, double> // Les claus són cadenes de text que guarden informació de
 Map<String, String> // Les claus són cadenes de text que guarden altres cadenes de text
 ```
 
-### Exemple09
+### Exemple 0109
 
 ```java
 package com.project;
@@ -652,7 +652,7 @@ Per controlar excepcions en JAVA fem servir estructures try/catch/finally
 
 La informació d'errors de cada excepció està disponible al paràmetre d'aquesta, a l'exemple els paràmetres 'e'
 
-### Exemple10
+### Exemple 0110
 
 
 ```java
@@ -686,7 +686,7 @@ public class Main {
 
 Si en canvi el què volem és llançar una excepció, farem servir **throw**
 
-### Exemple11
+### Exemple 0111
 
 
 ```java
@@ -724,7 +724,7 @@ Al final del programa, no ens podem oblidar de tancar l'objecte Scanner adequada
 scanner.close()
 ```
 
-### Exemple12
+### Exemple 0112
 
 
 ```java
@@ -795,7 +795,7 @@ Un cop s'ha carregat la informació de l'arxiu .JSON en aquest tipus d'objecte, 
 curs.getInt("id")
 ```
 
-### Exemple13
+### Exemple 0113
 
 
 ```java
@@ -872,7 +872,7 @@ public class Main {
 
 Els arxius JSON també cal escriure'ls amb la llibreria 'org.json'
 
-### Exemple14
+### Exemple 0114
 
 
 ```java

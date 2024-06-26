@@ -113,7 +113,7 @@ Per connectar a una base de dades SQLite cal configurar l'arxiu *pom.xml* de mav
 
 **Nota:** Amb l'extensió de *Visual Studio Code* anomenada *'SQLite Viewer'* d'en *Florian Klampfer* es poden veure els continguts dels arxius que contenen dades tipus *'SQLite'*
 
-### Exemple 00
+### Exemple 0700
 
 Aquest exemple mostra com fer una connexió amb SQLite, i gestionar dades.
 
@@ -271,7 +271,7 @@ Per connectar a una base de dades MySQL cal configurar l'arxiu *pom.xml* de mave
 </dependency>
 ```
 
-### Exemple 01
+### Exemple 0701
 
 Aquest exemple mostra com fer una connexió amb MySQL, i gestionar dades.
 
@@ -539,7 +539,7 @@ Un cop hagis fet tots els canvis, crides updateRow() per actualitzar la fila a l
 
 **Nota:** En tots dos casos, és important que el ResultSet sigui actualitzable, cosa que depèn de com es crea l'objecte Statement o PreparedStatement que es fa servir per obtenir el ResultSet.
 
-### Exemple 02
+### Exemple 0702
 
 Aquest exemple mostra l'ús de **insertRow** i **updateRow** en un objecte **ResultSet**, aquest exemple **NO** fa ús del *Singleton AppData*.
 
