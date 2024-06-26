@@ -3,8 +3,10 @@ package com.project;
 public class Main {
 
     public static String esParell(int numero) {
-
-        return "";
+        if (numero % 2 == 0) {
+            return numero + " és parell";
+        }
+        return numero + " és imparell";
     }
 
     public static void main(String[] args) {

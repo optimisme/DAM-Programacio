@@ -18,6 +18,13 @@ calculaOperacio(2, 3, "suma") ha de retornar 5
 
 calculaOperacio(3, 4, "multiplicació") ha de retornar 12
 
+```text
+El resultat de suma entre 2,00 i 3,00 és 5,00
+El resultat de multiplicació entre 3,00 i 4,00 és 12,00
+El resultat de resta entre 5,00 i 2,00 és 3,00
+El resultat de divisió entre 10,00 i 2,00 és 5,00
+```
+
 Executa el programa:
 ```bash
 ./run.sh com.project.Main

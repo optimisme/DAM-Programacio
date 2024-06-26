@@ -34,6 +34,15 @@ S'ha de mostrar per pantalla:
 ```
 Validar els anagrames d'exemple anteriors, i un parell de proves amb quatre paraules que no siguin anagrames.
 
+Exemple:
+```text
+Són les paraules 'Mare' i 'Rema' anagrames? true
+Són les paraules 'Porta' i 'Tropa' anagrames? true
+Són les paraules 'Triangle' i 'Integral' anagrames? true
+Són les paraules 'Sopa' i 'Posa' anagrames? true
+Són les paraules 'Casa' i 'Sopa' anagrames? false
+Són les paraules 'Gat' i 'Perro' anagrames? false
+```
 
 Executa el programa:
 ```bash

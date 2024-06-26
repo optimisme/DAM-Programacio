@@ -3,7 +3,22 @@ package com.project;
 public class Main {
 
     public static double calculaOperacio(double num1, double num2, String operacio) {
-        return 0.0;
+        switch (operacio.toLowerCase()) {
+            case "suma":
+                return num1 + num2;
+            case "resta":
+                return num1 - num2;
+            case "multiplicació":
+                return num1 * num2;
+            case "divisió":
+                if (num2 != 0) {
+                    return num1 / num2;
+                } else {
+                    throw new IllegalArgumentException("No es pot dividir per zero.");
+                }
+            default:
+                throw new IllegalArgumentException("Operació no vàlida: " + operacio);
+        }
     }
 
     public static void main(String[] args) {
