@@ -24,3 +24,12 @@ Aleshores:
 
 Recorda que Z ha de tornar el total a pagar, és a dir els impostos més el valor inicial.
 
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida amb el test:
+```bash
+./runTest.sh com.project.TestMain
+```

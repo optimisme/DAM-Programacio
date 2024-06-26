@@ -26,7 +26,7 @@ Executa el programa:
 ./run.sh com.project.Main
 ```
 
-Valida el test:
+Valida amb el test:
 ```bash
 ./runTest.sh com.project.TestMain
 ```
