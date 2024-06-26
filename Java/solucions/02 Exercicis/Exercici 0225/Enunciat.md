@@ -14,3 +14,24 @@ Fes un programa que demani un dia de la setmana i digui si s'ha d'anar a l'escol
 
 No facis servir "elif", fes-ho només amb un if-else.
 
+Exemple:
+```text
+Introdueix un dia de la setmana: dilluns
+S'ha d'anar a l'escola
+```
+
+```text
+Introdueix un dia de la setmana: diumenge
+No s'ha d'anar a l'escola
+```
+
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida amb el test:
+```bash
+./runTest.sh com.project.TestMain
+```
+
