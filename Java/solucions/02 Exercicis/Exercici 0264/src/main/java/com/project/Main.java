@@ -26,6 +26,8 @@ public class Main {
      * @return La llista de números.
      */
     public static List<Integer> convertirLlista(ArrayList<String> numeros) {
-
+        return numeros.stream()
+                      .map(Integer::parseInt)
+                      .collect(Collectors.toList());
     }
 }

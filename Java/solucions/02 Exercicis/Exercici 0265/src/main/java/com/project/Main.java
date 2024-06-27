@@ -28,14 +28,18 @@ public class Main {
     }
 
     public static int calculaSuma(List<Integer> numeros) {
+        return numeros.stream().mapToInt(Integer::intValue).sum();
     }
 
     public static int calculaMaxim(List<Integer> numeros) {
+        return numeros.stream().mapToInt(Integer::intValue).max().orElse(Integer.MIN_VALUE);
     }
 
     public static int calculaMinim(List<Integer> numeros) {
+        return numeros.stream().mapToInt(Integer::intValue).min().orElse(Integer.MAX_VALUE);
     }
 
     public static double calculaMitjana(List<Integer> numeros) {
+        return numeros.stream().mapToInt(Integer::intValue).average().orElse(0.0);
     }
 }
