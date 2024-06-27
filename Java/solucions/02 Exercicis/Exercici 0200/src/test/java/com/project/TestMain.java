@@ -21,8 +21,7 @@ public class TestMain {
             text = text.replace("\r\n", "\n");
 
             // Comprova que la sortida conté el text esperat
-            String expectedOutput = "El resultat de la divisió és 21.015625\n" +
-                                    "El resultat arrodonit de la divisió és 21.02\n";
+            String expectedOutput = "1\n3\n5\n7\n9\n";
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0, 
                 "\n>>>>>>>>>> >>>>>>>>>>\n" +

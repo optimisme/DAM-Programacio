@@ -54,24 +54,14 @@ public class TestMain {
 
             actualOutput5 = actualOutput5.replace("\r\n", "\n");
 
-            assertEquals(expectedOutput5, actualOutput5);
+            assertEquals(expectedOutput5, actualOutput5, 
+                "\n>>>>>>>>>> >>>>>>>>>>\n" +
+                TestStringUtils.findFirstDifference(expectedOutput5, actualOutput5) +
+                "<<<<<<<<<< <<<<<<<<<<\n");
 
         } finally {
             Locale.setDefault(defaultLocale);
         }
-    }
-
-    public String findFirstDifference(String str1, String str2) {
-        int length = Math.min(str1.length(), str2.length());
-        for (int i = 0; i < length; i++) {
-            if (str1.charAt(i) != str2.charAt(i)) {
-                return "Difference at position " + i + ": '" + str1.charAt(i) + "' vs '" + str2.charAt(i) + "'";
-            }
-        }
-        if (str1.length() != str2.length()) {
-            return "Strings differ in length.";
-        }
-        return "identical";
     }
 
     private interface ThrowingRunnable {
