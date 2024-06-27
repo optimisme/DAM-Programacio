@@ -1,50 +1,57 @@
-// TestMain.java
 package com.project;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Locale;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 public class TestMain {
 
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(originalOut);
+    }
+
     @Test
-    public void testEscriuLlistaPartsDelDia() throws Exception {
+    public void testEscriuLlistaPartsDelDia() {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
             String[] partsDelDia = {"Matí", "Tarda", "Vespre", "Nit"};
-            String text = SystemLambda.tapSystemOut(() -> {
-                Main.escriuLlista(partsDelDia);
-            });
-            text = text.replace("\r\n", "\n");
+            Main.escriuLlista(partsDelDia);
+            String text = outContent.toString().replace("\r\n", "\n");
 
             String expectedOutput = "L'element a la posició 0 de la llista és 'Matí'\n" +
                                     "L'element a la posició 1 de la llista és 'Tarda'\n" +
                                     "L'element a la posició 2 de la llista és 'Vespre'\n" +
                                     "L'element a la posició 3 de la llista és 'Nit'\n";
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+            assertTrue(text.equals(expectedOutput));
         } finally {
             Locale.setDefault(defaultLocale); // Restaura la configuració regional per defecte
         }
     }
 
     @Test
-    public void testEscriuLlistaDiesDeLaSetmana() throws Exception {
+    public void testEscriuLlistaDiesDeLaSetmana() {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
             String[] diesDeLaSetmana = {"Dilluns", "Dimarts", "Dimecres", "Dijous", "Divendres", "Dissabte", "Diumenge"};
-            String text = SystemLambda.tapSystemOut(() -> {
-                Main.escriuLlista(diesDeLaSetmana);
-            });
-            text = text.replace("\r\n", "\n");
+            Main.escriuLlista(diesDeLaSetmana);
+            String text = outContent.toString().replace("\r\n", "\n");
 
             String expectedOutput = "L'element a la posició 0 de la llista és 'Dilluns'\n" +
                                     "L'element a la posició 1 de la llista és 'Dimarts'\n" +
@@ -53,27 +60,21 @@ public class TestMain {
                                     "L'element a la posició 4 de la llista és 'Divendres'\n" +
                                     "L'element a la posició 5 de la llista és 'Dissabte'\n" +
                                     "L'element a la posició 6 de la llista és 'Diumenge'\n";
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+            assertTrue(text.equals(expectedOutput));
         } finally {
             Locale.setDefault(defaultLocale); // Restaura la configuració regional per defecte
         }
     }
 
     @Test
-    public void testEscriuLlistaMesosDeLAny() throws Exception {
+    public void testEscriuLlistaMesosDeLAny() {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
             String[] mesosDeLAny = {"Gener", "Febrer", "Març", "Abril", "Maig", "Juny", "Juliol", "Agost", "Setembre", "Octubre", "Novembre", "Desembre"};
-            String text = SystemLambda.tapSystemOut(() -> {
-                Main.escriuLlista(mesosDeLAny);
-            });
-            text = text.replace("\r\n", "\n");
+            Main.escriuLlista(mesosDeLAny);
+            String text = outContent.toString().replace("\r\n", "\n");
 
             String expectedOutput = "L'element a la posició 0 de la llista és 'Gener'\n" +
                                     "L'element a la posició 1 de la llista és 'Febrer'\n" +
@@ -87,11 +88,7 @@ public class TestMain {
                                     "L'element a la posició 9 de la llista és 'Octubre'\n" +
                                     "L'element a la posició 10 de la llista és 'Novembre'\n" +
                                     "L'element a la posició 11 de la llista és 'Desembre'\n";
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+            assertTrue(text.equals(expectedOutput));
         } finally {
             Locale.setDefault(defaultLocale); // Restaura la configuració regional per defecte
         }

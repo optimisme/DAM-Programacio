@@ -1,24 +1,36 @@
-// TestMain.java
 package com.project;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Locale;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 public class TestMain {
 
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(originalOut);
+    }
+
     @Test
-    public void testMostrarTaula() throws Exception {
+    public void testMostrarTaula() {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
-            String text = SystemLambda.tapSystemOut(() -> {
-                // Executa la funció per a provar la seva sortida
-                Main.mostrarTaula();
-            });
-            text = text.replace("\r\n", "\n");
+            Main.mostrarTaula();
+            String text = outContent.toString().replace("\r\n", "\n").trim();
 
             String expectedOutput = "0,0 1,0 2,0 3,0 4,0 5,0\n" +
                                     "0,1 1,1 2,1 3,1 4,1 5,1\n" +
@@ -27,7 +39,7 @@ public class TestMain {
                                     "0,4 1,4 2,4 3,4 4,4 5,4\n" +
                                     "0,5 1,5 2,5 3,5 4,5 5,5";
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
+            assertTrue(diff.compareTo("identical") == 0,
                 "\n>>>>>>>>>> >>>>>>>>>>\n" +
                 diff +
                 "<<<<<<<<<< <<<<<<<<<<\n");

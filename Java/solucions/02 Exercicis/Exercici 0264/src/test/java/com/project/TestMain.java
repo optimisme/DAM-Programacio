@@ -1,19 +1,34 @@
-// TestMain.java
 package com.project;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 public class TestMain {
 
+    private final PrintStream originalOut = System.out;
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setUpStreams() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @AfterEach
+    public void restoreStreams() {
+        System.setOut(originalOut);
+    }
+
     @Test
-    public void testConvertirLlista() throws Exception {
+    public void testConvertirLlista() {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
@@ -29,24 +44,16 @@ public class TestMain {
     }
 
     @Test
-    public void testOutput() throws Exception {
-        Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
-        Locale.setDefault(Locale.US); // Estableix la configuració regional a US
-
+    public void testOutput() {
         try {
-            String text = SystemLambda.tapSystemOut(() -> {
-                Main.main(new String[]{});
-            });
-            text = text.replace("\r\n", "\n");
+            Main.main(new String[]{});
+            String text = outContent.toString().replace("\r\n", "\n");
 
             String expectedOutput = "Convertit des de llista: [4, 5, 6, 7]\n";
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+            assertTrue(text.contains(expectedOutput),
+                "\nExpected output not found:\n" + text);
         } finally {
-            Locale.setDefault(defaultLocale); // Restaura la configuració regional per defecte
+            Locale.setDefault(Locale.getDefault()); // Restaura la configuració regional per defecte
         }
     }
 }

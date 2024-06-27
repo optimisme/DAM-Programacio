@@ -1,24 +1,43 @@
-// TestMain.java
 package com.project;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.Locale;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 public class TestMain {
 
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+    private final InputStream originalIn = System.in;
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(originalOut);
+        System.setIn(originalIn);
+    }
+
     @Test
-    public void testMenuOpcioSortir() throws Exception {
+    public void testMenuOpcioSortir() {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
-            String text = SystemLambda.tapSystemOut(() -> {
-                // Simula l'entrada de l'opció 0 per sortir
-                SystemLambda.withTextFromSystemIn("0").execute(() -> Main.main(new String[]{}));
-            });
-            text = text.replace("\r\n", "\n");
+            String input = "0";
+            System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+            Main.main(new String[]{});
+            String text = outContent.toString().replace("\r\n", "\n");
 
             String expectedOutput = "    CALCULADORA\n" +
                                     "    Menú Principal\n" +
@@ -39,16 +58,16 @@ public class TestMain {
     }
 
     @Test
-    public void testOpcioIncorrecta() throws Exception {
+    public void testOpcioIncorrecta() {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
-            String text = SystemLambda.tapSystemOut(() -> {
-                // Simula l'entrada d'una opció incorrecta seguida de l'opció 0 per sortir
-                SystemLambda.withTextFromSystemIn("5\n0").execute(() -> Main.main(new String[]{}));
-            });
-            text = text.replace("\r\n", "\n");
+            String input = "5\n0";
+            System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+            Main.main(new String[]{});
+            String text = outContent.toString().replace("\r\n", "\n");
 
             String expectedOutput = "    CALCULADORA\n" +
                                     "    Menú Principal\n" +
@@ -77,16 +96,16 @@ public class TestMain {
     }
 
     @Test
-    public void testOperacions() throws Exception {
+    public void testOperacions() {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
-            String text = SystemLambda.tapSystemOut(() -> {
-                // Simula l'entrada per sumar 5 i 3, després sortir
-                SystemLambda.withTextFromSystemIn("1\n5\n3\n0").execute(() -> Main.main(new String[]{}));
-            });
-            text = text.replace("\r\n", "\n");
+            String input = "1\n5\n3\n0";
+            System.setIn(new ByteArrayInputStream(input.getBytes()));
+
+            Main.main(new String[]{});
+            String text = outContent.toString().replace("\r\n", "\n");
 
             String expectedOutput = "    CALCULADORA\n" +
                                     "    Menú Principal\n" +

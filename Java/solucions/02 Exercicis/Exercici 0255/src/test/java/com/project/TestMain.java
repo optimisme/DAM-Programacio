@@ -1,25 +1,39 @@
-// TestMain.java
 package com.project;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Locale;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 public class TestMain {
 
+    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+    private final PrintStream originalOut = System.out;
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(outContent));
+    }
+
+    @AfterEach
+    public void tearDown() {
+        System.setOut(originalOut);
+        outContent.reset();
+    }
+
     @Test
-    public void testCalculaNums() throws Exception {
+    public void testCalculaNums() {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
-            String text = SystemLambda.tapSystemOut(() -> {
-                // Executa el main per a provar la seva sortida
-                Main.main(new String[]{});
-            });
-            text = text.replace("\r\n", "\n");
+            // Executa el main per a provar la seva sortida
+            Main.main(new String[]{});
+            String text = outContent.toString().replace("\r\n", "\n").trim();
 
             // Atès que el número es genera aleatòriament, no podem preveure el resultat exacte
             // per tant, només comprovarem que la sortida segueix el format esperat.

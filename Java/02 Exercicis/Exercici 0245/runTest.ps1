@@ -11,7 +11,7 @@
 Set-Location $PSScriptRoot
 
 # Set MAVEN_OPTS environment variable
-$env:MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED"
+$env:MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED -Dfile.encoding=UTF8"
 
 # Check for the first argument and set it as the main class
 $mainClass = $args[0]
