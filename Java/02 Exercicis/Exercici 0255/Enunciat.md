@@ -10,8 +10,35 @@
 
 ### Exerici 55
 
-Fes una funció que rebi un número llarg com a paràmetre, el transformi a cadena text i retorni dos paràmetres:
+Fes una funció 'calculaNums' que rebi un número llarg com a paràmetre, el transformi a cadena text i retorni un array amb:
 
 * El nombre de números parells
 * El nombre de números senars
 
+El número s'ha de generar automàticament.
+
+Posa-hi les següents funcions:
+```java
+
+    public static long generaNumeroAleatori() {
+        return 0; // Genera un número llarg (long) aleatòri
+    }
+
+    public static int[] calculaNums(long numero) {
+    // Retorna un array amb el nombre de números parells i senars en un número llarg.
+    }
+```
+
+Exemple:
+```text
+
+
+Executa el programa:
+```bash
+./run.sh com.project.Main
+```
+
+Valida amb el test:
+```bash
+./runTest.sh com.project.TestMain
+```
