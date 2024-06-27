@@ -3,7 +3,9 @@ package com.project;
 import java.util.Locale;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class TestMain {
 
@@ -13,14 +15,18 @@ public class TestMain {
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
-            String text = SystemLambda.tapSystemOut(() -> {
-                // Executa el main per a provar la seva sortida
-                String[] args = {}; // Passa els arguments necessaris si n'hi ha
-                Main.main(args);
-            });
-            text = text.replace("\r\n", "\n");
+            // Redirigeix la sortida estàndard a un flux de sortida
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            PrintStream originalOut = System.out;
+            System.setOut(new PrintStream(outContent));
+
+            // Executa el main per a provar la seva sortida
+            String[] args = {}; // Passa els arguments necessaris si n'hi ha
+            Main.main(args);
 
             // Comprova que la sortida conté el text esperat
+            String text = outContent.toString().replace("\r\n", "\n");
+
             String expectedOutput = "El resultat de la divisió és 21.015625\n" +
                                     "El resultat arrodonit de la divisió és 21.02\n";
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
@@ -28,8 +34,11 @@ public class TestMain {
                 "\n>>>>>>>>>> >>>>>>>>>>\n" +
                 diff +
                 "<<<<<<<<<< <<<<<<<<<<\n");
+
         } finally {
-            Locale.setDefault(defaultLocale); // Restaura la configuració regional per defecte
+            // Restaura la configuració regional per defecte i el flux de sortida
+            Locale.setDefault(defaultLocale);
+            System.setOut(System.out);
         }
     }
 }
