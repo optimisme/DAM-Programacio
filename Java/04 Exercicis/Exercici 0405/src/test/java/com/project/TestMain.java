@@ -7,20 +7,28 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class TestMain {
 
     @Test
     public void testMainOutput() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
-            // Executa el main per a provar la seva sortida
-            String[] args = {}; // Passa els arguments necessaris si n'hi ha
-            Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        // Redirigeix la sortida estàndard a un flux de sortida
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        // Executa el main per a provar la seva sortida
+        String[] args = {}; // Passa els arguments necessaris si n'hi ha
+        Main.main(args);
+
+        // Restaura els fluxos originals
+        System.setOut(originalOut);
 
         // Comprova que la sortida conté el text esperat
+        String text = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
         String expectedOutput = "Llibre: Cien años de soledad - Autor: Gabriel García Márquez (Colombiana)\n" + 
             "Data de Prestec: 01/01/2024 - Data de retorn: 31/01/2024\n" + 
             "Està en termini? true\n" + 
@@ -28,13 +36,12 @@ public class TestMain {
             "Llibre: Harry Potter y la piedra filosofal - Autor: J.K. Rowling (Britànica)\n" + 
             "Data de Prestec: 15/01/2024 - Data de retorn: 15/02/2024\n" + 
             "Està en termini? true\n" + 
-            "-----" +
-            "\n";
+            "-----\n";
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
@@ -80,11 +87,10 @@ public class TestMain {
         assertEquals("02/02/2024", prestec.getDataPrestec(), "El setter de data de Prestec no funciona com s'esperava.");
         assertEquals("02/03/2024", prestec.getDataRetorn(), "El setter de data de retorn no funciona com s'esperava.");
     }
-    
 
     @Test
     public void testMainPrivateAttributes() {
-        // Obtenim tots els camps de la classe Cotxe
+        // Obtenim tots els camps de la classe Autor
         Field[] fields = Autor.class.getDeclaredFields();
 
         // Iterem per cada camp per verificar que sigui privat

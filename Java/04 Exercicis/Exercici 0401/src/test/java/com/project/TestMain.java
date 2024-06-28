@@ -8,40 +8,47 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class TestMain {
 
     @Test
     public void testMainOutput() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
-            // Executa el main per a provar la seva sortida
-            String[] args = {}; // Passa els arguments necessaris si n'hi ha
-            Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        // Redirigeix la sortida estàndard a un flux de sortida
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        // Executa el main per a provar la seva sortida
+        String[] args = {}; // Passa els arguments necessaris si n'hi ha
+        Main.main(args);
+
+        // Restaura els fluxos originals
+        System.setOut(originalOut);
 
         // Comprova que la sortida conté el text esperat
-        String expectedOutput = "El Senyor dels Anells, J.R.R. Tolkien; 1954 - Disponible\n" + 
-            "1984, George Orwell; 1949 - Disponible\n" + 
-            "El Petit Príncep, Antoine de Saint-Exupéry; 1943 - Disponible\n" + 
-            "\n" + 
-            "Després dels préstecs:\n" + 
-            "El Senyor dels Anells, J.R.R. Tolkien; 1954 - En préstec\n" + 
-            "1984, George Orwell; 1949 - En préstec\n" + 
-            "El Petit Príncep, Antoine de Saint-Exupéry; 1943 - Disponible\n" + 
-            "\n" + 
-            "Després de retornar el llibre1:\n" + 
-            "El Senyor dels Anells, J.R.R. Tolkien; 1954 - Disponible" +
-            "\n";
+        String text = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
+        String expectedOutput = "El Senyor dels Anells, J.R.R. Tolkien; 1954 - Disponible\n" +
+            "1984, George Orwell; 1949 - Disponible\n" +
+            "El Petit Príncep, Antoine de Saint-Exupéry; 1943 - Disponible\n" +
+            "\n" +
+            "Després dels préstecs:\n" +
+            "El Senyor dels Anells, J.R.R. Tolkien; 1954 - En préstec\n" +
+            "1984, George Orwell; 1949 - En préstec\n" +
+            "El Petit Príncep, Antoine de Saint-Exupéry; 1943 - Disponible\n" +
+            "\n" +
+            "Després de retornar el llibre1:\n" +
+            "El Senyor dels Anells, J.R.R. Tolkien; 1954 - Disponible\n";
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0,
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
-@Test
+    @Test
     public void testMainGettersSetters() {
         // Creació d'un objecte Llibre
         Llibre llibre1 = new Llibre("El Senyor dels Anells", "J.R.R. Tolkien", 1954);

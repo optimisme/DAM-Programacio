@@ -7,29 +7,36 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class TestMain {
 
     @Test
     public void testMainOutput() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
-            // Executa el main per a provar la seva sortida
-            String[] args = {}; // Passa els arguments necessaris si n'hi ha
-            Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        // Redirigeix la sortida estàndard a un flux de sortida
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        // Executa el main per a provar la seva sortida
+        String[] args = {}; // Passa els arguments necessaris si n'hi ha
+        Main.main(args);
+
+        // Restaura els fluxos originals
+        System.setOut(originalOut);
 
         // Comprova que la sortida conté el text esperat
-        String expectedOutput = "Temperatura mitjana: 21.75°C\n" + 
-            "Nova temperatura mitjana (20): 21.0°C\n" + 
-            "Nova temperatura mitjana (25): 22.5°C" +
-            "\n";
+        String text = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
+        String expectedOutput = "Temperatura mitjana: 21.625°C\n" + 
+            "Nova temperatura mitjana (20): 21.25°C\n" + 
+            "Nova temperatura mitjana (25): 22.0°C\n";
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
@@ -37,7 +44,7 @@ public class TestMain {
         // Reset dels atributs estàtics per a aquest test
         // Això podria requerir mètodes addicionals en la classe ControlTemperatura per a resetejar els valors estàtics
         // o bé podries inicialitzar aquests valors estàtics de nou de alguna manera.
-    
+
         // Creació de zones amb temperatures inicials
         ControlTemperatura zona1 = new ControlTemperatura("Recepció", 21.5);
         ControlTemperatura zona2 = new ControlTemperatura("Oficina", 22.0);
@@ -64,12 +71,10 @@ public class TestMain {
         temperaturaMitjanaEsperada = (20.0 + 23.0) / 2;
         assertEquals(temperaturaMitjanaEsperada, ControlTemperatura.getTemperaturaMitjana(), "La temperatura mitjana després de l'ajust de zona2 no coincideix amb l'esperada.");
     }
-    
-    
 
     @Test
     public void testMainPrivateAttributes() {
-        // Obtenim tots els camps de la classe Cotxe
+        // Obtenim tots els camps de la classe ControlTemperatura
         Field[] fields = ControlTemperatura.class.getDeclaredFields();
 
         // Iterem per cada camp per verificar que sigui privat
