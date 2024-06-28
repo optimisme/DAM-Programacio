@@ -3,16 +3,12 @@ package com.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.math.BigDecimal;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.*;
 
 import static org.mockito.Mockito.*;
@@ -24,15 +20,24 @@ public class TestMain {
 
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = outputStream.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
-            String expectedOutput = "ID: 1, Nom: Zona Arcade, Temàtica: Arcade, Capacitat Màxima: 100" +
+        String expectedOutput = "ID: 1, Nom: Zona Arcade, Temàtica: Arcade, Capacitat Màxima: 100" +
             "\nID: 2, Nom: Zona VR, Temàtica: Realitat Virtual, Capacitat Màxima: 50" +
             "\nID: 1, Nom: Passi Bàsic, Preu: 19.99, Durada: 1 dies" +
             "\nID: 2, Nom: Passi Premium, Preu: 39.99, Durada: 3 dies" +
@@ -43,7 +48,7 @@ public class TestMain {
             "\nÀrea: Zona VR" +
             "\n";
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-        assertTrue(diff.compareTo("identical") == 0, 
+        assertTrue(diff.compareTo("identical") == 0,
             "\n>>>>>>>>>> >>>>>>>>>>\n" +
             diff +
             "<<<<<<<<<< <<<<<<<<<<\n");
@@ -67,13 +72,13 @@ public class TestMain {
             checkForeignKey(dbMetaData, "acces_area_tarifa", "tarifes", "id_tarifa");
         }
     }
-    
+
     private void checkTableExists(DatabaseMetaData dbMetaData, String tableName) throws SQLException {
         try (ResultSet rs = dbMetaData.getTables(null, null, tableName, null)) {
             assertTrue(rs.next(), "La taula " + tableName + " no existeix.");
         }
     }
-    
+
     private void checkTableExistsAndColumns(DatabaseMetaData dbMetaData, String tableName, String[] columnNames) throws SQLException {
         checkTableExists(dbMetaData, tableName);
         try (ResultSet rs = dbMetaData.getColumns(null, null, tableName, null)) {
@@ -83,7 +88,7 @@ public class TestMain {
             }
         }
     }
-    
+
     private void checkForeignKey(DatabaseMetaData dbMetaData, String tableName, String pkTableName, String fkColumnName) throws SQLException {
         try (ResultSet rs = dbMetaData.getImportedKeys(null, null, tableName)) {
             boolean found = false;
@@ -107,12 +112,12 @@ public class TestMain {
         assertMethod(clazz, "afegirArea", true, true, "Error amb la definició de la funció afegirArea.", Connection.class, String.class, String.class, int.class);
         assertMethod(clazz, "afegirTarifa", true, true, "Error amb la definició de la funció afegirTarifa.", Connection.class, String.class, BigDecimal.class, int.class);
         assertMethod(clazz, "definirAccesAreaTarifa", true, true, "Error amb la definició de la funció definirAccesAreaTarifa.", Connection.class, int.class, int.class);
-    
+
         assertMethod(clazz, "llistarArees", true, true, "Error amb la definició de la funció llistarArees.", Connection.class);
         assertMethod(clazz, "llistarTarifes", true, true, "Error amb la definició de la funció llistarTarifes.", Connection.class);
         assertMethod(clazz, "llistarAreesAccesiblesPerTarifa", true, true, "Error amb la definició de la funció llistarAreesAccesiblesPerTarifa.", Connection.class, int.class);
         assertMethod(clazz, "llistarTarifesPerAccesArea", true, true, "Error amb la definició de la funció llistarTarifesPerAccesArea.", Connection.class, int.class);
-    
+
         assertMethod(clazz, "obtenirIdAreaPerNom", true, true, "Error amb la definició de la funció obtenirIdAreaPerNom.", Connection.class, String.class);
         assertMethod(clazz, "obtenirIdTarifaPerNom", true, true, "Error amb la definició de la funció obtenirIdTarifaPerNom.", Connection.class, String.class);
     }

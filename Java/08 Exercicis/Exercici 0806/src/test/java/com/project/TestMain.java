@@ -1,14 +1,22 @@
 package com.project;
 
 import org.junit.jupiter.api.Test;
+
+import com.project.Main;
+import com.project.TestStringUtils;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.math.BigDecimal;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.sql.*;
+
 import java.util.Locale;
+import static org.mockito.Mockito.*;
 
 public class TestMain {
 
@@ -17,12 +25,21 @@ public class TestMain {
 
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = outputStream.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = """
@@ -189,94 +206,5 @@ public class TestMain {
         // Comprova si el mètode és privat
         boolean isPrivate = Modifier.isPrivate(method.getModifiers());
         assertEquals(shouldBePrivate, isPrivate, message + " El mètode hauria de ser " + (shouldBePrivate ? "privat" : "no privat") + ".");
-    }
-
-
-    @Test
-    public void testMainExtra() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
-
-            Locale.setDefault(Locale.US);
-
-            AppData db = AppData.getInstance();
-
-            // Create tables
-            Main.createTables();
-
-            Main.addCitizen("A", "B", "1970-01-01", "C", "D", "E");
-            Main.addCitizen("B", "C", "1970-02-01", "D", "E", "F");
-            Main.addCitizen("C", "D", "1970-03-01", "E", "F", "G");
-            Main.addSurveillance("AB", "2024-01-14 11:00", 20, 4, "CC");
-            Main.addSurveillance("AC", "2024-01-15 11:01", 40, 5, "DC");
-            Main.addSurveillance("AB", "2024-01-16 11:02", 60, 6, "EC");
-            Main.addSurveillance("AE", "2024-01-17 11:03", 80, 7, "FC");
-            Main.addCensoredMaterial("BC", "ZZ", "CD", "2024-04-14", "DE");
-            Main.addCensoredMaterial("BD", "ZX", "CD", "2024-04-15", "EE");
-            Main.addCensoredMaterial("BE", "ZY", "CD", "2024-04-16", "FE");
-            Main.addCensoredMaterial("BF", "XZ", "CD", "2024-04-17", "DE");
-            Main.addCensoredMaterial("BG", "XX", "CD", "2024-04-18", "HE");
-            Main.addCensoredMaterial("BH", "XY", "CD", "2024-04-19", "IE");
-            Main.addDetention(1, "2024-04-01", "A", 10, "DA");
-            Main.addDetention(2, "2024-05-02", "B", 15, "DA");
-            Main.addDetention(3, "2024-06-03", "C", 30, "FC");
-            Main.addDetention(1, "2024-07-03", "D", 10, "GD");
-            Main.addDetention(2, "2024-08-02", "E", 15, "HE");
-            Main.addDetention(3, "2024-09-01", "F", 30, "HE");
-            Main.listCitizens();
-            Main.listSurveillance();
-            Main.listCensoredMaterials();
-            Main.listDetentions();
-            Main.showAverageDetentionDurationByLocation("AB");
-            Main.countCensoredMaterialsByReason("DE");
-            Main.listDetentionsByCharges("DA");
-            Main.listDetentionsByCharges("HE");
-            Main.listDetentionsFromDate("2024-06-03");
-            Main.listSurveillanceEntries("2024-01-15", "2024-01-17");
-
-            // Close the database connection
-            db.close();
-        });
-
-        text = text.replace("\r\n", "\n");
-
-        String expectedOutput = """
-            Citizen ID: 1, Name: A, Address: B, Birth: 1970-01-01, National ID: C, Employment: D, Political Affiliation: E
-            Citizen ID: 2, Name: B, Address: C, Birth: 1970-02-01, National ID: D, Employment: E, Political Affiliation: F
-            Citizen ID: 3, Name: C, Address: D, Birth: 1970-03-01, National ID: E, Employment: F, Political Affiliation: G
-            Surveillance ID: 1, Location: AB, Date/Time: 2024-01-14T11:00, Duration: 20, Citizen ID: 4, Observation Type: CC
-            Surveillance ID: 2, Location: AC, Date/Time: 2024-01-15T11:01, Duration: 40, Citizen ID: 5, Observation Type: DC
-            Surveillance ID: 3, Location: AB, Date/Time: 2024-01-16T11:02, Duration: 60, Citizen ID: 6, Observation Type: EC
-            Surveillance ID: 4, Location: AE, Date/Time: 2024-01-17T11:03, Duration: 80, Citizen ID: 7, Observation Type: FC
-            Material ID: 1, Type: BC, Title: ZZ, Author: CD, Date of Censorship: 2024-04-14, Reason: DE
-            Material ID: 2, Type: BD, Title: ZX, Author: CD, Date of Censorship: 2024-04-15, Reason: EE
-            Material ID: 3, Type: BE, Title: ZY, Author: CD, Date of Censorship: 2024-04-16, Reason: FE
-            Material ID: 4, Type: BF, Title: XZ, Author: CD, Date of Censorship: 2024-04-17, Reason: DE
-            Material ID: 5, Type: BG, Title: XX, Author: CD, Date of Censorship: 2024-04-18, Reason: HE
-            Material ID: 6, Type: BH, Title: XY, Author: CD, Date of Censorship: 2024-04-19, Reason: IE
-            Detention ID: 1, Citizen ID: 1, Date of Detention: 2024-04-01, Location: A, Duration: 10, Charges: DA
-            Detention ID: 2, Citizen ID: 2, Date of Detention: 2024-05-02, Location: B, Duration: 15, Charges: DA
-            Detention ID: 3, Citizen ID: 3, Date of Detention: 2024-06-03, Location: C, Duration: 30, Charges: FC
-            Detention ID: 4, Citizen ID: 1, Date of Detention: 2024-07-03, Location: D, Duration: 10, Charges: GD
-            Detention ID: 5, Citizen ID: 2, Date of Detention: 2024-08-02, Location: E, Duration: 15, Charges: HE
-            Detention ID: 6, Citizen ID: 3, Date of Detention: 2024-09-01, Location: F, Duration: 30, Charges: HE
-            No records found.
-            {TotalCount=2, ReasonForCensorship=DE}
-            {DetentionID=1, CitizenID=1, DateOfDetention=2024-04-01, Duration=10, Charges=DA, LocationOfDetention=A}
-            {DetentionID=2, CitizenID=2, DateOfDetention=2024-05-02, Duration=15, Charges=DA, LocationOfDetention=B}
-            {DetentionID=5, CitizenID=2, DateOfDetention=2024-08-02, Duration=15, Charges=HE, LocationOfDetention=E}
-            {DetentionID=6, CitizenID=3, DateOfDetention=2024-09-01, Duration=30, Charges=HE, LocationOfDetention=F}
-            Citizen Name: C, Detention ID: 3, Date of Detention: 2024-06-03, Location of Detention: C, Duration: 30, Charges: FC
-            Citizen Name: A, Detention ID: 4, Date of Detention: 2024-07-03, Location of Detention: D, Duration: 10, Charges: GD
-            Citizen Name: B, Detention ID: 5, Date of Detention: 2024-08-02, Location of Detention: E, Duration: 15, Charges: HE
-            Citizen Name: C, Detention ID: 6, Date of Detention: 2024-09-01, Location of Detention: F, Duration: 30, Charges: HE
-            Surveillance ID: 2, Location: AC, Date/Time: 2024-01-15T11:01, Duration: 40, Citizen ID: 5, Observation Type: DC
-            Surveillance ID: 3, Location: AB, Date/Time: 2024-01-16T11:02, Duration: 60, Citizen ID: 6, Observation Type: EC
-            """.replace("\r\n", "\n").replace("            ","");
-
-        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
     }
 }

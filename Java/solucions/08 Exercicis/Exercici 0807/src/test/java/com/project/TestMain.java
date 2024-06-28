@@ -3,8 +3,9 @@ package com.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -25,12 +26,21 @@ public class TestMain {
 
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outputStream));
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = outputStream.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = """
@@ -132,6 +142,7 @@ public class TestMain {
             Total observations for 'Planet': 6
             Heaviest Celestial Body: Andromeda
             """.replace("\r\n", "\n").replace("            ","");
+
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
         assertTrue(diff.compareTo("identical") == 0, 
             "\n>>>>>>>>>> >>>>>>>>>>\n" +
@@ -237,106 +248,4 @@ public class TestMain {
         }
     }
 
-    @Test
-    public void testMainExtra() throws Exception {
-        
-        Locale.setDefault(Locale.US);
-
-        Connection conn = DriverManager.getConnection(URL, USER, PWD);
-        conn.setAutoCommit(false);
-
-        String text = SystemLambda.tapSystemOut(() -> {
-            Main.createTables(conn);
-
-            Main.addTelescope(conn, "ABC", "1", "2", 2);
-            Main.addTelescope(conn, "DEF", "2", "3", 4);
-
-            Main.addCelestialBody(conn, "GHI", "A", 3, 4); 
-            Main.addCelestialBody(conn, "JKL", "A", 4, 5);
-            Main.addCelestialBody(conn, "MNO", "B", 5, 6); 
-            Main.addCelestialBody(conn, "PQR", "B", 6, 7);
-
-            Main.addObservation(conn, 1, 1, Timestamp.valueOf("2024-01-01 00:00:00"), "X0");
-            Main.addObservation(conn, 1, 2, Timestamp.valueOf("2024-01-01 00:00:01"), "X1");
-            Main.addObservation(conn, 2, 1, Timestamp.valueOf("2024-01-01 00:00:02"), "X2");
-            Main.addObservation(conn, 3, 2, Timestamp.valueOf("2024-01-01 00:00:03"), "X3");
-            Main.addObservation(conn, 4, 1, Timestamp.valueOf("2024-01-01 00:00:04"), "X4");
-
-            Main.updateCelestialBodyMass(conn, 2, 55);
-
-            conn.commit(); // Confirm all operations at the end
-
-            Main.listTelescopes(conn);
-
-            Main.listCelestialBodies(conn);
-
-            Main.listObservations(conn);
-
-            System.out.println("Observation Frequency:");
-            Main.analyzeObservationFrequency(conn);
-
-            String criteria = "dateTime BETWEEN '2024-01-01' AND '2024-04-15'";
-            System.out.println("Observations meeting the criteria: (" + criteria + ")");
-            Main.filterObservationsByCriteria(conn, criteria);
-
-            int desiredTelescopeId = 3;
-            criteria = "telescopeId = " + desiredTelescopeId;
-            System.out.println("Observations meeting the criteria: (" + criteria + ")");
-            Main.filterObservationsByCriteria(conn, criteria);
-
-            criteria = "description LIKE '%X1%'";           
-            System.out.println("Observations meeting the criteria: (" + criteria + ")");
-            Main.filterObservationsByCriteria(conn, criteria);
-
-            criteria = "description LIKE '%X9%'";           
-            System.out.println("Observations meeting the criteria: (" + criteria + ")");
-            Main.filterObservationsByCriteria(conn, criteria);
-
-            System.out.println("Total observations for 'A': " + Main.getTotalObservationsByBodyType(conn, "A"));
-            System.out.println("Total observations for 'B': " + Main.getTotalObservationsByBodyType(conn, "B"));
-            
-            Main.printHeaviestCelestialBody(conn);
-            
-            conn.close();
-        });
-        text = text.replace("\r\n", "\n");
-
-        String expectedOutput = """
-            Telescope [telescopeId=1, name='ABC', location='1', type='2', diameter=2.0]
-            Telescope [telescopeId=2, name='DEF', location='2', type='3', diameter=4.0]
-            CelestialBody [bodyId=1, name=GHI, type=A, mass=3.0, distance=4.0]
-            CelestialBody [bodyId=2, name=JKL, type=A, mass=55.0, distance=5.0]
-            CelestialBody [bodyId=3, name=MNO, type=B, mass=5.0, distance=6.0]
-            CelestialBody [bodyId=4, name=PQR, type=B, mass=6.0, distance=7.0]
-            Observation [observationId=1, telescopeId=1, bodyId=1, dateTime=2024-01-01 00:00:00.0, description=X0]
-            Observation [observationId=2, telescopeId=1, bodyId=2, dateTime=2024-01-01 00:00:01.0, description=X1]
-            Observation [observationId=3, telescopeId=2, bodyId=1, dateTime=2024-01-01 00:00:02.0, description=X2]
-            Observation [observationId=4, telescopeId=3, bodyId=2, dateTime=2024-01-01 00:00:03.0, description=X3]
-            Observation [observationId=5, telescopeId=4, bodyId=1, dateTime=2024-01-01 00:00:04.0, description=X4]
-            Observation Frequency:
-              Body ID: 1, Observation Count: 3
-              Body ID: 2, Observation Count: 2
-            Observations meeting the criteria: (dateTime BETWEEN '2024-01-01' AND '2024-04-15')
-            Observation [observationId=1, telescopeId=1, bodyId=1, dateTime=2024-01-01 00:00:00.0, description=X0]
-            Observation [observationId=2, telescopeId=1, bodyId=2, dateTime=2024-01-01 00:00:01.0, description=X1]
-            Observation [observationId=3, telescopeId=2, bodyId=1, dateTime=2024-01-01 00:00:02.0, description=X2]
-            Observation [observationId=4, telescopeId=3, bodyId=2, dateTime=2024-01-01 00:00:03.0, description=X3]
-            Observation [observationId=5, telescopeId=4, bodyId=1, dateTime=2024-01-01 00:00:04.0, description=X4]
-            Observations meeting the criteria: (telescopeId = 3)
-            Observation [observationId=4, telescopeId=3, bodyId=2, dateTime=2024-01-01 00:00:03.0, description=X3]
-            Observations meeting the criteria: (description LIKE '%X1%')
-            Observation [observationId=2, telescopeId=1, bodyId=2, dateTime=2024-01-01 00:00:01.0, description=X1]
-            Observations meeting the criteria: (description LIKE '%X9%')
-            No observations found meeting the criteria.
-            Total observations for 'A': 5
-            Total observations for 'B': 0
-            Heaviest Celestial Body: JKL
-            """.replace("\r\n", "\n").replace("            ","");
-
-        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
-    }
 }

@@ -14,6 +14,13 @@ Fent servir el Singleton 'AppData' i una base de dades *MySQL* anomenada **schoo
 
 **Nota**: Si ja hi ha un contenedor MySQL a docker, anomenat 'mysqlServer', es pot carregar iniciar la base de dades 'school.sql' amb:
 
+Si encara no hi ha un contenedor 'mysql' a Docker:
+```bash
+
+```
+
+Quan ja hi ha un contenedor 'mysql' funcionant a Docker:
+
 A Linux i macOS:
 ```bash
 docker exec -i mysqlServer mysql -uroot -ppwd < dbSchool.sql
