@@ -8,28 +8,35 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class TestMain {
 
     @Test
     public void testMainOutput() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
-            // Executa el main per a provar la seva sortida
-            String[] args = {}; // Passa els arguments necessaris si n'hi ha
-            Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        // Redirigeix la sortida estàndard a un flux de sortida
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        // Executa el main per a provar la seva sortida
+        String[] args = {}; // Passa els arguments necessaris si n'hi ha
+        Main.main(args);
+
+        // Restaura els fluxos originals
+        System.setOut(originalOut);
 
         // Comprova que la sortida conté el text esperat
+        String text = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
         String expectedOutput = "Joan - Nota Mitjana: 4.75\n" + 
-            "Maria - Nota Mitjana: 4.0" +
-            "\n";
+            "Maria - Nota Mitjana: 4.0\n";
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
@@ -49,26 +56,39 @@ public class TestMain {
         assertEquals("TestProfessor", curs.getProfessor(), "El nom del professor no és correcte");
         
         curs.afegeixEstudiant(estudiant);
-        String text = SystemLambda.tapSystemOut(() -> {
-            curs.mostraEstudiants();
-        });
         
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+        
+        curs.mostraEstudiants();
+        
+        // Restaura els fluxos originals
+        System.setOut(originalOut);
+
         // Comprovació de la sortida de mostraEstudiants
-        String expectedOutput = "TestNom - Nota Mitjana: 4.0";
+        String text = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
+        String expectedOutput = "TestNom - Nota Mitjana: 4.0\n";
         assertTrue(text.contains(expectedOutput), "La sortida de mostraEstudiants no és correcta");
         
         // Eliminació d'estudiant i comprovació que ja no es mostra
         curs.eliminaEstudiant("TestNom");
-        String textAfterRemoval = SystemLambda.tapSystemOut(() -> {
-            curs.mostraEstudiants();
-        });
+
+        outContent.reset();
+        System.setOut(new PrintStream(outContent));
         
+        curs.mostraEstudiants();
+
+        // Restaura els fluxos originals
+        System.setOut(originalOut);
+
+        String textAfterRemoval = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
         assertFalse(textAfterRemoval.contains(expectedOutput), "L'estudiant no s'ha eliminat correctament del curs");
     }
 
     @Test
     public void testMainPrivateAttributes() {
-        // Obtenim tots els camps de la classe Cotxe
+        // Obtenim tots els camps de la classe Curs
         Field[] fields = Curs.class.getDeclaredFields();
 
         // Iterem per cada camp per verificar que sigui privat
