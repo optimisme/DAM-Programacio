@@ -3,11 +3,12 @@ package com.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.sql.*;
 
 public class TestMain {
@@ -17,11 +18,22 @@ public class TestMain {
 
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Capturem la sortida del sistema
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             Main.main(args);
-        });
+        } finally {
+            // Restableix la sortida del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = outputStream.toString();
         text = text.replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
@@ -172,5 +184,4 @@ public class TestMain {
         boolean isPrivate = Modifier.isPrivate(method.getModifiers());
         assertEquals(shouldBePrivate, isPrivate, message + " El mètode hauria de ser " + (shouldBePrivate ? "privat" : "no privat") + ".");
     }
-
 }

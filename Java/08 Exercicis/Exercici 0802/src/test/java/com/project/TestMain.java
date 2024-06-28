@@ -3,11 +3,12 @@ package com.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.io.File;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.sql.*;
 import java.util.Locale;
 
@@ -18,11 +19,22 @@ public class TestMain {
 
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Capturem la sortida del sistema
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             Main.main(args);
-        });
+        } finally {
+            // Restableix la sortida del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = outputStream.toString();
         text = text.replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
@@ -113,12 +125,13 @@ public class TestMain {
             Client ID: 5, Client Name: Charlie Brown, Average expenditure: 275.0
             Client ID: 6, Client Name: Emma Wilson, Average expenditure: 320.0
             """.replace("\r\n", "\n").replace("            ","");
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
+
 
     @Test
     public void testMainTables() throws SQLException {
@@ -171,7 +184,6 @@ public class TestMain {
         }
     }
 
-
     @Test
     public void testMainCalls() throws Exception {
 
@@ -206,7 +218,13 @@ public class TestMain {
 
     @Test
     public void testMainExtra() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Capturem la sortida del sistema
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        PrintStream printStream = new PrintStream(outputStream);
+        PrintStream originalOut = System.out;
+        System.setOut(printStream);
+
+        try {
             AppData db = AppData.getInstance();
 
             // Create tables
@@ -263,8 +281,12 @@ public class TestMain {
 
             // Close the database connection
             db.close();
-        });
+        } finally {
+            // Restableix la sortida del sistema
+            System.setOut(originalOut);
+        }
 
+        String text = outputStream.toString();
         text = text.replace("\r\n", "\n");
 
         String expectedOutput = """
@@ -314,9 +336,10 @@ public class TestMain {
             """.replace("\r\n", "\n").replace("            ","");
 
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 }
+

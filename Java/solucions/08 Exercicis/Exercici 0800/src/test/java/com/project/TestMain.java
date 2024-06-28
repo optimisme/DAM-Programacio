@@ -4,29 +4,35 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
-
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
-import java.sql.Date;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.sql.*;
+import java.io.PrintStream;
 
 public class TestMain {
 
     @Test
     public void testMainOutput() throws Exception {
-
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
-            // Executa el main per a provar la seva sortida
-            String[] args = {}; // Passa els arguments necessaris si n'hi ha
-            Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        // Executa el main per a provar la seva sortida
+        String[] args = {}; // Passa els arguments necessaris si n'hi ha
+        Main.main(args);
+
+        System.setOut(originalOut);
 
         // Comprova que la sortida conté el text esperat
+        String text = outContent.toString().replace("\r\n", "\n");
         String expectedOutput = "\nEditorials:" +
             "\nID: 1, Nom: Editorial Alpha" +
             "\nID: 2, Nom: Beta Publishers" +
@@ -39,11 +45,11 @@ public class TestMain {
             "\nID: 4, Títol: Quart text, Autor: Autor D, Any: 2021, Editorial: Delta Literature" +
             "\nID: 5, Títol: Cinquè manuscrit, Autor: Autor E, Any: 2022, Editorial: Editorial Alpha" +
             "\nID: 6, Títol: Sisè document, Autor: Autor F, Any: 2023, Editorial: Beta Publishers" +
-            "\n\nInformació del Llibre: 5" + 
+            "\n\nInformació del Llibre: 5" +
             "\nID: 5, Títol: Cinquè manuscrit, Autor: Autor E, Any de Publicació: 2022, Editorial: Editorial Alpha" +
             "\n";
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-        assertTrue(diff.compareTo("identical") == 0, 
+        assertTrue(diff.compareTo("identical") == 0,
             "\n>>>>>>>>>> >>>>>>>>>>\n" +
             diff +
             "<<<<<<<<<< <<<<<<<<<<\n");
@@ -51,7 +57,6 @@ public class TestMain {
 
     @Test
     public void testMainTables() throws SQLException {
-
         System.setProperty("environment", "test");
 
         // Comprova l'existència de l'arxiu dades.sqlite
@@ -62,7 +67,7 @@ public class TestMain {
 
         try (Connection conn = DriverManager.getConnection(url)) {
             DatabaseMetaData dbMetaData = conn.getMetaData();
-            
+
             // Comprova l'existència de la taula Editorials
             try (ResultSet rs = dbMetaData.getTables(null, null, "editorials", null)) {
                 assertTrue(rs.next(), "La taula Editorials no existeix.");
@@ -131,11 +136,11 @@ public class TestMain {
     private void assertMethod(Class<?> clazz, String methodName, boolean shouldBeStatic, boolean shouldBePrivate, String message, Class<?>... parameterTypes) throws NoSuchMethodException {
         // Utilitza getDeclaredMethod per accedir a mètodes privats
         Method method = clazz.getDeclaredMethod(methodName, parameterTypes);
-    
+
         // Comprova si el mètode és estàtic
         boolean isStatic = Modifier.isStatic(method.getModifiers());
         assertEquals(shouldBeStatic, isStatic, message + " El mètode hauria de ser " + (shouldBeStatic ? "static" : "no static") + ".");
-    
+
         // Comprova si el mètode és privat
         boolean isPrivate = Modifier.isPrivate(method.getModifiers());
         assertEquals(shouldBePrivate, isPrivate, message + " El mètode hauria de ser " + (shouldBePrivate ? "privat" : "no privat") + ".");
