@@ -3,10 +3,11 @@ package com.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.io.File;
 import java.sql.*;
 import java.util.Locale;
@@ -15,15 +16,23 @@ public class TestMain {
 
     @Test
     public void testMainOutputA() throws Exception {
-
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             MainA.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = baos.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = """
@@ -39,24 +48,33 @@ public class TestMain {
             ID: 1, Species ID: 1, Spaceship Name: SS Voyager, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
             ID: 2, Species ID: 1, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Galactic Frontier
             """.replace("\r\n", "\n").replace("            ","");
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0,
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
     public void testMainOutputB() throws Exception {
-
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             MainB.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = baos.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = """
@@ -101,11 +119,12 @@ public class TestMain {
             ID: 1, Species ID: 1, Spaceship Name: SS Merchant, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
             ID: 2, Species ID: 2, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Outer Rim territories
             """.replace("\r\n", "\n").replace("            ","");
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0,
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
@@ -200,8 +219,12 @@ public class TestMain {
 
     @Test
     public void testMainExtraA() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
+        try {
             Locale.setDefault(Locale.US);
 
             AppData db = AppData.getInstance();
@@ -232,9 +255,14 @@ public class TestMain {
 
             // Close the database connection
             db.close();
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
 
+        String text = baos.toString().replace("\r\n", "\n");
+
+        // Comprova que la sortida conté el text esperat
         String expectedOutput = """
             Adding initial species...
             ID: 1, Name: Zorglon, Origin: Alpha Centauri, Limbs: 4, Telepathic: Yes
@@ -253,16 +281,20 @@ public class TestMain {
             """.replace("\r\n", "\n").replace("            ","");
 
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
     public void testMainExtraB() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
+        try {
             Locale.setDefault(Locale.US);
 
             AppData db = AppData.getInstance();
@@ -319,9 +351,12 @@ public class TestMain {
 
             // Close the database connection
             db.close();
-        });
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
 
-        text = text.replace("\r\n", "\n");
+        String text = baos.toString().replace("\r\n", "\n");
 
         String expectedOutput = """
             Adding initial species...
@@ -367,9 +402,9 @@ public class TestMain {
             """.replace("\r\n", "\n").replace("            ","");
 
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 }

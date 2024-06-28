@@ -3,7 +3,6 @@ package com.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
@@ -13,6 +12,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class TestMain {
 
@@ -20,12 +21,19 @@ public class TestMain {
     public void testMainOutputA() throws Exception {
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             MainA.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            System.setOut(originalOut);
+        }
+        
+        String text = baos.toString().replace("\r\n", "\n");
 
         // Obté la data actual en el format necessari
         LocalDate currentDate = LocalDate.now();
@@ -54,12 +62,19 @@ public class TestMain {
     public void testMainOutputB() throws Exception {
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             MainB.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            System.setOut(originalOut);
+        }
+        
+        String text = baos.toString().replace("\r\n", "\n");
 
         // Obté la data actual en el format necessari
         LocalDate currentDate = LocalDate.now();
@@ -176,8 +191,11 @@ public class TestMain {
 
     @Test
     public void testMainExtraA() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
+        try {
             Locale.setDefault(Locale.US);
             Date date = new Date(System.currentTimeMillis());
             
@@ -232,9 +250,11 @@ public class TestMain {
 
             // Tanca la base de dades
             app.close();
-        });
+        } finally {
+            System.setOut(originalOut);
+        }
 
-        text = text.replace("\r\n", "\n");
+        String text = baos.toString().replace("\r\n", "\n");
 
         String expectedOutput = """
             Inserted UOR268 with ID: 1
@@ -252,16 +272,19 @@ public class TestMain {
             """.replace("\r\n", "\n").replace("            ","");
 
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
     public void testMainExtraB() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
+        try {
             Locale.setDefault(Locale.US);
             Date date = new Date(System.currentTimeMillis());
             
@@ -330,9 +353,11 @@ public class TestMain {
 
             // Tanca la base de dades
             app.close();
-        });
+        } finally {
+            System.setOut(originalOut);
+        }
 
-        text = text.replace("\r\n", "\n");
+        String text = baos.toString().replace("\r\n", "\n");
 
         String expectedOutput = """
             Inserted UOR268 with ID: 1
@@ -352,9 +377,9 @@ public class TestMain {
             """.replace("\r\n", "\n").replace("            ","");
 
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 }

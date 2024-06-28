@@ -3,11 +3,12 @@ package com.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.io.File;
 import java.sql.*;
 import java.util.Locale;
@@ -16,15 +17,23 @@ public class TestMain {
 
     @Test
     public void testMainOutputA() throws Exception {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
-        System.setProperty("environment", "test");
+        try {
+            System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             MainA.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = baos.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = """
@@ -44,24 +53,32 @@ public class TestMain {
             - ID: 5, Name: Felp Signals, Planet Origin: Felpar, Complexity: 6, Telepathic: Yes, Uses gestures: No
             - ID: 6, Name: Signarly, Planet Origin: Sigmar, Complexity: 2, Telepathic: No, Uses gestures: Yes
             """.replace("\r\n", "\n").replace("            ","");
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
     public void testMainOutputB() throws Exception {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
-        System.setProperty("environment", "test");
+        try {
+            System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             MainB.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = baos.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = """
@@ -81,11 +98,11 @@ public class TestMain {
             - Maximum Complexity: 7
             - Percentage of languages using gestures: 33.33%
             """.replace("\r\n", "\n").replace("            ","");
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
@@ -115,20 +132,7 @@ public class TestMain {
             }
         }
     }
-/* 
-    private void checkForeignKey(DatabaseMetaData metaData, String tableName, String pkTableName, String fkColumnName) throws SQLException {
-        try (ResultSet rs = metaData.getImportedKeys(null, null, tableName)) {
-            boolean foundFK = false;
-            while (rs.next()) {
-                if (pkTableName.equals(rs.getString("PKTABLE_NAME")) && fkColumnName.equals(rs.getString("FKCOLUMN_NAME"))) {
-                    foundFK = true;
-                    break;
-                }
-            }
-            assertTrue(foundFK, "The table " + tableName + " does not have the correct foreign key relation with " + pkTableName);
-        }
-    }
-*/
+
     @Test
     public void testMainCallsA() throws Exception {
         Class<MainA> clazz = MainA.class;
@@ -204,8 +208,12 @@ public class TestMain {
 
     @Test
     public void testMainExtraA() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
+        try {
             Locale.setDefault(Locale.US);
 
             AppData db = AppData.getInstance();
@@ -238,8 +246,12 @@ public class TestMain {
 
             // Close the database connection
             db.close();
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = baos.toString().replace("\r\n", "\n");
 
         String expectedOutput = """
             Add languages:
@@ -260,16 +272,20 @@ public class TestMain {
             """.replace("\r\n", "\n").replace("            ","");
 
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
     public void testMainExtraB() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
+        try {
             Locale.setDefault(Locale.US);
 
             AppData db = AppData.getInstance();
@@ -318,9 +334,12 @@ public class TestMain {
             System.out.printf("- Percentage of languages using gestures: %.2f%%\n", percentageGestures);
             // Close the database connection
             db.close();
-        });
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
 
-        text = text.replace("\r\n", "\n");
+        String text = baos.toString().replace("\r\n", "\n");
 
         String expectedOutput = """
             Add languages:
@@ -341,9 +360,9 @@ public class TestMain {
             """.replace("\r\n", "\n").replace("            ","");
 
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 }

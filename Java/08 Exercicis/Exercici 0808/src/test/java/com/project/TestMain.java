@@ -3,10 +3,11 @@ package com.project;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.io.File;
 import java.sql.*;
 import java.util.Locale;
@@ -15,15 +16,23 @@ public class TestMain {
 
     @Test
     public void testMainOutputA() throws Exception {
-
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             MainA.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = baos.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = """
@@ -39,62 +48,83 @@ public class TestMain {
             ID: 1, Species ID: 1, Spaceship Name: SS Voyager, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
             ID: 2, Species ID: 1, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Galactic Frontier
             """.replace("\r\n", "\n").replace("            ","");
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0,
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
     public void testMainOutputB() throws Exception {
-
         System.setProperty("environment", "test");
 
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
+
+        try {
             // Executa el main per a provar la seva sortida
             String[] args = {}; // Passa els arguments necessaris si n'hi ha
             MainB.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
+
+        String text = baos.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = """
             Adding initial species...
             ID: 1, Name: Zorglon, Origin: Alpha Centauri, Limbs: 4, Telepathic: Yes
             ID: 2, Name: Glarblex, Origin: Sirius B, Limbs: 6, Telepathic: No
+            ID: 3, Name: Vulcor, Origin: Orion Belt, Limbs: 8, Telepathic: Yes
 
             Adding spaceships...
             ID: 1, Name: SS Voyager, Type: Exploration, Capacity: 1000
             ID: 2, Name: SS Predator, Type: War, Capacity: 2000
+            ID: 3, Name: SS Merchant, Type: Trade, Capacity: 500
 
             Adding missions...
-            ID: 1, Species ID: 1, Spaceship Name: SS Voyager, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
-            ID: 2, Species ID: 1, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Galactic Frontier
+            ID: 1, Species ID: 1, Spaceship Name: SS Merchant, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
+            ID: 2, Species ID: 2, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Galactic Frontier
+            ID: 3, Species ID: 3, Spaceship Name: SS Voyager, Date: 2024-07-20, Duration: 50.0, Objective: Trade mission to Betelgeuse
 
             Updating species 'Zorglon' to 'Zorglon Revised'...
             ID: 1, Name: Zorglon Revised, Origin: Beta Centauri, Limbs: 5, Telepathic: Yes
             ID: 2, Name: Glarblex, Origin: Sirius B, Limbs: 6, Telepathic: No
+            ID: 3, Name: Vulcor, Origin: Orion Belt, Limbs: 8, Telepathic: Yes
 
             Deleting spaceship 'SS Voyager'...
             ID: 2, Name: SS Predator, Type: War, Capacity: 2000
+            ID: 3, Name: SS Merchant, Type: Trade, Capacity: 500
 
             Adding another species and updating a mission...
             ID: 1, Name: Zorglon Revised, Origin: Beta Centauri, Limbs: 5, Telepathic: Yes
             ID: 2, Name: Glarblex, Origin: Sirius B, Limbs: 6, Telepathic: No
-            ID: 3, Name: Quibitron, Origin: Zeta Reticuli, Limbs: 8, Telepathic: Yes
-            ID: 1, Species ID: 1, Spaceship Name: SS Voyager, Date: 2024-05-10, Duration: 100.5, Objective: Explore the newly discovered planets around Zeta Reticuli
-            ID: 2, Species ID: 1, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Galactic Frontier
+            ID: 3, Name: Vulcor, Origin: Orion Belt, Limbs: 8, Telepathic: Yes
+            ID: 4, Name: Quibitron, Origin: Zeta Reticuli, Limbs: 8, Telepathic: Yes
+            ID: 1, Species ID: 1, Spaceship Name: SS Merchant, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
+            ID: 2, Species ID: 2, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Outer Rim territories
 
             Deleting species 'Glarblex'...
             ID: 1, Name: Zorglon Revised, Origin: Beta Centauri, Limbs: 5, Telepathic: Yes
-            ID: 3, Name: Quibitron, Origin: Zeta Reticuli, Limbs: 8, Telepathic: Yes
+            ID: 3, Name: Vulcor, Origin: Orion Belt, Limbs: 8, Telepathic: Yes
+            ID: 4, Name: Quibitron, Origin: Zeta Reticuli, Limbs: 8, Telepathic: Yes
+
+            Listing missions after deletion of a species...
+            ID: 1, Species ID: 1, Spaceship Name: SS Merchant, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
+            ID: 2, Species ID: 2, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Outer Rim territories
             """.replace("\r\n", "\n").replace("            ","");
-            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                "\n>>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0,
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
@@ -189,8 +219,12 @@ public class TestMain {
 
     @Test
     public void testMainExtraA() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
+        try {
             Locale.setDefault(Locale.US);
 
             AppData db = AppData.getInstance();
@@ -221,37 +255,46 @@ public class TestMain {
 
             // Close the database connection
             db.close();
-        });
-        text = text.replace("\r\n", "\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
 
+        String text = baos.toString().replace("\r\n", "\n");
+
+        // Comprova que la sortida conté el text esperat
         String expectedOutput = """
             Adding initial species...
             ID: 1, Name: Zorglon, Origin: Alpha Centauri, Limbs: 4, Telepathic: Yes
             ID: 2, Name: Glarblex, Origin: Sirius B, Limbs: 6, Telepathic: No
             ID: 3, Name: Vulcor, Origin: Orion Belt, Limbs: 8, Telepathic: Yes
-
+            
             Adding spaceships...
             ID: 1, Name: SS Voyager, Type: Exploration, Capacity: 1000
             ID: 2, Name: SS Predator, Type: War, Capacity: 2000
             ID: 3, Name: SS Merchant, Type: Trade, Capacity: 500
-
+            
             Adding missions...
-            ID: 1, Species ID: 1, Spaceship Name: null, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
-            ID: 2, Species ID: 2, Spaceship Name: null, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Galactic Frontier
-            ID: 3, Species ID: 3, Spaceship Name: null, Date: 2024-07-20, Duration: 50.0, Objective: Trade mission to Betelgeuse
+            ID: 1, Species ID: 1, Spaceship Name: SS Merchant, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
+            ID: 2, Species ID: 2, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Galactic Frontier
+            ID: 3, Species ID: 3, Spaceship Name: SS Voyager, Date: 2024-07-20, Duration: 50.0, Objective: Trade mission to Betelgeuse
             """.replace("\r\n", "\n").replace("            ","");
 
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 
     @Test
     public void testMainExtraB() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
+        // Captura la sortida del sistema
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(baos));
 
+        try {
             Locale.setDefault(Locale.US);
 
             AppData db = AppData.getInstance();
@@ -261,44 +304,44 @@ public class TestMain {
 
             // Adding initial species and list them
             System.out.println("Adding initial species...");
-            MainB.addSpecies("Zorglon", "Alpha Centauri", 4, true);
-            MainB.addSpecies("Glarblex", "Sirius B", 6, false);
-            MainB.addSpecies("Vulcor", "Orion Belt", 8, true);
+            MainB.addSpecies("abc", "def", 41, true);
+            MainB.addSpecies("ghi", "jkl", 61, false);
+            MainB.addSpecies("mno", "pqr", 81, true);
             MainB.listSpecies();
 
             // Add spaceships and list them
             System.out.println("\nAdding spaceships...");
-            MainB.addSpaceship("SS Voyager", "Exploration", 1000);
-            MainB.addSpaceship("SS Predator", "War", 2000);
-            MainB.addSpaceship("SS Merchant", "Trade", 500);
+            MainB.addSpaceship("arr", "brr", 1001);
+            MainB.addSpaceship("crr", "drr", 2001);
+            MainB.addSpaceship("err", "frr", 501);
             MainB.listSpaceships();
 
             // Add missions and list them
             System.out.println("\nAdding missions...");
-            MainB.addMission(1, 3, "2024-05-10", 100.5, "Explore the unknown regions of Andromeda");
-            MainB.addMission(2, 2, "2024-06-15", 300.0, "Defend the Galactic Frontier");
-            MainB.addMission(3, 1, "2024-07-20", 50.0, "Trade mission to Betelgeuse");
+            MainB.addMission(1, 3, "2024-05-11", 100.5, "add");
+            MainB.addMission(2, 2, "2024-06-11", 300.0, "bdd");
+            MainB.addMission(3, 1, "2024-07-21", 50.0, "edd");
             MainB.listMissions();
 
             // Update species and list
-            System.out.println("\nUpdating species 'Zorglon' to 'Zorglon Revised'...");
-            MainB.updateSpecies(1, "Zorglon Revised", "Beta Centauri", 5, true);
+            System.out.println("\nUpdating species 'ghi' to 'ihg'...");
+            MainB.updateSpecies(1, "ghi", "igh", 51, true);
             MainB.listSpecies();
 
             // Delete a spaceship and list
-            System.out.println("\nDeleting spaceship 'SS Voyager'...");
+            System.out.println("\nDeleting spaceship 'abc'...");
             MainB.deleteSpaceship(1);
             MainB.listSpaceships();
 
             // Add another species, update a mission, and list both
             System.out.println("\nAdding another species and updating a mission...");
-            MainB.addSpecies("Quibitron", "Zeta Reticuli", 8, true);
-            MainB.updateMission(2, "Defend the Outer Rim territories");
+            MainB.addSpecies("frr", "ftt", 8, true);
+            MainB.updateMission(2, "fee");
             MainB.listSpecies();
             MainB.listMissions();
 
             // Finally, delete a species and list
-            System.out.println("\nDeleting species 'Glarblex'...");
+            System.out.println("\nDeleting species ...");
             MainB.deleteSpecies(2);
             MainB.listSpecies();
 
@@ -308,57 +351,60 @@ public class TestMain {
 
             // Close the database connection
             db.close();
-        });
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
 
-        text = text.replace("\r\n", "\n");
+        String text = baos.toString().replace("\r\n", "\n");
 
         String expectedOutput = """
             Adding initial species...
-            ID: 1, Name: Zorglon, Origin: Alpha Centauri, Limbs: 4, Telepathic: Yes
-            ID: 2, Name: Glarblex, Origin: Sirius B, Limbs: 6, Telepathic: No
-            ID: 3, Name: Vulcor, Origin: Orion Belt, Limbs: 8, Telepathic: Yes
+            ID: 1, Name: abc, Origin: def, Limbs: 41, Telepathic: Yes
+            ID: 2, Name: ghi, Origin: jkl, Limbs: 61, Telepathic: No
+            ID: 3, Name: mno, Origin: pqr, Limbs: 81, Telepathic: Yes
 
             Adding spaceships...
-            ID: 1, Name: SS Voyager, Type: Exploration, Capacity: 1000
-            ID: 2, Name: SS Predator, Type: War, Capacity: 2000
-            ID: 3, Name: SS Merchant, Type: Trade, Capacity: 500
+            ID: 1, Name: arr, Type: brr, Capacity: 1001
+            ID: 2, Name: crr, Type: drr, Capacity: 2001
+            ID: 3, Name: err, Type: frr, Capacity: 501
 
             Adding missions...
-            ID: 1, Species ID: 1, Spaceship Name: SS Merchant, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
-            ID: 2, Species ID: 2, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Galactic Frontier
-            ID: 3, Species ID: 3, Spaceship Name: SS Voyager, Date: 2024-07-20, Duration: 50.0, Objective: Trade mission to Betelgeuse
+            ID: 1, Species ID: 1, Spaceship Name: err, Date: 2024-05-11, Duration: 100.5, Objective: add
+            ID: 2, Species ID: 2, Spaceship Name: crr, Date: 2024-06-11, Duration: 300.0, Objective: bdd
+            ID: 3, Species ID: 3, Spaceship Name: arr, Date: 2024-07-21, Duration: 50.0, Objective: edd
 
-            Updating species 'Zorglon' to 'Zorglon Revised'...
-            ID: 1, Name: Zorglon Revised, Origin: Beta Centauri, Limbs: 5, Telepathic: Yes
-            ID: 2, Name: Glarblex, Origin: Sirius B, Limbs: 6, Telepathic: No
-            ID: 3, Name: Vulcor, Origin: Orion Belt, Limbs: 8, Telepathic: Yes
+            Updating species 'ghi' to 'ihg'...
+            ID: 1, Name: ghi, Origin: igh, Limbs: 51, Telepathic: Yes
+            ID: 2, Name: ghi, Origin: jkl, Limbs: 61, Telepathic: No
+            ID: 3, Name: mno, Origin: pqr, Limbs: 81, Telepathic: Yes
 
-            Deleting spaceship 'SS Voyager'...
-            ID: 2, Name: SS Predator, Type: War, Capacity: 2000
-            ID: 3, Name: SS Merchant, Type: Trade, Capacity: 500
+            Deleting spaceship 'abc'...
+            ID: 2, Name: crr, Type: drr, Capacity: 2001
+            ID: 3, Name: err, Type: frr, Capacity: 501
 
             Adding another species and updating a mission...
-            ID: 1, Name: Zorglon Revised, Origin: Beta Centauri, Limbs: 5, Telepathic: Yes
-            ID: 2, Name: Glarblex, Origin: Sirius B, Limbs: 6, Telepathic: No
-            ID: 3, Name: Vulcor, Origin: Orion Belt, Limbs: 8, Telepathic: Yes
-            ID: 4, Name: Quibitron, Origin: Zeta Reticuli, Limbs: 8, Telepathic: Yes
-            ID: 1, Species ID: 1, Spaceship Name: SS Merchant, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
-            ID: 2, Species ID: 2, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Outer Rim territories
+            ID: 1, Name: ghi, Origin: igh, Limbs: 51, Telepathic: Yes
+            ID: 2, Name: ghi, Origin: jkl, Limbs: 61, Telepathic: No
+            ID: 3, Name: mno, Origin: pqr, Limbs: 81, Telepathic: Yes
+            ID: 4, Name: frr, Origin: ftt, Limbs: 8, Telepathic: Yes
+            ID: 1, Species ID: 1, Spaceship Name: err, Date: 2024-05-11, Duration: 100.5, Objective: add
+            ID: 2, Species ID: 2, Spaceship Name: crr, Date: 2024-06-11, Duration: 300.0, Objective: fee
 
-            Deleting species 'Glarblex'...
-            ID: 1, Name: Zorglon Revised, Origin: Beta Centauri, Limbs: 5, Telepathic: Yes
-            ID: 3, Name: Vulcor, Origin: Orion Belt, Limbs: 8, Telepathic: Yes
-            ID: 4, Name: Quibitron, Origin: Zeta Reticuli, Limbs: 8, Telepathic: Yes
+            Deleting species ...
+            ID: 1, Name: ghi, Origin: igh, Limbs: 51, Telepathic: Yes
+            ID: 3, Name: mno, Origin: pqr, Limbs: 81, Telepathic: Yes
+            ID: 4, Name: frr, Origin: ftt, Limbs: 8, Telepathic: Yes
 
             Listing missions after deletion of a species...
-            ID: 1, Species ID: 1, Spaceship Name: SS Merchant, Date: 2024-05-10, Duration: 100.5, Objective: Explore the unknown regions of Andromeda
-            ID: 2, Species ID: 2, Spaceship Name: SS Predator, Date: 2024-06-15, Duration: 300.0, Objective: Defend the Outer Rim territories
+            ID: 1, Species ID: 1, Spaceship Name: err, Date: 2024-05-11, Duration: 100.5, Objective: add
+            ID: 2, Species ID: 2, Spaceship Name: crr, Date: 2024-06-11, Duration: 300.0, Objective: fee
             """.replace("\r\n", "\n").replace("            ","");
 
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+        assertTrue(diff.compareTo("identical") == 0, 
+            "\n>>>>>>>>>> >>>>>>>>>>\n" +
+            diff +
+            "<<<<<<<<<< <<<<<<<<<<\n");
     }
 }
