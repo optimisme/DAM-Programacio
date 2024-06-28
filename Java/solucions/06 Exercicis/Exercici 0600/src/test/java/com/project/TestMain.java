@@ -7,25 +7,32 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class TestMain {
 
     @Test
     public void testMainOutput() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
-            // Executa el main per a provar la seva sortida
-            String[] args = {}; // Passa els arguments necessaris si n'hi ha
-            Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        // Redirigeix la sortida estàndard a un flux de sortida
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        // Executa el main per a provar la seva sortida
+        String[] args = {}; // Passa els arguments necessaris si n'hi ha
+        Main.main(args);
+
+        // Restaura els fluxos originals
+        System.setOut(originalOut);
 
         // Comprova que la sortida conté el text esperat
+        String text = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
         String expectedOutput = "Maria Lopez - Salari Anual: 30000.0\n" +
             "Després de l'increment: 33000.0\n" +
             "Carlos Garcia [TI] - Salari Anual: 50000.0\n" +
-            "Després de l'increment: 55000.0" +
-            "\n";
+            "Després de l'increment: 55000.0\n";
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
         assertTrue(diff.compareTo("identical") == 0, 
             "\n>>>>>>>>>> >>>>>>>>>>\n" +
@@ -56,7 +63,7 @@ public class TestMain {
 
     @Test
     public void testMainPrivateAttributes() {
-        // Obtenim tots els camps de la classe Cotxe
+        // Obtenim tots els camps de la classe Empleat
         Field[] fields = Empleat.class.getDeclaredFields();
 
         // Iterem per cada camp per verificar que sigui privat
