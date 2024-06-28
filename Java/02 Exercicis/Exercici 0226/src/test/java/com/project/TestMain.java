@@ -2,8 +2,9 @@ package com.project;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Locale;
 
 public class TestMain {
@@ -19,16 +20,24 @@ public class TestMain {
                                     "Per un capital de 7464.00€, un interès del 4.00% i 14 mesos, els interessos són 4179.84€\n" +
                                     "Per un capital de 10000.00€, un interès del 2.00% i 24 mesos, els interessos són 4800.00€\n";
 
-            String actualOutput = SystemLambda.tapSystemOut(() -> {
-                Main.main(new String[]{});
-            });
+            // Redirigeix la sortida estàndard a un flux de sortida
+            ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+            PrintStream originalOut = System.out;
+            System.setOut(new PrintStream(outContent));
 
-            actualOutput = actualOutput.replace("\r\n", "\n"); // Normalitza les noves línies
+            // Executa el main per a provar la seva sortida
+            Main.main(new String[]{});
+
+            // Comprova que la sortida conté el text esperat
+            String actualOutput = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
             String diff = TestStringUtils.findFirstDifference(actualOutput, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0,
                 "\n>>>>>>>>>> >>>>>>>>>>\n" +
                 diff +
                 "<<<<<<<<<< <<<<<<<<<<\n");
+
+            // Restaura els fluxos originals
+            System.setOut(originalOut);
         } finally {
             Locale.setDefault(defaultLocale); // Restaura la configuració regional per defecte
         }

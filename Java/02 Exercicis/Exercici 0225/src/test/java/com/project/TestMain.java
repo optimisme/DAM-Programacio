@@ -11,20 +11,28 @@ import java.util.Locale;
 public class TestMain {
 
     @Test
-    public void testImpostos() throws Exception {
+    public void testEscola() throws Exception {
         Locale defaultLocale = Locale.getDefault(); // Guarda la configuració regional per defecte
         Locale.setDefault(Locale.US); // Estableix la configuració regional a US
 
         try {
             String[] inputs = {
-                "9000\n",
-                "20000\n",
-                "60000\n"
+                "dilluns\n",
+                "dimarts\n",
+                "dimecres\n",
+                "dijous\n",
+                "divendres\n",
+                "dissabte\n",
+                "diumenge\n"
             };
             String[] expectedOutputs = {
-                "Introdueix una xifra entre 0 i 100.000: Per un import de 9000, els impostos que has de pagar són un 10% i el total és 9900.00\n",
-                "Introdueix una xifra entre 0 i 100.000: Per un import de 20000, els impostos que has de pagar són un 20% i el total és 24000.00\n",
-                "Introdueix una xifra entre 0 i 100.000: Per un import de 60000, els impostos que has de pagar són un 30% i el total és 78000.00\n"
+                "Introdueix un dia de la setmana: S'ha d'anar a l'escola\n",
+                "Introdueix un dia de la setmana: S'ha d'anar a l'escola\n",
+                "Introdueix un dia de la setmana: S'ha d'anar a l'escola\n",
+                "Introdueix un dia de la setmana: S'ha d'anar a l'escola\n",
+                "Introdueix un dia de la setmana: S'ha d'anar a l'escola\n",
+                "Introdueix un dia de la setmana: No s'ha d'anar a l'escola\n",
+                "Introdueix un dia de la setmana: No s'ha d'anar a l'escola\n"
             };
 
             for (int i = 0; i < inputs.length; i++) {

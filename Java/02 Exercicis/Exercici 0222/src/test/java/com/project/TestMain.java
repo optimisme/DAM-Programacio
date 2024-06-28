@@ -2,8 +2,9 @@ package com.project;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.util.Locale;
 
 public class TestMain {
@@ -15,13 +16,21 @@ public class TestMain {
 
         try {
             for (int i = 0; i < 5; i++) {
-                String actualOutput = SystemLambda.tapSystemOut(() -> {
-                    Main.main(new String[]{});
-                });
+                // Redirigeix la sortida estàndard a un flux de sortida
+                ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+                PrintStream originalOut = System.out;
+                System.setOut(new PrintStream(outContent));
 
-                actualOutput = actualOutput.replace("\r\n", "\n"); // Normalitza les noves línies
+                // Executa el main per a provar la seva sortida
+                Main.main(new String[]{});
+
+                // Comprova que la sortida conté el text esperat
+                String actualOutput = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
                 boolean outputIsValid = validateOutput(actualOutput);
                 assertTrue(outputIsValid, "La sortida no és vàlida:\n" + actualOutput);
+
+                // Restaura els fluxos originals
+                System.setOut(originalOut);
             }
         } finally {
             Locale.setDefault(defaultLocale); // Restaura la configuració regional per defecte
