@@ -2,25 +2,30 @@ package com.project;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-
 import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import com.github.stefanbirkner.systemlambda.SystemLambda;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 public class TestMain {
 
     @Test
     public void testMainOutput() throws Exception {
-        String text = SystemLambda.tapSystemOut(() -> {
-            // Executa el main per a provar la seva sortida
-            String[] args = {}; // Passa els arguments necessaris si n'hi ha
-            Main.main(args);
-        });
-        text = text.replace("\r\n", "\n");
+        // Redirigeix la sortida estàndard a un flux de sortida
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+
+        // Executa el main per a provar la seva sortida
+        String[] args = {}; // Passa els arguments necessaris si n'hi ha
+        Main.main(args);
+
+        // Restaura els fluxos originals
+        System.setOut(originalOut);
 
         // Comprova que la sortida conté el text esperat
+        String text = outContent.toString().replace("\r\n", "\n"); // Normalitza les noves línies
         String expectedOutput = "Totes les publicacions:\n" +
             "Publicacio{titol='El Senyor dels Anells', anyPublicacio=1954}\n" +
             "Publicacio{titol='National Geographic', anyPublicacio=2020}\n" +
@@ -29,8 +34,7 @@ public class TestMain {
             "Publicacio{titol='El Senyor dels Anells', anyPublicacio=1954}\n" +
             "Publicacio{titol='Dune', anyPublicacio=1965}\n\n" +
             "Revistes:\n" +
-            "Publicacio{titol='National Geographic', anyPublicacio=2020}" +
-            "\n";
+            "Publicacio{titol='National Geographic', anyPublicacio=2020}\n";
         String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
         assertTrue(diff.compareTo("identical") == 0, 
             "\n>>>>>>>>>> >>>>>>>>>>\n" +
@@ -59,38 +63,42 @@ public class TestMain {
         // Verificar que la llista de revistes té 4 elements
         assertEquals(4, biblioteca.getRevistes().size(), "Hauria d'haver 4 revistes a la biblioteca.");
     
-        String text = SystemLambda.tapSystemOut(() -> {
-            Biblioteca bib = new Biblioteca();
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        PrintStream originalOut = System.out;
+        System.setOut(new PrintStream(outContent));
+    
+        Biblioteca bib = new Biblioteca();
 
-            // Afegir 3 llibres
-            bib.afegirPublicacio(new Llibre("El Senyor dels Anells", 1954, "J.R.R. Tolkien"));
-            bib.afegirPublicacio(new Llibre("Dune", 1965, "Frank Herbert"));
-            bib.afegirPublicacio(new Llibre("1984", 1949, "George Orwell"));
+        // Afegir 3 llibres
+        bib.afegirPublicacio(new Llibre("El Senyor dels Anells", 1954, "J.R.R. Tolkien"));
+        bib.afegirPublicacio(new Llibre("Dune", 1965, "Frank Herbert"));
+        bib.afegirPublicacio(new Llibre("1984", 1949, "George Orwell"));
 
-            // Afegir 4 revistes
-            bib.afegirPublicacio(new Revista("National Geographic", 2020, 1024));
-            bib.afegirPublicacio(new Revista("Science News", 2021, 1050));
-            bib.afegirPublicacio(new Revista("The Economist", 2021, 1051));
-            bib.afegirPublicacio(new Revista("Time", 2020, 1025));
+        // Afegir 4 revistes
+        bib.afegirPublicacio(new Revista("National Geographic", 2020, 1024));
+        bib.afegirPublicacio(new Revista("Science News", 2021, 1050));
+        bib.afegirPublicacio(new Revista("The Economist", 2021, 1051));
+        bib.afegirPublicacio(new Revista("Time", 2020, 1025));
 
-            System.out.println("Totes les publicacions:");
-            for (Publicacio publicacio : biblioteca.getPublicacions()) {
-                System.out.println(publicacio);
-            }
+        System.out.println("Totes les publicacions:");
+        for (Publicacio publicacio : bib.getPublicacions()) {
+            System.out.println(publicacio);
+        }
 
-            System.out.println("\nLlibres:");
-            for (Llibre llibre : biblioteca.getLlibres()) {
-                System.out.println(llibre);
-            }
+        System.out.println("\nLlibres:");
+        for (Llibre llibre : bib.getLlibres()) {
+            System.out.println(llibre);
+        }
 
-            System.out.println("\nRevistes:");
-            for (Revista revista : biblioteca.getRevistes()) {
-                System.out.println(revista);
-            }
-        });
+        System.out.println("\nRevistes:");
+        for (Revista revista : bib.getRevistes()) {
+            System.out.println(revista);
+        }
+    
+        System.setOut(originalOut);
     
         // Reemplaça els salts de línia de Windows per fer el test més genèric
-        text = text.replace("\r\n", "\n");
+        String text = outContent.toString().replace("\r\n", "\n");
 
         // Comprova que la sortida conté el text esperat
         String expectedOutput = "Totes les publicacions:\n" +
@@ -120,7 +128,7 @@ public class TestMain {
     
     @Test
     public void testMainPrivateAttributes() {
-        // Obtenim tots els camps de la classe Cotxe
+        // Obtenim tots els camps de la classe Publicacio
         Field[] fields = Publicacio.class.getDeclaredFields();
 
         // Iterem per cada camp per verificar que sigui privat
