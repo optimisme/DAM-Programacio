@@ -682,7 +682,7 @@ public class Main {
 }
 ```
 
-## Llançar excepcions, throw
+### Llançar excepcions, throw
 
 Si en canvi el què volem és llançar una excepció, farem servir **throw**
 
