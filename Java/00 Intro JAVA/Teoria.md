@@ -215,7 +215,7 @@ public class Main {
 Per fer anar aquest exemple, cal anar amb el terminal i esciure:
 
 ```bash
-cd "./UF456/Teoria/00\ Introducció\ a\ JAVA/Exemple00/"
+cd "./Java/00 Intro JAVA/Exemple00/"
 mvn clean
 mvn compile
 ./run.sh com.project.Main
