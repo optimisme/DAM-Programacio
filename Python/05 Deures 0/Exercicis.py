@@ -76,6 +76,8 @@ def exercici1():
 # * La frase amb totes les vocals reemplaçades per '*'
 # * La frase amb la primera lletra de cada paraula en majúscula
 
+# Fes servir ''.join(['*' if c in vocals else c for c in frase]) per canviar les vocals per '*'
+
 def exercici2():
     pass
 
