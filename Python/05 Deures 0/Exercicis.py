@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import math
 
 # Conversió de graus Celsius a Fahrenheit

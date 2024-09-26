@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 # Conversió de graus Celsius a Fahrenheit
 # Fórmula: Fahrenheit = (Celsius * 9/5) + 32
 def celsius_a_fahrenheit(celsius):
