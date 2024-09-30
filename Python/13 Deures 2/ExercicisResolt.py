@@ -253,15 +253,15 @@ def mostraFrases(llista):
         cnt = cnt + 1
 
 # Fes una funció 'limitaFrases' que:
-# - si la llista té més de 8 elements, elimina els del principi
+# - si la llista té més de 10 elements, elimina els del principi
 # - retorna la llista modificada resultant
 def limitaFrases(llista):
-    while len(llista) > 8:
+    while len(llista) > 10:
         llista.pop(0)
     return llista
 
 # Fes una funció 'mainRun' que fins que l'usuari no escriu 'sortir':
-# - neteja la pantalla i mostra les 8 últimes frases d'una llista de frases
+# - neteja la pantalla i mostra les 10 últimes frases d'una llista de frases
 # - demana a l'usuari: "Introdueix una comanda ('ajuda' o 'sortir'): "
 # - identifica la comanda escrita per l'usuari i crida la funció corresponent
 # - afegeix la comanda identificada amb "Comanda: X"
@@ -274,7 +274,7 @@ def mainRun():
         entrada = input("Introdueix una comanda ('ajuda' o 'sortir'): ")
         if entrada == "sortir":
             break
-        historial.append(f"Comanda: {entrada}")
+        historial.append(f">Comanda: {entrada}")
         resultat = cridaFuncio(entrada)
         historial.extend(resultat)
 
