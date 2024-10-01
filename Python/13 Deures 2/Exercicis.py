@@ -85,8 +85,8 @@ def comptarPerClau(clau):
     Paràmetres:
         clau (str): La clau del diccionari per la qual es vol comptar.
     Retorna:
-        dict[str, int]: Un diccionari on les claus són els valors únics trobats
-                        i els valors són el nombre d'ocurrències de cada un.
+        Un diccionari bonic on les claus són els valors únics trobats
+        i els valors són el nombre d'ocurrències de cada un.
     Exemples:
         comptarPerClau("tipus")
         {
