@@ -16,6 +16,10 @@ def clearScreen():
 
 clearScreen()
 
+# En aquests deures es farà un programa que permet gestionar les dades
+# de 'llistaJocs' a través de la linia de comandes
+# mostrant la informació i últimes comandes d'un historial de 10 linies
+
 llistaJocs = [
     { "nom": "Super Mario Bros", "any": 1985, "tipus": "Plataformes", "preu": 5000 },
     { "nom": "The Legend of Zelda", "any": 1986, "tipus": "Acció-Aventura", "preu": 5000 },
