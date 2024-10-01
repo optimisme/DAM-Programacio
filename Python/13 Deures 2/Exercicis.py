@@ -77,11 +77,7 @@ def infoJoc(nomJoc):
         infoJoc("abc")
           ["Error infoJoc: "abc" desconegut."]
     """
-    for joc in llistaJocs:
-        if joc["nom"] == nomJoc:
-            info = f"  {joc['nom']}: {joc['any']}, {joc['tipus']} ({joc['preu']} pessetes)"
-            return [info]
-    return [f"  Error infoJoc: \"{nomJoc}\" desconegut."]
+    pass
 
 def comptarPerClau(clau):
     """
@@ -110,14 +106,7 @@ def comptarPerClau(clau):
             "1981": 1
         }
     """
-    comptador = {}
-    for joc in llistaJocs:
-        tipus = joc[clau]
-        if tipus in comptador:
-            comptador[tipus] += 1
-        else:
-            comptador[tipus] = 1
-    return comptador
+    pass
 
 def llistarPerClau(clau, condicio):
     """
@@ -136,11 +125,7 @@ def llistarPerClau(clau, condicio):
         llistarPerClau("any", "1990")
           Mario Kart 64: 1996, Carreres (10000 pessetes)
     """
-    resultat = []
-    for joc in llistaJocs:
-        if joc[clau] == condicio:
-            resultat.extend(infoJoc(joc["nom"]))
-    return resultat
+    pass
 
 
 def llistarPerInterval(clau, inici, fi):
@@ -160,11 +145,7 @@ def llistarPerInterval(clau, inici, fi):
           Metroid: 1986, Acció-Aventura (6000 pessetes)
           Donkey Kong: 1981, Plataformes (1000 pessetes)
     """
-    resultat = []
-    for joc in llistaJocs:
-        if inici <= joc[clau] <= fi:
-            resultat.extend(infoJoc(joc['nom']))
-    return resultat
+    pass
 
 def modificarJoc(nomJoc, clau, nouValor):
     global llistaJocs
@@ -183,12 +164,7 @@ def modificarJoc(nomJoc, clau, nouValor):
         modificarJoc("Super Mario Bros", "preu", 2)
           Super Mario Bros: 1985, Plataformes (2 pessetes)
     """
-    for i, joc in enumerate(llistaJocs):
-        if joc['nom'] == nomJoc:
-            joc[clau] = nouValor
-            llistaJocs[i] = joc # Aquí es modifica realment la llista!
-            return infoJoc(joc['nom'])
-    return [f"  Error modificarJoc: \"{nomJoc}\" desconegut."]
+    pass
 
 def ajudaAmpliada(nomFuncio):    
     """
@@ -212,19 +188,7 @@ def ajudaAmpliada(nomFuncio):
         ajudaAmpliada("abc")
           Error ajudaAmpliada: funció "abc" desconeguda.
     """
-    if nomFuncio in diccionariFuncions:
-        info = diccionariFuncions[nomFuncio]
-        resultat = [f"  Ajuda:   {info['ajuda']}"]
-        if 'clau' in info['ajuda']:
-            claus = llistaJocs[0].keys() if llistaJocs else []
-            if nomFuncio == 'llistarPerInterval':
-                resultat.append("  Claus:   any, preu")
-            else:
-                resultat.append(f"  Claus:   {', '.join(claus)}")
-        resultat.append(f"  Exemple: {info['exemple']}")
-        return resultat
-    else:
-        return [f"  Error ajudaAmpliada: funció \"{nomFuncio}\" desconeguda."]
+    pass
 
 def divideixFrase(frase):
     """
@@ -288,65 +252,7 @@ def cridaFuncio(frase):
         cridaFuncio("funcio llistarPerInterval any 1985 1990")
         ? Executa llistarPerInterval amb els paràmetres donats
     """
-    parts = divideixFrase(frase)
-    if len(parts) == 0:
-        return ["  Error cridaFuncio: no hi ha paràmetres"]
-
-    tipusPeticio = parts[0]
-    if tipusPeticio == "ajuda":
-        if len(parts) == 1:
-            return llistaAjuda
-        else:
-            nomFuncio = parts[1]
-            return ajudaAmpliada(nomFuncio)
-
-    elif tipusPeticio == "funcio":
-        if len(parts) == 1:
-            return ["  Error cridaFuncio: falta el nom de la funció i els paràmetres si en té"]
-        else:
-            nomFuncio = parts[1]
-            if nomFuncio not in diccionariFuncions:
-                return [f"  Error cridaFuncio: funció \"{nomFuncio}\" desconeguda"]
-            else:
-                numParametres = diccionariFuncions[nomFuncio]["parametres"]
-                textPluralFix = "paràmetres"
-                if len(parts) != (numParametres + 2):
-                    if (numParametres == 1):
-                        textPluralFix = "paràmetre"
-                    return [f"  Error cridaFuncio: la funció \"{nomFuncio}\" necessita {numParametres} {textPluralFix}"]
-                elif nomFuncio == "llistarPerInterval" and parts[2] != "any" and parts[2] != "preu":
-                    return [f"  Error cridaFuncio: la clau \"{parts[2]}\" no és vàlida, la \"{nomFuncio}\" necessita \"any\" o \"preu\""]
-                else:
-                    parametres = parts[2:]
-                    if nomFuncio == "infoJoc":
-                        return infoJoc(parametres[0])
-                    elif nomFuncio == "comptarPerClau":
-                        resultat = comptarPerClau(parametres[0])
-                        return diccionariBonic(resultat, 4).split('\n')
-                    elif nomFuncio == "llistarPerClau":
-                        clau = parametres[0]
-                        condicio = parametres[1]
-                        if (clau == 'any' or clau == 'preu') and not(condicio.isnumeric()):
-                            return [f"  Error cridaFuncio: la clau \"{clau}\" ha de tenir un valor numèric"]
-                        else:
-                            return llistarPerClau(clau, condicio)
-                    elif nomFuncio == "llistarPerInterval":
-                        clau = parametres[0]
-                        inici = parametres[1]
-                        fi = parametres[2]
-                        if not(inici.isnumeric() and fi.isnumeric()):
-                            return ["  Error cridaFuncio: inici i final han de ser números"]
-                        return llistarPerInterval(clau, int(inici), int(fi))
-                    elif nomFuncio == "modificarJoc":
-                        nomJoc = parametres[0]
-                        clau = parametres[1]
-                        nouValor = parametres[2]
-                        modificats = modificarJoc(nomJoc, clau, nouValor)
-                        return modificats
-                    else:
-                        return []
-    else:
-        return [f"  Error cridaFuncio: tipus de petició \"{tipusPeticio}\" desconeguda"]
+    pass
 
 def limitaFrases(llista):
     """
@@ -366,9 +272,7 @@ def limitaFrases(llista):
         limitaFrases(['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l'])
         ['c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l']
     """
-    while len(llista) > 10:
-        llista.pop(0)
-    return llista
+    pass
 
 def mostraFrases(llista):
     """
@@ -411,11 +315,7 @@ def mostraFrases(llista):
         - S'utilitza típicament per mostrar un historial o una llista de resultats
         de manera consistent en una interfície de consola.
     """
-    for i in range(10):
-        if i < len(llista):
-            print(llista[i])
-        else:
-            print(f" ")
+    pass
 
 def mainRun():
     """
@@ -452,18 +352,6 @@ def mainRun():
         - L'historial es manté entre iteracions, permetent a l'usuari veure les comandes i resultats anteriors.
         - La funció clearScreen s'espera que netegi la pantalla de la consola per a una millor presentació.
     """
-    historial = []
-    while True:
-        historial = limitaFrases(historial)
-        clearScreen()
-        mostraFrases(historial)
-        frase = input("Introdueix una comanda ('ajuda' o 'sortir'): ")
-        if frase == "sortir" or frase == "Sortir":
-            break
-        historial.extend(["", f"> Comanda: {frase}"])
-        missatges = cridaFuncio(frase)
-        historial.extend(missatges)
+    pass
 
-# No canvieu això o no passarà el test
-if __name__ == "__main__":
-    mainRun()
+mainRun()
