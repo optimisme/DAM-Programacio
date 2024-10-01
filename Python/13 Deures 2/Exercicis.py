@@ -339,12 +339,17 @@ def mainRun():
         - Proporciona una interfície de consola neta i actualitzada.
         - Permet a l'usuari introduir comandes i veure els resultats.
         - Ofereix una manera de sortir del programa.
+        - Per cada petició de l'usuari escriu "> Comanda: X" on X és la frase introduida
     Exemples d'ús:
         mainRun()
-        Introdueix una comanda ('ajuda' o 'sortir'): ajuda
-        ? Mostra l'ajuda general
+        Introdueix una comanda ('ajuda' o 'sortir'): ajuda llistarPerClau
+        > Comanda: ajuda llistarPerClau
+          Ajuda:   funcio llistarPerClau clau condicio
+          Claus:   nom, any, tipus, preu
+          Exemple: funcio llistarPerClau tipus Plataformes
         Introdueix una comanda ('ajuda' o 'sortir'): funcio infoJoc "The Legend of Zelda"
-        ? Mostra la informació del joc
+        > Comanda: funcio infoJoc "The Legend of Zelda"
+          The Legend of Zelda: 1986, Acció-Aventura (5000 pessetes)
         Introdueix una comanda ('ajuda' o 'sortir'): sortir
         ? El programa finalitza
     Notes:
