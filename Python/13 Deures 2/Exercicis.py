@@ -363,4 +363,6 @@ def mainRun():
     """
     pass
 
-mainRun()
+# No canvieu això o no passarà el test
+if __name__ == "__main__":
+    mainRun()
