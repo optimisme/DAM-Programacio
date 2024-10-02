@@ -137,7 +137,7 @@ def llistarPerClau(clau, condicio):
           The Legend of Zelda: 1986, Acció-Aventura (5000 pessetes)
           Metroid: 1986, Acció-Aventura (6000 pessetes)
 
-        llistarPerClau("any", "1990")
+          llistarPerClau("any", 1986)
           Mario Kart 64: 1996, Carreres (10000 pessetes)
     """
     resultat = []
