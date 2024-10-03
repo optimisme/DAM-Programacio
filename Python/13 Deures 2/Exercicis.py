@@ -9,9 +9,9 @@ def diccionariBonic(dic, spaces):
     return json.dumps(dic, indent = spaces, ensure_ascii=False)
 
 def clearScreen():
-    if os.name == 'nt':     # Si estàs en Windows
+    if os.name == 'nt':     # Si estàs a Windows
         os.system('cls')
-    else:                   # Si estàs en Linux o macOS
+    else:                   # Si estàs a Linux o macOS
         os.system('clear')
 
 clearScreen()
