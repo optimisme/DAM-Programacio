@@ -23,12 +23,13 @@ import platform
 import random
 
 # Aquesta funció neteja la pantalla, no la modifiquis
-def clear_screen():
-    sistema = platform.system()
-    if sistema == "Windows":
+def clearScreen():
+    if os.name == 'nt':     # Si estàs a Windows
         os.system('cls')
-    else:
+    else:                   # Si estàs a Linux o macOS
         os.system('clear')
+
+clearScreen()
 
 """
 -------------------------------------------------------------------------------
