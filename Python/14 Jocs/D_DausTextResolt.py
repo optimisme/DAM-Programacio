@@ -59,7 +59,25 @@ def afegir_jugador(ranking_str, nom_jugador, nova_puntuacio):
         afegir_jugador(ranking_str, "Juan", 120)
         Retorna: "pepe:150;Juan:120;"
     """
-    pass
+    jugadors = ranking_str.split(";") if ranking_str else []
+    ranking_actualitzat = []
+    jugador_actualitzat = False
+    
+    for jugador in jugadors:
+        if not jugador: continue
+        nom, puntuacio = jugador.split(":")
+        puntuacio = int(puntuacio)
+        
+        if nom == nom_jugador:
+            if nova_puntuacio > puntuacio:
+                puntuacio = nova_puntuacio
+            jugador_actualitzat = True
+        ranking_actualitzat.append(f"{nom}:{puntuacio}")
+    
+    if not jugador_actualitzat:
+        ranking_actualitzat.append(f"{nom_jugador}:{nova_puntuacio}")
+    
+    return ";".join(ranking_actualitzat)
 
 def escollir_jugador(ranking_str):
     """
@@ -82,7 +100,30 @@ def escollir_jugador(ranking_str):
         escollir_jugador(ranking_str)
         Retorna: "pepe" si l'usuari selecciona la primera opció o escriu "pepe".
     """
-    pass
+    if not ranking_str:
+        print("No hi ha jugadors disponibles.")
+        return None
+
+    jugadors = [jugador for jugador in ranking_str.split(";") if jugador]  # Filtra elements buits
+    while True:
+        for i, jugador in enumerate(jugadors):
+            nom, puntuacio = jugador.split(":")
+            print(f"{i + 1}) {nom}")
+        
+        eleccio = input("\nEscull un jugador (número o nom): ").strip()
+
+        if eleccio.isdigit():
+            index = int(eleccio) - 1
+            if 0 <= index < len(jugadors):
+                return jugadors[index].split(":")[0]
+            else:
+                print("Número no vàlid, torna-ho a intentar.")
+        else:
+            for jugador in jugadors:
+                nom, _ = jugador.split(":")
+                if nom.lower() == eleccio.lower():
+                    return nom
+            print("Nom no vàlid, torna-ho a intentar.")
 
 def mostrar_puntuacions(ranking_str):
     """
@@ -109,7 +150,14 @@ def mostrar_puntuacions(ranking_str):
         Juan                                  100
         Pablo                                  50
     """
-    pass
+    print("················ Ranking ················")
+    print(f"{'NOM':<20} {'PUNTS':>20}")
+    print("*****************************************")
+    
+    jugadors = ranking_str.split(";")
+    ranking = [(j.split(":")[0], int(j.split(":")[1])) for j in jugadors if j]
+    for nom, punts in sorted(ranking, key=lambda x: x[1], reverse=True):
+        print(f"{nom:<20} {punts:>20}")
 
 def jugar(jugador):
     """
@@ -133,7 +181,29 @@ def jugar(jugador):
         jugar(jugador)
         Retorna: 150 si el jugador guanya, -1 si l'ordinador guanya.
     """
-    pass
+    punts_jugador = 0
+    punts_ordinador = 0
+
+    for _ in range(50):
+        dau1, dau2 = random.randint(1, 6), random.randint(1, 6)
+        if (dau1 + dau2) % 2 == 0:
+            punts_jugador += max(dau1, dau2)
+        else:
+            punts_jugador -= min(dau1, dau2)
+
+        dau1, dau2 = random.randint(1, 6), random.randint(1, 6)
+        if (dau1 + dau2) % 2 == 0:
+            punts_ordinador += max(dau1, dau2)
+        else:
+            punts_ordinador -= min(dau1, dau2)
+
+    if punts_jugador > punts_ordinador:
+        print(f"Ha guanyat el jugador \"{jugador}\" amb {punts_jugador} punts.")
+    else:
+        punts_jugador = -1
+        print(f"Ha guanyat l'ordinador amb {punts_ordinador} punts.")
+
+    return punts_jugador
 
 def mainRun():
     """
@@ -173,7 +243,47 @@ def mainRun():
         4) Mostrar puntuacions
         0) Sortir
     """
-    pass
+    ranking_str = ""
+    jugador_actual = ""
+    
+    while True:
+        opcio_escollir = "2)" if ranking_str else "X)"
+        opcio_jugar = "3)" if jugador_actual else "X)"
+        
+        print(f"\n1) Afegir jugador")
+        print(f"{opcio_escollir} Escollir jugador")
+        print(f"{opcio_jugar} Jugar ({jugador_actual})")
+        print("4) Mostrar puntuacions")
+        print("0) Sortir")
+        
+        opcio = input("\nEscull una opció: ")
+        
+        if opcio == '1' or opcio.lower() == 'afegir':
+            nom_jugador = input("\nIntrodueix el nom del nou jugador: ")
+            ranking_str = afegir_jugador(ranking_str, nom_jugador, 0)
+        
+        elif opcio == '2' or opcio.lower() == 'escollir':
+            if ranking_str:
+                jugador_actual = escollir_jugador(ranking_str)
+            else:
+                print("\nNo hi ha jugadors al rànquing. Afegiu-ne un primer.")
+        
+        elif opcio == '3' or opcio.lower() == 'jugar':
+            if jugador_actual:
+                punts_jugador = jugar(jugador_actual)
+                if punts_jugador != -1:
+                    ranking_str = afegir_jugador(ranking_str, jugador_actual, punts_jugador)
+            else:
+                print("\nNo s'ha escollit cap jugador.")
+        
+        elif opcio == '4' or opcio.lower() == 'puntuacions' or opcio.lower() == 'ranking':
+            mostrar_puntuacions(ranking_str)
+        
+        elif opcio == '0' or opcio.lower() == 'sortir':
+            break
+        
+        else:
+            print("Opció no vàlida.")
 
 if __name__ == "__main__":
     mainRun()
