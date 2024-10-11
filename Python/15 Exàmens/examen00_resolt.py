@@ -1,6 +1,10 @@
 import random
 import string
 
+nom = ""
+cognoms = ""
+dni = ""
+
 usuaris = []
 
 def generaDNI():

@@ -4,6 +4,10 @@ import os
 import platform
 import random
 
+nom = ""
+cognoms = ""
+dni = ""
+
 """
 
 En aquest exàmen es farà un gestor de dades per una notaria.
