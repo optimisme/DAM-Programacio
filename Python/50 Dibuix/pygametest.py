@@ -7,21 +7,21 @@
 import pygame
 import sys
 
-# Inicialitzar Pygame
-pygame.init()
-
-# Configurar la pantalla
-screen = pygame.display.set_mode((640, 480))
-pygame.display.set_caption('Hello World!')
-
 # Definir els colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 GREEN = (0, 255, 0)
 BLUE = (0, 0, 255)
 
+# Inicialitzar Pygame
+pygame.init()
+
+# Configurar la pantalla
+screen = pygame.display.set_mode((640, 480))
+pygame.display.set_caption('Window Title')
+
 # Configurar la font
-font = pygame.font.SysFont(None, 55)
+font = pygame.font.SysFont("Arial", 55)
 
 # Crear el text
 text = font.render('Hello World!', True, BLACK)
