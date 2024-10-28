@@ -1,11 +1,18 @@
-import sys
+import math
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
+import sys
+import utils
 
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
+RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE  = (0, 0, 255)
+PURPLE = (128, 0, 128)
+ORANGE = (255, 165, 0) 
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -23,7 +30,7 @@ def main():
         app_run()
         app_draw()
 
-        clock.tick(30) # Limitar a 30 FPS
+        clock.tick(60) # Limitar a 60 FPS
 
     # Fora del bucle, tancar l'aplicació
     pygame.quit()
@@ -42,14 +49,20 @@ def app_run():
 
 # Dibuixar
 def app_draw():
-    
     # Pintar el fons de blanc
     screen.fill(WHITE)
 
-    # Escriure un text de prova
-    font = pygame.font.SysFont("Arial", 55)
-    text = font.render('Hello World!', True, BLACK)
-    screen.blit(text, (50, 50))
+    # Dibuixar la graella de coordenades (llibreria utils)
+    utils.draw_grid(pygame, screen, 50)
+
+    # Dibuixar un rectangle vermell a la posició (150, 200) de mida (75, 100)
+    pygame.draw.rect(screen, RED, pygame.Rect(150, 200, 75, 100))
+
+    # Dibuixar un cercle verd a la posició (100, 150) de radi 10
+    pygame.draw.circle(screen, GREEN, (100, 150), 50)
+
+    # Dibuixar una linia des de l'origen del rectangle fins al centre del cercle
+    pygame.draw.line(screen, BLUE, (150, 200), (100, 150), 5)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

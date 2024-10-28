@@ -1,13 +1,18 @@
-import sys
+import math
+import os
+os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
+import sys
 import utils
 
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-RED =   (255, 0, 0)
+RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE  = (0, 0, 255)
+PURPLE = (128, 0, 128)
+ORANGE = (255, 165, 0)  
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -15,6 +20,9 @@ clock = pygame.time.Clock()
 # Definir la finestra
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
+
+pos_x = 100
+dir_x = "right"
 
 # Bucle de l'aplicació
 def main():
@@ -25,7 +33,7 @@ def main():
         app_run()
         app_draw()
 
-        clock.tick(30) # Limitar a 30 FPS
+        clock.tick(60) # Limitar a 60 FPS
 
     # Fora del bucle, tancar l'aplicació
     pygame.quit()
@@ -40,24 +48,34 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    pass
+    global pos_x, dir_x
+
+    delta_time = clock.get_time() / 1000.0  # Convertir a segons
+    
+    speed = 50  # píxels per segon
+    displacement = speed * delta_time
+
+    if (dir_x == "right"):
+        pos_x = pos_x + displacement
+        if (pos_x > 200):
+            dir_x = "left"
+    else:
+        pos_x = pos_x - displacement
+        if (pos_x < 100):
+            dir_x = "right"
 
 # Dibuixar
 def app_draw():
+    global pos_x, dir_x
+
     # Pintar el fons de blanc
     screen.fill(WHITE)
 
-    # Dibuixar la graella de coordenades (llibreria utils)
+    # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    # Dibuixar un rectangle vermell a la posició (150, 200) de mida (75, 100)
-    pygame.draw.rect(screen, RED, pygame.Rect(150, 200, 75, 100))
-
-    # Dibuixar un cercle verd a la posició (100, 150) de radi 10
-    pygame.draw.circle(screen, GREEN, (100, 150), 50)
-
-    # Dibuixar una linia des de l'origen del rectangle fins al centre del cercle
-    pygame.draw.line(screen, BLUE, (150, 200), (100, 150), 5)
+    # Draw
+    pygame.draw.line(screen, BLUE, (pos_x, 100), (pos_x, 200), 5)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
