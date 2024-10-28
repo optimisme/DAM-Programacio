@@ -25,10 +25,7 @@ pygame.display.set_caption('Window Title')
 def main():
     global font, text, image
 
-    is_looping = True
-
-    # Definir el text
-    font = pygame.font.SysFont("Arial", 55)
+    is_looping = Truetext = font.render('Hello Arial!', True, BLACK)
     text = font.render('Hello Arial!', True, BLACK)
 
     # Carregar la imatge
