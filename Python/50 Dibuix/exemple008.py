@@ -47,8 +47,8 @@ def main():
 
 # Gestionar events
 def app_events():
-    global mouse_pos, mouse_down, square_dragging, circle_dragging, drag_offset
-    mouse_inside = pygame.mouse.get_focused() # El ratolí està dins de la finestra?
+    global mouse_pos, mouse_down
+    mouse_inside = pygame.mouse.get_focused()  # El ratolí està dins de la finestra?
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT:  # Botó tancar finestra
@@ -58,25 +58,29 @@ def app_events():
                 mouse_pos["x"], mouse_pos["y"] = event.pos
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_down = True
-            # Comprova si el clic és dins del rectangle
-            if rectangle_pos.collidepoint(mouse_pos["x"], mouse_pos["y"]):
-                square_dragging = True
-                drag_offset["x"] = mouse_pos["x"] - rectangle_pos.x
-                drag_offset["y"] = mouse_pos["y"] - rectangle_pos.y
-            # Comprova si el clic és dins del cercle
-            elif is_point_in_circle(mouse_pos, circle_center, circle_radius):
-                circle_dragging = True
-                drag_offset["x"] = mouse_pos["x"] - circle_center["x"]
-                drag_offset["y"] = mouse_pos["y"] - circle_center["y"]
         elif event.type == pygame.MOUSEBUTTONUP:
             mouse_down = False
-            square_dragging = False
-            circle_dragging = False
     return True
 
 # Fer càlculs
 def app_run():
-    global rectangle_pos, circle_center
+    global rectangle_pos, circle_center, square_dragging, circle_dragging, drag_offset
+
+    # Inici de l'arrossegament en fer clic dins del rectangle o cercle
+    if mouse_down:
+        if not square_dragging and not circle_dragging:  # Només detecta al començar l'arrossegament
+            if rectangle_pos.collidepoint(mouse_pos["x"], mouse_pos["y"]):
+                square_dragging = True
+                drag_offset["x"] = mouse_pos["x"] - rectangle_pos.x
+                drag_offset["y"] = mouse_pos["y"] - rectangle_pos.y
+            elif is_point_in_circle(mouse_pos, circle_center, circle_radius):
+                circle_dragging = True
+                drag_offset["x"] = mouse_pos["x"] - circle_center["x"]
+                drag_offset["y"] = mouse_pos["y"] - circle_center["y"]
+    else:
+        # Alliberar l'arrossegament quan s'aixeca el ratolí
+        square_dragging = False
+        circle_dragging = False
 
     # Actualitza la posició del rectangle si es fa "drag"
     if square_dragging:
