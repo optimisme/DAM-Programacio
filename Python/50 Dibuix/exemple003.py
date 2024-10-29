@@ -33,7 +33,7 @@ def main():
 
     # Carregar la imatge
     folder = os.path.join(os.path.dirname(__file__), "./assets/exemple003.png")
-    image = pygame.image.load(folder)
+    image = pygame.image.load(folder).convert_alpha()
     image = scale_image(image, target_width=100)
 
     while is_looping:

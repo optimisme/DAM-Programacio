@@ -22,11 +22,11 @@ def main():
     is_looping = True
 
     pathShinnosuke = os.path.join(os.path.dirname(__file__), "./assets/exercici002/shinnosuke.png")
-    im_shinnosuke = pygame.image.load(pathShinnosuke)
+    im_shinnosuke = pygame.image.load(pathShinnosuke).convert_alpha()
     im_shinnosuke = scale_image(im_shinnosuke, target_width=100)
 
     pathShiro = os.path.join(os.path.dirname(__file__), "./assets/exercici002/shiro.png")
-    im_shiro = pygame.image.load(pathShiro)
+    im_shiro = pygame.image.load('./assets/exercici002/shiro.png').convert_alpha()
     im_shiro = scale_image(im_shiro, target_width=75)
 
     while is_looping:
