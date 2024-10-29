@@ -412,3 +412,62 @@ heights[cnt] = max(5, 45 - min(distance, max_distance) * (40 / max_distance))
 </video>
 </center>
 <br/>
+
+## Exercici 23
+
+Fes un programa **exercici023.py** que faci una simulació del sistema solar. Per fer-ho:
+
+```python
+# Colors
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+BLUE = (50, 120, 200)
+BROWN = (165, 42, 42)
+YELLOW = (255, 255, 0)
+GRAY = (200, 200, 200)
+ORANGE = (255, 165, 0)
+GOLD = (255, 215, 0)
+LIGHT_GRAY = (169, 169, 169) 
+RED = (255, 69, 0) 
+
+# Dades del sistema
+earth_rotation = 150
+sun = {
+    "pos": (0, 0),
+    "radius": earth_rotation / 10
+}
+planets = {
+    "Mercury": { "angle": 0, "distance": 0.39, "speed": 47.87, "size": 0.38, "color": LIGHT_GRAY, "pos": (0, 0) },
+    "Venus":   { "angle": 0, "distance": 0.72, "speed": 35.02, "size": 0.95, "color": GOLD, "pos": (0, 0) },
+    "Earth":   { "angle": 0, "distance": 1.00, "speed": 29.78, "size": 1.00, "color": BLUE, "pos": (0, 0) },
+    "Mars":    { "angle": 0, "distance": 1.52, "speed": 24.07, "size": 0.53, "color": RED, "pos": (0, 0) },
+}
+
+# A "app_run" es calcularà l'angle i la posició segons l'animació
+
+# A "app_run" posiciona el sol al centre de la pantalla
+sun["pos"] = (screen.get_width() // 2, screen.get_height() // 2) 
+
+# A "app_run" calcula la posició de cada planeta amb la funció
+def posicio_perimetre_cercle(center, radi, angle_graus):
+    angle_radians = math.radians(angle_graus)  # Convertir l'angle a radians
+    x = center[0] + radi * math.cos(angle_radians)    # Coordenada X
+    y = center[1] + radi * math.sin(angle_radians)    # Coordenada Y
+    return x, y
+
+# A "app_draw" tingues en compte que el plantea es dibuixa amb una mida 
+planet_draw_radius = int(planet["size"] * 10)
+
+# A "app_draw" tingues en compte que els noms dels planetes s'alinean a la dreta + 5
+label = font.render(name, True, LIGHT_GRAY)
+label_rect = label.get_rect()
+label_rect.midleft = (planet["pos"][0] + planet_draw_radius + 5, planet["pos"][1]) 
+screen.blit(label, label_rect)
+```
+
+<center>
+<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
+  <source src="./assets/exercici023.mov" type="video/mp4">
+</video>
+</center>
+<br/>
