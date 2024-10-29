@@ -22,12 +22,27 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
-# Direcció del moviment
-dir_x = "none"
 
-# Posició de l'objecte
-pos_x = 100
-size = 25
+# Posició de l'esquiador
+skater_position = { "row": -1, "column": -1}
+
+allowed_emojis = "🌲❄️☃️🏂"
+emojis = get_emoji(pygame, allowed_emojis)
+img_tree = emojis[0]
+img_snow = emojis[1]
+img_sman = emojis[2]
+img_skater = emojis[3]
+board = [
+  ['','','','','','','','','☃️',''],
+  ['','🌲','❄️','','','','','🌲','',''],
+  ['','🌲','🌲','','','','','','❄️',''],
+  ['','🌲',  '','','','','','','',''],
+  ['','','','','','','','','',''],
+  ['','','☃️','','','','','','🌲',''],
+  ['','','','','','','🌲','🌲','',''],
+  ['','❄️','🌲','','','','❄️','☃️','',''],
+  ['','🌲','🌲','','','','','','',''],
+]
 
 # Bucle de l'aplicació
 def main():
@@ -46,47 +61,25 @@ def main():
 
 # Gestionar events
 def app_events():
-    global dir_x, dir_y
+    global position
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # Botó tancar finestra
             return False
-        elif event.type == pygame.KEYDOWN:  # Tecla premuda
+        if event.type == pygame.KEYUP:  # Tecla alliberada
             if event.key == pygame.K_LEFT:
-                dir_x = 'left'
+                pass
             elif event.key == pygame.K_RIGHT:
-                dir_x = 'right'
-        elif event.type == pygame.KEYUP:  # Tecla alliberada
-            if event.key == pygame.K_LEFT:
-                if dir_x == 'left':
-                    dir_x = 'none'
-            elif event.key == pygame.K_RIGHT:
-                if dir_x == 'right':
-                    dir_x = 'none'
+                pass
+            elif event.key == pygame.K_UP:
+                pass
+            elif event.key == pygame.K_DOWN:
+                pass
     return True
 
 # Fer càlculs
 def app_run():
-    global dir_x, pos_x, size
-
-    delta_time = clock.get_time() / 1000.0  # Convertir a segons
-    
-    speed = 100  # píxels per segon
-    displacement = speed * delta_time
-
-    limit_left = size
-    limit_right = screen.get_width() - size
-
-    if (dir_x == "right"):
-        pos_x = pos_x + displacement
-        if (pos_x > limit_right):
-            pos_x = limit_right
-    elif (dir_x == "left"):
-        pos_x = pos_x - displacement
-        if (pos_x < limit_left):
-            pos_x = limit_left
-
-    size = 10 + (pos_x / 8)
+    pass
 
 # Dibuixar
 def app_draw():
