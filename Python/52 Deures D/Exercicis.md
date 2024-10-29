@@ -3,14 +3,24 @@
 
 Resol aquests exercicis, entrega la URL del projecte GitHub amb els exercicis resolts.
 
-## Exercici 0
 
-Fes un programa **exercici000.py** que fa el següent dibuix, a partir de dos bucles:
+## Exercici 6
+
+Fes un programa **exercici006.py** que fa el següent dibuix, fent servir bucles anidats:
+
+```python
+    for row in range(8):
+        for column in range(8):
+```
 
 <br/>
-<center><img src="./assets/exercici000.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici006.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
+
+## Exercici 7
+
+Fes un programa **exercici007.py** que fa el següent dibuix, a partir de dos bucles:
 
 - Els bucles es defineixen com **for q in range (0, len(colors))**
 
@@ -35,23 +45,14 @@ def draw_polygon(screen, color, center, radius, num_vertices, angle_offset=(math
     pygame.draw.polygon(screen, color, points)
 ```
 
-## Exercici 1
-
-Fes un programa **exercici001.py** que fa el següent dibuix, fent servir bucles anidats:
-
-```python
-    for row in range(8):
-        for column in range(8):
-```
-
 <br/>
-<center><img src="./assets/exercici001.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici007.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
-## Exercici 2
+## Exercici 8
 
-Fes un programa **exercici002.py** que fa el següent dibuix, a partir de la següent matriu, on cada número de la matriu correspon a un color de la llista del primer exercici. 
+Fes un programa **exercici008.py** que fa el següent dibuix, a partir de la següent matriu, on cada número de la matriu correspon a un color de la llista del primer exercici. 
 
 ```text
 board = [
@@ -67,13 +68,13 @@ board = [
 ```
 
 <br/>
-<center><img src="./assets/exercici002.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici008.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
-## Exercici 3
+## Exercici 9
 
-Fes un programa **exercici003.py** que fa el següent dibuix, a partir de la següent llista de dades.
+Fes un programa **exercici009.py** que fa el següent dibuix, a partir de la següent llista de dades.
 
 - Fes un fons blanc per la taula d'informació
 - Dibuixa les linies horitzontals de cada fila en un bucle
@@ -92,13 +93,13 @@ dades = [
 ```
 
 <br/>
-<center><img src="./assets/exercici003.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici009.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
-## Exercici 4
+## Exercici 14
 
-Fes un programa **exercici004.py** que fa el següent dibuix, a partir del bucle:
+Fes un programa **exercici014.py** que fa el següent dibuix, a partir del bucle:
 
 ```python
 for counter in range(0, 11):
@@ -113,13 +114,13 @@ light = counter * (255 / 10)
 La posició **x** de cada quadre també s'ha de calcular a partir de **counter**
 
 <br/>
-<center><img src="./assets/exercici004.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici014.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
-## Exercici 5
+## Exercici 15
 
-Fes un programa **exercici005.py** que fa el següent dibuix, a partir d'un bucle i la funció que transforma valors de color HSL a RGB:
+Fes un programa **exercici015.py** que fa el següent dibuix, a partir d'un bucle i la funció que transforma valors de color HSL a RGB:
 
 ```python
 def hsl_to_rgb(hue, saturation, lightness):
@@ -152,13 +153,13 @@ Per fer l'exercici fes servir:
 - Cada quadre és de 21x21
 
 <br/>
-<center><img src="./assets/exercici005.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici015.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
-## Exercici 6
+## Exercici 16
 
-Fes un programa **exercici006.py** que fa el següent dibuix, a partir de dos bucles anidats:
+Fes un programa **exercici016.py** que fa el següent dibuix, a partir de dos bucles anidats:
 
 ```python
 for hue in range(0, 361, 15):
@@ -172,13 +173,13 @@ for hue in range(0, 361, 15):
 - Cada quadre és de 21x21
 
 <br/>
-<center><img src="./assets/exercici006.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici016.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
-## Exercici 7
+## Exercici 17
 
-Fes un programa **exercici007.py** que fa el següent dibuix, a partir d'un bucle així:
+Fes un programa **exercici017.py** que fa el següent dibuix, a partir d'un bucle així:
 
 ```python
 for angle in range(0, 361, 15):
@@ -197,26 +198,26 @@ def posicio_perimetre_cercle(center, radi, angle_graus):
 La mida de gruix de les línies és de 5.
 
 <br/>
-<center><img src="./assets/exercici007.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici017.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
-## Exercici 8
+## Exercici 18
 
-Fes un programa **exercici008.py** que fa el següent dibuix, una [roda de colors](https://en.wikipedia.org/wiki/Color_wheel) a partir de valors HSL i dibuix amb **pygame.draw.polygon**
+Fes un programa **exercici018.py** que fa el següent dibuix, una [roda de colors](https://en.wikipedia.org/wiki/Color_wheel) a partir de valors HSL i dibuix amb **pygame.draw.polygon**
 
 Per fer-ho, calcula les linies com a l'exercici anterior i defineix un polígon entre la línia actual i la linia anterior. 
 
 Després emplena aquest polígon del color HSL amb l'**angle** que correson, **saturarion** a 1.0 i **lightness** a 0.5.
 
 <br/>
-<center><img src="./assets/exercici008.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici018.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
-## Exercici 9
+## Exercici 19
 
-Fes un programa **exercici009.py** que fa el següent dibuix, fent servir la funció **"draw_moves"** a l'estil [Sketch](https://en.wikipedia.org/wiki/Etch_A_Sketch).
+Fes un programa **exercici019.py** que fa el següent dibuix, fent servir la funció **"draw_moves"** a l'estil [Sketch](https://en.wikipedia.org/wiki/Etch_A_Sketch).
 
 ```python
 def draw_moves(color, start_pos, moves):
@@ -243,13 +244,13 @@ moves_grass = [{"direction": "right", "distance": 650}, {"direction": "down", "d
 ```
 
 <br/>
-<center><img src="./assets/exercici009.png" style="max-height: 400px" alt="">
+<center><img src="./assets/exercici019.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
-## Exercici 10
+## Exercici 20
 
-Fes un programa **exercici010.py** que a partir d'un diccionari **board** tipus:
+Fes un programa **exercici020.py** que a partir d'un diccionari **board** tipus:
 
 ```python
 board = {
@@ -277,14 +278,37 @@ A més, quan el mouse passa pel damunt d'alguna cel·la aquesta s'ha de dibuixar
 
 <center>
 <video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
-  <source src="./assets/exercici010.mov" type="video/mp4">
+  <source src="./assets/exercici020.mov" type="video/mp4">
 </video>
 </center>
 <br/>
 
-## Exercici 11
+## Exercici 21
 
-Fes un programa **exercici011.py** que canvii la mida d'unes caselles segons la distància del mouse fins a les caselles.
+Fes un programa **exercici021.py** que generi una graella de números aleatòris entre el 0 i el 9, la graella ha de ser de 10 files i 15 columnes. Aleshores
+
+- Dibuixa la graella on cada cel·la faci 25x25
+- Quan el mouse es posa per damunt d'una cel·la canvia el color de fons de totes les cel·les que tenen el mateix número que aquella cel·la
+- Quan es fa click en una cel·la, s'esborren totes les cel·les que tenen el mateix número que aquella cel·la
+
+Hauràs de definir les funcions:
+```python
+def get_cell_value(cell) # Retorna el valor d'una cel·la
+def draw_board_values() # Dibuixa els valors del taulell
+```
+
+**Nota:** Podeu fer servir les funcions de l'exercici 10 *(draw_board, cell_from_point_, point_from_cell)
+
+<center>
+<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
+  <source src="./assets/exercici021.mov" type="video/mp4">
+</video>
+</center>
+<br/>
+
+## Exercici 22
+
+Fes un programa **exercici022.py** que canvii la mida d'unes caselles segons la distància del mouse fins a les caselles.
 
 A la funció **app_run** caldrà fer dos bucles:
 
@@ -301,30 +325,7 @@ heights[cnt] = max(5, 45 - min(distance, max_distance) * (40 / max_distance))
 
 <center>
 <video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
-  <source src="./assets/exercici011.mov" type="video/mp4">
-</video>
-</center>
-<br/>
-
-## Exercici 12
-
-Fes un programa **exercici012.py** que generi una graella de números aleatòris entre el 0 i el 9, la graella ha de ser de 10 files i 15 columnes. Aleshores
-
-- Dibuixa la graella on cada cel·la faci 25x25
-- Quan el mouse es posa per damunt d'una cel·la canvia el color de fons de totes les cel·les que tenen el mateix número que aquella cel·la
-- Quan es fa click en una cel·la, s'esborren totes les cel·les que tenen el mateix número que aquella cel·la
-
-Hauràs de definir les funcions:
-```python
-def get_cell_value(cell) # Retorna el valor d'una cel·la
-def draw_board_values() # Dibuixa els valors del taulell
-```
-
-**Nota:** Podeu fer servir les funcions de l'exercici 10 *(draw_board, cell_from_point_, point_from_cell)
-
-<center>
-<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
-  <source src="./assets/exercici012.mov" type="video/mp4">
+  <source src="./assets/exercici022.mov" type="video/mp4">
 </video>
 </center>
 <br/>

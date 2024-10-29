@@ -8,7 +8,7 @@ import utils
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-GRAY = (200, 200, 200)
+BLUE = (50, 120, 200)
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -52,18 +52,20 @@ def app_draw():
     # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    for row in range(8):
-        for column in range(8):
-            color = GRAY if (row + column) % 2 == 0 else BLACK
-                
-            x = 50 + column * 50
-            y = 50 + row * 50
-            rect = pygame.Rect(x, y, 50, 50)
-            pygame.draw.rect(screen, color, rect)
+    # Dibuixar les dades
+    for angle in range(0, 361, 15):
+        x0, y0 = posicio_perimetre_cercle((300, 250), 25, angle)
+        x1, y1 = posicio_perimetre_cercle((300, 250), 150, angle)
+        pygame.draw.line(screen, BLACK, (x0, y0), (x1, y1), 5)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
+def posicio_perimetre_cercle(center, radi, angle_graus):
+    angle_radians = math.radians(angle_graus)  # Convertir l'angle a radians
+    x = center[0] + radi * math.cos(angle_radians)    # Coordenada X
+    y = center[1] + radi * math.sin(angle_radians)    # Coordenada Y
+    return x, y
 
 if __name__ == "__main__":
     main()

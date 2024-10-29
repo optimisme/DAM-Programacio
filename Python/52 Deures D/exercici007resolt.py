@@ -8,7 +8,13 @@ import utils
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-BLUE = (50, 120, 200)
+GREEN = (127, 184, 68)
+YELLOW = (240, 187, 64)
+ORANGE = (226, 137, 50)
+RED = (202, 73, 65)
+PURPLE = (135, 65, 152)
+BLUE  = (75, 154, 217)
+colors = [GREEN, YELLOW, ORANGE, RED, PURPLE, BLUE]
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -52,20 +58,37 @@ def app_draw():
     # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    # Dibuixar les dades
-    for angle in range(0, 361, 15):
-        x0, y0 = posicio_perimetre_cercle((300, 250), 25, angle)
-        x1, y1 = posicio_perimetre_cercle((300, 250), 150, angle)
-        pygame.draw.line(screen, BLACK, (x0, y0), (x1, y1), 5)
+    # Dibuixar quadres
+    for q in range (0, len(colors)):
+        size = 50
+        x = 50 + (q * 100)
+        pygame.draw.rect(screen, colors[q], pygame.Rect(x, 50, size, size))
+
+        radius = 25
+        x = 50 + (q * 100) + radius
+        pygame.draw.circle(screen, colors[q], (x, 150 + radius), radius, 2)
+
+    for q in range (0, 10):
+        radius = 25
+        x = 50 + (q * 100) + radius
+        grey = 25 * q
+        color = (grey, grey, grey)
+        draw_polygon(screen, color, (x, 250 + radius), radius, 3)
+        draw_polygon(screen, color, (x, 350 + radius), radius, 5)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
-def posicio_perimetre_cercle(center, radi, angle_graus):
-    angle_radians = math.radians(angle_graus)  # Convertir l'angle a radians
-    x = center[0] + radi * math.cos(angle_radians)    # Coordenada X
-    y = center[1] + radi * math.sin(angle_radians)    # Coordenada Y
-    return x, y
+def draw_polygon(screen, color, center, radius, num_vertices, angle_offset=(math.pi / 3)):
+    points = [
+        (
+            center[0] + radius * math.cos(angle_offset + i * 2 * math.pi / num_vertices),
+            center[1] + radius * math.sin(angle_offset + i * 2 * math.pi / num_vertices)
+        )
+        for i in range(num_vertices)
+    ]
+    pygame.draw.polygon(screen, color, points)
+
 
 if __name__ == "__main__":
     main()

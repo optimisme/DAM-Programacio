@@ -8,7 +8,7 @@ import utils
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-BLUE = (50, 120, 200)
+GRAY = (200, 200, 200)
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -52,33 +52,18 @@ def app_draw():
     # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    # Dibuixar les dades
-    for hue in range(0, 361, 15):
-        for counter in range(0, 100, 5):
-            value = counter / 100
-
-            x = 50 + hue * (500 / 360)
-            y = 50 + counter * 4
-
-            color = hsl_to_rgb(hue, 1.0, value)
-            pygame.draw.rect(screen, color, pygame.Rect(x, y, 21, 21))
+    for row in range(8):
+        for column in range(8):
+            color = GRAY if (row + column) % 2 == 0 else BLACK
+                
+            x = 50 + column * 50
+            y = 50 + row * 50
+            rect = pygame.Rect(x, y, 50, 50)
+            pygame.draw.rect(screen, color, rect)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
-def hsl_to_rgb(hue, saturation, lightness):
-    hue = hue / 360
-    a = saturation * min(lightness, 1 - lightness)
-
-    k_r = (0 + hue * 12) % 12
-    k_g = (8 + hue * 12) % 12
-    k_b = (4 + hue * 12) % 12
-
-    r = int(255 * (lightness - a * max(-1, min(k_r - 3, 9 - k_r, 1))))
-    g = int(255 * (lightness - a * max(-1, min(k_g - 3, 9 - k_g, 1))))
-    b = int(255 * (lightness - a * max(-1, min(k_b - 3, 9 - k_b, 1))))
-
-    return r, g, b
 
 if __name__ == "__main__":
     main()

@@ -9,9 +9,6 @@ import utils
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 BLUE = (50, 120, 200)
-BROWN = (165, 42, 42)  
-YELLOW = (255, 255, 0)  
-GREEN = (0, 255, 0)  
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -20,11 +17,17 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
-# Definir els moviments
-moves_house = [{"direction": "right", "distance": 250}, {"direction": "up", "distance": 200}, {"direction": "left", "distance": 50}, {"direction": "up", "distance": 50}, {"direction": "left", "distance": 50}, {"direction": "up", "distance": 50}, {"direction": "left", "distance": 50}, {"direction": "down", "distance": 50}, {"direction": "left", "distance": 50}, {"direction": "down", "distance": 50}, {"direction": "left", "distance": 50}, {"direction": "down", "distance": 200}]
-moves_sun = [{"direction": "right", "distance": 25}, {"direction": "up", "distance": 25}, {"direction": "right", "distance": 25}, {"direction": "up", "distance": 25}, {"direction": "right", "distance": 50}, {"direction": "down", "distance": 25}, {"direction": "right", "distance": 25}, {"direction": "down", "distance": 25}, {"direction": "right", "distance": 25}, {"direction": "down", "distance": 50}, {"direction": "left", "distance": 25}, {"direction": "down", "distance": 25}, {"direction": "left", "distance": 25}, {"direction": "down", "distance": 25}, {"direction": "left", "distance": 50}, {"direction": "up", "distance": 25}, {"direction": "left", "distance": 25}, {"direction": "up", "distance": 25}, {"direction": "left", "distance": 25} ]
-moves_car = [{"direction": "up", "distance": 50}, {"direction": "right", "distance": 50}, {"direction": "up", "distance": 50}, {"direction": "right", "distance": 50}, {"direction": "down", "distance": 50}, {"direction": "right", "distance": 50}, {"direction": "down", "distance": 50} ]
-moves_grass = [{"direction": "right", "distance": 650}, {"direction": "down", "distance": 100}, {"direction": "left", "distance": 650}]
+# Definir les dades
+dades = [ 
+  {'nom': 'Pelut', 'any': 2018, 'pes': 6.5, 'especie': 'Gos'},
+  {'nom': 'Pelat', 'any': 2020, 'pes': 5.0, 'especie': 'Gos'},
+  {'nom': 'Mia', 'any': 2022, 'pes': 3.0, 'especie': 'Gat'},
+  {'nom': 'Nemo', 'any': 2003, 'pes': 0.1, 'especie': 'Peix'},
+  {'nom': 'Mickey', 'any': 1928, 'pes': 0.5, 'especie': 'Ratolí'},
+  {'nom': 'Donald', 'any': 1934, 'pes': 0.5, 'especie': 'Ànec'} ]
+
+font0 = pygame.font.SysFont("Arial", 18)
+font1 = pygame.font.SysFont("Arial", 16)
 
 # Bucle de l'aplicació
 def main():
@@ -54,47 +57,38 @@ def app_run():
 
 # Dibuixar
 def app_draw():
+    
     # Pintar el fons de blanc
     screen.fill(WHITE)
 
     # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    # Dibuixar les dades seguint els moviments
-    draw_moves(BROWN, (350, 400), moves_house)
-    draw_moves(YELLOW, (50, 100), moves_sun)
-    draw_moves(BLUE, (100, 400), moves_car)
-    draw_moves(GREEN, (0, 400), moves_grass)
+    # Dibuixar el fons de la taula
+    back = pygame.Rect(150, 100, 200, 25 * len(dades))
+    pygame.draw.rect(screen, WHITE, back)
+
+    # Dibuixar les linies de les files
+    for row_line in range(0, len(dades) + 1):
+        y = 100 + row_line * 25
+        pygame.draw.line(screen, BLACK, (150, y), (350, y), 2)
+
+    # Dibuixar les dades
+    for pos in range(len(dades)):
+        item = dades[pos]
+        y = 100 + pos * 25 + 2
+
+        textNom = font0.render(item["nom"], True, BLACK)
+        screen.blit(textNom, (155, y + 2))
+
+        textAny = font1.render(str(item["any"]), True, BLUE)
+        screen.blit(textAny, (255, y + 2))
+
+        textEspecie = font1.render(str(item["especie"]), True, BLUE)
+        screen.blit(textEspecie, (305, y + 2))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def draw_moves(color, start_pos, moves):
-    x, y = start_pos
-
-    polygon = [start_pos]
-    for move in moves:
-        direction = move["direction"]
-        distance = move["distance"]
-
-        # Determinar la nova posició segons la direcció
-        if direction == "up":
-            new_x, new_y = x, y - distance
-        elif direction == "down":
-            new_x, new_y = x, y + distance
-        elif direction == "left":
-            new_x, new_y = x - distance, y
-        elif direction == "right":
-            new_x, new_y = x + distance, y
-        else:
-            continue  # Ignorar direccions desconegudes
-
-        polygon.append((new_x, new_y))
-
-        # Actualitzar la posició per al següent moviment
-        x, y = new_x, new_y
-
-    pygame.draw.polygon(screen, color, polygon)
 
 if __name__ == "__main__":
     main()
