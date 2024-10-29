@@ -79,11 +79,40 @@ Fes servir dos bucles:
 
 ## Exercici 4
 
-Fes un programa **exercici004.py** que faci el següent dibuix, amb les eines de dibuix de **pygame**.
+Fes un programa **exercici004.py** que faci un dibuix aleatori, amb les eines de dibuix de **pygame**.
 
+Al iniciar el mètode main, s'ha d'emplenar una llista amb 10 coordenades (x,y) aleatòria dins dels limits de la pantalla.
+
+```python
+window_width, window_height = screen.get_size()
+```
+
+Aleshores la funció draw ha de dibuixar la llista anterior, com a **polygon**
 
 <br/>
 <center><img src="./assets/exercici004.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+
+## Exercici 5
+
+Fes un programa **exercici005.py** que faci el següent dibuix, amb les eines de dibuix de **pygame**.
+
+S'ha de dibuixar una espiral rectangular que surt des del centre de la finestra:
+```python
+# Centre de la pantalla
+center_x, center_y = screen.get_width() // 2, screen.get_height() // 2
+```
+
+En total ha de fer 25 voltes (linies) a partir d'un bucle:
+```python
+for _ in range(25)
+```
+
+A cada volta (linia), s'incrementa en 15 pixels el dibuix de la següent linia
+
+<br/>
+<center><img src="./assets/exercici005.png" style="max-height: 400px" alt="">
 <br/></center>
 <br/>
 
@@ -178,6 +207,67 @@ dades = [
 <br/>
 <center><img src="./assets/exercici009.png" style="max-height: 400px" alt="">
 <br/></center>
+<br/>
+
+## Exercici 10
+
+Fes un programa **exercici010.py** que a partir d'una llista de rectangles i colors:
+```python
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE  = (0, 0, 255)
+PURPLE = (128, 0, 128)
+ORANGE = (255, 165, 0) 
+GOLD = (255, 215, 0)
+NAVY = (0, 0, 128)
+
+rectangles = [
+    { "rect": pygame.Rect(50, 100, 250, 50), "color": RED },
+    { "rect": pygame.Rect(50, 200, 100, 200), "color": GOLD },
+    { "rect": pygame.Rect(200, 200, 100, 100), "color": BLUE },
+    { "rect": pygame.Rect(200, 350, 400, 50), "color": PURPLE },
+    { "rect": pygame.Rect(350, 100, 50, 200), "color": ORANGE },
+    { "rect": pygame.Rect(450, 100, 150, 100), "color": GREEN },
+    { "rect": pygame.Rect(450, 250, 150, 50), "color": NAVY }
+]
+```
+
+Dibuixi els rectangles a les posicions indicades, i els empleni del color quan el mouse passa pel damunt.
+
+Ha de fer servir bucles for, tant a **"app_run""** per detectar si el mouse està en algun rectangle, com a **"app_draw"** per fer el dibuix.
+
+Podeu fer servir la funció **.collidepoint** de **pygame** que a partir d'un **Rect** i un **punt** diu si el punt està dins del rectangle o no.
+
+<center>
+<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
+  <source src="./assets/exercici010.mov" type="video/mp4">
+</video>
+</center>
+<br/>
+
+## Exercici 11
+
+Fes un programa **exercici011.py** que amb les tecles *"dreta"* i *"esquerra"* del teclat, mogui un cercle per la pantalla.
+
+La mida del cercle ha de canviar segons la posició X on es troba, essent:
+```python
+size = 10 + (pos_x / 8)
+```
+
+La velocitat del moviment és de 100 píxels per segon.
+
+El moviment del cercle ha d'estar limitat a la mida de la finestra:
+```python
+screen.get_width()
+```
+
+<center>
+<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
+  <source src="./assets/exercici011.mov" type="video/mp4">
+</video>
+</center>
 <br/>
 
 ## Exercici 14

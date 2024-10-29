@@ -1,4 +1,4 @@
-import math
+import random
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
@@ -17,9 +17,17 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
+# Llista aleatòria
+list = []
+
 # Bucle de l'aplicació
 def main():
+    global list
+
     is_looping = True
+
+    window_width, window_height = screen.get_size()  # Obtenir els límits de la finestra    
+    list = [(random.randint(0, window_width), random.randint(0, window_height)) for _ in range(10)]
 
     while is_looping:
         is_looping = app_events()
@@ -41,27 +49,15 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    pass
+    global list
 
 # Dibuixar
 def app_draw():
     screen.fill(WHITE)
     utils.draw_grid(pygame, screen, 50)
     
-    # Bucle cercles
-    odd = True
-    for cnt in range(225, 0, -25):
-        if odd:
-            color = RED
-        else:
-            color = WHITE
-        
-        pygame.draw.circle(screen, color, (350, 250), cnt)
-        odd = not odd
-
-    # Bucle Relleus
-    for cnt in range(25, 250, 25):
-        pygame.draw.circle(screen, BLACK, (350, 250), cnt, 5)
+    # Dibuixar la llista
+    pygame.draw.polygon(screen, BLACK, list, 5)
 
     pygame.display.update()
 
