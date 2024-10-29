@@ -90,6 +90,5 @@ def app_draw():
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
-
 if __name__ == "__main__":
     main()
