@@ -3,10 +3,93 @@
 
 Resol aquests exercicis, entrega la URL del projecte GitHub amb els exercicis resolts.
 
+## Exercici 0
+
+Fes un programa **exercici000.py** que faci el següent dibuix, amb les eines de dibuix de **pygame**.
+
+<br/>
+<center><img src="./assets/exercici000.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+
+## Exercici 1
+
+Fes un programa **exercici001.py** que faci el següent dibuix, amb les eines de dibuix de **pygame**.
+
+Les tipografies són:
+
+- Arial de mida 60
+- Courier New de mida 40, Bold
+- Arial de 28
+- El color verd és: (100, 150, 100)
+
+<br/>
+<center><img src="./assets/exercici001.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+
+## Exercici 2
+
+Fes un programa **exercici002.py** que faci el següent dibuix, amb les eines de dibuix de **pygame**.
+
+Els arxius estàn a: *"./assets/exercici002/"*
+
+Fes servir aquesta funció d'escalat, amb un ample de 100 per en Shinnosuke i de 75 per en Shiro.
+
+```python
+def scale_image(im_shinnosuke, target_width=None, target_height=None):
+
+    original_width, original_height = im_shinnosuke.get_size()
+    aspect_ratio = original_height / original_width
+
+    if target_width and not target_height:  # Escalar per ample mantenint la proporció
+        new_width = target_width
+        new_height = int(target_width * aspect_ratio)
+    elif target_height and not target_width:  # Escalar per altura mantenint la proporció
+        new_height = target_height
+        new_width = int(target_height / aspect_ratio)
+    elif target_width and target_height:  # Escalar deformant la imatge
+        new_width = target_width
+        new_height = target_height
+    else:
+        raise ValueError("Especifica almenys un dels dos paràmetres: target_width o target_height.")
+
+    scaled_im_shinnosuke = pygame.transform.scale(im_shinnosuke, (new_width, new_height))
+    return scaled_im_shinnosuke
+```
+
+<br/>
+<center><img src="./assets/exercici002.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+
+## Exercici 3
+
+Fes un programa **exercici003.py** que faci el següent dibuix, amb les eines de dibuix de **pygame**.
+
+Fes servir dos bucles:
+
+- Un bucle per els colors emplenats vermells i blancs
+- Un bucle pels cercles negres
+
+<br/>
+<center><img src="./assets/exercici003.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
+
+## Exercici 4
+
+Fes un programa **exercici004.py** que faci el següent dibuix, amb les eines de dibuix de **pygame**.
+
+
+<br/>
+<center><img src="./assets/exercici004.png" style="max-height: 400px" alt="">
+<br/></center>
+<br/>
 
 ## Exercici 6
 
-Fes un programa **exercici006.py** que fa el següent dibuix, fent servir bucles anidats:
+Fes un programa **exercici006.py** que faci el següent dibuix, fent servir bucles anidats:
 
 ```python
     for row in range(8):
@@ -20,7 +103,7 @@ Fes un programa **exercici006.py** que fa el següent dibuix, fent servir bucles
 
 ## Exercici 7
 
-Fes un programa **exercici007.py** que fa el següent dibuix, a partir de dos bucles:
+Fes un programa **exercici007.py** que faci el següent dibuix, a partir de dos bucles:
 
 - Els bucles es defineixen com **for q in range (0, len(colors))**
 
@@ -52,7 +135,7 @@ def draw_polygon(screen, color, center, radius, num_vertices, angle_offset=(math
 
 ## Exercici 8
 
-Fes un programa **exercici008.py** que fa el següent dibuix, a partir de la següent matriu, on cada número de la matriu correspon a un color de la llista del primer exercici. 
+Fes un programa **exercici008.py** que faci el següent dibuix, a partir de la següent matriu, on cada número de la matriu correspon a un color de la llista del primer exercici. 
 
 ```text
 board = [
@@ -74,7 +157,7 @@ board = [
 
 ## Exercici 9
 
-Fes un programa **exercici009.py** que fa el següent dibuix, a partir de la següent llista de dades.
+Fes un programa **exercici009.py** que faci el següent dibuix, a partir de la següent llista de dades.
 
 - Fes un fons blanc per la taula d'informació
 - Dibuixa les linies horitzontals de cada fila en un bucle
@@ -99,7 +182,7 @@ dades = [
 
 ## Exercici 14
 
-Fes un programa **exercici014.py** que fa el següent dibuix, a partir del bucle:
+Fes un programa **exercici014.py** que faci el següent dibuix, a partir del bucle:
 
 ```python
 for counter in range(0, 11):
@@ -120,7 +203,7 @@ La posició **x** de cada quadre també s'ha de calcular a partir de **counter**
 
 ## Exercici 15
 
-Fes un programa **exercici015.py** que fa el següent dibuix, a partir d'un bucle i la funció que transforma valors de color HSL a RGB:
+Fes un programa **exercici015.py** que faci el següent dibuix, a partir d'un bucle i la funció que transforma valors de color HSL a RGB:
 
 ```python
 def hsl_to_rgb(hue, saturation, lightness):
@@ -159,7 +242,7 @@ Per fer l'exercici fes servir:
 
 ## Exercici 16
 
-Fes un programa **exercici016.py** que fa el següent dibuix, a partir de dos bucles anidats:
+Fes un programa **exercici016.py** que faci el següent dibuix, a partir de dos bucles anidats:
 
 ```python
 for hue in range(0, 361, 15):
@@ -179,7 +262,7 @@ for hue in range(0, 361, 15):
 
 ## Exercici 17
 
-Fes un programa **exercici017.py** que fa el següent dibuix, a partir d'un bucle així:
+Fes un programa **exercici017.py** que faci el següent dibuix, a partir d'un bucle així:
 
 ```python
 for angle in range(0, 361, 15):
@@ -204,7 +287,7 @@ La mida de gruix de les línies és de 5.
 
 ## Exercici 18
 
-Fes un programa **exercici018.py** que fa el següent dibuix, una [roda de colors](https://en.wikipedia.org/wiki/Color_wheel) a partir de valors HSL i dibuix amb **pygame.draw.polygon**
+Fes un programa **exercici018.py** que faci el següent dibuix, una [roda de colors](https://en.wikipedia.org/wiki/Color_wheel) a partir de valors HSL i dibuix amb **pygame.draw.polygon**
 
 Per fer-ho, calcula les linies com a l'exercici anterior i defineix un polígon entre la línia actual i la linia anterior. 
 
@@ -217,7 +300,7 @@ Després emplena aquest polígon del color HSL amb l'**angle** que correson, **s
 
 ## Exercici 19
 
-Fes un programa **exercici019.py** que fa el següent dibuix, fent servir la funció **"draw_moves"** a l'estil [Sketch](https://en.wikipedia.org/wiki/Etch_A_Sketch).
+Fes un programa **exercici019.py** que faci el següent dibuix, fent servir la funció **"draw_moves"** a l'estil [Sketch](https://en.wikipedia.org/wiki/Etch_A_Sketch).
 
 ```python
 def draw_moves(color, start_pos, moves):
