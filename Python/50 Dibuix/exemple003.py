@@ -32,7 +32,8 @@ def main():
     text = font.render('Hello Arial!', True, BLACK)
 
     # Carregar la imatge
-    image = pygame.image.load('./assets/exemple003.png')
+    folder = os.path.join(os.path.dirname(__file__), "./assets/exemple003.png")
+    image = pygame.image.load(folder)
     image = scale_image(image, target_width=100)
 
     while is_looping:
@@ -92,7 +93,7 @@ def scale_image(image, target_width=None, target_height=None):
     else:
         raise ValueError("Especifica almenys un dels dos paràmetres: target_width o target_height.")
 
-    scaled_image = pygame.transform.scale(image, (new_width, new_height))
+    scaled_image = pygame.transform.smoothscale(image, (new_width, new_height))
     return scaled_image
 
 if __name__ == "__main__":

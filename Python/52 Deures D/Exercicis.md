@@ -54,7 +54,7 @@ def scale_image(im_shinnosuke, target_width=None, target_height=None):
     else:
         raise ValueError("Especifica almenys un dels dos paràmetres: target_width o target_height.")
 
-    scaled_im_shinnosuke = pygame.transform.scale(im_shinnosuke, (new_width, new_height))
+    scaled_im_shinnosuke = pygame.transform.smoothscale(im_shinnosuke, (new_width, new_height))
     return scaled_im_shinnosuke
 ```
 

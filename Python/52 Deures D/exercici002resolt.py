@@ -21,10 +21,12 @@ def main():
     global im_shinnosuke, im_shiro
     is_looping = True
 
-    im_shinnosuke = pygame.image.load('./assets/exercici002/shinnosuke.png')
+    pathShinnosuke = os.path.join(os.path.dirname(__file__), "./assets/exercici002/shinnosuke.png")
+    im_shinnosuke = pygame.image.load(pathShinnosuke)
     im_shinnosuke = scale_image(im_shinnosuke, target_width=100)
 
-    im_shiro = pygame.image.load('./assets/exercici002/shiro.png')
+    pathShiro = os.path.join(os.path.dirname(__file__), "./assets/exercici002/shiro.png")
+    im_shiro = pygame.image.load(pathShiro)
     im_shiro = scale_image(im_shiro, target_width=75)
 
     while is_looping:
@@ -78,7 +80,7 @@ def scale_image(im_shinnosuke, target_width=None, target_height=None):
     else:
         raise ValueError("Especifica almenys un dels dos paràmetres: target_width o target_height.")
 
-    scaled_im_shinnosuke = pygame.transform.scale(im_shinnosuke, (new_width, new_height))
+    scaled_im_shinnosuke = pygame.transform.smoothscale(im_shinnosuke, (new_width, new_height))
     return scaled_im_shinnosuke
 
 if __name__ == "__main__":
