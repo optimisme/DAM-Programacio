@@ -530,8 +530,8 @@ A més, quan el mouse passa pel damunt d'alguna cel·la aquesta s'ha de dibuixar
 Fes un programa **exercici021.py** que generi una graella de números aleatòris entre el 0 i el 9, la graella ha de ser de 10 files i 15 columnes. Aleshores
 
 - Dibuixa la graella on cada cel·la faci 25x25
-- Quan el mouse es posa per damunt d'una cel·la canvia el color de fons de totes les cel·les que tenen el mateix número que aquella cel·la
-- Quan es fa click en una cel·la, s'esborren totes les cel·les que tenen el mateix número que aquella cel·la
+- Quan el mouse es posa per damunt d'una cel·la, canvia el color de fons de totes les cel·les que coincideixen amb valor
+- Quan es fa click en una cel·la, s'esborren totes les cel·les que coincideixen amb valor
 
 Hauràs de definir les funcions:
 ```python
