@@ -314,6 +314,43 @@ També dibuixa el jugador amb **'img_skater'** a la posició on toca
 </center>
 <br/>
 
+## Exercici 13
+
+Fes un programa **exercici013.py** que amb les tecles *"fletxa"* del teclat, es mogui un cotxe per un circuit.
+
+Les dades inicials del cotxe són:
+
+```python
+car = {
+    "x": 245,
+    "y": 430,
+    "angle": 270,
+    "speed": 100,
+    "img": img_car,
+    "direction_x": "none",
+    "direction_y": "none",
+}
+```
+
+Els arxius estàn a: *"./assets/exercici012/"*
+
+El cotxe s'ha de moure i mostrar la imatge en 8 direccions: **amunt, amunt_dreta, dreta, dreta_avall, avall, avall_esquerra, esquerra, esquerra_amunt**
+
+Per mostrar el cotxe rotat, fes servir la funció [pygame.transform.rotate](https://www.pygame.org/docs/ref/transform.html#pygame.transform.rotate)
+```python
+# Dibuixar el cotxe
+rotated_img = pygame.transform.rotate(car["img"], -car["angle"])
+rect = rotated_img.get_rect(center=(car["x"], car["y"]))
+screen.blit(rotated_img, rect)
+```
+
+<center>
+<video width="100%" controls allowfullscreen style="max-width: 90%; width: 500px; max-height: 300px">
+  <source src="./assets/exercici013.mov" type="video/mp4">
+</video>
+</center>
+<br/>
+
 ## Exercici 14
 
 Fes un programa **exercici014.py** que faci el següent dibuix, a partir del bucle:
