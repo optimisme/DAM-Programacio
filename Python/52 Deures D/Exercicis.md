@@ -271,6 +271,64 @@ screen.get_width()
 </center>
 <br/>
 
+## Exercici 12
+
+Fes un programa **exercici012.py** que amb les tecles *"fletxa"* del teclat, mogui un esquiador per la muntanya.
+
+- L'esquiador pot anar per sobre de la neu
+- L'esquiador **no** pot anar fora del taulell 
+- L'esquiador **no** pot anar on hi ha un arbre o un ninot de neu.
+- L'esquiador sempre comença a la fila 0, columna 0
+- El color de fons de cada casella és: **"LIGHT_BLUE = (173, 216, 230)"**
+- La mida de cada casella és: **"CELL_SIZE = 50"**
+
+Per carregar les imatges **emoji** necessites importar **svgmoji** que està a la carpeta **"./assets"** així:
+```python
+from assets.svgmoji.emojis import get_emoji
+```
+
+No es poden mostrar **emojis** amb **pygame**, però si imatges de la llibreria **svgmoji** en format **.png**. Pots carregar les imatges així:
+```python
+img_tree = get_emoji(pygame, "🌲", size=CELL_SIZE)
+img_sman = get_emoji(pygame, "☃️", size=CELL_SIZE)
+img_snow = get_emoji(pygame, "❄️", size=CELL_SIZE)
+img_skater = get_emoji(pygame, "🏂", size=CELL_SIZE)
+```
+
+Defineix la funció **"place_random_letters(letter, count)"**:
+
+- Posa "count" vegades la lletra "letter" en posicions aleatòries del tauler
+- **No** es poden posar lletres a la posició 0,0
+
+Defineix la funció **"init_board()"**:
+
+- Inicia un tauler de 8 files i 10 columnes
+- 9 caselles amb la lletra "T" repartides aleatòriament fent servir *place_random_letters*
+- 3 caselles amb la lletra "S" repartides aleatòriament fent servir *place_random_letters*
+- 3 caselles amb la lletra "M" repartides aleatòriament fent servir *place_random_letters*
+- La resta de caselles tenen una cadena de text buida ""
+
+Defineix la funció **"is_skiable_cell(row, col)"**:
+
+- Retorna 'False' si la casella *row/col* està fora del tauler
+- Retorna 'False' si la casella *row/col* té un arbre 'T' o un ninot de neu 'M'
+- Retorna 'True' si l'esquiador pot anar a aquella casella (està buida o té neu 'S')
+
+La funció **"app_draw"** ha de dibuixar el tauler amb caselles de mida 50x50 i imatges:
+
+- On hi ha un arbre **'T'** dibuixa **'img_tree'**
+- On hi ha un ninot de neu **'M'** dibuixa **'img_sman'**
+- On hi ha neu de neu **'S'** dibuixa **'img_snow'**
+
+També dibuixa el jugador amb **'img_skater'** a la posició on toca
+
+<center>
+<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
+  <source src="./assets/exercici012.mov" type="video/mp4">
+</video>
+</center>
+<br/>
+
 ## Exercici 14
 
 Fes un programa **exercici014.py** que faci el següent dibuix, a partir del bucle:

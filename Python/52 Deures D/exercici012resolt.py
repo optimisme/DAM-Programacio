@@ -1,4 +1,4 @@
-import math
+import random
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
@@ -14,6 +14,7 @@ GREEN = (0, 255, 0)
 BLUE  = (0, 0, 255)
 PURPLE = (128, 0, 128)
 ORANGE = (255, 165, 0)  
+LIGHT_BLUE = (173, 216, 230)
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -22,31 +23,23 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
-
 # Posició de l'esquiador
-skater_position = { "row": -1, "column": -1}
+CELL_SIZE = 50
 
-allowed_emojis = "🌲❄️☃️🏂"
-emojis = get_emoji(pygame, allowed_emojis)
-img_tree = emojis[0]
-img_snow = emojis[1]
-img_sman = emojis[2]
-img_skater = emojis[3]
-board = [
-  ['','','','','','','','','☃️',''],
-  ['','🌲','❄️','','','','','🌲','',''],
-  ['','🌲','🌲','','','','','','❄️',''],
-  ['','🌲',  '','','','','','','',''],
-  ['','','','','','','','','',''],
-  ['','','☃️','','','','','','🌲',''],
-  ['','','','','','','🌲','🌲','',''],
-  ['','❄️','🌲','','','','❄️','☃️','',''],
-  ['','🌲','🌲','','','','','','',''],
-]
+pos_skater = { "row": 0, "column": 0}
+
+img_tree = get_emoji(pygame, "🌲", size=CELL_SIZE)
+img_snow = get_emoji(pygame, "❄️", size=CELL_SIZE)
+img_sman = get_emoji(pygame, "☃️", size=CELL_SIZE)
+img_skater = get_emoji(pygame, "🏂", size=CELL_SIZE)
+
+board = []
 
 # Bucle de l'aplicació
 def main():
     is_looping = True
+
+    init_board()
 
     while is_looping:
         is_looping = app_events()
@@ -55,26 +48,32 @@ def main():
 
         clock.tick(60) # Limitar a 60 FPS
 
-    # Fora del bucle, tancar l'aplicació
     pygame.quit()
     sys.exit()
 
 # Gestionar events
 def app_events():
-    global position
+    global pos_skater
 
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # Botó tancar finestra
             return False
         if event.type == pygame.KEYUP:  # Tecla alliberada
+            new_row = pos_skater["row"]
+            new_col = pos_skater["column"]
             if event.key == pygame.K_LEFT:
-                pass
+                new_col -= 1
             elif event.key == pygame.K_RIGHT:
-                pass
+                new_col += 1
             elif event.key == pygame.K_UP:
-                pass
+                new_row -= 1
             elif event.key == pygame.K_DOWN:
-                pass
+                new_row += 1
+            
+            # Comprovar si la nova posició és vàlida abans de moure l'esquiador
+            if is_skiable_cell(new_row, new_col):
+                pos_skater["row"] = new_row
+                pos_skater["column"] = new_col
     return True
 
 # Fer càlculs
@@ -83,32 +82,72 @@ def app_run():
 
 # Dibuixar
 def app_draw():
-    global pos_x, pos_y
-
-    # Pintar el fons de blanc
     screen.fill(WHITE)
-
-    # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    # Text informatiu
-    font = pygame.font.SysFont("Arial", 24)
-    text = font.render('Apreta les tecles (left/right)', True, BLACK)
-    screen.blit(text, (50, 50))
+    # Dibuixar el tauler
+    start_x = 50
+    start_y = 50
+    for row in range(len(board)):
+        for col in range(len(board[row])):
+            x = start_x + col * CELL_SIZE
+            y = start_y + row * CELL_SIZE
+            pygame.draw.rect(screen, LIGHT_BLUE, pygame.Rect(x, y, CELL_SIZE, CELL_SIZE))
 
-    # Dibuixar el cercle
-    center = (pos_x, 250)
-    pygame.draw.circle(screen, BLACK, center, size)
-    
-    emojis = get_emoji(pygame, "😊⭐")
-    for cnt in range(len(emojis)):
-        emoji = emojis[cnt]
+            if board[row][col] != '':
+                if board[row][col] == 'T':
+                    rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
+                    screen.blit(img_tree, rect)
+                elif board[row][col] == 'M':
+                    rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
+                    screen.blit(img_sman, rect)
+                elif board[row][col] == 'S':
+                    rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
+                    screen.blit(img_snow, rect)
 
-        screen.blit(emoji, (cnt * 25, 50))
+    # Dibuixar el personatge
+    x = start_x + pos_skater["column"] * CELL_SIZE
+    y = start_y + pos_skater["row"] * CELL_SIZE
+    rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
+    screen.blit(img_skater, rect)
 
-
-    # Actualitzar el dibuix a la finestra
     pygame.display.update()
+
+def init_board():
+    global board
+    rows = 8
+    cols = 10
+    
+    board = [['' for _ in range(cols)] for _ in range(rows)]
+    
+    place_random_letters('T', 9)
+    place_random_letters('S', 3)
+    place_random_letters('M', 3)
+
+def place_random_letters(letter, count):
+    global board
+
+    rows = len(board)
+    cols = len(board[0])
+
+    placed = 0
+    while placed < count:
+        row = random.randint(0, rows - 1)
+        col = random.randint(0, cols - 1)
+        if row != 0 and col != 0 and board[row][col] == '':
+            board[row][col] = letter
+            placed += 1
+
+# Comprovar si una casella està buida o té neu
+def is_skiable_cell(row, col):
+    global board
+
+    is_within_bounds = 0 <= row < len(board) and 0 <= col < len(board[0])
+    if not is_within_bounds:
+        return False
+    
+    cell_content = board[row][col]
+    return cell_content == '' or cell_content == 'S'
 
 if __name__ == "__main__":
     main()
