@@ -31,10 +31,10 @@ sun = {
     "radius": 20
 }
 planets = {
-    "Mercury": { "distance": 58,  "speed": 47.87, "size": 3.80, "color": GRAY, "angle": 0, "pos": (0, 0) },
-    "Venus":   { "distance": 108, "speed": 35.02, "size": 9.50, "color": GOLD, "angle": 0, "pos": (0, 0) },
-    "Earth":   { "distance": 150, "speed": 29.78, "size": 10.0, "color": BLUE, "angle": 0, "pos": (0, 0) },
-    "Mars":    { "distance": 228, "speed": 24.07, "size": 5.30, "color": RED,  "angle": 0, "pos": (0, 0) },
+    "Mercury": { "distance": 58,  "speed": 47.87, "radius": 3.80, "color": GRAY, "angle": 0, "pos": (0, 0) },
+    "Venus":   { "distance": 108, "speed": 35.02, "radius": 9.50, "color": GOLD, "angle": 0, "pos": (0, 0) },
+    "Earth":   { "distance": 150, "speed": 29.78, "radius": 10.0, "color": BLUE, "angle": 0, "pos": (0, 0) },
+    "Mars":    { "distance": 228, "speed": 24.07, "radius": 5.30, "color": RED,  "angle": 0, "pos": (0, 0) },
 }
 
 # Bucle de l'aplicació
@@ -91,12 +91,12 @@ def app_draw():
         pygame.draw.circle(screen, GRAY, sun["pos"], planet["distance"], 1)
         
         # Dibuixar el planeta a la seva posició
-        pygame.draw.circle(screen, planet["color"], (int(planet["pos"][0]), int(planet["pos"][1])), planet["size"])
+        pygame.draw.circle(screen, planet["color"], (int(planet["pos"][0]), int(planet["pos"][1])), planet["radius"])
 
         # Dibuixar el nom del planeta
         label = font.render(name, True, GRAY)
         label_rect = label.get_rect()
-        label_rect.midleft = (planet["pos"][0] + planet["size"] + 5, planet["pos"][1]) 
+        label_rect.midleft = (planet["pos"][0] + planet["radius"] + 5, planet["pos"][1]) 
         screen.blit(label, label_rect)
 
     pygame.display.update()

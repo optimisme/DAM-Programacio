@@ -535,10 +535,10 @@ sun = {
     "radius": 20
 }
 planets = {
-    "Mercury": { "distance": 58,  "speed": 47.87, "size": 3.80, "color": GRAY, "angle": 0, "pos": (0, 0) },
-    "Venus":   { "distance": 108, "speed": 35.02, "size": 9.50, "color": GOLD, "angle": 0, "pos": (0, 0) },
-    "Earth":   { "distance": 150, "speed": 29.78, "size": 10.0, "color": BLUE, "angle": 0, "pos": (0, 0) },
-    "Mars":    { "distance": 228, "speed": 24.07, "size": 5.30, "color": RED,  "angle": 0, "pos": (0, 0) },
+    "Mercury": { "distance": 58,  "speed": 47.87, "radius": 3.80, "color": GRAY, "angle": 0, "pos": (0, 0) },
+    "Venus":   { "distance": 108, "speed": 35.02, "radius": 9.50, "color": GOLD, "angle": 0, "pos": (0, 0) },
+    "Earth":   { "distance": 150, "speed": 29.78, "radius": 10.0, "color": BLUE, "angle": 0, "pos": (0, 0) },
+    "Mars":    { "distance": 228, "speed": 24.07, "radius": 5.30, "color": RED,  "angle": 0, "pos": (0, 0) },
 }
 
 # A "app_run" es calcularà:
@@ -547,7 +547,7 @@ planets = {
     sun["pos"] = (int(screen.get_width() / 2), int(screen.get_height() / 2)) 
 
     # Per cada planeta, calcula el seu 'angle' a partir de "velocitat*delta_time"
-    # (cada planeta té la seva pròpia velocitat)
+    # (cada planeta té la seva pròpia velocitat "speed")
 
     # Per cada planeta, calcula la seva posició 'x,y' al perímetre de la òrbita
     # amb la funció 'posicio_perimetre_cercle'
@@ -562,7 +562,7 @@ planets = {
     # El nom del planeta
     label = font.render(name, True, GRAY)
     label_rect = label.get_rect()
-    label_rect.midleft = (planet["pos"][0] + planet["size"] + 5, planet["pos"][1]) 
+    label_rect.midleft = (planet["pos"][0] + planet["radius"] + 5, planet["pos"][1]) 
     screen.blit(label, label_rect)
 
 # Fes servir aquesta funció per calcular la posició (x, y) dels planetes
