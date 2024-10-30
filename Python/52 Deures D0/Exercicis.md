@@ -37,6 +37,7 @@ Els arxius estàn a: *"./assets/exercici002/"*
 Fes servir la funció d'escalat que hi ha a utils, amb un ample de 100 per en Shinnosuke i de 75 per en Shiro.
 
 ```python
+# Carregar la imatge d'en Shinnosuke
 path_shinnosuke = os.path.join(os.path.dirname(__file__), "./assets/exercici002/shinnosuke.png")
 im_shinnosuke = pygame.image.load(path_shinnosuke).convert_alpha()
 im_shinnosuke = utils.scale_image(pygame, im_shinnosuke, target_width=100)
