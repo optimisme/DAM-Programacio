@@ -273,7 +273,7 @@ screen.get_width()
 
 ## Exercici 12
 
-Fes un programa **exercici012.py** que amb les tecles *"fletxa"* del teclat, mogui un esquiador per la muntanya.
+Fes un programa **exercici012.py** que amb les tecles *"fletxa"* del teclat, es mogui un esquiador per la muntanya.
 
 - L'esquiador pot anar per sobre de la neu
 - L'esquiador **no** pot anar fora del taulell 
@@ -302,17 +302,18 @@ Defineix la funció **"place_random_letters(letter, count)"**:
 
 Defineix la funció **"init_board()"**:
 
-- Inicia un tauler de 8 files i 10 columnes
-- 9 caselles amb la lletra "T" repartides aleatòriament fent servir *place_random_letters*
-- 3 caselles amb la lletra "S" repartides aleatòriament fent servir *place_random_letters*
-- 3 caselles amb la lletra "M" repartides aleatòriament fent servir *place_random_letters*
-- La resta de caselles tenen una cadena de text buida ""
+- Inicia un tauler de 8 files i 10 columnes amb cadenes de text buides ""
+- Inicia 9 caselles amb la lletra "T" fent servir *place_random_letters*
+- Inicia 3 caselles amb la lletra "S" fent servir *place_random_letters*
+- Inicia 3 caselles amb la lletra "M" fent servir *place_random_letters*
 
 Defineix la funció **"is_skiable_cell(row, col)"**:
 
 - Retorna 'False' si la casella *row/col* està fora del tauler
 - Retorna 'False' si la casella *row/col* té un arbre 'T' o un ninot de neu 'M'
 - Retorna 'True' si l'esquiador pot anar a aquella casella (està buida o té neu 'S')
+
+La funció **"app_events"** ha de posicionar el jugador a una casella esquiable quan s'apreten les tecles *fletxa*
 
 La funció **"app_draw"** ha de dibuixar el tauler amb caselles de mida 50x50 i imatges:
 
