@@ -336,7 +336,15 @@ car = {
 
 Els arxius estàn a: *"./assets/exercici012/"*
 
-El cotxe s'ha de moure i mostrar la imatge en 8 direccions: **amunt, amunt_dreta, dreta, dreta_avall, avall, avall_esquerra, esquerra, esquerra_amunt**
+El cotxe s'ha de moure en 8 direccions: 
+
+| Direccions | | | |
+|--------------|-|-|-|
+| | ↖️  | ⬆️ | ↗️  |
+| | ⬅️ |    | ➡️  |
+| | ↙️  | ⬇️ | ↘️  |
+
+<br/>
 
 Per mostrar el cotxe rotat, fes servir la funció [pygame.transform.rotate](https://www.pygame.org/docs/ref/transform.html#pygame.transform.rotate)
 ```python
