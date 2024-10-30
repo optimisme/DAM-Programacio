@@ -179,6 +179,8 @@ Fes un programa **exercici009.py** que faci el següent dibuix, a partir de la s
 - El color blau es correspon a (50, 120, 200)
 - Els textos estàn desplacats 5 pixels horitzontals i 2 verticals
 
+S'ha de fer amb un bucle, de manera que si hi ha més o menys dades, la taula s'adapta.
+
 ```text
 dades = [ 
   {'nom': 'Pelut', 'any': 2018, 'pes': 6.5, 'especie': 'Gos'},
