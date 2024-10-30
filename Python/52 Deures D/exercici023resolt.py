@@ -72,7 +72,7 @@ def app_run():
         planet = planets[name]
         planet["angle"] = planet["angle"] + planet["speed"] * delta_time
         distance_from_sun = planet["distance"]
-        planet["pos"] = posicio_perimetre_cercle(sun["pos"], distance_from_sun, planet["angle"])
+        planet["pos"] = utils.point_on_circle(sun["pos"], distance_from_sun, planet["angle"])
 
 # Dibuixar
 def app_draw():
@@ -100,12 +100,6 @@ def app_draw():
         screen.blit(label, label_rect)
 
     pygame.display.update()
-
-def posicio_perimetre_cercle(center, radi, angle_graus):
-    angle_radians = math.radians(angle_graus)  # Convertir l'angle a radians
-    x = center[0] + radi * math.cos(angle_radians)    # Coordenada X
-    y = center[1] + radi * math.sin(angle_radians)    # Coordenada Y
-    return x, y
 
 if __name__ == "__main__":
     main()

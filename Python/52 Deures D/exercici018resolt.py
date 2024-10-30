@@ -55,16 +55,16 @@ def app_draw():
     # Dibuixar les dades
     for angle in range(0, 361, 15):
         # Calcular els punts de la línia actual
-        x0, y0 = posicio_perimetre_cercle((300, 250), 25, angle)
-        x1, y1 = posicio_perimetre_cercle((300, 250), 150, angle)
+        x0, y0 = utils.point_on_circle((300, 250), 25, angle)
+        x1, y1 = utils.point_on_circle((300, 250), 150, angle)
         
         # Calcular els punts de la línia anterior
         prev_angle = angle - 15
-        x_prev_0, y_prev_0 = posicio_perimetre_cercle((300, 250), 25, prev_angle)
-        x_prev_1, y_prev_1 = posicio_perimetre_cercle((300, 250), 150, prev_angle)
+        x_prev_0, y_prev_0 = utils.point_on_circle((300, 250), 25, prev_angle)
+        x_prev_1, y_prev_1 = utils.point_on_circle((300, 250), 150, prev_angle)
 
         # Crear un color segons l'angle (opcional, per donar variació de color)
-        color = hsl_to_rgb(angle, 1.0, 0.5)
+        color = utils.hsl_to_rgb(angle, 1.0, 0.5)
         
         # Dibuixar el polígon que omple l'espai entre les dues línies consecutives
         pygame.draw.polygon(screen, color, [(x0, y0), (x1, y1), (x_prev_1, y_prev_1), (x_prev_0, y_prev_0)])
@@ -72,26 +72,6 @@ def app_draw():
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def posicio_perimetre_cercle(center, radi, angle_graus):
-    angle_radians = math.radians(angle_graus)  # Convertir l'angle a radians
-    x = center[0] + radi * math.cos(angle_radians)    # Coordenada X
-    y = center[1] + radi * math.sin(angle_radians)    # Coordenada Y
-    return x, y
-
-def hsl_to_rgb(hue, saturation, lightness):
-    hue = hue / 360
-    a = saturation * min(lightness, 1 - lightness)
-
-    k_r = (0 + hue * 12) % 12
-    k_g = (8 + hue * 12) % 12
-    k_b = (4 + hue * 12) % 12
-
-    r = int(255 * (lightness - a * max(-1, min(k_r - 3, 9 - k_r, 1))))
-    g = int(255 * (lightness - a * max(-1, min(k_g - 3, 9 - k_g, 1))))
-    b = int(255 * (lightness - a * max(-1, min(k_b - 3, 9 - k_b, 1))))
-
-    return r, g, b
 
 if __name__ == "__main__":
     main()

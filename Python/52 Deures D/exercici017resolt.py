@@ -1,4 +1,3 @@
-import math
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
@@ -54,18 +53,12 @@ def app_draw():
 
     # Dibuixar les dades
     for angle in range(0, 361, 15):
-        x0, y0 = posicio_perimetre_cercle((300, 250), 25, angle)
-        x1, y1 = posicio_perimetre_cercle((300, 250), 150, angle)
+        x0, y0 = utils.point_on_circle((300, 250), 25, angle)
+        x1, y1 = utils.point_on_circle((300, 250), 150, angle)
         pygame.draw.line(screen, BLACK, (x0, y0), (x1, y1), 5)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def posicio_perimetre_cercle(center, radi, angle_graus):
-    angle_radians = math.radians(angle_graus)  # Convertir l'angle a radians
-    x = center[0] + radi * math.cos(angle_radians)    # Coordenada X
-    y = center[1] + radi * math.sin(angle_radians)    # Coordenada Y
-    return x, y
 
 if __name__ == "__main__":
     main()

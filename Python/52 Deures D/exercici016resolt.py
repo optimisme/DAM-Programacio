@@ -66,25 +66,11 @@ def app_draw():
             x = 50 + column * 25
             hue = hue_step * column
 
-            color = hsl_to_rgb(hue, 1.0, lightness)
+            color = utils.hsl_to_rgb(hue, 1.0, lightness)
             pygame.draw.rect(screen, color, pygame.Rect(x, y, 25, 25))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def hsl_to_rgb(hue, saturation, lightness):
-    hue = hue / 360
-    a = saturation * min(lightness, 1 - lightness)
-
-    k_r = (0 + hue * 12) % 12
-    k_g = (8 + hue * 12) % 12
-    k_b = (4 + hue * 12) % 12
-
-    r = int(255 * (lightness - a * max(-1, min(k_r - 3, 9 - k_r, 1))))
-    g = int(255 * (lightness - a * max(-1, min(k_g - 3, 9 - k_g, 1))))
-    b = int(255 * (lightness - a * max(-1, min(k_b - 3, 9 - k_b, 1))))
-
-    return r, g, b
 
 if __name__ == "__main__":
     main()

@@ -348,19 +348,7 @@ Els colors [HSL](https://en.wikipedia.org/wiki/HSL_and_HSV) representen els colo
 Aquesta funció transforma un color **HSL** al format **RGB** de **pygame**:
 
 ```python
-def hsl_to_rgb(hue, saturation, lightness):
-    hue = hue / 360
-    a = saturation * min(lightness, 1 - lightness)
-
-    k_r = (0 + hue * 12) % 12
-    k_g = (8 + hue * 12) % 12
-    k_b = (4 + hue * 12) % 12
-
-    r = int(255 * (lightness - a * max(-1, min(k_r - 3, 9 - k_r, 1))))
-    g = int(255 * (lightness - a * max(-1, min(k_g - 3, 9 - k_g, 1))))
-    b = int(255 * (lightness - a * max(-1, min(k_b - 3, 9 - k_b, 1))))
-
-    return r, g, b
+utils.hsl_to_rgb(hue, saturation, lightness)
 ```
 
 Per fer l'exercici fes servir:
@@ -392,6 +380,11 @@ for row in range(0, rows):
     for column in range(0, columns):
 ```
 
+I fent servir la funció:
+```python
+utils.hsl_to_rgb(hue, saturation, lightness)
+```
+
 - Obté un valor entre 0 i 1 equivalent al counter (dividir per 100)
 - **y**: 50 + row * 25
 - **saturation**: 1.0
@@ -411,15 +404,7 @@ Fes un programa **exercici017.py** que faci el següent dibuix, a partir d'un bu
 for angle in range(0, 361, 15):
 ```
 
-Fes servir la funció següent per obtenir la posició dels punts (x, y) a partir de l'angle anterior:
-
-```python
-def posicio_perimetre_cercle(center, radi, angle_graus):
-    angle_radians = math.radians(angle_graus)  # Convertir l'angle a radians
-    x = center[0] + radi * math.cos(angle_radians)    # Coordenada X
-    y = center[1] + radi * math.sin(angle_radians)    # Coordenada Y
-    return x, y
-```
+Fes servir la funció **"utils.point_on_circle"** per obtenir la posició dels punts (x, y) al perímetre del cercle, a partir de l'angle anterior.
 
 La mida de gruix de les línies és de 5.
 
@@ -594,7 +579,7 @@ planets = {
     # (cada planeta té la seva pròpia velocitat "speed")
 
     # - La seva posició 'x,y' al perímetre de la òrbita,
-    #   amb la funció 'posicio_perimetre_cercle'
+    #   amb la funció 'utils.point_on_circle'
     #   * El radi és la seva distància fins al sol 
     #   * L'angle l'has calculat al pas anterior
 
@@ -608,13 +593,6 @@ planets = {
     label_rect = label.get_rect()
     label_rect.midleft = (planet["pos"][0] + planet["radius"] + 5, planet["pos"][1]) 
     screen.blit(label, label_rect)
-
-# Fes servir aquesta funció per calcular la posició (x, y) dels planetes
-def posicio_perimetre_cercle(center, radi, angle_graus):
-    angle_radians = math.radians(angle_graus)  # Convertir l'angle a radians
-    x = center[0] + radi * math.cos(angle_radians)    # Coordenada X
-    y = center[1] + radi * math.sin(angle_radians)    # Coordenada Y
-    return x, y
 ```
 
 <center>

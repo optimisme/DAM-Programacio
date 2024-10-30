@@ -1,4 +1,5 @@
 import re
+import math
 import subprocess
 from IPython.display import display, Markdown
 
@@ -116,3 +117,24 @@ def scale_image(pygame, image, target_width=None, target_height=None):
 
     scaled_image = pygame.transform.smoothscale(image, (new_width, new_height))
     return scaled_image
+
+def point_on_circle(center, radius, angle_degrees):
+    # Returns the x,y position at circle perimeter
+    angle_radians = math.radians(angle_degrees)  # Convert angle to radians
+    x = center[0] + radius * math.cos(angle_radians)  # X coordinate
+    y = center[1] + radius * math.sin(angle_radians)  # Y coordinate
+    return x, y
+
+def hsl_to_rgb(hue, saturation, lightness):
+    hue = hue / 360
+    a = saturation * min(lightness, 1 - lightness)
+
+    k_r = (0 + hue * 12) % 12
+    k_g = (8 + hue * 12) % 12
+    k_b = (4 + hue * 12) % 12
+
+    r = int(255 * (lightness - a * max(-1, min(k_r - 3, 9 - k_r, 1))))
+    g = int(255 * (lightness - a * max(-1, min(k_g - 3, 9 - k_g, 1))))
+    b = int(255 * (lightness - a * max(-1, min(k_b - 3, 9 - k_b, 1))))
+
+    return r, g, b
