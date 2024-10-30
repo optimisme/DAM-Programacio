@@ -678,8 +678,8 @@ def app_run():
     global time
 
     now = datetime.now()
-    current_time_ms = now.hour * 3600000 + now.minute * 60000 + now.second * 1000 + now.microsecond / 1000
-
+    current_time_ms = now.timestamp() * 1000
+    
     # Hores amb fracció de minuts (format 12 hores)
     time["hours"] = (current_time_ms / 3600000) % 12
 
