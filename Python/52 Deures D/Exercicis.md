@@ -349,7 +349,7 @@ El cotxe s'ha de moure en 8 direccions:
 Per mostrar el cotxe rotat, fes servir la funció [pygame.transform.rotate](https://www.pygame.org/docs/ref/transform.html#pygame.transform.rotate)
 ```python
 # Dibuixar el cotxe
-rotated_img = pygame.transform.rotate(car["img"], -car["angle"])
+rotated_img = pygame.transform.rotate(car["img"], car["angle"])
 rect = rotated_img.get_rect(center=(car["x"], car["y"]))
 screen.blit(rotated_img, rect)
 ```

@@ -29,7 +29,7 @@ img_circuit = utils.scale_image(pygame, img_circuit, target_height=480)
 car = {
     "x": 245,
     "y": 430,
-    "angle": 270,
+    "angle": 90,
     "speed": 100,
     "img": img_car,
     "direction_x": "none",
@@ -88,27 +88,27 @@ def app_run():
 
     if car["direction_x"] == "left":
         car["x"] = car["x"] - car["speed"] * delta_time
-        car["angle"] = 270
+        car["angle"] = 90
     elif car["direction_x"] == "right":
         car["x"] = car["x"] + car["speed"] * delta_time
-        car["angle"] = 90
+        car["angle"] = 270
 
     if car["direction_y"] == "up":
         car["y"] = car["y"] - car["speed"] * delta_time
         if car["direction_x"] == "none":
             car["angle"] = 0
         elif car["direction_x"] == "right":
-            car["angle"] = 45
-        elif car["direction_x"] == "left":
             car["angle"] = 315
+        elif car["direction_x"] == "left":
+            car["angle"] = 45
     elif car["direction_y"] == "down":
         car["y"] = car["y"] + car["speed"] * delta_time
         if car["direction_x"] == "none":
             car["angle"] = 180
         elif car["direction_x"] == "right":
-            car["angle"] = 135
-        elif car["direction_x"] == "left":
             car["angle"] = 225
+        elif car["direction_x"] == "left":
+            car["angle"] = 135
 
 # Dibuixar
 def app_draw():
@@ -119,7 +119,7 @@ def app_draw():
     screen.blit(img_circuit, (0,0))
 
     # Dibuixar el cotxe
-    rotated_img = pygame.transform.rotate(car["img"], -car["angle"])
+    rotated_img = pygame.transform.rotate(car["img"], car["angle"])
     rect = rotated_img.get_rect(center=(car["x"], car["y"]))
     screen.blit(rotated_img, rect)
 
