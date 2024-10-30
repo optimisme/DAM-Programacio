@@ -69,7 +69,7 @@ Fes un programa **exercici003.py** que faci el següent dibuix, amb les eines de
 
 Fes servir dos bucles:
 
-- Un bucle per els colors emplenats vermells i blancs
+- Un bucle pels colors emplenats vermells i blancs
 - Un bucle pels cercles negres
 
 <br/>
@@ -81,7 +81,7 @@ Fes servir dos bucles:
 
 Fes un programa **exercici004.py** que faci un dibuix aleatori, amb les eines de dibuix de **pygame**.
 
-Al iniciar el mètode main, s'ha d'emplenar una llista amb 10 coordenades (x,y) aleatòria dins dels limits de la pantalla.
+Al iniciar el mètode main, s'ha d'emplenar una llista amb 10 coordenades (x,y) aleatòria dins dels limits de la finestra.
 
 ```python
 window_width, window_height = screen.get_size()
@@ -101,7 +101,7 @@ Fes un programa **exercici005.py** que faci el següent dibuix, amb les eines de
 S'ha de dibuixar una espiral rectangular que surt des del centre de la finestra:
 ```python
 # Centre de la pantalla
-center_x, center_y = screen.get_width() // 2, screen.get_height() // 2
+center_x, center_y = int(screen.get_width() / 2), int(screen.get_height() / 2)
 ```
 
 En total ha de fer 25 voltes (linies) a partir d'un bucle:
@@ -134,18 +134,18 @@ Fes un programa **exercici006.py** que faci el següent dibuix, fent servir bucl
 
 Fes un programa **exercici007.py** que faci el següent dibuix, a partir de dos bucles:
 
-- Els bucles es defineixen com **for q in range (0, len(colors))**
+- Els bucles es defineixen com: **"for q in range (0, len(colors))"**
 
-- Els colors del primer bucle s'obtenen de la següent llista
-    colors = [(127, 184, 68), (240, 187, 64), (226, 137, 50), (202, 73, 65), (135, 65, 152), (75, 154, 217)]
+- Els colors del primer bucle s'obtenen de la següent llista:
+    **"colors = [(127, 184, 68), (240, 187, 64), (226, 137, 50), (202, 73, 65), (135, 65, 152), (75, 154, 217)]"**
 
-- Els colors *grisos* s'obtenen dinàmicament des de (0, 0, 0) sumant 25 a cada iteració.
+- Els colors *grisos* s'obtenen dinàmicament des de (0, 0, 0) sumant 25 a cada iteració. És a dir: **"(0, 0, 0) > (25, 25, 25) > (50, 50, 50) ..."**
 
-- La mida dels quadres és de 50 i els radis de la resta de polígons és de 25
+- La mida dels quadres és de **50** i els radis de la resta de polígons és de **25**
 
 - Necessitaràs la següent funció per dibuixar els triangles i pentàgons.
 
-```pyton
+```python
 def draw_polygon(screen, color, center, radius, num_vertices, angle_offset=(math.pi / 3)):
     points = [
         (
@@ -164,9 +164,10 @@ def draw_polygon(screen, color, center, radius, num_vertices, angle_offset=(math
 
 ## Exercici 8
 
-Fes un programa **exercici008.py** que faci el següent dibuix, a partir de la següent matriu, on cada número de la matriu correspon a un color de la llista del primer exercici. 
+Fes un programa **exercici008.py** que faci el següent dibuix, a partir de la següent matriu, on cada número de la matriu correspon a un color de la llista:
 
-```text
+```python
+colors = [(127, 184, 68), (240, 187, 64), (226, 137, 50), (202, 73, 65), (135, 65, 152), (75, 154, 217)]
 board = [
     [0, 1, 2, 3, 4, 5, 4, 3],
     [1, 2, 3, 4, 5, 4, 3, 2],
@@ -238,7 +239,7 @@ Dibuixi els rectangles a les posicions indicades, i els empleni del color quan e
 
 Ha de fer servir bucles for, tant a **"app_run""** per detectar si el mouse està en algun rectangle, com a **"app_draw"** per fer el dibuix.
 
-Podeu fer servir la funció **.collidepoint** de **pygame** que a partir d'un **Rect** i un **punt** diu si el punt està dins del rectangle o no.
+Podeu fer servir la funció [collidepoint](https://www.pygame.org/docs/ref/rect.html#pygame.Rect.collidepoint) de **pygame** que a partir d'un **Rect** i un **punt** diu si el punt està dins del rectangle o no.
 
 <center>
 <video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
@@ -293,7 +294,15 @@ La posició **x** de cada quadre també s'ha de calcular a partir de **counter**
 
 ## Exercici 15
 
-Fes un programa **exercici015.py** que faci el següent dibuix, a partir d'un bucle i la funció que transforma valors de color HSL a RGB:
+Fes un programa **exercici015.py** que faci el següent dibuix, a partir d'un bucle.
+
+Els colors [HSL](https://en.wikipedia.org/wiki/HSL_and_HSV) representen els colors a partir de:
+
+- **hue**: Un número entre 0 i 360 que representa el color (to) en el cercle cromàtic. 
+- **saturation**: Un número entre 0 i 1 que representa la saturació o intensitat del color. 
+- **lightness**: Un número entre 0 i 1 que representa la lluminositat del color. 
+
+Aquesta funció transforma un color **HSL** al format **RGB** de **pygame**:
 
 ```python
 def hsl_to_rgb(hue, saturation, lightness):
@@ -311,19 +320,18 @@ def hsl_to_rgb(hue, saturation, lightness):
     return r, g, b
 ```
 
-Els color [HSL](https://en.wikipedia.org/wiki/HSL_and_HSV) representen els colors a partir de:
-
-- **hue**: Un número entre 0 i 360 que representa el color (to) en el cercle cromàtic. 
-- **saturation**: Un número entre 0 i 1 que representa la saturació o intensitat del color. 
-- **lightness**: Un número entre 0 i 1 que representa la lluminositat del color. 
-
 Per fer l'exercici fes servir:
 
-- El bucle: **for hue in range(0, 361, 15):**
-- **x**: 50 + hue * (500 / 360)
+```python
+columns = 21
+    for column in range(0, columns):
+```
+
+- **x**: x = 50 + column * 25
+- **hue**: hue = (360 / 21) * column
 - **saturation**: 1.0
 - **lightness**: 0.5
-- Cada quadre és de 21x21
+- Cada quadre és de 25x25
 
 <br/>
 <center><img src="./assets/exercici015.png" style="max-height: 400px" alt="">
@@ -335,15 +343,17 @@ Per fer l'exercici fes servir:
 Fes un programa **exercici016.py** que faci el següent dibuix, a partir de dos bucles anidats:
 
 ```python
-for hue in range(0, 361, 15):
-    for counter in range(0, 100, 5):
+rows = 15
+columns = 21
+for row in range(0, rows):
+    for column in range(0, columns):
 ```
 
 - Obté un valor entre 0 i 1 equivalent al counter (dividir per 100)
-- **y**: 50 + counter * 4
+- **y**: 50 + row * 25
 - **saturation**: 1.0
-- **lightness**: Igual al valor entre 0 i 1 del càlcul anterior
-- Cada quadre és de 21x21
+- **lightness**: (1/ 15) * row
+- Cada quadre és de 25x25
 
 <br/>
 <center><img src="./assets/exercici016.png" style="max-height: 400px" alt="">
@@ -381,7 +391,7 @@ Fes un programa **exercici018.py** que faci el següent dibuix, una [roda de col
 
 Per fer-ho, calcula les linies com a l'exercici anterior i defineix un polígon entre la línia actual i la linia anterior. 
 
-Després emplena aquest polígon del color HSL amb l'**angle** que correson, **saturarion** a 1.0 i **lightness** a 0.5.
+Després emplena aquest polígon del color **HSL** amb l'**angle** que correson, **saturarion** a 1.0 i **lightness** a 0.5.
 
 <br/>
 <center><img src="./assets/exercici018.png" style="max-height: 400px" alt="">
@@ -514,45 +524,53 @@ BLACK = (0, 0, 0)
 BLUE = (50, 120, 200)
 BROWN = (165, 42, 42)
 YELLOW = (255, 255, 0)
-GRAY = (200, 200, 200)
+GRAY = (169, 169, 169) 
 ORANGE = (255, 165, 0)
 GOLD = (255, 215, 0)
-LIGHT_GRAY = (169, 169, 169) 
 RED = (255, 69, 0) 
 
 # Dades del sistema
-earth_rotation = 150
 sun = {
     "pos": (0, 0),
-    "radius": earth_rotation / 10
+    "radius": 20
 }
 planets = {
-    "Mercury": { "angle": 0, "distance": 0.39, "speed": 47.87, "size": 0.38, "color": LIGHT_GRAY, "pos": (0, 0) },
-    "Venus":   { "angle": 0, "distance": 0.72, "speed": 35.02, "size": 0.95, "color": GOLD, "pos": (0, 0) },
-    "Earth":   { "angle": 0, "distance": 1.00, "speed": 29.78, "size": 1.00, "color": BLUE, "pos": (0, 0) },
-    "Mars":    { "angle": 0, "distance": 1.52, "speed": 24.07, "size": 0.53, "color": RED, "pos": (0, 0) },
+    "Mercury": { "distance": 58,  "speed": 47.87, "size": 3.80, "color": GRAY, "angle": 0, "pos": (0, 0) },
+    "Venus":   { "distance": 108, "speed": 35.02, "size": 9.50, "color": GOLD, "angle": 0, "pos": (0, 0) },
+    "Earth":   { "distance": 150, "speed": 29.78, "size": 10.0, "color": BLUE, "angle": 0, "pos": (0, 0) },
+    "Mars":    { "distance": 228, "speed": 24.07, "size": 5.30, "color": RED,  "angle": 0, "pos": (0, 0) },
 }
 
-# A "app_run" es calcularà l'angle i la posició segons l'animació
+# A "app_run" es calcularà:
 
-# A "app_run" posiciona el sol al centre de la pantalla
-sun["pos"] = (screen.get_width() // 2, screen.get_height() // 2) 
+    # La posició del sol al centre de la finestra
+    sun["pos"] = (int(screen.get_width() / 2), int(screen.get_height() / 2)) 
 
-# A "app_run" calcula la posició de cada planeta amb la funció
+    # Per cada planeta, calcula el seu 'angle' a partir de "velocitat*delta_time"
+    # (cada planeta té la seva pròpia velocitat)
+
+    # Per cada planeta, calcula la seva posició 'x,y' al perímetre de la òrbita
+    # amb la funció 'posicio_perimetre_cercle'
+    # - El radi és la seva distància fins al sol 
+    # - L'angle l'has calculat al pas anterior
+
+# A "app_draw" per cada planeta es dibuixa:
+
+    # El cercle de la òrbita de color "GRAY = (169, 169, 169)" 
+    # Cada planeta a la seva posició
+
+    # El nom del planeta
+    label = font.render(name, True, GRAY)
+    label_rect = label.get_rect()
+    label_rect.midleft = (planet["pos"][0] + planet["size"] + 5, planet["pos"][1]) 
+    screen.blit(label, label_rect)
+
+# Fes servir aquesta funció per calcular la posició (x, y) dels planetes
 def posicio_perimetre_cercle(center, radi, angle_graus):
     angle_radians = math.radians(angle_graus)  # Convertir l'angle a radians
     x = center[0] + radi * math.cos(angle_radians)    # Coordenada X
     y = center[1] + radi * math.sin(angle_radians)    # Coordenada Y
     return x, y
-
-# A "app_draw" tingues en compte que el plantea es dibuixa amb una mida 
-planet_draw_radius = int(planet["size"] * 10)
-
-# A "app_draw" tingues en compte que els noms dels planetes s'alinean a la dreta + 5
-label = font.render(name, True, LIGHT_GRAY)
-label_rect = label.get_rect()
-label_rect.midleft = (planet["pos"][0] + planet_draw_radius + 5, planet["pos"][1]) 
-screen.blit(label, label_rect)
 ```
 
 <center>

@@ -68,13 +68,14 @@ def app_draw():
         x = 50 + (q * 100) + radius
         pygame.draw.circle(screen, colors[q], (x, 150 + radius), radius, 2)
 
+    grey = 0
     for q in range (0, 10):
         radius = 25
         x = 50 + (q * 100) + radius
-        grey = 25 * q
         color = (grey, grey, grey)
         draw_polygon(screen, color, (x, 250 + radius), radius, 3)
         draw_polygon(screen, color, (x, 350 + radius), radius, 5)
+        grey = grey + 25
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

@@ -53,15 +53,21 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
 
     # Dibuixar les dades
-    for hue in range(0, 361, 15):
-        for counter in range(0, 100, 5):
-            value = counter / 100
+    
+    rows = 15
+    columns = 21
+    lgt_step = (1/ rows)
+    hue_step = (360 / columns)
 
-            x = 50 + hue * (500 / 360)
-            y = 50 + counter * 4
+    for row in range(0, rows):
+        y = 50 + row * 25
+        lightness = lgt_step * row
+        for column in range(0, columns):
+            x = 50 + column * 25
+            hue = hue_step * column
 
-            color = hsl_to_rgb(hue, 1.0, value)
-            pygame.draw.rect(screen, color, pygame.Rect(x, y, 21, 21))
+            color = hsl_to_rgb(hue, 1.0, lightness)
+            pygame.draw.rect(screen, color, pygame.Rect(x, y, 25, 25))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

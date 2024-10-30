@@ -50,7 +50,7 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
     
     # Centre de la finstra
-    center_x, center_y = screen.get_width() // 2, screen.get_height() // 2
+    center_x, center_y = int(screen.get_width() / 2), int(screen.get_height() / 2)
     
     # Paràmetres de l'espiral rectangular
     x, y = center_x, center_y
