@@ -347,6 +347,8 @@ El cotxe s'ha de moure en 8 direccions:
 
 <br/>
 
+Escala el cotxe amb **target_width=15"** i la imatge amb **"target_height=480"**
+
 Per mostrar el cotxe rotat, fes servir la funció [pygame.transform.rotate](https://www.pygame.org/docs/ref/transform.html#pygame.transform.rotate)
 ```python
 # Dibuixar el cotxe
