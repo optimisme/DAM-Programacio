@@ -56,11 +56,19 @@ def app_run():
 
     now = datetime.now()
 
-    current_time_ms = now.hour * 3600000 + now.minute * 60000 + now.second * 1000 + now.microsecond / 1000
+    # Convertir cada part de l'hora actual en mil·lisegons
+    hours_in_ms = now.hour * 3600000       # Hores en mil·lisegons
+    minutes_in_ms = now.minute * 60000     # Minuts en mil·lisegons
+    seconds_in_ms = now.second * 1000      # Segons en mil·lisegons
+    microseconds_in_ms = now.microsecond / 1000  # Microsegons en mil·lisegons
 
-    time["hours"] = (current_time_ms / 3600000) % 12
-    time["minutes"] = (current_time_ms / 60000) % 60
-    time["seconds"] = (current_time_ms / 1000) % 60
+    # Sumar totes les parts per obtenir el temps actual en mil·lisegons
+    current_time_ms = hours_in_ms + minutes_in_ms + seconds_in_ms + microseconds_in_ms
+
+    # Assignar les hores, minuts i segons directament amb decimals inclosos
+    time["hours"] = (current_time_ms / 3600000) % 12    # Hores amb fracció de minuts (format 12 hores)
+    time["minutes"] = (current_time_ms / 60000) % 60    # Minuts amb fracció de segons
+    time["seconds"] = (current_time_ms / 1000) % 60     # Segons amb fracció de mil·lisegons
 
 # Dibuixar
 def app_draw():   
@@ -81,20 +89,27 @@ def app_draw():
         label_rect = label.get_rect(center=(x, y))  # Centrar el text
         screen.blit(label, label_rect)
     
-    # Dibuixar l'agulla de les hores
-    hour_angle = (360 / 12) * ((time["hours"] % 12) + time["minutes"] / 60) - 90
+    # Constants
+    offset = -90 # Ajust per rotar l'angle l'origen d'un rellotge
+
+    # Càlcul de l'angle de les hores (continu)
+    degrees_per_hour = (360 / 12)
+    hour_angle = degrees_per_hour * time["hours"] + offset
     hour_x, hour_y = utils.point_on_circle(center, radius * 0.4, hour_angle)
     pygame.draw.line(screen, WHITE, center, (hour_x, hour_y), 10)
 
-    # Dibuixar l'agulla dels minuts
-    minute_angle = (360 / 60) * (time["minutes"] + time["seconds"] / 60) - 90
+    # Càlcul de l'angle dels minuts (continu)
+    degress_per_min = (360 / 60)
+    minute_angle = degress_per_min * time["minutes"] + offset
     minute_x, minute_y = utils.point_on_circle(center, radius * 0.7, minute_angle)
     pygame.draw.line(screen, BLUE, center, (minute_x, minute_y), 6)
 
-    # Dibuixar l'agulla dels segons
-    second_angle = (360 / 60) * time["seconds"] - 90
+    # Càlcul de l'angle dels segons (continu)
+    degress_per_sec = (360 / 60)
+    second_angle = degress_per_sec * time["seconds"] + offset
     second_x, second_y = utils.point_on_circle(center, radius * 0.9, second_angle)
     pygame.draw.line(screen, RED, center, (second_x, second_y), 2)
+
 
     pygame.display.update()
 
