@@ -1,5 +1,6 @@
 import math
 import os
+from datetime import datetime
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 import sys
@@ -19,8 +20,13 @@ screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
 # Definir variables globals
-font = pygame.font.Font("Arial", 16)
+font = pygame.font.SysFont("Arial", 16)
 
+time = { 
+    "hours": 0, 
+    "minutes": 0, 
+    "seconds": 0
+}
 
 # Bucle de l'aplicació
 def main():
@@ -46,43 +52,49 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    global sun, planets
-    delta_time = clock.get_time() / 1000.0  
-    
-     # Posició del Sol al centre de la pantalla
-    sun["pos"] = (int(screen.get_width() / 2), int(screen.get_height() / 2)) 
+    global time
 
-    planet_names = list(planets.keys()) 
-    for name in planet_names:
-        planet = planets[name]
-        planet["angle"] = planet["angle"] + planet["speed"] * delta_time
-        distance_from_sun = planet["distance"]
-        planet["pos"] = utils.point_on_circle(sun["pos"], distance_from_sun, planet["angle"])
+    now = datetime.now()
+
+    current_time_ms = now.hour * 3600000 + now.minute * 60000 + now.second * 1000 + now.microsecond / 1000
+
+    time["hours"] = (current_time_ms / 3600000) % 12
+    time["minutes"] = (current_time_ms / 60000) % 60
+    time["seconds"] = (current_time_ms / 1000) % 60
 
 # Dibuixar
-def app_draw():
-    global sun, planets
-    
+def app_draw():   
+    global time
+
     screen.fill(BLACK)
     utils.draw_grid(pygame, screen, 50)
 
-    # Dibuixar el Sol
-    pygame.draw.circle(screen, YELLOW, sun["pos"], sun["radius"])
+    center = (325, 250)
+    radius = 200
 
-    # Dibuixar els planetes i les seves òrbites
-    for name, planet in planets.items():
-                         
-        # Dibuixar l'òrbita com a cercle gris (traç de 1 píxel)
-        pygame.draw.circle(screen, GRAY, sun["pos"], planet["distance"], 1)
-        
-        # Dibuixar el planeta a la seva posició
-        pygame.draw.circle(screen, planet["color"], (int(planet["pos"][0]), int(planet["pos"][1])), planet["radius"])
+    # Dibuixar els números
+    for num in range(1, 13):
+        angle = (360 / 12 * num) - 90  # Angle de cada numero
+        x, y = utils.point_on_circle(center, radius, angle) 
 
-        # Dibuixar el nom del planeta
-        label = font.render(name, True, GRAY)
-        label_rect = label.get_rect()
-        label_rect.midleft = (planet["pos"][0] + planet["radius"] + 5, planet["pos"][1]) 
+        label = font.render(str(num), True, WHITE)
+        label_rect = label.get_rect(center=(x, y))  # Centrar el text
         screen.blit(label, label_rect)
+    
+    # Dibuixar l'agulla de les hores
+    hour_angle = (360 / 12) * ((time["hours"] % 12) + time["minutes"] / 60) - 90
+    hour_x, hour_y = utils.point_on_circle(center, radius * 0.4, hour_angle)
+    pygame.draw.line(screen, WHITE, center, (hour_x, hour_y), 10)
+
+    # Dibuixar l'agulla dels minuts
+    minute_angle = (360 / 60) * (time["minutes"] + time["seconds"] / 60) - 90
+    minute_x, minute_y = utils.point_on_circle(center, radius * 0.7, minute_angle)
+    pygame.draw.line(screen, BLUE, center, (minute_x, minute_y), 6)
+
+    # Dibuixar l'agulla dels segons
+    second_angle = (360 / 60) * time["seconds"] - 90
+    second_x, second_y = utils.point_on_circle(center, radius * 0.9, second_angle)
+    pygame.draw.line(screen, RED, center, (second_x, second_y), 2)
 
     pygame.display.update()
 

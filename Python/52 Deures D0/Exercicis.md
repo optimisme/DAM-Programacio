@@ -648,3 +648,66 @@ planets = {
 </video>
 </center>
 <br/>
+
+## Exercici 24
+
+Fes un programa **exercici024.py** que mostri un rellotge com el del vídeo.
+
+Fes servir la funció **"utils.point_on_circle"** per obtenir la posició dels punts (x, y) dels números, i agulles al voltant dels seus respectius cercles.
+
+Per obtenir la hora amb precissió en **python**, cal importar:
+```python
+from datetime import datetime
+```
+
+Feu servir un objecte global per guardar les dades de la hora actual:
+```python
+time = { 
+    "hours": 0, 
+    "minutes": 0, 
+    "seconds": 0
+}
+```
+
+Actualitzeu la informació de la hora a la funció **"app_run"**:
+```python
+def app_run():
+    global time
+
+    now = datetime.now()
+
+    current_time_ms = now.hour * 3600000 + now.minute * 60000 + now.second * 1000 + now.microsecond / 1000
+
+    time["hours"] = (current_time_ms / 3600000) % 12
+    time["minutes"] = (current_time_ms / 60000) % 60
+    time["seconds"] = (current_time_ms / 1000) % 60
+```
+
+Aquests són els colors:
+```python
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0)
+BLUE = (50, 120, 200)
+RED = (255, 69, 0) 
+```
+
+Feu el dibuix amb el rellotge centrat a (325, 250).
+
+- Els números van a un radi de 200
+- L'agulla de les hores a un radi de (200*0.4)
+- L'agulla dels minuts a un radi de (200*0.4)
+- L'agulla dels segons a un radi de (200*0.9)
+
+Exemple de com dibuixar les hores:
+```python
+    hour_angle = (360 / 12) * ((time["hours"] % 12) + time["minutes"] / 60) - 90
+    hour_x, hour_y = utils.point_on_circle(center, radius * 0.4, hour_angle)
+    pygame.draw.line(screen, WHITE, center, (hour_x, hour_y), 10)
+```
+
+<center>
+<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
+  <source src="./assets/exercici024.mov" type="video/mp4">
+</video>
+</center>
+<br/>
