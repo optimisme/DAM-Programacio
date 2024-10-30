@@ -704,6 +704,7 @@ Feu el dibuix amb el rellotge centrat a (325, 250).
 - L'agulla de les hores a un radi de (200*0.4)
 - L'agulla dels minuts a un radi de (200*0.7)
 - L'agulla dels segons a un radi de (200*0.9)
+- Els angles tenen un **"offset = -90"**
 
 Exemple de com dibuixar les hores:
 ```python
