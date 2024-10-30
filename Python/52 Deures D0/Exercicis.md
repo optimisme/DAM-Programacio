@@ -404,7 +404,7 @@ utils.hsl_to_rgb(hue, saturation, lightness)
 Per fer l'exercici fes servir:
 
 ```python
-columns = 21
+    columns = 21
     for column in range(0, columns):
 ```
 
