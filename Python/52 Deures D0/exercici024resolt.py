@@ -73,22 +73,22 @@ def app_draw():
     screen.fill(BLACK)
     utils.draw_grid(pygame, screen, 50)
 
+    # Ajust per rotar l'angle d'origen pygame
+    # a l'angle 0 d'un rellotge
+    offset = -90 
+
     center = (325, 250)
     radius = 200
 
     # Dibuixar els números
     for num in range(1, 13):
-        angle = (360 / 12 * num) - 90  # Angle de cada numero
+        angle = (360 / 12 * num) + offset  # Angle de cada numero
         x, y = utils.point_on_circle(center, radius, angle) 
 
         label = font.render(str(num), True, WHITE)
         label_rect = label.get_rect(center=(x, y))  # Centrar el text
         screen.blit(label, label_rect)
     
-    # Ajust per rotar l'angle d'origen pygame
-    # a l'angle 0 d'un rellotge
-    offset = -90 
-
     # Càlcul de l'angle de les hores 
     degrees_per_hour = (360 / 12)
     hour_angle = degrees_per_hour * time["hours"] + offset
