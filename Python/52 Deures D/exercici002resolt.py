@@ -23,11 +23,11 @@ def main():
 
     path_shinnosuke = os.path.join(os.path.dirname(__file__), "./assets/exercici002/shinnosuke.png")
     im_shinnosuke = pygame.image.load(path_shinnosuke).convert_alpha()
-    im_shinnosuke = scale_image(im_shinnosuke, target_width=100)
+    im_shinnosuke = utils.scale_image(pygame, im_shinnosuke, target_width=100)
 
     path_shiro = os.path.join(os.path.dirname(__file__), "./assets/exercici002/shiro.png")
     im_shiro = pygame.image.load(path_shiro).convert_alpha()
-    im_shiro = scale_image(im_shiro, target_width=75)
+    im_shiro = utils.scale_image(pygame, im_shiro, target_width=75)
 
     while is_looping:
         is_looping = app_events()
@@ -62,26 +62,6 @@ def app_draw():
     screen.blit(im_shiro, (225, 205))
 
     pygame.display.update()
-
-def scale_image(im_shinnosuke, target_width=None, target_height=None):
-
-    original_width, original_height = im_shinnosuke.get_size()
-    aspect_ratio = original_height / original_width
-
-    if target_width and not target_height:  # Escalar per ample mantenint la proporció
-        new_width = target_width
-        new_height = int(target_width * aspect_ratio)
-    elif target_height and not target_width:  # Escalar per altura mantenint la proporció
-        new_height = target_height
-        new_width = int(target_height / aspect_ratio)
-    elif target_width and target_height:  # Escalar deformant la imatge
-        new_width = target_width
-        new_height = target_height
-    else:
-        raise ValueError("Especifica almenys un dels dos paràmetres: target_width o target_height.")
-
-    scaled_im_shinnosuke = pygame.transform.smoothscale(im_shinnosuke, (new_width, new_height))
-    return scaled_im_shinnosuke
 
 if __name__ == "__main__":
     main()

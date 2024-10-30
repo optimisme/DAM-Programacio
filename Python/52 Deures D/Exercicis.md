@@ -34,28 +34,12 @@ Fes un programa **exercici002.py** que faci el següent dibuix, amb les eines de
 
 Els arxius estàn a: *"./assets/exercici002/"*
 
-Fes servir aquesta funció d'escalat, amb un ample de 100 per en Shinnosuke i de 75 per en Shiro.
+Fes servir la funció d'escalat que hi ha a utils, amb un ample de 100 per en Shinnosuke i de 75 per en Shiro.
 
 ```python
-def scale_image(im_shinnosuke, target_width=None, target_height=None):
-
-    original_width, original_height = im_shinnosuke.get_size()
-    aspect_ratio = original_height / original_width
-
-    if target_width and not target_height:  # Escalar per ample mantenint la proporció
-        new_width = target_width
-        new_height = int(target_width * aspect_ratio)
-    elif target_height and not target_width:  # Escalar per altura mantenint la proporció
-        new_height = target_height
-        new_width = int(target_height / aspect_ratio)
-    elif target_width and target_height:  # Escalar deformant la imatge
-        new_width = target_width
-        new_height = target_height
-    else:
-        raise ValueError("Especifica almenys un dels dos paràmetres: target_width o target_height.")
-
-    scaled_im_shinnosuke = pygame.transform.smoothscale(im_shinnosuke, (new_width, new_height))
-    return scaled_im_shinnosuke
+path_shinnosuke = os.path.join(os.path.dirname(__file__), "./assets/exercici002/shinnosuke.png")
+im_shinnosuke = pygame.image.load(path_shinnosuke).convert_alpha()
+im_shinnosuke = utils.scale_image(pygame, im_shinnosuke, target_width=100)
 ```
 
 <br/>
