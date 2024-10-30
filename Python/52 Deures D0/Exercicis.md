@@ -708,10 +708,10 @@ Feu el dibuix amb el rellotge centrat a (325, 250).
 
 Exemple de com dibuixar les hores:
 ```python
-    degrees_per_hour = (360 / 12)
-    hour_angle = degrees_per_hour * time["hours"] + offset
-    hour_x, hour_y = utils.point_on_circle(center, radius * 0.4, hour_angle)
-    pygame.draw.line(screen, WHITE, center, (hour_x, hour_y), 10)
+degrees_per_hour = (360 / 12)
+hour_angle = (degrees_per_hour * time["hours"]) + offset
+hour_x, hour_y = utils.point_on_circle(center, radius * 0.4, hour_angle)
+pygame.draw.line(screen, WHITE, center, (hour_x, hour_y), 10)
 ```
 
 <center>
