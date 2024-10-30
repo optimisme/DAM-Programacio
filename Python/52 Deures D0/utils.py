@@ -81,7 +81,7 @@ def run_code(file_path):
 
 def draw_grid(pygame, screen, size):
 
-    font = pygame.font.SysFont(None, 20)
+    font = pygame.font.SysFont("Arial", 16)
     width, height = screen.get_size()
 
     grid_color = (100, 100, 100)
