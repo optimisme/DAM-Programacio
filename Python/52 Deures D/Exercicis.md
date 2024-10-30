@@ -605,13 +605,14 @@ planets = {
     # La posició del sol al centre de la finestra
     sun["pos"] = (int(screen.get_width() / 2), int(screen.get_height() / 2)) 
 
-    # Per cada planeta, calcula el seu 'angle' a partir de "velocitat*delta_time"
+    # Per cada planeta, calcula:
+    # -El seu 'angle' a partir de "velocitat*delta_time"
     # (cada planeta té la seva pròpia velocitat "speed")
 
-    # Per cada planeta, calcula la seva posició 'x,y' al perímetre de la òrbita
-    # amb la funció 'posicio_perimetre_cercle'
-    # - El radi és la seva distància fins al sol 
-    # - L'angle l'has calculat al pas anterior
+    # - La seva posició 'x,y' al perímetre de la òrbita,
+    #   amb la funció 'posicio_perimetre_cercle'
+    #   * El radi és la seva distància fins al sol 
+    #   * L'angle l'has calculat al pas anterior
 
 # A "app_draw" per cada planeta es dibuixa:
 
