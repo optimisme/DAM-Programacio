@@ -55,21 +55,31 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
 
     # Dibuixar les dades
+    center = {"x": 300, "y": 250}
+    
     for angle in range(0, 361, 15):
-        # Calcular els punts de la línia actual
-        x0, y0 = utils.point_on_circle((300, 250), 25, angle)
-        x1, y1 = utils.point_on_circle((300, 250), 150, angle)
+        # Calculate current line points
+        p0 = utils.point_on_circle(center, 25, angle)
+        p1 = utils.point_on_circle(center, 150, angle)
         
-        # Calcular els punts de la línia anterior
+        # Calculate previous line points
         prev_angle = angle - 15
-        x_prev_0, y_prev_0 = utils.point_on_circle((300, 250), 25, prev_angle)
-        x_prev_1, y_prev_1 = utils.point_on_circle((300, 250), 150, prev_angle)
+        prev_0 = utils.point_on_circle(center, 25, prev_angle)
+        prev_1 = utils.point_on_circle(center, 150, prev_angle)
 
-        # Crear un color segons l'angle (opcional, per donar variació de color)
+        # Create color based on angle (optional, for color variation)
         color = utils.hsl_to_rgb(angle, 1.0, 0.5)
         
-        # Dibuixar el polígon que omple l'espai entre les dues línies consecutives
-        pygame.draw.polygon(screen, color, [(x0, y0), (x1, y1), (x_prev_1, y_prev_1), (x_prev_0, y_prev_0)])
+        # Convert dictionary points to tuples for pygame
+        points = [
+            (int(p0["x"]), int(p0["y"])),
+            (int(p1["x"]), int(p1["y"])),
+            (int(prev_1["x"]), int(prev_1["y"])),
+            (int(prev_0["x"]), int(prev_0["y"]))
+        ]
+        
+        # Draw polygon between consecutive lines
+        pygame.draw.polygon(screen, color, points)
 
 
     # Actualitzar el dibuix a la finestra

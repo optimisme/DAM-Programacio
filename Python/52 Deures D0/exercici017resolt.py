@@ -55,9 +55,14 @@ def app_draw():
 
     # Dibuixar les dades
     for angle in range(0, 361, 15):
-        x0, y0 = utils.point_on_circle((300, 250), 25, angle)
-        x1, y1 = utils.point_on_circle((300, 250), 150, angle)
-        pygame.draw.line(screen, BLACK, (x0, y0), (x1, y1), 5)
+        
+        pos0= utils.point_on_circle({ "x": 300, "y": 250 }, 25, angle)
+        pos1 = utils.point_on_circle({ "x": 300, "y": 250 }, 150, angle)
+
+        pos0_tuple = (pos0["x"], pos0["y"])
+        pos1_tuple = (pos1["x"], pos1["y"])
+
+        pygame.draw.line(screen, BLACK, pos0_tuple, pos1_tuple, 5)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

@@ -79,34 +79,38 @@ def app_draw():
     # a l'angle 0 d'un rellotge
     offset = -90 
 
-    center = (325, 250)
+    center = { "x": 325, "y": 250 }
+    center_tuple = (center["x"], center["y"])
     radius = 200
     
     # Càlcul de l'angle de les hores 
     degrees_per_hour = (360 / 12)
     hour_angle = (degrees_per_hour * time["hours"]) + offset
-    hour_x, hour_y = utils.point_on_circle(center, radius * 0.4, hour_angle)
-    pygame.draw.line(screen, WHITE, center, (hour_x, hour_y), 10)
+    hour = utils.point_on_circle(center, radius * 0.4, hour_angle)
+    hour_tuple = (hour["x"], hour["y"])
+    pygame.draw.line(screen, WHITE, center_tuple, hour_tuple, 10)
 
     # Càlcul de l'angle dels minuts 
     degress_per_min = (360 / 60)
     minute_angle = (degress_per_min * time["minutes"]) + offset
-    minute_x, minute_y = utils.point_on_circle(center, radius * 0.7, minute_angle)
-    pygame.draw.line(screen, BLUE, center, (minute_x, minute_y), 6)
+    minute = utils.point_on_circle(center, radius * 0.7, minute_angle)
+    minute_tuple = (minute["x"], minute["y"])
+    pygame.draw.line(screen, BLUE, center_tuple, minute_tuple, 6)
 
     # Càlcul de l'angle dels segons 
     degress_per_sec = (360 / 60)
     second_angle = (degress_per_sec * time["seconds"]) + offset
-    second_x, second_y = utils.point_on_circle(center, radius * 0.9, second_angle)
-    pygame.draw.line(screen, RED, center, (second_x, second_y), 2)
+    second = utils.point_on_circle(center, radius * 0.9, second_angle)
+    second_tuple = (second["x"], second["y"])
+    pygame.draw.line(screen, RED, center_tuple, second_tuple, 2)
 
     # Dibuixar els números
     for num in range(1, 13):
         angle = (degrees_per_hour * num + offset)
-        x, y = utils.point_on_circle(center, radius, angle) 
-
+        num_pos = utils.point_on_circle(center, radius, angle) 
+        num_pos_tuple = (num_pos["x"], num_pos["y"])
         label = font.render(str(num), True, WHITE)
-        label_rect = label.get_rect(center=(x, y))  # Centrar el text
+        label_rect = label.get_rect(center=num_pos_tuple)  # Centrar el text
         screen.blit(label, label_rect)
 
     pygame.display.update()

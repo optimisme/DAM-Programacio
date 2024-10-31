@@ -29,14 +29,14 @@ pygame.display.set_caption('Window Title')
 font = pygame.font.Font(None, 16)
 
 sun = {
-    "pos": (0, 0),
+    "pos": { "x": 0, "y": 0 },
     "radius": 20
 }
 planets = {
-    "Mercury": { "distance": 58,  "speed": 47.87, "radius": 3.80, "color": GRAY, "angle": 0, "pos": (0, 0) },
-    "Venus":   { "distance": 108, "speed": 35.02, "radius": 9.50, "color": GOLD, "angle": 0, "pos": (0, 0) },
-    "Earth":   { "distance": 150, "speed": 29.78, "radius": 10.0, "color": BLUE, "angle": 0, "pos": (0, 0) },
-    "Mars":    { "distance": 228, "speed": 24.07, "radius": 5.30, "color": RED,  "angle": 0, "pos": (0, 0) },
+    "Mercury": { "distance": 58,  "speed": 47.87, "radius": 3.80, "color": GRAY, "angle": 0, "pos": { "x": 0, "y": 0 } },
+    "Venus":   { "distance": 108, "speed": 35.02, "radius": 9.50, "color": GOLD, "angle": 0, "pos": { "x": 0, "y": 0 } },
+    "Earth":   { "distance": 150, "speed": 29.78, "radius": 10.0, "color": BLUE, "angle": 0, "pos": { "x": 0, "y": 0 } },
+    "Mars":    { "distance": 228, "speed": 24.07, "radius": 5.30, "color": RED,  "angle": 0, "pos": { "x": 0, "y": 0 } },
 }
 
 # Bucle de l'aplicació
@@ -67,7 +67,8 @@ def app_run():
     delta_time = clock.get_time() / 1000.0  
     
      # Posició del Sol al centre de la pantalla
-    sun["pos"] = (int(screen.get_width() / 2), int(screen.get_height() / 2)) 
+    sun["pos"]["x"] = int(screen.get_width() / 2)
+    sun["pos"]["y"] = int(screen.get_height() / 2)
 
     planet_names = list(planets.keys()) 
     for name in planet_names:
@@ -84,21 +85,23 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
 
     # Dibuixar el Sol
-    pygame.draw.circle(screen, YELLOW, sun["pos"], sun["radius"])
+    sun_pos_tuple = (sun["pos"]["x"], sun["pos"]["y"])
+    pygame.draw.circle(screen, YELLOW, sun_pos_tuple, sun["radius"])
 
     # Dibuixar els planetes i les seves òrbites
     for name, planet in planets.items():
                          
         # Dibuixar l'òrbita com a cercle gris (traç de 1 píxel)
-        pygame.draw.circle(screen, GRAY, sun["pos"], planet["distance"], 1)
+        pygame.draw.circle(screen, GRAY, sun_pos_tuple, planet["distance"], 1)
         
         # Dibuixar el planeta a la seva posició
-        pygame.draw.circle(screen, planet["color"], (int(planet["pos"][0]), int(planet["pos"][1])), planet["radius"])
+        planet_pos_tuple = (planet["pos"]["x"], planet["pos"]["y"])
+        pygame.draw.circle(screen, planet["color"], planet_pos_tuple, planet["radius"])
 
         # Dibuixar el nom del planeta
         label = font.render(name, True, GRAY)
         label_rect = label.get_rect()
-        label_rect.midleft = (planet["pos"][0] + planet["radius"] + 5, planet["pos"][1]) 
+        label_rect.midleft = (planet["pos"]["x"] + planet["radius"] + 5, planet["pos"]["y"]) 
         screen.blit(label, label_rect)
 
     pygame.display.update()
