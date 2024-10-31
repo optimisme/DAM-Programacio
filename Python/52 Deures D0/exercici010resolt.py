@@ -26,13 +26,13 @@ pygame.display.set_caption('Window Title')
 # Variables globals
 mouse_pos = { "x": -1, "y": -1 }
 rectangles = [
-    { "rect": pygame.Rect(50, 100, 250, 50), "color": RED },
-    { "rect": pygame.Rect(50, 200, 100, 200), "color": GOLD },
-    { "rect": pygame.Rect(200, 200, 100, 100), "color": BLUE },
-    { "rect": pygame.Rect(200, 350, 400, 50), "color": PURPLE },
-    { "rect": pygame.Rect(350, 100, 50, 200), "color": ORANGE },
-    { "rect": pygame.Rect(450, 100, 150, 100), "color": GREEN },
-    { "rect": pygame.Rect(450, 250, 150, 50), "color": NAVY }
+    { "rect": { "x": 50, "y": 100, "width": 250, "height": 50 }, "color": RED },
+    { "rect": { "x": 50, "y": 200, "width": 100, "height": 200 }, "color": GOLD },
+    { "rect": { "x": 200, "y": 200, "width": 100, "height": 100 }, "color": BLUE },
+    { "rect": { "x": 200, "y": 350, "width": 400, "height": 50 }, "color": PURPLE },
+    { "rect": { "x": 350, "y": 100, "width": 50, "height": 200 }, "color": ORANGE },
+    { "rect": { "x": 450, "y": 100, "width": 150, "height": 100 }, "color": GREEN },
+    { "rect": { "x": 450, "y": 250, "width": 150, "height": 50 }, "color": NAVY }
 ]
 collide = -1
 
@@ -75,8 +75,7 @@ def app_run():
     collide = -1
     for cnt in range(len(rectangles)):
         obj = rectangles[cnt]
-        mouse_point = (mouse_pos["x"], mouse_pos["y"])
-        if obj["rect"].collidepoint(mouse_point):
+        if is_point_in_rect(mouse_pos, obj["rect"]):
             collide = cnt
 
 # Dibuixar
@@ -92,14 +91,21 @@ def app_draw():
     # Draw rectangles
     for cnt in range(len(rectangles)):
         obj = rectangles[cnt]
+        rectangle = obj["rect"]
+        rectangle_tuple = (rectangle["x"], rectangle["y"], rectangle["width"], rectangle["height"])
 
         if collide == cnt:
-            pygame.draw.rect(screen, obj["color"], obj["rect"])
+            pygame.draw.rect(screen, obj["color"], rectangle_tuple)
 
-        pygame.draw.rect(screen, BLACK, obj["rect"], 5)
+
+        pygame.draw.rect(screen, BLACK, rectangle_tuple, 5)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
+
+def is_point_in_rect(point, rectangle):
+    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
+            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
 
 if __name__ == "__main__":
     main()
