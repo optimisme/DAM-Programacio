@@ -225,11 +225,11 @@ Dibuixi els rectangles a les posicions indicades, i els empleni del color quan e
 
 Ha de fer servir bucles for, tant a **"app_run""** per detectar si el mouse està en algun rectangle, com a **"app_draw"** per fer el dibuix.
 
-Feu servir aquesta funció per veure si un punt està dins de l'àrea definida per un rectangle:
+Feu servir la funció **"utils.is_point_in_rect"** per veure si un punt està dins de l'àrea definida per un rectangle:
 ```python
-def is_point_in_rect(point, rectangle):
-    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
-            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
+point= { "x": 15, "y": 15 }
+rect = { "x": 10, "y": 10, "width": 20, "height": 20 }
+utils.is_point_in_rect(point, rect):
 ```
 
 <center>
