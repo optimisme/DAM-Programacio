@@ -104,8 +104,7 @@ def app_draw():
         x = 50 + cnt * 25
         height = 5 + heights[cnt] # Alçada en funció de la distància
         y = 250 - height           # Ajustar perquè creixi cap amunt
-        rect = pygame.Rect(x, y, 25, height)
-        pygame.draw.rect(screen, BLACK, rect)
+        pygame.draw.rect(screen, BLACK, (x, y, 25, height))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
