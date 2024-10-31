@@ -117,7 +117,7 @@ def app_draw():
 
     # Draw moving object
     pygame.draw.rect(screen, ORANGE, (pos_x, pos_y, 15, 15))
-
+colli
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
