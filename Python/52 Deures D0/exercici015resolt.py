@@ -60,7 +60,7 @@ def app_draw():
         hue = hue_step * column
 
         color = utils.hsl_to_rgb(hue, 1.0, 0.5)
-        pygame.draw.rect(screen, color, pygame.Rect(x, 200, 25, 25))
+        pygame.draw.rect(screen, color, (x, 200, 25, 25))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

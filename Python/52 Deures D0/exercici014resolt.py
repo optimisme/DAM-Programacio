@@ -57,10 +57,10 @@ def app_draw():
         light = counter * (255 / 10)
         x = 50 + (counter * 50)
 
-        pygame.draw.rect(screen, (light, 0, 0), pygame.Rect(x, 150, 50, 50))
-        pygame.draw.rect(screen, (0, light, 0), pygame.Rect(x, 200, 50, 50))
-        pygame.draw.rect(screen, (0, 0, light), pygame.Rect(x, 250, 50, 50))
-        pygame.draw.rect(screen, (light, light, light), pygame.Rect(x, 300, 50, 50))
+        pygame.draw.rect(screen, (light, 0, 0), (x, 150, 50, 50))
+        pygame.draw.rect(screen, (0, light, 0), (x, 200, 50, 50))
+        pygame.draw.rect(screen, (0, 0, light), (x, 250, 50, 50))
+        pygame.draw.rect(screen, (light, light, light), (x, 300, 50, 50))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
