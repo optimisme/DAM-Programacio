@@ -226,7 +226,12 @@ Dibuixi els rectangles a les posicions indicades, i els empleni del color quan e
 
 Ha de fer servir bucles for, tant a **"app_run""** per detectar si el mouse està en algun rectangle, com a **"app_draw"** per fer el dibuix.
 
-Podeu fer servir la funció [collidepoint](https://www.pygame.org/docs/ref/rect.html#pygame.Rect.collidepoint) de **pygame** que a partir d'un **Rect** i un **punt** diu si el punt està dins del rectangle o no.
+Feu servir aquesta funció per veure si un punt està dins de l'àrea definida per un rectangle:
+```python
+def is_point_in_rect(point, rectangle):
+    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
+            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
+```
 
 <center>
 <video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
