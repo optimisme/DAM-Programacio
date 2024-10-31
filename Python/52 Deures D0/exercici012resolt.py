@@ -92,24 +92,20 @@ def app_draw():
         for col in range(len(board[row])):
             x = start_x + col * CELL_SIZE
             y = start_y + row * CELL_SIZE
-            pygame.draw.rect(screen, LIGHT_BLUE, pygame.Rect(x, y, CELL_SIZE, CELL_SIZE))
+            pygame.draw.rect(screen, LIGHT_BLUE, (x, y, CELL_SIZE, CELL_SIZE))
 
             if board[row][col] != '':
                 if board[row][col] == 'T':
-                    rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
-                    screen.blit(img_tree, rect)
+                    screen.blit(img_tree, (x, y, CELL_SIZE, CELL_SIZE))
                 elif board[row][col] == 'M':
-                    rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
-                    screen.blit(img_sman, rect)
+                    screen.blit(img_sman, (x, y, CELL_SIZE, CELL_SIZE))
                 elif board[row][col] == 'S':
-                    rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
-                    screen.blit(img_snow, rect)
+                    screen.blit(img_snow, (x, y, CELL_SIZE, CELL_SIZE))
 
     # Dibuixar el personatge
     x = start_x + pos_skater["column"] * CELL_SIZE
     y = start_y + pos_skater["row"] * CELL_SIZE
-    rect = pygame.Rect(x, y, CELL_SIZE, CELL_SIZE)
-    screen.blit(img_skater, rect)
+    screen.blit(img_skater, (x, y, CELL_SIZE, CELL_SIZE))
 
     pygame.display.update()
 
