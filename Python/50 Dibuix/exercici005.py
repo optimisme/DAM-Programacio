@@ -71,11 +71,11 @@ def app_run():
     # Inici de l'arrossegament en fer clic dins del rectangle o cercle
     if mouse_down:
         if not square_dragging and not circle_dragging:  # Només detecta al començar l'arrossegament
-            if is_point_in_rect(mouse_pos, rectangle):
+            if utils.is_point_in_rect(mouse_pos, rectangle):
                 square_dragging = True
                 drag_offset["x"] = mouse_pos["x"] - rectangle["x"]
                 drag_offset["y"] = mouse_pos["y"] - rectangle["y"]
-            elif is_point_in_circle(mouse_pos, circle_center, circle_radius):
+            elif utils.is_point_in_circle(mouse_pos, circle_center, circle_radius):
                 circle_dragging = True
                 drag_offset["x"] = mouse_pos["x"] - circle_center["x"]
                 drag_offset["y"] = mouse_pos["y"] - circle_center["y"]
@@ -113,14 +113,6 @@ def app_draw():
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def is_point_in_rect(point, rectangle):
-    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
-            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
-
-def is_point_in_circle(point, center, r):
-    distancia = math.sqrt((point["x"] - center["x"]) ** 2 + (point["y"] - center["y"]) ** 2)
-    return distancia <= r
 
 if __name__ == "__main__":
     main()

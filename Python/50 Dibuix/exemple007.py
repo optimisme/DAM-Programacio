@@ -74,11 +74,11 @@ def app_run():
 
     if mouse_down:
         rectangle = { "x": 100, "y": 150, "width": 200, "height": 50 }
-        if is_point_in_rect(mouse_pos, rectangle):
+        if utils.is_point_in_rect(mouse_pos, rectangle):
             square_clicked = True
 
         center = { "x": 400, "y": 175 }
-        if is_point_in_circle(mouse_pos, center, 50):
+        if utils.is_point_in_circle(mouse_pos, center, 50):
             circle_clicked = True
 
     else:
@@ -113,14 +113,6 @@ def app_draw():
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def is_point_in_rect(point, rectangle):
-    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
-            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
-
-def is_point_in_circle(point, center, r):
-    distancia = math.sqrt((point["x"] - center["x"]) ** 2 + (point["y"] - center["y"]) ** 2)
-    return distancia <= r
 
 if __name__ == "__main__":
     main()

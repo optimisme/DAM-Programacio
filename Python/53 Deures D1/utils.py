@@ -118,13 +118,6 @@ def scale_image(pygame, image, target_width=None, target_height=None):
     scaled_image = pygame.transform.smoothscale(image, (new_width, new_height))
     return scaled_image
 
-def point_on_circle(center, radius, angle_degrees):
-    # Returns the x,y position at circle perimeter
-    angle_radians = math.radians(angle_degrees)  # Convert angle to radians
-    x = center[0] + radius * math.cos(angle_radians)  # X coordinate
-    y = center[1] + radius * math.sin(angle_radians)  # Y coordinate
-    return x, y
-
 def hsl_to_rgb(hue, saturation, lightness):
     hue = hue / 360
     a = saturation * min(lightness, 1 - lightness)
@@ -138,3 +131,18 @@ def hsl_to_rgb(hue, saturation, lightness):
     b = int(255 * (lightness - a * max(-1, min(k_b - 3, 9 - k_b, 1))))
 
     return r, g, b
+
+def point_on_circle(center, radius, angle_degrees):
+    # Returns the x,y position at circle perimeter
+    angle_radians = math.radians(angle_degrees)  # Convert angle to radians
+    x = center[0] + radius * math.cos(angle_radians)  # X coordinate
+    y = center[1] + radius * math.sin(angle_radians)  # Y coordinate
+    return x, y
+
+def is_point_in_rect(point, rectangle):
+    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
+            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
+
+def is_point_in_circle(point, center, r):
+    distancia = math.sqrt((point["x"] - center["x"]) ** 2 + (point["y"] - center["y"]) ** 2)
+    return distancia <= r
