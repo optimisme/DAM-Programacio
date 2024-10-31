@@ -33,8 +33,8 @@ font = pygame.font.SysFont("Arial", 14)
 mouse_data = { "x": -1, "y": -1, "pressed": False }
 direction = "up"
 buttons = [
-    { "value": "up",   "x": 25, "y": 25 },
-    { "value": "down", "x": 25, "y": 50 },
+    { "value": "up",   "x": 25, "y": 25, "pressed": False },
+    { "value": "down", "x": 25, "y": 50, "pressed": False },
 ]
 position_y = 250
 radius = 25
@@ -71,11 +71,6 @@ def app_events():
                 mouse_data["y"] = -1
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_data["pressed"] = True
-            for button in buttons:
-                rect = { "x": button["x"], "y": button["y"], "width": BUTTON_SIZE, "height": BUTTON_SIZE }
-                if is_point_in_rect(mouse_data, rect):
-                    direction = button["value"]
-                    break
         elif event.type == pygame.MOUSEBUTTONUP:
             mouse_data["pressed"] = False
 
@@ -83,10 +78,20 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    global position_y, radius
+    global buttons, direction, position_y, radius
+
+    for button in buttons:
+        if not mouse_data["pressed"]:
+            button["pressed"] = False
+        else:
+            rect = { "x": button["x"], "y": button["y"], "width": BUTTON_SIZE, "height": BUTTON_SIZE }
+            if utils.is_point_in_rect(mouse_data, rect):
+                direction = button["value"]
+                button["pressed"] = True
+            else:
+                button["pressed"] = False            
 
     delta_time = clock.get_time() / 1000.0  # Convertir a segons
-
     speed = 150
 
     if direction == "up":
@@ -130,17 +135,13 @@ def draw_button(button):
 
     color = WHITE
     if direction == button["value"]:
-        if mouse_data["pressed"]:
+        if button["pressed"]:
             color = ORANGE
-        elif direction == button["value"]:
+        else:
             color = BLUE
 
     pygame.draw.rect(screen, color, rect_tuple)
     pygame.draw.rect(screen, BLACK, rect_tuple, 2)
-
-def is_point_in_rect(point, rectangle):
-    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
-            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
 
 if __name__ == "__main__":
     main()

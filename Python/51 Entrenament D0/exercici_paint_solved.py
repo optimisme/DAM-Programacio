@@ -85,13 +85,13 @@ def app_events():
     if mouse_relased:
         for button in buttons_width:
             rect = { "x": button["x"], "y": button["y"], "width": BUTTON_SIZE, "height": BUTTON_SIZE }
-            if is_point_in_rect(mouse, rect):
+            if utils.is_point_in_rect(mouse, rect):
                 line_width = button["width"]
                 break
 
         for button in buttons_color:
             rect = { "x": button["x"], "y": button["y"], "width": BUTTON_SIZE, "height": BUTTON_SIZE }
-            if is_point_in_rect(mouse, rect):
+            if utils.is_point_in_rect(mouse, rect):
                 selected_color = button["color"]
                 break
 
@@ -171,10 +171,6 @@ def init_color_buttons():
     buttons_color.append({ "color": BLACK, "x": 325, "y": 25 })
     buttons_color.append({ "color": (128, 128, 128), "x": 325, "y": 50 })
     buttons_color.append({ "color": WHITE, "x": 325, "y": 75 })
-
-def is_point_in_rect(point, rectangle):
-    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
-            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
 
 if __name__ == "__main__":
     main()

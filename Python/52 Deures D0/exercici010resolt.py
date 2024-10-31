@@ -77,7 +77,7 @@ def app_run():
     collide = -1
     for cnt in range(len(rectangles)):
         obj = rectangles[cnt]
-        if is_point_in_rect(mouse_pos, obj["rect"]):
+        if utils.is_point_in_rect(mouse_pos, obj["rect"]):
             collide = cnt
 
 # Dibuixar
@@ -104,10 +104,6 @@ def app_draw():
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def is_point_in_rect(point, rectangle):
-    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
-            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
 
 if __name__ == "__main__":
     main()
