@@ -24,6 +24,8 @@ pygame.display.set_caption('Window Title')
 
 
 # Variables globals
+window_size = { "width": 0, "height": 0, "center_x": 0, "center_y": 0 }
+
 BOARD_SIZE = (12, 8)
 CELL_SIZE = 50
 mouse_pos = { "x": -1, "y": -1 }
@@ -81,7 +83,12 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    pass
+    global window_size
+    
+    window_size["width"] = screen.get_width()
+    window_size["height"] = screen.get_height()
+    window_size["center_x"] = int(screen.get_width() / 2)
+    window_size["center_y"] = int(screen.get_height() / 2)
 
 # Dibuixar
 def app_draw():
@@ -91,7 +98,9 @@ def app_draw():
     screen.fill(WHITE)
 
     # Draw board
-    draw_board(25, 25)
+    x = window_size["center_x"] - int(len(board[0]) * CELL_SIZE / 2)
+    y = window_size["center_y"] - int(len(board) * CELL_SIZE / 2)
+    draw_board(x, y)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

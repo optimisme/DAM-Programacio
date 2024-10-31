@@ -23,7 +23,7 @@ pygame.display.set_caption('Window Title')
 
 # Variables globals
 mouse_pos = { "x": -1, "y": -1 }
-finestra = { "ample": 0, "alt": 0, "mig_x": 0, "mig_y": 0 }
+window_size = { "width": 0, "height": 0, "center_x": 0, "center_y": 0 }
 
 # Bucle de l'aplicació
 def main():
@@ -59,12 +59,12 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    global finestra
+    global window_size
 
-    finestra["ample"] = screen.get_width()
-    finestra["alt"] = screen.get_height()
-    finestra["mig_x"] = int(screen.get_width() / 2)
-    finestra["mig_y"] = int(screen.get_height() / 2)
+    window_size["width"] = screen.get_width()
+    window_size["height"] = screen.get_height()
+    window_size["center_x"] = int(screen.get_width() / 2)
+    window_size["center_y"] = int(screen.get_height() / 2)
 
 # Dibuixar
 def app_draw():
@@ -72,14 +72,14 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
     
     # Definir mida rectangle exterior
-    ext_ample = finestra["ample"] - 100
-    ext_alt = finestra["alt"] - 100
+    ext_ample = window_size["width"] - 100
+    ext_alt = window_size["height"] - 100
     ext_rect = (50, 50, ext_ample, ext_alt)
 
     # Dibuixar limits
     pygame.draw.rect(screen, BLACK, ext_rect, 4)
-    pygame.draw.line(screen, BLACK, (finestra["mig_x"], 0), (finestra["mig_x"], finestra["alt"]), 4)
-    pygame.draw.line(screen, BLACK, (0, finestra["mig_y"]), (finestra["ample"], finestra["mig_y"]), 4)
+    pygame.draw.line(screen, BLACK, (window_size["center_x"], 0), (window_size["center_x"], window_size["height"]), 4)
+    pygame.draw.line(screen, BLACK, (0, window_size["center_y"]), (window_size["width"], window_size["center_y"]), 4)
 
     # Dibuixar quadre
     q_x = mouse_pos["x"] - 20
@@ -99,13 +99,13 @@ def get_color(x, y, ext_x, ext_y, ext_ample, ext_alt):
     if x < ext_x or x > (ext_x + ext_ample) or y < ext_y or y > (ext_y + ext_alt):
         return color
     
-    if x < finestra["mig_x"]:
-        if y < finestra["mig_y"]:
+    if x < window_size["center_x"]:
+        if y < window_size["center_y"]:
             return RED
         else: 
             return GREEN
     else:
-        if y < finestra["mig_y"]:
+        if y < window_size["center_y"]:
             return BLUE
         else: 
             return YELLOW

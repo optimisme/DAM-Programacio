@@ -22,7 +22,7 @@ screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
 # Variables globals
-finestra = { "ample": 0, "alt": 0, "mig_x": 0, "mig_y": 0 }
+window_size = { "width": 0, "height": 0, "center_x": 0, "center_y": 0 }
 
 # Bucle de l'aplicació
 def main():
@@ -48,12 +48,12 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    global finestra
+    global window_size
 
-    finestra["ample"] = screen.get_width()
-    finestra["alt"] = screen.get_height()
-    finestra["mig_x"] = int(screen.get_width() / 2)
-    finestra["mig_y"] = int(screen.get_height() / 2)
+    window_size["width"] = screen.get_width()
+    window_size["height"] = screen.get_height()
+    window_size["center_x"] = int(screen.get_width() / 2)
+    window_size["center_y"] = int(screen.get_height() / 2)
 
 # Dibuixar
 def app_draw():
@@ -67,8 +67,8 @@ def app_draw():
         q_ample = q * 25 * perspective
         q_alt = q * 20 * perspective
 
-        x = finestra["mig_x"] - int(q_ample / 2)
-        y = finestra["mig_y"] - int(q_alt / 2)
+        x = window_size["center_x"] - int(q_ample / 2)
+        y = window_size["center_y"] - int(q_alt / 2)
 
         parell = (q % 2) == 0
         if parell:

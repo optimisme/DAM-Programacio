@@ -21,7 +21,7 @@ for cnt in range(0, 10)
 
 ## Exercici 1
 
-Fes un programa **exercici000.py** que dibuixi 20 rectangles centrats a la pantalla, simulant perspectiva.
+Fes un programa **exercici001.py** que dibuixi 20 rectangles centrats a la pantalla, simulant perspectiva.
 
 Cal fer-ho amb un bulce:
 ```python
@@ -39,11 +39,11 @@ q_alt = q * 20 * perspective
 S'ha de centrar els quadres a la finestra, fes una variable global per capturar les mides:
 ```python
 def app_run():
-    global finestra
-    finestra["ample"] = screen.get_width()
-    finestra["alt"] = screen.get_height()
-    finestra["mig_x"] = int(screen.get_width() / 2)
-    finestra["mig_y"] = int(screen.get_height() / 2)
+    global window_size
+    window_size["width"] = screen.get_width()
+    window_size["height"] = screen.get_height()
+    window_size["center_x"] = int(screen.get_width() / 2)
+    window_size["center_y"] = int(screen.get_height() / 2)
 ```
 
 A més, el color canvia a cada iteració amb **q * 10**.
@@ -57,7 +57,7 @@ A més, el color canvia a cada iteració amb **q * 10**.
 
 ## Exercici 2
 
-Fes un programa **exercici000.py** on:
+Fes un programa **exercici002.py** on:
 
 Defineix una nova funció **draw_text(text, font, x, y, align_x="left", align_y="top")** que dibuixa un text a la posició **x**, **y** amb l'anineació definida a **align_x** i **align_y**.
 
