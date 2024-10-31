@@ -81,7 +81,7 @@ def app_draw():
                 
             x = 50 + column * 50
             y = 50 + row * 50
-            rect = pygame.Rect(x, y, 50, 50)
+            rect = (x, y, 50, 50)
             pygame.draw.rect(screen, color, rect)
 
     # Actualitzar el dibuix a la finestra

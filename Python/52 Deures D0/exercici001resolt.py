@@ -50,8 +50,7 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
     
     # Fons vermell
-    rect = pygame.Rect(50, 50,550, 100)
-    pygame.draw.rect(screen, RED, rect)
+    pygame.draw.rect(screen, RED, (50, 50,550, 100))
 
     # Texts
     fontT = pygame.font.SysFont("Arial", 60)

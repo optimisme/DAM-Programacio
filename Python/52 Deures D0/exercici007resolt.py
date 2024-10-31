@@ -62,7 +62,7 @@ def app_draw():
     for q in range (0, len(colors)):
         size = 50
         x = 50 + (q * 100)
-        pygame.draw.rect(screen, colors[q], pygame.Rect(x, 50, size, size))
+        pygame.draw.rect(screen, colors[q], (x, 50, size, size))
 
         radius = 25
         x = 50 + (q * 100) + radius

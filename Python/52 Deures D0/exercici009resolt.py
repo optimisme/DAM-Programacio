@@ -65,7 +65,7 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
 
     # Dibuixar el fons de la taula
-    back = pygame.Rect(150, 100, 200, 25 * len(dades))
+    back = (150, 100, 200, 25 * len(dades))
     pygame.draw.rect(screen, WHITE, back)
 
     # Dibuixar les linies de les files
