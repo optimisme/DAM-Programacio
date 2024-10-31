@@ -21,6 +21,9 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
+# Variables globals
+finestra = { "ample": 0, "alt": 0, "mig_x": 0, "mig_y": 0 }
+
 # Bucle de l'aplicació
 def main():
     is_looping = True
@@ -45,25 +48,27 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    pass
+    global finestra
+
+    finestra["ample"] = screen.get_width()
+    finestra["alt"] = screen.get_height()
+    finestra["mig_x"] = int(screen.get_width() / 2)
+    finestra["mig_y"] = int(screen.get_height() / 2)
 
 # Dibuixar
 def app_draw():
     screen.fill(WHITE)
     utils.draw_grid(pygame, screen, 50)
      
-    migAmple = int(screen.get_width() / 2)
-    migAlt = int(screen.get_height() / 2)
-
     for q in range(20, 0, -1):
 
         perspective = (q / 20)
 
-        qAmple = q * 25 * perspective
-        qAlt = q * 20 * perspective
+        q_ample = q * 25 * perspective
+        q_alt = q * 20 * perspective
 
-        x = migAmple - int(qAmple / 2)
-        y = migAlt - int(qAlt / 2)
+        x = finestra["mig_x"] - int(q_ample / 2)
+        y = finestra["mig_y"] - int(q_alt / 2)
 
         parell = (q % 2) == 0
         if parell:
@@ -71,7 +76,7 @@ def app_draw():
         else:
             color = (0, q * 10, 0)  # Color verd
 
-        pygame.draw.rect(screen, color, (x, y, qAmple, qAlt))
+        pygame.draw.rect(screen, color, (x, y, q_ample, q_alt))
         
     pygame.display.update()
 

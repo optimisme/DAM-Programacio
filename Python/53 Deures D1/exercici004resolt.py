@@ -8,11 +8,11 @@ import utils
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-RED = (255, 0, 0)
+GRAY = (200, 200, 200)
+YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
-BLUE  = (0, 0, 255)
-PURPLE = (128, 0, 128)
-ORANGE = (255, 165, 0) 
+BLUE = (50, 150, 255)
+RED = (255, 0, 0)
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -20,6 +20,10 @@ clock = pygame.time.Clock()
 # Definir la finestra
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
+
+# Variables globals
+mouse_pos = { "x": -1, "y": -1 }
+finestra = { "ample": 0, "alt": 0, "mig_x": 0, "mig_y": 0 }
 
 # Bucle de l'aplicació
 def main():
@@ -38,34 +42,40 @@ def main():
 
 # Gestionar events
 def app_events():
+    global mouse_pos
+    mouse_inside = pygame.mouse.get_focused() # El ratolí està dins de la finestra?
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # Botó tancar finestra
             return False
+        elif event.type == pygame.MOUSEMOTION:
+            if mouse_inside:
+                mouse_pos["x"] = event.pos[0]
+                mouse_pos["y"] = event.pos[1]
+            else:
+                mouse_pos["x"] = -1
+                mouse_pos["y"] = -1
     return True
 
 # Fer càlculs
 def app_run():
-    pass
+    global finestra
+
+    finestra["ample"] = screen.get_width()
+    finestra["alt"] = screen.get_height()
+    finestra["mig_x"] = int(screen.get_width() / 2)
+    finestra["mig_y"] = int(screen.get_height() / 2)
 
 # Dibuixar
 def app_draw():
-    # Pintar el fons de blanc
     screen.fill(WHITE)
-
-    # Dibuixar la graella de coordenades (llibreria utils)
     utils.draw_grid(pygame, screen, 50)
-
-    # Dibuixar un rectangle vermell a la posició (150, 200) de mida (75, 100)
-    pygame.draw.rect(screen, RED, (150, 200, 75, 100))
-
-    # Dibuixar un cercle verd a la posició (100, 150) de radi 10
-    pygame.draw.circle(screen, GREEN, (100, 150), 50)
-
-    # Dibuixar una linia des de l'origen del rectangle fins al centre del cercle
-    pygame.draw.line(screen, BLUE, (150, 200), (100, 150), 5)
-
-    # Actualitzar el dibuix a la finestra
+    
+    # Dibuixar botons
+    
+    
     pygame.display.update()
+
 
 if __name__ == "__main__":
     main()

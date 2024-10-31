@@ -32,14 +32,18 @@ A cada pas el factor de perspectiva multiplica l'ample i alt del quadre amb **pe
 
 L'ample i alt de cada quadre és:
 ```python
-qAmple = q * 25 * perspective
-qAlt = q * 20 * perspective
+q_ample = q * 25 * perspective
+q_alt = q * 20 * perspective
 ```
 
-S'ha de centrar els quadres a la finestra:
+S'ha de centrar els quadres a la finestra, fes una variable global per capturar les mides:
 ```python
-migAmple = int(screen.get_width() / 2)
-migAlt = int(screen.get_height() / 2)
+def app_run():
+    global finestra
+    finestra["ample"] = screen.get_width()
+    finestra["alt"] = screen.get_height()
+    finestra["mig_x"] = int(screen.get_width() / 2)
+    finestra["mig_y"] = int(screen.get_height() / 2)
 ```
 
 A més, el color canvia a cada iteració amb **q * 10**.

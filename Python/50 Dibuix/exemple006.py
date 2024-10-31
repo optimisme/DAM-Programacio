@@ -91,21 +91,21 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
 
     # Draw face
-    pygame.draw.ellipse(screen, ORANGE, pygame.Rect(175, 50, 300, 400))
+    pygame.draw.ellipse(screen, ORANGE, (175, 50, 300, 400))
 
     # Draw nose
-    pygame.draw.arc(screen, GRAY, pygame.Rect(300, 275, 50, 25), math.radians(0), math.radians(180), 5)
+    pygame.draw.arc(screen, GRAY, (300, 275, 50, 25), math.radians(0), math.radians(180), 5)
 
     # Draw smile
-    pygame.draw.arc(screen, RED, pygame.Rect(250, 300, 150, 100), math.radians(180), math.radians(0), 5)
+    pygame.draw.arc(screen, RED, (250, 300, 150, 100), math.radians(180), math.radians(0), 5)
 
     # Draw eyes back
-    pygame.draw.rect(screen, WHITE, pygame.Rect(250, 150, 50, 75))
-    pygame.draw.rect(screen, WHITE, pygame.Rect(350, 150, 50, 75))
+    pygame.draw.rect(screen, WHITE, (250, 150, 50, 75))
+    pygame.draw.rect(screen, WHITE, (350, 150, 50, 75))
 
     # Draw eyes
-    pygame.draw.rect(screen, BLACK, pygame.Rect(eye_left["x"], eye_left["y"], 20, 20))
-    pygame.draw.rect(screen, BLACK, pygame.Rect(eye_right["x"], eye_right["y"], 20, 20))
+    pygame.draw.rect(screen, BLACK, (eye_left["x"], eye_left["y"], 20, 20))
+    pygame.draw.rect(screen, BLACK, (eye_right["x"], eye_right["y"], 20, 20))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
