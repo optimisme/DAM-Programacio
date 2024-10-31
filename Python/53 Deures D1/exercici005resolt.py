@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import random
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
@@ -34,6 +36,7 @@ img_ship = get_emoji(pygame, "🚢", size=CELL_SIZE)
 img_drop = get_emoji(pygame, "🌊", size=CELL_SIZE)
 img_bomb = get_emoji(pygame, "💥", size=CELL_SIZE)
 
+board_pos = { "x": -1, "y": -1 }
 board = []
 
 # Bucle de l'aplicació
@@ -69,8 +72,8 @@ def app_events():
                 mouse_pos["x"] = -1
                 mouse_pos["y"] = -1
         elif event.type == pygame.MOUSEBUTTONDOWN:
-            cell_x = int((mouse_pos["x"] - 25) / CELL_SIZE)
-            cell_y = int((mouse_pos["y"] - 25) / CELL_SIZE)
+            cell_x = int((mouse_pos["x"] - board_pos["x"]) / CELL_SIZE)
+            cell_y = int((mouse_pos["y"] - board_pos["y"]) / CELL_SIZE)
 
             if 0 <= cell_x < len(board[0]) and 0 <= cell_y < len(board):
                 # Si la cel·la és buida, marca-la com a "W"
@@ -90,6 +93,9 @@ def app_run():
     window_size["center_x"] = int(screen.get_width() / 2)
     window_size["center_y"] = int(screen.get_height() / 2)
 
+    board_pos["x"] = window_size["center_x"] - int(len(board[0]) * CELL_SIZE / 2)
+    board_pos["y"] = window_size["center_y"] - int(len(board) * CELL_SIZE / 2)
+
 # Dibuixar
 def app_draw():
     global pos_x, pos_y
@@ -98,9 +104,7 @@ def app_draw():
     screen.fill(WHITE)
 
     # Draw board
-    x = window_size["center_x"] - int(len(board[0]) * CELL_SIZE / 2)
-    y = window_size["center_y"] - int(len(board) * CELL_SIZE / 2)
-    draw_board(x, y)
+    draw_board()
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
@@ -168,11 +172,11 @@ def init_board():
                 place_ship(x, y, length, direction)
                 placed = True
 
-def draw_board(start_x, start_y):    
+def draw_board():    
     for i in range(len(board)):
         for j in range(len(board[i])):
-            cell_x = start_x + j * CELL_SIZE
-            cell_y = start_y + i * CELL_SIZE
+            cell_x = board_pos["x"] + j * CELL_SIZE
+            cell_y = board_pos["y"] + i * CELL_SIZE
             
             pygame.draw.rect(screen, BLUE, (cell_x, cell_y, CELL_SIZE, CELL_SIZE))
 
@@ -180,9 +184,6 @@ def draw_board(start_x, start_y):
                 screen.blit(img_ship, (cell_x, cell_y))
             elif board[i][j] == "W":
                 screen.blit(img_drop, (cell_x, cell_y))
-            elif board[i][j] == "R":
-                screen.blit(img_ship, (cell_x, cell_y))
-                screen.blit(img_redc, (cell_x, cell_y))
             elif board[i][j] == "B":
                 screen.blit(img_ship, (cell_x, cell_y))
                 screen.blit(img_bomb, (cell_x, cell_y))
