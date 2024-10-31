@@ -149,7 +149,9 @@ def init_board():
     board = [["" for _ in range(BOARD_SIZE[0])] for _ in range(BOARD_SIZE[1])]
 
     ships = [(3, "horizontal"), (4, "horizontal"), (3, "vertical")]
-    for length, direction in ships:
+    for ship in ships:
+        length = ship[0]
+        direction = ship[1]
         placed = False
         while not placed:
             x, y = random.randint(0, len(board) - 1), random.randint(0, len(board[0]) - 1)
