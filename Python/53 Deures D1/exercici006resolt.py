@@ -28,7 +28,9 @@ pygame.display.set_caption('Window Title')
 
 
 # Variables globals
-mouse_pos = { "x": -1, "y": -1 }
+font = pygame.font.SysFont("Arial", 14)
+
+mouse_data = { "x": -1, "y": -1, "pressed": False }
 direction = "up"
 buttons = [
     { "value": "up",   "x": 25, "y": 25 },
@@ -54,7 +56,7 @@ def main():
 
 # Gestionar events
 def app_events():
-    global mouse_pos, buttons, direction
+    global mouse_data, buttons, direction
     mouse_inside = pygame.mouse.get_focused()
 
     for event in pygame.event.get():
@@ -62,17 +64,20 @@ def app_events():
             return False
         elif event.type == pygame.MOUSEMOTION:
             if mouse_inside:
-                mouse_pos["x"] = event.pos[0]
-                mouse_pos["y"] = event.pos[1]
+                mouse_data["x"] = event.pos[0]
+                mouse_data["y"] = event.pos[1]
             else:
-                mouse_pos["x"] = -1
-                mouse_pos["y"] = -1
+                mouse_data["x"] = -1
+                mouse_data["y"] = -1
         elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_data["pressed"] = True
             for button in buttons:
                 rect = { "x": button["x"], "y": button["y"], "width": BUTTON_SIZE, "height": BUTTON_SIZE }
-                if is_point_in_rect(mouse_pos, rect):
+                if is_point_in_rect(mouse_data, rect):
                     direction = button["value"]
                     break
+        elif event.type == pygame.MOUSEBUTTONUP:
+            mouse_data["pressed"] = False
 
     return True
 
@@ -112,16 +117,25 @@ def app_draw():
     center = (500, position_y)
     pygame.draw.circle(screen, BLUE, center, radius)
 
+    # Draw 'mouse pressed' text
+    if mouse_data["pressed"]:
+        text = font.render("Mouse Pressed", True, BLACK)
+        screen.blit(text, (60, 30))
+
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
 def draw_button(button):
     rect_tuple = (button["x"], button["y"], BUTTON_SIZE, BUTTON_SIZE)
-    if direction == button["value"]:
-        pygame.draw.rect(screen, BLUE, rect_tuple)
-    else:
-        pygame.draw.rect(screen, WHITE, rect_tuple)
 
+    color = WHITE
+    if direction == button["value"]:
+        if mouse_data["pressed"]:
+            color = ORANGE
+        elif direction == button["value"]:
+            color = BLUE
+
+    pygame.draw.rect(screen, color, rect_tuple)
     pygame.draw.rect(screen, BLACK, rect_tuple, 2)
 
 def is_point_in_rect(point, rectangle):

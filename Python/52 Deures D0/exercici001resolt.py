@@ -68,11 +68,12 @@ def app_draw():
 
     fontB = pygame.font.SysFont("Arial", 28)
     text0 = fontB.render("Lorem ipsum dolor sit amet, consectetur", True, BLACK)
-    text1 = fontB.render("adipiscing elit, sed do eiusmod tempor", True, BLACK)
-    text2 = fontB.render("incididunt ut labore et dolore magna aliqua.", True, BLACK)
-
     screen.blit(text0, (50, 250))
+
+    text1 = fontB.render("adipiscing elit, sed do eiusmod tempor", True, BLACK)
     screen.blit(text1, (50, 285))
+
+    text2 = fontB.render("incididunt ut labore et dolore magna aliqua.", True, BLACK)
     screen.blit(text2, (50, 320))
 
     pygame.display.update()
