@@ -210,15 +210,14 @@ PURPLE = (128, 0, 128)
 ORANGE = (255, 165, 0) 
 GOLD = (255, 215, 0)
 NAVY = (0, 0, 128)
-
 rectangles = [
-    { "rect": pygame.Rect(50, 100, 250, 50), "color": RED },
-    { "rect": pygame.Rect(50, 200, 100, 200), "color": GOLD },
-    { "rect": pygame.Rect(200, 200, 100, 100), "color": BLUE },
-    { "rect": pygame.Rect(200, 350, 400, 50), "color": PURPLE },
-    { "rect": pygame.Rect(350, 100, 50, 200), "color": ORANGE },
-    { "rect": pygame.Rect(450, 100, 150, 100), "color": GREEN },
-    { "rect": pygame.Rect(450, 250, 150, 50), "color": NAVY }
+    { "rect": { "x": 50, "y": 100, "width": 250, "height": 50 }, "color": RED },
+    { "rect": { "x": 50, "y": 200, "width": 100, "height": 200 }, "color": GOLD },
+    { "rect": { "x": 200, "y": 200, "width": 100, "height": 100 }, "color": BLUE },
+    { "rect": { "x": 200, "y": 350, "width": 400, "height": 50 }, "color": PURPLE },
+    { "rect": { "x": 350, "y": 100, "width": 50, "height": 200 }, "color": ORANGE },
+    { "rect": { "x": 450, "y": 100, "width": 150, "height": 100 }, "color": GREEN },
+    { "rect": { "x": 450, "y": 250, "width": 150, "height": 50 }, "color": NAVY }
 ]
 ```
 
