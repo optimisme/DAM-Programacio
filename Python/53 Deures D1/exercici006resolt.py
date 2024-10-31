@@ -32,6 +32,8 @@ buttons = [
     { "value": "up",   "x": 25, "y": 25 },
     { "value": "down", "x": 25, "y": 50 },
 ]
+position_y = 250
+radius = 25
 
 # Bucle de l'aplicació
 def main():
@@ -74,7 +76,24 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    pass
+    global position_y, radius
+
+    delta_time = clock.get_time() / 1000.0  # Convertir a segons
+
+    speed = 150
+
+    if direction == "up":
+        position_y = position_y - speed * delta_time
+    else:
+        position_y = position_y + speed * delta_time
+
+    min_y = radius
+    max_y = screen.get_height() - radius
+
+    if position_y < min_y:
+        position_y = min_y
+    elif position_y > max_y:
+        position_y = max_y
 
 # Dibuixar
 def app_draw():
@@ -87,6 +106,9 @@ def app_draw():
     for button in buttons:
         draw_button(button)
 
+    # Draw circle
+    center = (500, position_y)
+    pygame.draw.circle(screen, BLUE, center, radius)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
