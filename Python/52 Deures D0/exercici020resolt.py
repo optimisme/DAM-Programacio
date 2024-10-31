@@ -82,8 +82,8 @@ def app_draw():
         cell_position = point_from_cell(cell_over, board)
         if cell_position["x"] != -1 and cell_position["y"] != -1:
             cell_size = board["cell_size"]
-            rect = pygame.Rect(cell_position["x"], cell_position["y"], cell_size, cell_size)
-            pygame.draw.rect(screen, BLUE, rect)
+            rect_tuple = (cell_position["x"], cell_position["y"], cell_size, cell_size)
+            pygame.draw.rect(screen, BLUE, rect_tuple)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
@@ -97,8 +97,8 @@ def draw_board(board):
 
     for row in range(rows):
         for col in range(cols):
-            rect = pygame.Rect(x_start + col * cell_size, y_start + row * cell_size, cell_size, cell_size)
-            pygame.draw.rect(screen, BLACK, rect, 1)  # Dibuixar només el contorn de la cel·la
+            rect_tuple = (x_start + col * cell_size, y_start + row * cell_size, cell_size, cell_size)
+            pygame.draw.rect(screen, BLACK, rect_tuple, 1)  # Dibuixar només el contorn de la cel·la
 
 def cell_from_point(point, board):
     x = point["x"]
