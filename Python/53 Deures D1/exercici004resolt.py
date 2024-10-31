@@ -89,9 +89,7 @@ def app_draw():
         center = (dot["x"], dot["y"])
         pygame.draw.circle(screen, dot["color"], center, dot["radius"])
 
-    
     pygame.display.update()
-
 
 if __name__ == "__main__":
     main()
