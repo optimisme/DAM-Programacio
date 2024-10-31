@@ -83,16 +83,14 @@ def app_events():
 
     if mouse_relased:
         for button in buttons_width:
-            rect = pygame.Rect(button["x"], button["y"], BUTTON_SIZE, BUTTON_SIZE)
-            position = (mouse["x"], mouse["y"])
-            if rect.collidepoint(position):
+            rect = { "x": button["x"], "y": button["y"], "width": BUTTON_SIZE, "height": BUTTON_SIZE }
+            if is_point_in_rect(mouse, rect):
                 line_width = button["width"]
                 break
 
         for button in buttons_color:
-            rect = pygame.Rect(button["x"], button["y"], BUTTON_SIZE, BUTTON_SIZE)
-            position = (mouse["x"], mouse["y"])
-            if rect.collidepoint(position):
+            rect = { "x": button["x"], "y": button["y"], "width": BUTTON_SIZE, "height": BUTTON_SIZE }
+            if is_point_in_rect(mouse, rect):
                 selected_color = button["color"]
                 break
 
@@ -121,8 +119,7 @@ def app_draw():
         draw_button_color(button)
 
     # Dibuixar el color escollit
-    rect = pygame.Rect(350, 25, 50, 70)
-    pygame.draw.rect(screen, selected_color, rect)
+    pygame.draw.rect(screen, selected_color, (350, 25, 50, 70))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
@@ -133,19 +130,19 @@ def draw_button_width(button):
     if button["width"] == line_width:
         color = YELLOW
 
-    rect = pygame.Rect(button["x"], button["y"], BUTTON_SIZE, BUTTON_SIZE)
-    pygame.draw.rect(screen, color, rect)
+    rect_tuple = (button["x"], button["y"], BUTTON_SIZE, BUTTON_SIZE)
+    pygame.draw.rect(screen, color, rect_tuple)
 
     line0 = (button["x"], button["y"] + BUTTON_SIZE)
     line1 = (button["x"] + BUTTON_SIZE, button["y"])
     pygame.draw.line(screen, BLACK, line0, line1, button["width"])
 
 def draw_button_color(button):
-    rect = pygame.Rect(button["x"], button["y"], BUTTON_SIZE, BUTTON_SIZE)
-    pygame.draw.rect(screen, button["color"], rect)
+    rect_tuple = (button["x"], button["y"], BUTTON_SIZE, BUTTON_SIZE)
+    pygame.draw.rect(screen, button["color"], rect_tuple)
 
     if button["color"] == WHITE:
-        pygame.draw.rect(screen, BLACK, rect, 2)
+        pygame.draw.rect(screen, BLACK, rect_tuple, 2)
 
 def init_color_buttons():
     global buttons_color
@@ -173,6 +170,10 @@ def init_color_buttons():
     buttons_color.append({ "color": BLACK, "x": 325, "y": 25 })
     buttons_color.append({ "color": (128, 128, 128), "x": 325, "y": 50 })
     buttons_color.append({ "color": WHITE, "x": 325, "y": 75 })
+
+def is_point_in_rect(point, rectangle):
+    return (rectangle["x"] <= point["x"] <= rectangle["x"] + rectangle["width"] and
+            rectangle["y"] <= point["y"] <= rectangle["y"] + rectangle["height"])
 
 if __name__ == "__main__":
     main()
