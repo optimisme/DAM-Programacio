@@ -24,8 +24,15 @@ screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
 # Variables globals
+window_size = { 
+    "width": 0, 
+    "height": 0, 
+    "center": {
+        "x": 0,
+        "y": 0
+    } 
+}
 mouse_pos = { "x": -1, "y": -1 }
-window_size = { "width": 0, "height": 0, "center_x": 0, "center_y": 0 }
 
 # Bucle de l'aplicació
 def main():
@@ -65,8 +72,8 @@ def app_run():
 
     window_size["width"] = screen.get_width()
     window_size["height"] = screen.get_height()
-    window_size["center_x"] = int(screen.get_width() / 2)
-    window_size["center_y"] = int(screen.get_height() / 2)
+    window_size["center"]["x"] = int(screen.get_width() / 2)
+    window_size["center"]["y"] = int(screen.get_height() / 2)
 
 # Dibuixar
 def app_draw():
@@ -80,8 +87,16 @@ def app_draw():
 
     # Dibuixar limits
     pygame.draw.rect(screen, BLACK, ext_rect, 4)
-    pygame.draw.line(screen, BLACK, (window_size["center_x"], 0), (window_size["center_x"], window_size["height"]), 4)
-    pygame.draw.line(screen, BLACK, (0, window_size["center_y"]), (window_size["width"], window_size["center_y"]), 4)
+
+    # Linia vertical
+    start_tuple = (window_size["center"]["x"], 0)
+    end_tuple = (window_size["center"]["x"], window_size["height"])
+    pygame.draw.line(screen, BLACK, start_tuple, end_tuple, 4)
+
+    # Linia horitzontal
+    start_tuple = (0, window_size["center"]["y"])
+    end_tuple = (window_size["width"], window_size["center"]["y"])
+    pygame.draw.line(screen, BLACK, start_tuple, end_tuple, 4)
 
     # Dibuixar quadre
     q_x = mouse_pos["x"] - 20
@@ -101,13 +116,13 @@ def get_color(x, y, ext_x, ext_y, ext_ample, ext_alt):
     if x < ext_x or x > (ext_x + ext_ample) or y < ext_y or y > (ext_y + ext_alt):
         return color
     
-    if x < window_size["center_x"]:
-        if y < window_size["center_y"]:
+    if x < window_size["center"]["x"]:
+        if y < window_size["center"]["y"]:
             return RED
         else: 
             return GREEN
     else:
-        if y < window_size["center_y"]:
+        if y < window_size["center"]["y"]:
             return BLUE
         else: 
             return YELLOW

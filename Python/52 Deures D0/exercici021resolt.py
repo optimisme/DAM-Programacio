@@ -71,8 +71,6 @@ def app_events():
             y = event.pos[1]
             cell_mouse_up = cell_from_point({ "x": x, "y": y}, board)
 
-
-
     return True
 
 # Fer càlculs

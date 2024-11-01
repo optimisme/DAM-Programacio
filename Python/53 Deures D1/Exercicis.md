@@ -42,8 +42,8 @@ def app_run():
     global window_size
     window_size["width"] = screen.get_width()
     window_size["height"] = screen.get_height()
-    window_size["center_x"] = int(screen.get_width() / 2)
-    window_size["center_y"] = int(screen.get_height() / 2)
+    window_size["center"]["x"] = int(screen.get_width() / 2)
+    window_size["center"]["y"] = int(screen.get_height() / 2)
 ```
 
 A més, el color canvia a cada iteració amb **q * 10**.
