@@ -103,34 +103,6 @@ def app_draw():
     # Pintar el fons de blanc
     screen.fill(WHITE)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     # Dibuixar el taulell
     draw_board(board)
 
