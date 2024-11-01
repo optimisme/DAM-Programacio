@@ -213,10 +213,10 @@ def draw_snake():
     for cnt in reversed(range(len(snake["queue"]))):
         cercle = snake["queue"][cnt]
         if len(snake["queue"]) > 1:
-            color_value = int((cnt * 225) / (len(snake["queue"]) - 1))
+            lightness = int((cnt * 225) / (len(snake["queue"]) - 1))
         else:
-            color_value = 0
-        color = (color_value, color_value, color_value)
+            lightness = 0
+        color = (lightness, lightness, lightness)
         pygame.draw.circle(screen, color, (int(cercle['x']), int(cercle['y'])), snake["radius"])
 
 def draw_piece():
