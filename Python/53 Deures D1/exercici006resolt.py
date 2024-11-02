@@ -1,45 +1,53 @@
 #!/usr/bin/env python3
 
-import random
+import math
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 import sys
+import random
 import utils
-from assets.svgmoji.emojis import get_emoji
 
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
 RED = (255, 0, 0)
+YELLOW = (255, 255, 0)
 GREEN = (0, 255, 0)
-BLUE  = (100, 200, 255)
-PURPLE = (128, 0, 128)
-ORANGE = (255, 165, 0)  
+BLUE  = (0, 0, 255)
 
+# Definir dimensions de la pantalla
+WIDTH = 640
+HEIGHT = 480
+
+# Inicialitzar pygame
 pygame.init()
 clock = pygame.time.Clock()
 
 # Definir la finestra
-screen = pygame.display.set_mode((640, 480))
-pygame.display.set_caption('Window Title')
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption('Atrapa les boles!')
 
+# Variables globals del joc
+font = pygame.font.SysFont("Arial", 18)
 
-# Variables globals
-font14 = pygame.font.SysFont("Arial", 14)
-font22 = pygame.font.SysFont("Arial", 22)
-font50 = pygame.font.SysFont("Arial", 50)
+balls = []
+balls_dropped = 0
+balls_caught = 0
 
-mouse_data = { "x": -1, "y": -1, "pressed": False, "released": False }
-buttons = [
-    { "text": "-", "value": "sub", "x": 25, "y": 25, "width": 50, "height": 25, "pressed": False },
-    { "text": "+", "value": "add", "x": 75, "y": 25, "width": 50, "height": 25, "pressed": False },
-]
+# Inicialitzar el joc
+def init_game():
+    global balls, balls_dropped, balls_caught
+    balls = []
+    balls_dropped = 0
+    balls_caught = 0
 
-counter = 0
+    for i in range(10):
+        add_ball(balls)
 
-# Bucle de l'aplicació
+# Bucle principal de l'aplicació
 def main():
+    init_game()
     is_looping = True
 
     while is_looping:
@@ -53,91 +61,79 @@ def main():
     pygame.quit()
     sys.exit()
 
-# Gestionar events
+# Gestionar esdeveniments
 def app_events():
-    global mouse_data
-    mouse_inside = pygame.mouse.get_focused()
-
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT: # Botó tancar finestra
             return False
-        elif event.type == pygame.MOUSEMOTION:
-            if mouse_inside:
-                mouse_data["x"] = event.pos[0]
-                mouse_data["y"] = event.pos[1]
-            else:
-                mouse_data["x"] = -1
-                mouse_data["y"] = -1
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_data["pressed"] = True
-        elif event.type == pygame.MOUSEBUTTONUP:
-            mouse_data["pressed"] = False
-            mouse_data["released"] = True
-
     return True
 
-# Fer càlculs
+# Actualitzar lògica del joc
 def app_run():
-    global buttons, counter
-
-    for button in buttons:
-        if utils.is_point_in_rect(mouse_data, button):
-            if mouse_data["pressed"]:
-                button["pressed"] = True
-            elif mouse_data["released"]:
-                button["pressed"] = False   
-                if button["value"] == "add": # Aquí fem la operació
-                    counter += 1
-                else:
-                    counter -= 1
+    global balls_caught, balls
+    mouseX, mouseY = pygame.mouse.get_pos()
+    for ball in balls:
+        update_ball(ball)
+        mouse = { "x": mouseX, "y": mouseY }
+        collision = utils.is_point_in_circle(mouse, ball, ball["size"] / 2)
+        if collision:
+            ball['hovered'] = True
+            balls_caught += 1
+            init_ball(ball)
         else:
-            button["pressed"] = False
-    mouse_data["released"] = False  
-   
-# Dibuixar
-def app_draw():
-    global pos_x, pos_y
+            ball['hovered'] = False
 
+# Dibuixar elements a la pantalla
+def app_draw():
     # Pintar el fons de blanc
     screen.fill(WHITE)
 
-    # Draw buttons
-    for button in buttons:
-        draw_button(button)
+    # Dibuixar estadístiques
+    display_stats()
 
-    # Draw 'mouse pressed' text
-    if mouse_data["pressed"]:
-        text = font14.render("Mouse Pressed", True, BLACK)
-        screen.blit(text, (135, 30))
-
-    # Dibuixa el comptador
-    text_surface = font50.render(str(counter), True, BLACK)
-    text_rect = text_surface.get_rect()
-    text_rect.centerx = screen.get_width() / 2
-    text_rect.centery = screen.get_height() / 2
-    screen.blit(text_surface, text_rect)
+    # Dibuixar boles
+    for ball in balls:
+        display_ball(ball)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
-def draw_button(button):
+# Afegir una nou globus a la llista de boles
+def add_ball(arBalls):
+    ball = {'x': 0, 'y': 0, 'color': '', 'size': 10, 'hovered': False}
+    init_ball(ball)
+    arBalls.append(ball)
 
-    color = WHITE
-    if button["pressed"]:
-        color = ORANGE
+# Iniciar/Reiniciar els valors d'un globus
+def init_ball(ball):
+    ball['x'] = random.randint(10, WIDTH - 10)
+    ball['y'] = 10
+    ball['color'] = random.choice([YELLOW, GREEN, BLUE, RED])
+    ball['size'] = random.randint(10, 30)
+    ball['hovered'] = False
 
-    rect_tuple = (button["x"], button["y"], button["width"], button["height"])
-    pygame.draw.rect(screen, color, rect_tuple)
-    pygame.draw.rect(screen, BLACK, rect_tuple, 2)
+# Mostrar un cercle individual
+def display_ball(ball):
+    pygame.draw.circle(screen, ball['color'], (int(ball['x']), int(ball['y'])), int(ball['size'] / 2), 0)
+    if ball.get('hovered', False):
+        pygame.draw.circle(screen, BLACK, (int(ball['x']), int(ball['y'])), int(ball['size'] / 2) + 5, 1)
 
-    button_center_x = button["x"] + int(button["width"] / 2)
-    button_center_y = button["y"] + int(button["height"] / 2)
 
-    text_surface = font22.render(button["text"], True, BLACK)
-    text_rect = text_surface.get_rect()
-    text_rect.centerx = button_center_x
-    text_rect.centery = button_center_y
-    screen.blit(text_surface, text_rect)
+# Mostrar estadístiques
+def display_stats():
+    caught_text = font.render(f"Atrapats: {balls_caught}", True, BLACK)
+    dropped_text = font.render(f"Perduts: {balls_dropped}", True, BLACK)
+    screen.blit(caught_text, (10, HEIGHT - 40))
+    screen.blit(dropped_text, (10, HEIGHT - 20))
+
+# Actualitzar un globus individual
+def update_ball(ball):
+    global balls_dropped
+    ball['y'] += ball['size'] / 20 + balls_caught / 100
+    if ball['y'] > HEIGHT:
+        balls_dropped += 1
+        init_ball(ball)
+
 
 if __name__ == "__main__":
     main()

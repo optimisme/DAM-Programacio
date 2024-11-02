@@ -1,231 +1,146 @@
 #!/usr/bin/env python3
 
-import math
+import random
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 import sys
-import random
 import utils
+from assets.svgmoji.emojis import get_emoji
 
-# Define colors
+# Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-GRAY = (220, 220, 220)
 RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+BLUE  = (100, 200, 255)
+PURPLE = (128, 0, 128)
+ORANGE = (255, 165, 0)  
 
 pygame.init()
 clock = pygame.time.Clock()
 
-# Define window size
+# Definir la finestra
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
+
 # Variables globals
-font14 = pygame.font.SysFont("Arial", 14)
-font12 = pygame.font.SysFont("Arial", 12)
+font = pygame.font.SysFont("Arial", 14)
 
-window_size = { 
-    "width": 0, 
-    "height": 0, 
-    "center": {
-        "x": 0,
-        "y": 0
-    } 
-}
+mouse_data = { "x": -1, "y": -1, "pressed": False, "released": False }
+buttons = [
+    { "value": "up",   "x": 25, "y": 25, "width": 25, "height": 25, "pressed": False },
+    { "value": "down", "x": 25, "y": 50, "width": 25, "height": 25, "pressed": False },
+]
 
-mouse_pos = {'x': 300, 'y': 250 }
-
-level = 1  # Level
-snake = {
-    "status": "follow_mouse", # "follow_mouse" or "orbit_mouse"
-    "queue": [],
-    "direction_angle": 0,
-    "speed": 1,
-    "radius": 7
-}
-
-piece = { # (food)
-    "x": -1, 
-    "y": -1, 
-    "value": 0,
-    "radius": 7
-}  
+direction = "up"
+position_y = 250
+radius = 25
 
 # Bucle de l'aplicació
 def main():
     is_looping = True
 
-    init_game()
-
     while is_looping:
         is_looping = app_events()
         app_run()
         app_draw()
-        clock.tick(60)  # Limit to 60 FPS
 
+        clock.tick(60) # Limitar a 60 FPS
+
+    # Fora del bucle, tancar l'aplicació
     pygame.quit()
     sys.exit()
 
 # Gestionar events
 def app_events():
-    global mouse_pos
+    global mouse_data
+    mouse_inside = pygame.mouse.get_focused()
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:  # Close window button
+        if event.type == pygame.QUIT:
             return False
         elif event.type == pygame.MOUSEMOTION:
-            mouse_pos['x'], mouse_pos['y'] = event.pos
+            if mouse_inside:
+                mouse_data["x"] = event.pos[0]
+                mouse_data["y"] = event.pos[1]
+            else:
+                mouse_data["x"] = -1
+                mouse_data["y"] = -1
+        elif event.type == pygame.MOUSEBUTTONDOWN:
+            mouse_data["pressed"] = True
+        elif event.type == pygame.MOUSEBUTTONUP:
+            mouse_data["pressed"] = False
+            mouse_data["released"] = True
+
     return True
 
 # Fer càlculs
 def app_run():
-    set_window_size()
-    move_snake()
+    global buttons, direction, position_y, radius
+
+    for button in buttons:
+        if utils.is_point_in_rect(mouse_data, button):
+            if mouse_data["pressed"]:
+                button["pressed"] = True
+            elif mouse_data["released"]:
+                button["pressed"] = False   
+                direction = button["value"] # Aquí realitzem la operació
+        else:
+            button["pressed"] = False
+    mouse_data["released"] = False  
+
+    delta_time = clock.get_time() / 1000.0  # Convertir a segons
+    speed = 150
+
+    if direction == "up":
+        position_y = position_y - speed * delta_time
+    else:
+        position_y = position_y + speed * delta_time
+
+    min_y = radius
+    max_y = screen.get_height() - radius
+
+    if position_y < min_y:
+        position_y = min_y
+    elif position_y > max_y:
+        position_y = max_y
 
 # Dibuixar
 def app_draw():
+    global pos_x, pos_y
+
+    # Pintar el fons de blanc
     screen.fill(WHITE)
 
-    draw_board()
-    draw_piece()
-    draw_snake()
+    # Draw buttons
+    for button in buttons:
+        draw_button(button)
+
+    # Draw circle
+    center = (500, position_y)
+    pygame.draw.circle(screen, BLUE, center, radius)
+
+    # Draw 'mouse pressed' text
+    if mouse_data["pressed"]:
+        text = font.render("Mouse Pressed", True, BLACK)
+        screen.blit(text, (60, 30))
+
+    # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
-# Estableix les mides de la finestra
-def set_window_size():
-    global window_size
+def draw_button(button):
 
-    window_size["width"] = screen.get_width()
-    window_size["height"] = screen.get_height()
-    window_size["center"]["x"] = int(screen.get_width() / 2)
-    window_size["center"]["y"] = int(screen.get_height() / 2)
+    color = WHITE
+    if button["pressed"]:
+        color = ORANGE
+    elif direction == button["value"]:
+        color = BLUE
 
-# Iniciar la serp
-def init_game():
-    global snake
-
-    # Genera la primera peça 
-    # (necessita tenir les mides de la finestra)
-    set_window_size()
-    if piece['x'] == -1:
-        generate_piece()
-
-    # Inicia la serp
-    # (al centre de la pantalla, i de mida 5)
-    snake["points"] = []
-    snake["queue"].append({'x': window_size["center"]["x"], 'y': window_size["center"]["y"]})
-    for cnt in range(4):
-        extend_snake()
-
-def generate_piece():
-    piece['x'] = random.randint(5, window_size["width"] - 5)
-    piece['y'] = random.randint(5, window_size["height"] - 5)
-    piece['value'] = random.randint(1, 4)
-
-def extend_snake():
-    # Afegir un nou punt a la cua, copiant/duplicant l'última posició
-    ultim = len(snake["queue"]) - 1
-    snake["queue"].append({
-        "x": snake["queue"][ultim]['x'], 
-        "y": snake["queue"][ultim]['y']
-    })
-
-def move_snake():
-    global serp, level
-
-    # Si la serp xoca amb la peça
-    hit = utils.is_point_in_circle(snake["queue"][0], piece, piece["radius"])
-    if hit:
-        level += 1
-        snake["speed"] += 0.05      # Augmentar velocitat
-        if snake["speed"] > 3.5:    # Limitar velocitat
-            snake["speed"] = 3.5
-        for _ in range(piece['value']): # Ampliar la cua de la serp
-            extend_snake()              # al número de la peça (menjar)
-        generate_piece()
-
-    # Calcular la següent posició
-    update_snake_angle()
-    next_pos = {
-        "x": snake["queue"][0]['x'] + snake["speed"] * math.cos(snake["direction_angle"]), 
-        "y": snake["queue"][0]['y'] + snake["speed"] * math.sin(snake["direction_angle"])
-    }
-
-    # Inserir la nova posició al principi de la cua
-    snake["queue"].insert(0, next_pos)
-
-    # Eliminar l'últim segment per mantenir
-    snake["queue"].pop()
-
-def update_snake_angle():
-    global snake
-
-    # Calcula la diferència en les coordenades entre el cap de la serp i el ratolí
-    delta_x = mouse_pos['x'] - snake["queue"][0]['x']
-    delta_y = mouse_pos['y'] - snake["queue"][0]['y']
-   
-    # Calcula la distància entre el cap de la serp i la posició del ratolí
-    distancia = math.hypot(delta_x, delta_y)
-
-    # Determina l'estat de la serp segons la distància al ratolí
-    if distancia < 5:
-        snake["status"] = 'orbit_mouse'  # Estat per orbitar prop del ratolí
-    if distancia > 50:
-        snake["status"] = 'follow_mouse'  # Estat per seguir el ratolí
-
-    # Si la serp està en estat d'òrbita, 
-    # augmenta l'angle de direcció per fer-la girar
-    if snake["status"] == 'orbit_mouse':
-        snake["direction_angle"] += distancia * math.pi / 1000
-        return
-
-    # Calcula el pendent per obtenir l'angle; 
-    # si delta_x és 0, s'estableix a infinit per evitar divisió per zero
-    if delta_x != 0:
-        pendent = delta_y / delta_x
-    else:
-        pendent = float('inf')
-
-    # Calcula l'angle de direcció de la serp per seguir el ratolí
-    if delta_x == 0 and mouse_pos['y'] < snake["queue"][0]['y']:
-        # Angle per anar amunt (270 graus)
-        snake["direction_angle"] = (3 * math.pi) / 2
-    elif delta_x == 0 and mouse_pos['y'] >= snake["queue"][0]['y']:
-        # Angle per anar avall (90 graus)
-        snake["direction_angle"] = math.pi / 2
-    elif mouse_pos['x'] > snake["queue"][0]['x']:
-        # Angle per anar cap a la dreta 
-        snake["direction_angle"] = math.atan(pendent)
-    else:
-        # Angle per anar cap a l'esquerra (180 graus)
-        snake["direction_angle"] = math.atan(pendent) + math.pi
-
-def draw_board():
-    level_text = font14.render(f'Level: {level}', True, BLACK)
-    length_text = font14.render(f'Length: {len(snake["queue"])}', True, BLACK)
-    speed_text = font14.render(f'Speed: {snake["speed"]:.2f}', True, BLACK)
-    screen.blit(level_text, (15, 15))
-    screen.blit(length_text, (15, 35))
-    screen.blit(speed_text, (15, 55))
-
-def draw_snake():
-    for cnt in reversed(range(len(snake["queue"]))):
-        cercle = snake["queue"][cnt]
-        if len(snake["queue"]) > 1:
-            lightness = int((cnt * 225) / (len(snake["queue"]) - 1))
-        else:
-            lightness = 0
-        color = (lightness, lightness, lightness)
-        pygame.draw.circle(screen, color, (int(cercle['x']), int(cercle['y'])), snake["radius"])
-
-def draw_piece():
-    circle_pos_tuple = (int(piece['x']), int(piece['y']))
-    pygame.draw.circle(screen, RED, circle_pos_tuple, piece["radius"])
-
-    text = font12.render(str(piece['value']), True, BLACK)
-    text_rect = text.get_rect(center=circle_pos_tuple)
-    screen.blit(text, text_rect)
+    rect_tuple = (button["x"], button["y"], button["width"], button["height"])
+    pygame.draw.rect(screen, color, rect_tuple)
+    pygame.draw.rect(screen, BLACK, rect_tuple, 2)
 
 if __name__ == "__main__":
     main()
