@@ -21,7 +21,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Definir la finestra
-screen = pygame.display.set_mode((640, 480))
+screen = pygame.display.set_mode((640, 480), pygame.RESIZABLE)
 pygame.display.set_caption('Window Title')
 
 

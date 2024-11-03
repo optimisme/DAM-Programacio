@@ -18,7 +18,7 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Define window size
-screen = pygame.display.set_mode((640, 480))
+screen = pygame.display.set_mode((640, 480), pygame.RESIZABLE)
 pygame.display.set_caption('Window Title')
 
 # Variables globals
@@ -38,11 +38,11 @@ mouse_pos = {'x': 300, 'y': 250 }
 
 level = 1  # Level
 snake = {
-    "status": "follow_mouse", # "follow_mouse" or "orbit_mouse"
     "queue": [],
-    "direction_angle": 0,
-    "speed": 1,
-    "radius": 7
+    "speed": 50,
+    "radius": 7,
+    "status": "follow_mouse", # "follow_mouse" or "orbit_mouse"
+    "direction_angle": 0
 }
 
 piece = { # (food)
@@ -81,7 +81,9 @@ def app_events():
 # Fer càlculs
 def app_run():
     set_window_size()
-    move_snake()
+    delta_time = clock.get_time() / 1000.0  # Convertir a segons
+
+    move_snake(delta_time)
 
 # Dibuixar
 def app_draw():
@@ -119,8 +121,8 @@ def init_game():
         extend_snake()
 
 def generate_piece():
-    piece['x'] = random.randint(5, window_size["width"] - 5)
-    piece['y'] = random.randint(5, window_size["height"] - 5)
+    piece['x'] = random.randint(100, window_size["width"] - 100)
+    piece['y'] = random.randint(100, window_size["height"] - 100)
     piece['value'] = random.randint(1, 4)
 
 def extend_snake():
@@ -131,26 +133,22 @@ def extend_snake():
         "y": snake["queue"][ultim]['y']
     })
 
-def move_snake():
+def move_snake(delta_time):
     global serp, level
 
     # Si la serp xoca amb la peça
     hit = utils.is_point_in_circle(snake["queue"][0], piece, piece["radius"])
     if hit:
         level += 1
-        snake["speed"] += 0.05      # Augmentar velocitat
-        if snake["speed"] > 3.5:    # Limitar velocitat
-            snake["speed"] = 3.5
+        snake["speed"] = snake["speed"] * 1.05  # Augmentar velocitat
+        if snake["speed"] > 200:    # Limitar velocitat
+            snake["speed"] = 200
         for _ in range(piece['value']): # Ampliar la cua de la serp
             extend_snake()              # al número de la peça (menjar)
         generate_piece()
 
     # Calcular la següent posició
-    update_snake_angle()
-    next_pos = {
-        "x": snake["queue"][0]['x'] + snake["speed"] * math.cos(snake["direction_angle"]), 
-        "y": snake["queue"][0]['y'] + snake["speed"] * math.sin(snake["direction_angle"])
-    }
+    next_pos = get_next_snake_pos(delta_time)
 
     # Inserir la nova posició al principi de la cua
     snake["queue"].insert(0, next_pos)
@@ -158,7 +156,7 @@ def move_snake():
     # Eliminar l'últim segment per mantenir
     snake["queue"].pop()
 
-def update_snake_angle():
+def get_next_snake_pos(delta_time):
     global snake
 
     # Calcula la diferència en les coordenades entre el cap de la serp i el ratolí
@@ -178,28 +176,32 @@ def update_snake_angle():
     # augmenta l'angle de direcció per fer-la girar
     if snake["status"] == 'orbit_mouse':
         snake["direction_angle"] += distancia * math.pi / 1000
-        return
-
-    # Calcula el pendent per obtenir l'angle; 
-    # si delta_x és 0, s'estableix a infinit per evitar divisió per zero
-    if delta_x != 0:
-        pendent = delta_y / delta_x
     else:
-        pendent = float('inf')
+        # Calcula el pendent per obtenir l'angle; 
+        # si delta_x és 0, s'estableix a infinit per evitar divisió per zero
+        if delta_x != 0:
+            pendent = delta_y / delta_x
+        else:
+            pendent = float('inf')
 
-    # Calcula l'angle de direcció de la serp per seguir el ratolí
-    if delta_x == 0 and mouse_pos['y'] < snake["queue"][0]['y']:
-        # Angle per anar amunt (270 graus)
-        snake["direction_angle"] = (3 * math.pi) / 2
-    elif delta_x == 0 and mouse_pos['y'] >= snake["queue"][0]['y']:
-        # Angle per anar avall (90 graus)
-        snake["direction_angle"] = math.pi / 2
-    elif mouse_pos['x'] > snake["queue"][0]['x']:
-        # Angle per anar cap a la dreta 
-        snake["direction_angle"] = math.atan(pendent)
-    else:
-        # Angle per anar cap a l'esquerra (180 graus)
-        snake["direction_angle"] = math.atan(pendent) + math.pi
+        # Calcula l'angle de direcció de la serp per seguir el ratolí
+        if delta_x == 0 and mouse_pos['y'] < snake["queue"][0]['y']:
+            # Angle per anar amunt (270 graus)
+            snake["direction_angle"] = (3 * math.pi) / 2
+        elif delta_x == 0 and mouse_pos['y'] >= snake["queue"][0]['y']:
+            # Angle per anar avall (90 graus)
+            snake["direction_angle"] = math.pi / 2
+        elif mouse_pos['x'] > snake["queue"][0]['x']:
+            # Angle per anar cap a la dreta 
+            snake["direction_angle"] = math.atan(pendent)
+        else:
+            # Angle per anar cap a l'esquerra (180 graus)
+            snake["direction_angle"] = math.atan(pendent) + math.pi
+
+    return {
+        "x": snake["queue"][0]['x'] + snake["speed"] * delta_time * math.cos(snake["direction_angle"]), 
+        "y": snake["queue"][0]['y'] + snake["speed"] * delta_time * math.sin(snake["direction_angle"])
+    }
 
 def draw_board():
     level_text = font14.render(f'Level: {level}', True, BLACK)

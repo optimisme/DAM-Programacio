@@ -11,39 +11,37 @@ import utils
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-YELLOW = (255, 255, 0)
-GREEN = (0, 255, 0)
-BLUE  = (0, 0, 255)
-
-# Definir dimensions de la pantalla
-WIDTH = 640
-HEIGHT = 480
+GREEN = (127, 184, 68)
+YELLOW = (240, 187, 64)
+ORANGE = (226, 137, 50)
+RED = (202, 73, 65)
+PURPLE = (135, 65, 152)
+BLUE  = (75, 154, 217)
+colors = [GREEN, YELLOW, ORANGE, RED, PURPLE, BLUE]
 
 # Inicialitzar pygame
 pygame.init()
 clock = pygame.time.Clock()
 
 # Definir la finestra
-screen = pygame.display.set_mode((WIDTH, HEIGHT))
-pygame.display.set_caption('Atrapa les boles!')
+screen = pygame.display.set_mode((640, 480), pygame.RESIZABLE)
+pygame.display.set_caption('Window Title')
 
 # Variables globals del joc
 font = pygame.font.SysFont("Arial", 18)
+window_size = { 
+    "width": 0, 
+    "height": 0, 
+    "center": {
+        "x": 0,
+        "y": 0
+    } 
+}
+mouse_pos = { "x": -1, "y": -1 }
 
-balls = []
-balls_dropped = 0
-balls_caught = 0
-
-# Inicialitzar el joc
-def init_game():
-    global balls, balls_dropped, balls_caught
-    balls = []
-    balls_dropped = 0
-    balls_caught = 0
-
-    for i in range(10):
-        add_ball(balls)
+balloons_list = []
+balloons_dropped = 0
+balloons_caught = 0
 
 # Bucle principal de l'aplicació
 def main():
@@ -63,25 +61,35 @@ def main():
 
 # Gestionar esdeveniments
 def app_events():
+    global mouse_pos
+    mouse_inside = pygame.mouse.get_focused() # El ratolí està dins de la finestra?
+
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # Botó tancar finestra
             return False
+        elif event.type == pygame.MOUSEMOTION:
+            if mouse_inside:
+                mouse_pos["x"] = event.pos[0]
+                mouse_pos["y"] = event.pos[1]
+            else:
+                mouse_pos["x"] = -1
+                mouse_pos["y"] = -1
+
     return True
 
 # Actualitzar lògica del joc
 def app_run():
-    global balls_caught, balls
-    mouseX, mouseY = pygame.mouse.get_pos()
-    for ball in balls:
-        update_ball(ball)
-        mouse = { "x": mouseX, "y": mouseY }
-        collision = utils.is_point_in_circle(mouse, ball, ball["size"] / 2)
+    global mouse_pos, balloons_list, balloons_caught
+
+    set_window_size()
+    delta_time = clock.get_time() / 1000.0  # Convertir a segons
+
+    for balloon in balloons_list:
+        update_balloon(balloon, delta_time)
+        collision = utils.is_point_in_circle(mouse_pos, balloon, balloon["size"] / 2)
         if collision:
-            ball['hovered'] = True
-            balls_caught += 1
-            init_ball(ball)
-        else:
-            ball['hovered'] = False
+            balloons_caught += 1
+            init_balloon(balloon)
 
 # Dibuixar elements a la pantalla
 def app_draw():
@@ -91,49 +99,65 @@ def app_draw():
     # Dibuixar estadístiques
     display_stats()
 
-    # Dibuixar boles
-    for ball in balls:
-        display_ball(ball)
+    # Dibuixar els globus
+    for balloon in balloons_list:
+        draw_balloon(balloon)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
-# Afegir una nou globus a la llista de boles
-def add_ball(arBalls):
-    ball = {'x': 0, 'y': 0, 'color': '', 'size': 10, 'hovered': False}
-    init_ball(ball)
-    arBalls.append(ball)
+# Estableix les mides de la finestra
+def set_window_size():
+    global window_size
+
+    window_size["width"] = screen.get_width()
+    window_size["height"] = screen.get_height()
+    window_size["center"]["x"] = int(screen.get_width() / 2)
+    window_size["center"]["y"] = int(screen.get_height() / 2)
+
+# Iniciar el joc
+def init_game():
+    global balloons_list, balloons_dropped, balloons_caught
+    balloons_list = []
+    balloons_dropped = 0
+    balloons_caught = 0
+
+    set_window_size()
+
+    # Afegir 10 globus a la llista de globus
+    for i in range(10):
+        balloon = {'x': 0, 'y': 0, 'color': '', 'size': 10, 'speed': 10}
+        init_balloon(balloon)
+        balloons_list.append(balloon)
 
 # Iniciar/Reiniciar els valors d'un globus
-def init_ball(ball):
-    ball['x'] = random.randint(10, WIDTH - 10)
-    ball['y'] = 10
-    ball['color'] = random.choice([YELLOW, GREEN, BLUE, RED])
-    ball['size'] = random.randint(10, 30)
-    ball['hovered'] = False
+def init_balloon(balloon):
+    balloon['x'] = random.randint(10, window_size['width'] - 10)
+    balloon['y'] = 10
+    balloon['color'] = random.choice(colors)
+    balloon['size'] = random.randint(10, 30)
+    balloon['speed'] = (balloon['size'] * 2) + balloons_caught
 
 # Mostrar un cercle individual
-def display_ball(ball):
-    pygame.draw.circle(screen, ball['color'], (int(ball['x']), int(ball['y'])), int(ball['size'] / 2), 0)
-    if ball.get('hovered', False):
-        pygame.draw.circle(screen, BLACK, (int(ball['x']), int(ball['y'])), int(ball['size'] / 2) + 5, 1)
-
+def draw_balloon(balloon):
+    center_tuple = (int(balloon['x']), int(balloon['y']))
+    radius = int(balloon['size'] / 2)
+    pygame.draw.circle(screen, balloon['color'], center_tuple, radius, 0)
 
 # Mostrar estadístiques
 def display_stats():
-    caught_text = font.render(f"Atrapats: {balls_caught}", True, BLACK)
-    dropped_text = font.render(f"Perduts: {balls_dropped}", True, BLACK)
-    screen.blit(caught_text, (10, HEIGHT - 40))
-    screen.blit(dropped_text, (10, HEIGHT - 20))
+    caught_text = font.render(f"Caught: {balloons_caught}", True, BLACK)
+    dropped_text = font.render(f"Dropped: {balloons_dropped}", True, BLACK)
+    screen.blit(caught_text, (10, window_size["height"] - 40))
+    screen.blit(dropped_text, (10, window_size["height"] - 20))
 
 # Actualitzar un globus individual
-def update_ball(ball):
-    global balls_dropped
-    ball['y'] += ball['size'] / 20 + balls_caught / 100
-    if ball['y'] > HEIGHT:
-        balls_dropped += 1
-        init_ball(ball)
-
+def update_balloon(balloon, delta_time):
+    global balloons_dropped
+    balloon['y'] = balloon['y'] + balloon['speed'] * delta_time
+    if balloon['y'] > window_size["height"]:
+        balloons_dropped += 1
+        init_balloon(balloon)
 
 if __name__ == "__main__":
     main()
