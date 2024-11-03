@@ -1,22 +1,25 @@
 #!/usr/bin/env python3
 
-import random
+import math
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
 import pygame
 import sys
+import random
 import utils
-from assets.svgmoji.emojis import get_emoji
 
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-BLUE  = (100, 200, 255)
-PURPLE = (128, 0, 128)
-ORANGE = (255, 165, 0)  
+GREEN = (127, 184, 68)
+YELLOW = (240, 187, 64)
+ORANGE = (226, 137, 50)
+RED = (202, 73, 65)
+PURPLE = (135, 65, 152)
+BLUE  = (75, 154, 217)
+colors = [GREEN, YELLOW, ORANGE, RED, PURPLE, BLUE]
 
+# Inicialitzar pygame
 pygame.init()
 clock = pygame.time.Clock()
 
@@ -24,8 +27,8 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480), pygame.RESIZABLE)
 pygame.display.set_caption('Window Title')
 
-
-# Variables globals
+# Variables globals del joc
+font = pygame.font.SysFont("Arial", 18)
 window_size = { 
     "width": 0, 
     "height": 0, 
@@ -34,23 +37,16 @@ window_size = {
         "y": 0
     } 
 }
-
-BOARD_SIZE = (12, 8)
-CELL_SIZE = 50
 mouse_pos = { "x": -1, "y": -1 }
 
-img_ship = get_emoji(pygame, "🚢", size=CELL_SIZE)
-img_drop = get_emoji(pygame, "🌊", size=CELL_SIZE)
-img_bomb = get_emoji(pygame, "💥", size=CELL_SIZE)
+balloons_list = []
+balloons_dropped = 0
+balloons_caught = 0
 
-board_pos = { "x": -1, "y": -1 }
-board = []
-
-# Bucle de l'aplicació
+# Bucle principal de l'aplicació
 def main():
+    init_game()
     is_looping = True
-
-    init_board()
 
     while is_looping:
         is_looping = app_events()
@@ -63,13 +59,13 @@ def main():
     pygame.quit()
     sys.exit()
 
-# Gestionar events
+# Gestionar esdeveniments
 def app_events():
-    global mouse_pos, board
-    mouse_inside = pygame.mouse.get_focused()
+    global mouse_pos
+    mouse_inside = pygame.mouse.get_focused() # El ratolí està dins de la finestra?
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
+        if event.type == pygame.QUIT: # Botó tancar finestra
             return False
         elif event.type == pygame.MOUSEMOTION:
             if mouse_inside:
@@ -78,122 +74,89 @@ def app_events():
             else:
                 mouse_pos["x"] = -1
                 mouse_pos["y"] = -1
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            cell_x = int((mouse_pos["x"] - board_pos["x"]) / CELL_SIZE)
-            cell_y = int((mouse_pos["y"] - board_pos["y"]) / CELL_SIZE)
 
-            if 0 <= cell_x < len(board[0]) and 0 <= cell_y < len(board):
-                # Si la cel·la és buida, marca-la com a "W"
-                if board[cell_y][cell_x] == "":
-                    board[cell_y][cell_x] = "W"
-                # Si conté una part de vaixell "S" marca com "B"
-                elif board[cell_y][cell_x] == "S":
-                    board[cell_y][cell_x] = "B"
     return True
 
-# Fer càlculs
+# Actualitzar lògica del joc
 def app_run():
+    global mouse_pos, balloons_list, balloons_caught
+
+    set_window_size()
+    delta_time = clock.get_time() / 1000.0  # Convertir a segons
+
+    for balloon in balloons_list:
+        update_balloon(balloon, delta_time)
+        collision = utils.is_point_in_circle(mouse_pos, balloon, balloon["radius"])
+        if collision:
+            balloons_caught += 1
+            init_balloon(balloon)
+
+# Dibuixar elements a la pantalla
+def app_draw():
+    # Pintar el fons de blanc
+    screen.fill(WHITE)
+
+    # Dibuixar estadístiques
+    display_stats()
+
+    # Dibuixar els globus
+    for balloon in balloons_list:
+        draw_balloon(balloon)
+
+    # Actualitzar el dibuix a la finestra
+    pygame.display.update()
+
+# Estableix les mides de la finestra
+def set_window_size():
     global window_size
-    
+
     window_size["width"] = screen.get_width()
     window_size["height"] = screen.get_height()
     window_size["center"]["x"] = int(screen.get_width() / 2)
     window_size["center"]["y"] = int(screen.get_height() / 2)
 
-    board_pos["x"] = window_size["center"]["x"] - int(len(board[0]) * CELL_SIZE / 2)
-    board_pos["y"] = window_size["center"]["y"] - int(len(board) * CELL_SIZE / 2)
+# Iniciar el joc
+def init_game():
+    global balloons_list, balloons_dropped, balloons_caught
+    balloons_list = []
+    balloons_dropped = 0
+    balloons_caught = 0
 
-# Dibuixar
-def app_draw():
-    global pos_x, pos_y
+    set_window_size()
 
-    # Pintar el fons de blanc
-    screen.fill(WHITE)
+    # Afegir 10 globus a la llista de globus
+    for i in range(10):
+        balloon = {'x': 0, 'y': 0, 'color': '', 'radius': 10, 'speed': 10}
+        init_balloon(balloon)
+        balloons_list.append(balloon)
 
-    # Draw board
-    draw_board()
+# Iniciar/Reiniciar els valors d'un globus
+def init_balloon(balloon):
+    balloon['x'] = random.randint(10, window_size['width'] - 10)
+    balloon['y'] = 10
+    balloon['color'] = random.choice(colors)
+    balloon['radius'] = random.randint(5, 15)
+    balloon['speed'] = balloon['radius'] * 2 + balloons_caught
 
-    # Actualitzar el dibuix a la finestra
-    pygame.display.update()
+# Mostrar un cercle individual
+def draw_balloon(balloon):
+    center_tuple = (int(balloon['x']), int(balloon['y']))
+    pygame.draw.circle(screen, balloon['color'], center_tuple, balloon['radius'], 0)
 
-def place_ship(x, y, length, direction):
-    global board
-    if direction == "horizontal":
-        for i in range(length):
-            board[x][y + i] = "S"
-    elif direction == "vertical":
-        for i in range(length):
-            board[x + i][y] = "S"
+# Mostrar estadístiques
+def display_stats():
+    caught_text = font.render(f"Caught: {balloons_caught}", True, BLACK)
+    dropped_text = font.render(f"Dropped: {balloons_dropped}", True, BLACK)
+    screen.blit(caught_text, (10, window_size["height"] - 40))
+    screen.blit(dropped_text, (10, window_size["height"] - 20))
 
-def is_valid_position(x, y, length, direction):
-    max_rows = len(board)
-    max_cols = len(board[0])
-
-    # Comprova els límits del tauler i que totes les cel·les estiguin buides
-    if direction == "horizontal" and y + length <= max_cols:
-        for i in range(length):
-            if board[x][y + i] != "":
-                return False
-            # Comprova els espais de dalt i de baix del vaixell
-            if x > 0 and board[x - 1][y + i] != "":
-                return False
-            if x < max_rows - 1 and board[x + 1][y + i] != "":
-                return False
-        # Comprova els espais als extrems del vaixell
-        if y > 0 and board[x][y - 1] != "":
-            return False
-        if y + length < max_cols and board[x][y + length] != "":
-            return False
-        return True
-
-    elif direction == "vertical" and x + length <= max_rows:
-        for i in range(length):
-            if board[x + i][y] != "":
-                return False
-            # Comprova els espais a l'esquerra i a la dreta del vaixell
-            if y > 0 and board[x + i][y - 1] != "":
-                return False
-            if y < max_cols - 1 and board[x + i][y + 1] != "":
-                return False
-        # Comprova els espais als extrems del vaixell
-        if x > 0 and board[x - 1][y] != "":
-            return False
-        if x + length < max_rows and board[x + length][y] != "":
-            return False
-        return True
-
-    return False
-
-def init_board():
-    global board
-    board = [["" for _ in range(BOARD_SIZE[0])] for _ in range(BOARD_SIZE[1])]
-
-    ships = [(3, "horizontal"), (4, "horizontal"), (3, "vertical")]
-    for ship in ships:
-        length = ship[0]
-        direction = ship[1]
-        placed = False
-        while not placed:
-            x, y = random.randint(0, len(board) - 1), random.randint(0, len(board[0]) - 1)
-            if is_valid_position(x, y, length, direction):
-                place_ship(x, y, length, direction)
-                placed = True
-
-def draw_board():    
-    for i in range(len(board)):
-        for j in range(len(board[i])):
-            cell_x = board_pos["x"] + j * CELL_SIZE
-            cell_y = board_pos["y"] + i * CELL_SIZE
-            
-            pygame.draw.rect(screen, BLUE, (cell_x, cell_y, CELL_SIZE, CELL_SIZE))
-
-            if board[i][j] == "S":
-                screen.blit(img_ship, (cell_x, cell_y))
-            elif board[i][j] == "W":
-                screen.blit(img_drop, (cell_x, cell_y))
-            elif board[i][j] == "B":
-                screen.blit(img_ship, (cell_x, cell_y))
-                screen.blit(img_bomb, (cell_x, cell_y))
+# Actualitzar un globus individual
+def update_balloon(balloon, delta_time):
+    global balloons_dropped
+    balloon['y'] = balloon['y'] + balloon['speed'] * delta_time
+    if balloon['y'] > window_size["height"]:
+        balloons_dropped += 1
+        init_balloon(balloon)
 
 if __name__ == "__main__":
     main()
