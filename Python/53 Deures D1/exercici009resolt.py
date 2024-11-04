@@ -11,7 +11,7 @@ from assets.svgmoji.emojis import get_emoji
 # Definir colors
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0)
-GRAY = (200, 200, 200)
+GRAY = (215, 215, 215)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 BLUE  = (100, 200, 255)
@@ -138,13 +138,13 @@ def draw_LED_number():
 
     # Definir posicions per a cada segment
     positions = {
-        "htt": { "begin": { "x": left,  "y": top },      "end": { "x": right, "y": top } },
-        "hcc": { "begin": { "x": left,  "y": center_y }, "end": { "x": right, "y": center_y } },
-        "hbb": { "begin": { "x": left,  "y": bottom },   "end": { "x": right, "y": bottom } },
-        "vtl": { "begin": { "x": left,  "y": top },      "end": { "x": left, "y": center_y } },
-        "vtr": { "begin": { "x": right, "y": top },      "end": { "x": right, "y": center_y } },
-        "vbl": { "begin": { "x": left,  "y": center_y }, "end": { "x": left, "y": bottom } },
-        "vbr": { "begin": { "x": right, "y": center_y }, "end": { "x": right, "y": bottom } },
+        "htt": { "begin": { "x": left + 4,  "y": top },      "end": { "x": right - 4, "y": top } },
+        "hcc": { "begin": { "x": left + 4,  "y": center_y }, "end": { "x": right - 4, "y": center_y } },
+        "hbb": { "begin": { "x": left + 4,  "y": bottom },   "end": { "x": right - 4, "y": bottom } },
+        "vtl": { "begin": { "x": left,  "y": top + 4 },      "end": { "x": left,  "y": center_y - 4 } },
+        "vtr": { "begin": { "x": right, "y": top + 4 },      "end": { "x": right, "y": center_y - 4 } },
+        "vbl": { "begin": { "x": left,  "y": center_y + 4 }, "end": { "x": left,  "y": bottom - 4 } },
+        "vbr": { "begin": { "x": right, "y": center_y + 4 }, "end": { "x": right, "y": bottom - 4 } },
     }
 
     # Definir els segments per a cada dígit hexadecimal
@@ -159,18 +159,18 @@ def draw_LED_number():
         ["htt", "vtr", "vbr"],                             # 7
         ["htt", "vtl", "vtr", "hcc", "vbl", "vbr", "hbb"], # 8
         ["htt", "vtl", "vtr", "hcc", "vbr", "hbb"],        # 9
-        ["htt", "vtl", "vtr", "hcc", "vbl", "vbr"],        # A
-        ["vtl", "hcc", "vbl", "vbr", "hbb"],               # B
-        ["hcc", "vbl", "hbb"],                             # C
-        ["vtr", "hcc", "vbr", "hbb", "vbl"],               # D
-        ["htt", "vtr", "vtl", "hcc", "vbl", "hbb"],        # E
-        ["htt", "vtl", "hcc", "vbl"],                      # F
+        ["htt", "vtr", "hcc", "vbl", "vbr", "hbb"],        # a
+        ["vtl", "hcc", "vbl", "vbr", "hbb"],               # b
+        ["hcc", "vbl", "hbb"],                             # c
+        ["vtr", "hcc", "vbr", "hbb", "vbl"],               # d
+        ["htt", "vtr", "vtl", "hcc", "vbl", "hbb"],        # e
+        ["htt", "vtl", "hcc", "vbl"],                      # f
     ]
 
     # Determinar el número a dibuixar en hexadecimal
     number = digits[0] * 8 + digits[1] * 4 + digits[2] * 2 + digits[3] * 1
 
-    # Dibuixar totes les posicions
+    # Dibuixar totes les posicions (segments)
     for key in positions:
         start = positions[key]["begin"]
         end = positions[key]["end"]

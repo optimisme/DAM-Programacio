@@ -223,7 +223,7 @@ Finalment: **el tauler ha de quedar centrat a la finestra**
 
 Fes un programa **exercici007.py** on dos botons sumen o resten el valor d'un comptador:
 
-- La operació no es fa fins a l'event 'mouseup' dins del mateix botó
+- La operació no es fa fins a l'event **'mouseup'** dins del mateix botó
 - Mentre hi ha el botó apretat, aquest es dibuixa amb un fons taronja (255, 165, 0)  
 
 <center>
@@ -237,7 +237,7 @@ Fes un programa **exercici007.py** on dos botons sumen o resten el valor d'un co
 
 Fes un programa **exercici008.py** on dos botons canvien la direcció de moviment d'un cercle (amunt i avall):
 
-- El canvi de direcció no es fa fins a l'event 'mouseup' dins del mateix botó
+- El canvi de direcció no es fa fins a l'event **'mouseup'** dins del mateix botó
 - Mentre hi ha el botó apretat, aquest es dibuixa amb un fons taronja (255, 165, 0)  
 - El botó que marca la direcció es dibuixa amb un fons blau (100, 200, 255)
 
@@ -250,8 +250,43 @@ Fes un programa **exercici008.py** on dos botons canvien la direcció de movimen
 
 ## Exercici 9
 
-Fes un programa **exercici009.py** on quatre botons defineixen el valor d'un comptador *Hexadecimal* de 6 segments.
+Fes un programa **exercici009.py** on quatre botons defineixen el valor d'un visualitzador *Hexadecimal* de [7 segments](https://ca.wikipedia.org/wiki/Visualitzador_de_set_segments) escollits a partir de 4 botons.
 
-- El canvi de valor es fa a l'event 'mousedown' dins del mateix botó.
+- El canvi de valor es fa a l'event **'mousedown'** dins del mateix botó.
+- Sempre es dibuixen en gris tots els segments de color gris (215, 215, 215)
+- A partir del número hexadecimal s'activen els segments per dibuixar: *0,1,2,3,4,5,6,7,8,9,a,b,c,d,e*
 
+<br/>
+<center>
+<table>
+  <tr>
+    <td><img src="./assets/exercici009/hex_0.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_1.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_2.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_3.png" width="165"></td>
+  </tr>
+  <tr>
+    <td><img src="./assets/exercici009/hex_4.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_5.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_6.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_7.png" width="165"></td>
+  </tr>
+  <tr>
+    <td><img src="./assets/exercici009/hex_8.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_9.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_a.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_b.png" width="165"></td>
+  </tr>
+  <tr>
+    <td><img src="./assets/exercici009/hex_c.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_d.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_e.png" width="165"></td>
+    <td><img src="./assets/exercici009/hex_f.png" width="165"></td>
+  </tr>
+</table>
+</center>
+<br/>
 
+## Exercici 10
+
+Fes un programa **exercici010.py** on 
