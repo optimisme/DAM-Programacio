@@ -57,5 +57,11 @@ Fes que la funció **app_run** sumi un 1 a l'atribut "timer" del cursor, quan el
 
 Fes que la funció **app_run** canvii el valor de l'atribut "visible" cada vegada que el timer arriba a 30.
 
-El cursor es dibuixa (o no es dibuixa) segons el valor de l'atibut "visible" del cursor
+El cursor es dibuixa (o no es dibuixa) segons el valor de l'atribut "visible" del cursor
 
+<center>
+<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
+  <source src="./assets/exercici_text00.mov" type="video/mp4">
+</video>
+</center>
+<br/>
