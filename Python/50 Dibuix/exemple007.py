@@ -26,11 +26,10 @@ pygame.display.set_caption('Window Title')
 
 # Posició del mouse
 mouse_pos = { "x": -1, "y": -1 }
-mouse_down = False
 
-# Si fem click al rectangle o al cercle
-square_clicked = False
-circle_clicked = False
+# Posició de l'ull esquerra
+eye_left = { "x": 200, "y": 200 }
+eye_right = { "x": 400, "y": 200 }
 
 # Bucle de l'aplicació
 def main():
@@ -49,7 +48,7 @@ def main():
 
 # Gestionar events
 def app_events():
-    global mouse_pos, mouse_down
+    global mouse_pos
     mouse_inside = pygame.mouse.get_focused() # El ratolí està dins de la finestra?
 
     for event in pygame.event.get():
@@ -62,32 +61,30 @@ def app_events():
             else:
                 mouse_pos["x"] = -1
                 mouse_pos["y"] = -1
-        elif event.type == pygame.MOUSEBUTTONDOWN:
-            mouse_down = True
-        elif event.type == pygame.MOUSEBUTTONUP:
-            mouse_down = False
     return True
 
 # Fer càlculs
 def app_run():
-    global mouse_pos, mouse_down, square_clicked, circle_clicked
+    global mouse_pos, eye_left, eye_right
 
-    if mouse_down:
-        rectangle = { "x": 100, "y": 150, "width": 200, "height": 50 }
-        if utils.is_point_in_rect(mouse_pos, rectangle):
-            square_clicked = True
+    eye_left["x"] = mouse_pos["x"] - 10
+    if (eye_left["x"] < 250):
+        eye_left["x"] = 250
+    elif (eye_left["x"] > 280):
+        eye_left["x"] = 280
 
-        center = { "x": 400, "y": 175 }
-        if utils.is_point_in_circle(mouse_pos, center, 50):
-            circle_clicked = True
+    eye_left["y"] = mouse_pos["y"] - 10
+    if (eye_left["y"] < 150):
+        eye_left["y"] = 150
+    elif (eye_left["y"] > 205):
+        eye_left["y"] = 205
 
-    else:
-        square_clicked = False
-        circle_clicked = False
+    eye_right["x"] = mouse_pos["x"] - 10
+    eye_right["y"] = mouse_pos["y"] - 10
 
 # Dibuixar
 def app_draw():
-    global square_clicked, circle_clicked
+    global eye_left, eye_left
 
     # Pintar el fons de blanc
     screen.fill(WHITE)
@@ -95,21 +92,22 @@ def app_draw():
     # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    # Dibuixar text d'ajuda
-    font = pygame.font.SysFont("Arial", 24)
-    text = font.render('Fes click als objectes', True, BLACK)
-    screen.blit(text, (50, 50))
+    # Draw face
+    pygame.draw.ellipse(screen, ORANGE, (175, 50, 300, 400))
 
-    # Quadre i cercle
-    color = BLACK
-    if square_clicked:
-        color = BLUE
-    pygame.draw.rect(screen, color, (100, 150, 200, 50))
+    # Draw nose
+    pygame.draw.arc(screen, GRAY, (300, 275, 50, 25), math.radians(0), math.radians(180), 5)
 
-    color = BLACK
-    if circle_clicked:
-        color = GREEN
-    pygame.draw.circle(screen, color, (400, 175), 50)
+    # Draw smile
+    pygame.draw.arc(screen, RED, (250, 300, 150, 100), math.radians(180), math.radians(0), 5)
+
+    # Draw eyes back
+    pygame.draw.rect(screen, WHITE, (250, 150, 50, 75))
+    pygame.draw.rect(screen, WHITE, (350, 150, 50, 75))
+
+    # Draw eyes
+    pygame.draw.rect(screen, BLACK, (eye_left["x"], eye_left["y"], 20, 20))
+    pygame.draw.rect(screen, BLACK, (eye_right["x"], eye_right["y"], 20, 20))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

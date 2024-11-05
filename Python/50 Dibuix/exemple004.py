@@ -23,12 +23,19 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
-pos_x = 100
-dir_x = "right"
+# Definir una superfície de dibuix
+surface = pygame.Surface((320, 240))  
+surface.fill((200, 200, 200)) # Fons gris
 
 # Bucle de l'aplicació
 def main():
+    global font, text, image
+
     is_looping = True
+
+    # Dibuixar una creu a la superfície
+    pygame.draw.line(surface, RED, (0, 0), (surface.get_width(), surface.get_height()), 5) 
+    pygame.draw.line(surface, GREEN, (0, surface.get_height()), (surface.get_width(), 0), 5)
 
     while is_looping:
         is_looping = app_events()
@@ -50,34 +57,19 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    global pos_x, dir_x
-
-    delta_time = clock.get_time() / 1000.0  # Convertir a segons
-    
-    speed = 50  # píxels per segon
-    displacement = speed * delta_time
-
-    if (dir_x == "right"):
-        pos_x = pos_x + displacement
-        if (pos_x > 200):
-            dir_x = "left"
-    else:
-        pos_x = pos_x - displacement
-        if (pos_x < 100):
-            dir_x = "right"
+    pass
 
 # Dibuixar
 def app_draw():
-    global pos_x, dir_x
-
+    
     # Pintar el fons de blanc
     screen.fill(WHITE)
 
     # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    # Draw
-    pygame.draw.line(screen, BLUE, (pos_x, 100), (pos_x, 200), 5)
+    # Dibuixar la superfície
+    screen.blit(surface, (50, 100)) 
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

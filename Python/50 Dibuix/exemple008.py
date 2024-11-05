@@ -9,9 +9,13 @@ import utils
 
 # Definir colors
 WHITE = (255, 255, 255)
+GRAY = (128, 128, 128)  
 BLACK = (0, 0, 0)
-BLUE = (0, 0, 255)
+RED = (255, 0, 0)
 GREEN = (0, 255, 0)
+BLUE  = (0, 0, 255)
+PURPLE = (128, 0, 128)
+ORANGE = (255, 165, 0)  
 
 pygame.init()
 clock = pygame.time.Clock()
@@ -20,17 +24,13 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
-# Posició inicial del rectangle i cercle
-rectangle = { "x": 100, "y": 150, "width": 200, "height": 50 }
-circle_center = { "x": 400, "y": 175 }
-circle_radius = 50
-
-# Variables de l'estat del ratolí
+# Posició del mouse
 mouse_pos = { "x": -1, "y": -1 }
 mouse_down = False
-square_dragging = False
-circle_dragging = False
-drag_offset = { "x": 0, "y": 0 }
+
+# Si fem click al rectangle o al cercle
+square_clicked = False
+circle_clicked = False
 
 # Bucle de l'aplicació
 def main():
@@ -50,14 +50,18 @@ def main():
 # Gestionar events
 def app_events():
     global mouse_pos, mouse_down
-    mouse_inside = pygame.mouse.get_focused()  # El ratolí està dins de la finestra?
+    mouse_inside = pygame.mouse.get_focused() # El ratolí està dins de la finestra?
 
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:  # Botó tancar finestra
+        if event.type == pygame.QUIT: # Botó tancar finestra
             return False
         elif event.type == pygame.MOUSEMOTION:
             if mouse_inside:
-                mouse_pos["x"], mouse_pos["y"] = event.pos
+                mouse_pos["x"] = event.pos[0]
+                mouse_pos["y"] = event.pos[1]
+            else:
+                mouse_pos["x"] = -1
+                mouse_pos["y"] = -1
         elif event.type == pygame.MOUSEBUTTONDOWN:
             mouse_down = True
         elif event.type == pygame.MOUSEBUTTONUP:
@@ -66,50 +70,46 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    global rectangle, circle_center, square_dragging, circle_dragging, drag_offset
+    global mouse_pos, mouse_down, square_clicked, circle_clicked
 
-    # Inici de l'arrossegament en fer clic dins del rectangle o cercle
     if mouse_down:
-        if not square_dragging and not circle_dragging:  # Només detecta al començar l'arrossegament
-            if utils.is_point_in_rect(mouse_pos, rectangle):
-                square_dragging = True
-                drag_offset["x"] = mouse_pos["x"] - rectangle["x"]
-                drag_offset["y"] = mouse_pos["y"] - rectangle["y"]
-            elif utils.is_point_in_circle(mouse_pos, circle_center, circle_radius):
-                circle_dragging = True
-                drag_offset["x"] = mouse_pos["x"] - circle_center["x"]
-                drag_offset["y"] = mouse_pos["y"] - circle_center["y"]
+        rectangle = { "x": 100, "y": 150, "width": 200, "height": 50 }
+        if utils.is_point_in_rect(mouse_pos, rectangle):
+            square_clicked = True
+
+        center = { "x": 400, "y": 175 }
+        if utils.is_point_in_circle(mouse_pos, center, 50):
+            circle_clicked = True
+
     else:
-        # Alliberar l'arrossegament quan s'aixeca el ratolí
-        square_dragging = False
-        circle_dragging = False
-
-    # Actualitza la posició del rectangle si es fa "drag"
-    if square_dragging:
-        rectangle["x"] = mouse_pos["x"] - drag_offset["x"]
-        rectangle["y"] = mouse_pos["y"] - drag_offset["y"]
-
-    # Actualitza la posició del cercle si es fa "drag"
-    if circle_dragging:
-        circle_center["x"] = mouse_pos["x"] - drag_offset["x"]
-        circle_center["y"] = mouse_pos["y"] - drag_offset["y"]
+        square_clicked = False
+        circle_clicked = False
 
 # Dibuixar
 def app_draw():
+    global square_clicked, circle_clicked
+
     # Pintar el fons de blanc
     screen.fill(WHITE)
 
     # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    # Dibuixar el rectangle
-    rectangle_color = BLUE if square_dragging else BLACK
-    rectangle_tuple = (rectangle["x"], rectangle["y"], rectangle["width"], rectangle["height"])
-    pygame.draw.rect(screen, rectangle_color, rectangle_tuple)
+    # Dibuixar text d'ajuda
+    font = pygame.font.SysFont("Arial", 24)
+    text = font.render('Fes click als objectes', True, BLACK)
+    screen.blit(text, (50, 50))
 
-    # Dibuixar el cercle
-    circle_color = GREEN if circle_dragging else BLACK
-    pygame.draw.circle(screen, circle_color, (circle_center["x"], circle_center["y"]), circle_radius)
+    # Quadre i cercle
+    color = BLACK
+    if square_clicked:
+        color = BLUE
+    pygame.draw.rect(screen, color, (100, 150, 200, 50))
+
+    color = BLACK
+    if circle_clicked:
+        color = GREEN
+    pygame.draw.circle(screen, color, (400, 175), 50)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

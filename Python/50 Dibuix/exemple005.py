@@ -23,13 +23,8 @@ clock = pygame.time.Clock()
 screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
-# Direcció del moviment
-dir_x = "none"
-dir_y = "none"
-
-# Posició de l'objecte
 pos_x = 100
-pos_y = 100
+dir_x = "right"
 
 # Bucle de l'aplicació
 def main():
@@ -48,38 +43,14 @@ def main():
 
 # Gestionar events
 def app_events():
-    global dir_x, dir_y
-
     for event in pygame.event.get():
         if event.type == pygame.QUIT: # Botó tancar finestra
             return False
-        elif event.type == pygame.KEYDOWN:  # Tecla premuda
-            if event.key == pygame.K_UP:
-                dir_y = 'up'
-            elif event.key == pygame.K_DOWN:
-                dir_y = 'down'
-            elif event.key == pygame.K_LEFT:
-                dir_x = 'left'
-            elif event.key == pygame.K_RIGHT:
-                dir_x = 'right'
-        elif event.type == pygame.KEYUP:  # Tecla alliberada
-            if event.key == pygame.K_UP:
-                if dir_y == 'up':
-                    dir_y = 'none'
-            elif event.key == pygame.K_DOWN:
-                if dir_y == 'down':
-                    dir_y = 'none'
-            elif event.key == pygame.K_LEFT:
-                if dir_x == 'left':
-                    dir_x = 'none'
-            elif event.key == pygame.K_RIGHT:
-                if dir_x == 'right':
-                    dir_x = 'none'
     return True
 
 # Fer càlculs
 def app_run():
-    global dir_x, dir_y, pos_x, pos_y
+    global pos_x, dir_x
 
     delta_time = clock.get_time() / 1000.0  # Convertir a segons
     
@@ -89,24 +60,15 @@ def app_run():
     if (dir_x == "right"):
         pos_x = pos_x + displacement
         if (pos_x > 200):
-            pos_x = 200
-    elif (dir_x == "left"):
+            dir_x = "left"
+    else:
         pos_x = pos_x - displacement
         if (pos_x < 100):
-            pos_x = 100
-
-    if (dir_y == "down"):
-        pos_y = pos_y + displacement
-        if (pos_y > 200):
-            pos_y = 200
-    elif (dir_y == "up"):
-        pos_y = pos_y - displacement
-        if (pos_y < 100):
-            pos_y = 100
+            dir_x = "right"
 
 # Dibuixar
 def app_draw():
-    global pos_x, pos_y
+    global pos_x, dir_x
 
     # Pintar el fons de blanc
     screen.fill(WHITE)
@@ -114,11 +76,8 @@ def app_draw():
     # Dibuixar la graella
     utils.draw_grid(pygame, screen, 50)
 
-    # Draw limits
-    pygame.draw.rect(screen, BLUE, (100, 100, 100, 100), 2)
-
-    # Draw moving object
-    pygame.draw.rect(screen, ORANGE, (pos_x, pos_y, 15, 15))
+    # Draw
+    pygame.draw.line(screen, BLUE, (pos_x, 100), (pos_x, 200), 5)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
