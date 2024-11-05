@@ -71,8 +71,14 @@ def app_draw():
     # Dibuixar la superfície
     screen.blit(surface, (50, 100)) 
 
+    # Dibuixar només una porció de la superfície
+    # Rectangle de tall: (x, y, width, height)
+    clip_rect = pygame.Rect(50, 50, 100, 100)
+    screen.blit(surface, (400, 100), clip_rect) 
+
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
+
 
 if __name__ == "__main__":
     main()
