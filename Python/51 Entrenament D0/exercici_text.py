@@ -78,14 +78,17 @@ def app_draw():
     screen.fill(WHITE)
     utils.draw_grid(pygame, screen, 50)
 
+    # Dibuix del quadre de text
     color = BLUE if input_box["focused"] else GRAY
     rect_tuple = (input_box["x"], input_box["y"], input_box["width"], input_box["height"])
     pygame.draw.rect(screen, color, rect_tuple, 2)
     
+    # Dibuix del text dins del quadre de text
     text_surface = font.render(input_box["text"], True, BLACK)
     text_tuple = (input_box["x"] + 5, input_box["y"] + 5)
     screen.blit(text_surface, text_tuple)
     
+    # Dibuix del cursor (intermitent)
     if input_box["focused"] and cursor["visible"]:
         # Posició de l'inici del quadre d'entrada
         input_x_start = input_box["x"] + 5
