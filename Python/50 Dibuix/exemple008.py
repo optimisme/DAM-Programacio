@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import math
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
@@ -19,7 +21,7 @@ screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
 # Posició inicial del rectangle i cercle
-rectangle_pos = pygame.Rect(100, 150, 200, 50)
+rectangle = { "x": 100, "y": 150, "width": 200, "height": 50 }
 circle_center = { "x": 400, "y": 175 }
 circle_radius = 50
 
@@ -64,16 +66,16 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    global rectangle_pos, circle_center, square_dragging, circle_dragging, drag_offset
+    global rectangle, circle_center, square_dragging, circle_dragging, drag_offset
 
     # Inici de l'arrossegament en fer clic dins del rectangle o cercle
     if mouse_down:
         if not square_dragging and not circle_dragging:  # Només detecta al començar l'arrossegament
-            if rectangle_pos.collidepoint(mouse_pos["x"], mouse_pos["y"]):
+            if utils.is_point_in_rect(mouse_pos, rectangle):
                 square_dragging = True
-                drag_offset["x"] = mouse_pos["x"] - rectangle_pos.x
-                drag_offset["y"] = mouse_pos["y"] - rectangle_pos.y
-            elif is_point_in_circle(mouse_pos, circle_center, circle_radius):
+                drag_offset["x"] = mouse_pos["x"] - rectangle["x"]
+                drag_offset["y"] = mouse_pos["y"] - rectangle["y"]
+            elif utils.is_point_in_circle(mouse_pos, circle_center, circle_radius):
                 circle_dragging = True
                 drag_offset["x"] = mouse_pos["x"] - circle_center["x"]
                 drag_offset["y"] = mouse_pos["y"] - circle_center["y"]
@@ -84,8 +86,8 @@ def app_run():
 
     # Actualitza la posició del rectangle si es fa "drag"
     if square_dragging:
-        rectangle_pos.x = mouse_pos["x"] - drag_offset["x"]
-        rectangle_pos.y = mouse_pos["y"] - drag_offset["y"]
+        rectangle["x"] = mouse_pos["x"] - drag_offset["x"]
+        rectangle["y"] = mouse_pos["y"] - drag_offset["y"]
 
     # Actualitza la posició del cercle si es fa "drag"
     if circle_dragging:
@@ -102,7 +104,8 @@ def app_draw():
 
     # Dibuixar el rectangle
     rectangle_color = BLUE if square_dragging else BLACK
-    pygame.draw.rect(screen, rectangle_color, rectangle_pos)
+    rectangle_tuple = (rectangle["x"], rectangle["y"], rectangle["width"], rectangle["height"])
+    pygame.draw.rect(screen, rectangle_color, rectangle_tuple)
 
     # Dibuixar el cercle
     circle_color = GREEN if circle_dragging else BLACK
@@ -110,10 +113,6 @@ def app_draw():
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def is_point_in_circle(point, center, r):
-    distancia = math.sqrt((point["x"] - center["x"]) ** 2 + (point["y"] - center["y"]) ** 2)
-    return distancia <= r
 
 if __name__ == "__main__":
     main()

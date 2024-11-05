@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import math
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
@@ -56,7 +58,7 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
 
     # Dibuixar un rectangle vermell a la posició (150, 200) de mida (75, 100)
-    pygame.draw.rect(screen, RED, pygame.Rect(150, 200, 75, 100))
+    pygame.draw.rect(screen, RED, (150, 200, 75, 100))
 
     # Dibuixar un cercle verd a la posició (100, 150) de radi 10
     pygame.draw.circle(screen, GREEN, (100, 150), 50)

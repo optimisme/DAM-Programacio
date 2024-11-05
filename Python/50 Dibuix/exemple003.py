@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import math
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
@@ -29,8 +31,9 @@ def main():
     text = font.render('Hello Arial!', True, BLACK)
 
     # Carregar la imatge
-    image = pygame.image.load('./assets/exemple003.png')
-    image = scale_image(image, target_width=100)
+    folder = os.path.join(os.path.dirname(__file__), "./assets/exemple003.png")
+    image = pygame.image.load(folder).convert_alpha()
+    image = utils.scale_image(pygame, image, target_width=100)
 
     while is_looping:
         is_looping = app_events()
@@ -71,26 +74,6 @@ def app_draw():
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def scale_image(image, target_width=None, target_height=None):
-
-    original_width, original_height = image.get_size()
-    aspect_ratio = original_height / original_width
-
-    if target_width and not target_height:  # Escalar per ample mantenint la proporció
-        new_width = target_width
-        new_height = int(target_width * aspect_ratio)
-    elif target_height and not target_width:  # Escalar per altura mantenint la proporció
-        new_height = target_height
-        new_width = int(target_height / aspect_ratio)
-    elif target_width and target_height:  # Escalar deformant la imatge
-        new_width = target_width
-        new_height = target_height
-    else:
-        raise ValueError("Especifica almenys un dels dos paràmetres: target_width o target_height.")
-
-    scaled_image = pygame.transform.scale(image, (new_width, new_height))
-    return scaled_image
 
 if __name__ == "__main__":
     main()

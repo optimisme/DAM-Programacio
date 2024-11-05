@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import math
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
@@ -113,10 +115,10 @@ def app_draw():
     utils.draw_grid(pygame, screen, 50)
 
     # Draw limits
-    pygame.draw.rect(screen, BLUE, pygame.Rect(100, 100, 100, 100), 2)
+    pygame.draw.rect(screen, BLUE, (100, 100, 100, 100), 2)
 
     # Draw moving object
-    pygame.draw.rect(screen, ORANGE, pygame.Rect(pos_x, pos_y, 15, 15))
+    pygame.draw.rect(screen, ORANGE, (pos_x, pos_y, 15, 15))
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()

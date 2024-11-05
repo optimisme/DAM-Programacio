@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import math
 import os
 os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
@@ -71,15 +73,13 @@ def app_run():
     global mouse_pos, mouse_down, square_clicked, circle_clicked
 
     if mouse_down:
-        if (mouse_pos["x"] > 100 and 
-            mouse_pos["y"] > 150 and 
-            mouse_pos["x"] < (100 + 200) and
-            mouse_pos["y"] < (150 + 50)):
-                square_clicked = True
+        rectangle = { "x": 100, "y": 150, "width": 200, "height": 50 }
+        if utils.is_point_in_rect(mouse_pos, rectangle):
+            square_clicked = True
 
         center = { "x": 400, "y": 175 }
-        if is_point_in_circle(mouse_pos, center, 50):
-                circle_clicked = True
+        if utils.is_point_in_circle(mouse_pos, center, 50):
+            circle_clicked = True
 
     else:
         square_clicked = False
@@ -104,7 +104,7 @@ def app_draw():
     color = BLACK
     if square_clicked:
         color = BLUE
-    pygame.draw.rect(screen, color, pygame.Rect(100, 150, 200, 50))
+    pygame.draw.rect(screen, color, (100, 150, 200, 50))
 
     color = BLACK
     if circle_clicked:
@@ -113,10 +113,6 @@ def app_draw():
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
-
-def is_point_in_circle(point, center, r):
-    distancia = math.sqrt((point["x"] - center["x"]) ** 2 + (point["y"] - center["y"]) ** 2)
-    return distancia <= r
 
 if __name__ == "__main__":
     main()
