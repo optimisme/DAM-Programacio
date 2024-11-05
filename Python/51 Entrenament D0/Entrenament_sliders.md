@@ -15,9 +15,9 @@ Fes un programa **pygame** que faci aquest dibuix amb un bucle i la funció **"d
 Es tracta de sliders per escollir valors entre 0 i 255 i que han d'estar definits al codi així:
 ```python
 sliders = [
-    { "value": 128, "x": 100, "y": 200, "width": 200, "height": 5, "dragging": False },
-    { "value": 128, "x": 100, "y": 250, "width": 200, "height": 5, "dragging": False },
-    { "value": 128, "x": 100, "y": 300, "width": 200, "height": 5, "dragging": False }
+    { "value": 128, "x": 100, "y": 200, "width": 200, "height": 5, "dragging": False, "radius": 10 },
+    { "value": 128, "x": 100, "y": 250, "width": 200, "height": 5, "dragging": False, "radius": 10 },
+    { "value": 128, "x": 100, "y": 300, "width": 200, "height": 5, "dragging": False, "radius": 10 }
 ]
 ```
 De moment "dragging" no fa res, serà per detectar l'arrosegament.
