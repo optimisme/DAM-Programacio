@@ -25,7 +25,6 @@ input_box = {
     "y": 200,
     "width": 200,
     "height": 32,
-    "color": GRAY,
     "text": "",
     "focused": False
 }

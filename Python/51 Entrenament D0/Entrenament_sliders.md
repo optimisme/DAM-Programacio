@@ -1,6 +1,6 @@
 # Entrenament Sliders
 
-Anem a fer alguns exercicis, per anar agafant pràctica.
+Farem una eina per escollir un color RGB amb **pygame**
 
 ## Exercici 0
 
