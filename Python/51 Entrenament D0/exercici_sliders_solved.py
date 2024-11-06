@@ -72,8 +72,8 @@ def app_events():
 def app_run():
     global sliders
     for slider in sliders:
-        knob_x = slider["x"] + (slider["value"] / 255) * slider["width"]
-        circle_center = { "x": knob_x, "y": slider["y"] + int(slider["height"] / 2) }
+        circle_x = slider["x"] + (slider["value"] / 255) * slider["width"]
+        circle_center = { "x": circle_x, "y": slider["y"] + int(slider["height"] / 2) }
 
         # Detectar si el ratolí està sobre el cercle només en el moment de clicar
         if mouse["pressed"]:
@@ -112,8 +112,9 @@ def app_draw():
 def draw_slider(slider):
     rect_tuple = (slider["x"], slider["y"], slider["width"], slider["height"])
     pygame.draw.rect(screen, GRAY, rect_tuple)
-    knob_x = slider["x"] + (slider["value"] / 255) * slider["width"]
-    circle_tuple = (int(knob_x), int(slider["y"] + slider["height"] / 2))
+    circle_x = int(slider["x"] + (slider["value"] / 255) * slider["width"])
+    circle_y = int(slider["y"] + slider["height"] / 2)
+    circle_tuple = (circle_x, circle_y)
     pygame.draw.circle(screen, BLACK, circle_tuple, slider["radius"])
 
 def draw_value(slider):

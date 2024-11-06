@@ -1,6 +1,6 @@
 # Entrenament Text
 
-Farem un quadre d'entrada de text amb **pygame**
+Farem un quadre d'entrada de text amb **exercici_text**
 
 ## Exercici 0
 

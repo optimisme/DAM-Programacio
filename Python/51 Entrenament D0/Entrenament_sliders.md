@@ -4,7 +4,7 @@ Farem una eina per escollir un color RGB amb **pygame**
 
 ## Exercici 0
 
-Fes un programa **pygame** que faci aquest dibuix amb un bucle i la funció **"draw_slider(slider)"**:
+Fes un programa **exercici_sliders** que faci aquest dibuix amb un bucle i la funció **"draw_slider(slider)"**:
 
 <br/>
 <center><img src="./assets/exercici_sliders00.png" style="max-height: 400px" alt="">

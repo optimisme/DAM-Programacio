@@ -4,7 +4,7 @@ Farem una eina per dibuixar amb **pygame**
 
 ## Exercici 0
 
-Fes un programa **pygame** que apunti les posicions per on passa el mouse en una llista anomenada **polygons**, i dibuixi un cercle negre per cada punt apuntat a la llista.
+Fes un programa **exercici_paint** que apunti les posicions per on passa el mouse en una llista anomenada **polygons**, i dibuixi un cercle negre per cada punt apuntat a la llista.
 
 S'ha de guardar en format de tupla (x,y)
 
