@@ -57,7 +57,7 @@ text_width = font.size(input_box["text"])[0]
 Fes que la funció **app_run**:
 
 - El cursor es dibuixa (o no es dibuixa) segons el valor de l'atribut "visible" del cursor
-- La velocitat a la que fa pampallugues el cursor depèn de "blink_speed"
+- La velocitat a la que fa pampallugues el cursor depèn de *"blink_speed"*
 ```python
 cursor["timer"] = cursor["timer"] + delta_time
 if cursor["timer"] >= cursor["blink_speed"]:
