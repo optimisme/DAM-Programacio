@@ -32,7 +32,8 @@ input_box = {
 cursor = {
     "visible": True,
     "timer": 0,
-    "position": 0
+    "position": 0,
+    "blink_speed": 0.5
 }
 
 def main():
@@ -69,8 +70,10 @@ def app_events():
 
 def app_run():
     global cursor
-    cursor["timer"] += 1
-    if cursor["timer"] >= 30:
+    delta_time = clock.get_time() / 1000.0  # Convertir a segons
+    
+    cursor["timer"] += delta_time
+    if cursor["timer"] >= cursor["blink_speed"]:
         cursor["visible"] = not cursor["visible"]
         cursor["timer"] = 0
 

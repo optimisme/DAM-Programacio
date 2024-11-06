@@ -41,23 +41,29 @@ Implementa un cursor a partir d'aquest diccionari:
 cursor = {
     "visible": True,
     "timer": 0,
-    "position": 0
+    "position": 0,
+    "blink_speed": 0.5
 }
 ```
 
-El cursor s'ha de dibuixar a la última posició del text, per saber quina és, medeix el text així:
+- El cursor s'ha de dibuixar a la última posició del text, per saber quina és, medeix el text així:
 ```python
 text_width = font.size(input_box["text"])[0]
 ```
-El dibuix del cursor és una linia vertical a la posició del requadre amb un "padding" de 5
+- El dibuix del cursor és una linia vertical a la posició del requadre amb un "padding" de 5
 
 ## Exercici 4
 
-Fes que la funció **app_run** sumi un 1 a l'atribut "timer" del cursor, quan el "timer" arriba a 30 es torna a posar a 0.
+Fes que la funció **app_run**:
 
-Fes que la funció **app_run** canvii el valor de l'atribut "visible" cada vegada que el timer arriba a 30.
-
-El cursor es dibuixa (o no es dibuixa) segons el valor de l'atribut "visible" del cursor
+- El cursor es dibuixa (o no es dibuixa) segons el valor de l'atribut "visible" del cursor
+- La velocitat a la que fa pampallugues el cursor depèn de "blink_speed"
+```python
+cursor["timer"] = cursor["timer"] + delta_time
+if cursor["timer"] >= cursor["blink_speed"]:
+    cursor["visible"] = not cursor["visible"]
+    cursor["timer"] = 0
+```
 
 <center>
 <video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
