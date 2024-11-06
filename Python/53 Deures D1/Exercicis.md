@@ -289,7 +289,7 @@ Fes un programa **exercici009.py** on quatre botons defineixen el valor d'un vis
 
 ## Exercici 10
 
-Fes un programa **exercici010.py** on hi hagi una serp, que segueix la posició del mouse i creix al *"menjar"* pomes. A mida que la serp creix, la velocitat a la que es mou és més ràpida.
+Fes un programa **exercici010.py** on hi hagi una serp, que segueix la posició del mouse i creix al *"menjar pomes"*. A mida que la serp creix, la velocitat a la que es mou és més ràpida.
 
 <center>
 <video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
