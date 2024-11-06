@@ -289,4 +289,122 @@ Fes un programa **exercici009.py** on quatre botons defineixen el valor d'un vis
 
 ## Exercici 10
 
-Fes un programa **exercici010.py** on 
+Fes un programa **exercici010.py** on hi hagi una serp, que segueix la posició del mouse i creix al *"menjar"* pomes. A mida que la serp creix, la velocitat a la que es mou és més ràpida.
+
+<center>
+<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
+  <source src="./assets/exercici010.mov" type="video/mp4">
+</video>
+</center>
+<br/>
+
+Fes servir aquest objecte pr guardar la informació de la *"serp"* i la *"poma"*:
+```python
+snake = {
+    "queue": [],
+    "speed": 50,
+    "radius": 7,
+    "status": "follow_mouse", # "follow_mouse" or "orbit_mouse"
+    "direction_angle": 0
+}
+
+piece = { # (food)
+    "x": -1, 
+    "y": -1, 
+    "value": 0,
+    "radius": 7
+}  
+```
+
+Cal mostrar un resum amb:
+
+- El nivell o pomes que ha menjat
+- La llargada de la serp
+- La velocitat
+
+Aquestes són les condicions:
+
+- La posició dels cercles que defineixen la llargada de la serp es guaden a *snake["queue"]*
+- Els cercles més llunyans al cap de la serp es dibuixen d'un gris més clar
+- La velocitat de la serp depèn de *delta_time* i creix *1.05* cada vegada que menja una poma, fins a un màxim de 200
+- Les pomes es generen aleatòriament dins l'espai definit per la finestra amb un padding de 100 pixels horitzontals i verticals
+- 
+
+Et caldràn les següents funcions:
+```python
+def init_game()
+# Inicia el joc creant la primera peça si no existeix i col·locant la serp al centre de la pantalla amb una mida inicial de 5 segments.
+
+def generate_piece()
+# Genera una nova peça amb una posició i un valor aleatori dins dels límits de la finestra.
+
+def extend_snake()
+# Afegeix un segment addicional a la cua de la serp copiant l'última posició de la cua actual.
+
+def move_snake(delta_time)
+# Detecta si la serp ha xocat amb la peça, augmenta la velocitat i la longitud de la serp segons el valor de la peça, i genera una nova peça si cal. Calcula i actualitza la nova posició del cap de la serp i elimina l'últim segment per mantenir la longitud constant.
+
+def get_next_snake_pos(delta_time)
+# Resolta més avall
+# Calcula la següent posició de la serp basant-se en la posició del ratolí i l'estat de la serp (seguint o orbitant el ratolí). Determina l'angle de direcció en funció de la distància i el pendent respecte al ratolí.
+
+def draw_board()
+# Mostra el nivell, la longitud de la serp, i la velocitat actual a la pantalla.
+
+def draw_snake()
+# Dibuixa la serp segment per segment, aplicant un efecte de lluminositat que varia segons la posició del segment dins la cua.
+
+def draw_piece()
+# Dibuixa la peça actual a la pantalla en color vermell, incloent-hi el seu valor al centre de la peça.
+```
+
+
+Fes servir aquesta funció per calcular la posició de la serp:
+```python
+def get_next_snake_pos(delta_time):
+    global snake
+
+    # Calcula la diferència en les coordenades entre el cap de la serp i el ratolí
+    delta_x = mouse_pos['x'] - snake["queue"][0]['x']
+    delta_y = mouse_pos['y'] - snake["queue"][0]['y']
+   
+    # Calcula la distància entre el cap de la serp i la posició del ratolí
+    distancia = math.hypot(delta_x, delta_y)
+
+    # Determina l'estat de la serp segons la distància al ratolí
+    if distancia < 5:
+        snake["status"] = 'orbit_mouse'  # Estat per orbitar prop del ratolí
+    if distancia > 50:
+        snake["status"] = 'follow_mouse'  # Estat per seguir el ratolí
+
+    # Si la serp està en estat d'òrbita, 
+    # augmenta l'angle de direcció per fer-la girar
+    if snake["status"] == 'orbit_mouse':
+        snake["direction_angle"] += distancia * math.pi / 1000
+    else:
+        # Calcula el pendent per obtenir l'angle; 
+        # si delta_x és 0, s'estableix a infinit per evitar divisió per zero
+        if delta_x != 0:
+            pendent = delta_y / delta_x
+        else:
+            pendent = float('inf')
+
+        # Calcula l'angle de direcció de la serp per seguir el ratolí
+        if delta_x == 0 and mouse_pos['y'] < snake["queue"][0]['y']:
+            # Angle per anar amunt (270 graus)
+            snake["direction_angle"] = (3 * math.pi) / 2
+        elif delta_x == 0 and mouse_pos['y'] >= snake["queue"][0]['y']:
+            # Angle per anar avall (90 graus)
+            snake["direction_angle"] = math.pi / 2
+        elif mouse_pos['x'] > snake["queue"][0]['x']:
+            # Angle per anar cap a la dreta 
+            snake["direction_angle"] = math.atan(pendent)
+        else:
+            # Angle per anar cap a l'esquerra (180 graus)
+            snake["direction_angle"] = math.atan(pendent) + math.pi
+
+    return {
+        "x": snake["queue"][0]['x'] + snake["speed"] * delta_time * math.cos(snake["direction_angle"]), 
+        "y": snake["queue"][0]['y'] + snake["speed"] * delta_time * math.sin(snake["direction_angle"])
+    }
+```
