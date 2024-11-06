@@ -328,7 +328,6 @@ Aquestes són les condicions:
 - Els cercles més llunyans al cap de la serp es dibuixen d'un gris més clar
 - La velocitat de la serp depèn de *delta_time* i creix *1.05* cada vegada que menja una poma, fins a un màxim de 200
 - Les pomes es generen aleatòriament dins l'espai definit per la finestra amb un padding de 100 pixels horitzontals i verticals
-- 
 
 Et caldràn les següents funcions:
 ```python
