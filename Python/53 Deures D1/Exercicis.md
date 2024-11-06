@@ -253,7 +253,7 @@ Fes un programa **exercici008.py** on dos botons canvien la direcció de movimen
 Fes un programa **exercici009.py** on quatre botons defineixen el valor d'un visualitzador *Hexadecimal* de [7 segments](https://ca.wikipedia.org/wiki/Visualitzador_de_set_segments) escollits a partir de 4 botons.
 
 - El canvi de valor es fa a l'event **'mousedown'** dins del mateix botó.
-- Sempre es dibuixen en gris tots els segments de color gris (215, 215, 215)
+- Sempre es dibuixen tots els segments de color gris (215, 215, 215)
 - A partir del número hexadecimal s'activen els segments per dibuixar: *0,1,2,3,4,5,6,7,8,9,a,b,c,d,e*
 
 <br/>
