@@ -25,8 +25,12 @@ De moment "dragging" no fa res, serà per detectar l'arrosegament.
 El radi del cercle ha de ser 10.
 
 La posició "x" del cercle ha de ser proporcional al valor, tenint en compte que els limits són entre 0 i 255. 
-
-Per tant, 128 és la meitat
+```python
+if slider["dragging"]:
+    relative_x = max(slider["x"], min(mouse["x"], slider["x"] + slider["width"]))
+    slider["value"] = int((relative_x - slider["x"]) / slider["width"] * 255)
+```
+Per tant, slider["value"] = 128
 
 ## Exercici 1
 
