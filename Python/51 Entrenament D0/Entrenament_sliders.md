@@ -25,6 +25,13 @@ De moment "dragging" no fa res, serà per detectar l'arrosegament.
 El radi del cercle ha de ser 10.
 
 La posició "x" del cercle ha de ser proporcional al valor, tenint en compte que els limits són entre 0 i 255. 
+```pyton
+circle_x = slider["x"] + (slider["value"] / 255) * slider["width"]
+circle_center = { "x": circle_x, "y": slider["y"] + int(slider["height"] / 2) }
+```
+
+Al revés, per calcular el valor a partir de la "x" del cercle:
+
 ```python
 if slider["dragging"]:
     relative_x = max(slider["x"], min(mouse["x"], slider["x"] + slider["width"]))
