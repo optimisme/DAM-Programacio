@@ -130,7 +130,10 @@ def app_draw():
         draw_button_color(button)
 
     # Dibuixar el color escollit
-    pygame.draw.rect(screen, selected_color, (350, 25, 50, 70))
+    color_tuple = (350, 25, 50, 70)
+    pygame.draw.rect(screen, selected_color, color_tuple)
+    if selected_color == WHITE:
+        pygame.draw.rect(screen, BLACK, color_tuple, 2)
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
