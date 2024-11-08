@@ -87,7 +87,7 @@ def app_events():
 def app_run():
     global scroll
 
-    # Obtenir la posició a partir del valor (percentage)
+    # Obtenir la posició "y" del cercle a partir del valor (percentage)
     circle_center = {
         "x": int(scroll["x"] + scroll["width"] / 2),
         "y": int(scroll["y"] + (scroll["percentage"] / 100) * scroll["height"])
@@ -132,6 +132,8 @@ def app_draw():
 def draw_scroll():
     rect_tuple = (scroll["x"], scroll["y"], scroll["width"], scroll["height"])
     pygame.draw.rect(screen, GRAY, rect_tuple)
+
+    # Obtenir la posició "y" del cercle a partir del valor (percentage)
     circle_x = int(scroll["x"] + scroll["width"] / 2)
     circle_y = int(scroll["y"] + (scroll["percentage"] / 100) * scroll["height"])
     circle_tuple = (circle_x, circle_y)

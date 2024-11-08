@@ -81,7 +81,7 @@ def app_run():
 
     # Comprovar si cal començar o acabar el dragging
     for slider in sliders:
-        # Obtenir la posició del cercle a partir del valor
+        # Obtenir la posició "x" del cercle a partir del valor
         circle_x = slider["x"] + (slider["value"] / 255) * slider["width"]
         circle_center = { "x": circle_x, "y": slider["y"] + int(slider["height"] / 2) }
 
@@ -123,7 +123,7 @@ def draw_slider(slider):
     rect_tuple = (slider["x"], slider["y"], slider["width"], slider["height"])
     pygame.draw.rect(screen, GRAY, rect_tuple)
 
-    # Obtenir la posició del cercle a partir del valor
+    # Obtenir la posició "x" del cercle a partir del valor
     circle_x = int(slider["x"] + (slider["value"] / 255) * slider["width"])
     circle_y = int(slider["y"] + slider["height"] / 2)
     circle_tuple = (circle_x, circle_y)
