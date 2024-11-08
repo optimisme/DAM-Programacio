@@ -4,7 +4,7 @@ Farem una eina per dibuixar amb **pygame**
 
 ## Exercici 0
 
-Fes un programa **exercici_paint** que apunti les posicions per on passa el mouse en una llista anomenada **polygons**, i dibuixi un cercle negre per cada punt apuntat a la llista.
+Fes un programa **exercici_paint** que apunti les posicions per on passa el mouse en una llista anomenada **points**, i dibuixi un cercle negre per cada punt apuntat a la llista.
 
 S'ha de guardar en format de tupla (x,y)
 
@@ -34,27 +34,18 @@ Si hi ha menys de dos punts, que no es dibuixi res.
 
 Fes servir **pygame.draw.lines** perquè no tanqui el polígon.
 
-<center>
-<video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
-  <source src="./assets/exercici_paint02.mov" type="video/mp4">
-</video>
-</center>
-<br/>
-
 ## Exercici 3
 
-Per evitar que diferents dibuixos quedin connectats, la llista **polygons** tindrà a dins llistes de tuples (x,y) enlloc de directament les tuples.
+Fes una **surface** de la mateixa mida que la finestra:
 
-Fes que cada vegada que s'apreta el mouse (pygame.MOUSEBUTTONDOWN), es comença una nova llista de polígons buida.
+- Inicia la surface amb un fons de color *WHITE*
+- Dibuixa la surface a la posició (0,0) de la finestra
 
-Modifica el codi perquè quan es mou el mouse amb el botó apretat, s'afegeix la posició a la última llista de **polygons** (polygons[-1].append(position))
+Quan es fa *pygame.MOUSEBUTTONUP*:
 
-Adapta el codi de draw
-```python
-    for polygon in polygons:
-        if len(polygon) >= 2:
-            pygame.draw.lines ...
-```
+- Canvia l'estat de mouse["pressed"]
+- Si hi ha més de 2 punts a la llista *points*, dibuixa'ls a la superfície amb **pygame.draw.lines**
+- Reinicia la llista *points* amb una llista buida []
 
 <center>
 <video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
@@ -103,19 +94,19 @@ Quan hi ha un event **pygame.MOUSEBUTTONUP** s'ha de comprovar tots els botons d
 
 ## Exercici 6
 
-Modifica la llista **polygons** perquè sigui una llista d'objectes de tipus: 
+Modifica la llista **points** perquè sigui una llista d'objectes de tipus: 
 [
     { width: 5, points: [(0,0), (100, 100)]}
 ]
 
 Així quan es crea el nou objecte a **pygame.MOUSEBUTTONDOWN**:
 ```python
-polygons.append({ "width": line_width, "points": []})
+points.append({ "width": line_width, "points": []})
 ```
 
 - Cal adaptar la inserció de punts:
 ```python
-polygons[-1]["points"].append(position)
+points[-1]["points"].append(position)
 ```
 
 - Cal adaptar el dibuix al nou format
@@ -138,7 +129,7 @@ buttons_color = [
 ]
 ```
 
-Per fer-ho fa servir la funció "utils.hsl_to_rgb(hue, 1.0, lightness)" amb:
+Per fer-ho fa servir la funció **"utils.hsl_to_rgb(hue, 1.0, lightness)"** amb:
 - 10 columnes (que defineixen el grau **hue**)
 - 3 files (que defineixen **lightness**)
 

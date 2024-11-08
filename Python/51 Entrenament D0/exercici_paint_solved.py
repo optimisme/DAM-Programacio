@@ -18,7 +18,9 @@ pygame.init()
 clock = pygame.time.Clock()
 
 # Definir la finestra
-screen = pygame.display.set_mode((640, 480))
+WIDTH = 640
+HEIGHT = 480
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption('Window Title')
 
 # Variables globals
@@ -27,8 +29,9 @@ mouse = {
     "y": -1,
     "pressed": False
 }
-polygons = []
+points = []
 line_width = 1
+selected_color = BLACK
 buttons_width = [
     { "width": 1, "x": 25, "y": 25 },
     { "width": 2, "x": 50, "y": 25 },
@@ -37,16 +40,17 @@ buttons_width = [
     { "width": 5, "x": 25, "y": 75 },
     { "width": 6, "x": 50, "y": 75 },
 ]
-selected_color = BLACK
 buttons_color = []
 
-surface = pygame.Surface((640, 480))
+surface = pygame.Surface((WIDTH, HEIGHT))
 
 # Bucle de l'aplicació
 def main():
     is_looping = True
 
     init_color_buttons()
+
+    surface.fill(WHITE)
 
     while is_looping:
         is_looping = app_events()
@@ -61,7 +65,7 @@ def main():
 
 # Gestionar events
 def app_events():
-    global mouse, line_width, selected_color
+    global mouse, points, line_width, selected_color
     mouse_inside = pygame.mouse.get_focused()
     mouse_relased = False
 
@@ -71,18 +75,17 @@ def app_events():
         elif event.type == pygame.MOUSEBUTTONDOWN and mouse_inside:
             mouse["pressed"] = True
             mouse["x"], mouse["y"] = event.pos
-            polygons.append({ "color": selected_color, "width": line_width, "points": []})  # Comença una nova llista de posicions
         elif event.type == pygame.MOUSEBUTTONUP:
             mouse["pressed"] = False
             mouse_relased = True
+            # Dibuixa la llista de punts a la superfície
+            if len(points) >= 2:
+                pygame.draw.lines(surface, selected_color, False, points, line_width)
+            points = []  # Comença una nova llista de posicions
         elif event.type == pygame.MOUSEMOTION and mouse_inside and mouse["pressed"]:
             mouse["x"], mouse["y"] = event.pos
         else:
             mouse["x"], mouse["y"] = -1, -1
-
-    if mouse["pressed"] and polygons:
-        position = (mouse["x"], mouse["y"])
-        polygons[-1]["points"].append(position)
 
     if mouse_relased:
         for button in buttons_width:
@@ -101,17 +104,22 @@ def app_events():
 
 # Fer càlculs
 def app_run():
-    pass
+    if mouse["pressed"]:
+        position_tuple = (mouse["x"], mouse["y"])
+        points.append(position_tuple)
 
 # Dibuixar
 def app_draw():
     # Pintar el fons de blanc
     screen.fill(WHITE)
 
+    # Dibuixar la surface
+    surface_pos_tuple = (0, 0)
+    screen.blit(surface, surface_pos_tuple)
+
     # Dibuixar els polygons
-    for polygon in polygons:
-        if len(polygon["points"]) >= 2:
-            pygame.draw.lines(screen, polygon["color"], False, polygon["points"], polygon["width"])
+    if len(points) >= 2:
+        pygame.draw.lines(screen, selected_color, False, points, line_width)
 
     # Dibuixar els botons de gruix
     for button in buttons_width:
