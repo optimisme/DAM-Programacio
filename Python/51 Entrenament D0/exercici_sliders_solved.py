@@ -81,6 +81,7 @@ def app_run():
 
     # Comprovar si cal començar o acabar el dragging
     for slider in sliders:
+        # Obtenir la posició del cercle a partir del valor
         circle_x = slider["x"] + (slider["value"] / 255) * slider["width"]
         circle_center = { "x": circle_x, "y": slider["y"] + int(slider["height"] / 2) }
 
@@ -92,7 +93,7 @@ def app_run():
         else:
             slider["dragging"] = False
 
-        # Actualitzar el valor del slider mentre està en "dragging"
+        # Actualitzar el valor a partir de la posició
         if slider["dragging"]:
             relative_x = max(slider["x"], min(mouse["x"], slider["x"] + slider["width"]))
             slider["value"] = int((relative_x - slider["x"]) / slider["width"] * 255)
