@@ -71,16 +71,25 @@ def app_events():
 # Fer càlculs
 def app_run():
     global sliders
+
+    # Comprovar si algun slider està fent dragging
+    any_is_dragging = False
+    for slider in sliders:
+        if slider["dragging"]:
+            any_is_dragging = True
+            break
+
+    # Comprovar si cal començar o acabar el dragging
     for slider in sliders:
         circle_x = slider["x"] + (slider["value"] / 255) * slider["width"]
         circle_center = { "x": circle_x, "y": slider["y"] + int(slider["height"] / 2) }
 
-        # Detectar si el ratolí està sobre el cercle només en el moment de clicar
+        # Detectar si el ratolí està sobre el cercle només en el moment de clickar
         if mouse["pressed"]:
             # Només iniciar el dragging si cap altre slider està arrossegant-se
             any_is_dragging = False
-            for slider in sliders:
-                if slider["dragging"]:
+            for slider_x in sliders:
+                if slider_x["dragging"]:
                     any_is_dragging = True
                     break
             if not any_is_dragging:  
