@@ -78,7 +78,12 @@ def app_run():
         # Detectar si el ratolí està sobre el cercle només en el moment de clicar
         if mouse["pressed"]:
             # Només iniciar el dragging si cap altre slider està arrossegant-se
-            if not any(s["dragging"] for s in sliders):  
+            any_is_dragging = False
+            for slider in sliders:
+                if slider["dragging"]:
+                    any_is_dragging = True
+                    break
+            if not any_is_dragging:  
                 slider["dragging"] = utils.is_point_in_circle(mouse, circle_center, slider["radius"])
         else:
             slider["dragging"] = False

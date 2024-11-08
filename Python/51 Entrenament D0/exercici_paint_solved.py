@@ -40,6 +40,8 @@ buttons_width = [
 selected_color = BLACK
 buttons_color = []
 
+surface = pygame.Surface((640, 480))
+
 # Bucle de l'aplicació
 def main():
     is_looping = True
