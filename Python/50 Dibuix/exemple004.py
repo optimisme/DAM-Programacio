@@ -24,7 +24,7 @@ screen = pygame.display.set_mode((640, 480))
 pygame.display.set_caption('Window Title')
 
 # Definir una superfície de dibuix
-surface = pygame.Surface((320, 240))  
+surface = pygame.Surface((320, 240), pygame.SRCALPHA)  
 surface.fill((200, 200, 200)) # Fons gris
 
 # Bucle de l'aplicació
