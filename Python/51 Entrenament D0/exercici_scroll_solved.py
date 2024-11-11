@@ -44,7 +44,7 @@ scroll = {
     "visible_height": 200
 }
 
-surface = pygame.Surface((320, 500))
+surface = pygame.Surface((320, 500), pygame.SRCALPHA)
 
 # Bucle de l'aplicació
 def main():
