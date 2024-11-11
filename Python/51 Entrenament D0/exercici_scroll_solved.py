@@ -87,18 +87,19 @@ def app_events():
 def app_run():
     global scroll
 
-    # Comprovar si el mouse ha fet click dins del cercle i iniciar l'arrossegament
+    # Obtenir la posició "y" del cercle a partir del valor (percentage)
     circle_center = {
         "x": int(scroll["x"] + scroll["width"] / 2),
         "y": int(scroll["y"] + (scroll["percentage"] / 100) * scroll["height"])
     }
 
+    # Comprovar si el mouse ha fet click dins del cercle i iniciar l'arrossegament
     if mouse["pressed"] and not scroll["dragging"] and utils.is_point_in_circle(mouse, circle_center, scroll["radius"]):
         scroll["dragging"] = True
 
     # Si s'està arrossegant, actualitzar la posició del cercle
     if scroll["dragging"]:
-        # Calcular el nou percentatge en funció de la posició del mouse dins de l'àrea de l'scroll
+        # Calcular el nou percentatge en funció de la posició dins de l'àrea de l'scroll
         relative_y = max(min(mouse["y"], scroll["y"] + scroll["height"]), scroll["y"])
         scroll["percentage"] = ((relative_y - scroll["y"]) / scroll["height"]) * 100
 
@@ -131,6 +132,8 @@ def app_draw():
 def draw_scroll_slider():
     rect_tuple = (scroll["x"], scroll["y"], scroll["width"], scroll["height"])
     pygame.draw.rect(screen, GRAY, rect_tuple)
+
+    # Obtenir la posició "y" del cercle a partir del valor (percentage)
     circle_x = int(scroll["x"] + scroll["width"] / 2)
     circle_y = int(scroll["y"] + (scroll["percentage"] / 100) * scroll["height"])
     circle_tuple = (circle_x, circle_y)

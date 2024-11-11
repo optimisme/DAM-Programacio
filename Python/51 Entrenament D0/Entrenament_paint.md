@@ -94,22 +94,7 @@ Quan hi ha un event **pygame.MOUSEBUTTONUP** s'ha de comprovar tots els botons d
 
 ## Exercici 6
 
-Modifica la llista **points** perquè sigui una llista d'objectes de tipus: 
-[
-    { width: 5, points: [(0,0), (100, 100)]}
-]
-
-Així quan es crea el nou objecte a **pygame.MOUSEBUTTONDOWN**:
-```python
-points.append({ "width": line_width, "points": []})
-```
-
-- Cal adaptar la inserció de punts:
-```python
-points[-1]["points"].append(position)
-```
-
-- Cal adaptar el dibuix al nou format
+Comprova que el funcionament correspon al vídeo
 
 <center>
 <video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">
@@ -166,8 +151,8 @@ Fes que es pogui canviar la variable global **selected_color**, que per defecté
 
 Mostra el color escollit amb un rectangle al costat de la llista de colors.
 
-- Afegeix un atribut "color" a la informació de cada plygon
 - Fes que es dibuixi el poligon del color que toca
+- Si el color és blanc, posa-hi un marc negre per veure'l bé
 
 <center>
 <video width="100%" controls allowfullscreen style="max-width: 90%; width: 400px; max-height: 250px">

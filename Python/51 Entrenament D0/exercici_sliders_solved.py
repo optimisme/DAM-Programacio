@@ -71,24 +71,29 @@ def app_events():
 # Fer càlculs
 def app_run():
     global sliders
+
+    # Comprovar si algun slider està fent dragging
+    any_is_dragging = False
     for slider in sliders:
+        if slider["dragging"]:
+            any_is_dragging = True
+            break
+
+    # Comprovar si cal començar o acabar el dragging
+    for slider in sliders:
+        # Obtenir la posició "x" del cercle a partir del valor
         circle_x = slider["x"] + (slider["value"] / 255) * slider["width"]
         circle_center = { "x": circle_x, "y": slider["y"] + int(slider["height"] / 2) }
 
-        # Detectar si el ratolí està sobre el cercle només en el moment de clicar
+        # Detectar si el ratolí està sobre el cercle només en el moment de clickar
         if mouse["pressed"]:
             # Només iniciar el dragging si cap altre slider està arrossegant-se
-            any_is_dragging = False
-            for slider in sliders:
-                if slider["dragging"]:
-                    any_is_dragging = True
-                    break
             if not any_is_dragging:  
                 slider["dragging"] = utils.is_point_in_circle(mouse, circle_center, slider["radius"])
         else:
             slider["dragging"] = False
 
-        # Actualitzar el valor del slider mentre està en "dragging"
+        # Actualitzar el valor a partir de la posició
         if slider["dragging"]:
             relative_x = max(slider["x"], min(mouse["x"], slider["x"] + slider["width"]))
             slider["value"] = int((relative_x - slider["x"]) / slider["width"] * 255)
@@ -117,6 +122,8 @@ def app_draw():
 def draw_slider(slider):
     rect_tuple = (slider["x"], slider["y"], slider["width"], slider["height"])
     pygame.draw.rect(screen, GRAY, rect_tuple)
+
+    # Obtenir la posició "x" del cercle a partir del valor
     circle_x = int(slider["x"] + (slider["value"] / 255) * slider["width"])
     circle_y = int(slider["y"] + slider["height"] / 2)
     circle_tuple = (circle_x, circle_y)
