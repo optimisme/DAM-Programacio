@@ -122,13 +122,13 @@ def app_draw():
     screen.blit(sub_surface, (50, 100))
 
     # Dibuixar l'scroll
-    draw_scroll()
+    draw_scroll_slider()
 
     # Actualitzar el dibuix a la finestra
     pygame.display.update()
 
 
-def draw_scroll():
+def draw_scroll_slider():
     rect_tuple = (scroll["x"], scroll["y"], scroll["width"], scroll["height"])
     pygame.draw.rect(screen, GRAY, rect_tuple)
     circle_x = int(scroll["x"] + scroll["width"] / 2)
