@@ -61,6 +61,8 @@ Abans de girar la ruleta s'ha de definir l'aposta de cada jugador. Les apostes p
 
 Per fer l'aposta s'arrossegua una o més fitxes d'un valor (si el jugador té aquella fitxa disponible), cap a un espai d'aposta de la ruleta (numero, color, parell/senar, columna)
 
+Si es deixa la fitxa en un espai no vàlid, aquesta s'animarà cap a la seva posició original.
+
 **Gir de la ruleta:**
 
 Quan ja no es volen fer més apostes, hi haurà un botó "Girar" al costat de la ruleta que la farà rodar.
