@@ -14,9 +14,9 @@ Apliqueu els colors corresponents: vermell i negre per les caselles de l’1 al 
 
 - S'ha de dibuixar la taula de números, de 3 columnes i 12 files, amb el 0 apart.
 
-- S'ha de dibuixar l'espai per les apostes *vermell*/*negre*
+- S'ha de dibuixar l'espai per les apostes *vermell/negre*
 
-- S'ha de dibuixar l'espai per les apostes *parell*/*senar*
+- S'ha de dibuixar l'espai per les apostes *parell/senar*
 
 - Espai per apostes a una de les tres columnes.
 
@@ -77,4 +77,4 @@ Després d'aturar-se, la ruleta es mostra el resultat de l'aposta.
 
 **Final de la partida:**
 
-Es juga fins que els tres jugadors s'arruinen. Qué és el final més probable i s'anomena **house edge**.
+Es juga fins que els tres jugadors s'arruinen. Qué és el final més probable i s'anomena **[house edge](https://en.wikipedia.org/wiki/Casino_game)**.
