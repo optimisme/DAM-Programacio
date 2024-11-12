@@ -65,13 +65,13 @@ Per fer l'aposta s'arrossega la fixta d'un valor (si el jugador té aquella fitx
 
 Quan ja no es volen fer més apostes, hi haurà un botó "Girar" al costat de la ruleta que la farà rodar.
 
-Simuleu la velocitat de gir **amb una animació decreixent** fins que la ruleta s'aturi.
+Simuleu la velocitat de gir <span style="text-decoration:underline">amb una animació decreixent</span> fins que la ruleta s'aturi.
 
 No hi haurà "pilota", però si una fletxa que indica el número escollit.
 
-**La fletxa sempre ha de quedar centrada a la casella escollida**, perquè no hi hagi confusió. Feu servir [aquest exemple](https://optimisme.github.io/roulette/) com a inspiració.
+<span style="text-decoration:underline">La fletxa sempre ha de quedar centrada a la casella escollida</span>, perquè no hi hagi confusió. Feu servir [aquest exemple](https://optimisme.github.io/roulette/) com a inspiració.
 
-**S'han de seguir les probabilitats de guanyar indicades anteriorment.** S'entén que si fós una màquina recreativa, s'hauria de complir la [normativa del BOE](https://www.boe.es/buscar/pdf/1998/BOE-A-1998-23945-consolidado.pdf)
+<span style="text-decoration:underline">S'han de seguir les probabilitats de guanyar indicades anteriorment.</span> S'entén que si fós una màquina recreativa, s'hauria de complir la [normativa del BOE](https://www.boe.es/buscar/pdf/1998/BOE-A-1998-23945-consolidado.pdf)
 
 **Resultats de l’aposta:**
 
