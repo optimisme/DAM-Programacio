@@ -80,3 +80,13 @@ Després d'aturar-se, la ruleta es mostra el resultat de l'aposta.
 **Final de la partida:**
 
 Es juga fins que els tres jugadors s'arruinen. Qué és el final més probable, **[house edge](https://en.wikipedia.org/wiki/Casino_game)**.
+
+**Llista de tirades:**
+
+Cal que guardeu la informació de cada tirada en una llista. Per cada tirada s'ha de guardar:
+
+- L'aposta de cada jugador
+- El resultat
+- El crèdit de cada jugador després de la tirada
+
+Hi ha d'haver un botó que permeti veure la llista de tirades en una taula. Ha de tenir scroll si és necessari perquè hi ha moltes tirades.
