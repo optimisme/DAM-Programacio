@@ -95,4 +95,6 @@ Cal que guardeu la informació de cada tirada en una llista. Per cada tirada s'h
 - El crèdit de cada jugador després de la tirada
 - L'aposta de cada jugador
 
-Hi ha d'haver un botó que permeti veure la llista de tirades en una taula. Ha de tenir scroll si és necessari perquè hi ha moltes tirades.
+Hi ha d'haver un botó que permeti veure la llista de tirades en una taula, amb un scroll si hi han moltes tirades.
+
+A la vista de la llista no es dibuixarà la ruleta, i hi haurà un botó per tancar la llista i tornar a la vista de la ruleta.
