@@ -59,7 +59,7 @@ Abans de girar la ruleta s'ha de definir l'aposta de cada jugador. Les apostes p
 
 - Columna. Per cada columna la possibilitat de guanyar és del 32%. Si s'escull aquella columna obtens 2 unitat per cada unitat apostada.
 
-Per fer l'aposta s'arrossega la fixta d'un valor (si el jugador té aquella fitxa disponible), cap a un espai d'aposta de la ruleta (numero, color, parell/senar, columna)
+Per fer l'aposta s'arrossegua una o més fitxes d'un valor (si el jugador té aquella fitxa disponible), cap a un espai d'aposta de la ruleta (numero, color, parell/senar, columna)
 
 **Gir de la ruleta:**
 
