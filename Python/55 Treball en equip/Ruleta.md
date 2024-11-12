@@ -4,7 +4,7 @@
 
 Una ruleta de casino és una roda que gira i que està dividida en diferents caselles numerades. Cada casella té un color (negre, vermell o verd per a la casella zero). Els jugadors aposten a un número, color parell/senar o columna, i la ruleta es fa girar fins que la bola es para en una casella, decidint així el resultat de l’aposta.
 
-## Requeriments del treball
+## Joc i vista de la ruleta
 
 **Dibuix de la ruleta:**
 
@@ -87,7 +87,7 @@ Després d'aturar-se, la ruleta es mostra el resultat de l'aposta.
 
 Es juga fins que els tres jugadors s'arruinen, que és el final més probable i s'anomena **[house edge](https://en.wikipedia.org/wiki/Casino_game)**.
 
-**Llista de tirades:**
+## Estadístiques i vista de tirades
 
 Cal que guardeu la informació de cada tirada en una llista. Per cada tirada s'ha de guardar:
 
