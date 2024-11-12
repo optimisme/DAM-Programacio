@@ -43,6 +43,8 @@ Per exemple, inicialment:
 
 Les fitxes s'han de reorganitzar per tal que, amb el crèdit disponible, hi hagi la màxima varietat de valors de fitxe possible.
 
+Després de la llista hi ha d'haver un número amb el crèdit disponible (suma total) del jugador.
+
 **Apostes i premis:**
 
 Abans de girar la ruleta s'ha de definir l'aposta de cada jugador. Les apostes poden ser:
