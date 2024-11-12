@@ -81,7 +81,7 @@ Després d'aturar-se, la ruleta es mostra el resultat de l'aposta.
 
 **Final de la partida:**
 
-Es juga fins que els tres jugadors s'arruinen. Qué és el final més probable, **[house edge](https://en.wikipedia.org/wiki/Casino_game)**.
+Es juga fins que els tres jugadors s'arruinen, que és el final més probable i s'anomena **[house edge](https://en.wikipedia.org/wiki/Casino_game)**.
 
 **Llista de tirades:**
 
