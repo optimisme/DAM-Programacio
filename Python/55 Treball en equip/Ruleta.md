@@ -51,7 +51,7 @@ Després de la llista hi ha d'haver un número amb el crèdit disponible (suma t
 
 Abans de girar la ruleta s'ha de definir l'aposta de cada jugador. Les apostes poden ser:
 
-- A un o més números. Per cada número la possibilitat de guanyar és de un 2,7%. Si s'escull aquell número obtens 25 unitats per cada unitat apostada.
+- A un o més números. Per cada número la possibilitat de guanyar és de un 2,7%. Si s'escull aquell número obtens 35 unitats per cada unitat apostada.
 
 - Aposta a un color *"negre"* o *"vermell"* (no *"verd"*). Per cada color la possibilitat de guanyar és del 49%. Si s'escull aquell color obtens 1 unitat per cada unitat apostada.
 
