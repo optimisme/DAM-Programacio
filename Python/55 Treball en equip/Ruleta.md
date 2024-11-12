@@ -2,7 +2,7 @@
 
 *A petició d'en Cachinero*
 
-Una ruleta de casino és una roda que gira i que està dividida en diferents caselles numerades. Cada casella té un color (negre, vermell o verd per a la casella zero). Els jugadors aposten a un número, color o rang de números, i la ruleta es fa girar fins que la bola es para en una casella, decidint així el resultat de l’aposta.
+Una ruleta de casino és una roda que gira i que està dividida en diferents caselles numerades. Cada casella té un color (negre, vermell o verd per a la casella zero). Els jugadors aposten a un número, color parell/senar o columna, i la ruleta es fa girar fins que la bola es para en una casella, decidint així el resultat de l’aposta.
 
 ## Requeriments del projecte
 
