@@ -75,7 +75,7 @@ No hi haurà "pilota", però si una fletxa que indica el número escollit.
 
 Feu servir [aquest exemple](https://optimisme.github.io/roulette/) com a inspiració.
 
-<span style="text-decoration:underline">S'han de seguir les probabilitats de guanyar indicades anteriorment.</span> S'entén que si fós una màquina recreativa, s'hauria de complir la [normativa del BOE](https://www.boe.es/buscar/pdf/1998/BOE-A-1998-23945-consolidado.pdf)
+S'entén que si fós una màquina recreativa, s'hauria de complir la [normativa del BOE](https://www.boe.es/buscar/pdf/1998/BOE-A-1998-23945-consolidado.pdf)
 
 **Probabilitats:**
 
