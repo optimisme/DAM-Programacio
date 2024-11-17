@@ -51,13 +51,13 @@ Després de la llista hi ha d'haver un número amb el crèdit disponible (suma t
 
 Abans de girar la ruleta s'ha de definir l'aposta de cada jugador. Les apostes poden ser:
 
-- A un o més números. Per cada número la possibilitat de guanyar és de un 2,7%. Si s'escull aquell número obtens 35 unitats per cada unitat apostada.
+- A un o més números. Si surt aquell número obtens 35 unitats per cada unitat apostada.
 
-- Aposta a un color *"negre"* o *"vermell"* (no *"verd"*). Per cada color la possibilitat de guanyar és del 49%. Si s'escull aquell color obtens 1 unitat per cada unitat apostada.
+- Aposta a un color *"negre"* o *"vermell"* (no *"verd"*). Si s'escull aquell color obtens 1 unitat per cada unitat apostada.
 
-- Parell o senar. Per cada tipus la possibilitat de guanyar és del 49%. Si s'escull la opció obtens 1 unitat per cada unitat apostada.
+- Parell o senar. Si surt la opció obtens 1 unitat per cada unitat apostada.
 
-- Columna. Per cada columna la possibilitat de guanyar és del 32%. Si s'escull aquella columna obtens 2 unitat per cada unitat apostada.
+- Columna. Si s'escull aquella columna obtens 2 unitat per cada unitat apostada.
 
 Per fer l'aposta s'arrossegua una o més fitxes d'un valor (si el jugador té aquella fitxa disponible), cap a un espai d'aposta de la ruleta (numero, color, parell/senar, columna)
 
@@ -76,6 +76,14 @@ No hi haurà "pilota", però si una fletxa que indica el número escollit.
 Feu servir [aquest exemple](https://optimisme.github.io/roulette/) com a inspiració.
 
 <span style="text-decoration:underline">S'han de seguir les probabilitats de guanyar indicades anteriorment.</span> S'entén que si fós una màquina recreativa, s'hauria de complir la [normativa del BOE](https://www.boe.es/buscar/pdf/1998/BOE-A-1998-23945-consolidado.pdf)
+
+**Probabilitats:**
+
+El número aleatòri que s'escull al girar la ruleta, defineix les probabilitats del joc. La ruleta està pensada perquè la banca sempre guanyi els diners de tots els jugadors:
+
+- Quan s'aposta a un número la possibilitat de guanyar és del 2.7%
+- Quan s'aposta a un color, o a parell/senar la possibilitat de guanyar és del 49%
+- Quan s'aposta a una columna, la possibilitat de guanyar és del 32%
 
 **Resultats de l’aposta:**
 
