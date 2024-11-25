@@ -40,8 +40,8 @@ $mainClass = $args[0]
 $action = $args[1]
 $verbose = $false
 
-# Check for "verbose" paramater -v
-if ($args -contains "-v") {
+# Check for "verbose" paramater -X
+if ($args -contains "-X") {
     $verbose = $true
 }
 if ($verbose) {

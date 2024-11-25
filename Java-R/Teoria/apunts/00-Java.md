@@ -183,7 +183,7 @@ Per fer anar aquest exemple, cal anar amb el terminal i escriure:
 Per veure la sortida detallada:
 ```bash
 # A la carpeta on hi ha './run.sh'
-./run.sh com.exemple000.Main -v
+./run.sh com.exemple000.Main -X
 ```
 
 **Nota:** Els usuaris de Windows crideu a '.\run.ps1' enlloc de './run.sh'

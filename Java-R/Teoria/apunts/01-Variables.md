@@ -23,11 +23,11 @@ El següent exemple assigna el nom d'un mes a la variable 'mes' i després li ca
 
 ```bash
 # Fes anar l'exemple amb
-./run.sh com.exemple001.Main
+./run.sh com.exemple010.Main
 ```
 
 ```java
-package com.exemple001;
+package com.exemple010;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,18 +51,18 @@ Contingut de 'mes': Febrer
 Contingut de 'mes': Març
 ```
 
-### Exercici 001
+### Exercici 010
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici001/Main.java
+src/main/exercici010/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici001.Main
+./run.sh com.exercici010.Main
 ```
 
 - Guardi la paraula **"Dilluns"** en una variable **"nomDia"**
@@ -108,11 +108,11 @@ scanner.close();
 
 ```bash
 # Fes anar l'exemple amb
-./run.sh com.exemple002.Main
+./run.sh com.exemple011.Main
 ```
 
 ```java
-package com.exemple002;
+package com.exemple011;
 
 import java.util.Scanner;
 
@@ -142,11 +142,11 @@ En **Java** però, cal indicar quin tipus d'informació guardarem a les variable
 
 ```bash
 # Fes anar l'exemple amb
-./run.sh com.exemple003.Main
+./run.sh com.exemple012.Main
 ```
 
 ```java
-package com.exemple003;
+package com.exemple012;
 
 public class Main {
     public static void main(String[] args) {
@@ -182,4 +182,113 @@ Char: a
 String: Hola
 Int: 45
 Float: 32.5
+```
+
+## Canvi de tipus
+
+A vegades necessitem canviar el tipus d'una variable, per exemple:
+
+- Quan algú escriu al teclat, rebem un text **"String"**
+- Si el què escriu és un número l'hem de passar a **"int"** o **"float"**
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple013.Main
+```
+
+```java
+package com.exemple013;
+
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        // Iniciar la capacitat de llegir informació del teclat
+        Scanner scanner = new Scanner(System.in);
+
+        // Demanar el nom
+        System.out.print("Escriu el teu nom: ");
+        String nom = scanner.nextLine();
+
+        // Demanar l'edat com un String
+        System.out.print("Escriu la teva edat: ");
+        String edatString = scanner.nextLine();
+
+        // Convertir el String a un enter
+        int edat = Integer.parseInt(edatString);
+
+        // Mostrar el resultat
+        System.out.println("Hola, " + nom + "! Tens " + edat + " anys.");
+
+        // Tancar la lectura del teclat
+        scanner.close();
+    }
+}
+```
+
+### Exercici 011
+
+Modifica el codi de:
+
+```bash
+src/main/exercici011/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici011.Main
+```
+
+- Demani la teva edat
+- Calculi l'edat entrada *7
+
+La sortida ha de ser:
+
+```text
+Escriu la teva edat: 10
+La teva edat en anys de gos són 70 anys.
+```
+
+### Exemples de transformació entre tipus
+
+```bash
+./run.sh com.exemple014.Main
+```
+
+```java
+package com.exemple014;
+
+public class Main {
+
+    public static void main(String[] args) {
+        // Exemples de transformació des d'un String:
+        String textNumero = "123";
+        int numeroInt = Integer.parseInt(textNumero); // String a int
+        float numeroFloat = Float.parseFloat(textNumero); // String a float
+        System.out.println("String a Int: " + numeroInt);
+        System.out.println("String a Float: " + numeroFloat);
+
+        // Exemples de transformació des d'un Int:
+        int numero = 45;
+        float numeroFloat2 = numero; // Int a float (promoció automàtica)
+        String numeroString = Integer.toString(numero); // Int a String
+        System.out.println("Int a Float: " + numeroFloat2);
+        System.out.println("Int a String: " + numeroString);
+
+        // Exemples de transformació des d'un Float:
+        float preu = 32.5f;
+        int preuInt = (int) preu; // Float a Int (càsting explícit, truncament)
+        String preuString = Float.toString(preu); // Float a String
+        System.out.println("Float a Int: " + preuInt);
+        System.out.println("Float a String: " + preuString);
+
+        // Exemples de transformació des d'un Char:
+        char caracter = '7';
+        int caracterInt = Character.getNumericValue(caracter); // Char a Int (si és un dígit)
+        String caracterString = Character.toString(caracter); // Char a String
+        System.out.println("Char a Int: " + caracterInt);
+        System.out.println("Char a String: " + caracterString);
+    }
+}
 ```

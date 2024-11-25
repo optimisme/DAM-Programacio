@@ -36,9 +36,9 @@ mainClass=$1
 action=$2 
 verbose=0
 
-# Check for "verbose" paramater -v
+# Check for "verbose" paramater -X
 for arg in "$@"; do
-    if [[ "$arg" == "-v" ]]; then
+    if [[ "$arg" == "-X" ]]; then
         verbose=1
     fi
 done
