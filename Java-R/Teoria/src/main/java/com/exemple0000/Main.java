@@ -1,5 +1,5 @@
 // Paquet al que pertany aquest codi
-package com.exemple000;
+package com.exemple0000;
 
 // Classe principal del programa
 public class Main {

@@ -23,11 +23,11 @@ El següent exemple assigna el nom d'un mes a la variable 'mes' i després li ca
 
 ```bash
 # Fes anar l'exemple amb
-./run.sh com.exemple010.Main
+./run.sh com.exemple0100.Main
 ```
 
 ```java
-package com.exemple010;
+package com.exemple0100;
 
 public class Main {
     public static void main(String[] args) {
@@ -51,19 +51,21 @@ Contingut de 'mes': Febrer
 Contingut de 'mes': Març
 ```
 
-### Exercici 010
+### Exercici 0100
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici010/Main.java
+src/main/exercici0100/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici010.Main
+./run.sh com.exercici0100.Main
 ```
+
+Faci els següents passos:
 
 - Guardi la paraula **"Dilluns"** en una variable **"nomDia"**
 - Mostri el valor de la variable **"nomDia"** per pantalla
@@ -108,11 +110,11 @@ scanner.close();
 
 ```bash
 # Fes anar l'exemple amb
-./run.sh com.exemple011.Main
+./run.sh com.exemple0101.Main
 ```
 
 ```java
-package com.exemple011;
+package com.exemple0101;
 
 import java.util.Scanner;
 
@@ -142,11 +144,11 @@ En **Java** però, cal indicar quin tipus d'informació guardarem a les variable
 
 ```bash
 # Fes anar l'exemple amb
-./run.sh com.exemple012.Main
+./run.sh com.exemple0102.Main
 ```
 
 ```java
-package com.exemple012;
+package com.exemple0102;
 
 public class Main {
     public static void main(String[] args) {
@@ -193,11 +195,11 @@ A vegades necessitem canviar el tipus d'una variable, per exemple:
 
 ```bash
 # Fes anar l'exemple amb
-./run.sh com.exemple013.Main
+./run.sh com.exemple0103.Main
 ```
 
 ```java
-package com.exemple013;
+package com.exemple0103;
 
 import java.util.Scanner;
 
@@ -205,10 +207,6 @@ public class Main {
     public static void main(String[] args) {
         // Iniciar la capacitat de llegir informació del teclat
         Scanner scanner = new Scanner(System.in);
-
-        // Demanar el nom
-        System.out.print("Escriu el teu nom: ");
-        String nom = scanner.nextLine();
 
         // Demanar l'edat com un String
         System.out.print("Escriu la teva edat: ");
@@ -226,22 +224,21 @@ public class Main {
 }
 ```
 
-### Exercici 011
+### Exercici 0101
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici011/Main.java
+src/main/exercici0101/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici011.Main
+./run.sh com.exercici0101.Main
 ```
 
-- Demani la teva edat
-- Calculi l'edat entrada *7
+Demani la teva edati calculi l'edat entrada *7
 
 La sortida ha de ser:
 
@@ -250,14 +247,66 @@ Escriu la teva edat: 10
 La teva edat en anys de gos són 70 anys.
 ```
 
+### Exercici 0102
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0102/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0102.Main
+```
+
+Demani un número i calculi *el doble*, *el triple*, *la meitat*
+
+La sortida ha de ser:
+
+```text
+Escriu un nombre: 50
+El doble és: 100
+El triple és: 150
+La meitat és: 25.0
+```
+
+### Exercici 0103
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0103/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0103.Main
+```
+
+Demani un país, una ciutat i un número d'habitants.
+
+La sortida ha de ser:
+
+```text
+Escriu el nom d'un país: Espanya
+Escriu el nom d'una ciutat: La Corunya
+Escriu el número d'habitants: 247.376
+"La Corunya" és una ciutat situada a "Espanya" amb 247.376 habitants.
+```
+
+**Nota**: Recorda que dins d'una cadena de text, pots posar el caràcter `"` amb `\"`
+
 ### Exemples de transformació entre tipus
 
 ```bash
-./run.sh com.exemple014.Main
+./run.sh com.exemple0104.Main
 ```
 
 ```java
-package com.exemple014;
+package com.exemple0104;
 
 public class Main {
 
@@ -291,4 +340,40 @@ public class Main {
         System.out.println("Char a String: " + caracterString);
     }
 }
+```
+
+### Exercici 0104
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0104/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0104.Main
+```
+
+Faci els següents passos:
+
+- Demani un float a l'usuari, per exemple: *"45.78f"*.
+- Converteixi el float a "int" anomenat **"valor0"**
+- Converteixi l'enter a "String"
+- Demani un sol caràcter numèric a l'usuari, per exemple: '9'
+- El transformi a tipus "char" anomenat **"caracter"**
+- Transformi el "char" anterior a "int" i l'anomeni **valor1**
+- Sumi **"valor0"** i **"valor1** i mostri el resultat
+
+La sortida ha de ser:
+
+```text
+Escriu un número decimal: 45.78
+Float convertit a Int (valor0): 45
+Int convertit a String: "45"
+Escriu un sol caràcter numèric: 9
+Caràcter llegit: '9'
+Char convertit a Int: 9
+La suma de valor0 i valor1 és: 54
 ```

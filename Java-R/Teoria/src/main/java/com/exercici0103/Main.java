@@ -1,4 +1,4 @@
-package com.exercici000;
+package com.exercici0103;
 
 public class Main {
     public static void main(String[] args) {
