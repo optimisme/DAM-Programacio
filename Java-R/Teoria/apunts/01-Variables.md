@@ -186,7 +186,7 @@ Int: 45
 Float: 32.5
 ```
 
-## Canvi de tipus
+### Canvi de tipus
 
 A vegades necessitem canviar el tipus d'una variable, per exemple:
 

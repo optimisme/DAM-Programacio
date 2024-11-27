@@ -30,84 +30,84 @@ if (numero > 0) {
 }
 ```
 
-### Exercici 0200
+### Exercici 0300
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0200/Main.java
+src/main/exercici0300/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0200.Main
+./run.sh com.exercici0300.Main
 ```
 
 Demani els valors numèrics de 'a' i 'b', i faci l'algorisme del següent diagrama:
 
 <center>
-<img src="./assets/02condicions0.png" style="max-height: 450px;"/>
+<img src="./assets/03condicions0.png" style="max-height: 450px;"/>
 </center>
 
-### Exercici 0201
+### Exercici 0301
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0201/Main.java
+src/main/exercici0301/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0201.Main
+./run.sh com.exercici0301.Main
 ```
 
 Demani el valor numèric de 'n' i faci l'algorisme del següent diagrama:
 
 <center>
-<img src="./assets/02condicions1.png" style="max-height: 450px;"/>
+<img src="./assets/03condicions1.png" style="max-height: 450px;"/>
 </center>
 
-### Exercici 0202
+### Exercici 0302
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0202/Main.java
+src/main/exercici0302/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0202.Main
+./run.sh com.exercici0302.Main
 ```
 
 Demani els valors de 'a', 'b', 'c' i faci l'algorisme del següent diagrama:
 
 <center>
-<img src="./assets/02condicions2.png" style="max-height: 450px;"/>
+<img src="./assets/03condicions2.png" style="max-height: 450px;"/>
 </center>
 
-### Exercici 0203
+### Exercici 0303
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0203/Main.java
+src/main/exercici0303/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0203.Main
+./run.sh com.exercici0303.Main
 ```
 
 Demani el valor numèric de 'n' i faci l'algorisme del següent diagrama:
 
 <center>
-<img src="./assets/02condicions2.png" style="max-height: 450px;"/>
+<img src="./assets/03condicions2.png" style="max-height: 450px;"/>
 </center>
 
 ## Operador ternari
@@ -128,16 +128,16 @@ String resultat = (edat >= 18) ? "Major d'edat" : "Menor d'edat";
 System.out.println(resultat);
 ```
 
-### Exemple 0200
+### Exemple 0300
 
 Fes anar aquest exemple amb:
 
 ```bash
-./run.sh com.exemple0200.Main
+./run.sh com.exemple0300.Main
 ```
 
 ```java
-package com.exemple0200;
+package com.exemple0300;
 
 import java.util.Scanner;
 
@@ -169,18 +169,18 @@ public class Main {
 }
 ```
 
-### Exercici 0204
+### Exercici 0304
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0204/Main.java
+src/main/exercici0304/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0204.Main
+./run.sh com.exercici0304.Main
 ```
 
 Retorni el número més petit fent servir **l'operador ternari**
@@ -221,16 +221,16 @@ switch (expressió) {
 
 **Important**: En **Java** si no es posa **break**, el programa continuarà pel següent **case** com si el valor també coincidís.
 
-### Exemple 0201
+### Exemple 0301
 
 Fes anar aquest exemple amb:
 
 ```bash
-./run.sh com.exemple0201.Main
+./run.sh com.exemple0301.Main
 ```
 
 ```java
-package com.exemple0201;
+package com.exemple0301;
 
 import java.util.Scanner;
 
@@ -273,18 +273,18 @@ public class Main {
 }
 ```
 
-### Exercici 0205
+### Exercici 0305
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0205/Main.java
+src/main/exercici0305/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0205.Main
+./run.sh com.exercici0305.Main
 ```
 
 Demani un mes de l'any i retorni el seu número.
@@ -294,18 +294,18 @@ Escri un mes de l'any: Febrer
 "Febrer" és el mes número 2
 ```
 
-### Exercici 0206
+### Exercici 0306
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0206/Main.java
+src/main/exercici0306/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0206.Main
+./run.sh com.exercici0306.Main
 ```
 
 Demani dos números a l'usuari i una operació matemàtica (suma, resta, multiplicació o divisió).
@@ -340,18 +340,18 @@ Escriu l'operació (+, -, *, /): ^
 Error: Operació no vàlida.
 ```
 
-### Exercici 0207
+### Exercici 0307
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0207/Main.java
+src/main/exercici0307/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0207.Main
+./run.sh com.exercici0307.Main
 ```
 
 Demani a l'usuari la seva edat i la classifica segons:

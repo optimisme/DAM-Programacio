@@ -1,31 +1,12 @@
 package com.exemple0200;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
 
-        Scanner scanner = new Scanner(System.in);
+        float iva = 20;
+        float preu = 200;
+        float preuVenda = preu + (preu * iva / 100);
 
-        // Demanar tres números a l'usuari
-        System.out.print("Escriu el primer número: ");
-        int num1 = scanner.nextInt();
-
-        System.out.print("Escriu el segon número: ");
-        int num2 = scanner.nextInt();
-
-        System.out.print("Escriu el tercer número: ");
-        int num3 = scanner.nextInt();
-
-        // Determinar el més gran amb operadors ternaris
-        int max = (num1 > num2) ? 
-                     ((num1 > num3) ? num1 : num3) : 
-                     ((num2 > num3) ? num2 : num3);
-
-        // Mostrar el resultat
-        System.out.println("El número més gran és: " + max);
-
-        scanner.close();
+        System.out.println("El preu del producte és " + preu + "€, i amb l'IVA es pot comprar per: " + preuVenda);
     }
 }
-
