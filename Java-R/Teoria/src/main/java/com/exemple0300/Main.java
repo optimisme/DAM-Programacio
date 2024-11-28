@@ -1,31 +1,32 @@
 package com.exemple0300;
 
-import java.util.Scanner;
-
 public class Main {
     public static void main(String[] args) {
+        // Exemples de cadenes
+        String cadena1 = "Hola, món!";
+        String cadena2 = "hola, món!";
+        String cadena3 = "Adéu, món!";
+        String prefix = "Hola";
+        String sufix = "món!";
 
-        Scanner scanner = new Scanner(System.in);
+        // equals(String str): Comprova si dues cadenes són exactament iguals
+        System.out.println("cadena1.equals(cadena2): " + cadena1.equals(cadena2)); // False
+        System.out.println("cadena1.equals(\"Hola, món!\"): " + cadena1.equals("Hola, món!")); // True
 
-        // Demanar tres números a l'usuari
-        System.out.print("Escriu el primer número: ");
-        int num1 = scanner.nextInt();
+        // equalsIgnoreCase(String str): Comprova si dues cadenes són iguals ignorant majúscules i minúscules
+        System.out.println("cadena1.equalsIgnoreCase(cadena2): " + cadena1.equalsIgnoreCase(cadena2)); // True
 
-        System.out.print("Escriu el segon número: ");
-        int num2 = scanner.nextInt();
+        // compareTo(String str): Compara lexicogràficament les cadenes
+        System.out.println("cadena1.compareTo(cadena3): " + cadena1.compareTo(cadena3)); // Positiu (cadena1 > cadena3)
+        System.out.println("cadena3.compareTo(cadena1): " + cadena3.compareTo(cadena1)); // Negatiu (cadena3 < cadena1)
+        System.out.println("cadena1.compareTo(\"Hola, món!\"): " + cadena1.compareTo("Hola, món!")); // 0
 
-        System.out.print("Escriu el tercer número: ");
-        int num3 = scanner.nextInt();
+        // startsWith(String prefix): Comprova si comença amb un prefix determinat
+        System.out.println("cadena1.startsWith(prefix): " + cadena1.startsWith(prefix)); // True
+        System.out.println("cadena3.startsWith(prefix): " + cadena3.startsWith(prefix)); // False
 
-        // Determinar el més gran amb operadors ternaris
-        int max = (num1 > num2) ? 
-                     ((num1 > num3) ? num1 : num3) : 
-                     ((num2 > num3) ? num2 : num3);
-
-        // Mostrar el resultat
-        System.out.println("El número més gran és: " + max);
-
-        scanner.close();
+        // endsWith(String suffix): Comprova si acaba amb un sufix determinat
+        System.out.println("cadena1.endsWith(sufix): " + cadena1.endsWith(sufix)); // True
+        System.out.println("cadena3.endsWith(sufix): " + cadena3.endsWith(sufix)); // True
     }
 }
-
