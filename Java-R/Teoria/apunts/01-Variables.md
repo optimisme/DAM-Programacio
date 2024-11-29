@@ -14,10 +14,19 @@
 <img src="./assets/01variables.png" height="128" style="max-height: 128px;"/>
 </center>
 
-Les variables són com **caixes** on podem guardar informació per fer-la servir més endavant. Cada variable té:
+Les variables són espais de memòria on podem guardar informació per fer-la servir més endavant (com una caixa on guardem informació). Cada variable té:
 
 - Un **nom** (etiqueta que la identifica) 
 - Un **valor** (la informació que hi posem a dins)
+
+En **Java** les variables normalment s'escrien amb minúscula amb i la primera lletra de cada paraula en majúscula (nomenclatura **snakeCase**).
+
+```java
+double pi = 3.141592653589793;
+int maxUsers = 100;
+String defaultMessage = "Hola, món!";
+```
+
 
 El següent exemple assigna el nom d'un mes a la variable 'mes' i després li canvia el valor:
 
@@ -79,6 +88,18 @@ Contingut de 'nomDia': Dimarts
 Contingut de 'nomDia': Dimecres
 Contingut de 'nomDia': Dijous
 Contingut de 'nomDia': Divendres
+```
+
+## Constants
+
+A part de les **variables**, les constants són espais de memòria (*caixes*) on es poden guardar valors que no cambiaràn durant l'execució del programa.
+
+En **Java** les constants normalment s'escrien amb majúscula amb les paràules separades per `_` (nomenclatura **UPPER_SNAKE_CASE**) i s'identifiquen com a constants amb la paraula **final**:
+
+```java
+final double PI = 3.141592653589793;
+final int MAX_USERS = 100;
+final String DEFAULT_MESSAGE = "Hola, món!";
 ```
 
 ## Entrada de text

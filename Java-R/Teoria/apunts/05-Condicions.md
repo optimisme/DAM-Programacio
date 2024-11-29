@@ -30,85 +30,97 @@ if (numero > 0) {
 }
 ```
 
-### Exercici 0400
+### Exercici 0500
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0400/Main.java
+src/main/exercici0500/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0400.Main
+./run.sh com.exercici0500.Main
 ```
 
-Demani els valors numèrics de 'a' i 'b', i faci l'algorisme del següent diagrama:
+Demani els valors numèrics de 'a' i 'b', i faci la funció *mesGranQueA5* segons el següent diagrama.
+
+```java
+public static boolean mesGranQueA5(float a, float b)
+```
 
 <center>
-<img src="./assets/03condicions0.png" style="max-height: 450px;"/>
+<img src="./assets/05condicions0.png" style="max-height: 450px;"/>
 </center>
 
-### Exercici 0401
+### Exercici 0501
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0401/Main.java
+src/main/exercici0501/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0401.Main
+./run.sh com.exercici0501.Main
 ```
 
-Demani el valor numèric de 'n' i faci l'algorisme del següent diagrama:
+Demani el valor numèric de 'n', i faci la funció *MultipleOf3* segons el següent diagrama.
+
+```java
+public static boolean MultipleOf3(float n)
+```
 
 <center>
-<img src="./assets/03condicions1.png" style="max-height: 450px;"/>
+<img src="./assets/05condicions1.png" style="max-height: 450px;"/>
 </center>
 
-### Exercici 0402
+### Exercici 0502
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0402/Main.java
+src/main/exercici0502/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0402.Main
+./run.sh com.exercici0502.Main
 ```
 
-Demani els valors de 'a', 'b', 'c' i faci l'algorisme del següent diagrama:
+Demani els valors de 'a', 'b', 'c' , i faci la funció *maxOfThree* segons el següent diagrama.
+
+```java
+public static int maxOfThree(float a, float b, float c)
+```
 
 <center>
-<img src="./assets/03condicions2.png" style="max-height: 450px;"/>
+<img src="./assets/05condicions2.png" style="max-height: 450px;"/>
 </center>
 
-### Exercici 0403
+### Exercici 0503
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0403/Main.java
+src/main/exercici0503/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0403.Main
+./run.sh com.exercici0503.Main
 ```
 
-Demani el valor numèric de 'n' i faci l'algorisme del següent diagrama:
+Demani el valor el nom de l'usuari i retorni si comença per vocal o per consonant.
 
-<center>
-<img src="./assets/03condicions2.png" style="max-height: 450px;"/>
-</center>
+```java
+public static boolean startsWithVowel(String word)
+```
 
 ## Operador ternari
 
@@ -128,21 +140,21 @@ String resultat = (edat >= 18) ? "Major d'edat" : "Menor d'edat";
 System.out.println(resultat);
 ```
 
-### Exemple 0400
+### Exemple 0500
 
 Fes anar aquest exemple amb:
 
 ```bash
-./run.sh com.exemple0400.Main
+./run.sh com.exemple0500.Main
 ```
 
 ```java
-package com.exemple0400;
+package com.exemple0500;
 
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+public static void main(String[] args) {
 
         Scanner scanner = new Scanner(System.in);
 
@@ -169,21 +181,27 @@ public class Main {
 }
 ```
 
-### Exercici 0404
+### Exercici 0504
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0404/Main.java
+src/main/exercici0504/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0404.Main
+./run.sh com.exercici0504.Main
 ```
 
-Retorni el número més petit fent servir **l'operador ternari**
+
+
+Retorni el número més petit fent servir **l'operador ternari** amb una funció que es digui **minOfThree**
+
+```java
+public static int minOfThree(float a, float b, float c)
+```
 
 ```text
 Escriu el primer número: 4
@@ -221,21 +239,21 @@ switch (expressió) {
 
 **Important**: En **Java** si no es posa **break**, el programa continuarà pel següent **case** com si el valor també coincidís.
 
-### Exemple 0401
+### Exemple 0501
 
 Fes anar aquest exemple amb:
 
 ```bash
-./run.sh com.exemple0401.Main
+./run.sh com.exemple0501.Main
 ```
 
 ```java
-package com.exemple0401;
+package com.exemple0501;
 
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
         // Demanar el número del dia a l'usuari
@@ -273,42 +291,50 @@ public class Main {
 }
 ```
 
-### Exercici 0405
+### Exercici 0505
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0405/Main.java
+src/main/exercici0505/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0405.Main
+./run.sh com.exercici0505.Main
 ```
 
-Demani un mes de l'any i retorni el seu número.
+Demani un mes de l'any i retorni el seu número amb la funció *"nomDelMes"*
+
+```java
+public static String nomDelMes(int valor)
+```
 
 ```text
 Escri un mes de l'any: Febrer
 "Febrer" és el mes número 2
 ```
 
-### Exercici 0406
+### Exercici 0506
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0406/Main.java
+src/main/exercici0506/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0406.Main
+./run.sh com.exercici0506.Main
 ```
 
-Demani dos números a l'usuari i una operació matemàtica (suma, resta, multiplicació o divisió).
+Demani dos números a l'usuari i una operació matemàtica (suma, resta, multiplicació o divisió) a través de la funció **"calculadora"** que rep com a paràmetres la operació i dos valors:
+
+```java
+public static float calculadora(char operacio, float a, float b)
+```
 
 - El programa ha d'utilitzar un switch per executar l'operació i mostrar el resultat.
 
@@ -340,18 +366,18 @@ Escriu l'operació (+, -, *, /): ^
 Error: Operació no vàlida.
 ```
 
-### Exercici 0407
+### Exercici 0507
 
 Modifica el codi de:
 
 ```bash
-src/main/exercici0407/Main.java
+src/main/exercici0507/Main.java
 ```
 
 Per fer que quan s'executa el programa amb:
 
 ```bash
-./run.sh com.exercici0407.Main
+./run.sh com.exercici0507.Main
 ```
 
 Demani a l'usuari la seva edat i la classifica segons:

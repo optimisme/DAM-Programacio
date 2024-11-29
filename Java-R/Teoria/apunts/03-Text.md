@@ -27,6 +27,22 @@ String salutacio = "Hola, ".concat(nom); // Amb concat
 System.out.println(salutacio);
 ```
 
+### Exercici 0300
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0300/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0300.Main
+```
+
+Demani el nom, primer cognom i segon cognom d'una persona i escrigui: *"Hola, Nom PrimerCognom SegonCognom"*
+
 ## Comparació
 
 Hi ha diversos mètodes per comparar cadenes de text:
@@ -77,6 +93,59 @@ public class Main {
 }
 ```
 
+### Exercici 0301
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0301/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0301.Main
+```
+
+Demani el el nom de dues persones:
+
+- Escrigui *"true"* o "false"* segons si s'ha escrit el mateix nom.
+- Escrigui *"true"* o "false"* segons si s'ha escrit el mateix nom sense tenir en compte majúscules.
+
+Exemple de sortida:
+
+```text
+Els noms "emma" i "Emma" són: false, true
+```
+
+### Exercici 0302
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0302/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0302.Main
+```
+
+Demani dues paraules i:
+
+- Escrigui *"true"* o "false"* segons si la 1a paraula comença amb la 2a paraula
+- Escrigui *"true"* o "false"* segons si la 1a paraula acaba amb la 2a paraula
+
+Exemple de sortida:
+
+```text
+Les paraules "cami" i "mi": false, true
+Les paraules "balena" i "ba": true, false
+Les paraules "nana" i "na" true, true
+Les paraules "cercar" i "bo": false, false
+```
+
 ## Longitud
 
 Per obtenir la quantitat de caràcters (llargada) d'una cadena es fa servir **.length()**:
@@ -95,11 +164,11 @@ Per obtenir subcadenes de text es fa servir **substring**:
 
 ```bash
 # Fes anar l'exemple amb
-./run.sh com.exemple0301.Main
+./run.sh com.exemple0303.Main
 ```
 
 ```java
-package com.exemple0301;
+package com.exemple0303;
 
 public class Main {
     public static void main(String[] args) {
@@ -150,6 +219,34 @@ public class Main {
 }
 ```
 
+### Exercici 0303
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0303/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0303.Main
+```
+
+A partir de la següent frase: *"Cada matí fa sol però a les tardes plou"*:
+
+- Busqui la posició de la paraula "matí"
+- Busqui la posició de la paraula "tardes"
+- Escrigui la subcadena entre "matí" i "tardes" inclòses
+
+Exemple de sortida:
+
+```text
+Posició de "matí": 5
+Posició de "tardes": 27
+Subcadena entre "matí" i "tardes": "matí fa sol però a les tardes"
+```
+
 ## Manipulació de textos
 
 Algunes funcions retornen el valor d'una cadena de text, però manipulada:
@@ -193,12 +290,64 @@ public class Main {
 }
 ```
 
+### Exercici 0304
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0304/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0304.Main
+```
+
+Demani una paraula a l'usuari i:
+
+- L'escriqui en majúscules:
+- L'escrigui en minúscules
+
+Exemple de sortida:
+
+```text
+Escriu una paraula: Hola
+HOLA
+hola
+```
+
+### Exercici 0305
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0305/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0305.Main
+```
+
+Demani dues paraules i una frase a l'usuari i canvii totes les coincidències de la primera paraula, per la segona.
+
+Exemple de sortida:
+
+```text
+Escriu la paraula a canviar: món
+Escriu la nova paraula: poble
+Escriu la frase: El món està canviant, però queda molt per conèixer sobre el món on venim.
+Resultat: El poble està canviant, però queda molt per conèixer sobre el poble on venim.
+```
+
 ## Mostrar textos
 
 **Java** té diverses maneres de mostrar textos per pantalla, la més habitual és amb un system.out:
 
 ```java
-System.out.println("Hola, Caracola");
+System.out.println("Hola, caracola");
 ```
 
 Però també permet escriure textos en múltiples linies a través de **`"""`**:
@@ -241,7 +390,7 @@ public class Main {
 }
 ```
 
-**Nota**: no hi ha manera de posar directament booleans.
+**Nota**: no hi ha manera d'escriure directament booleans.
 
 ## Alinear textos
 
@@ -278,4 +427,56 @@ La sortida és:
 0123456789
     Hola|
 Hola    |
+```
+
+### Exercici 0306
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0306/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0306.Main
+```
+
+Fes un programa que demani tres paraules, i les mostri alineades a la dreta, centre i esquerra amb un espaiat de 10 espais per cada columna, i separa les columnes amb '|'.
+
+Exemple de sortida:
+
+```text
+Escriu la primera paraula: cotxe
+Escriu la segona paraula: moto
+Escriu la tercera paraula: kart
+0123456789|0123456789|0123456789
+     cotxe|   moto   |kart
+```
+
+### Exercici 0307
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0307/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0307.Main
+```
+
+Fes un programa que demani tres paraules, i les mostri alineades a la esquerra, dreta i dreata amb un espaiat de 8 espais per cada columna, i separa les columnes amb '|'.
+
+Exemple de sortida:
+
+```text
+Escriu la primera paraula: cotxe
+Escriu la segona paraula: moto
+Escriu la tercera paraula: kart
+01234567|01234567|01234567
+cotxe   |    moto|    kart
 ```
