@@ -331,4 +331,4 @@ Per fer que quan s'executa el programa amb:
 ./run.sh com.exercici0209.Main
 ```
 
-Demana a l'usuari un número i comprova si no és positiu, és a dir no és negatiu ni tampoc 0. La sortida és 'true' o 'false'
+Demana a l'usuari un número i comprova si no és positiu, és a dir és negatiu o 0. La sortida és 'true' o 'false'
