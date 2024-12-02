@@ -17,6 +17,9 @@ function Get-LatestVersion {
     }
 }
 
+# Set console output to UTF-8
+[Console]::OutputEncoding = [System.Text.Encoding]::UTF8
+
 $fxBasePath = Get-LatestVersion "javafx-base"
 $fxControlsPath = Get-LatestVersion "javafx-controls"
 $fxFxmlPath = Get-LatestVersion "javafx-fxml"
