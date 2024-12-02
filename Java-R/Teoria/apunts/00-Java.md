@@ -117,10 +117,10 @@ Els projectes de l'assignatura tenen dos scripts:
 
 ```bash
 # A Linux i macOS
-run.sh com.exemple000.Main 
+run.sh com.exemple0000.Main 
 
 # A Windows
-run.ps1 com.exemple000.Main 
+run.ps1 com.exemple0000.Main 
 ```
 
 Per **'netejar'** i **'compilar'** el projecte abans de compilar-lo:
@@ -148,13 +148,13 @@ En JAVA tots els programes tenen un punt d'entrada que està a:
 
 En aquest cas, el nom de la classe podría ser diferent a 'Main' però el nom del a funció no podría ser diferent.
 
-### Exemple00
+### Exemple0000
 
 Aquest exemple, escriu 'Hello World' per la consola.
 
 ```java
 // Paquet al que pertany aquest codi
-package com.exemple000;
+package com.exemple0000;
 
 // Classe principal del programa
 public class Main {
@@ -177,13 +177,13 @@ Per fer anar aquest exemple, cal anar amb el terminal i escriure:
 
 ```bash
 # A la carpeta on hi ha './run.sh'
-./run.sh com.exemple000.Main
+./run.sh com.exemple0000.Main
 ```
 
 Per veure la sortida detallada:
 ```bash
 # A la carpeta on hi ha './run.sh'
-./run.sh com.exemple000.Main -X
+./run.sh com.exemple0000.Main -X
 ```
 
 **Nota:** Els usuaris de Windows crideu a '.\run.ps1' enlloc de './run.sh'

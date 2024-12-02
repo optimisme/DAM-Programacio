@@ -28,7 +28,9 @@ public class Main {
         char caracter = '7';
         int caracterInt = Character.getNumericValue(caracter); // Char a Int (si és un dígit)
         String caracterString = Character.toString(caracter); // Char a String
+        char cadenaChar = caracterString.charAt(0); // String a char
         System.out.println("Char a Int: " + caracterInt);
         System.out.println("Char a String: " + caracterString);
+        System.out.println("String a Char: " + cadenaChar);
     }
 }
