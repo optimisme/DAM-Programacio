@@ -34,9 +34,22 @@ Aquest càlcul es fa així: imc = pes / (altura ^ 2)
 Exemple de sortida:
 
 ```text
-Escriu el pes: 80
-Escriu l'alçada: 180
-imc = 
+Escriu el pes (kg): 80
+Escriu l'alçada (cm): 180
+imc = 24,69
+```
+
+L'entrada ha d'acceptar números decimals amb `.`i també `,`. Però ha d'operar amb format 'localeUS' dels EUA. Per fer-ho, inicia el **"locale"** després de l'scanner:
+
+```java
+Scanner scanner = new Scanner(System.in);
+Locale localeUS = Locale.US;
+```
+
+Indica el **"locale"** que ha de fer servir al escriure per consola:
+
+```java
+System.out.printf(localeUS, "imc = %.2f%n", imc);
 ```
 
 Per executar i testejar el programa:
