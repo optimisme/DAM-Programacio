@@ -1,0 +1,89 @@
+# Exercici 0000
+
+Fes un programa que demani dos números (fent servir inputs) i calculi la resta entre ells.
+
+Com a sortida ha de mostrar: "El resultat de calcular X - Y és Z", on:
+
+X és el primer valor escrit
+Y és el segon valor escrit
+Z és el resultat de restar-los
+
+Exemple de sortida:
+
+```text
+Escriu el primer número: -10
+Escriu el segon número: 2
+El resultat de calcular -10 - 2 és -12
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0000.java
+# A la carpeta "Deures00" executar
+./run.sh com.exercicis.Exercici0000
+./runTest.sh com.exercicis.TestExercici0000
+```
+
+# Exercici 0001
+
+Fes un programa que a partir de demanar el pes i l'altura, calculi l'índex de massa corporal IMC
+
+Aquest càlcul es fa així: imc = pes / (altura ^ 2)
+
+Exemple de sortida:
+
+```text
+Escriu el pes: 80
+Escriu l'alçada: 180
+imc = 
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0001.java
+# A la carpeta "Deures00" executar
+./run.sh com.exercicis.Exercici0001
+./runTest.sh com.exercicis.TestExercici0001
+```
+
+# Exercici 0002
+
+Fes un programa que converteixi un valor en Euros cap a Dollars, per fer-ho ha de demanar:
+
+El valor en Euros que es vol convertir
+La tasa de conversió que ha d'aplicar
+Ha de mostrar la quantitat resultant com a: "El valor de X€ són Y$"
+
+La operació és senzilla, simplement és multiplicar els euros pel valor de la tasa de conversió
+
+Exemple de sortida:
+
+```text
+Escriu el valor en Euros: 70.2
+Escriu la tasa de conversió (ex: 1.25): 1.42
+El valor de 70.20€ són 99.68$
+```
+
+L'entrada ha d'acceptar números decimals amb `.`i també `,`. Però ha d'operar amb format 'localeUS' dels EUA. Per fer-ho, inicia el **"locale"** després de l'scanner:
+
+```java
+Scanner scanner = new Scanner(System.in);
+Locale localeUS = Locale.US;
+```
+
+Indica el **"locale"** que ha de fer servir al escriure per consola:
+
+```java
+System.out.printf(localeUS, "El valor de %.2f€ són %.2f$%n", euros, dollars);
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0002.java
+# A la carpeta "Deures00" executar
+./run.sh com.exercicis.Exercici0002
+./runTest.sh com.exercicis.TestExercici0002
+```
