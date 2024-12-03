@@ -443,16 +443,15 @@ Per fer que quan s'executa el programa amb:
 ./run.sh com.exercici0306.Main
 ```
 
-Fes un programa que demani tres paraules, i les mostri alineades a la dreta, centre i esquerra amb un espaiat de 10 espais per cada columna, i separa les columnes amb '|'.
+Fes un programa que demani dues paraules, i les mostri alineades a la dreta i esquerra amb un espaiat de 10 espais per cada columna, i separa les columnes amb '|'.
 
 Exemple de sortida:
 
 ```text
 Escriu la primera paraula: cotxe
-Escriu la segona paraula: moto
 Escriu la tercera paraula: kart
-0123456789|0123456789|0123456789
-     cotxe|   moto   |kart
+0123456789|0123456789
+     cotxe|kart
 ```
 
 ### Exercici 0307
