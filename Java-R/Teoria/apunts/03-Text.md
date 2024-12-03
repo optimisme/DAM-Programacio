@@ -480,3 +480,23 @@ Escriu la tercera paraula: kart
 01234567|01234567|01234567
 cotxe   |    moto|    kart
 ```
+
+# Localització
+
+Cada país/cultura té la seva pròpia manera d'escriure els números decimals i les monedes. Per exemple:
+
+- Als EUA esriuen els decimals amb `.`: 2.25$ i 5.21€
+- A alguns països d'Europa amb `,`: 2,25$ i 5.21€
+
+Per simplificar l'escriptura farem servir el format americà, i per activar-lo:
+
+```java
+Scanner scanner = new Scanner(System.in);
+Locale localeUS = Locale.US;
+```
+
+Aleshores les sortides dels test amb números decimals, hauràn de ser amb **"System.out.printf"** enlloc de **"System.out.println"** per poder definir el locale:
+
+```java
+System.out.printf(localeUS, "El valor de %.2f€ són %.2f$%n", euros, dollars);
+```
