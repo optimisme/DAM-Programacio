@@ -474,6 +474,12 @@ Aleshores les sortides dels test amb números decimals, hauràn de ser amb **"Sy
 System.out.printf(localeUS, "El valor de %.2f€ són %.2f$%n", euros, dollars);
 ```
 
+Altres locales s'obtenen amb: 
+
+```java
+new Locale("es", "ES")
+```
+
 ### Exercici 0307
 
 Modifica el codi de:
@@ -499,6 +505,6 @@ Fes servir 10 decimals:
 Exemple de sortida:
 
 ```text
-PI amb Locale.US: 3.1415926536
-PI amb Locale.ES: 3,1415926536
+PI amb LocaleUS: 3.1415926536
+PI amb LocaleES: 3,1415926536
 ```
