@@ -477,7 +477,7 @@ System.out.printf(localeUS, "El valor de %.2f€ són %.2f$%n", euros, dollars);
 Altres locales s'obtenen amb: 
 
 ```java
-new Locale("es", "ES")
+Locale localeES = new Locale("es", "ES")
 ```
 
 ### Exercici 0307
