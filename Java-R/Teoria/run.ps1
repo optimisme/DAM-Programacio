@@ -33,7 +33,7 @@ if (-not $fxPath) {
 }
 
 # Opcions comunes per a MAVEN_OPTS
-$env:MAVEN_OPTS = "--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --module-path $fxPath --add-modules javafx.controls,javafx.fxml,javafx.graphics"
+$env:MAVEN_OPTS = "--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED -Dfile.encoding=UTF8 --module-path $fxPath --add-modules javafx.controls,javafx.fxml,javafx.graphics"
 
 # Resta de l'script
 

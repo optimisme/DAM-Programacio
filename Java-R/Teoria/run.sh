@@ -24,7 +24,7 @@ if [[ -z "$FX_PATH" ]]; then
 fi
 
 # Opcions comunes per a MAVEN_OPTS
-export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED --module-path $FX_PATH --add-modules javafx.controls,javafx.fxml,javafx.graphics"
+export MAVEN_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED --add-opens java.base/java.nio=ALL-UNNAMED --add-opens java.base/java.util=ALL-UNNAMED -Dfile.encoding=UTF8 --module-path $FX_PATH --add-modules javafx.controls,javafx.fxml,javafx.graphics"
 
 # Opcions específiques per a Darwin
 if [[ "$OSTYPE" == "darwin"* ]]; then
