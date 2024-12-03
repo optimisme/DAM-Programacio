@@ -87,3 +87,57 @@ Per executar i testejar el programa:
 ./run.sh com.exercicis.Exercici0002
 ./runTest.sh com.exercicis.TestExercici0002
 ```
+
+# Exercici 0003
+
+Fes un programa que calculi el preu final d'un producte, a partir de:
+
+- El preu base
+- El percentatge de l'IVA
+- El percentatge del descompte aplicat
+
+Ha de fer el càlcul a la funció:
+
+```java
+public static double calcularPreuFinal(double preuBase, double iva, double descompte)
+````
+
+I el càlcul es fa així:
+
+```text
+double preuAmbIva = preuBase + (preuBase * iva / 100);
+double preuFinal = preuAmbIva - (preuAmbIva * descompte / 100);
+```
+
+Exemple de sortida:
+
+```text
+Introdueix el preu base: 20
+Introdueix l'IVA (%): 21
+Introdueix el descompte (%): 5
+El preu final és: 22.99
+```
+
+L'entrada ha d'acceptar números decimals amb `.`i també `,`. Però ha d'operar amb format 'localeUS' dels EUA. Per fer-ho, inicia el **"locale"** després de l'scanner:
+
+```java
+Scanner scanner = new Scanner(System.in);
+Locale localeUS = Locale.US;
+```
+
+Indica el **"locale"** que ha de fer servir al escriure per consola:
+
+```java
+System.out.printf(localeUS, "El preu final és: %.2f\n", preuFinal);
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0003.java
+# A la carpeta "Deures00" executar
+# Quan s'executa amb "#testCalcularPreuFinal" només es testeja aquesta funció
+./run.sh com.exercicis.Exercici0003
+./runTest.sh com.exercicis.TestExercici0003#testCalcularPreuFinal
+./runTest.sh com.exercicis.TestExercici0003
+```

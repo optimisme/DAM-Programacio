@@ -1,16 +1,16 @@
-package com.exercici0000a;
+package com.exercicis;
 
-import com.testStringUtils.*;
+import com.testStringUtils.TestStringUtils;
 
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
-import com.exercici0000a.Main;
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 import java.util.Locale;
 
-class TestMain {
+class TestExercici0003 {
 
     @Test
     public void testMainFunction() throws Exception {
@@ -21,7 +21,7 @@ class TestMain {
             String text = SystemLambda.tapSystemOut(() -> 
                 SystemLambda.withTextFromSystemIn("100\n21\n15\n").execute(() -> {
                     String[] args = {}; 
-                    Main.main(args);
+                    Exercici0003.main(args);
                 })
             );
     
@@ -52,7 +52,7 @@ class TestMain {
             double descompte = 15.0;
             double impostos = 21.0;
 
-            double resultatObtingut = Main.calcularPreuFinal(preuBase, descompte, impostos);
+            double resultatObtingut = Exercici0003.calcularPreuFinal(preuBase, descompte, impostos);
             double resultatEsperat = 90.85;
 
             String resultatObtingutText = String.format(Locale.US, "%.2f", resultatObtingut);
