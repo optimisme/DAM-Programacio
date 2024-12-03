@@ -69,7 +69,7 @@ Per fer que quan s'executa el programa amb:
 ./run.sh com.exercici0400.Main
 ```
 
-Demani dues paraules a l'usuari i cridi a la funció **concatenaParaules** que retorna la seva concatenació.
+Demani dues paraules a l'usuari i cridi a la funció **concatenaParaules** que retorna la seva concatenació amb un espai al mig.
 
 ```java
 public static String concatenaParaules(String a, String b)
