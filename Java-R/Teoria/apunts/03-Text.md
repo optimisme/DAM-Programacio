@@ -454,32 +454,6 @@ Escriu la tercera paraula: kart
      cotxe|kart
 ```
 
-### Exercici 0307
-
-Modifica el codi de:
-
-```bash
-src/main/exercici0307/Main.java
-```
-
-Per fer que quan s'executa el programa amb:
-
-```bash
-./run.sh com.exercici0307.Main
-```
-
-Fes un programa que demani tres paraules, i les mostri alineades a la esquerra, dreta i dreata amb un espaiat de 8 espais per cada columna, i separa les columnes amb '|'.
-
-Exemple de sortida:
-
-```text
-Escriu la primera paraula: cotxe
-Escriu la segona paraula: moto
-Escriu la tercera paraula: kart
-01234567|01234567|01234567
-cotxe   |    moto|    kart
-```
-
 # Localització
 
 Cada país/cultura té la seva pròpia manera d'escriure els números decimals i les monedes. Per exemple:
@@ -498,4 +472,33 @@ Aleshores les sortides dels test amb números decimals, hauràn de ser amb **"Sy
 
 ```java
 System.out.printf(localeUS, "El valor de %.2f€ són %.2f$%n", euros, dollars);
+```
+
+### Exercici 0307
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0307/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0307.Main
+```
+
+Fes un programa que mostri el número PI amb locale US i locale ES.
+
+Fes servir 10 decimals:
+
+```java
+%.10f
+```
+
+Exemple de sortida:
+
+```text
+PI amb Locale.US: 3.1415926536
+PI amb Locale.ES: 3,1415926536
 ```
