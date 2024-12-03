@@ -541,3 +541,26 @@ public class Main {
 }
 ```
 
+### Exercici 0609
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0609/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0609.Main
+```
+
+Fes que a partir d'una cadena de text escrita per l'usuari, canvii els espais que separen les paraules per guions `-`
+
+Fes-ho amb les funcions **split** i **join**
+
+Exemple de sortida:
+```text
+Escriu una frase: Hola què tal
+Resultat: Hola-què-tal
+```
