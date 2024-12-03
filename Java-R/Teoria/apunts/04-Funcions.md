@@ -211,7 +211,7 @@ La formúla és: *"ample * alt"*
 
 Exemple de sortida:
 ```text
-Amplada: 5.0 unitats
-Alçada: 3.0 unitats
+Amplada: 5.0
+Alçada: 3.0
 Àrea del rectangle: 15.0 unitats quadrades
 ```
