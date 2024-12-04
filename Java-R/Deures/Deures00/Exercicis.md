@@ -20,8 +20,11 @@ Per executar i testejar el programa:
 
 ```bash
 # Codi: src/main/java/com/exercicis/Exercici0000.java
-# A la carpeta "Deures00" executar
+
+# A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0000
+
+# A la carpeta "Deures00" executar el test
 ./runTest.sh com.exercicis.TestExercici0000
 ```
 
@@ -56,8 +59,11 @@ Per executar i testejar el programa:
 
 ```bash
 # Codi: src/main/java/com/exercicis/Exercici0001.java
-# A la carpeta "Deures00" executar
+
+# A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0001
+
+# A la carpeta "Deures00" executar el test
 ./runTest.sh com.exercicis.TestExercici0001
 ```
 
@@ -96,8 +102,11 @@ Per executar i testejar el programa:
 
 ```bash
 # Codi: src/main/java/com/exercicis/Exercici0002.java
-# A la carpeta "Deures00" executar
+
+# A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0002
+
+# A la carpeta "Deures00" executar el test
 ./runTest.sh com.exercicis.TestExercici0002
 ```
 
@@ -148,11 +157,15 @@ Per executar i testejar el programa:
 
 ```bash
 # Codi: src/main/java/com/exercicis/Exercici0003.java
-# A la carpeta "Deures00" executar
-# Quan s'executa amb "#testCalcularPreuFinal" només es testeja aquesta funció
+
+# A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0003
-./runTest.sh com.exercicis.TestExercici0003#testCalcularPreuFinal
+
+# A la carpeta "Deures00" executar el test
 ./runTest.sh com.exercicis.TestExercici0003
+
+# Testejar només "#testCalcularPreuFinal"
+./runTest.sh "com.exercicis.TestExercici0003#testCalcularPreuFinal"
 ```
 
 # Exercici 0004
@@ -186,15 +199,20 @@ public static String validaContrasenya(String contrasenya)
 
 ```bash
 # Codi: src/main/java/com/exercicis/Exercici0004.java
-# A la carpeta "Deures00" executar
+
+# A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0004
+
+# A la carpeta "Deures00" executar el test
 ./runTest.sh com.exercicis.TestExercici0004
-./runTest.sh com.exercicis.TestExercici0004#testContaMajuscules
-./runTest.sh com.exercicis.TestExercici0004#testContaMinuscules
-./runTest.sh com.exercicis.TestExercici0004#testValidaContrasenya
-./runTest.sh com.exercicis.TestExercici0004#testMainFunctionValidPwd
-./runTest.sh com.exercicis.TestExercici0004#testMainFunctionInvalidPwd
-./runTest.sh com.exercicis.TestExercici0004#testMainFunctionEdgeCase
+
+# Testos individuals
+./runTest.sh "com.exercicis.TestExercici0004#testContaMajuscules"
+./runTest.sh "com.exercicis.TestExercici0004#testContaMinuscules"
+./runTest.sh "com.exercicis.TestExercici0004#testValidaContrasenya"
+./runTest.sh "com.exercicis.TestExercici0004#testMainFunctionValidPwd"
+./runTest.sh "com.exercicis.TestExercici0004#testMainFunctionInvalidPwd"
+./runTest.sh "com.exercicis.TestExercici0004#testMainFunctionEdgeCase"
 ```
 
 Exemples:

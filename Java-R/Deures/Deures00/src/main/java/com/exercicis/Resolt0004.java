@@ -2,7 +2,7 @@ package com.exercicis;
 
 import java.util.Scanner;
 
-public class ExerciciResolt0004 {
+public class Resolt0004 {
 
     public static int contaMajuscules(String contrasenya) {
         int count = 0;

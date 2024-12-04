@@ -3,7 +3,7 @@ package com.exercicis;
 import java.util.Locale;
 import java.util.Scanner;
 
-public class ExerciciResolt0003 {
+public class Resolt0003 {
     
     public static double calcularPreuFinal(double preuBase, double iva, double descompte) {
         double preuAmbIva = preuBase + (preuBase * iva / 100);
