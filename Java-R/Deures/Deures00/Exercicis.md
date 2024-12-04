@@ -170,7 +170,7 @@ Per executar i testejar el programa:
 
 # Exercici 0004
 
-Demana a l'usuari que escrigui una contrasenya.
+Fes un programa que demana a l'usuari que escrigui una contrasenya.
 
 Crea la funció 'validaContrasenya' que apartir d'un text de contrasenya dirà que és vàlida si:
 
@@ -228,3 +228,7 @@ La contrasenya 'Pass12': La contrasenya NO és vàlida
 Escriu una contrasenya: ValidPass123
 La contrasenya 'ValidPass123': La contrasenya és vàlida
 ```
+
+# Exercici 0005
+
+Fes un programa que 
