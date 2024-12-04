@@ -197,6 +197,8 @@ public static int contaMinuscules(String contrasenya)
 public static String validaContrasenya(String contrasenya)
 ```
 
+Per executar i testejar el programa:
+
 ```bash
 # Codi: src/main/java/com/exercicis/Exercici0004.java
 
@@ -231,4 +233,48 @@ La contrasenya 'ValidPass123': La contrasenya és vàlida
 
 # Exercici 0005
 
-Fes un programa que 
+Fes un programa que validi si una cadena de text és un plaíndrom. Un palíndrom és un text que es llegeix igual del dret que del revés, sense tenir en compte els caràcters especials (ni accents).
+
+El programa ha de cridar la funció **"isPalindrom"** amb els textos de validació, i des del **main** mostrar el text amb *(Si)* o *(No)* segons el resultat.
+
+Necessitaràs:
+
+```java
+// Retorna 'true' si és palíndrom
+public static boolean isPalindrom(String text)
+
+// Retorna el mateix text sense espais ni caràcters especials
+public static String normalize(String text)
+```
+
+Comprova-ho amb els següents exemples:
+
+```text
+Anul·la la lluna (Si)
+Atrapa la lluna (No)
+Atrapa'l o l'aparta (Si)
+Aparta'l o atrapa'l (No)
+No sap pas on (Si)
+On sap pas qui (No)
+Tramaran anar a Mart (Si)
+A Mart trobaràn art (No)
+Un pop nu (Si)
+Nu pop un (Si)
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0005.java
+
+# A la carpeta "Deures00" executar el programa
+./run.sh com.exercicis.Exercici0005
+
+# A la carpeta "Deures00" executar el test
+./runTest.sh com.exercicis.TestExercici0005
+
+# Testos individuals
+./runTest.sh "com.exercicis.TestExercici0005#testIsPalindrom"
+./runTest.sh "com.exercicis.TestExercici0005#testNormalize"
+./runTest.sh "com.exercicis.TestExercici0005#testMainOutput"
+```
