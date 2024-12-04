@@ -1,7 +1,7 @@
 package com.exercicis;
 
 
-public class Exercici0005 {
+public class Resolt0005 {
 
     public static boolean isPalindrom(String text) {
         // Normalitzar text
