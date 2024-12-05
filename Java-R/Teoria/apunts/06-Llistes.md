@@ -248,16 +248,22 @@ HashMap<String, Integer> puntuacions = new HashMap<>(Map.of(
 
 **Obtenir la llista de claus**
 ```java
-// Obtenir totes les claus
+// Obtenir totes les claus (cal adaptar el tipus String si és diferent)
 Set<String> claus = puntuacions.keySet();
+ArrayList<String> llistaDeClaus = new ArrayList<>(claus);
 
-// Mostrar les claus
-System.out.println("Les claus són: " + claus);
+// Mostrar l'ArrayList de claus
+System.out.println("ArrayList de claus: " + llistaDeClaus);
 ```
 
 **Obtenir tots els valors**
 ```java
+// Obtenir els valors del HashMap (cal adaptar el tipus Integer si és diferent)
 Collection<Integer> valors = puntuacions.values();
+ArrayList<Integer> llistaDeValors = new ArrayList<>(valors);
+
+// Mostrar l'ArrayList de valors
+System.out.println("ArrayList de valors: " + llistaDeValors);
 ```
 
 **Obtenir un valor a partir d'una clau**
