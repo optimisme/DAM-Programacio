@@ -38,6 +38,5 @@ public class Exercici0010 {
         /*
             TODO: Resol aquí l'exercici
         */
-
     }
 }

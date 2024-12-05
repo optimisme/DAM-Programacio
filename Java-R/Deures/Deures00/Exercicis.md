@@ -535,7 +535,7 @@ Llista imparells dividits per 2: [24.5, 19.5, 5.5, 39.5, 16.5, 34.5, 29.5]
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0009.java
+# Codi: src/main/java/com/exercicis/Exercici0010.java
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0010
@@ -590,7 +590,7 @@ Noms compostos: [Princess Peach, Iggy Koopa, Donkey Kong]
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0009.java
+# Codi: src/main/java/com/exercicis/Exercici0011.java
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0011
@@ -697,7 +697,7 @@ Wonders in Turkey:
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0009.java
+# Codi: src/main/java/com/exercicis/Exercici0012.java
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0012
