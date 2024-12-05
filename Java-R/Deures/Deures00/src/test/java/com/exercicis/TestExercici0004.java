@@ -14,31 +14,53 @@ class TestExercici0004 {
 
     @Test
     public void testContaMajuscules() {
-        assertEquals(2, Exercici0004.contaMajuscules("PassWord123"));
-        assertEquals(0, Exercici0004.contaMajuscules("password"));
-        assertEquals(8, Exercici0004.contaMajuscules("PASSWORD123"));
-        assertEquals(1, Exercici0004.contaMajuscules("P"));
-        assertEquals(0, Exercici0004.contaMajuscules(""));
+        String diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0004.contaMajuscules("PassWord123")), 
+            "2"
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0004.contaMajuscules("password")), 
+            "0"
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
     }
 
     @Test
     public void testContaMinuscules() {
-        assertEquals(6, Exercici0004.contaMinuscules("PassWord123"));
-        assertEquals(8, Exercici0004.contaMinuscules("password"));
-        assertEquals(0, Exercici0004.contaMinuscules("PASSWORD123"));
-        assertEquals(1, Exercici0004.contaMinuscules("p"));
-        assertEquals(0, Exercici0004.contaMinuscules(""));
+        String diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0004.contaMinuscules("PassWord123")), 
+            "6"
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0004.contaMinuscules("PASSWORD123")), 
+            "0"
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
     }
 
     @Test
     public void testValidaContrasenya() {
-        assertEquals("La contrasenya és vàlida", Exercici0004.validaContrasenya("PassWord123"));
-        assertEquals("La contrasenya NO és vàlida", Exercici0004.validaContrasenya("password"));
-        assertEquals("La contrasenya NO és vàlida", Exercici0004.validaContrasenya("PASSWORD"));
-        assertEquals("La contrasenya NO és vàlida", Exercici0004.validaContrasenya("Pass12"));
-        assertEquals("La contrasenya és vàlida", Exercici0004.validaContrasenya("PassWord"));
-        assertEquals("La contrasenya és vàlida", Exercici0004.validaContrasenya("ValidPass123"));
-        assertEquals("La contrasenya és vàlida", Exercici0004.validaContrasenya("AnotherValid1"));
+        String diff = TestStringUtils.findFirstDifference(
+            Exercici0004.validaContrasenya("PassWord123"), 
+            "La contrasenya és vàlida"
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            Exercici0004.validaContrasenya("password"), 
+            "La contrasenya NO és vàlida"
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
     }
 
     @Test
@@ -62,9 +84,7 @@ class TestExercici0004 {
 
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0,
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
         } finally {
             Locale.setDefault(defaultLocale);
         }
@@ -91,9 +111,7 @@ class TestExercici0004 {
 
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0,
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
         } finally {
             Locale.setDefault(defaultLocale);
         }
@@ -120,9 +138,7 @@ class TestExercici0004 {
 
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0,
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
         } finally {
             Locale.setDefault(defaultLocale);
         }

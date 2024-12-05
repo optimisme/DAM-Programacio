@@ -32,9 +32,7 @@ class TestExercici0000 {
     
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0,
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
         } finally {
             Locale.setDefault(defaultLocale); 
         }
@@ -61,9 +59,7 @@ class TestExercici0000 {
     
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0,
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
         } finally {
             Locale.setDefault(defaultLocale); 
         }
@@ -90,9 +86,7 @@ class TestExercici0000 {
     
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0,
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
         } finally {
             Locale.setDefault(defaultLocale); 
         }

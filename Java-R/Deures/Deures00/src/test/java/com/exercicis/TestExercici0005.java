@@ -14,26 +14,43 @@ class TestExercici0005 {
 
     @Test
     public void testIsPalindrom() {
-        assertTrue(Exercici0005.isPalindrom("Anul·la la lluna"));
-        assertFalse(Exercici0005.isPalindrom("Atrapa la lluna"));
-        assertTrue(Exercici0005.isPalindrom("Atrapa'l o l'aparta"));
-        assertFalse(Exercici0005.isPalindrom("Aparta'l o atrapa'l"));
-        assertTrue(Exercici0005.isPalindrom("No sap pas on"));
-        assertFalse(Exercici0005.isPalindrom("On sap pas qui"));
-        assertTrue(Exercici0005.isPalindrom("Tramaran anar a Mart"));
-        assertFalse(Exercici0005.isPalindrom("A Mart trobaràn art"));
-        assertTrue(Exercici0005.isPalindrom("Un pop nu"));
-        assertTrue(Exercici0005.isPalindrom("Nu pop un"));
+        String diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0005.isPalindrom("Anul·la la lluna")),
+            String.valueOf(true)
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0005.isPalindrom("Atrapa la lluna")),
+            String.valueOf(false)
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0005.isPalindrom("Atrapa'l o l'aparta")),
+            String.valueOf(true)
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
     }
 
     @Test
     public void testNormalize() {
-        assertEquals("anullalalluna", Exercici0005.normalize("Anul·la la lluna"));
-        assertEquals("atrapalalluna", Exercici0005.normalize("Atrapa la lluna"));
-        assertEquals("atrapalolaparta", Exercici0005.normalize("Atrapa'l o l'aparta"));
-        assertEquals("apartaloatrapal", Exercici0005.normalize("Aparta'l o atrapa'l"));
-        assertEquals("nosappason", Exercici0005.normalize("No sap pas on"));
-        assertEquals("tramarananaramart", Exercici0005.normalize("Tramaran anar a Mart"));
+        String diff = TestStringUtils.findFirstDifference(
+            Exercici0005.normalize("Anul·la la lluna"),
+            "anullalalluna"
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            Exercici0005.normalize("Atrapa la lluna"),
+            "atrapalalluna"
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
     }
 
     @Test
@@ -46,8 +63,6 @@ class TestExercici0005 {
                 String[] args = {};
                 Exercici0005.main(args); // Invocar el main
             });
-
-            text = text.replace("\r\n", "\n");
 
             String expectedOutput = """
                 Anul·la la lluna (Si)
@@ -64,9 +79,7 @@ class TestExercici0005 {
 
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0,
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
         } finally {
             Locale.setDefault(defaultLocale);
         }

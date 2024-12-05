@@ -497,3 +497,52 @@ Per executar i testejar el programa:
 # Testos individuals
 ./runTest.sh "com.exercicis.TestExercici0009#testDibuixarRectangle"
 ```
+
+# Exercici 0010
+
+Fes un programa que:
+
+- Generi un ArrayList iniciat amb 10 enters aleatòris entre 0 i 99
+- Generi un ArrayList amb els 10 números anteriors multiplicats per 2
+- Generi un ArrayList amb els números imparells de la primera llista
+- Generi un ArrayList amb la divisió per 2 dels números imparelles anteriors
+
+Necessitaràs:
+
+```java
+// Genera un ArrayList amb "quantitat" numeros aleatòris entre "min" i "max"
+public static ArrayList<Integer> generarNumerosAleatoris(int quantitat, int min, int max)
+
+// Retorna un ArrayList amb cada valor de "llista" multiplicat per 2
+public static ArrayList<Integer> multiplicarPerDos(ArrayList<Integer> llista)
+
+// Retorna un ArrayList amb els valors imparells de "llista"
+public static ArrayList<Integer> filtrarImparells(ArrayList<Integer> llista)
+
+// Retorna un ArrayList amb cada valor de "llista" dividit per 2
+public static ArrayList<Double> dividirPerDos(ArrayList<Integer> llista)
+```
+
+Exemple de sortida:
+
+```text
+Llista inicial: [49, 39, 11, 79, 33, 69, 42, 28, 30, 59]
+Llista multiplicada per 2: [98, 78, 22, 158, 66, 138, 84, 56, 60, 118]
+Llista només amb números imparells: [49, 39, 11, 79, 33, 69, 59]
+Llista imparells dividits per 2: [24.5, 19.5, 5.5, 39.5, 16.5, 34.5, 29.5]
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0009.java
+
+# A la carpeta "Deures00" executar el programa
+./run.sh com.exercicis.Exercici0010
+
+# A la carpeta "Deures00" executar el test
+./runTest.sh com.exercicis.TestExercici0010
+
+# Testos individuals
+./runTest.sh "com.exercicis.TestExercici0010#testDibuixarRectangle"
+```

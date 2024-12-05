@@ -14,13 +14,47 @@ class TestExercici0006 {
 
     @Test
     public void testCalculaEntrada() {
-        // Testar diferents casos per a calculaEntrada
-        assertEquals(20.8, Exercici0006.calculaEntrada(1, 2, 1, "dimarts"), 0.01);
-        assertEquals(24.5, Exercici0006.calculaEntrada(1, 2, 2, "dijous"), 0.01);
-        assertEquals(32.0, Exercici0006.calculaEntrada(2, 0, 2, "dissabte"), 0.01);
-        assertEquals(21.0, Exercici0006.calculaEntrada(1, 1, 1, "diumenge"), 0.01);
-        assertEquals(28.5, Exercici0006.calculaEntrada(2, 3, 1, "dijous"), 0.01);
-        assertEquals(84.0, Exercici0006.calculaEntrada(4, 4, 4, "dimecres"), 0.01);
+        String diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0006.calculaEntrada(1, 2, 1, "dimarts")),
+            String.valueOf(20.8)
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "\n<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0006.calculaEntrada(1, 2, 2, "dijous")),
+            String.valueOf(24.5)
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "\n<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0006.calculaEntrada(2, 0, 2, "dissabte")),
+            String.valueOf(32.0)
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "\n<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0006.calculaEntrada(1, 1, 1, "diumenge")),
+            String.valueOf(21.0)
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "\n<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0006.calculaEntrada(2, 3, 1, "dijous")),
+            String.valueOf(28.5)
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "\n<<<<<<<<<< Diff end <<<<<<<<<<");
+
+        diff = TestStringUtils.findFirstDifference(
+            String.valueOf(Exercici0006.calculaEntrada(4, 4, 4, "dimecres")),
+            String.valueOf(84.0)
+        );
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "\n<<<<<<<<<< Diff end <<<<<<<<<<");
     }
 
     @Test
@@ -34,8 +68,6 @@ class TestExercici0006 {
                 Exercici0006.main(args);
             });
 
-            text = text.replace("\r\n", "\n");
-
             String expectedOutput = """
                 Cas 1 (2 adults, 2 nens, 1 gran):  28.80€
                 Cas 2 (1 adult,  2 nens, 0 grans): 12.50€
@@ -47,9 +79,7 @@ class TestExercici0006 {
 
             String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
             assertTrue(diff.compareTo("identical") == 0,
-                ">>>>>>>>>> >>>>>>>>>>\n" +
-                diff +
-                "<<<<<<<<<< <<<<<<<<<<\n");
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "\n<<<<<<<<<< Diff end <<<<<<<<<<");
         } finally {
             Locale.setDefault(defaultLocale); 
         }

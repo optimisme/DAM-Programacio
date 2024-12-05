@@ -12,8 +12,6 @@ class TestExercici0009 {
 
     @Test
     public void testDibuixarRectangle() throws Exception {
-        // Captura la sortida de dibuixarRectangle per diferents dimensions
-        
         // Cas 1: Rectangle de 5x3
         String text = SystemLambda.tapSystemOut(() -> {
             Exercici0009.dibuixarRectangle(5, 3);
@@ -23,7 +21,10 @@ class TestExercici0009 {
             *ooo*
             *****
             """;
-        assertEquals(expectedOutput, text);
+
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
 
         // Cas 2: Rectangle de 8x4
         text = SystemLambda.tapSystemOut(() -> {
@@ -35,14 +36,20 @@ class TestExercici0009 {
             *oooooo*
             ********
             """;
-        assertEquals(expectedOutput, text);
+
+        diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
 
         // Cas 3: Dimensions invàlides (ample o alt menor que 2)
         text = SystemLambda.tapSystemOut(() -> {
             Exercici0009.dibuixarRectangle(1, 2);
         });
         expectedOutput = "L'ample i l'alt han de ser com a mínim 2.\n";
-        assertEquals(expectedOutput, text);
+
+        diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
     }
 
     @Test
@@ -60,7 +67,10 @@ class TestExercici0009 {
             *ooo*
             *****
             """;
-        assertEquals(expectedOutput, text);
+
+        String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
 
         // Cas 2: Dimensions invàlides
         text = SystemLambda.tapSystemOut(() -> 
@@ -73,6 +83,9 @@ class TestExercici0009 {
             Introdueix l'ample del rectangle: Introdueix l'alt del rectangle: Resultat:
             L'ample i l'alt han de ser com a mínim 2.
             """;
-        assertEquals(expectedOutput, text);
+
+        diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+        assertTrue(diff.compareTo("identical") == 0, 
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
     }
 }

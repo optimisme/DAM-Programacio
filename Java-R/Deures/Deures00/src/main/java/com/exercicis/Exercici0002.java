@@ -11,7 +11,7 @@ public class Exercici0002 {
         /*
             TODO: Resol aquí l'exercici
         */
-        
+
         scanner.close();
     }
 }
