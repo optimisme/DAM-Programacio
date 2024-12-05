@@ -234,14 +234,81 @@ En un HashMap, totes les claus han de ser del mateix tipus i tots els valors han
 
 Maneres d'iniciar un *HashMap*:
 ```java
-Map<String, Integer> map = Map.of(
+HashMap<String, Integer> puntuacions = new HashMap<>();
+puntuacions.put("Anna", 85);
+puntuacions.put("Joan", 92);
+puntuacions.put("Maria", 78);
+
+HashMap<String, Integer> puntuacions = new HashMap<>(Map.of(
     "Anna", 85,
     "Joan", 92,
     "Maria", 78
-);
+));
 ```
 
-La de claus d'un **Hash-Map** s'obté amb **.keySet()**
+**Obtenir la llista de claus**
+```java
+// Obtenir totes les claus
+Set<String> claus = puntuacions.keySet();
+
+// Mostrar les claus
+System.out.println("Les claus són: " + claus);
+```
+
+**Obtenir tots els valors**
+```java
+Collection<Integer> valors = puntuacions.values();
+```
+
+**Obtenir un valor a partir d'una clau**
+```java
+int puntuacioAnna = puntuacions.get("Anna")
+```
+
+**Afegir o modificar el valor a partir d'una clau**
+```java
+// Modifica la puntuació d'Anna a 90 (o l'afegeix si no existeix)
+puntuacions.put("Anna", 90); 
+
+// No canvia perquè "Anna" ja existeix (o l'afegeix si no existeix)
+puntuacions.putIfAbsent("Anna", 95); 
+```
+
+**Eliminar elements**
+```java
+// Elimina Maria del mapa
+puntuacions.remove("Maria"); 
+
+// Només elimina si el valor és 92
+puntuacions.remove("Joan", 92); 
+```
+
+**Consultar elements**
+```java
+// Comprova si la clau "Anna" existeix
+if (puntuacions.containsKey("Anna")) {
+    System.out.println("La puntuació d'Anna és: " + puntuacions.get("Anna"));
+}
+
+// Comprova si alguna clau té el valor 85
+if (puntuacions.containsValue(85)) {
+    System.out.println("Algú té una puntuació de 85.");
+}
+```
+
+**Altres operacions d'un HashMap**
+```java
+// Retorna el nombre d'elements
+int mida = puntuacions.size(); 
+
+// Buida el mapa
+puntuacions.clear(); 
+
+// Comprovar si un HasMap té claus i valors
+if (puntuacions.isEmpty()) {
+    System.out.println("El mapa està buit.");
+}
+```
 
 ### Exemple 0602
 

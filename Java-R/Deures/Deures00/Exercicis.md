@@ -549,3 +549,111 @@ Per executar i testejar el programa:
 ./runTest.sh "com.exercicis.TestExercici0010#testFiltrarImparells"
 ./runTest.sh "com.exercicis.TestExercici0010#testDividirPerDos"
 ```
+
+# Exercici 0011
+
+Fes un programa que a partir de la següent llista de noms:
+
+```java
+ArrayList<String> noms = new ArrayList<>(Arrays.asList("Mario", "Princess Peach", "Wario", "Luigi", "Iggy Koopa", "Toad", "Yoshi", "Donkey Kong", "Birdo"));
+```
+
+- N'escull 5 a l'atzar i genera un nou ArrayList (no poden ser duplicats)
+- Provoca una excepció demanant 25 noms (mostra la longitud de la llista)
+- Genera un nou ArrayList amb els que acaben amb vocal
+- Genera un nou ArrayList amb els que són compostos
+
+Necessitaràs:
+
+```java
+// Escull "quantitat" noms a l'atzar
+// Si "quantitat" és massa gran provoca una excepció:
+// IllegalArgumentException("La quantitat no pot ser més gran que la mida de la llista.");
+public static ArrayList<String> escullNomsAleatoris(ArrayList<String> noms, int quantitat)
+
+// Retorna un ArrayList amb els noms que acaben amb vocal 'aeiou'
+public static ArrayList<String> nomsAcabenVocal(ArrayList<String> noms)
+
+// Retorna un ArrayList amb els noms compostos per més d'una paraula
+public static ArrayList<String> nomsCompostos(ArrayList<String> noms)
+```
+
+Exemple de sortida:
+
+```text
+Noms escollits a l'atzar: [Birdo, Mario, Yoshi, Toad, Luigi]
+Error: La quantitat no pot ser més gran que 9.
+Noms que acaben amb vocal: [Mario, Wario, Luigi, Iggy Koopa, Yoshi, Birdo]
+Noms compostos: [Princess Peach, Iggy Koopa, Donkey Kong]
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0009.java
+
+# A la carpeta "Deures00" executar el programa
+./run.sh com.exercicis.Exercici0011
+
+# A la carpeta "Deures00" executar el test
+./runTest.sh com.exercicis.TestExercici0011
+
+# Testos individuals
+./runTest.sh "com.exercicis.TestExercici0011#testEscullNomsAleatoris"
+./runTest.sh "com.exercicis.TestExercici0011#testNomsAcabenVocal"
+./runTest.sh "com.exercicis.TestExercici0011#testNomsCompostos"
+```
+
+# Exercici 0012
+
+Fes un programa que a partir de la següent llista de diccionaris:
+
+```java
+ArrayList<String> noms = new ArrayList<>(Arrays.asList("Mario", "Princess Peach", "Wario", "Luigi", "Iggy Koopa", "Toad", "Yoshi", "Donkey Kong", "Birdo"));
+```
+
+- N'escull 5 a l'atzar i genera un nou ArrayList (no poden ser duplicats)
+- Provoca una excepció demanant 25 noms (mostra la longitud de la llista)
+- Genera un nou ArrayList amb els que acaben amb vocal
+- Genera un nou ArrayList amb els que són compostos
+
+Necessitaràs:
+
+```java
+// Escull "quantitat" noms a l'atzar
+// Si "quantitat" és massa gran provoca una excepció:
+// IllegalArgumentException("La quantitat no pot ser més gran que la mida de la llista.");
+public static ArrayList<String> escullNomsAleatoris(ArrayList<String> noms, int quantitat)
+
+// Retorna un ArrayList amb els noms que acaben amb vocal 'aeiou'
+public static ArrayList<String> nomsAcabenVocal(ArrayList<String> noms)
+
+// Retorna un ArrayList amb els noms compostos per més d'una paraula
+public static ArrayList<String> nomsCompostos(ArrayList<String> noms)
+```
+
+Exemple de sortida:
+
+```text
+Noms escollits a l'atzar: [Birdo, Mario, Yoshi, Toad, Luigi]
+Error: La quantitat no pot ser més gran que 9.
+Noms que acaben amb vocal: [Mario, Wario, Luigi, Iggy Koopa, Yoshi, Birdo]
+Noms compostos: [Princess Peach, Iggy Koopa, Donkey Kong]
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0009.java
+
+# A la carpeta "Deures00" executar el programa
+./run.sh com.exercicis.Exercici0011
+
+# A la carpeta "Deures00" executar el test
+./runTest.sh com.exercicis.TestExercici0011
+
+# Testos individuals
+./runTest.sh "com.exercicis.TestExercici0011#testEscullNomsAleatoris"
+./runTest.sh "com.exercicis.TestExercici0011#testNomsAcabenVocal"
+./runTest.sh "com.exercicis.TestExercici0011#testNomsCompostos"
+```
