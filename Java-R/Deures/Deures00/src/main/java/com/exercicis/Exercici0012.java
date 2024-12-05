@@ -24,7 +24,7 @@ public class Exercici0012 {
         // Fem una còpia per no modificar l'original "wonders"
         ArrayList<HashMap<String, Object>> sortedWonders = new ArrayList<>(wonders);
         sortedWonders.sort(Comparator.comparing(wonder -> (String) wonder.get("name")));
-        return wonders;
+        return sortedWonders;
     }
 
     public static ArrayList<HashMap<String, Object>> getSortedWondersByName(ArrayList<HashMap<String, Object>> wonders, int quantity) {

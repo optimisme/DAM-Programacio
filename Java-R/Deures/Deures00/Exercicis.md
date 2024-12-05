@@ -706,7 +706,10 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0012
 
 # Testos individuals
-./runTest.sh "com.exercicis.TestExercici0012#testEscullNomsAleatoris"
-./runTest.sh "com.exercicis.TestExercici0012#testNomsAcabenVocal"
-./runTest.sh "com.exercicis.TestExercici0012#testNomsCompostos"
+./runTest.sh "com.exercicis.TestExercici0012#testCreateWonder"
+./runTest.sh "com.exercicis.TestExercici0012#testSortWondersByName"
+./runTest.sh "com.exercicis.TestExercici0012#testGetSortedWondersByName"
+./runTest.sh "com.exercicis.TestExercici0012#testSortNames"
+./runTest.sh "com.exercicis.TestExercici0012#testGetOlder"
+./runTest.sh "com.exercicis.TestExercici0012#testGetRegion"
 ```
