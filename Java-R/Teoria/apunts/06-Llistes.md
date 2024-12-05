@@ -127,17 +127,60 @@ ArrayList<Integer> numeros = new ArrayList<>(Arrays.asList(10, 20, 30));
 ArrayList<Integer> numeros = new ArrayList<>(List.of(10, 20, 30));
 ```
 
-**Manipulació**
+**Mètodes d'ArrayList**
 
-- Per afegir elements `.add(valor)`
-- Per treure elements `.remove(index)`
-- Per treure modificar `.set(index, valor)`
-- Per llegit el valor `.get(x)`.
-- Per obtenir la longitud `.size()`
+- **Afegir elements:** 
+    * `.add(valor)` (al final)
+    * `.add(index, valor)` (en una posició específica)
+- **Treure elements:** 
+    * `.remove(index)` (per índex)
+    * `.remove(object)` (per valor)
+    * `.removeIf(predicate)` (per condició)
+- **Modificar elements:** 
+    * `.set(index, valor)` (substituir el valor en un índex)
+- **Llegir elements:** 
+    * `.get(index)` (obtenir el valor en un índex)
+- **Obtenir la longitud:** 
+    * `.size()` (nombre total d'elements).
+- **Comprovar si conté un element:** 
+    * `.contains(valor)`
+- **Trobar la posició d'un element:** 
+    * `.indexOf(valor)` 
+    * `.lastIndexOf(valor)`
+- **Eliminar tots els elements:** 
+    * `.clear()`
+- **Comprovar si està buit:** 
+    * `.isEmpty()`
+- **Obtenir una subllista:** 
+    * `.subList(inici, final)` (vista d'una part de la llista).
+- **Convertir a array:** 
+    * `.toArray()` (per treballar amb arrays).
+
+Un **predicate** en programació és una funció que pren un element com a entrada i retorna un valor booleà (true o false). A **Java**, s'utilitza sovint en col·leccions com a part de funcionalitats de filtratge o eliminació.
+
+Exemple:
+
+```java
+public static void main(String[] args) {
+        ArrayList<Integer> numeros = new ArrayList<>();
+        numeros.add(10);
+        numeros.add(15);
+        numeros.add(20);
+        numeros.add(25);
+
+        // Eliminar números imparells 
+        // (predicat ha de tornar 'true' o 'false')
+        numeros.removeIf((n) -> {
+            return n % 2 != 0;
+        });
+
+        System.out.println(numeros); // Sortida: [10, 20]
+    }
+```
 
 **Subllistes**
 
-Per obtenir una porció d'un ArrayList `.subList(inici, final)`, 
+Per obtenir una porció d'un ArrayList `.subList(inici, final)`
 
 - Inici és inclusiu
 - Final és exclusiu (no inclòs)

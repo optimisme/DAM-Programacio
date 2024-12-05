@@ -713,3 +713,119 @@ Per executar i testejar el programa:
 ./runTest.sh "com.exercicis.TestExercici0012#testGetOlder"
 ./runTest.sh "com.exercicis.TestExercici0012#testGetRegion"
 ```
+
+# Exercici 0013
+
+Fes un programa que permeti afegir i treure informació de ciutats d'un **ArrayList** que conté **HashMaps** amb etiquetes: *population*, *heigth* o *sealand*
+
+Necessites:
+```java
+// Diu si un "id" existeix al ArrayList "cities"
+public static boolean idExists(ArrayList<HashMap<String, Object>> cities, int id)
+
+// Crea un id entre 1000 i 9000, que no existeix a l'ArrayList "cities"
+public static int generateId(ArrayList<HashMap<String, Object>> cities)
+
+// Retorna l'id d'una ciutat a partir del seu nom
+// (retorna -1 si no troba cap ciutat amb el nom "name")
+public static int getIdByName(ArrayList<HashMap<String, Object>> cities, String name)
+
+// Afegeix una ciutat a l'ArrayList "cities"
+public static void addCity(ArrayList<HashMap<String, Object>> cities, 
+    String name, int population, int height, boolean sealand)
+
+// Esborra una ciutat de l'ArrayList "cities" a partir de "id"
+public static void removeCity(ArrayList<HashMap<String, Object>> cities, int id)
+
+// Actualitza el HashMap amb identificador "id" i clau "field" amb el nou valor "value"
+public static void updateData(ArrayList<HashMap<String, Object>> cities, 
+    int id, String field, Object value)
+// Mostra la taula de les ciutats amb la informació de "citites"
+// les columnes són d'amples: 5,10, 10, 7, 8
+// l'alineació és: esquerra, esquerra, dreta, dreta, dreta
+public static void showInformation(ArrayList<HashMap<String, Object>> cities)
+```
+
+Aquest **"main"** ha de donar la següent sortida:
+
+```java
+    public static void main(String[] args) {
+        // Afegir les ciutats inicials
+        addCity("Barcelona", 1620343, 12, true);
+        addCity("Madrid", 3207247, 667, false);
+        addCity("València", 791413, 15, true);
+        addCity("Màlaga", 569130, 11, true);
+        addCity("Sevilla", 688711, 7, false);
+        addCity("Alicante", 330525, 12, true);
+        addCity("Zaragoza", 664938, 220, false);
+        addCity("Gijón", 275735, 3, true);
+        addCity("Palma de M", 22610, 14, true);
+        addCity("Bilbao", 345821, 30, false);
+        
+        // Eliminar Sevilla (haurem de buscar el seu ID)
+        int sevillaId = getIdByName("Sevilla");
+        if (sevillaId != -1) {
+            removeCity(sevillaId);
+        }
+        
+        // Actualitzar diverses dades
+        int barcelonaId = getIdByName("Barcelona");
+        updateData(barcelonaId, "population", 1621000);
+
+        int valenciaId = getIdByName("València");
+        updateData(valenciaId, "height", 16);
+
+        int palmaId = getIdByName("Palma de M");
+        updateData(palmaId, "name", "Palma");
+
+        int zaragozaId = getIdByName("Zaragoza");
+        updateData(zaragozaId, "sealand", false);
+        
+        // Afegir una nova ciutat
+        addCity("Tarragona", 132299, 70, true);
+        
+        // Mostrar la informació final
+        showInformation();
+    }
+}
+```
+
+Sortida esperada:
+
+```text
+----------------------------------------------
+|ID   |Name      |Population| Height| Sealand|
+----------------------------------------------
+|7009 |Barcelona |   1621000|     12|    true|
+|4109 |Madrid    |   3207247|    667|   false|
+|1962 |València  |    791413|     16|    true|
+|9607 |Màlaga    |    569130|     11|    true|
+|9414 |Alicante  |    330525|     12|    true|
+|2954 |Zaragoza  |    664938|    220|   false|
+|5185 |Gijón     |    275735|      3|    true|
+|6854 |Palma     |     22610|     14|    true|
+|6163 |Bilbao    |    345821|     30|   false|
+|1885 |Tarragona |    132299|     70|    true|
+----------------------------------------------
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0013.java
+
+# A la carpeta "Deures00" executar el programa
+./run.sh com.exercicis.Exercici0013
+
+# A la carpeta "Deures00" executar el test
+./runTest.sh com.exercicis.TestExercici0013
+
+# Testos individuals
+./runTest.sh "com.exercicis.TestExercici0013#testGenerateId"
+./runTest.sh "com.exercicis.TestExercici0013#testIdExists"
+./runTest.sh "com.exercicis.TestExercici0013#testGetIdByName"
+./runTest.sh "com.exercicis.TestExercici0013#testAddCity"
+./runTest.sh "com.exercicis.TestExercici0013#testRemoveCity"
+./runTest.sh "com.exercicis.TestExercici0013#testUpdateData"
+./runTest.sh "com.exercicis.TestExercici0013#testShowInformation"
+```
