@@ -127,15 +127,21 @@ ArrayList<Integer> numeros = new ArrayList<>(Arrays.asList(10, 20, 30));
 ArrayList<Integer> numeros = new ArrayList<>(List.of(10, 20, 30));
 ```
 
-Es pot 
+**Manipulació**
 
 - Per afegir elements `.add(valor)`
 - Per treure elements `.remove(index)`
 - Per treure modificar `.set(index, valor)`
+- Per llegit el valor `.get(x)`.
+- Per obtenir la longitud `.size()`
 
-Es pot accedir mitjançant un índex i el mètode `.get(x)`.
+**Subllistes**
 
-La longitud d'un array s'obté amb **.size()**
+Per obtenir una porció d'un ArrayList `.subList(inici, final)`, 
+
+- Inici és inclusiu
+- Final és exclusiu (no inclòs)
+- S'obté una vista, no una nova llista
 
 ### Exemple 0601
 

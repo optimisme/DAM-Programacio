@@ -606,39 +606,92 @@ Per executar i testejar el programa:
 
 # Exercici 0012
 
-Fes un programa que a partir de la següent llista de diccionaris:
+Fes un programa que a partir de la següent informació:
 
 ```java
-ArrayList<String> noms = new ArrayList<>(Arrays.asList("Mario", "Princess Peach", "Wario", "Luigi", "Iggy Koopa", "Toad", "Yoshi", "Donkey Kong", "Birdo"));
+ArrayList<HashMap<String, Object>> wonders = new ArrayList<>();
+wonders.add(createWonder("Great Pyramid of Giza", "Egypt", 4500));
+wonders.add(createWonder("Hanging Gardens of Babylon", "Babylon, Mesopotamia", 2500));
+wonders.add(createWonder("Statue of Zeus at Olympia", "Olympia, Greece", 2500));
+wonders.add(createWonder("Temple of Artemis at Ephesus", "Ephesus, Turkey", 2400));
+wonders.add(createWonder("Mausoleum at Halicarnassus", "Halicarnassus, Turkey", 2300));
+wonders.add(createWonder("Colossus of Rhodes", "Island of Rhodes, Greece", 2300));
+wonders.add(createWonder("Lighthouse of Alexandria", "Alexandria, Egypt", 2200));
 ```
-
-- N'escull 5 a l'atzar i genera un nou ArrayList (no poden ser duplicats)
-- Provoca una excepció demanant 25 noms (mostra la longitud de la llista)
-- Genera un nou ArrayList amb els que acaben amb vocal
-- Genera un nou ArrayList amb els que són compostos
 
 Necessitaràs:
 
 ```java
-// Escull "quantitat" noms a l'atzar
-// Si "quantitat" és massa gran provoca una excepció:
-// IllegalArgumentException("La quantitat no pot ser més gran que la mida de la llista.");
-public static ArrayList<String> escullNomsAleatoris(ArrayList<String> noms, int quantitat)
+// Retorna un HashMap amb les claus "name", "location" i "age"
+public static HashMap<String, Object> createWonder(String name, String location, int age)
 
-// Retorna un ArrayList amb els noms que acaben amb vocal 'aeiou'
-public static ArrayList<String> nomsAcabenVocal(ArrayList<String> noms)
+// Mostra la informació del la llista segons el format de sortida
+public static void showInformation(ArrayList<HashMap<String, Object>> wonders)
 
-// Retorna un ArrayList amb els noms compostos per més d'una paraula
-public static ArrayList<String> nomsCompostos(ArrayList<String> noms)
+// Obté totes les meravelles ordenades per nom
+public static ArrayList<HashMap<String, Object>> sortWondersByName(ArrayList<HashMap<String, Object>> wonders)
+
+// Obté les "quantity" meravelles ordenades per nom (subllista)
+// fa servir "sortWondersByName"
+public static ArrayList<HashMap<String, Object>> getSortedWondersByName(ArrayList<HashMap<String, Object>> wonders, int quantity)
+
+// Obté els noms de les marevelles ordenats alfabèticament
+public static ArrayList<String> sortNames(ArrayList<HashMap<String, Object>> wonders)
+
+// Obté les "quantity" meravelles ordenades per antiguitat (subllista)
+public static ArrayList<HashMap<String, Object>> getOlder(ArrayList<HashMap<String, Object>> wonders, int quantity)
+
+// Mostra les meravelles de la regió "region"
+public static ArrayList<HashMap<String, Object>> getRegion(ArrayList<HashMap<String, Object>> wonders, String region)
 ```
 
 Exemple de sortida:
 
 ```text
-Noms escollits a l'atzar: [Birdo, Mario, Yoshi, Toad, Luigi]
-Error: La quantitat no pot ser més gran que 9.
-Noms que acaben amb vocal: [Mario, Wario, Luigi, Iggy Koopa, Yoshi, Birdo]
-Noms compostos: [Princess Peach, Iggy Koopa, Donkey Kong]
+All Wonders:
+* Name: Great Pyramid of Giza
+  Location: Egypt
+  Age: 4500 years
+* Name: Hanging Gardens of Babylon
+  Location: Babylon, Mesopotamia
+  Age: 2500 years
+* Name: Statue of Zeus at Olympia
+  Location: Olympia, Greece
+  Age: 2500 years
+* Name: Temple of Artemis at Ephesus
+  Location: Ephesus, Turkey
+  Age: 2400 years
+* Name: Mausoleum at Halicarnassus
+  Location: Halicarnassus, Turkey
+  Age: 2300 years
+* Name: Colossus of Rhodes
+  Location: Island of Rhodes, Greece
+  Age: 2300 years
+* Name: Lighthouse of Alexandria
+  Location: Alexandria, Egypt
+  Age: 2200 years
+-------------------------
+Sorted Names:
+[Great Pyramid of Giza, Hanging Gardens of Babylon, Statue of Zeus at Olympia, Temple of Artemis at Ephesus, Mausoleum at Halicarnassus, Colossus of Rhodes, Lighthouse of Alexandria]
+-------------------------
+Top 3 Oldest Wonders:
+* Name: Great Pyramid of Giza
+  Location: Egypt
+  Age: 4500 years
+* Name: Hanging Gardens of Babylon
+  Location: Babylon, Mesopotamia
+  Age: 2500 years
+* Name: Statue of Zeus at Olympia
+  Location: Olympia, Greece
+  Age: 2500 years
+-------------------------
+Wonders in Turkey:
+* Name: Temple of Artemis at Ephesus
+  Location: Ephesus, Turkey
+  Age: 2400 years
+* Name: Mausoleum at Halicarnassus
+  Location: Halicarnassus, Turkey
+  Age: 2300 years
 ```
 
 Per executar i testejar el programa:
@@ -647,13 +700,13 @@ Per executar i testejar el programa:
 # Codi: src/main/java/com/exercicis/Exercici0009.java
 
 # A la carpeta "Deures00" executar el programa
-./run.sh com.exercicis.Exercici0011
+./run.sh com.exercicis.Exercici0012
 
 # A la carpeta "Deures00" executar el test
-./runTest.sh com.exercicis.TestExercici0011
+./runTest.sh com.exercicis.TestExercici0012
 
 # Testos individuals
-./runTest.sh "com.exercicis.TestExercici0011#testEscullNomsAleatoris"
-./runTest.sh "com.exercicis.TestExercici0011#testNomsAcabenVocal"
-./runTest.sh "com.exercicis.TestExercici0011#testNomsCompostos"
+./runTest.sh "com.exercicis.TestExercici0012#testEscullNomsAleatoris"
+./runTest.sh "com.exercicis.TestExercici0012#testNomsAcabenVocal"
+./runTest.sh "com.exercicis.TestExercici0012#testNomsCompostos"
 ```

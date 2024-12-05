@@ -155,6 +155,13 @@ String text = "Aquest és un exemple";
 System.out.println("Longitud: " + text.length()); // 21
 ```
 
+Per repetir una cadena de text *X* vegades:
+
+```java
+// Escriu "*>*>*>", que és el patró "*>" tres vegades
+System.out.println("*>".repeat(3));
+```
+
 ## Subcadenes
 
 Per obtenir subcadenes de text es fa servir **substring**: 
