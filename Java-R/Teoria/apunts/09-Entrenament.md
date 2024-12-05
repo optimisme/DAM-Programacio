@@ -237,13 +237,13 @@ afegir Rosalind Franklin,Anglaterra,Biologia Molecular,No,1920
 esborrar Charles Darwin
 ```
 
-- Permet filtrar informació amb comandes:
+- Permet filtrar informació amb comandes i mostra només la informació demanada:
 ```text
 filtrar disciplina "Física"
 filtrar naixement 1809
 ```
 
-- Permet treure el filtre amb:
+- Permet treure el filtre i mostrar tota la taula:
 ```text
 treure filtre
 ```
