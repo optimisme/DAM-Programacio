@@ -225,6 +225,8 @@ Copia el programa anterior, i fes que a més cada personatge tingui un identific
 | 77 | Alan Turing       | Anglaterra      | Matemàtiques/Infor. | No     | 1912      |
 ```
 
+El programa ha de demanar a l'usuari: *Escriu una comanda (o ajuda)?* i:
+
 - Permet afegir un nou personatge amb una comanda estil:
 ```text
 afegir Rosalind Franklin,Anglaterra,Biologia Molecular,No,1920
