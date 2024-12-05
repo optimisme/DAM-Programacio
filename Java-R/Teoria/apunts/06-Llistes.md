@@ -643,3 +643,194 @@ Exemple de sortida:
 Escriu una frase: Hola què tal
 Resultat: Hola-què-tal
 ```
+
+## Ordenació d'ArrayList
+
+A **Java**, es pot ordenar els ArrayList amb la funció **".sort"**, que té com a paràmetre una funció **lambda** amb el resultat d'ordenar dos valors `a` i `b`.
+
+### Exemple 0607
+
+Exemple d'ordenar un ArrayList de tipus *Integer*, l'ArrayList original *numeros* queda modificat.
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple0607.Main
+```
+
+```java
+package com.exemple0607;
+
+import java.util.ArrayList;
+
+public class Main {
+    public static void main(String[] args) {
+        ArrayList<Integer> numeros = new ArrayList<>();
+        numeros.add(25);
+        numeros.add(5);
+        numeros.add(15);
+        numeros.add(10);
+
+        System.out.println("Abans d'ordenar: " + numeros);
+
+        // Ordenar de menor a major
+        numeros.sort((a, b) -> a.compareTo(b));
+        System.out.println("De menor a major: " + numeros);
+
+        // Ordenar de major a menor
+        numeros.sort((a, b) -> b.compareTo(a));
+        System.out.println("De major a menor: " + numeros);
+    }
+}
+```
+
+### Exemple 0608
+
+Exemple d'ordenar un ArrayList de tipus *String*, l'ArrayList original *noms* queda modificat.
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple0608.Main
+```
+
+```java
+import java.util.ArrayList;
+
+public class Main {
+
+    public static void main(String[] args) {
+        ArrayList<String> noms = new ArrayList<>();
+        noms.add("Mario");
+        noms.add("Luigi");
+        noms.add("Peach");
+        noms.add("Bowser");
+
+        System.out.println("Abans d'ordenar: " + noms);
+
+        // Ordenar alfabèticament (ascendent)
+        noms.sort((a, b) -> a.compareTo(b));
+        System.out.println("De menor a major (alfabètic): " + noms);
+
+        // Ordenar alfabèticament (descendent)
+        noms.sort((a, b) -> b.compareTo(a));
+        System.out.println("De major a menor (alfabètic): " + noms);
+    }
+}
+```
+
+### Exemple 0609
+
+Exemple d'ordenar un ArrayList que conté un HashMap. Per no modificar l'ArrayList original, en fa una còpia en una nova variable.
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple0609.Main
+```
+
+```java
+import java.util.ArrayList;
+import java.util.HashMap;
+
+public class Main {
+
+    public static HashMap<String, Object> createStudent(String name, int age) {
+        HashMap<String, Object> map = new HashMap<>();
+        map.put("name", name);
+        map.put("age", age);
+        return map;
+    }
+
+    public static void showInformation(ArrayList<HashMap<String, Object>> students) {
+        for (HashMap<String, Object> student : students) {
+            System.out.println("Name: " + student.get("name") + ", " + student.get("age") + " years");
+        }
+    }
+
+    public static void main(String[] args) {
+        ArrayList<HashMap<String, Object>> students = new ArrayList<>();
+
+        students.add(createStudent("Anna", 18));
+        students.add(createStudent("Marcos", 19));
+        students.add(createStudent("Eva", 17));
+        students.add(createStudent("Zahir", 18));
+
+        // Fer la còpia per no modificar l'original
+        ArrayList<HashMap<String, Object>> studentsByName = new ArrayList<>(students);
+        studentsByName.sort((student1, student2) -> {
+            String a = (String) student1.get("name");
+            String b = (String) student2.get("name");
+            return a.compareTo(b);
+        });
+
+        // Fer la còpia per no modificar l'original
+        ArrayList<HashMap<String, Object>> studentsByAge = new ArrayList<>(students);
+        studentsByAge.sort((student1, student2) -> {
+            Integer a = (Integer) student1.get("age");
+            Integer b = (Integer) student2.get("age");
+            return a.compareTo(b);
+        });
+
+        System.out.println("Original List:");
+        showInformation(students);
+
+        System.out.println("-".repeat(25));
+        System.out.println("Sorted by Name:");
+        showInformation(studentsByName);
+
+        System.out.println("-".repeat(25));
+        System.out.println("Sorted by Age:");
+        showInformation(studentsByAge);
+    }
+}
+```
+
+### Exercici 0610
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0610/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0610.Main
+```
+
+Fes un programa que guardi la següent informació en una combinació de **ArrayList** i **HashMap** amb les claus: *nom*, *especie*, *pes*, *anysVida*
+
+```text
+| Nom      | Espècie  | Pes | A.V |
+|----------|----------|-----|-----|
+| Simba    | Lleó     | 190 |   15|
+| Pelut    | Gos      |   6 |   12|
+| Max      | Cavall   | 500 |   30|
+| Luna     | Gat      |   4 |   15|
+| Rocky    | Tortuga  | 150 |  100|
+| Polly    | Loro     |   1 |   50|
+```
+Finalment, mostra el resultat d'ordenar la llista segons:
+
+- nom
+- especie
+- pes
+- anysVida
+
+Mostra en quatre taules, on:
+
+- Es mostra el títol abans de la taula
+- Els noms estàn aliniats a l'esquerra i ocupen 10 caràcters
+- Els números ocupen 5 caràcters i s'alinien a la dreta
+
+Per exemple:
+```text
+> Ordenats per "pes"
+| Nom      | Espècie  | Pes | A.V |
+|----------|----------|-----|-----|
+| Polly    | Loro     |   1 |   50|
+| Luna     | Gat      |   4 |   15|
+| Pelut    | Gos      |   6 |   12|
+| Rocky    | Tortuga  | 150 |  100|
+| Simba    | Lleó     | 190 |   15|
+| Max      | Cavall   | 500 |   30|
+```

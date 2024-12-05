@@ -23,10 +23,14 @@ public class Exercici0012 {
     public static ArrayList<HashMap<String, Object>> sortWondersByName(ArrayList<HashMap<String, Object>> wonders) {
         // Fem una còpia per no modificar l'original "wonders"
         ArrayList<HashMap<String, Object>> sortedWonders = new ArrayList<>(wonders);
-        sortedWonders.sort(Comparator.comparing(wonder -> (String) wonder.get("name")));
+        sortedWonders.sort((wonder1, wonder2) -> {
+            String a = (String) wonder1.get("name");
+            String b = (String) wonder2.get("name");
+            return a.compareTo(b);
+        });
         return sortedWonders;
     }
-
+  
     public static ArrayList<HashMap<String, Object>> getSortedWondersByName(ArrayList<HashMap<String, Object>> wonders, int quantity) {
         // Ordenar totes les meravelles
         ArrayList<HashMap<String, Object>> sortedWonders = sortWondersByName(wonders);
@@ -51,10 +55,17 @@ public class Exercici0012 {
     public static ArrayList<HashMap<String, Object>> getOlder(ArrayList<HashMap<String, Object>> wonders, int quantity) {
         // Fem una còpia per no modificar l'original "wonders"
         ArrayList<HashMap<String, Object>> sortedWonders = new ArrayList<>(wonders);
-        sortedWonders.sort((w1, w2) -> (int) w2.get("age") - (int) w1.get("age"));
+        sortedWonders.sort((w1, w2) -> {
+            Integer a = (Integer) w1.get("age");
+            Integer b = (Integer) w2.get("age");
+
+            // Ordenar de més gran a més petit
+            // (de més antic a més modern)
+            return b.compareTo(a); 
+        });
         return new ArrayList<>(sortedWonders.subList(0, Math.min(quantity, sortedWonders.size())));
     }
-
+   
     public static ArrayList<HashMap<String, Object>> getRegion(ArrayList<HashMap<String, Object>> wonders, String region) {
         ArrayList<HashMap<String, Object>> result = new ArrayList<>();
         for (HashMap<String, Object> wonder : wonders) {
