@@ -544,5 +544,8 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0010
 
 # Testos individuals
-./runTest.sh "com.exercicis.TestExercici0010#testDibuixarRectangle"
+./runTest.sh "com.exercicis.TestExercici0010#testGenerarNumerosAleatoris"
+./runTest.sh "com.exercicis.TestExercici0010#testMultiplicarPerDos"
+./runTest.sh "com.exercicis.TestExercici0010#testFiltrarImparells"
+./runTest.sh "com.exercicis.TestExercici0010#testDividirPerDos"
 ```
