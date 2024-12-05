@@ -829,3 +829,104 @@ Per executar i testejar el programa:
 ./runTest.sh "com.exercicis.TestExercici0013#testUpdateData"
 ./runTest.sh "com.exercicis.TestExercici0013#testShowInformation"
 ```
+
+# Exercici 0014
+
+Fes un programa que permeti jugar a "Pedra, Paper, Tisores" contra l'ordinador.
+El programa ha de:
+
+- Permetre jugar rondes fins que un jugador arribi a 3 victòries o l'usuari decideixi sortir
+- Mantenir i mostrar el marcador després de cada ronda
+- Guardar les estadístiques de cada jugada (quantes vegades s'ha fet servir cada opció i si ha guanyat)
+- Mostrar un missatge descriptiu segons el resultat de cada ronda
+- Mostrar un missatge final quan algú guanya la partida
+- Permetre sortir del joc quan l'usuari vulgui escrivint "SORTIR"
+- Mostrar les estadístiques finals en acabar la partida
+
+Necessitaràs implementar els següents mètodes:
+```java
+// Retorna un moviment aleatori entre "PEDRA", "PAPER", "TISORES"
+public static String getMovePC()
+
+// Demana i valida el moviment del jugador, ha de ser "PEDRA", "PAPER" o "TISORES"
+// Si s'introdueix "SORTIR" retorna null
+// Rep un Scanner com a paràmetre per llegir l'entrada
+public static String getPlayerMove(Scanner scanner)
+
+// Determina qui guanya i retorna un String amb el resultat: "PC", "PLAYER" o "DRAW"
+public static String getWinner(String playerMove, String pcMove)
+
+// Retorna el missatge amb el marcador actual
+public static String getScoreMessage(int playerScore, int pcScore)
+
+// Retorna el missatge de victòria segons qui ha guanyat la partida
+public static String getWinnerMessage(boolean playerWon)
+
+// Actualitza les estadístiques al HashMap stats
+// Format: {"PEDRA_COUNT": 0, "PAPER_COUNT": 0, "TISORES_COUNT": 0,
+//          "PEDRA_WINS": 0, "PAPER_WINS": 0, "TISORES_WINS": 0}
+public static void updateStats(HashMap<String, Integer> stats, String move, boolean win)
+
+// Retorna un missatge segons el resultat de la ronda:
+// - Si guanya PC: "Ho sento! [moviment] guanya a [moviment]!"
+// - Si guanya PLAYER: "Molt bé! [moviment] guanya a [moviment]!"
+// - Si és empat: "Empat! Els dos heu triat [moviment]!"
+public static String getMessage(String winner, String playerMove, String pcMove)
+
+// Mostra les estadístiques finals:
+// - Número total de partides jugades
+// - Percentatge de victòries del jugador (amb un decimal)
+// - Moviment més utilitzat pel jugador (amb el número de vegades)
+// - Moviment que més victòries ha donat al jugador (amb el percentatge arrodonit)
+public static void showStats(HashMap<String, Integer> stats)
+```
+
+Exemple de sortida:
+```text
+Benvingut a Pedra, Paper, Tisores!
+El primer en arribar a 3 victòries guanya!
+
+Escriu PEDRA, PAPER, TISORES o SORTIR: pedra
+PC tria: TISORES
+Molt bé! PEDRA guanya a TISORES!
+Marcador -> JUGADOR: 1 - PC: 0
+
+Escriu PEDRA, PAPER, TISORES o SORTIR: paper
+PC tria: PEDRA
+Molt bé! PAPER guanya a PEDRA!
+Marcador -> JUGADOR: 2 - PC: 0
+
+Escriu PEDRA, PAPER, TISORES o SORTIR: tisores
+PC tria: PAPER
+Molt bé! TISORES guanya a PAPER!
+Marcador -> JUGADOR: 3 - PC: 0
+
+Felicitats! Has guanyat la partida!
+
+
+Estadístiques finals:
+------------------
+Total partides: 3
+Victòries: 100.0%
+Moviment més utilitzat: PEDRA (1 vegades)
+Moviment més victoriós: PEDRA (100% victòries)
+```
+
+Per executar i testejar el programa:
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0014.java
+
+# A la carpeta "Deures00" executar el programa
+./run.sh com.exercicis.Exercici0014
+
+# A la carpeta "Deures00" executar el test
+./runTest.sh com.exercicis.TestExercici0014
+
+# Testos individuals
+./runTest.sh "com.exercicis.TestExercici0014#testGetPlayerMove"
+./runTest.sh "com.exercicis.TestExercici0014#testGetMovePC"
+./runTest.sh "com.exercicis.TestExercici0014#testGetWinner"
+./runTest.sh "com.exercicis.TestExercici0014#testUpdateStats"
+./runTest.sh "com.exercicis.TestExercici0014#testGetMessage"
+./runTest.sh "com.exercicis.TestExercici0014#testShowStats"
+```
