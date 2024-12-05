@@ -1,8 +1,6 @@
 # TODO
 
-Menus - JLine
-
-Arxius json
+Menus, JLine, Clear Screen, Arxius json
 
 ----
 
