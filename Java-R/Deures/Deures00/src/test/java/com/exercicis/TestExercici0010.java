@@ -119,7 +119,7 @@ class TestExercici0010 {
         }
     }
 
-// Mètodes auxiliars per extreure i manipular les llistes
+    // Mètodes auxiliars per extreure i manipular les llistes
 
     private ArrayList<Integer> extreureLlistaIntegers(String linia) {
         ArrayList<Integer> resultat = new ArrayList<>();
