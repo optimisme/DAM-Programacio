@@ -10,7 +10,7 @@
 
 # Entrenament
 
-## Exercici 0
+## Exercici 0900
 
 Un anagrama és un text, que passat a minúscules i ordenant els seus caràcters, és igual a un altre.
 
@@ -36,7 +36,7 @@ S'ha de mostrar per pantalla:
 ```
 Validar els anagrames d'exemple anteriors, i un parell de proves amb quatre paraules que no siguin anagrames.
 
-## Exercici 1
+## Exercici 0901
 
 import random
 def tira_moneda():
@@ -64,7 +64,7 @@ if m2 == "cara":
 print(f'El resultat del llançament de les tres monedes és: {m0}, {m1}, {m2}')
 print(f'El nombre de cares és: {cares}')
 
-## Exercici 2
+## Exercici 0902
 
 Un cuidador de gossos cobra 30€ per dia que cuida un gos.
 
@@ -78,7 +78,7 @@ A partir dels paràmetres:
 * dia: número de gossos que només es queden de dia
 * nit: número de gossos que es queden de dia i de nit
 
-## Exercici 3
+## Exercici 0903
 
 Un petit hotel a la costa vol informatitzar el seu sistema de reserves. 
 
@@ -123,7 +123,7 @@ Exemples per comprovar:
 * Habitació amb vistes, 6 nits, 1 persona sense esmorzar: 438€
 ```
 
-## Exercici 4
+## Exercici 0904
 
 Fes una funció (calculaTarifa) que determini el cost mensual d'una factura telefònica segons els minuts que una persona ha parlat i el número de missatges (SMS) enviats. 
 
@@ -149,59 +149,7 @@ Comprova que la funció calculaTarifa funciona correctament amb els següents va
 * 520 minuts i 240 SMS => 56.5€
 ```
 
-## Exercici 5
-
-Fes una funció (calculaIrpf) que calculi l'IRPF que ha de pagar una persona segons els ingressos bruts que té.
-
-Si et cal, fes altres funcions de suport a aquesta funció principal. Sigues organitzat/da!
-
-Aquests són els trams que ha de tenir en compte:
-```text
-                | Trams IRPF            |Total|
-                |-----------------------|-----|
-                | De 0 a 12.450€        | 19% |
-                | De 12.450€ a 20.200€  | 24% |
-                | De 20.200€ a 35.200€  | 30% |
-                | De 35.200€ a 60.000€  | 37% |
-                | De 60.000€ a 300.000€ | 45% |
-                | Més de 300.000€       | 47% |
-```
-Per exemple:
-
-* Si una persona cobra 10.200€, hauria de pagar el 19% = 1.938€
-```text
-+   0,19 *   10.200€           = 1.938,0€
-                               ----------
-                         Total:  1.938,0€
-```
-* Si una persona cobra 15.000€, hauria de pagar:
-```text
-    0,24 * (15.000€ - 12.450€) =   606,0€
-+   0,19 *  12.450€            = 2.365,5€
-                               ----------
-                         Total:  2.971,5€
-```
-* Si una persona cobra 22.000€, hauria de pagar:
-```text
-    0,3  * (22.000€ - 20.200€) =   540,0€
-    0,24 * (20.200€ - 12.450€) = 1.860,0€
-+   0,19 *  12.450€            = 2.365,5€
-                               ----------
-                         Total:  4.765,5€
-```
-Comprova:
-```text
-        * 7600 => 1444.0
-        * 16000 => 3217.5
-        * 26000 => 5965.5
-        * 32000 => 7765.5
-        * 54500 => 15866.5
-        * 64832 => 20075.9
-        * 275387 => 114825.65
-        * 765915 => 344881.55
-```
-
-## Exercici 0006
+## Exercici 0905
 
 Fes un programa que simuli una partida entre en Pau i la Paz
 
@@ -212,3 +160,97 @@ A cada tirada es mostra, segons correspon:
 En Pau ha tret cara (2), la Paz ha tret cara (1)
 ```
 
+## Exercici 0906
+
+Fes un programa que rebi una cadena de text i un ample (en caràcters) i:
+
+- Torna una cadena de text de l'ample especificat
+- El text està centrat a l'ample definit
+- Si la posició és imparell, el text queda desplaçat un caràcter a l'esquerra
+- Si el téxt és més llarg que l'ample, queda tallat (i ocupa tots els caràcters)
+
+## Exercici 0907
+
+Fes un programa que:
+
+- Demana a l'usuari un número entre 5 i 10
+- Si no és vàlid torna un missatge d'error (també si és un text o una lletra)
+
+- Genera un array de mira el número escollit, amb valors entre 1000 i 9999 (inclòsos)
+- Escull la meitat de valors de l'array a l'atzar i els posa en un nou array
+- Ordena de major a menor els valors escollits
+- Ordena de menor a major els valors descartats
+
+- Mostra l'array original
+- Mostra els valors escollits ordenats
+- Mostra els valors descartats ordenats
+
+## Exercici 0908
+
+Fes un programa que mostri una taula amb informació com la següent, a partir d'un **ArrayList** i un **HashMap**:
+
+```text
+| Nom               | País            | Disciplina          | Nobel? | Naixement |
+|-------------------|-----------------|---------------------|--------|-----------|
+| Albert Einstein   | Alemanya/Suïssa | Física              | Sí     | 1879      |
+| Marie Curie       | Polònia/França  | Física/Química      | Sí     | 1867      |
+| Isaac Newton      | Anglaterra      | Física/Matemàtiques | No     | 1643      |
+| Charles Darwin    | Anglaterra      | Biologia            | No     | 1809      |
+| Alan Turing       | Anglaterra      | Matemàtiques/Infor. | No     | 1912      |
+```
+
+El programa ha de demanar a l'usuari: *Quina columna vols ordenar (o sortir)?* i:
+
+- Si escriu *ordenar* i un nom de columna es dibuixa la taula ordenada segons la columna
+- Si escriu *ordenar* i el nom de la columna seguit de **inv** igual però en ordre invers
+- Si escriu sortir, se surt del programa
+- Si escull una opció no vàlida o **ajuda** es mostren les opcions disponibles
+
+Per exemple:
+```text
+ordenar nom
+ordenar naixement inv
+```
+## Exercici 0909
+
+Copia el programa anterior, i fes que a més cada personatge tingui un identificador únic de dues xifres més grans que 10.
+
+```text
+| Id | Nom               | País            | Disciplina          | Nobel? | Naixement |
+|----|-------------------|-----------------|---------------------|--------|-----------|
+| 24 | Albert Einstein   | Alemanya/Suïssa | Física              | Sí     | 1879      |
+| 18 | Marie Curie       | Polònia/França  | Física/Química      | Sí     | 1867      |
+| 99 | Isaac Newton      | Anglaterra      | Física/Matemàtiques | No     | 1643      |
+| 56 | Charles Darwin    | Anglaterra      | Biologia            | No     | 1809      |
+| 77 | Alan Turing       | Anglaterra      | Matemàtiques/Infor. | No     | 1912      |
+```
+
+- Permet afegir un nou personatge amb una comanda estil:
+```text
+afegir Rosalind Franklin,Anglaterra,Biologia Molecular,No,1920
+```
+
+- Permet esborrar un personate a partir del seu nom amb la comanda:
+```text
+esborrar Charles Darwin
+```
+
+- Permet filtrar informació amb comandes:
+```text
+filtrar disciplina "Física"
+filtrar naixement 1809
+```
+
+- Permet treure el filtre amb:
+```text
+treure filtre
+```
+
+Et caldràn les funcions:
+```java
+// Retorna un id entre 10 i 99 que no existeix a "personatges"
+public static int generaId(ArrayList<HashMap<String, Object>> personatges)
+
+// Comprova si un id ja existeix a l'ArrayList
+public static boolean idExisteix(ArrayList<HashMap<String, Object>> personatges, int id)
+```

@@ -1,14 +1,18 @@
 # TODO
 
 Menus - JLine
+
 Arxius json
+
+----
 
 Objectes
 
 Herencia
 
-JavaFX (gluon)
-JAVAFX (maquetació)
-...
+JavaFX (gluon), (maquetació), ...
+
 Arxius
+
 BBDD
+
