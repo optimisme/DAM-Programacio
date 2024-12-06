@@ -168,10 +168,10 @@ public static void main(String[] args) {
         numeros.add(20);
         numeros.add(25);
 
-        // Eliminar números imparells 
-        // (predicat ha de tornar 'true' o 'false')
+        // El predicat ha de tornar 'true' o 'false'
+        // Eliminar si és imparell (si el mòdul 2 és != 0)
         numeros.removeIf((n) -> {
-            return n % 2 != 0;
+            return (n % 2 != 0);
         });
 
         System.out.println(numeros); // Sortida: [10, 20]
