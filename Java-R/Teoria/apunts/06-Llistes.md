@@ -1033,5 +1033,6 @@ Fes un programa que guardi la següent informació en una combinació de **Array
 ```
 Finalment:
 
-- Aplica un filtre per mostrar els animals que pesen més de 100Kg i mostra la taula resultant.
-- Aplica un filtre per mostrar els animals que viuen menys o igual a 30 anys, i mostra la taula resultant amb una nova columna *Cal* que és el resultat dividir els anys de vida pel pes de l'animal.
+- Aplica un *filter* per mostrar la taula resultant amb els animals que pesen més de 100Kg.
+- Aplica un *map* per mostrar la taula resultant amb els noms dels animals en majúscules.
+- Aplica un *filter* i un *map* per mostrar la taula resultant amb els animals que viuen menys o igual a 30 anys, posa-hi un nou atribut *cal* (Columna "Cal") que és el resultat dividir els anys de vida pel pes de l'animal.
