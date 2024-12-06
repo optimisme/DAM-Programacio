@@ -1005,3 +1005,33 @@ public class Main {
 }
 ```
 
+### Exercici 0611
+
+Modifica el codi de:
+
+```bash
+src/main/exercici0611/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici0611.Main
+```
+
+Fes un programa que guardi la següent informació en una combinació de **ArrayList** i **HashMap** amb les claus: *nom*, *especie*, *pes*, *anysVida*
+
+```text
+| Nom      | Espècie  | Pes | A.V |
+|----------|----------|-----|-----|
+| Simba    | Lleó     | 190 |   15|
+| Pelut    | Gos      |   6 |   12|
+| Max      | Cavall   | 500 |   30|
+| Luna     | Gat      |   4 |   15|
+| Rocky    | Tortuga  | 150 |  100|
+| Polly    | Loro     |   1 |   50|
+```
+Finalment:
+
+- Aplica un filtre per mostrar els animals que pesen més de 100Kg i mostra la taula resultant.
+- Aplica un filtre per mostrar els animals que viuen menys o igual a 30 anys, i mostra la taula resultant amb una nova columna *Cal* que és el resultat dividir els anys de vida pel pes de l'animal.
