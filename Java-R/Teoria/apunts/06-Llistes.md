@@ -877,3 +877,131 @@ Per exemple:
 | Simba    | Lleó     | 190 |   15|
 | Max      | Cavall   | 500 |   30|
 ```
+
+## Filtrar
+
+Filtar elements d'una llista és escollir-ne algun subconjunt segons un criteri. 
+
+El tipus **ArrrayList** no permet filtrar elements de manera directe, però es pot fer fàcilment així:
+
+- Obtenir un *stream*
+- Escollir els elements amb un *predicat* que retorna *"true"* o *"false"*
+- Tornar-ho a *ArrayList* amb un *collect*
+
+Per filtrar els elements d'una llista, s'ha de definir un *predicat* tal i com en aquest exemple:
+
+### Exemple 0610
+
+Exemple de com filtrar els elements d'un *ArrayList*:
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple0610.Main
+```
+
+```java
+package com.exemple0610;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        
+        ArrayList<Integer> numeros = new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11));
+        
+        // Filtrar només els números parells
+        ArrayList<Integer> parells = new ArrayList<>(numeros.stream()
+            .filter((num) -> {
+                // El mòdul de 2 igual a 0 escull els parells
+                return (num % 2 == 0);
+            })
+            .collect(Collectors.toList()));
+        
+        System.out.println("Números parells: " + parells);
+    }
+}
+```
+
+## Mapejar
+
+Mapejar elements d'una llista és aplicar una funció a cada un dels elements. 
+
+El tipus **ArrrayList** no permet mapejar elements de manera directe, però es pot fer fàcilment així:
+
+- Obtenir un *stream*
+- Aplicar el mapping amb un *predicat*
+- Tornar-ho a *ArrayList* amb un *collect*
+
+Al mapejar **pot canviar el tipus**, en aquest exemple el *predicat* retorna un **Double** i per això la llista resultant és **"ArrayList<Double>"**:
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple0611.Main
+```
+
+```java
+package com.exemple0611;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        
+        ArrayList<Integer> numeros = new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11));
+        
+        // Obtenir una llista amb cada valor dividit per 2
+        ArrayList<Double> meitats = new ArrayList<>(numeros.stream()
+            .map((num) -> {
+                Double rst = num / 2.0;
+                return rst;
+            })
+            .collect(Collectors.toList()));
+        
+        System.out.println("Números parells: " + meitats);
+    }
+}
+```
+
+## Filtrar & Mapejar
+
+L'avantatge de fer servir un *stream* per aplicar filtres i mapejats és que es poden combinar aquestes dues operacions en un mateix *stream*:
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple0612.Main
+```
+
+```java
+package com.exemple0612;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+public class Main {
+    public static void main(String[] args) {
+        
+        ArrayList<Integer> numeros = new ArrayList<>(Arrays.asList(7, 8, 9, 10, 11));
+        
+        // Obtenir una llista amb cada valor dividit per 2
+        ArrayList<Double> senarsDuplicats = new ArrayList<>(numeros.stream()
+            .filter((num) -> {
+                // El mòdul de 2 diferent de 0 escull els imparells
+                return (num % 2 != 0);
+            })
+            .map((num) -> {
+                // Duplica el valor
+                Double rst = num * 2.0;
+                return rst;
+            })
+            .collect(Collectors.toList()));
+        
+        System.out.println("Imparells duplicats: " + senarsDuplicats);
+    }
+}
+```
+
