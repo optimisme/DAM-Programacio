@@ -71,7 +71,7 @@ Per fer que quan s'executa el programa amb:
 Demani el valor numèric de 'n', i faci la funció *MultipleOf3* segons el següent diagrama.
 
 ```java
-public static boolean MultipleOf3(float n)
+public static boolean multipleOf3(float n)
 ```
 
 <center>
@@ -95,7 +95,7 @@ Per fer que quan s'executa el programa amb:
 Demani els valors de 'a', 'b', 'c' , i faci la funció *maxOfThree* segons el següent diagrama.
 
 ```java
-public static int maxOfThree(float a, float b, float c)
+public static float maxOfThree(float a, float b, float c)
 ```
 
 <center>
