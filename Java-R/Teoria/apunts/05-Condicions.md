@@ -200,7 +200,7 @@ Per fer que quan s'executa el programa amb:
 Retorni el número més petit fent servir **l'operador ternari** amb una funció que es digui **minOfThree**
 
 ```java
-public static int minOfThree(float a, float b, float c)
+public static float minOfThree(float a, float b, float c)
 ```
 
 ```text
