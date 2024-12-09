@@ -16,7 +16,8 @@ Un array és una estructura de dades que permet emmagatzemar múltiples **elemen
 
 Els arrays **tenen una mida fixa** i els seus elements es poden accedir mitjançant un índex i `[x]`.
 
-La longitud d'un array s'obté amb **.length**
+- La longitud d'un array s'obté amb: **.length**
+- Per escriure el contingut d'un array: **Arrays.toString(nomArrray)**
 
 ### Exemple 0600
 
@@ -28,11 +29,16 @@ La longitud d'un array s'obté amb **.length**
 ```java
 package com.exemple0600;
 
+import java.util.Arrays;
+
 public class Main {
 
     public static void main(String[] args) {
         // Declaració i inicialització d'un array
         int[] numeros = {10, 20, 30, 40, 50};
+
+        // Escriure els elements
+        System.out.println("Array: " + Arrays.toString(numeros));
 
         // Accés a elements
         System.out.println("Element a l'índex [0]: " + numeros[0]);
