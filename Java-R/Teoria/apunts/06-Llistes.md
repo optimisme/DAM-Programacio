@@ -540,6 +540,10 @@ Hashmap<String, Hashmap<String, Object>>
     ...
 }
 ```
+Anidar *"HasMap"* permet fer:
+```text
+.get("Anna").get("Edat")
+```
 
 Exemple de sortida:
 ```text
