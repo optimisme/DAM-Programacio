@@ -523,6 +523,11 @@ Sense fer servir bucles, crea un Mixed-Map que contingui:
 
 Després, accedeix manualment a cadascuna de les claus i mostra el contingut.
 
+L'estructura és: 
+```java
+Hashmap<String, Hashmap<String, Object>>
+```
+
 Exemple de sortida:
 ```text
 Anna té 30 anys i practica futbol.
