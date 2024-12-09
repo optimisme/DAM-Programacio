@@ -9,6 +9,7 @@ public class Main {
             System.out.println(nums[5]);
 
             int result = 10 / 0;
+            System.out.println(result);
 
         } catch (ArithmeticException e) {
             // Bloc per divisions per 0
