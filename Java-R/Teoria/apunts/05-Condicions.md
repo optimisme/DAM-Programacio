@@ -312,7 +312,7 @@ public static String nomDelMes(int valor)
 ```
 
 ```text
-Escri un mes de l'any: 2
+Escri un número de mes de l'any: 2
 "Febrer" és el mes número 2
 ```
 
