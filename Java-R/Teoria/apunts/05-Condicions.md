@@ -305,7 +305,7 @@ Per fer que quan s'executa el programa amb:
 ./run.sh com.exercici0505.Main
 ```
 
-Demani un mes de l'any i retorni el seu número amb la funció *"nomDelMes"*
+Demani un número de mes de l'any i retorni el seu nom amb la funció *"nomDelMes"*
 
 ```java
 public static String nomDelMes(int valor)
