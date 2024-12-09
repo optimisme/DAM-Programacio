@@ -527,6 +527,19 @@ L'estructura és:
 ```java
 Hashmap<String, Hashmap<String, Object>>
 ```
+```json
+{
+    "Anna": {
+        "edat": 30,
+        "esport": "futbol"
+    },
+    "Joan": {
+        "edat": 18,
+        "esport": "natació"
+    },
+    ...
+}
+```
 
 Exemple de sortida:
 ```text
