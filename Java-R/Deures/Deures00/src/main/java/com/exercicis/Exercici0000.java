@@ -7,7 +7,7 @@ public class Exercici0000 {
         Scanner scanner = new Scanner(System.in);
 
         /*
-            TODO: Resol aquí l'exercici 
+            TODO: Resol aquí l'exercici
          */
 
         scanner.close();
