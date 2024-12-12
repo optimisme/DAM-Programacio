@@ -878,7 +878,7 @@ Fes un programa que guardi la següent informació en una combinació de **Array
 | Max      | Cavall   | 500 |   30|
 | Luna     | Gat      |   4 |   15|
 | Rocky    | Tortuga  | 150 |  100|
-| Polly    | Loro     |   1 |   50|
+| Alita    | Loro     |   1 |   50|
 ```
 Finalment, mostra el resultat d'ordenar la llista segons:
 
@@ -898,7 +898,7 @@ Per exemple:
 > Ordenats per "pes"
 | Nom      | Espècie  | Pes | A.V |
 |----------|----------|-----|-----|
-| Polly    | Loro     |   1 |   50|
+| Alita    | Loro     |   1 |   50|
 | Luna     | Gat      |   4 |   15|
 | Pelut    | Gos      |   6 |   12|
 | Rocky    | Tortuga  | 150 |  100|
@@ -1057,7 +1057,7 @@ Fes un programa que guardi la següent informació en una combinació de **Array
 | Max      | Cavall   | 500 |   30|
 | Luna     | Gat      |   4 |   15|
 | Rocky    | Tortuga  | 150 |  100|
-| Polly    | Loro     |   1 |   50|
+| Alita    | Loro     |   1 |   50|
 ```
 Finalment:
 
