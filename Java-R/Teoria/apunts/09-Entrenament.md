@@ -38,31 +38,19 @@ Validar els anagrames d'exemple anteriors, i un parell de proves amb quatre para
 
 ## Exercici 0901
 
-import random
-def tira_moneda():
-    resultat = random.randint(1, 2)
-    if resultat == 1:
-        return "cara"
-    else:
-        return "creu"
+Fes un programa que simuli tirar una moneda tres vegades a l'aire i compti el número de cares que han sortit.
 
-def tira_monedes():
-    moneda0 = tira_moneda()
-    moneda1 = tira_moneda()
-    moneda2 = tira_moneda()
-    return moneda0, moneda1, moneda2
+Necessites dues funcions: 
 
-m0, m1, m2 = tira_monedes()
-cares = 0
-if m0 == "cara":
-    cares = cares + 1
-if m1 == "cara":
-    cares = cares + 1
-if m2 == "cara":
-    cares = cares + 1
+- **tiraMoneda** que retorna "cara" o "creu"
+- **tiraMonedes** que retorna un ArrayList amb el resultat de tirar tres monedes
 
-print(f'El resultat del llançament de les tres monedes és: {m0}, {m1}, {m2}')
-print(f'El nombre de cares és: {cares}')
+Finalment has de mostrar una resposta d'aquest estil:
+
+```text
+El resultat del llançament de les tres monedes és: "cara", "creu", "cara"
+El nombre de cares és: 2
+```
 
 ## Exercici 0902
 
