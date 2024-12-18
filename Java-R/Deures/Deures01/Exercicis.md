@@ -3,100 +3,18 @@
 
 
 
-# Examen0
+# Exercici0
 
-Fes la funció **validarNom** que valida si el nom és vàlid, només accepta lletres i el caràcter espai.
-
-Exemples:
-  validarNom("Maria Neures") retorna true
-  validarNom("io") retorna true
-  validarNom("Picachu4") retorna false
-
-Et cal:
-
-```java
-// Retorna si el nom és vàlid
-
-```
-
-Per executar i testejar el programa:
-
-```bash
-# Codi: src/main/java/com/exercicis/Exercici0000.java
-
-# A la carpeta "Deures01" executar el programa
-./run.sh com.exercicis.ExempleExamen
-
-# A la carpeta "Deures01" executar el test
-./runTest.sh com.exercicis.TestExempleExamen
-
-# Testos individuals
-./runTest.sh "com.exercicis.TestExempleExamen#testValidarNom"
-```
+Resol els mètodes de l'*Exercici0* segons la descripció dels seus comentaris.
 
 
-# Exercici 0004
+# Exercici1
 
-Fes un programa que demana a l'usuari que escrigui una contrasenya.
+Resol els mètodes de l'*Exercici1* segons la descripció dels seus comentaris.
 
-Crea la funció 'validaContrasenya' que apartir d'un text de contrasenya dirà que és vàlida si:
 
-- La contrasenya té almenys 8 caràcters
 
-- La contrasenya té almenys 2 lletres majúscules i 2 lletres minúscules
 
-La resposta de la funció serà el text:
-
-- "La contrasenya és vàlida" si és vàlida
-
-- "La contrasenya NO és vàlida" si no és vàlida
-
-Et calen les funcions:
-
-```java
-// Retorna el número de majúscules
-public static int contaMajuscules(String contrasenya)
-// Retorna el número de minúscules
-public static int contaMinuscules(String contrasenya)
-// Retorna, segons cal:
-// "La contrasenya és vàlida"
-// "La contrasenya NO és vàlida"
-public static String validaContrasenya(String contrasenya)
-```
-
-Per executar i testejar el programa:
-
-```bash
-# Codi: src/main/java/com/exercicis/Exercici0004.java
-
-# A la carpeta "Deures00" executar el programa
-./run.sh com.exercicis.Exercici0004
-
-# A la carpeta "Deures00" executar el test
-./runTest.sh com.exercicis.TestExercici0004
-
-# Testos individuals
-./runTest.sh "com.exercicis.TestExercici0004#testContaMajuscules"
-./runTest.sh "com.exercicis.TestExercici0004#testContaMinuscules"
-./runTest.sh "com.exercicis.TestExercici0004#testValidaContrasenya"
-./runTest.sh "com.exercicis.TestExercici0004#testMainFunctionValidPwd"
-./runTest.sh "com.exercicis.TestExercici0004#testMainFunctionInvalidPwd"
-./runTest.sh "com.exercicis.TestExercici0004#testMainFunctionEdgeCase"
-```
-
-Exemples:
-```text
-Escriu una contrasenya: PassWord123
-La contrasenya 'PassWord123': La contrasenya és vàlida
-Escriu una contrasenya: password
-La contrasenya 'password': La contrasenya NO és vàlida
-Escriu una contrasenya: PassWord123
-La contrasenya 'PassWord123': La contrasenya és vàlida
-Escriu una contrasenya: Pass12
-La contrasenya 'Pass12': La contrasenya NO és vàlida
-Escriu una contrasenya: ValidPass123
-La contrasenya 'ValidPass123': La contrasenya és vàlida
-```
 
 ```python
 #!/usr/bin/env python3
