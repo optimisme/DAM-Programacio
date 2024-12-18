@@ -732,7 +732,11 @@ public class Exercici0 {
     }
 
     /**
-     * Genera una representació en forma de taula de les operacions associades a un client específic.
+     * Genera una representació en forma de taula de les operacions 
+     * associades a un client específic.
+     * 
+     * Cada linia del resultat es guarda en un String de l'ArrayList.
+     * 
      * Fes servir: Locale.setDefault(Locale.US)
      * 
      * Format esperat de sortida:
@@ -864,6 +868,7 @@ Impostos:  21% (14.41)                     Total: 83.04
             Locale.setDefault(defaultLocale);
         }
     }
+
 
 
     public static void main(String[] args) {
