@@ -46,6 +46,20 @@ public class Exercici0 {
     public static HashMap<String, HashMap<String, Object>> clients = new HashMap<>();
     public static ArrayList<HashMap<String, Object>> operacions = new ArrayList<>();
 
+    // Neteja la consola tenint en compte el sistema operatiu
+    public static void clearScreen() {
+        try {
+            if (System.getProperty("os.name").toLowerCase().contains("win")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
     /**
      * Valida si un nom és vàlid.
      * Un nom és vàlid si no està buit i només conté lletres o espais
@@ -869,10 +883,17 @@ Impostos:  21% (14.41)                     Total: 83.04
         }
     }
 
-
-
+    /**
+     * 
+     * @run ./run.sh "com.exercicis.Exercici0"
+     * @test ./runTest.sh "com.exercicis.TestExercici0"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testMain"
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+
+        clearScreen();
+        System.out.println("Main");
 
         // Resol aquí el codi principal
 
