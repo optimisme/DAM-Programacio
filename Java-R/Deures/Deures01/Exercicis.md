@@ -1,50 +1,110 @@
+
+# Explicació
+
+
+
+# Examen0
+
+Fes la funció **validarNom** que valida si el nom és vàlid, només accepta lletres i el caràcter espai.
+
+Exemples:
+  validarNom("Maria Neures") retorna true
+  validarNom("io") retorna true
+  validarNom("Picachu4") retorna false
+
+Et cal:
+
+```java
+// Retorna si el nom és vàlid
+
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0000.java
+
+# A la carpeta "Deures01" executar el programa
+./run.sh com.exercicis.ExempleExamen
+
+# A la carpeta "Deures01" executar el test
+./runTest.sh com.exercicis.TestExempleExamen
+
+# Testos individuals
+./runTest.sh "com.exercicis.TestExempleExamen#testValidarNom"
+```
+
+
+# Exercici 0004
+
+Fes un programa que demana a l'usuari que escrigui una contrasenya.
+
+Crea la funció 'validaContrasenya' que apartir d'un text de contrasenya dirà que és vàlida si:
+
+- La contrasenya té almenys 8 caràcters
+
+- La contrasenya té almenys 2 lletres majúscules i 2 lletres minúscules
+
+La resposta de la funció serà el text:
+
+- "La contrasenya és vàlida" si és vàlida
+
+- "La contrasenya NO és vàlida" si no és vàlida
+
+Et calen les funcions:
+
+```java
+// Retorna el número de majúscules
+public static int contaMajuscules(String contrasenya)
+// Retorna el número de minúscules
+public static int contaMinuscules(String contrasenya)
+// Retorna, segons cal:
+// "La contrasenya és vàlida"
+// "La contrasenya NO és vàlida"
+public static String validaContrasenya(String contrasenya)
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercicis/Exercici0004.java
+
+# A la carpeta "Deures00" executar el programa
+./run.sh com.exercicis.Exercici0004
+
+# A la carpeta "Deures00" executar el test
+./runTest.sh com.exercicis.TestExercici0004
+
+# Testos individuals
+./runTest.sh "com.exercicis.TestExercici0004#testContaMajuscules"
+./runTest.sh "com.exercicis.TestExercici0004#testContaMinuscules"
+./runTest.sh "com.exercicis.TestExercici0004#testValidaContrasenya"
+./runTest.sh "com.exercicis.TestExercici0004#testMainFunctionValidPwd"
+./runTest.sh "com.exercicis.TestExercici0004#testMainFunctionInvalidPwd"
+./runTest.sh "com.exercicis.TestExercici0004#testMainFunctionEdgeCase"
+```
+
+Exemples:
+```text
+Escriu una contrasenya: PassWord123
+La contrasenya 'PassWord123': La contrasenya és vàlida
+Escriu una contrasenya: password
+La contrasenya 'password': La contrasenya NO és vàlida
+Escriu una contrasenya: PassWord123
+La contrasenya 'PassWord123': La contrasenya és vàlida
+Escriu una contrasenya: Pass12
+La contrasenya 'Pass12': La contrasenya NO és vàlida
+Escriu una contrasenya: ValidPass123
+La contrasenya 'ValidPass123': La contrasenya és vàlida
+```
+
+```python
 #!/usr/bin/env python3
 
 import os
 import platform
 import random
 
-nom = ""
-cognoms = ""
-dni = ""
-
-"""
-
-En aquest exàmen es farà un gestor de dades per una notaria.
-
-Hi haurà diferents tipus de dades, 'clients' i 'operacions'.
-
-Exemples de com han de ser les dades:
-
-clients = {
-    "client_0": {
-        "nom": "Joan Garcia", 
-        "edat": 45, 
-        "factors": ["autònom", "risc mitjà"], 
-        "descompte": 15
-    },
-    "client_1": {"nom": "Marta Pérez", "edat": 38, "factors": ["empresa", "risc baix"], "descompte": 10},
-    "client_2": {"nom": "Pere López", "edat": 52, "factors": ["autònom", "risc alt"], "descompte": 5}
-}
-
-operacions = [
-    {
-        "id": 0, 
-        "tipus": "Declaració d'impostos", 
-        "clients": ["client_0", "client_2"], 
-        "data": "2024-10-05", 
-        "observacions": "Presentació conjunta", 
-        "preu": 150.0
-    },
-    {"id": 1, "tipus": "Gestió laboral", "clients": ["client_2"], "data": "2024-10-04", "observacions": "Contractació de personal", "preu": 200.0},
-    {"id": 2, "tipus": "Assessoria fiscal", "clients": ["client_1"], "data": "2024-10-03", "observacions": "Revisió d'informes", "preu": 120.0}
-]
-
-"""
-
-# Inicialitzar les dades
-clients = {}
-operacions = []
 
 # Aquesta funció neteja la pantalla, no la modifiquis
 def clearScreen():
@@ -57,18 +117,7 @@ clearScreen()
 
 def validar_nom(nom):
     """
-    Valida que un nom sigui vàlid
-    Paràmetres:
-        nom: el nom que s'ha de validar
-    Funcionament:
-        Si el nom és una cadena buida, retorna false
-        Per cada caràcter dins de nom mira que sigui una lletra o un espai blanc
-    Retorn:
-        True si el nom és vàlid (no és una cadena buida, només conté lletres o espais)
-        False altrament
-    Exemples:
-        nom("Maria Neures") -> True
-        nom("Picachu4") -> False
+
     """
     if nom == "":
         return False
@@ -1034,3 +1083,4 @@ def mainRun():
 
 if __name__ == '__main__':
     mainRun()
+```
