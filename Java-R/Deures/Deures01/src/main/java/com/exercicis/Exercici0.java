@@ -40,7 +40,7 @@ import java.util.Random;
     ]
 */
 
-public class Examen0 {
+public class Exercici0 {
 
     // Variables globals (es poden fer servir a totes les funcions)
     public static HashMap<String, HashMap<String, Object>> clients = new HashMap<>();
@@ -54,7 +54,7 @@ public class Examen0 {
      * @param nom El nom a validar.
      * @return True si el nom és vàlid, false altrament.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testValidarNom"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testValidarNom"
      */
     public static boolean validarNom(String nom) {
         nom = nom.trim().toLowerCase(); 
@@ -81,7 +81,7 @@ public class Examen0 {
      * @param edat L'edat que s'ha de validar.
      * @return True si l'edat es troba entre 18 i 100 (inclosos), false altrament.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testValidarEdat"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testValidarEdat"
      */
     public static boolean validarEdat(int edat) {
 
@@ -103,7 +103,7 @@ public class Examen0 {
      * @param factors Llista d'elements a validar.
      * @return True si els factors compleixen les condicions, false altrament.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testValidarFactors"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testValidarFactors"
      */
     public static boolean validarFactors(String[] factors) {
         if (factors != null && factors.length == 2) {
@@ -133,7 +133,7 @@ public class Examen0 {
      * @param descompte El valor del descompte a validar.
      * @return True si el descompte és vàlid, false altrament.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testValidarDescompte"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testValidarDescompte"
      */
     public static boolean validarDescompte(double descompte) {
         return (descompte >= 0 && descompte <= 20);
@@ -157,7 +157,7 @@ public class Examen0 {
      * @param tipus El tipus d'operació a validar.
      * @return True si el tipus d'operació és vàlid, false altrament.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testValidarTipusOperacio"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testValidarTipusOperacio"
      */
     public static boolean validarTipusOperacio(String tipus) {
         String[] tipusValids = {
@@ -194,7 +194,7 @@ public class Examen0 {
      * @param clientsGlobals La llista global de clients vàlids.
      * @return True si la llista de clients compleix totes les condicions, false altrament.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testValidarClients"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testValidarClients"
      */
     public static boolean validarClients(ArrayList<String> clientsLlista, ArrayList<String> clientsGlobals) {
         if (clientsLlista == null || clientsGlobals == null) {
@@ -228,7 +228,7 @@ public class Examen0 {
      * @param str La cadena a comprovar.
      * @return True si la cadena conté només dígits, false altrament.
      *
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testIsAllDigits"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testIsAllDigits"
      */
     public static boolean isAllDigits(String str) {
         if (str.length() == 0) {
@@ -261,7 +261,7 @@ public class Examen0 {
      * @param data La cadena que representa una data en format 'AAAA-MM-DD'.
      * @return True si la data és vàlida, false altrament.
      *
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testValidarData"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testValidarData"
      */
     public static boolean validarData(String data) {
         if (data == null || data.length() != 10) {
@@ -323,7 +323,7 @@ public class Examen0 {
      * @param preu El valor del preu a validar.
      * @return True si el preu és un número i és superior a 100, false altrament.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testValidarPreu"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testValidarPreu"
      */
     public static boolean validarPreu(double preu) {
         return preu > 100;
@@ -336,7 +336,7 @@ public class Examen0 {
      *
      * @return Una clau única per al client.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testGeneraClauClient"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testGeneraClauClient"
      */
     public static String generaClauClient() {
         Random random = new Random();
@@ -366,7 +366,7 @@ public class Examen0 {
      * @param descompte El descompte associat al nou client.
      * @return La clau del nou client afegit.
      *
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testAfegirClient"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testAfegirClient"
      */
     public static String afegirClient(String nom, int edat, ArrayList<String> factors, double descompte) {
 
@@ -401,7 +401,7 @@ public class Examen0 {
      * @param nouValor El nou valor que s'ha d'assignar al camp.
      * @return Un missatge d'error si el client o el camp no existeixen; "" altrament.
      *
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testModificarClient"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testModificarClient"
      */
     public static String modificarClient(String clauClient, String camp, Object nouValor) {
         if (!clients.containsKey(clauClient)) {
@@ -431,7 +431,7 @@ public class Examen0 {
      *
      * @param clauClient La clau del client que s'ha d'esborrar.
      * @return Un missatge d'error si el client no existeix o "OK" si s'ha esborrat correctament.
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testEsborrarClient"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testEsborrarClient"
      */
     public static String esborrarClient(String clauClient) {
         if (!clients.containsKey(clauClient)) {
@@ -452,7 +452,7 @@ public class Examen0 {
      * @return Una llista de diccionaris, on cada diccionari conté 
      *         la clau del client i les dades del client.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testLlistarClients"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testLlistarClients"
      */
     public static ArrayList<HashMap<String, HashMap<String, Object>>> llistarClients(
             ArrayList<String> claus,
@@ -494,7 +494,7 @@ public class Examen0 {
      *
      * @return Una clau única per a l'operació.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testGeneraClauOperacio"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testGeneraClauOperacio"
      */
     public static String generaClauOperacio() {
         Random random = new Random();
@@ -537,7 +537,7 @@ public class Examen0 {
      * @param preu El preu associat a l'operació.
      * @return L'identificador de la nova operació.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testAfegirOperacio"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testAfegirOperacio"
      */
     public static String afegirOperacio(
             String tipus,
@@ -569,7 +569,7 @@ public class Examen0 {
      * @return Un missatge d'error si l'operació o el camp no existeix, "OK" 
      *         si la modificació s'ha realitzat correctament.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testModificarOperacio"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testModificarOperacio"
      */
     public static String modificarOperacio(String idOperacio, String camp, Object nouValor) {
         for (HashMap<String, Object> operacio : operacions) {
@@ -591,7 +591,7 @@ public class Examen0 {
      * @param idOperacio L'identificador de l'operació que es vol esborrar.
      * @return Un missatge d'error si l'operació amb 'idOperacio' no existeix, "OK" si s'esborra correctament.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testEsborrarOperacio"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testEsborrarOperacio"
      */
     public static String esborrarOperacio(String idOperacio) {
         for (int i = 0; i < operacions.size(); i++) {
@@ -613,7 +613,7 @@ public class Examen0 {
      * @param condicions Un HashMap amb les condicions que les operacions han de complir.
      * @return Una llista amb les operacions que compleixen les condicions.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testLlistarOperacions"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testLlistarOperacions"
      */
     public static ArrayList<HashMap<String, Object>> llistarOperacions(
             ArrayList<String> ids,
@@ -654,7 +654,7 @@ public class Examen0 {
      * @param clauClient La clau única del client que es vol filtrar.
      * @return Una llista amb les operacions associades al client especificat.
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testLlistarOperacionsClient"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testLlistarOperacionsClient"
      */
     public static ArrayList<HashMap<String, Object>> llistarOperacionsClient(String clauClient) {
         ArrayList<HashMap<String, Object>> resultat = new ArrayList<>();
@@ -691,7 +691,7 @@ public class Examen0 {
      * Si input és: {{"Hola", "left", 6}, {"Mon", "right", 5}}
      * Output seria: "Hola    Mon"
      * 
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testAlineaColumnes"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testAlineaColumnes"
      */
     public static String alineaColumnes(ArrayList<Object[]> columnes) {
         StringBuilder result = new StringBuilder();
@@ -773,9 +773,9 @@ Impostos:  21% (14.41)                     Total: 83.04
      * @param ordre El camp pel qual s'ordenaran les operacions (exemple: "data", "preu").
      * @return Una llista de cadenes de text que representen les línies de la taula.
      *
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testTaulaOperacionsClient0"
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testTaulaOperacionsClient1"
-     * @test ./runTest.sh "com.exercicis.TestExamen0#testTaulaOperacionsClient2"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testTaulaOperacionsClient0"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testTaulaOperacionsClient1"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testTaulaOperacionsClient2"
      */
     public static ArrayList<String> taulaOperacionsClient(String clauClient, String ordre) {
         Locale defaultLocale = Locale.getDefault();
