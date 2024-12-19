@@ -898,4 +898,32 @@ Impostos:  21% (14.41)                     Total: 83.04
             Locale.setDefault(defaultLocale);
         }
     }
+
+    @Test
+    public void testMostrarMenu() {
+        // Menú esperat
+        String menuText = """
+=== Menú de Gestió de Notaria ===
+1. Afegir client
+2. Modificar client
+3. Esborrar client
+4. Llistar clients
+5. Afegir operació
+6. Modificar operació
+7. Esborrar operació
+8. Llistar operacions
+0. Sortir
+        """;
+        ArrayList<String> menuEsperat = new ArrayList<>(List.of(menuText.split("\\R")));
+
+        // Executa el mètode
+        ArrayList<String> menuGenerat = Exercici0.mostrarMenu();
+
+        // Compara el resultat amb l'esperat
+        String diff = TestStringUtils.findFirstDifference(menuGenerat.toString(), menuEsperat.toString());
+        assertTrue(diff.compareTo("identical") == 0,
+            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+    }
+
+    
 }

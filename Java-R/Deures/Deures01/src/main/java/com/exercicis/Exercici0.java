@@ -1,6 +1,7 @@
 package com.exercicis;
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
@@ -882,6 +883,35 @@ Impostos:  21% (14.41)                     Total: 83.04
             Locale.setDefault(defaultLocale);
         }
     }
+
+    /**
+     * Genera el menú principal de l'aplicació de Gestió de Notaria.
+     * 
+     * Retorna una llista de cadenes de text que representen 
+     * les opcions disponibles en el menú principal de l'aplicació.
+     *
+     * @return Una llista de cadenes de text amb les opcions del menú principal.
+     *
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testMostrarMenu"
+     */
+    public static ArrayList<String> mostrarMenu() {
+        String menuText = """
+=== Menú de Gestió de Notaria ===
+1. Afegir client
+2. Modificar client
+3. Esborrar client
+4. Llistar clients
+5. Afegir operació
+6. Modificar operació
+7. Esborrar operació
+8. Llistar operacions
+0. Sortir
+            """;
+        String[] lines = menuText.split("\\R");
+        return new ArrayList<>(Arrays.asList(lines));
+    }
+
+
 
     /**
      * 
