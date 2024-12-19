@@ -9,6 +9,10 @@ public class TestStringUtils {
      * @return A string showing the lines with a marker at the first different character.
      */
     public static String findFirstDifference(String str1, String str2) {
+        // Normalitzem els salts de línia a \n
+        str1 = normalizeLineEndings(str1);
+        str2 = normalizeLineEndings(str2);
+        
         int length = Math.min(str1.length(), str2.length());
         for (int i = 0; i < length; i++) {
             if (str1.charAt(i) != str2.charAt(i)) {
@@ -21,6 +25,13 @@ public class TestStringUtils {
         }
         
         return "identical";
+    }
+
+    /**
+     * Normalitza els salts de línia a \n
+     */
+    private static String normalizeLineEndings(String str) {
+        return str.replace("\r\n", "\n").replace("\r", "\n");
     }
 
     private static String getDifference(String strReceived, String strExpected, int index) {
@@ -80,5 +91,3 @@ public class TestStringUtils {
         return end;
     }
 }
-
-
