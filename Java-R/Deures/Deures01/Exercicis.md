@@ -3,13 +3,13 @@
 
 Aquests exercicis són alhora exemples d'examen.
 
-# Exercici0
+# Exercici 0
 
 Resol els mètodes de l'*Exercici0* segons la descripció dels seus comentaris al codi amb *//TODO.*
 
 (Examen llarg de dificultat moderada)
 
-# Exercici1
+# Exercici 1
 
 Resol els mètodes de l'*Exercici1* segons la descripció dels seus comentaris al codi amb *//TODO.* per fer un joc tipus **2048** per línia de comandes.
 
