@@ -375,7 +375,8 @@ public class Exercici1 {
      * 1. Genera una fitxa inicial
      * 2. Entra en un bucle que:
      *    - Genera una nova fitxa
-     *    - Neteja la pantalla i mostra el taulell
+     *    - Neteja la pantalla (amb clearScreen)
+     *    - Mostra el taulell
      *    - Mostra missatges d'error si n'hi ha
      *    - Comprova si el joc ha acabat (guanyat o perdut)
      *    - Demana i processa el següent moviment del jugador
