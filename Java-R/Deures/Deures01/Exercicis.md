@@ -15,3 +15,4 @@ Resol els mètodes de l'*Exercici1* segons la descripció dels seus comentaris a
 
 (Examen curt de dificultat alta)
 
+Teniu un exemple del joc en aquest enllaç **"[Play 2048](https://play2048.co)"**, però enlloc de posar el final a *2048* serà a **128**
