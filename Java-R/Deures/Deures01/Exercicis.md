@@ -1,7 +1,7 @@
 
 # Explicació
 
-Aquests exercicis són alhora exemples d'examen.
+Aquests exercicis són exemples d'examens.
 
 # Exercici 0
 
