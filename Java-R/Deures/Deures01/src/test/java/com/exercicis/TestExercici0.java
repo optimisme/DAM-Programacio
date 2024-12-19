@@ -963,6 +963,496 @@ Impostos:  21% (14.41)                     Total: 83.04
     }
     
     
+    @Test
+    public void testLlistarClientsMenu() {
+        // Configura els clients globals
+        Exercici0.clients.clear();
+    
+        // Cas 1: Sense clients
+        ArrayList<String> esperatSenseClients = new ArrayList<>();
+        esperatSenseClients.add("=== Llistar Clients ===");
+        esperatSenseClients.add("No hi ha clients per mostrar.");
+    
+        ArrayList<String> resultatSenseClients = Exercici0.getLlistarClientsMenu();
+        assertEquals(esperatSenseClients, resultatSenseClients, "El resultat amb zero clients hauria de coincidir amb l'esperat.");
+    
+        // Cas 2: Amb clients
+        HashMap<String, Object> client1 = new HashMap<>();
+        client1.put("nom", "Joan");
+        client1.put("edat", 30);
+        client1.put("factors", Arrays.asList("autònom", "risc mitjà"));
+        client1.put("descompte", 10);
+    
+        HashMap<String, Object> client2 = new HashMap<>();
+        client2.put("nom", "Maria");
+        client2.put("edat", 45);
+        client2.put("factors", Arrays.asList("empresa", "risc baix"));
+        client2.put("descompte", 15);
+    
+        Exercici0.clients.put("client_1", client1);
+        Exercici0.clients.put("client_2", client2);
+    
+        ArrayList<String> esperatAmbClients = new ArrayList<>();
+        esperatAmbClients.add("=== Llistar Clients ===");
+        esperatAmbClients.add("client_1: " + client1.toString());
+        esperatAmbClients.add("client_2: " + client2.toString());
+    
+        ArrayList<String> resultatAmbClients = Exercici0.getLlistarClientsMenu();
+        assertEquals(esperatAmbClients, resultatAmbClients, "El resultat amb clients hauria de coincidir amb l'esperat.");
+    }
+    
+    @Test
+    public void testDibuixarLlista() {
+        // Capturar la sortida del sistema
+        PrintStream originalOut = System.out;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outputStream));
+    
+        try {
+            // Cas de prova
+            ArrayList<String> llista = new ArrayList<>(List.of(
+                "Primera línia",
+                "Segona línia",
+                "Tercera línia"
+            ));
+    
+            // Executa el mètode
+            Exercici0.dibuixarLlista(llista);
+    
+            // Generar la sortida esperada
+            String sortidaEsperada = String.join(System.lineSeparator(), llista) + System.lineSeparator();
+    
+            // Compara utilitzant TestStringUtils
+            String diff = TestStringUtils.findFirstDifference(outputStream.toString(), sortidaEsperada);
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+        } finally {
+            // Restaura la sortida original del sistema
+            System.setOut(originalOut);
+        }
+    }
+    
+    @Test
+    public void testLlegirNom() {
+        Object[][] testCases = {
+            {"Joan\n", "Joan"},
+            {"123\nAnna\n", "Anna"},
+            {"Ayoub Martorell\n", "Ayoub Martorell"},
+            {"\nPep\n", "Pep"},
+            {"!@#$\nMaria\n", "Maria"}
+        };
+        
+        for (Object[] testCase : testCases) {
+            String input = (String) testCase[0];
+            String expectedOutput = (String) testCase[1];
+            
+            // Captura l'entrada simulada i la sortida del sistema
+            InputStream originalIn = System.in;
+            PrintStream originalOut = System.out;
+            
+            try {
+                System.setIn(new ByteArrayInputStream(input.getBytes()));
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(outputStream));
+                Scanner scanner = new Scanner(System.in);
+                
+                String result = Exercici0.llegirNom(scanner);
+                
+                // Compara l'entrada amb el resultat esperat
+                String diff = TestStringUtils.findFirstDifference(result, expectedOutput);
+                assertTrue(diff.equals("identical"),
+                    ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+                
+                // Verifica que els missatges d'error apareguin quan calgui
+                if (input.split("\n").length > 1) {  // Si hi ha més d'una línia, vol dir que hi ha hagut error
+                    String expectedError = "Nom no vàlid. Només s'accepten lletres i espais.";
+                    String capturedOutput = outputStream.toString();
+                    assertTrue(capturedOutput.contains(expectedError),
+                        "No s'ha trobat el missatge d'error esperat en la sortida:\n" + capturedOutput);
+                }
+            } finally {
+                // Restaura l'entrada i sortida original
+                System.setIn(originalIn);
+                System.setOut(originalOut);
+            }
+        }
+    }
+    
+    @Test
+    public void testLlegirEdat() {
+        Object[][] testCases = {
+            {"25\n", 25},
+            {"17\n30\n", 30}, // Fora de rang inicialment, després correcte
+            {"abc\n50\n", 50}, // Entrada no vàlida, després correcte
+            {"101\n99\n", 99}, // Fora de rang inicialment, després correcte
+            {"18\n", 18} // Valor límit inferior
+        };
+        
+        for (Object[] testCase : testCases) {
+            String input = (String) testCase[0];
+            int expectedOutput = (int) testCase[1];
+            
+            // Captura l'entrada simulada i la sortida del sistema
+            InputStream originalIn = System.in;
+            PrintStream originalOut = System.out;
+            
+            try {
+                System.setIn(new ByteArrayInputStream(input.getBytes()));
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(outputStream));
+                Scanner scanner = new Scanner(System.in);
+                
+                int result = Exercici0.llegirEdat(scanner);
+                
+                // Compara el resultat amb el valor esperat
+                assertEquals(expectedOutput, result, 
+                    String.format("Per l'entrada '%s': Valor esperat: %d, Valor obtingut: %d", 
+                        input.replace("\n", "\\n"), expectedOutput, result));
+                
+                // Verifica que els missatges d'error apareguin quan calgui
+                if (input.split("\n").length > 1) {  // Si hi ha més d'una línia, hi ha hagut error
+                    String expectedError = "Edat no vàlida. Introdueix un número entre 18 i 100.";
+                    String capturedOutput = outputStream.toString();
+                    assertTrue(capturedOutput.contains(expectedError),
+                        String.format("Per l'entrada '%s': No s'ha trobat el missatge d'error esperat.\nSortida capturada:\n%s", 
+                            input.replace("\n", "\\n"), capturedOutput));
+                }
+                
+            } finally {
+                // Restaura l'entrada i sortida original
+                System.setIn(originalIn);
+                System.setOut(originalOut);
+            }
+        }
+    }
 
- 
+    @Test
+    public void testLlegirFactors() {
+        Object[][] testCases = {
+            {"autònom\nrisc alt\n", List.of("autònom", "risc alt")},
+            {"empresa\nrisc baix\n", List.of("empresa", "risc baix")},
+            {"autònom\nrisc baix\nrisc mitjà\n", List.of("autònom", "risc mitjà")}, // Entrada invàlida seguida de vàlida
+            {"empresa\nabc\nrisc alt\n", List.of("empresa", "risc alt")}, // Entrada no vàlida seguida de vàlida
+            {"empresa\nrisc mitjà\n", List.of("empresa", "risc mitjà")}
+        };
+    
+        for (Object[] testCase : testCases) {
+            String input = (String) testCase[0];
+            ArrayList<String> expectedOutput = new ArrayList<>((List<String>) testCase[1]);
+    
+            // Captura l'entrada simulada i la sortida del sistema
+            InputStream originalIn = System.in;
+            PrintStream originalOut = System.out;
+    
+            try {
+                System.setIn(new ByteArrayInputStream(input.getBytes()));
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(outputStream));
+    
+                Scanner scanner = new Scanner(System.in);
+                ArrayList<String> result = Exercici0.llegirFactors(scanner);
+    
+                // Compara el resultat amb l'output esperat
+                String expectedOutputString = expectedOutput.toString();
+                String resultOutputString = result.toString();
+    
+                String diff = TestStringUtils.findFirstDifference(resultOutputString, expectedOutputString);
+                assertTrue(diff.equals("identical"),
+                    ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+    
+                // Verifica que els missatges d'error apareguin en el flux de sortida si cal
+                if (input.contains("\nabc\n") || input.contains("\nrisc baix\n") && input.contains("autònom")) {
+                    assertTrue(outputStream.toString().contains("Factor no vàlid"),
+                        "Missatge d'error esperat no trobat en la sortida:\n" + outputStream.toString());
+                }
+    
+            } finally {
+                // Restaura l'entrada i sortida original
+                System.setIn(originalIn);
+                System.setOut(originalOut);
+            }
+        }
+    }
+    
+    @Test
+    public void testLlegirDescompte() {
+        Object[][] testCases = {
+            {"10\n", 10.0},                         // Descompte vàlid
+            {"15.5\n", 15.5},                       // Descompte vàlid amb decimal
+            {"25\n15\n", 15.0},                     // Entrada no vàlida seguida d'una vàlida
+            {"-5\n10\n", 10.0},                     // Entrada negativa seguida d'una vàlida
+            {"abc\n20\n", 20.0},                    // Entrada no numèrica seguida d'una vàlida
+            {"21\n20\n", 20.0}                      // Fora del rang seguit d'una entrada vàlida
+        };
+    
+        for (Object[] testCase : testCases) {
+            String input = (String) testCase[0];
+            double expectedOutput = (double) testCase[1];
+    
+            // Captura l'entrada simulada i la sortida del sistema
+            InputStream originalIn = System.in;
+            PrintStream originalOut = System.out;
+    
+            try {
+                System.setIn(new ByteArrayInputStream(input.getBytes()));
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(outputStream));
+    
+                Scanner scanner = new Scanner(System.in);
+                ArrayList<String> linies = new ArrayList<>();
+                double result = Exercici0.llegirDescompte(scanner);
+    
+                // Comprova el resultat
+                assertEquals(expectedOutput, result, 0.01, 
+                    "El descompte esperat no coincideix amb el resultat obtingut.");
+    
+                // Comprova els missatges d'error esperats en cas d'entrada no vàlida
+                if (input.contains("abc") || input.contains("-5") || input.contains("21") || input.contains("25")) {
+                    String output = outputStream.toString();
+                    assertTrue(output.contains("Descompte no vàlid"),
+                        "Missatge d'error esperat 'Descompte no vàlid' no trobat en la sortida:\n" + output);
+                }
+    
+            } finally {
+                // Restaura l'entrada i sortida original
+                System.setIn(originalIn);
+                System.setOut(originalOut);
+            }
+        }
+    }
+    
+    @Test
+    public void testAfegirClientMenu() {
+        // Neteja els clients globals per començar amb un estat net
+        Exercici0.clients.clear();
+        
+        Object[][] testCases = {
+            // Input correcte: nom, edat, factors i descompte vàlids
+            {"Joan\n30\nautònom\nrisc alt\n10\n", Arrays.asList(
+                "=== Afegir Client ===",
+                "S'ha afegit el client amb clau client_")},
+             
+            // Input amb errors i correccions
+            {"123\nMaria\n15\n25\nempresa\nrisc baix\n15\n", Arrays.asList(
+                "=== Afegir Client ===",
+                "S'ha afegit el client amb clau client_")},
+             
+            // Input amb factors incorrectes i correcció
+            {"Pere\n35\nautònom\nrisc baix\nrisc alt\n20\n", Arrays.asList(
+                "=== Afegir Client ===",
+                "S'ha afegit el client amb clau client_")}
+        };
+        
+        for (Object[] testCase : testCases) {
+            String input = (String) testCase[0];
+            List<String> expectedLines = (List<String>) testCase[1];
+            
+            // Captura l'entrada simulada i la sortida del sistema
+            InputStream originalIn = System.in;
+            PrintStream originalOut = System.out;
+            
+            try {
+                System.setIn(new ByteArrayInputStream(input.getBytes()));
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(outputStream));
+                Scanner scanner = new Scanner(System.in);
+                
+                ArrayList<String> result = Exercici0.afegirClientMenu(scanner);
+                               
+                // Verifica cada línia excepte l'última (que conté la clau aleatòria)
+                for (int i = 0; i < expectedLines.size() - 1; i++) {
+                    String diff = TestStringUtils.findFirstDifference(result.get(i), expectedLines.get(i));
+                    assertTrue(diff.equals("identical"),
+                        String.format("Per l'entrada '%s' a la línia %d:\n>>>>>>>>>> Diff found >>>>>>>>>>\n%s\n<<<<<<<<<< Diff end <<<<<<<<<<\n",
+                            input.replace("\n", "\\n"),
+                            i,
+                            diff));
+                }
+                
+                // Verifica que l'última línia comença amb el text esperat
+                assertTrue(result.get(result.size() - 1).startsWith(expectedLines.get(expectedLines.size() - 1)),
+                    String.format("Per l'entrada '%s': L'última línia no comença amb el text esperat",
+                        input.replace("\n", "\\n")));
+                
+                // Verifica que s'ha afegit un nou client
+                assertTrue(Exercici0.clients.size() > 0, 
+                    String.format("Per l'entrada '%s': No s'ha afegit cap client al HashMap després de l'operació",
+                        input.replace("\n", "\\n")));
+                
+            } finally {
+                // Restaura l'entrada i sortida original
+                System.setIn(originalIn);
+                System.setOut(originalOut);
+            }
+        }
+    }
+
+    @Test
+    public void testModificarClientMenu() {
+        // Configura els clients globals per tenir dades inicials
+        Exercici0.clients.clear();
+        HashMap<String, Object> client = new HashMap<>();
+        client.put("nom", "Joan");
+        client.put("edat", 30);
+        client.put("factors", Arrays.asList("autònom", "risc alt"));
+        client.put("descompte", 10.0);
+        Exercici0.clients.put("client_100", client);
+    
+        Object[][] testCases = {
+            // Modificació amb camp vàlid (nom)
+            {"client_100\nnom\nMaria\n", Arrays.asList(
+                "=== Modificar Client ===",
+                "Camps disponibles per modificar: nom, edat, factors, descompte",
+                "S'ha modificat el client client_100.")},
+    
+            // Modificació amb camp vàlid (edat)
+            {"client_100\nedat\n35\n", Arrays.asList(
+                "=== Modificar Client ===",
+                "Camps disponibles per modificar: nom, edat, factors, descompte",
+                "S'ha modificat el client client_100.")},
+    
+            // Modificació amb factors vàlids
+            {"client_100\nfactors\nautònom\nrisc mitjà\n", Arrays.asList(
+                "=== Modificar Client ===",
+                "Camps disponibles per modificar: nom, edat, factors, descompte",
+                "S'ha modificat el client client_100.")},
+    
+            // Clau de client no existent
+            {"client_999\nnom\nMaria\n", Arrays.asList(
+                "=== Modificar Client ===",
+                "Client amb clau client_999 no existeix.")},
+    
+            // Camp no vàlid
+            {"client_100\ninvalid_camp\nMaria\n", Arrays.asList(
+                "=== Modificar Client ===",
+                "Camps disponibles per modificar: nom, edat, factors, descompte",
+                "El camp invalid_camp no és vàlid.")}
+        };
+    
+        for (Object[] testCase : testCases) {
+            String input = (String) testCase[0];
+            List<String> expectedLines = (List<String>) testCase[1];
+    
+            // Captura l'entrada simulada i la sortida del sistema
+            InputStream originalIn = System.in;
+            PrintStream originalOut = System.out;
+    
+            try {
+                System.setIn(new ByteArrayInputStream(input.getBytes()));
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(outputStream));
+                Scanner scanner = new Scanner(System.in);
+    
+                ArrayList<String> result = Exercici0.modificarClientMenu(scanner);
+    
+                // Verifica cada línia
+                for (int i = 0; i < expectedLines.size(); i++) {
+                    String diff = TestStringUtils.findFirstDifference(result.get(i), expectedLines.get(i));
+                    assertTrue(diff.equals("identical"),
+                        String.format("Per l'entrada '%s' a la línia %d:\n>>>>>>>>>> Diff found >>>>>>>>>>\n%s\n<<<<<<<<<< Diff end <<<<<<<<<<\n",
+                            input.replace("\n", "\\n"),
+                            i,
+                            diff));
+                }
+    
+                // Si la modificació és exitosa, verifica el canvi en el HashMap
+                if (expectedLines.get(expectedLines.size() - 1).startsWith("S'ha modificat")) {
+                    String clauClient = input.split("\n")[0];
+                    String camp = input.split("\n")[1];
+                    String nouValor = input.split("\n")[2];
+    
+                    if (camp.equals("factors")) {
+                        List<String> expectedFactors = Arrays.asList(input.split("\n")[2], input.split("\n")[3]);
+                        assertEquals(expectedFactors, Exercici0.clients.get(clauClient).get(camp),
+                            String.format("El camp '%s' del client '%s' no s'ha actualitzat correctament.", camp, clauClient));
+                    } else {
+                        assertEquals(nouValor, Exercici0.clients.get(clauClient).get(camp).toString(),
+                            String.format("El camp '%s' del client '%s' no s'ha actualitzat correctament.", camp, clauClient));
+                    }
+                }
+    
+            } finally {
+                // Restaura l'entrada i sortida original
+                System.setIn(originalIn);
+                System.setOut(originalOut);
+            }
+        }
+    }
+
+    @Test
+    public void testEsborrarClientMenu() {
+        // Configura els clients globals per tenir dades inicials
+        Exercici0.clients.clear();
+        HashMap<String, Object> client1 = new HashMap<>();
+        client1.put("nom", "Joan");
+        client1.put("edat", 30);
+        client1.put("factors", Arrays.asList("autònom", "risc alt"));
+        client1.put("descompte", 10.0);
+        Exercici0.clients.put("client_100", client1);
+    
+        HashMap<String, Object> client2 = new HashMap<>();
+        client2.put("nom", "Maria");
+        client2.put("edat", 40);
+        client2.put("factors", Arrays.asList("empresa", "risc baix"));
+        client2.put("descompte", 15.0);
+        Exercici0.clients.put("client_200", client2);
+    
+        Object[][] testCases = {
+            // Cas d'èxit: esborrar un client existent
+            {"client_100\n", Arrays.asList(
+                "=== Esborrar Client ===",
+                "S'ha esborrat el client client_100.")},
+    
+            // Cas d'error: clau no existent
+            {"client_999\n", Arrays.asList(
+                "=== Esborrar Client ===",
+                "Client amb clau client_999 no existeix.")},
+    
+            // Cas d'èxit: esborrar un altre client existent
+            {"client_200\n", Arrays.asList(
+                "=== Esborrar Client ===",
+                "S'ha esborrat el client client_200.")}
+        };
+    
+        for (Object[] testCase : testCases) {
+            String input = (String) testCase[0];
+            List<String> expectedLines = (List<String>) testCase[1];
+    
+            // Captura l'entrada simulada i la sortida del sistema
+            InputStream originalIn = System.in;
+            PrintStream originalOut = System.out;
+    
+            try {
+                System.setIn(new ByteArrayInputStream(input.getBytes()));
+                ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+                System.setOut(new PrintStream(outputStream));
+                Scanner scanner = new Scanner(System.in);
+    
+                ArrayList<String> result = Exercici0.esborrarClientMenu(scanner);
+    
+                // Verifica cada línia
+                for (int i = 0; i < expectedLines.size(); i++) {
+                    String diff = TestStringUtils.findFirstDifference(result.get(i), expectedLines.get(i));
+                    assertTrue(diff.equals("identical"),
+                        String.format("Per l'entrada '%s' a la línia %d:\n>>>>>>>>>> Diff found >>>>>>>>>>\n%s\n<<<<<<<<<< Diff end <<<<<<<<<<\n",
+                            input.replace("\n", "\\n"),
+                            i,
+                            diff));
+                }
+    
+                // Si l'operació és exitosa, comprova que el client ha estat eliminat
+                if (expectedLines.get(expectedLines.size() - 1).startsWith("S'ha esborrat")) {
+                    String clauClient = input.split("\n")[0];
+                    assertFalse(Exercici0.clients.containsKey(clauClient),
+                        String.format("El client amb clau '%s' no ha estat eliminat correctament.", clauClient));
+                }
+    
+            } finally {
+                // Restaura l'entrada i sortida original
+                System.setIn(originalIn);
+                System.setOut(originalOut);
+            }
+        }
+    }
+    
 }

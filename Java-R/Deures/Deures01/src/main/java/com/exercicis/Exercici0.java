@@ -3,6 +3,7 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -415,7 +416,7 @@ public class Exercici0 {
      * @param clauClient La clau del client que s'ha de modificar.
      * @param camp El camp que s'ha de modificar.
      * @param nouValor El nou valor que s'ha d'assignar al camp.
-     * @return Un missatge d'error si el client o el camp no existeixen; "" altrament.
+     * @return Un missatge d'error si el client o el camp no existeixen; "OK" altrament.
      *
      * @test ./runTest.sh "com.exercicis.TestExercici0#testModificarClient"
      */
@@ -913,6 +914,48 @@ Impostos:  21% (14.41)                     Total: 83.04
     }
 
     /**
+     * Genera el menú amb la llista de clients.
+     * 
+     * Retorna una llista de cadenes de text que representen 
+     * cada un dels clients de la llista.
+     * - El primer text de la llista és així: "=== Llistar Clients ==="
+     * - En cas de no haver-hi cap client afegeix a la llista de retorn "No hi ha clients per mostrar."
+     *
+     * @return Una llista de cadenes de text amb els clients.
+     *
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testLlistarClientsMenu"
+     */
+    public static ArrayList<String> getLlistarClientsMenu() {
+        ArrayList<String> linies = new ArrayList<>();
+        linies.add("=== Llistar Clients ===");
+    
+        if (clients.isEmpty()) {
+            linies.add("No hi ha clients per mostrar.");
+            return linies;
+        }
+    
+        for (String clau : clients.keySet()) {
+            linies.add(clau + ": " + clients.get(clau).toString());
+        }
+    
+        return linies;
+    }
+
+    /**
+     * Escriu per consola cada element d'una llista en una línia nova.
+     * 
+     * @param llista La llista de linies a mostrar
+     *
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testDibuixarLlista"
+     */
+    public static void dibuixarLlista(ArrayList<String> llista) {
+        for (String linia : llista) {
+            System.out.println(linia);
+        }
+    }
+    
+
+    /**
      * Demana a l'usuari que seleccioni una opció i retorna l'opció transformada a una paraula clau si és un número.
      * 
      * Mostra el text: "Selecciona una opció (número o paraula clau): ".
@@ -975,6 +1018,364 @@ Impostos:  21% (14.41)                     Total: 83.04
     }
 
     /**
+     * Demana i valida el nom d'un client.
+     * Mostra el missatge "Introdueix el nom del client: " i valida que el nom sigui correcte.
+     * Si el nom no és vàlid, afegeix el missatge d'error a la llista i torna a demanar el nom.
+     * Fes servir la funció "validarNom"
+     *
+     * @param scanner Scanner per llegir l'entrada de l'usuari
+     * @return El nom validat del client
+     * 
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testLlegirNom"
+     */
+    public static String llegirNom(Scanner scanner) {
+        System.out.print("Introdueix el nom del client: ");
+        String nom = scanner.nextLine().trim();
+        
+        while (!validarNom(nom)) {
+            System.out.println("Nom no vàlid. Només s'accepten lletres i espais.");
+            System.out.print("Introdueix el nom del client: ");
+            nom = scanner.nextLine().trim();
+        }
+        return nom;
+    }
+
+    /**
+     * Demana i valida l'edat d'un client.
+     * Mostra el missatge "Introdueix l'edat del client (18-100): " i valida que l'edat sigui correcta.
+     * Si l'edat no és vàlida, afegeix el missatge d'error a la llista i torna a demanar l'edat.
+     * Fes servir les funcions "isAllDigits" i "validarEdat"
+     *
+     * @param scanner Scanner per llegir l'entrada de l'usuari
+     * @return L'edat validada del client
+     * 
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testLlegirEdat"
+     */
+    public static int llegirEdat(Scanner scanner) {
+        System.out.print("Introdueix l'edat del client (18-100): ");
+        String edatInput = scanner.nextLine().trim();
+        
+        while (!isAllDigits(edatInput) || !validarEdat(Integer.parseInt(edatInput))) {
+            System.out.println("Edat no vàlida. Introdueix un número entre 18 i 100.");
+            System.out.print("Introdueix l'edat del client (18-100): ");
+            edatInput = scanner.nextLine().trim();
+        }
+        return Integer.parseInt(edatInput);
+    }
+    
+    /**
+     * Demana i valida els factors d'un client.
+     * Primer demana el tipus de client (autònom/empresa) i després el nivell de risc.
+     * Per autònoms, només permet 'risc alt' o 'risc mitjà'.
+     * Per empreses, permet 'risc alt', 'risc mitjà' o 'risc baix'.
+     * 
+     * Mostra els següents missatges:
+     * - "Introdueix el primer factor ('autònom' o 'empresa'): "
+     * - Per autònoms: "Introdueix el segon factor ('risc alt' o 'risc mitjà'): "
+     * - Per empreses: "Introdueix el segon factor ('risc alt', 'risc baix' o 'risc mitjà'): "
+     *
+     * @param scanner Scanner per llegir l'entrada de l'usuari
+     * @return ArrayList amb els dos factors validats
+     * 
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testLlegirFactors"
+     */
+    public static ArrayList<String> llegirFactors(Scanner scanner) {
+        ArrayList<String> factors = new ArrayList<>();
+        
+        // Llegir primer factor
+        System.out.print("Introdueix el primer factor ('autònom' o 'empresa'): ");
+        String factor1 = scanner.nextLine().trim();
+        while (!factor1.equals("autònom") && !factor1.equals("empresa")) {
+            System.out.println("Factor no vàlid. Ha de ser 'autònom' o 'empresa'.");
+            System.out.print("Introdueix el primer factor ('autònom' o 'empresa'): ");
+            factor1 = scanner.nextLine().trim();
+        }
+        factors.add(factor1);
+        
+        // Llegir segon factor
+        String promptFactor2 = factor1.equals("autònom")
+                ? "Introdueix el segon factor ('risc alt' o 'risc mitjà'): "
+                : "Introdueix el segon factor ('risc alt', 'risc baix' o 'risc mitjà'): ";
+        
+        System.out.print(promptFactor2);
+        String factor2 = scanner.nextLine().trim();
+        while (true) {
+            if (factor1.equals("autònom")) {
+                if (factor2.equals("risc alt") || factor2.equals("risc mitjà")) break;
+                System.out.println("Factor no vàlid. Per a autònoms només pot ser 'risc alt' o 'risc mitjà'.");
+            } else {
+                if (factor2.equals("risc alt") || factor2.equals("risc baix") || factor2.equals("risc mitjà")) break;
+                System.out.println("Factor no vàlid. Ha de ser 'risc alt', 'risc baix' o 'risc mitjà'.");
+            }
+            System.out.print(promptFactor2);
+            factor2 = scanner.nextLine().trim();
+        }
+        factors.add(factor2);
+        
+        return factors;
+    }
+    
+    /**
+     * Demana i valida un descompe
+     * Primer demana el descompte amb: 
+     * "Introdueix el descompte (0-20): "
+     * 
+     * Mostra el següent missatge en cas d'error: 
+     * "Descompte no vàlid. Ha de ser un número entre 0 i 20."
+     *
+     * @param scanner Scanner per llegir l'entrada de l'usuari
+     * @return ArrayList amb els dos factors validats
+     * 
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testLlegirDescompte"
+     */
+    public static double llegirDescompte(Scanner scanner) {
+        System.out.print("Introdueix el descompte (0-20): ");
+        String descompteInput = scanner.nextLine().trim();
+        
+        while (!descompteInput.matches("\\d+(\\.\\d+)?") || !validarDescompte(Double.parseDouble(descompteInput))) {
+            System.out.println("Descompte no vàlid. Ha de ser un número entre 0 i 20.");
+            System.out.print("Introdueix el descompte (0-20): ");
+            descompteInput = scanner.nextLine().trim();
+        }
+        
+        return Double.parseDouble(descompteInput);
+    }
+
+    /**
+     * Gestiona el procés d'afegir un nou client mitjançant interacció amb l'usuari.
+     * Utilitza les següents funcions auxiliars per obtenir i validar les dades:
+     * - llegirNom: per obtenir el nom del client
+     * - llegirEdat: per obtenir l'edat (entre 18 i 100)
+     * - llegirFactors: per obtenir el tipus (autònom/empresa) i nivell de risc
+     * - llegirDescompte: per obtenir el descompte (entre 0 i 20)
+     * 
+     * La primera línia del retorn sempre és "=== Afegir Client ==="
+     * 
+     * Missatges d'error que s'afegeixen a la llista de retorn per les funcions auxiliars:
+     * - "Nom no vàlid. Només s'accepten lletres i espais."
+     * - "Edat no vàlida. Introdueix un número entre 18 i 100."
+     * - "Factor no vàlid. Ha de ser 'autònom' o 'empresa'."
+     * - "Factor no vàlid. Per a autònoms només pot ser 'risc alt' o 'risc mitjà'."
+     * - "Factor no vàlid. Ha de ser 'risc alt', 'risc baix' o 'risc mitjà'."
+     * - "Els factors no són vàlids."
+     * - "Descompte no vàlid. Ha de ser un número entre 0 i 20."
+     * 
+     * En cas d'èxit, s'afegeix a la llista:
+     * - "S'ha afegit el client amb clau " + novaClau + "."
+     * 
+     * @param scanner L'objecte Scanner per rebre l'entrada de l'usuari
+     * @return Una llista de cadenes de text que contenen els missatges d'estat del procés
+     * 
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testAfegirClientMenu"
+     */
+    public static ArrayList<String> afegirClientMenu(Scanner scanner) {
+        ArrayList<String> linies = new ArrayList<>();
+        linies.add("=== Afegir Client ===");
+    
+        String nom = llegirNom(scanner);
+        int edat = llegirEdat(scanner);
+        ArrayList<String> factors = llegirFactors(scanner);
+        
+        if (!validarFactors(factors.toArray(new String[0]))) {
+            linies.add("Els factors no són vàlids.");
+            return linies;
+        }
+        
+        double descompte = llegirDescompte(scanner);
+        
+        String novaClau = afegirClient(nom, edat, factors, descompte);
+        linies.add("S'ha afegit el client amb clau " + novaClau + ".");
+        return linies;
+    }
+    
+    /**
+     * Gestiona el procés de modificació d'un client existent.
+     * 
+     * Primer demana i valida la clau del client:
+     * - "Introdueix la clau del client a modificar (per exemple, 'client_100'): "
+     * 
+     * Si el client existeix:
+     * - Mostra "Camps disponibles per modificar: nom, edat, factors, descompte"
+     * - Demana "Introdueix el camp que vols modificar: "
+     * 
+     * Segons el camp escollit, utilitza les funcions auxiliars:
+     * - llegirNom: si es modifica el nom
+     * - llegirEdat: si es modifica l'edat
+     * - llegirFactors: si es modifiquen els factors
+     * - llegirDescompte: si es modifica el descompte
+     * 
+     * La primera línia del retorn sempre és "=== Modificar Client ==="
+     * 
+     * Missatges d'error que s'afegeixen a la llista de retorn:
+     * - "Client amb clau " + clauClient + " no existeix."
+     * - "El camp " + camp + " no és vàlid."
+     * 
+     * Més els missatges d'error de les funcions auxiliars:
+     * - "Nom no vàlid. Només s'accepten lletres i espais."
+     * - "Edat no vàlida. Introdueix un número entre 18 i 100."
+     * - "Factor no vàlid. Ha de ser 'autònom' o 'empresa'."
+     * - "Factor no vàlid. Per a autònoms només pot ser 'risc alt' o 'risc mitjà'."
+     * - "Factor no vàlid. Ha de ser 'risc alt', 'risc baix' o 'risc mitjà'."
+     * - "Els factors no són vàlids."
+     * - "Descompte no vàlid. Ha de ser un número entre 0 i 20."
+     * 
+     * En cas d'èxit, s'afegeix a la llista:
+     * - "S'ha modificat el client " + clauClient + "."
+     * 
+     * @param scanner L'objecte Scanner per rebre l'entrada de l'usuari
+     * @return Una llista de cadenes de text que contenen els missatges d'estat del procés
+     * 
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testModificarClientMenu"
+     */
+    public static ArrayList<String> modificarClientMenu(Scanner scanner) {
+        ArrayList<String> linies = new ArrayList<>();
+        linies.add("=== Modificar Client ===");
+    
+        // Llegir clau client
+        System.out.print("Introdueix la clau del client a modificar (per exemple, 'client_100'): ");
+        String clauClient = scanner.nextLine().trim();
+        if (!clients.containsKey(clauClient)) {
+            linies.add("Client amb clau " + clauClient + " no existeix.");
+            return linies;
+        }
+    
+        // Llegir camp a modificar
+        linies.add("Camps disponibles per modificar: nom, edat, factors, descompte");
+        System.out.print("Introdueix el camp que vols modificar: ");
+        String camp = scanner.nextLine().trim();
+        if (!Arrays.asList("nom", "edat", "factors", "descompte").contains(camp)) {
+            linies.add("El camp " + camp + " no és vàlid.");
+            return linies;
+        }
+    
+        // Llegir nou valor segons el camp
+        Object nouValor = switch (camp) {
+            case "nom" -> llegirNom(scanner);
+            case "edat" -> llegirEdat(scanner);
+            case "factors" -> {
+                ArrayList<String> factors = llegirFactors(scanner);
+                if (!validarFactors(factors.toArray(new String[0]))) {
+                    linies.add("Els factors no són vàlids.");
+                    yield null;
+                }
+                yield factors;
+            }
+            case "descompte" -> llegirDescompte(scanner);
+            default -> null;
+        };
+    
+        if (nouValor == null) return linies;
+    
+        String resultat = modificarClient(clauClient, camp, nouValor);
+        if (!resultat.equals("OK")) {
+            linies.add(resultat);
+        } else {
+            linies.add("S'ha modificat el client " + clauClient + ".");
+        }
+    
+        return linies;
+    }
+
+    /**
+     * Gestiona el procés d'esborrar un client existent mitjançant interacció amb l'usuari.
+     * 
+     * Mostra per pantalla el següent missatge per demanar dades:
+     * - "Introdueix la clau del client a esborrar (per exemple, 'client_100'): "
+     * 
+     * La primera línia del retorn sempre és "=== Esborrar Client ==="
+     * 
+     * Missatges d'error que s'afegeixen a la llista de retorn:
+     * - "Client amb clau " + clauClient + " no existeix."
+     * 
+     * En cas d'èxit, s'afegeix a la llista:
+     * - "S'ha esborrat el client " + clauClient + "."
+     * 
+     * @param scanner L'objecte Scanner per rebre l'entrada de l'usuari.
+     * @return Una llista de cadenes de text que contenen els missatges d'estat del procés.
+     * 
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testEsborrarClientMenu"
+     */
+    public static ArrayList<String> esborrarClientMenu(Scanner scanner) {
+        ArrayList<String> linies = new ArrayList<>();
+        linies.add("=== Esborrar Client ===");
+
+        System.out.print("Introdueix la clau del client a esborrar (per exemple, 'client_100'): ");
+        String clauClient = scanner.nextLine().trim();
+
+        if (!clients.containsKey(clauClient)) {
+            linies.add("Client amb clau " + clauClient + " no existeix.");
+            return linies;
+        }
+
+        String resultat = esborrarClient(clauClient);
+        if (!resultat.equals("OK")) {
+            linies.add(resultat);
+        } else {
+            linies.add("S'ha esborrat el client " + clauClient + ".");
+        }
+
+        return linies;
+    }
+
+    /**
+     * Gestiona el menú principal de l'aplicació i l'execució de les operacions.
+     *
+     * Aquesta funció implementa un bucle que:
+     * 1. Mostra el menú principal.
+     * 2. Mostra els missatges d'error o avís
+     * 3. Obté l'opció seleccionada per l'usuari.
+     * 4. Executa l'acció corresponent utilitzant les funcions existents.
+     * 5. Finalitza quan l'usuari selecciona "Sortir".
+     *
+     * Els textos mostrats són:
+     * - "=== Menú de Gestió de Notaria ==="
+     * - "Selecciona una opció (número o paraula clau): "
+     * - "Opció no vàlida. Torna a intentar-ho."
+     * - "Fins aviat!"
+     *
+     * @param scanner L'objecte Scanner per llegir l'entrada de l'usuari.
+     */
+    public static void gestionaClientsOperacions(Scanner scanner) {
+
+        ArrayList<String> menu = getCadenesMenu();
+        ArrayList<String> resultat = new ArrayList<>();
+        while (true) {
+            
+            clearScreen();
+            dibuixarLlista(menu);
+            dibuixarLlista(resultat);
+
+            String opcio = obtenirOpcio(scanner);
+
+            switch (opcio.toLowerCase(Locale.ROOT)) {
+                case "sortir":
+                    dibuixarLlista(new ArrayList<>(List.of("Fins aviat!")));
+                    return;
+
+                case "afegir client":
+                    resultat = afegirClientMenu(scanner);
+                    break;
+
+                case "modificar client":
+                    resultat = modificarClientMenu(scanner);
+                    break;
+
+                case "esborrar client":
+                    resultat = esborrarClientMenu(scanner);
+                    break;
+
+                case "llistar clients":
+                    resultat = getLlistarClientsMenu();
+                    break;
+
+                default:
+                    resultat = new ArrayList<>(List.of("Opció no vàlida. Torna a intentar-ho."));
+            }
+        }
+    }
+
+
+    /**
      * 
      * @run ./run.sh "com.exercicis.Exercici0"
      * @test ./runTest.sh "com.exercicis.TestExercici0"
@@ -983,10 +1384,7 @@ Impostos:  21% (14.41)                     Total: 83.04
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        clearScreen();
-        System.out.println("Main");
-
-        // Resol aquí el codi principal
+        gestionaClientsOperacions(scanner);
 
         scanner.close();
     }

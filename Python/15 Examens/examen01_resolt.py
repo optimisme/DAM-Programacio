@@ -1012,25 +1012,28 @@ def mainRun():
     - Totes les entrades es converteixen a minúscules per facilitar la comparació.
     - Les opcions del menú es poden seleccionar tant pel número com pel nom.
     """
+    menu = mostrar_menu()
+    resultat = []
     while True:
-        clearScreen()  # Esborrem la pantalla
-        dibuixar_llista(mostrar_menu())
-        
+        clearScreen()  
+        dibuixar_llista(menu)
+        dibuixar_llista(resultat)
+
         opcio = obtenir_opcio()
         
         if opcio.lower() in ['0', 'sortir']:
-            dibuixar_llista(["Fins aviat!"])
+            resultat = ["Fins aviat!"]
             break
         elif opcio.lower() in ['1', 'afegir client']:
-            dibuixar_llista(afegir_client_menu())
+            resultat = afegir_client_menu()
         elif opcio.lower() in ['2', 'modificar client']:
-            dibuixar_llista(modificar_client_menu())
+            resultat = modificar_client_menu()
         elif opcio.lower() in ['3', 'esborrar client']:
-            dibuixar_llista(esborrar_client_menu())
+            resultat = esborrar_client_menu()
         elif opcio.lower() in ['4', 'llistar clients']:
-            dibuixar_llista(llistar_clients_menu())
+            resultat = llistar_clients_menu()
         else:
-            dibuixar_llista(["Opció no vàlida. Si us plau, tria una opció del menú."])
+            resultat = ["Opció no vàlida. Si us plau, tria una opció del menú."]
 
 if __name__ == '__main__':
     mainRun()
