@@ -371,7 +371,7 @@ public class Exercici1 {
     }
 
     /*
-     * Gestiona el bucle principal del joc 2048:
+     * Gestiona el bucle principal del joc:
      * 1. Genera una fitxa inicial
      * 2. Entra en un bucle que:
      *    - Genera una nova fitxa
