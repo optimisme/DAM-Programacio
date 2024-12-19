@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Locale;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 /**
@@ -892,9 +893,9 @@ Impostos:  21% (14.41)                     Total: 83.04
      *
      * @return Una llista de cadenes de text amb les opcions del menú principal.
      *
-     * @test ./runTest.sh "com.exercicis.TestExercici0#testMostrarMenu"
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testGetCadenesMenu"
      */
-    public static ArrayList<String> mostrarMenu() {
+    public static ArrayList<String> getCadenesMenu() {
         String menuText = """
 === Menú de Gestió de Notaria ===
 1. Afegir client
@@ -911,7 +912,67 @@ Impostos:  21% (14.41)                     Total: 83.04
         return new ArrayList<>(Arrays.asList(lines));
     }
 
+    /**
+     * Demana a l'usuari que seleccioni una opció i retorna l'opció transformada a una paraula clau si és un número.
+     * 
+     * Mostra el text: "Selecciona una opció (número o paraula clau): ".
+     * - Si l'opció introduïda és un número vàlid, es transforma a les paraules clau corresponents segons el menú.
+     * - Si l'opció són paraules clau vàlides, es retornen directament.
+     *   Les paraules clau han d'ignorar les majúscules, minúscules i accents
+     * - Si l'opció no és vàlida, mostra un missatge d'error i torna a preguntar fins que l'entrada sigui vàlida.
+     *   "Opció no vàlida. Torna a intentar-ho."
+     * 
+     * Relació de números i paraules clau:
+     *  1. "Afegir client"
+     *  2. "Modificar client"
+     *  3. "Esborrar client"
+     *  4. "Llistar clients"
+     *  5. "Afegir operació"
+     *  6. "Modificar operació"
+     *  7. "Esborrar operació"
+     *  8. "Llistar operacions"
+     *  0. "Sortir"
+     * 
+     * @return La cadena introduïda per l'usuari (número convertit a paraula clau o paraula clau validada).
+     * 
+     * @test ./runTest.sh "com.exercicis.TestExercici0#testObtenirOpcio"
+     */
+    public static String obtenirOpcio(Scanner scanner) {
+        ArrayList<String> menu = getCadenesMenu();
+        
+        while (true) {
+            System.out.print("Selecciona una opció (número o paraula clau): ");
 
+            String opcio = scanner.nextLine();
+            
+            // Comprova si és un número
+            try {
+                int index = Integer.parseInt(opcio);
+                if (index == 0) {
+                    return "Sortir";
+                } else if (index > 0 && index < menu.size() - 1) {
+                    return menu.get(index).substring(3).trim();
+                }
+            } catch (NumberFormatException e) {
+                // Si no és un número, continuem amb la comprovació de paraula clau
+            }
+            
+            // Comprova si és una paraula clau
+            String opcioNormalized = opcio.trim().toLowerCase().replace("ó", "o");
+            
+            for (int i = 0; i < menu.size(); i++) {
+                String paraulaClau = menu.get(i).substring(3).trim();
+                String paraulaClauNormalized = paraulaClau.toLowerCase().replace("ó", "o");
+                
+                if (paraulaClauNormalized.equals(opcioNormalized)) {
+                    return paraulaClau;
+                }
+            }
+            
+            // Si arribem aquí, l'opció no és vàlida
+            System.out.println("Opció no vàlida. Torna a intentar-ho.");
+        }
+    }
 
     /**
      * 

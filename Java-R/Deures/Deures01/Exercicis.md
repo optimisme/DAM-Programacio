@@ -19,43 +19,6 @@ Resol els mètodes de l'*Exercici1* segons la descripció dels seus comentaris a
 ```python
 
 
-def mostrar_menu():
-    """
-    Genera el menú principal de l'aplicació de Gestió de Notaria.
-
-    Aquesta funció retorna una llista de cadenes de text que representen les opcions disponibles en el menú principal de l'aplicació. Aquest menú permet a l'usuari seleccionar diverses operacions relacionades amb la gestió de clients i operacions en una notaria.
-
-    Retorn:
-        Llista de cadenes de text amb les opcions del menú principal.
-
-    Exemples:
-        mostrar_menu() ->
-            [
-                "=== Menú de Gestió de Notaria ===",
-                "1. Afegir client",
-                "2. Modificar client",
-                "3. Esborrar client",
-                "4. Llistar clients",
-                "5. Afegir operació",
-                "6. Modificar operació",
-                "7. Esborrar operació",
-                "8. Llistar operacions",
-                "0. Sortir"
-            ]
-    """
-    return [
-        "=== Menú de Gestió de Notaria ===",
-        "1. Afegir client",
-        "2. Modificar client",
-        "3. Esborrar client",
-        "4. Llistar clients",
-        "5. Afegir operació",
-        "6. Modificar operació",
-        "7. Esborrar operació",
-        "8. Llistar operacions",
-        "0. Sortir"
-    ]
-
 def obtenir_opcio():
     """
     Demana a l'usuari que seleccioni una opció i retorna l'opció introduïda.

@@ -7,12 +7,17 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Scanner;
 
 class TestExercici0 {
 
@@ -900,7 +905,7 @@ Impostos:  21% (14.41)                     Total: 83.04
     }
 
     @Test
-    public void testMostrarMenu() {
+    public void testGetCadenesMenu() {
         // Menú esperat
         String menuText = """
 === Menú de Gestió de Notaria ===
@@ -917,7 +922,7 @@ Impostos:  21% (14.41)                     Total: 83.04
         ArrayList<String> menuEsperat = new ArrayList<>(List.of(menuText.split("\\R")));
 
         // Executa el mètode
-        ArrayList<String> menuGenerat = Exercici0.mostrarMenu();
+        ArrayList<String> menuGenerat = Exercici0.getCadenesMenu();
 
         // Compara el resultat amb l'esperat
         String diff = TestStringUtils.findFirstDifference(menuGenerat.toString(), menuEsperat.toString());
@@ -925,5 +930,39 @@ Impostos:  21% (14.41)                     Total: 83.04
             ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
     }
 
+    @Test
+    public void testObtenirOpcio() {
+        Object[][] tests = {
+            {"1\n", "Afegir client"},
+            {"2\n", "Modificar client"},
+            {"3\n", "Esborrar client"},
+            {"4\n", "Llistar clients"},
+            {"5\n", "Afegir operació"},
+            {"6\n", "Modificar operació"},
+            {"7\n", "Esborrar operació"},
+            {"8\n", "Llistar operacions"},
+            {"0\n", "Sortir"},
+            {"afegir client\n", "Afegir client"},
+            {"MODIFICAR CLIENT\n", "Modificar client"},
+            {"modificar OPERACIO\n", "Modificar operació"},
+            {"Llistar Operacions\n", "Llistar operacions"},
+            {"sortir\n", "Sortir"}
+        };
     
+        for (Object[] test : tests) {
+            String input = (String) test[0];
+            String expected = (String) test[1];
+    
+            try (Scanner scanner = new Scanner(new ByteArrayInputStream(input.getBytes()))) {
+                String result = Exercici0.obtenirOpcio(scanner);
+                assertEquals(expected, result, 
+                    "Per l'entrada '" + input.trim() + "' s'esperava '" + expected + 
+                    "' però s'ha obtingut '" + result + "'");
+            }
+        }
+    }
+    
+    
+
+ 
 }
