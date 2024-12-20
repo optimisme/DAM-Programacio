@@ -11,7 +11,9 @@ Resol els mètodes de l'*Exercici0* segons la descripció dels seus comentaris a
 
 # Exercici 1
 
-Resol els mètodes de l'*Exercici1* segons la descripció dels seus comentaris al codi amb *//TODO.* per fer un joc tipus **2048** per línia de comandes.
+Resol els mètodes de l'*Exercici1* segons la descripció dels seus comentaris al codi amb *//TODO.* 
+
+Al final has de tenir un joc tipus **2048** implementat per línia de comandes.
 
 (Examen curt de dificultat alta)
 
