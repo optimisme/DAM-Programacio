@@ -8,6 +8,45 @@ import java.util.Locale;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
+/*
+   Aquest codi implementa una versió simplificada del joc 2048 en Java.
+   
+   - Constants i variables globals:
+     > `SIZE` defineix la mida del taulell (4x4),
+     > `board` representa el taulell com una matriu de enters
+     > `random` s'utilitza per generar números i posicions aleatòries.
+
+   - Mètodes:
+     > `clearScreen()`: Neteja la consola per actualitzar la visualització del joc.
+     > `printBoard()`: Mostra el taulell en format gràfic amb les caselles numerades.
+     > `spawnTile()`: Afegeix una nova fitxa (2 o 4) en una casella buida del taulell.
+     > `moveLeft`, `moveRight`, `moveUp`, `moveDown`: Implementen els moviments 
+       del jugador amb les regles del joc, com moure fitxes, combinar números iguals
+       i omplir els espais buits.
+     > `isGameFinished()`: Determina si el joc ha acabat (victòria, derrota o continua).
+     > `play(Scanner scanner)`: Gestiona el bucle principal del joc, demanant moviments
+       al jugador i aplicant-los fins que s'acabi el joc.
+     > `main(String[] args)`: Punt d'entrada del programa per inicialitzar el joc.
+   
+   Taulell:
+     > El taulell està representat per una matriu de mida 4x4 (`board`), on cada casella
+     conté un número (2, 4, ...), o 0 si és buida.
+     > Els moviments possibles són cap a l'esquerra, dreta, amunt o avall. 
+       A cada moviment:
+         1. Les fitxes es desplacen fins que trobin un obstacle (una altra fitxa o el límit).
+         2. Les fitxes adjacents amb el mateix valor es combinen, sumant el seu valor.
+         3. Les caselles buides es reomplen després del moviment.
+     > Després de cada moviment vàlid, es genera una nova fitxa (2 o 4) en una casella buida.
+     > El joc acaba quan el jugador aconsegueix una fitxa amb valor 128 (victòria) o
+       quan no queden moviments possibles (derrota).
+   
+   Funcionament del joc:
+     1. Inicialment, el taulell conté dues fitxes amb valors aleatoris (2 o 4).
+     2. El jugador introdueix un moviment (`left`, `up`, `right`, `down`) i el taulell
+        s'actualitza segons les regles descrites.
+     3. El joc continua fins que el jugador guanyi o perdi.
+ */
+
 public class Resolt1 {
 
     public static final int SIZE = 4;
