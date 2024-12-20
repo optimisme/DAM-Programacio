@@ -69,7 +69,7 @@ public class Exercici1 {
 
 
     /**
-     * Dibuixa el taulell amb aquest estil:
+     * Dibuixa el taulell amb aquest estil, els 0 deixen la cel·la buida:
      * 
 +----+----+----+----+
 |   2|  16|    |   2|
