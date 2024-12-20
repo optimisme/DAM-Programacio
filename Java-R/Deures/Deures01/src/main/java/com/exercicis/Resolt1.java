@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 import java.util.Random;
 
 /*
-   Aquest codi implementa una versió simplificada del joc 2048 en Java.
+   Implementa una versió simplificada del joc 2048 en Java.
    
    - Constants i variables globals:
      > `SIZE` defineix la mida del taulell (4x4),
