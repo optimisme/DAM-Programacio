@@ -1,0 +1,27 @@
+[
+    {
+        "treballa": true,
+        "estudis": [
+            "CFGS DAM",
+            "CFGM SMX"
+        ],
+        "ultima_modificacio": "2025-01-03T12:33:48",
+        "adreça": {
+            "ciutat": "Cornellà",
+            "carrer": "Carrer de la Llibertat"
+        },
+        "nom": "Joan",
+        "edat": 20
+    },
+    {
+        "treballa": false,
+        "estudis": ["CFGS DAW"],
+        "ultima_modificacio": "2025-01-03T12:33:48",
+        "adreça": {
+            "ciutat": "Terrassa",
+            "carrer": "Carrer Major"
+        },
+        "nom": "Sofia",
+        "edat": 22
+    }
+]
