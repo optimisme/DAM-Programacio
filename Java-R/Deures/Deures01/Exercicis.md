@@ -21,6 +21,10 @@ Teniu un exemple del joc en aquest enllaç **"[Play 2048](https://play2048.co)"*
 
 Aquí hi ha un exemple del "Resolt1"
 
+```bash
+./run.sh com.exercicis.Resolt1
+```
+
 <br/>
 <center>
 <video width="100%" style="max-width:450px;" controls allowfullscreen>
