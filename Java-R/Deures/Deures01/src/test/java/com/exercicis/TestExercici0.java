@@ -188,7 +188,8 @@ class TestExercici0 {
         tests.add(new Object[]{"2023-02-30", false});
         tests.add(new Object[]{"2023-13-01", false});
         tests.add(new Object[]{"2023-06-31", false});
-        tests.add(new Object[]{"2023-02-29", true});
+        tests.add(new Object[]{"2023-02-29", false});
+        tests.add(new Object[]{"2024-02-29", true});
         tests.add(new Object[]{"1000-01-01", true});
         tests.add(new Object[]{"9999-12-31", true});
         tests.add(new Object[]{"2023-00-10", false});

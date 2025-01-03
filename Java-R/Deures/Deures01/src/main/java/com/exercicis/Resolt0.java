@@ -274,6 +274,7 @@ public class Resolt0 {
      *  validarData("2023-04-15") retorna true
      *  validarData("2023-02-30") retorna false
      *  validarData("2023-13-01") retorna false
+     * 
      *
      * @param data La cadena que representa una data en format 'AAAA-MM-DD'.
      * @return True si la data és vàlida, false altrament.
@@ -284,25 +285,25 @@ public class Resolt0 {
         if (data == null || data.length() != 10) {
             return false;
         }
-
+    
         // Verifica si els guions es troben a les posicions correctes
         if (data.charAt(4) != '-' || data.charAt(7) != '-') {
             return false;
         }
-
+    
         String anyStr = data.substring(0, 4);
         String mesStr = data.substring(5, 7);
         String diaStr = data.substring(8, 10);
-
+    
         // Verifica que cada part contingui només dígits
         if (!isAllDigits(anyStr) || !isAllDigits(mesStr) || !isAllDigits(diaStr)) {
             return false;
         }
-
+    
         int any = Integer.parseInt(anyStr);
         int mes = Integer.parseInt(mesStr);
         int dia = Integer.parseInt(diaStr);
-
+    
         if (any < 1000 || any > 9999) {
             return false;
         }
@@ -312,17 +313,26 @@ public class Resolt0 {
         if (dia < 1 || dia > 31) {
             return false;
         }
-
+    
         // Mesos amb 30 dies
         if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30) {
             return false;
         }
-
+    
         // Mes de febrer
-        if (mes == 2 && dia > 29) {
-            return false;
+        if (mes == 2) {
+            boolean esAnyDeTraspas = (any % 4 == 0 && any % 100 != 0) || (any % 400 == 0);
+            if (esAnyDeTraspas) {
+                if (dia > 29) {
+                    return false;
+                }
+            } else {
+                if (dia > 28) {
+                    return false;
+                }
+            }
         }
-
+    
         return true;
     }
 
