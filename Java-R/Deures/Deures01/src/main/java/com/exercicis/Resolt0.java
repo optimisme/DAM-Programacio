@@ -194,7 +194,7 @@ public class Resolt0 {
     /**
      * Valida que la llista de clients sigui vàlida.
      * Comprova que:
-     * - La llista de clients sigui efectivament una llista.
+     * - La llista de clients sigui efectivament una llista (no `null`).
      * - Una llista buida és vàlida.
      * - Tots els elements de la llista de clients siguin únics.
      * - Tots els clients de la llista es trobin dins de la llista global de clients vàlids.
