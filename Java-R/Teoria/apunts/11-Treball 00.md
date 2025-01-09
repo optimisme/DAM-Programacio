@@ -192,7 +192,7 @@ Us recomano:
 | 1     | Cardizales, Hector | Pozo, Asier | Santana, Valeria |
 | 2     | Asensio, Víctor | Martínez, Samantha | Clemente, Gracia |
 | 3     | Bermudez, Alex | Lopez, Javier | Fernandez, Denís |
-| 4     | Navarrete, Byron | Perez, Albert | Garcia, Steephen |
-| 5     | Maestre, Dennis | Fernández, Germán | Paz, Paula |
-| 6     | Marin, Biel | Hirsch, Daniel | Romero, Ruth
-| 7     | Carrillo, Christopher | Maqueda, Jordi |
+| 4     | Maestre, Dennis | Navarrete, Byron | Paz, Paula |
+| 5     | Marin, Biel | Hirsch, Daniel | Romero, Ruth
+| 6     | Carrillo, Christopher | Maqueda, Jordi |
+| 7     | Perez, Albert | Garcia, Steephen |
