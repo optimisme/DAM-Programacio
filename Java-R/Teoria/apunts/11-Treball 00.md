@@ -190,7 +190,7 @@ Feu servir **GitHub projects** per gestionar les tasques que va fent cada membre
 
 | Equips | Alumne 0 | Alumne 1 | Alumne 2 |
 |-------|----------|----------|----------|
-| 0     | Prieto, Víctor | El Meftah, Sabrina | Martínez, Alex |
+| 0     | Prieto, Víctor | El Meftah, Sabrina |
 | 1     | Cardizales, Hector | Pozo, Asier | Santana, Valeria |
 | 2     | Asensio, Víctor | Martínez, Samantha | Clemente, Gracia |
 | 3     | Bermudez, Alex | Lopez, Javier | Fernandez, Denís |
@@ -198,5 +198,5 @@ Feu servir **GitHub projects** per gestionar les tasques que va fent cada membre
 | 5     | Marin, Biel | Hirsch, Daniel | Romero, Ruth
 | 6     | Carrillo, Christopher | Maqueda, Jordi |
 | 7     | Perez, Albert | Garcia, Steephen |
-| 8     | 
+| 8     | Martínez, Alex
 
