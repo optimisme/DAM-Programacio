@@ -175,7 +175,9 @@ El projecte s'ha de fer segons els següents equips, teniu en compte que:
 - Cal que els tots companys feu commits regularment
 - Cal que tots pogueu respondre a les preguntes de l'avaluació de qualsevol part del projecte
 
-Us recomano:
+### GitHub projects
+
+Feu servir **GitHub projects** per gestionar les tasques que va fent cada membre de l'equip.
 
 - Fer un llistat de totes les tasques que heu de fer
 - Ordenar les tasques segons dependències entre tasques (quines s'han de fer primer)
@@ -196,3 +198,5 @@ Us recomano:
 | 5     | Marin, Biel | Hirsch, Daniel | Romero, Ruth
 | 6     | Carrillo, Christopher | Maqueda, Jordi |
 | 7     | Perez, Albert | Garcia, Steephen |
+| 8     | 
+
