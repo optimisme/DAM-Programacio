@@ -196,7 +196,7 @@ Feu servir **GitHub projects** per gestionar les tasques que va fent cada membre
 | 3     | Bermudez, Alex | Lopez, Javier | Fernandez, Denís |
 | 4     | Maestre, Dennis | Navarrete, Byron | Paz, Paula |
 | 5     | Marin, Biel | Hirsch, Daniel | Romero, Ruth
-| 6     | Carrillo, Christopher | Maqueda, Jordi |
+| 6     | Carrillo, Christopher | Maqueda, Jordi | Bargados, David
 | 7     | Perez, Albert | Garcia, Steephen |
 | 8     | Martínez, Alex
 
