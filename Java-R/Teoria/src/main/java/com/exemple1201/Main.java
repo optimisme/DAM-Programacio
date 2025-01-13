@@ -1,0 +1,14 @@
+package com.exemple1201;
+
+public class Main {
+    public static void main(String[] args) {
+        Persona joan = new Persona("Joan", 25);
+        
+        joan.setNom("Juanito");
+        joan.setEdat(40);
+
+        
+        System.out.println(joan); // Imprimeix "Nom: Joanito, Edat: 40"
+        System.out.println(joan.getNom()); // Imprimeix "Juanito"
+    }
+}
