@@ -42,9 +42,14 @@ Per executar i testejar el programa:
 
 # A la carpeta "Deures02" executar el test
 ./runTest.sh com.exercicis.TestExercici0200
+
+# Testos individuals
+./runTest.sh com.exercicis.TestExercici0200#testMaxCapacityExceeded
+./runTest.sh com.exercicis.TestExercici0200#testRemainingCapacityCheck
+./runTest.sh com.exercicis.TestExercici0200#testNoRemainingCapacity
 ```
 
-# Exercici 02001
+# Exercici 0201
 
 Crea la classe 'ControlTemperatura' que permet gestionar la temperatura de diferents zones d'un edifici. 
 
@@ -93,6 +98,12 @@ Per executar i testejar el programa:
 
 # A la carpeta "Deures02" executar el test
 ./runTest.sh com.exercicis.TestExercici0201
+
+# Testos individuals
+./runTest.sh com.exercicis.TestExercici0201#testTemperaturaMitjanaInicial
+./runTest.sh com.exercicis.TestExercici0201#testCreacioZones
+./runTest.sh com.exercicis.TestExercici0201#testAjustarTemperatura
+./runTest.sh com.exercicis.TestExercici0201#testTemperaturaMitjanaDespresDeEliminarZones
 ```
 
 # Exercici 0202
@@ -158,6 +169,8 @@ Per executar i testejar el programa:
 
 # A la carpeta "Deures02" executar el test
 ./runTest.sh com.exercicis.TestExercici0202
+
+# Testos individuals
 ```
 
 # Exercici 0203
@@ -212,4 +225,6 @@ Per executar i testejar el programa:
 
 # A la carpeta "Deures02" executar el test
 ./runTest.sh com.exercicis.TestExercici0203
+
+# Testos individuals
 ```
