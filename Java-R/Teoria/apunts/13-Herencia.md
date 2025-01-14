@@ -3,7 +3,7 @@
         <p>© Albert Palacios Jiménez, 2023</p>
     </div>
     <div style="flex: 1; padding: 0px; text-align: right;">
-        <img src="../assets/ieti.png" height="32" alt="Logo de IETI" style="max-height: 32px;">
+        <img src="./assets/ieti.png" height="32" alt="Logo de IETI" style="max-height: 32px;">
     </div>
 </div>
 <hr/>
@@ -41,7 +41,7 @@ La sobreescriptura de mètodes es produeix quan una subclasse defineix un mètod
 La sobreescriptura permet que la subclasse proporcioni una implementació específica d'un mètode que ja existeix en la superclasse.
 
 
-## Exemple 0500
+### Exemple 1300
 
 Exemple d'herència amb **'extends'**, una classe pare 'Poligon' defineix les bases de classes herederes 'Cercle', 'Triangle' i 'Rectangle':
 
@@ -127,7 +127,7 @@ public class ExempleSuper {
 }
 ```
 
-## Exemple 0501
+### Exemple 1301
 
 Ús de súper al constructor i als mètodes sobreescrits
 
@@ -227,7 +227,7 @@ class ClasseB implements InterficieB {
 }
 ```
 
-## Exemple 0502
+### Exemple 1302
 
 Herència múltiple d'interficies, i implementació d'una interficie a una classe
 
@@ -288,7 +288,7 @@ Característiques:
 
 **Mètodes No Abstractes**: També pot contenir mètodes no abstractes amb implementació completa. Això permet que les subclasses utilitzin aquests mètodes directament o els sobreescriuen segons sigui necessari.
 
-## Exemple 0503
+### Exemple 1303
 
 En un sistema per gestionar vehicles. Es defineix una classe abstracta 'Vehicle' amb mètodes abstractes com 'accelerar()' i 'frenar()'. Això permet tenir subclasses com 'Cotxe' i 'Bicicleta' que hereten de 'Vehicle' i proporcionen implementacions específiques per aquests mètodes.
 
@@ -332,7 +332,7 @@ Els mètodes declarats com a final no poden ser sobrescrits per les subclasses
 
 Les classes declarades com a final no poden ser esteses. Això és útil quan vols evitar que el comportament d'una classe o mètode sigui modificat.
 
-## Exemple 0504
+### Exemple 1304
 
 En aquest exemple, tant la classe CompteEstalvi com els mètodes dipositar i retirar són marcats com a final. Això significa que no pots crear una classe que hereti de CompteEstalvi, i no pots sobreescriure els mètodes dipositar i retirar en una subclasse (si n'hi hagués).
 
@@ -479,7 +479,7 @@ Utilitza l'herència quan la relació entre les dues classes naturalment segueix
 
 Prefereix la composició quan la relació entre les classes sigui millor descrita com a "té-un", o quan necessitis una flexibilitat major per canviar el comportament dels teus components en temps d'execució. La composició també és preferible quan vols evitar els problemes de l'herència múltiple o quan vols minimitzar l'acoblament entre classes.
 
-## Exemple 0505
+### Exemple 1305
 
 Exemple de composició.
 
@@ -512,7 +512,7 @@ public class Main {
 }
 ```
 
-## Exemple 0506
+### Exemple 1306
 
 Exemple amb herència
 
@@ -587,6 +587,3 @@ if (animal instanceof Gos) {
     System.out.println("La conversió no és segura.");
 }
 ```
-
-
-

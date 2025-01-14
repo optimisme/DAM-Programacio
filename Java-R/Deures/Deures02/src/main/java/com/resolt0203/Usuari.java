@@ -1,4 +1,4 @@
-package com.exercici0203;
+package com.resolt0203;
 
 public class Usuari {
     public void mostrarPreferencies() {

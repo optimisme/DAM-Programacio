@@ -171,6 +171,11 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0202
 
 # Testos individuals
+./runTest.sh com.exercicis.TestExercici0202#testCreacioAutor
+./runTest.sh com.exercicis.TestExercici0202#testCreacioLlibre
+./runTest.sh com.exercicis.TestExercici0202#testCreacioPrestec
+./runTest.sh com.exercicis.TestExercici0202#testEstaEnTermini
+./runTest.sh com.exercicis.TestExercici0202#testSortidaMain
 ```
 
 # Exercici 0203
@@ -213,7 +218,7 @@ Simula el component del sistema que també necessita accedir a la configuració 
 
 - configurarSistema(): Configura el sistema basant-se en la configuració global.
 
-El format és: "Configurant sistema amb idioma Francès i zona horària GMT"
+El format és: "Configurant sistema amb idioma Dothraki i zona horària GMT"
 
 Per executar i testejar el programa:
 
@@ -227,4 +232,10 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0203
 
 # Testos individuals
+./runTest.sh com.exercicis.TestExercici0203#testSingletonInstance
+./runTest.sh com.exercicis.TestExercici0203#testDefaultValues
+./runTest.sh com.exercicis.TestExercici0203#testSetAndGetIdioma
+./runTest.sh com.exercicis.TestExercici0203#testSetAndGetZonaHoraria
+./runTest.sh com.exercicis.TestExercici0203#testUsuariMostrarPreferencies
+./runTest.sh com.exercicis.TestExercici0203#testSistemaConfigurarSistema
 ```
