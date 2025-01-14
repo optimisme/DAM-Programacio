@@ -1,4 +1,4 @@
-package com.exemple1400;
+package com.project;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ class AppData {
     }
 
     private void connect() {
-        String url = "jdbc:sqlite:./data/exemple1400.sqlite"; // Nom de l'arxiu amb les dades 'dades.sqlite'
+        String url = "jdbc:sqlite:dades.sqlite"; // Nom de l'arxiu amb les dades 'dades.sqlite'
         try {
             conn = DriverManager.getConnection(url);
             conn.setAutoCommit(false); // Desactiva l'autocommit per permetre control manual de transaccions
@@ -55,6 +55,7 @@ class AppData {
             }
         }
     }
+
     public int insertAndGetId(String sql) {
         int generatedId = -1;
         try (Statement stmt = conn.createStatement()) {
@@ -79,7 +80,7 @@ class AppData {
         }
         return generatedId;
     }
-       
+
     // Aquesta funció transforma el ResultSet en un Map<String, Object>
     // per fer l'accés a la informació més genèric
     public List<Map<String, Object>> query(String sql) {

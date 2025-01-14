@@ -1,4 +1,4 @@
-package com.exemple1400;
+package com.project;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -24,18 +24,25 @@ class AppData {
     }
 
     private void connect() {
-        String url = "jdbc:sqlite:./data/exemple1400.sqlite"; // Nom de l'arxiu amb les dades 'dades.sqlite'
+        String url = "jdbc:mysql://localhost:3308/government?useSSL=false&allowPublicKeyRetrieval=true";
+        String user = "root";
+        String password = "pwd";
+
         try {
-            conn = DriverManager.getConnection(url);
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            conn = DriverManager.getConnection(url, user, password);
             conn.setAutoCommit(false); // Desactiva l'autocommit per permetre control manual de transaccions
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
+        } catch (ClassNotFoundException | SQLException e) {
+            System.out.println("Error connectant a la base de dades MySQL.");
+            e.printStackTrace();
         }
     }
 
     public void close() {
         try {
-            if (conn != null) conn.close();
+            if (conn != null) {
+                conn.close();
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -58,34 +65,26 @@ class AppData {
     public int insertAndGetId(String sql) {
         int generatedId = -1;
         try (Statement stmt = conn.createStatement()) {
-            // Execute the update
-            stmt.executeUpdate(sql);
-            conn.commit();  // Make sure to commit the transaction if auto-commit is disabled
-    
-            // Query the last inserted row ID
-            try (ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid()")) {
-                if (rs.next()) {
-                    generatedId = rs.getInt(1); // Retrieve the last inserted ID
-                }
+            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
+            ResultSet rs = stmt.getGeneratedKeys();
+            if (rs.next()) {
+                generatedId = rs.getInt(1); // Obtenir el primer camp com a ID generat
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             try {
-                conn.rollback(); // Rollback the transaction in case of error
+                conn.rollback();
             } catch (SQLException ex) {
-                System.out.println("Error during rollback.");
+                System.out.println("Error en fer rollback.");
                 ex.printStackTrace();
             }
         }
         return generatedId;
     }
-       
-    // Aquesta funció transforma el ResultSet en un Map<String, Object>
-    // per fer l'accés a la informació més genèric
+
     public List<Map<String, Object>> query(String sql) {
         List<Map<String, Object>> resultList = new ArrayList<>();
 
-        // try-with-resources tancarà el ResultSet quan acabi el bloc
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             ResultSetMetaData metaData = rs.getMetaData();

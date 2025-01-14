@@ -124,7 +124,13 @@ Aquest exemple mostra com fer una connexió amb SQLite, i gestionar dades.
 
 La classe **AppData** és un singleton que gestiona una única connexió amb la base de dades, fent-la accessible des de qualsevol punt del codi.
 
-A més, implementa una funció **query** que enlloc de retornar un **ResultSet** retorna un objecte tipus **List<Map<String, Object>>** que és més senzill de gestionar.
+A més, implementa una funció **query** que enlloc de retornar un **ResultSet** retorna un objecte tipus 
+
+```java
+**List<Map<String, Object>>**
+```
+
+que és més senzill de gestionar.
 
 ```java
 public class Main {
@@ -291,6 +297,7 @@ A més, implementa una funció **query** que enlloc de retornar un **ResultSet**
 
 ```java
 public class Main {
+
     public static void main(String[] args) {
 
         // Crear el singleton (això es connecta a la base de dades)
@@ -699,3 +706,77 @@ public class Main {
 }
 ```
 
+### Exercici 1400
+
+Fent servir el Singleton 'AppData' i una base de dades *sqlite*, desenvolupa una aplicació per a una biblioteca que no només gestioni els llibres sinó també les editorials. 
+
+Cada llibre estarà relacionat amb una editorial amb claus foranes per establir relacions entre taules.
+
+**Taula editorials:**
+
+```sql
+id_editorial (INTEGER) : Un identificador únic per a cada editorial.
+nom (TEXT) : El nom de l'editorial.
+```
+
+**Taula llibres:**
+
+```sql
+id_llibre (INTEGER) : Un identificador únic per a cada llibre.
+titol (TEXT) : El títol del llibre.
+autor (TEXT) : El nom de l'autor del llibre.
+any_publicacio (INTEGER) : L'any de publicació del llibre.
+id_editorial (INTEGER) : La clau forana que enllaça amb l'id_editorial de la taula editorials.
+```
+
+Defineix també les següents funcions:
+```text
+void crearTaulaEditorials()
+void crearTaulaLlibres()
+void afegirEditorial(String nom)
+void afegirLlibre(String titol, String autor, int anyPublicacio, int idEditorial)
+void llistarTaulaEditorials()
+void llistarTaulaLlibres()
+void llistarInfoLlibre(int idLlibre)
+```
+
+Prova-ho amb aquest main:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        AppData db = AppData.getInstance();
+
+        // Crear taules
+        crearTaulaEditorials();
+        crearTaulaLlibres();
+
+        // Afegir editorials
+        afegirEditorial("Editorial Alpha");
+        afegirEditorial("Beta Publishers");
+        afegirEditorial("Gamma Books");
+        afegirEditorial("Delta Literature");
+
+        // Afegir llibres
+        afegirLlibre("El primer llibre", "Autor A", 2020, 1);
+        afegirLlibre("Segona obra", "Autor B", 2018, 2);
+        afegirLlibre("Tercer volum", "Autor C", 2019, 3);
+        afegirLlibre("Quart text", "Autor D", 2021, 4);
+        afegirLlibre("Cinquè manuscrit", "Autor E", 2022, 1);
+        afegirLlibre("Sisè document", "Autor F", 2023, 2);
+
+        System.out.println("\nEditorials:");
+        llistarTaulaEditorials();
+
+        System.out.println("\nLlibres:");
+        llistarTaulaLlibres();
+
+        int idLlibre = 5;
+        System.out.println("\nInformació del Llibre: " + idLlibre);
+        llistarInfoLlibre(idLlibre);
+
+        // Tancar la connexió amb la base de dades (del singleton)
+        db.close();
+    }
+}
+```

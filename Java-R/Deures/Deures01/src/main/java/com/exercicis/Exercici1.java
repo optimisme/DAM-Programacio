@@ -1,4 +1,5 @@
 package com.exercicis;
+
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -87,7 +88,18 @@ public class Exercici1 {
      * @test ./runTest.sh "com.exercicis.TestExercici1#testPrintBoardWithLargeNumbers"
      */
     public static void printBoard() {
-        // TODO
+        System.out.println("+----+----+----+----+");
+        for (int[] row : board) {
+            for (int cell : row) {
+                if (cell == 0) {
+                    System.out.printf("|    ", cell == 0 ? "" : cell);
+                } else {
+                    System.out.printf("|%4d", cell == 0 ? "" : cell);
+                }
+            }
+            System.out.println("|");
+            System.out.println("+----+----+----+----+");
+        }
     }
 
     /**
@@ -102,7 +114,13 @@ public class Exercici1 {
      * @test ./runTest.sh "com.exercicis.TestExercici1#testSpawnDoNotOverwriteExisting"
      */
     public static void spawnTile() {
-        // TODO
+        int x, y;
+        do {
+            x = random.nextInt(SIZE);
+            y = random.nextInt(SIZE);
+        } while (board[x][y] != 0);
+
+        board[x][y] = random.nextInt(10) == 0 ? 4 : 2;
     }
 
     /**
@@ -140,7 +158,40 @@ public class Exercici1 {
      * @test ./runTest.sh "com.exercicis.TestExercici1#testMoveLeftFullRowWithoutMerge"
      */
     public static void moveLeft() {
-        // TODO
+        for (int row = 0; row < SIZE; row++) {
+            // Array temporal per guardar els números de la fila actual
+            int[] newRow = new int[SIZE];
+            int newIndex = 0;
+            
+            // 1. Primer movem tots els números (!=0) cap a l'esquerra
+            for (int col = 0; col < SIZE; col++) {
+                if (board[row][col] != 0) {
+                    newRow[newIndex] = board[row][col];
+                    newIndex++;
+                }
+            }
+            
+            // 2. Fem els merge dels números adjacents iguals
+            for (int i = 0; i < SIZE - 1; i++) {
+                if (newRow[i] != 0 && newRow[i] == newRow[i + 1]) {
+                    newRow[i] *= 2;
+                    newRow[i + 1] = 0;
+                }
+            }
+            
+            // 3. Tornem a moure tot a l'esquerra després del merge
+            int[] finalRow = new int[SIZE];
+            int finalIndex = 0;
+            for (int i = 0; i < SIZE; i++) {
+                if (newRow[i] != 0) {
+                    finalRow[finalIndex] = newRow[i];
+                    finalIndex++;
+                }
+            }
+            
+            // 4. Actualitzem el board amb la fila processada
+            board[row] = finalRow;
+        }
     }
 
     /**
@@ -178,7 +229,40 @@ public class Exercici1 {
      * @test ./runTest.sh "com.exercicis.TestExercici1#testMoveRightFullColumnWithoutMerge"
      */
     public static void moveRight() {
-        // TODO
+        for (int row = 0; row < SIZE; row++) {
+            // Array temporal per guardar els números de la fila actual
+            int[] newRow = new int[SIZE];
+            int newIndex = SIZE - 1;
+            
+            // 1. Primer movem tots els números (!=0) cap a la dreta
+            for (int col = SIZE - 1; col >= 0; col--) {
+                if (board[row][col] != 0) {
+                    newRow[newIndex] = board[row][col];
+                    newIndex--;
+                }
+            }
+            
+            // 2. Fem els merge dels números adjacents iguals (de dreta a esquerra)
+            for (int i = SIZE - 1; i > 0; i--) {
+                if (newRow[i] != 0 && newRow[i] == newRow[i - 1]) {
+                    newRow[i] *= 2;
+                    newRow[i - 1] = 0;
+                }
+            }
+            
+            // 3. Tornem a moure tot a la dreta després del merge
+            int[] finalRow = new int[SIZE];
+            int finalIndex = SIZE - 1;
+            for (int i = SIZE - 1; i >= 0; i--) {
+                if (newRow[i] != 0) {
+                    finalRow[finalIndex] = newRow[i];
+                    finalIndex--;
+                }
+            }
+            
+            // 4. Actualitzem el board amb la fila processada
+            board[row] = finalRow;
+        }
     }
 
     /**
@@ -216,7 +300,42 @@ public class Exercici1 {
      * @test ./runTest.sh "com.exercicis.TestExercici1#testMoveUpFullColumnWithoutMerge"
      */
     public static void moveUp() {
-        // TODO
+        for (int col = 0; col < SIZE; col++) {
+            // Array temporal per guardar els números de la columna actual
+            int[] newCol = new int[SIZE];
+            int newIndex = 0;
+            
+            // 1. Primer movem tots els números (!=0) cap amunt
+            for (int row = 0; row < SIZE; row++) {
+                if (board[row][col] != 0) {
+                    newCol[newIndex] = board[row][col];
+                    newIndex++;
+                }
+            }
+            
+            // 2. Fem els merge dels números adjacents iguals
+            for (int i = 0; i < SIZE - 1; i++) {
+                if (newCol[i] != 0 && newCol[i] == newCol[i + 1]) {
+                    newCol[i] *= 2;
+                    newCol[i + 1] = 0;
+                }
+            }
+            
+            // 3. Tornem a moure tot amunt després del merge
+            int[] finalCol = new int[SIZE];
+            int finalIndex = 0;
+            for (int i = 0; i < SIZE; i++) {
+                if (newCol[i] != 0) {
+                    finalCol[finalIndex] = newCol[i];
+                    finalIndex++;
+                }
+            }
+            
+            // 4. Actualitzem el board amb la columna processada
+            for (int row = 0; row < SIZE; row++) {
+                board[row][col] = finalCol[row];
+            }
+        }
     }
 
     /**
@@ -254,7 +373,42 @@ public class Exercici1 {
      * @test ./runTest.sh "com.exercicis.TestExercici1#testMoveDownFullColumnWithoutMerge"
      */
     public static void moveDown() {
-        // TODO
+        for (int col = 0; col < SIZE; col++) {
+            // Array temporal per guardar els números de la columna actual
+            int[] newCol = new int[SIZE];
+            int newIndex = SIZE - 1;
+            
+            // 1. Primer movem tots els números (!=0) cap avall
+            for (int row = SIZE - 1; row >= 0; row--) {
+                if (board[row][col] != 0) {
+                    newCol[newIndex] = board[row][col];
+                    newIndex--;
+                }
+            }
+            
+            // 2. Fem els merge dels números adjacents iguals (de baix a dalt)
+            for (int i = SIZE - 1; i > 0; i--) {
+                if (newCol[i] != 0 && newCol[i] == newCol[i - 1]) {
+                    newCol[i] *= 2;
+                    newCol[i - 1] = 0;
+                }
+            }
+            
+            // 3. Tornem a moure tot avall després del merge
+            int[] finalCol = new int[SIZE];
+            int finalIndex = SIZE - 1;
+            for (int i = SIZE - 1; i >= 0; i--) {
+                if (newCol[i] != 0) {
+                    finalCol[finalIndex] = newCol[i];
+                    finalIndex--;
+                }
+            }
+            
+            // 4. Actualitzem el board amb la columna processada
+            for (int row = 0; row < SIZE; row++) {
+                board[row][col] = finalCol[row];
+            }
+        }
     }
 
     /**
@@ -275,8 +429,27 @@ public class Exercici1 {
      * @test ./runTest.sh "com.exercicis.TestExercici1#testGameWinWithMultipleConditions"
      */
     public static String isGameFinished() {
-        // TODO
-        return "continue";
+        // Primer comprovem si s'ha guanyat (hi ha un 128)
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                if (board[row][col] == 128) return "win";
+            }
+        }
+        
+        // Després comprovem si encara es pot continuar jugant
+        for (int row = 0; row < SIZE; row++) {
+            for (int col = 0; col < SIZE; col++) {
+                // Si hi ha una casella buida, es pot continuar
+                if (board[row][col] == 0) return "continue";
+                
+                // Si hi ha números iguals adjacents, es pot continuar
+                if (row > 0 && board[row][col] == board[row - 1][col]) return "continue";
+                if (col > 0 && board[row][col] == board[row][col - 1]) return "continue";
+            }
+        }
+        
+        // Si no hi ha caselles buides ni números iguals adjacents, s'ha perdut
+        return "lost";
     }
 
     /**
@@ -307,7 +480,55 @@ public class Exercici1 {
      * @test ./runTest.sh "com.exercicis.TestExercici1#testPlayMixedCaseCommands"
      */
     public static void play(Scanner scanner) {
-        // TODO
+        String message = "";
+
+        spawnTile();
+        while (true) {
+            spawnTile();
+
+            clearScreen();
+            printBoard();
+            if (message.compareTo("") != -1) {
+                System.out.println(message);
+            }
+
+            String gameFinished = isGameFinished();
+            if (gameFinished.equals("win")) {
+                System.out.println("You win, congrats!");
+                break;
+            }
+            if (gameFinished.equals("lost")) {
+                System.out.println("Game Over, you are a loser!");
+                break;
+            }
+
+            System.out.println("Enter move (left, up, right, down, exit): ");
+            String move = scanner.nextLine().toLowerCase();
+
+            switch (move) {
+                case "l":
+                case "left":
+                    moveLeft();
+                    break;
+                case "r":
+                case "right":
+                    moveRight();
+                    break;
+                case "u":
+                case "up":
+                    moveUp();
+                    break;
+                case "d":
+                case "down":
+                    moveDown();
+                    break;
+                case "exit":
+                    System.out.println("Exit game ...");
+                    return;
+                default:
+                    message = "Invalid move!";
+            }
+        } 
     }
 
     /**
@@ -320,4 +541,3 @@ public class Exercici1 {
         scanner.close();
     }
 }
-
