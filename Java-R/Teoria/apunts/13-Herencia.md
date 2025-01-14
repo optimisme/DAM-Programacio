@@ -43,6 +43,11 @@ La sobreescriptura permet que la subclasse proporcioni una implementació espec�
 
 ### Exemple 1300
 
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple1300.Main
+```
+
 Exemple d'herència amb **'extends'**, una classe pare 'Poligon' defineix les bases de classes herederes 'Cercle', 'Triangle' i 'Rectangle':
 
 ```java
@@ -98,6 +103,55 @@ public class Rectangle extends Poligon {
 
 ```
 
+### Exercici 1300
+
+Crea un sistema simple de gestió d'empleats per a una empresa.
+
+Classe Base (Superclasse): **Empleat**
+
+Atributs privats: nom (String), cognom (String), i salariAnual (double).
+
+Constructor: Que accepti nom, cognom, i salariAnual com a paràmetres.
+
+Mètodes:
+
+getNomComplet(): Retorna el nom complet de l'empleat (nom + cognom).
+
+incrementarSalari(double percentatge): Incrementa el salari de l'empleat segons un percentatge donat.
+
+```java
+this.salariAnual += this.salariAnual * (percentatge / 100);
+```
+
+getSalariAnual(): Retorna el salari anual de l'empleat.
+
+Subclasse: **Gerent**
+
+Atributs privats: departament (String).
+
+Constructor: Que accepti nom, cognom, salariAnual, i departament.
+
+Sobreescriu el mètode getNomComplet() per a que també inclogui el departament del gerent al final.
+
+Prova-ho amb aquest main:
+
+```java
+public class Main {
+    public static void main(String[] args) {
+        Empleat empleat = new Empleat("Maria", "Lopez", 30000);
+        Gerent gerent = new Gerent("Carlos", "Garcia", 50000, "TI");
+        
+        System.out.println(empleat.getNomComplet() + " - Salari Anual: " + empleat.getSalariAnual());
+        empleat.incrementarSalari(10);
+        System.out.println("Després de l'increment: " + empleat.getSalariAnual());
+        
+        System.out.println(gerent.getNomComplet() + " - Salari Anual: " + gerent.getSalariAnual());
+        gerent.incrementarSalari(10);
+        System.out.println("Després de l'increment: " + gerent.getSalariAnual());
+    }
+}
+```
+
 ### Súper
 
 **super** és una paraula clau que fa referència directa a la superclasse (classe pare) immediata d'una classe. S'utilitza principalment en dos contextos: 
@@ -128,6 +182,11 @@ public class ExempleSuper {
 ```
 
 ### Exemple 1301
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple1301.Main
+```
 
 Ús de súper al constructor i als mètodes sobreescrits
 
@@ -229,6 +288,11 @@ class ClasseB implements InterficieB {
 
 ### Exemple 1302
 
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple1302.Main
+```
+
 Herència múltiple d'interficies, i implementació d'una interficie a una classe
 
 ```java
@@ -290,6 +354,11 @@ Característiques:
 
 ### Exemple 1303
 
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple1303.Main
+```
+
 En un sistema per gestionar vehicles. Es defineix una classe abstracta 'Vehicle' amb mètodes abstractes com 'accelerar()' i 'frenar()'. Això permet tenir subclasses com 'Cotxe' i 'Bicicleta' que hereten de 'Vehicle' i proporcionen implementacions específiques per aquests mètodes.
 
 ```java
@@ -333,6 +402,11 @@ Els mètodes declarats com a final no poden ser sobrescrits per les subclasses
 Les classes declarades com a final no poden ser esteses. Això és útil quan vols evitar que el comportament d'una classe o mètode sigui modificat.
 
 ### Exemple 1304
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple1304.Main
+```
 
 En aquest exemple, tant la classe CompteEstalvi com els mètodes dipositar i retirar són marcats com a final. Això significa que no pots crear una classe que hereti de CompteEstalvi, i no pots sobreescriure els mètodes dipositar i retirar en una subclasse (si n'hi hagués).
 
@@ -453,6 +527,70 @@ public class BasicCoffeeMachine {
 }
 ```
 
+### Exercici 1301
+
+Desenvolupar un sistema en Java per gestionar animals en un zoològic, utilitzant una combinació d'herència de classes i implementació d'interfícies amb mètodes sobreescrits.
+
+Dins d'aquest sistema, diferents tipus d'animals tindran característiques i comportaments únics. 
+
+Hi haurà una classe base **Animal** amb propietats comunes, i subclasses específiques com *Mamifer* i *Ocell*, que heretaran de Animal. 
+
+A més, definirem interfícies per representar diferents comportaments, com *Volador* i *Nedador*, que alguns animals podran implementar.
+
+
+Classe abstracta **Animal**:
+
+Atributs protegits: nom (String), edat (int).
+
+Constructor: inicialitza nom i edat.
+
+Mètode toString(): retorna una cadena amb la informació de l'animal.
+
+
+Subclasse **Mamifer**, hereta de *Animal*:
+
+Atribut privat: tipusPelatge (String).
+
+Constructor: inicialitza nom, edat, i tipusPelatge.
+
+Sobreescriu toString() per incloure tipusPelatge.
+
+
+Subclasse **Ocell**, hereta de *Animal*:
+
+Atribut privat: colorPlomatge (String).
+
+Constructor: inicialitza nom, edat, i colorPlomatge.
+
+Sobreescriu toString() per incloure colorPlomatge.
+
+
+Interfície **Volador**:
+
+Mètode volar(): imprimeix un missatge que l'animal està volant.
+
+
+Interfície **Nedador**:
+
+Mètode nedar(): imprimeix un missatge que l'animal està nedant.
+
+Alguns animals específics implementaran les interfícies Volador i/o Nedador per reflectir els seus comportaments únics. 
+
+
+Classe **OcellVolador** que es deriva de *Ocell* i implementa *Volador*
+
+Constructor: inicia nom, edat i colorPlomatge
+
+Sobreescriu 'volar' amb el text: nom + " està volant!"
+
+
+Classe **Dofi* que es deriva de *Mamifer* i implementa *Nedador*
+
+Constructor: inicia nom, edat i tipusPelatge
+
+Sobreescriu 'nedar' amb el text: nom + " està nedant!"
+
+
 ## Composició vs Herència
 
 La composició i l'herència són dues tècniques fonamentals en la programació orientada a objectes (POO) utilitzades per reutilitzar codi i establir relacions entre classes. Tot i que ambdues permeten aconseguir una reutilització de codi eficaç, tenen diferències clau en com s'estructuren i utilitzen les relacions entre objectes i classes. Comprendre quan utilitzar una o l'altra és crucial per al disseny de software.
@@ -480,6 +618,11 @@ Utilitza l'herència quan la relació entre les dues classes naturalment segueix
 Prefereix la composició quan la relació entre les classes sigui millor descrita com a "té-un", o quan necessitis una flexibilitat major per canviar el comportament dels teus components en temps d'execució. La composició també és preferible quan vols evitar els problemes de l'herència múltiple o quan vols minimitzar l'acoblament entre classes.
 
 ### Exemple 1305
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple1305.Main
+```
 
 Exemple de composició.
 
@@ -513,6 +656,11 @@ public class Main {
 ```
 
 ### Exemple 1306
+
+```bash
+# Fes anar l'exemple amb
+./run.sh com.exemple1306.Main
+```
 
 Exemple amb herència
 
@@ -587,3 +735,57 @@ if (animal instanceof Gos) {
     System.out.println("La conversió no és segura.");
 }
 ```
+
+### Exercici 1302
+
+Crear un sistema que ens permeti gestionar un parc d'atraccions.
+
+El parc d'atraccions ofereix diverses atraccions, així com serveis addicionals com ara restaurants i botigues de records. 
+
+Cada atracció i servei té les seves pròpies característiques, però formen part del parc en el seu conjunt. 
+
+Utilitzarem la composició per modelar aquestes relacions, on el parc d'atraccions conté una llista d'atraccions i serveis.
+
+Classe **Atraccio**:
+
+Propietats privades: nom (text), tipus (text), alturaMinima (enter)
+
+Constructor: que inicia nom, tipus i alturaMinima
+
+Getters i Setters
+
+Sobreescriptura de la funció 'toString' amb retorn: 
+
+"Atraccio[nom=" + nom + ", tipus=" + tipus + ", alturaMinima=" + alturaMinima + "]
+
+Classe **Restaurant**:
+
+Propietats privades: nom (text), tipusCuina (text), capacitat (enter)
+
+Constructor: que inicia nom, tipusCuina i capacitat
+
+Getters i Setters
+
+Sobreescriptura de la funció 'toString' amb retorn: 
+
+"Restaurant[nom=" + nom + ", tipusCuina=" + tipusCuina + ", capacitat=" + capacitat + "]";
+
+Classe **Botiga**:
+
+Propietats privades: nom (text), tipusProducte (text)
+
+Constructor: que inicia nom i tipusProducte
+
+Getters i Setters
+
+Sobreescriptura de la funció 'toString' amb retorn: 
+
+"Botiga[nom=" + nom + ", tipusProducte=" + tipusProducte + "]";
+
+Classe **ParcAtraccions**:
+
+Propietats privades: llistes tipus 'ArrayList' de atraccions, restaurants i botigues
+
+Mètodes per afegir objectes a les llistes: afegirAtraccio, afegirRestaurant i afegirBotiga
+
+Mètodes per llistar els components: getAtraccions, getRestaurants i getBotigues
