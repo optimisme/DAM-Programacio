@@ -9,6 +9,51 @@ Resol els mètodes de l'*Exercici0* segons la descripció dels seus comentaris a
 
 (Examen llarg de dificultat moderada)
 
+Aquí hi ha un exemple del "Resolt0"
+
+```bash
+./run.sh com.exercicis.Resolt0
+```
+
+```bash
+# Testeja les funcions individualment
+./runTest.sh com.exercicis.TestExercici0#testValidarNom
+./runTest.sh com.exercicis.TestExercici0#testValidarEdat
+./runTest.sh com.exercicis.TestExercici0#testValidarFactors
+./runTest.sh com.exercicis.TestExercici0#testValidarDescompte
+./runTest.sh com.exercicis.TestExercici0#testValidarTipusOperacio
+./runTest.sh com.exercicis.TestExercici0#testValidarClients
+./runTest.sh com.exercicis.TestExercici0#testIsAllDigits
+./runTest.sh com.exercicis.TestExercici0#testValidarData
+./runTest.sh com.exercicis.TestExercici0#testValidarPreu
+./runTest.sh com.exercicis.TestExercici0#testGeneraClauClient
+./runTest.sh com.exercicis.TestExercici0#testAfegirClient
+./runTest.sh com.exercicis.TestExercici0#testModificarClient
+./runTest.sh com.exercicis.TestExercici0#testEsborrarClient
+./runTest.sh com.exercicis.TestExercici0#testLlistarClients
+./runTest.sh com.exercicis.TestExercici0#testGeneraClauOperacio
+./runTest.sh com.exercicis.TestExercici0#testAfegirOperacio
+./runTest.sh com.exercicis.TestExercici0#testModificarOperacio
+./runTest.sh com.exercicis.TestExercici0#testEsborrarOperacio
+./runTest.sh com.exercicis.TestExercici0#testLlistarOperacions
+./runTest.sh com.exercicis.TestExercici0#testLlistarOperacionsClient
+./runTest.sh com.exercicis.TestExercici0#testAlineaColumnes
+./runTest.sh com.exercicis.TestExercici0#testTaulaOperacionsClient0
+./runTest.sh com.exercicis.TestExercici0#testTaulaOperacionsClient1
+./runTest.sh com.exercicis.TestExercici0#testTaulaOperacionsClient2
+./runTest.sh com.exercicis.TestExercici0#testGetCadenesMenu
+./runTest.sh com.exercicis.TestExercici0#testObtenirOpcio
+./runTest.sh com.exercicis.TestExercici0#testLlistarClientsMenu
+./runTest.sh com.exercicis.TestExercici0#testDibuixarLlista
+./runTest.sh com.exercicis.TestExercici0#testLlegirNom
+./runTest.sh com.exercicis.TestExercici0#testLlegirEdat
+./runTest.sh com.exercicis.TestExercici0#testLlegirFactors
+./runTest.sh com.exercicis.TestExercici0#testLlegirDescompte
+./runTest.sh com.exercicis.TestExercici0#testAfegirClientMenu
+./runTest.sh com.exercicis.TestExercici0#testModificarClientMenu
+./runTest.sh com.exercicis.TestExercici0#testEsborrarClientMenu
+```
+
 # Exercici 1
 
 Resol els mètodes de l'*Exercici1* segons la descripció dels seus comentaris al codi amb *//TODO.* 
