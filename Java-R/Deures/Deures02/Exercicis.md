@@ -1,3 +1,6 @@
+
+# TODO: Falten testos i exercicis d'herència (old 060X)
+
 # Exercici 0200
 
 Crea la classe 'Estudiant', que és un sistema que permet registrar estudiants en un curs. 
