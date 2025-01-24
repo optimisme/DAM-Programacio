@@ -272,6 +272,18 @@ public class Main {
 
 ### Exercici 1200
 
+Modifica el codi de:
+
+```bash
+src/main/exercici1200/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici1200.Main
+```
+
 Crea la classe 'Cotxe' que tindrà els atributs privats:
 
 - color de tipus cadena de text
@@ -447,6 +459,18 @@ public class Main {
 
 ### Exercici 1201
 
+Modifica el codi de:
+
+```bash
+src/main/exercici1201/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici1201.Main
+```
+
 Crea la classe 'Llibre' que modeli el comportament bàsic d'un llibre en una biblioteca, permetent establir i obtenir el títol, l'autor, l'any de publicació i si està en préstec o no.
 
 **Atributs Privats:**
@@ -484,6 +508,18 @@ Amb el següent format:
 "Titol, Autor; Any - En préstec" o bé "Titol, Autor; Any - Disponible"
 
 ### Exercici 1202
+
+Modifica el codi de:
+
+```bash
+src/main/exercici1202/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici1202.Main
+```
 
 Crea dues classes 'Estudiant' i 'Curs'
 
@@ -530,6 +566,18 @@ Un constructor que inicialitzi el nomCurs i el professor.
 - mostraEstudiants(): Mostra la llista d'estudiants inscrits al curs. Aquesta funció ha d'ésser pública. El format serà "Nom - Nota Mitjana: 0.0"
 
 ### Exercici 1203
+
+Modifica el codi de:
+
+```bash
+src/main/exercici1203/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici1203.Main
+```
 
 Crea tres classes 'RegistreAccionsSingleton', 'InterficieUsuari', 'ApiBackend' per desenvolupar un sistema que registri les accions realitzades pels usuaris en dues àrees diferents d'una aplicació (per exemple, una interfície d'usuari i una API backend) fent servir un objecte de registre comú accessible mitjançant un Singleton.
 

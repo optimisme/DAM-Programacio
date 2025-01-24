@@ -105,6 +105,18 @@ public class Rectangle extends Poligon {
 
 ### Exercici 1300
 
+Modifica el codi de:
+
+```bash
+src/main/exercici1300/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici1300.Main
+```
+
 Crea un sistema simple de gestió d'empleats per a una empresa.
 
 Classe Base (Superclasse): **Empleat**
@@ -529,6 +541,18 @@ public class BasicCoffeeMachine {
 
 ### Exercici 1301
 
+Modifica el codi de:
+
+```bash
+src/main/exercici1301/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici1301.Main
+```
+
 Desenvolupar un sistema en Java per gestionar animals en un zoològic, utilitzant una combinació d'herència de classes i implementació d'interfícies amb mètodes sobreescrits.
 
 Dins d'aquest sistema, diferents tipus d'animals tindran característiques i comportaments únics. 
@@ -737,6 +761,18 @@ if (animal instanceof Gos) {
 ```
 
 ### Exercici 1302
+
+Modifica el codi de:
+
+```bash
+src/main/exercici1302/Main.java
+```
+
+Per fer que quan s'executa el programa amb:
+
+```bash
+./run.sh com.exercici1302.Main
+```
 
 Crear un sistema que ens permeti gestionar un parc d'atraccions.
 
