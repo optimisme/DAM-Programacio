@@ -400,3 +400,103 @@ Caràcter llegit: '9'
 Char convertit a Int: 9
 La suma de valor0 i valor1 és: 54
 ```
+
+## Validació d'un tipus
+
+Hi ha diferents maneres de validar que una variable és del tipus que esperem:
+
+- **instanceof**: per comprovar si una variable és d’un tipus específic.
+
+```java
+Object obj = "Hola";
+if (obj instanceof String) {
+    System.out.println("És una cadena de text.");
+}
+```
+
+- **.getClass()**: retorna l’objecte associat al tipus de la variable
+
+```java
+Object obj = "Hola";
+if (obj.getClass().equals(String.class)) {
+    System.out.println("Exactament un String.");
+}
+
+Object obj = "Hola";
+System.out.println("El tipus és: " + obj.getClass().getName());
+
+if (obj.getClass().getName().equals("java.lang.String")) {
+    System.out.println("És un String.");
+}
+```
+
+- **cast amb excepcions**: si proves de fer un cast explícit i el tipus no coincideix, llençarà una excepció
+
+```java
+try {
+    String text = (String) obj;
+    System.out.println("És un String.");
+} catch (ClassCastException e) {
+    System.out.println("No és un String.");
+}
+```
+
+### Validacions específiques
+
+- **isDigit()**: per comprovar si un caràcter és un dígit
+
+```java
+char c = '5';
+if (Character.isDigit(c)) {
+    System.out.println("És un dígit.");
+} else {
+    System.out.println("No és un dígit.");
+}
+```
+
+- **isNumeric()**: per comprovar si tota una cadena està formada només per dígits
+
+```java
+String str = "12345";
+boolean isNumeric = true;
+
+for (char c : str.toCharArray()) {
+    if (!Character.isDigit(c)) {
+        isNumeric = false;
+        break;
+    }
+}
+
+if (isNumeric) {
+    System.out.println("La cadena és numèrica.");
+} else {
+    System.out.println("La cadena no és numèrica.");
+}
+```
+
+- **isLetter()**: per comprovar si un caràcter és una lletra
+
+```java
+char c = 'A';
+if (Character.isLetter(c)) {
+    System.out.println("És una lletra.");
+}
+```
+
+- **isLetterOrDigit()**: per comprovar si un caràcter és una lletra o un dígit
+
+```java
+char c = '5';
+if (Character.isLetterOrDigit(c)) {
+    System.out.println("És una lletra o un dígit.");
+}
+```
+
+- **isAlphabetic()**: per comprovar si un caràcter és un caràcter alfabètic.
+
+```java
+char c = 'α'; // lletra grega alfa
+if (Character.isAlphabetic(c)) {
+    System.out.println("És un caràcter alfabètic.");
+}
+```
