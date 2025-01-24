@@ -408,24 +408,42 @@ Hi ha diferents maneres de validar que una variable és del tipus que esperem:
 - **instanceof**: per comprovar si una variable és d’un tipus específic.
 
 ```java
-Object obj = "Hola";
-if (obj instanceof String) {
+String str = "Hola";
+if (str instanceof String) {
     System.out.println("És una cadena de text.");
+}
+
+Integer igr = 42; 
+if (igr instanceof Integer) {
+    System.out.println("És un Integer.");
+}
+
+Double dbl = 3.14; 
+if (dbl instanceof Double) {
+    System.out.println("És un Double.");
+}
+
+ArrayList<String> arrl = new ArrayList<>();
+if (arrl instanceof List) {
+    System.out.println("És una instància de List.");
+}
+
+if (arrl instanceof ArrayList) {
+    System.out.println("És una instància de ArrayList.");
 }
 ```
 
 - **.getClass()**: retorna l’objecte associat al tipus de la variable
 
 ```java
-Object obj = "Hola";
-if (obj.getClass().equals(String.class)) {
+String str = "Hola";
+if (str.getClass().equals(String.class)) {
     System.out.println("Exactament un String.");
 }
 
-Object obj = "Hola";
 System.out.println("El tipus és: " + obj.getClass().getName());
 
-if (obj.getClass().getName().equals("java.lang.String")) {
+if (str.getClass().getName().equals("java.lang.String")) {
     System.out.println("És un String.");
 }
 ```
