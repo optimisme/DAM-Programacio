@@ -9,6 +9,12 @@ Resol els mètodes de l'*Exercici0* segons la descripció dels seus comentaris a
 
 (Examen llarg de dificultat moderada)
 
+Aquí hi ha un exemple del "Resolt0"
+
+```bash
+./run.sh com.exercicis.Resolt0
+```
+
 # Exercici 1
 
 Resol els mètodes de l'*Exercici1* segons la descripció dels seus comentaris al codi amb *//TODO.* 

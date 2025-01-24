@@ -5,23 +5,23 @@
             "CFGS DAM",
             "CFGM SMX"
         ],
-        "ultima_modificacio": "2025-01-03T12:33:48",
+        "ultima_modificacio": "2025-01-09T15:46:05",
         "adreça": {
             "ciutat": "Cornellà",
             "carrer": "Carrer de la Llibertat"
         },
-        "nom": "Joan",
+        "nom": "Marc",
         "edat": 20
     },
     {
         "treballa": false,
         "estudis": ["CFGS DAW"],
-        "ultima_modificacio": "2025-01-03T12:33:48",
+        "ultima_modificacio": "2025-01-09T15:46:05",
         "adreça": {
             "ciutat": "Terrassa",
             "carrer": "Carrer Major"
         },
-        "nom": "Sofia",
+        "nom": "Clara",
         "edat": 22
     }
 ]

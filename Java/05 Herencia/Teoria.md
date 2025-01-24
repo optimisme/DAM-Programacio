@@ -590,15 +590,3 @@ if (animal instanceof Gos) {
 
 
 
-## Documentació JAVA
-
-La documentació de les classes de JAVA està disponible a internet
-
-[Java Base API](https://download.java.net/java/early_access/panama/docs/api/java.base/module-summary.html)
-
-Com que tot el llenguatge és orientat a objectes, la documentació es base en la informació de cada un d'aquests objectes (atributs i funcions)
-
-Per exemple, l'objecte 'Clock':
-
-[Java Clock](https://download.java.net/java/early_access/panama/docs/api/java.base/java/time/Clock.html)
-

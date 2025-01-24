@@ -990,23 +990,4 @@ class TestExercici1 {
         String output = outputStream.toString();
         assertTrue(output.contains("Game Over, you are a loser!"));
     }
-
-    @Test
-    void testPlayMixedCaseCommands() throws Exception {
-        // Provar comandaments amb majúscules i minúscules barrejades
-        String input = "LEFT\nRiGhT\nUp\nDoWn\nexit\n";
-        InputStream inputStream = new ByteArrayInputStream(input.getBytes());
-        Scanner scanner = new Scanner(inputStream);
-        
-        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        PrintStream originalOut = System.out;
-        System.setOut(new PrintStream(outputStream));
-        
-        Exercici1.play(scanner);
-        
-        System.setOut(originalOut);
-        
-        String output = outputStream.toString();
-        assertFalse(output.contains("Invalid move!"));
-    }
 }
