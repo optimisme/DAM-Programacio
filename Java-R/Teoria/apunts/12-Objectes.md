@@ -356,6 +356,11 @@ En aquest exemple tenim un objecte calculadora que:
 
 Per accedir als atributs i funcions **'static'**, es fa directament amb el nom de l'objecte, per exemple: **'Calculadora.sumaValors(1, 2)'**
 
+```java
+// Cridar a la funció estàtica (sense instància)
+int resSum = Calculadora.sumaValors(4, 5);
+```
+
 ### Exemple 1202
 
 Exemple de com fer servir l'objecte 'Persona' amb Getters i Setters
