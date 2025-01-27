@@ -3,9 +3,7 @@ package com.exercici1202;
 public class Main {
     public static void main(String[] args) {
 
-        /* TODO: Crea els objectes "Estudiant" i "Curs" per tal que 
-                 funcioni segons l'enunciat amb el 
-                 següent codi
+
 
         // Creació d'estudiants
         Estudiant estudiant1 = new Estudiant("Joan", 20);
@@ -13,15 +11,18 @@ public class Main {
 
         // Actualització de la nota mitjana
         estudiant1.actualitzaNotaMitjana(9.5);
+
         estudiant2.actualitzaNotaMitjana(8.0);
+        estudiant2.actualitzaNotaMitjana(10.0);
+        estudiant2.actualitzaNotaMitjana(7.0);
 
         // Creació del curs i afegiment d'estudiants
-        Curs curs = new Curs("Matemàtiques", "Sr. Albert");
+        Curs curs = new Curs("Matemàtiques", "Sr. Lluis");
         curs.afegeixEstudiant(estudiant1);
         curs.afegeixEstudiant(estudiant2);
 
         // Mostrar estudiants del curs
         curs.mostraEstudiants();  
-        */
+
     }
 }

@@ -9,7 +9,7 @@ import com.github.stefanbirkner.systemlambda.SystemLambda;
 
 import java.util.Locale;
 
-class TestExercici0000 {
+class TestExercicis {
 
     @Test
     public void testMainFunctionWith22And15() throws Exception {

@@ -3,9 +3,7 @@ package com.exercici1201;
 public class Main {
     public static void main(String[] args) {
 
-        /* TODO: Crea l'objecte "Llibre" per tal que 
-                 funcioni segons l'enunciat amb el 
-                 següent codi
+
 
         // Creació de 3 llibres
         Llibre llibre1 = new Llibre("El Senyor dels Anells", "J.R.R. Tolkien", 1954);
@@ -33,6 +31,6 @@ public class Main {
         System.out.println("\nDesprés de retornar el llibre1:");
         System.out.println(llibre1);
 
-        */
+        
     }
 }
