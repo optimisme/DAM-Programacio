@@ -8,7 +8,7 @@ public class Exercici0000 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-
+        System.out.println(addImaginaries("1+2i", "4+5i"));
 
         scanner.close();
     }
@@ -23,7 +23,7 @@ public class Exercici0000 {
      * @param String el segon número imaginari
      * @return String el resultat de la suma
      */
-    private String addImaginaries(String num0, String num1) {
+    private static String addImaginaries(String num0, String num1) {
         return "";
     }
 
@@ -32,7 +32,7 @@ public class Exercici0000 {
      * 
      * @param int nivells del triangle (0 fins a n)
      */
-    private void drawPascal(int n) {
+    private static void drawPascal(int n) {
 
     }
 
@@ -42,7 +42,7 @@ public class Exercici0000 {
      * @param llista de valors
      * @return resultat de la suma
      */
-    private double addList(ArrayList<Double> list) {
+    private static double addList(ArrayList<Double> list) {
         return 0.0;
     }
 
