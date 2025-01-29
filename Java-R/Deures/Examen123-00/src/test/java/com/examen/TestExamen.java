@@ -130,6 +130,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -170,6 +171,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
         
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -221,6 +223,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
             
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -261,6 +264,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -309,6 +313,7 @@ class TestExamen {
             assertEquals("2025-02-29T12:00:00", last.get("modified"), "La data modificada de l'última hipoteca no coincideix.");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -343,6 +348,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -378,6 +384,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -412,6 +419,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -446,6 +454,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -480,6 +489,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+            
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -513,6 +524,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -546,6 +559,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -576,6 +591,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -610,6 +627,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -643,6 +662,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -676,6 +697,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -709,6 +732,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -742,6 +767,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -776,6 +802,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -810,6 +837,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -843,6 +872,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -879,6 +909,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -914,6 +946,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -950,6 +983,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -985,6 +1019,8 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
+
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -1017,6 +1053,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1050,6 +1087,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1083,6 +1121,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1117,6 +1156,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1151,6 +1191,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1185,6 +1226,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1219,6 +1261,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1253,6 +1296,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1287,6 +1331,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1349,6 +1394,7 @@ class TestExamen {
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -1402,6 +1448,7 @@ class TestExamen {
             assertTrue(diff.compareTo("identical") == 0, "Diff found:\n" + diff);
 
             obtainedPoints += testPoints;
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
