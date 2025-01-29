@@ -2,15 +2,70 @@ package com.exercicis;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
+
 
 public class Exercici0000 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-
+/* 
         System.out.println(addImaginaries("1+2i", "4+5i"));
 
+        NumIm a = new NumIm(1, 2);
+        NumIm b = new NumIm(4, 5);
+        NumIm c = NumIm.sumaEstatica(a, b);
+        NumIm d = a.sumaInstancia(b);
+
+        System.out.println(c);
+        System.out.println(d);
+
+
+        drawPascal(5);
+
+        ArrayList<Double> test = new ArrayList<>();
+        test.add(1.0);
+        test.add(2.0);
+        test.add(3.0);
+        double testSum = addList(test);
+        System.out.println(testSum);
+
+        int[][] entrada = { {1, 2, 3}, {4, 5, 6} };
+        int[][] transposada = transpose(entrada);
+        printMatrix(transposada);
+
+        System.out.println(firstNonRepeated("swiss"));
+        System.out.println(firstNonRepeated("redivider"));
+
+        System.out.println(inverInt(5432));
+
+        ArrayList<Integer> test = new ArrayList<>();
+        test.add(3);
+        test.add(6);
+        test.add(1);
+        test.add(5);
+        test.add(0);
+
+        System.out.println(minMaxAdd(test));
+*/
+        System.out.println(sumaSenseSumar(5, 3));
+
+        
         scanner.close();
+    }
+
+    private static int getReal(String num) {
+        int rst = 0;
+        int indexP = num.indexOf("+");
+        rst = Integer.valueOf(num.substring(0, indexP));
+        return rst;
+    }
+
+    private static int getImaginary(String num) {
+        int rst = 0;
+        int indexP = num.indexOf("+");
+        rst = Integer.valueOf(num.substring(indexP, num.length() - 1));
+        return rst;
     }
 
     /**
@@ -24,7 +79,14 @@ public class Exercici0000 {
      * @return String el resultat de la suma
      */
     private static String addImaginaries(String num0, String num1) {
-        return "";
+        int r0 = getReal(num0);
+        int i0 = getImaginary(num0);
+        int r1 = getReal(num1);
+        int i1 = getImaginary(num1);
+        int sumR = r0 + r1;
+        int sumI = i0 + i1;
+
+        return sumR + "+" + sumI + "i";
     }
 
     /**
@@ -33,7 +95,35 @@ public class Exercici0000 {
      * @param int nivells del triangle (0 fins a n)
      */
     private static void drawPascal(int n) {
+        ArrayList<ArrayList<Integer>> pascal = new ArrayList<>();
+        pascal.add(new ArrayList<>(List.of(1)));
+        pascal.add(new ArrayList<>(List.of(1, 1)));
 
+        for (int cnt = 1; cnt < n; cnt = cnt + 1) {
+            ArrayList<Integer> prevLine = pascal.get(cnt);
+            ArrayList<Integer> nextLine = new ArrayList<>();
+            nextLine.add(1);
+            int prevValue = 1;
+            for (int col = 1; col < prevLine.size(); col = col + 1) {
+                int sum = prevValue + prevLine.get(col);
+                nextLine.add(sum);
+                prevValue = prevLine.get(col);
+            }
+            nextLine.add(1);
+            pascal.add(nextLine);
+        }
+
+        for (int cntLine = 0; cntLine < pascal.size(); cntLine = cntLine + 1) {
+            ArrayList<Integer> line = pascal.get(cntLine);
+            for (int cntCol = 0; cntCol < line.size(); cntCol = cntCol + 1) {
+                int value = line.get(cntCol);
+                System.out.print(value);
+                if (cntCol < (line.size() - 1)) {
+                    System.out.print(",");
+                }
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -43,7 +133,12 @@ public class Exercici0000 {
      * @return resultat de la suma
      */
     private static double addList(ArrayList<Double> list) {
-        return 0.0;
+        Double sumaTotal = 0.0;
+
+        for (int i = 0; i < list.size(); i++) {
+            sumaTotal = sumaTotal + list.get(i);
+        }
+        return sumaTotal;
     }
 
     /** 
@@ -53,6 +148,18 @@ public class Exercici0000 {
      * @param int[][] matriu a dibuixar
      */
     public static void printMatrix(int[][] matrix) {
+        for (int cntFila = 0; cntFila < matrix.length; cntFila++){
+            for (int cntColumna = 0; cntColumna < matrix[cntFila].length; cntColumna++){
+
+                System.out.print(matrix[cntFila][cntColumna]);
+
+                if (cntColumna != (matrix[cntFila].length)-1){
+                    System.out.print(",");
+                }
+                
+            }
+            System.out.println();
+        }
     }
 
     /**
@@ -79,7 +186,17 @@ public class Exercici0000 {
      * @return int[][] matriu transposada
      */
     public static int[][] transpose(int[][] matrix) {
-        return null;
+        int fils = matrix.length;
+        int cols = matrix[0].length;
+        int[][] transposedMatrix = new int[cols][fils];
+
+        for (int i = 0; i < fils; i++) {
+            for (int j = 0; j < cols; j++) {
+            transposedMatrix[j][i] = matrix[i][j];
+            }
+        }
+
+        return transposedMatrix;
     }
 
     /**
@@ -109,7 +226,14 @@ public class Exercici0000 {
      * @return char primer caràcter que no es repeteix
      */
     public static char firstNonRepeated(String str) {
-        return 'a';
+        for (int chrCnt = 0; chrCnt < str.length(); chrCnt = chrCnt + 1) {
+            char lletra = str.charAt(chrCnt);
+            String resta = str.substring(chrCnt+1);
+            if (resta.indexOf(lletra) == -1) {
+                return lletra;
+            }
+        }
+        return '_';
     }
 
     /**
@@ -120,7 +244,13 @@ public class Exercici0000 {
      * @return int número resultant
      */
     public static int inverInt(int num) {
-        return 0;
+        String reves = "";
+        String numString = Integer.toString(num);
+        for (int i = numString.length()-1; i >= 0; i--){
+            reves = reves + numString.substring(i, i+1);
+        }
+        int nombre = Integer.parseInt(reves);
+        return nombre;
     }
 
     /**
@@ -140,8 +270,22 @@ public class Exercici0000 {
      * @param ArrayList<Integer> nums Llista de números d'entrada (exactament 5 números)
      * @return ArrayList<Integer> Llista amb els dos números de sortida [mínim, màxim]
      */
-    public ArrayList<Integer> minMaxAdd(ArrayList<Integer> nums) {
-        return new ArrayList<>(Arrays.asList(0, 0));
+    public static ArrayList<Integer> minMaxAdd(ArrayList<Integer> nums) {
+        int petit = 0;
+        int gran = 0;
+        nums.sort((a,b) -> a.compareTo(b));
+
+        for (int i = 0; i < nums.size() - 1; i++) {
+            petit = petit + nums.get(i); 
+        }
+
+        nums.sort((a,b) -> b.compareTo(a));
+
+        for (int i = 0; i < nums.size() - 1; i++) {
+            gran = gran + nums.get(i);
+        }
+
+        return new ArrayList<>(Arrays.asList(petit, gran));
     }
 
     /**
@@ -160,8 +304,8 @@ public class Exercici0000 {
      * @param int b Segon número a sumar
      * @return int Resultat de la suma de a i b sense utilitzar l'operació de suma
      */
-    public int sumaSenseSumar(int a, int b) {
-        return 0;
+    public static int sumaSenseSumar(int a, int b) {
+        return a - (-b);
     }
 
 /**
