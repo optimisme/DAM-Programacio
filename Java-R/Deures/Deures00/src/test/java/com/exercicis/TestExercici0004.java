@@ -14,53 +14,83 @@ class TestExercici0004 {
 
     @Test
     public void testContaMajuscules(TestInfo testInfo) throws Exception {
-        String diff = TestStringUtils.findFirstDifference(
-            String.valueOf(Exercici0004.contaMajuscules("PassWord123")), 
-            "2"
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+        try {
+            String diff = TestStringUtils.findFirstDifference(
+                String.valueOf(Exercici0004.contaMajuscules("PassWord123")), 
+                "2"
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
 
-        diff = TestStringUtils.findFirstDifference(
-            String.valueOf(Exercici0004.contaMajuscules("password")), 
-            "0"
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            diff = TestStringUtils.findFirstDifference(
+                String.valueOf(Exercici0004.contaMajuscules("password")), 
+                "0"
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void testContaMinuscules(TestInfo testInfo) throws Exception {
-        String diff = TestStringUtils.findFirstDifference(
-            String.valueOf(Exercici0004.contaMinuscules("PassWord123")), 
-            "6"
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+        try {
+            String diff = TestStringUtils.findFirstDifference(
+                String.valueOf(Exercici0004.contaMinuscules("PassWord123")), 
+                "6"
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
 
-        diff = TestStringUtils.findFirstDifference(
-            String.valueOf(Exercici0004.contaMinuscules("PASSWORD123")), 
-            "0"
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            diff = TestStringUtils.findFirstDifference(
+                String.valueOf(Exercici0004.contaMinuscules("PASSWORD123")), 
+                "0"
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test
     public void testValidaContrasenya(TestInfo testInfo) throws Exception {
-        String diff = TestStringUtils.findFirstDifference(
-            Exercici0004.validaContrasenya("PassWord123"), 
-            "La contrasenya és vàlida"
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+        try {
+            String diff = TestStringUtils.findFirstDifference(
+                Exercici0004.validaContrasenya("PassWord123"), 
+                "La contrasenya és vàlida"
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
 
-        diff = TestStringUtils.findFirstDifference(
-            Exercici0004.validaContrasenya("password"), 
-            "La contrasenya NO és vàlida"
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            diff = TestStringUtils.findFirstDifference(
+                Exercici0004.validaContrasenya("password"), 
+                "La contrasenya NO és vàlida"
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+                System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test

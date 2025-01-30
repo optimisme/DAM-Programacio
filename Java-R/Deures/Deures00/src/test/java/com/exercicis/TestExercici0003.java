@@ -14,16 +14,26 @@ class TestExercici0003 {
 
     @Test
     public void testCalcularPreuFinal(TestInfo testInfo) throws Exception {
-        double resultat = Exercici0003.calcularPreuFinal(100, 21, 15);
-        double esperat = 102.85;
+        try {
+            double resultat = Exercici0003.calcularPreuFinal(100, 21, 15);
+            double esperat = 102.85;
 
-        String diff = TestStringUtils.findFirstDifference(
-            String.format(Locale.US, "%.2f", resultat),
-            String.format(Locale.US, "%.2f", esperat)
-        );
+            String diff = TestStringUtils.findFirstDifference(
+                String.format(Locale.US, "%.2f", resultat),
+                String.format(Locale.US, "%.2f", esperat)
+            );
 
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test

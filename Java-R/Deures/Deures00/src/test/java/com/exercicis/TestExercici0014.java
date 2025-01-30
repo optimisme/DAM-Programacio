@@ -32,8 +32,8 @@ class TestExercici0014 {
             Scanner scannerInvalid = new Scanner("INVALID\nPAPER\n");
             assertEquals("PAPER", Exercici0014.getPlayerMove(scannerInvalid));
             scannerInvalid.close();
-            System.out.println("Test passed, succeeded!");
 
+            System.out.println("Test passed, succeeded!");
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -49,15 +49,15 @@ class TestExercici0014 {
             String move = Exercici0014.getMovePC();
             assertTrue(move.equals("PEDRA") || move.equals("PAPER") || move.equals("TISORES"),
                 "El moviment ha de ser PEDRA, PAPER o TISORES, però és: " + move);
-                System.out.println("Test passed, succeeded!");
 
-            } catch (AssertionError e) {
-                System.out.println("Test failed: " + testInfo.getDisplayName());
-                System.out.println(e.getMessage());
-            } catch (Exception e) {
-                System.out.println("Test encountered an error: " + testInfo.getDisplayName());
-                e.printStackTrace();
-            }
+            System.out.println("Test passed, succeeded!");
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -74,8 +74,8 @@ class TestExercici0014 {
             assertEquals("DRAW", Exercici0014.getWinner("PEDRA", "PEDRA"), "PEDRA contra PEDRA és empat");
             assertEquals("DRAW", Exercici0014.getWinner("PAPER", "PAPER"), "PAPER contra PAPER és empat");
             assertEquals("DRAW", Exercici0014.getWinner("TISORES", "TISORES"), "TISORES contra TISORES és empat");
-            System.out.println("Test passed, succeeded!");
 
+            System.out.println("Test passed, succeeded!");
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -103,8 +103,8 @@ class TestExercici0014 {
             Exercici0014.updateStats(stats, "PAPER", false);
             assertEquals(1, (int)stats.get("PAPER_COUNT"), "PAPER_COUNT hauria de ser 1");
             assertEquals(0, (int)stats.get("PAPER_WINS"), "PAPER_WINS hauria de ser 0");
+            
             System.out.println("Test passed, succeeded!");
-
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
@@ -137,8 +137,8 @@ class TestExercici0014 {
             diff = TestStringUtils.findFirstDifference(msgDraw, expectedDraw);
             assertTrue(diff.compareTo("identical") == 0,
                 ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
-            System.out.println("Test passed, succeeded!");
-
+            
+                System.out.println("Test passed, succeeded!");
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
             System.out.println(e.getMessage());
