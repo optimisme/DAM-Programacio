@@ -38,18 +38,18 @@ Fes els Getters i Setters de 'nom' i 'id'
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercici0200.java
+# Codi: src/main/java/com/exercici0300.java
 
-# A la carpeta "Deures02" executar el programa
-./run.sh com.exercici0200.Main
+# A la carpeta "Deures03" executar el programa
+./run.sh com.exercici0300.Main
 
-# A la carpeta "Deures02" executar el test
-./runTest.sh com.exercicis.TestExercici0200
+# A la carpeta "Deures03" executar el test
+./runTest.sh com.exercicis.TestExercici0300
 
 # Testos individuals
-./runTest.sh com.exercicis.TestExercici0200#testMaxCapacityExceeded
-./runTest.sh com.exercicis.TestExercici0200#testRemainingCapacityCheck
-./runTest.sh com.exercicis.TestExercici0200#testNoRemainingCapacity
+./runTest.sh com.exercicis.TestExercici0300#testMaxCapacityExceeded
+./runTest.sh com.exercicis.TestExercici0300#testRemainingCapacityCheck
+./runTest.sh com.exercicis.TestExercici0300#testNoRemainingCapacity
 ```
 
 # Exercici 0301
@@ -94,19 +94,19 @@ El constructor també suma la temperatura a la 'temperaturaTotal' estàtica i su
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercici0201.java
+# Codi: src/main/java/com/exercici0301.java
 
-# A la carpeta "Deures02" executar el programa
-./run.sh com.exercici0201.Main
+# A la carpeta "Deures03" executar el programa
+./run.sh com.exercici0301.Main
 
-# A la carpeta "Deures02" executar el test
-./runTest.sh com.exercicis.TestExercici0201
+# A la carpeta "Deures03" executar el test
+./runTest.sh com.exercicis.TestExercici0301
 
 # Testos individuals
-./runTest.sh com.exercicis.TestExercici0201#testTemperaturaMitjanaInicial
-./runTest.sh com.exercicis.TestExercici0201#testCreacioZones
-./runTest.sh com.exercicis.TestExercici0201#testAjustarTemperatura
-./runTest.sh com.exercicis.TestExercici0201#testTemperaturaMitjanaDespresDeEliminarZones
+./runTest.sh com.exercicis.TestExercici0301#testTemperaturaMitjanaInicial
+./runTest.sh com.exercicis.TestExercici0301#testCreacioZones
+./runTest.sh com.exercicis.TestExercici0301#testAjustarTemperatura
+./runTest.sh com.exercicis.TestExercici0301#testTemperaturaMitjanaDespresDeEliminarZones
 ```
 
 # Exercici 0302
@@ -165,20 +165,20 @@ Un constructor que inicialitzi el llibre, la dataPrestec, i la dataRetorn.
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercici0202.java
+# Codi: src/main/java/com/exercici0302.java
 
-# A la carpeta "Deures02" executar el programa
-./run.sh com.exercici0202.Main
+# A la carpeta "Deures03" executar el programa
+./run.sh com.exercici0302.Main
 
-# A la carpeta "Deures02" executar el test
-./runTest.sh com.exercicis.TestExercici0202
+# A la carpeta "Deures03" executar el test
+./runTest.sh com.exercicis.TestExercici0302
 
 # Testos individuals
-./runTest.sh com.exercicis.TestExercici0202#testCreacioAutor
-./runTest.sh com.exercicis.TestExercici0202#testCreacioLlibre
-./runTest.sh com.exercicis.TestExercici0202#testCreacioPrestec
-./runTest.sh com.exercicis.TestExercici0202#testEstaEnTermini
-./runTest.sh com.exercicis.TestExercici0202#testSortidaMain
+./runTest.sh com.exercicis.TestExercici0302#testCreacioAutor
+./runTest.sh com.exercicis.TestExercici0302#testCreacioLlibre
+./runTest.sh com.exercicis.TestExercici0302#testCreacioPrestec
+./runTest.sh com.exercicis.TestExercici0302#testEstaEnTermini
+./runTest.sh com.exercicis.TestExercici0302#testSortidaMain
 ```
 
 # Exercici 0303
@@ -226,21 +226,21 @@ El format és: "Configurant sistema amb idioma Dothraki i zona horària GMT"
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercici0203.java
+# Codi: src/main/java/com/exercici0303.java
 
-# A la carpeta "Deures02" executar el programa
-./run.sh com.exercici0203.Main
+# A la carpeta "Deures03" executar el programa
+./run.sh com.exercici0303.Main
 
-# A la carpeta "Deures02" executar el test
-./runTest.sh com.exercicis.TestExercici0203
+# A la carpeta "Deures03" executar el test
+./runTest.sh com.exercicis.TestExercici0303
 
 # Testos individuals
-./runTest.sh com.exercicis.TestExercici0203#testSingletonInstance
-./runTest.sh com.exercicis.TestExercici0203#testDefaultValues
-./runTest.sh com.exercicis.TestExercici0203#testSetAndGetIdioma
-./runTest.sh com.exercicis.TestExercici0203#testSetAndGetZonaHoraria
-./runTest.sh com.exercicis.TestExercici0203#testUsuariMostrarPreferencies
-./runTest.sh com.exercicis.TestExercici0203#testSistemaConfigurarSistema
+./runTest.sh com.exercicis.TestExercici0303#testSingletonInstance
+./runTest.sh com.exercicis.TestExercici0303#testDefaultValues
+./runTest.sh com.exercicis.TestExercici0303#testSetAndGetIdioma
+./runTest.sh com.exercicis.TestExercici0303#testSetAndGetZonaHoraria
+./runTest.sh com.exercicis.TestExercici0303#testUsuariMostrarPreferencies
+./runTest.sh com.exercicis.TestExercici0303#testSistemaConfigurarSistema
 ```
 
 # Exercici 0304
@@ -302,4 +302,25 @@ if (denominador == 0) {
 double real = (a.partReal * b.partReal + a.partImaginaria * b.partImaginaria) / denominador;
 double imaginari = (a.partImaginaria * b.partReal - a.partReal * b.partImaginaria) / denominador;
 return new NumComplex(real, imaginari);
+```
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercici0304.java
+
+# A la carpeta "Deures03" executar el programa
+./run.sh com.exercici0304.Main
+
+# A la carpeta "Deures03" executar el test
+./runTest.sh com.exercicis.TestExercici0304
+
+# Testos individuals
+./runTest.sh com.exercicis.TestExercici0304#testModul
+./runTest.sh com.exercicis.TestExercici0304#testConjugat
+./runTest.sh com.exercicis.TestExercici0304#testSuma
+./runTest.sh com.exercicis.TestExercici0304#testResta
+./runTest.sh com.exercicis.TestExercici0304#testMultiplica
+./runTest.sh com.exercicis.TestExercici0304#testDivideix
+./runTest.sh com.exercicis.TestExercici0304#testDivideixPerZero
 ```
