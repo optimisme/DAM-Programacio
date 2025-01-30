@@ -1,7 +1,7 @@
 
 # TODO: Falten testos i exercicis d'herència (old 060X)
 
-# Exercici 0200
+# Exercici 0300
 
 Crea la classe 'Estudiant', que és un sistema que permet registrar estudiants en un curs. 
 
@@ -52,7 +52,7 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0200#testNoRemainingCapacity
 ```
 
-# Exercici 0201
+# Exercici 0301
 
 Crea la classe 'ControlTemperatura' que permet gestionar la temperatura de diferents zones d'un edifici. 
 
@@ -109,7 +109,7 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0201#testTemperaturaMitjanaDespresDeEliminarZones
 ```
 
-# Exercici 0202
+# Exercici 0302
 
 Crea tres classes 'Autor', 'Llibre' i 'Prestec'
 
@@ -181,7 +181,7 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0202#testSortidaMain
 ```
 
-# Exercici 0203
+# Exercici 0303
 
 Crea tres classes 'ConfiguracioGlobal', 'Usuari' i 'Sistema' per desenvolupar un sistema que utilitzi un objecte de configuració global accessible des de diferents parts de l'aplicació, garantint que tots els components utilitzin la mateixa configuració a través d'un Singleton.
 
