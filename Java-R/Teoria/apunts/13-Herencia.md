@@ -80,7 +80,6 @@ Exemple d'herència amb **'extends'**, una classe pare 'Poligon' defineix les ba
 
 ```java
 public class Poligon {
-    // Atributs comuns a tots els polígons podrien anar aquí
 
     // Atributs comuns a tots els polígons podrien anar aquí
     public double x;
