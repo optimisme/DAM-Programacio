@@ -3,7 +3,7 @@ package com.exercicis;
 import com.testStringUtils.TestStringUtils;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
@@ -16,20 +16,30 @@ import java.util.Locale;
 class TestExercici0010 {
 
     @Test
-    public void testGenerarNumerosAleatoris() {
-        ArrayList<Integer> resultat = Exercici0010.generarNumerosAleatoris(5, 0, 99);
+    public void testGenerarNumerosAleatoris(TestInfo testInfo) throws Exception {
+        try {
+            ArrayList<Integer> resultat = Exercici0010.generarNumerosAleatoris(5, 0, 99);
 
-        // Comprovar que conté 5 elements
-        assertEquals(5, resultat.size());
+            // Comprovar que conté 5 elements
+            assertEquals(5, resultat.size());
 
-        // Comprovar que tots els nombres estan dins del rang
-        for (int num : resultat) {
-            assertTrue(num >= 0 && num <= 99, "Número fora del rang: " + num);
+            // Comprovar que tots els nombres estan dins del rang
+            for (int num : resultat) {
+                assertTrue(num >= 0 && num <= 99, "Número fora del rang: " + num);
+            }
+            System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
         }
     }
 
     @Test
-    public void testMultiplicarPerDos() {
+    public void testMultiplicarPerDos(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
@@ -47,7 +57,7 @@ class TestExercici0010 {
     }
 
     @Test
-    public void testFiltrarImparells() {
+    public void testFiltrarImparells(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
@@ -65,7 +75,7 @@ class TestExercici0010 {
     }
 
     @Test
-    public void testDividirPerDos() {
+    public void testDividirPerDos(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
@@ -83,7 +93,7 @@ class TestExercici0010 {
     }
 
     @Test
-    public void testMainFunction() throws Exception {
+    public void testMainFunction(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);

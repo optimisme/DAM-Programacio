@@ -3,6 +3,7 @@ package com.exercicis;
 import com.testStringUtils.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
@@ -12,7 +13,7 @@ import java.util.Locale;
 class TestExercicis {
 
     @Test
-    public void testMainFunctionWith22And15() throws Exception {
+    public void testMainFunctionWith22And15(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault(); 
         try {
             Locale.setDefault(Locale.US);

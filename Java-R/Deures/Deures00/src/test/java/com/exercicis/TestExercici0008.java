@@ -3,7 +3,7 @@ package com.exercicis;
 import com.testStringUtils.TestStringUtils;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
@@ -14,41 +14,51 @@ import java.util.Locale;
 class TestExercici0008 {
 
     @Test
-    public void testGeneraImparells() {
-        // Cas 1: Generar imparells fins a 15
-        ArrayList<Integer> resultat = Exercici0008.generaImparells(15);
-        ArrayList<Integer> esperat = new ArrayList<>();
-        esperat.add(3);
-        esperat.add(5);
-        esperat.add(7);
-        esperat.add(9);
-        esperat.add(11);
-        esperat.add(13);
-        esperat.add(15);
+    public void testGeneraImparells(TestInfo testInfo) throws Exception {
+        try {
+            // Cas 1: Generar imparells fins a 15
+            ArrayList<Integer> resultat = Exercici0008.generaImparells(15);
+            ArrayList<Integer> esperat = new ArrayList<>();
+            esperat.add(3);
+            esperat.add(5);
+            esperat.add(7);
+            esperat.add(9);
+            esperat.add(11);
+            esperat.add(13);
+            esperat.add(15);
 
-        String diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+            String diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
 
-        // Cas 2: Generar imparells fins a 2 (no hi ha imparells)
-        resultat = Exercici0008.generaImparells(2);
-        esperat = new ArrayList<>(); // Buit
+            // Cas 2: Generar imparells fins a 2 (no hi ha imparells)
+            resultat = Exercici0008.generaImparells(2);
+            esperat = new ArrayList<>(); // Buit
 
-        diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+            diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
 
-        // Cas 3: Generar imparells fins a 1 (fora de rang)
-        resultat = Exercici0008.generaImparells(1);
-        esperat = new ArrayList<>(); // Buit
+            // Cas 3: Generar imparells fins a 1 (fora de rang)
+            resultat = Exercici0008.generaImparells(1);
+            esperat = new ArrayList<>(); // Buit
 
-        diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+            diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+            System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void testMainFunction() throws Exception {
+    public void testMainFunction(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);

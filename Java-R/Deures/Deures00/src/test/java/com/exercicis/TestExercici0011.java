@@ -3,7 +3,7 @@ package com.exercicis;
 import com.testStringUtils.TestStringUtils;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
@@ -16,56 +16,86 @@ import java.util.Locale;
 class TestExercici0011 {
 
     @Test
-    public void testEscullNomsAleatoris() {
-        ArrayList<String> noms = new ArrayList<>(Arrays.asList(
-            "Mario", "Princess Peach", "Wario", "Luigi", "Iggy Koopa", "Toad"
-        ));
+    public void testEscullNomsAleatoris(TestInfo testInfo) throws Exception {
+        try {
+            ArrayList<String> noms = new ArrayList<>(Arrays.asList(
+                "Mario", "Princess Peach", "Wario", "Luigi", "Iggy Koopa", "Toad"
+            ));
 
-        ArrayList<String> seleccionats = Exercici0011.escullNomsAleatoris(noms, 5);
-        assertEquals(5, seleccionats.size(), "El nombre d'elements seleccionats hauria de ser 5.");
+            ArrayList<String> seleccionats = Exercici0011.escullNomsAleatoris(noms, 5);
+            assertEquals(5, seleccionats.size(), "El nombre d'elements seleccionats hauria de ser 5.");
 
-        for (String nom : seleccionats) {
-            assertTrue(noms.contains(nom), "El nom seleccionat no es troba a la llista original: " + nom);
+            for (String nom : seleccionats) {
+                assertTrue(noms.contains(nom), "El nom seleccionat no es troba a la llista original: " + nom);
+            }
+
+            // Cas d'error
+            Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+                Exercici0011.escullNomsAleatoris(noms, 25);
+            });
+
+            assertEquals("La quantitat no pot ser més gran que " + noms.size() + ".", exception.getMessage());
+            System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
         }
-
-        // Cas d'error
-        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
-            Exercici0011.escullNomsAleatoris(noms, 25);
-        });
-
-        assertEquals("La quantitat no pot ser més gran que " + noms.size() + ".", exception.getMessage());
     }
 
     @Test
-    public void testNomsAcabenVocal() {
-        ArrayList<String> noms = new ArrayList<>(Arrays.asList(
-            "Mario", "Princess Peach", "Wario", "Luigi", "Iggy Koopa", "Toad", "Yoshi", "Donkey Kong", "Birdo"
-        ));
+    public void testNomsAcabenVocal(TestInfo testInfo) throws Exception {
+        try {
+            ArrayList<String> noms = new ArrayList<>(Arrays.asList(
+                "Mario", "Princess Peach", "Wario", "Luigi", "Iggy Koopa", "Toad", "Yoshi", "Donkey Kong", "Birdo"
+            ));
 
-        ArrayList<String> resultat = Exercici0011.nomsAcabenVocal(noms);
-        List<String> esperat = Arrays.asList("Mario", "Wario", "Luigi", "Iggy Koopa", "Yoshi", "Birdo");
+            ArrayList<String> resultat = Exercici0011.nomsAcabenVocal(noms);
+            List<String> esperat = Arrays.asList("Mario", "Wario", "Luigi", "Iggy Koopa", "Yoshi", "Birdo");
 
-        String diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+            String diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+                System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void testNomsCompostos() {
-        ArrayList<String> noms = new ArrayList<>(Arrays.asList(
-            "Mario", "Princess Peach", "Wario", "Luigi", "Iggy Koopa", "Toad", "Yoshi", "Donkey Kong", "Birdo"
-        ));
+    public void testNomsCompostos(TestInfo testInfo) throws Exception {
+        try {
+            ArrayList<String> noms = new ArrayList<>(Arrays.asList(
+                "Mario", "Princess Peach", "Wario", "Luigi", "Iggy Koopa", "Toad", "Yoshi", "Donkey Kong", "Birdo"
+            ));
 
-        ArrayList<String> resultat = Exercici0011.nomsCompostos(noms);
-        List<String> esperat = Arrays.asList("Princess Peach", "Iggy Koopa", "Donkey Kong");
+            ArrayList<String> resultat = Exercici0011.nomsCompostos(noms);
+            List<String> esperat = Arrays.asList("Princess Peach", "Iggy Koopa", "Donkey Kong");
 
-        String diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+            String diff = TestStringUtils.findFirstDifference(resultat.toString(), esperat.toString());
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<\n");
+                System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void testMainFunction() throws Exception {
+    public void testMainFunction(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);

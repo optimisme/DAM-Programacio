@@ -3,7 +3,7 @@ package com.exercicis;
 import com.testStringUtils.TestStringUtils;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
@@ -13,7 +13,7 @@ import java.util.Locale;
 class TestExercici0004 {
 
     @Test
-    public void testContaMajuscules() {
+    public void testContaMajuscules(TestInfo testInfo) throws Exception {
         String diff = TestStringUtils.findFirstDifference(
             String.valueOf(Exercici0004.contaMajuscules("PassWord123")), 
             "2"
@@ -30,7 +30,7 @@ class TestExercici0004 {
     }
 
     @Test
-    public void testContaMinuscules() {
+    public void testContaMinuscules(TestInfo testInfo) throws Exception {
         String diff = TestStringUtils.findFirstDifference(
             String.valueOf(Exercici0004.contaMinuscules("PassWord123")), 
             "6"
@@ -47,7 +47,7 @@ class TestExercici0004 {
     }
 
     @Test
-    public void testValidaContrasenya() {
+    public void testValidaContrasenya(TestInfo testInfo) throws Exception {
         String diff = TestStringUtils.findFirstDifference(
             Exercici0004.validaContrasenya("PassWord123"), 
             "La contrasenya és vàlida"
@@ -64,7 +64,7 @@ class TestExercici0004 {
     }
 
     @Test
-    public void testMainFunctionValidPwd() throws Exception {
+    public void testMainFunctionValidPwd(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
@@ -91,7 +91,7 @@ class TestExercici0004 {
     }
 
     @Test
-    public void testMainFunctionInvalidPwd() throws Exception {
+    public void testMainFunctionInvalidPwd(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
@@ -118,7 +118,7 @@ class TestExercici0004 {
     }
 
     @Test
-    public void testMainFunctionEdgeCase() throws Exception {
+    public void testMainFunctionEdgeCase(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);

@@ -3,7 +3,7 @@ package com.exercicis;
 import com.testStringUtils.TestStringUtils;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
@@ -13,7 +13,7 @@ import java.util.Locale;
 class TestExercici0003 {
 
     @Test
-    public void testCalcularPreuFinal() {
+    public void testCalcularPreuFinal(TestInfo testInfo) throws Exception {
         double resultat = Exercici0003.calcularPreuFinal(100, 21, 15);
         double esperat = 102.85;
 
@@ -27,7 +27,7 @@ class TestExercici0003 {
     }
 
     @Test
-    public void testMainFunction() throws Exception {
+    public void testMainFunction(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);

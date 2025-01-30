@@ -3,7 +3,7 @@ package com.exercicis;
 import com.testStringUtils.TestStringUtils;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
@@ -12,7 +12,7 @@ import java.util.Locale;
 
 class TestExercici0001 {
     @Test
-    public void testIMC() throws Exception {
+    public void testIMC(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
@@ -39,7 +39,7 @@ class TestExercici0001 {
     }
 
     @Test
-    public void testIMCWithAnotherInput() throws Exception {
+    public void testIMCWithAnotherInput(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);

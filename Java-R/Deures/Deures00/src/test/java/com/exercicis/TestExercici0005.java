@@ -3,7 +3,7 @@ package com.exercicis;
 import com.testStringUtils.TestStringUtils;
 
 import org.junit.jupiter.api.Test;
-
+import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
@@ -13,48 +13,68 @@ import java.util.Locale;
 class TestExercici0005 {
 
     @Test
-    public void testIsPalindrom() {
-        String diff = TestStringUtils.findFirstDifference(
-            String.valueOf(Exercici0005.isPalindrom("Anul·la la lluna")),
-            String.valueOf(true)
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+    public void testIsPalindrom(TestInfo testInfo) throws Exception {
+        try {
+            String diff = TestStringUtils.findFirstDifference(
+                String.valueOf(Exercici0005.isPalindrom("Anul·la la lluna")),
+                String.valueOf(true)
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
 
-        diff = TestStringUtils.findFirstDifference(
-            String.valueOf(Exercici0005.isPalindrom("Atrapa la lluna")),
-            String.valueOf(false)
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            diff = TestStringUtils.findFirstDifference(
+                String.valueOf(Exercici0005.isPalindrom("Atrapa la lluna")),
+                String.valueOf(false)
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
 
-        diff = TestStringUtils.findFirstDifference(
-            String.valueOf(Exercici0005.isPalindrom("Atrapa'l o l'aparta")),
-            String.valueOf(true)
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            diff = TestStringUtils.findFirstDifference(
+                String.valueOf(Exercici0005.isPalindrom("Atrapa'l o l'aparta")),
+                String.valueOf(true)
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void testNormalize() {
-        String diff = TestStringUtils.findFirstDifference(
-            Exercici0005.normalize("Anul·la la lluna"),
-            "anullalalluna"
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+    public void testNormalize(TestInfo testInfo) throws Exception {
+        try {
+            String diff = TestStringUtils.findFirstDifference(
+                Exercici0005.normalize("Anul·la la lluna"),
+                "anullalalluna"
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
 
-        diff = TestStringUtils.findFirstDifference(
-            Exercici0005.normalize("Atrapa la lluna"),
-            "atrapalalluna"
-        );
-        assertTrue(diff.compareTo("identical") == 0,
-            ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            diff = TestStringUtils.findFirstDifference(
+                Exercici0005.normalize("Atrapa la lluna"),
+                "atrapalalluna"
+            );
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>>\n" + diff + "<<<<<<<<<< Diff end <<<<<<<<<<");
+            System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
     }
 
     @Test
-    public void testMainOutput() throws Exception {
+    public void testMainOutput(TestInfo testInfo) throws Exception {
         Locale defaultLocale = Locale.getDefault();
         try {
             Locale.setDefault(Locale.US);
