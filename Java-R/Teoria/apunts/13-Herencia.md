@@ -432,6 +432,14 @@ public class Cotxe extends Vehicle {
 
 ```
 
+## Mètodes i atributs protected
+
+Quan es defineix un mètode o un atribut com a **protected**, està disponible per la pròpia classe i les derivades. Així:
+
+- **public** accessible per tothom qui fa servir la instància
+- **protected** accessible per el propi objecte i derivats
+- **private** accessible únicament pel propi objecte
+
 ## Mètodes finals i classes finals
 
 Els mètodes declarats com a final no poden ser sobrescrits per les subclasses 
