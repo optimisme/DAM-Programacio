@@ -40,6 +40,34 @@ La sobreescriptura de mètodes es produeix quan una subclasse defineix un mètod
 
 La sobreescriptura permet que la subclasse proporcioni una implementació específica d'un mètode que ja existeix en la superclasse.
 
+### Súper
+
+**super** és una paraula clau que fa referència directa a la superclasse (classe pare) immediata d'una classe. S'utilitza principalment en dos contextos: 
+
+- Cridar a un constructor de la superclasse 
+
+- Accedir a membres (mètodes o camps) de la superclasse que han sigut ocultats o sobrescrits en la subclasse.
+
+```java
+class Pare {
+    Pare() {
+        System.out.println("Constructor de Pare");
+    }
+}
+
+class Fill extends Pare {
+    Fill() {
+        super(); // Crida al constructor de la classe Pare
+        System.out.println("Constructor de Fill");
+    }
+}
+
+public class ExempleSuper {
+    public static void main(String[] args) {
+        new Fill(); // Mostrarà: Constructor de Pare seguit de Constructor de Fill
+    }
+}
+```
 
 ### Exemple 1300
 
@@ -171,35 +199,6 @@ public class Main {
         System.out.println(gerent.getNomComplet() + " - Salari Anual: " + gerent.getSalariAnual());
         gerent.incrementarSalari(10);
         System.out.println("Després de l'increment: " + gerent.getSalariAnual());
-    }
-}
-```
-
-### Súper
-
-**super** és una paraula clau que fa referència directa a la superclasse (classe pare) immediata d'una classe. S'utilitza principalment en dos contextos: 
-
-- Cridar a un constructor de la superclasse 
-
-- Accedir a membres (mètodes o camps) de la superclasse que han sigut ocultats o sobrescrits en la subclasse.
-
-```java
-class Pare {
-    Pare() {
-        System.out.println("Constructor de Pare");
-    }
-}
-
-class Fill extends Pare {
-    Fill() {
-        super(); // Crida al constructor de la classe Pare
-        System.out.println("Constructor de Fill");
-    }
-}
-
-public class ExempleSuper {
-    public static void main(String[] args) {
-        new Fill(); // Mostrarà: Constructor de Pare seguit de Constructor de Fill
     }
 }
 ```
