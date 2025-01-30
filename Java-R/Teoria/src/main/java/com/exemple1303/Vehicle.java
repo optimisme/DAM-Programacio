@@ -1,6 +1,13 @@
 package com.exemple1303;
 
 public abstract class Vehicle {
+
+    private String marca;
+
+    public Vehicle(String marca) {
+        this.marca = marca;
+    }
+
     // Aquest mètode abstracte ha de ser implementat per totes les subclasses
     public abstract void accelerar();
     

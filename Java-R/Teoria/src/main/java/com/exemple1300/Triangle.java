@@ -5,7 +5,8 @@ public class Triangle extends Poligon {
     private double costat2;
     private double costat3;
 
-    public Triangle(double costat1, double costat2, double costat3) {
+    public Triangle(double x, double y, double costat1, double costat2, double costat3) {
+        super(x, y);
         this.costat1 = costat1;
         this.costat2 = costat2;
         this.costat3 = costat3;

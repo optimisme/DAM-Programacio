@@ -54,6 +54,15 @@ Exemple d'herència amb **'extends'**, una classe pare 'Poligon' defineix les ba
 public class Poligon {
     // Atributs comuns a tots els polígons podrien anar aquí
 
+    // Atributs comuns a tots els polígons podrien anar aquí
+    public double x;
+    public double y;
+
+    Poligon(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
+
     public double calcularArea() {
         return 0; // Implementació genèrica, la idea és sobreescriure en subclasses
     }
@@ -66,7 +75,8 @@ public class Poligon {
 public class Cercle extends Poligon {
     private double radi;
 
-    public Cercle(double radi) {
+    public Cercle(double x, double y, double radi) {
+        super(x, y);
         this.radi = radi;
     }
 
@@ -85,7 +95,8 @@ public class Rectangle extends Poligon {
     private double amplada;
     private double altura;
 
-    public Rectangle(double amplada, double altura) {
+    public Rectangle(double x, double y, double amplada, double altura) {
+        super(x, y);
         this.amplada = amplada;
         this.altura = altura;
     }
@@ -375,6 +386,13 @@ En un sistema per gestionar vehicles. Es defineix una classe abstracta 'Vehicle'
 
 ```java
 public abstract class Vehicle {
+
+    private String marca;
+
+    public Vehicle(String marca) {
+        this.marca = marca;
+    }
+
     // Aquest mètode abstracte ha de ser implementat per totes les subclasses
     public abstract void accelerar();
     
@@ -388,6 +406,15 @@ public abstract class Vehicle {
 }
 
 public class Cotxe extends Vehicle {
+
+    private String combustible;
+
+    public Cotxe(String marca, String combustible) {
+        // Crida al constructor de Vehicle
+        super(marca);
+        this.combustible = combustible;
+    }
+
     @Override
     public void accelerar() {
         System.out.println("El cotxe accelera.");
