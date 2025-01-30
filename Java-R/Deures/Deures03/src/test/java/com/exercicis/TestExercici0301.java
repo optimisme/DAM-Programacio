@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 
-class TestExercici0201 {
+class TestExercici0301 {
 
     @BeforeEach
     public void resetControlTemperaturaState() {

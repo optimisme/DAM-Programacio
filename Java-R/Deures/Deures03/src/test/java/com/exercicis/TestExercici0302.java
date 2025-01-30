@@ -8,7 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 
-class TestExercici0202 {
+class TestExercici0302 {
 
     @Test
     public void testCreacioAutor() {

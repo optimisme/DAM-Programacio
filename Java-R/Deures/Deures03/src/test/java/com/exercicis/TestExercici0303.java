@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 
-class TestExercici0203 {
+class TestExercici0303 {
 
     @BeforeEach
     public void resetConfiguracioGlobal() {

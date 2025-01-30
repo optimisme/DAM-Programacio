@@ -3,21 +3,21 @@ package com.exercicis;
 import com.testStringUtils.*;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Locale;
 
-class TestExercicis {
+class TestExercici0200 {
 
     @Test
-    public void testMainFunctionWith22And15() throws Exception {
-        Locale defaultLocale = Locale.getDefault(); 
+    void testAddImaginariesSimple(TestInfo testInfo) throws Exception {
         try {
-            Locale.setDefault(Locale.US);
-    
-            String text = SyExercici0200.addImaginaries("1+2i", "4+5i");
+            String result = Exercici0200.addImaginaries("1+2i", "4+5i");
             assertEquals("5+7i", result);
             System.out.println("Test passed, succeeded!");
         } catch (AssertionError e) {
@@ -772,7 +772,7 @@ class TestExercicis {
     void testFindUniqueNumberNoUnique(TestInfo testInfo) {
         try {
             ArrayList<Double> nums = new ArrayList<>(Arrays.asList(3.0, 3.0, 5.5, 5.5, 7.7, 7.7));
-            assertNull(Exercici0000.findUniqueNumber(nums));
+            assertNull(Exercici0200.findUniqueNumber(nums));
             System.out.println("Test passed, succeeded!");
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());

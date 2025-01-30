@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class Exercici0000 {
+public class Exercici0200 {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
