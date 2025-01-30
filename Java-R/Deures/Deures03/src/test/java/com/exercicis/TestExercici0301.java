@@ -1,6 +1,6 @@
 package com.exercicis;
 
-import com.exercici0201.*;
+import com.exercici0301.*;
 import com.testStringUtils.*;
 
 import org.junit.jupiter.api.BeforeEach;

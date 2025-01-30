@@ -1,6 +1,6 @@
 package com.exercicis;
 
-import com.exercici0203.*;
+import com.exercici0303.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

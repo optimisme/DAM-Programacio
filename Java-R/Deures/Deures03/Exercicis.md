@@ -242,3 +242,64 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0203#testUsuariMostrarPreferencies
 ./runTest.sh com.exercicis.TestExercici0203#testSistemaConfigurarSistema
 ```
+
+# Exercici 0304
+
+Fes la classe 'NumComplex', que permet fer operacions amb números complexes.
+
+*Classe NumComplex*
+
+**Atributs**:
+
+- partReal (private double): Part real del número complex
+- partImaginaria (private double): Part imaginaria del número complex
+
+**Getters i Setters**
+
+Fes els Getters i Setters de 'partReal' i 'partImaginaria'
+
+**Mètodes d'instància**:
+
+- modul(): Retorna el mòdul del número complex.
+```java
+Math.sqrt(partReal * partReal + partImaginaria * partImaginaria);
+```
+
+- conjugat(): Retorna un nou NumComplex que és el conjugat d'aquest.
+```java
+NumComplex(partReal, -partImaginaria);
+```
+
+- toString(): Retorna una representació en string del número complex, com "3.0 + 4.0i"
+
+Al fer la cadena que representa el número, sempre s'ha de posar el símbol '+' o '-' davant de la part imaginaria.
+
+**Mètodes estàtics**:
+
+- suma(NumComplex a, NumComplex b): Retorna la suma de dos números complexos.
+```java
+new NumComplex(a.partReal + b.partReal, a.partImaginaria + b.partImaginaria);
+```
+
+- resta(NumComplex a, NumComplex b): Retorna la resta de dos números complexos.
+```java
+new NumComplex(a.partReal - b.partReal, a.partImaginaria - b.partImaginaria);
+```
+
+- multiplica(NumComplex a, NumComplex b): Retorna la multiplicació de dos números complexos.
+```java
+double real = a.partReal * b.partReal - a.partImaginaria * b.partImaginaria;
+double imaginari = a.partReal * b.partImaginaria + a.partImaginaria * b.partReal;
+return new NumComplex(real, imaginari)
+```
+
+- divideix(NumComplex a, NumComplex b): Retorna la divisió de dos números complexos.
+```java
+double denominador = b.partReal * b.partReal + b.partImaginaria * b.partImaginaria;
+if (denominador == 0) {
+    throw new ArithmeticException("No es pot dividir per zero");
+}
+double real = (a.partReal * b.partReal + a.partImaginaria * b.partImaginaria) / denominador;
+double imaginari = (a.partImaginaria * b.partReal - a.partReal * b.partImaginaria) / denominador;
+return new NumComplex(real, imaginari);
+```
