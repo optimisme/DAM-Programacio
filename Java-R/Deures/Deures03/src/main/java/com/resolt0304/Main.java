@@ -1,4 +1,4 @@
-package com.exercici0304;
+package com.resolt0304;
 
 import java.util.Locale;
 
@@ -6,10 +6,6 @@ public class Main {
     public static void main(String[] args) {
         Locale defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
-
-        /*
-        TODO Modifica el codi de NumComplex.java 
-        per tal que funcioni aquest main
 
         try {
             NumComplex num1 = new NumComplex(3, 4);
@@ -39,6 +35,5 @@ public class Main {
         } finally {
             Locale.setDefault(defaultLocale);
         }
-        */
     }
 }
