@@ -1,6 +1,6 @@
 package com.exercicis;
 
-import com.testStringUtils.TestStringUtils;
+import com.testStringUtils.*;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
