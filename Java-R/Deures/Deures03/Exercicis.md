@@ -323,4 +323,5 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0304#testMultiplica
 ./runTest.sh com.exercicis.TestExercici0304#testDivideix
 ./runTest.sh com.exercicis.TestExercici0304#testDivideixPerZero
+./runTest.sh com.exercicis.TestExercici0304#testMain
 ```

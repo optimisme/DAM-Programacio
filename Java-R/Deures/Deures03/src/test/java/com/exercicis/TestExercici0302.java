@@ -89,7 +89,7 @@ class TestExercici0302 {
     }
 
     @Test
-    public void testSortidaMain() throws Exception {
+    public void testSortidaMain(TestInfo testInfo) throws Exception {
         try {
             String text = SystemLambda.tapSystemOut(() -> {
                 Main.main(new String[]{});

@@ -226,4 +226,43 @@ class TestExercici0304 {
         assertEquals("No es pot dividir per zero", exception.getMessage());
     }
     
+    @Test
+    void testMain(TestInfo testInfo) throws Exception {
+
+        try {
+            String text = SystemLambda.tapSystemOut(() -> {
+                Main.main(new String[]{});
+            });
+
+            text = text.replace("\r\n", "\n");
+
+            String expectedOutput = (
+                    "Número complex 1: 3.0 + 4.0i\n" +
+                    "Número complex 2: 1.0 - 2.0i\n\n" +
+                    "Mòdul de num1: 5.0\n" +
+                    "Conjugat de num1: 3.0 - 4.0i\n\n" +
+                    "Suma: 4.0 + 2.0i\n" +
+                    "Resta: 2.0 + 6.0i\n" +
+                    "Multiplicació: 11.0 - 2.0i\n" +
+                    "Divisió: -1.0 + 2.0i\n"
+            ).replace("\r\n", "\n").replace("        ", "");
+
+            String diff = TestStringUtils.findFirstDifference(text, expectedOutput);
+            if (diff.compareTo("identical") != 0) {
+                System.out.println("Received text: " + text);
+            }
+            assertTrue(diff.compareTo("identical") == 0,
+                ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
+
+            System.out.println("Test passed, succeeded!");
+
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
+    }
+
 }
