@@ -1,6 +1,4 @@
 
-# TODO: Falten testos i exercicis d'herència (old 060X)
-
 # Exercici 0300
 
 Crea la classe 'Estudiant', que és un sistema que permet registrar estudiants en un curs. 
@@ -38,7 +36,7 @@ Fes els Getters i Setters de 'nom' i 'id'
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercici0300.java
+# Codi: src/main/java/com/exercici0300
 
 # A la carpeta "Deures03" executar el programa
 ./run.sh com.exercici0300.Main
@@ -94,7 +92,7 @@ El constructor també suma la temperatura a la 'temperaturaTotal' estàtica i su
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercici0301.java
+# Codi: src/main/java/com/exercici0301
 
 # A la carpeta "Deures03" executar el programa
 ./run.sh com.exercici0301.Main
@@ -165,7 +163,7 @@ Un constructor que inicialitzi el llibre, la dataPrestec, i la dataRetorn.
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercici0302.java
+# Codi: src/main/java/com/exercici0302
 
 # A la carpeta "Deures03" executar el programa
 ./run.sh com.exercici0302.Main
@@ -226,7 +224,7 @@ El format és: "Configurant sistema amb idioma Dothraki i zona horària GMT"
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercici0303.java
+# Codi: src/main/java/com/exercici0303
 
 # A la carpeta "Deures03" executar el programa
 ./run.sh com.exercici0303.Main
@@ -307,7 +305,7 @@ return new NumComplex(real, imaginari);
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercici0304.java
+# Codi: src/main/java/com/exercici0304
 
 # A la carpeta "Deures03" executar el programa
 ./run.sh com.exercici0304.Main
@@ -325,3 +323,90 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0304#testDivideixPerZero
 ./runTest.sh com.exercicis.TestExercici0304#testMain
 ```
+
+# Exercici 0305
+
+Crea un sistema per gestionar un **torneig esportiu** on diversos participants competeixen en diferents modalitats esportives. El sistema ha de complir els següents requisits:
+
+*Interfície Esportista*
+
+- mètode 'void entrenar()'
+
+*Interfície Competidor*
+
+- mètode 'void competir()'
+
+*Classe Participant*
+
+**Atributs**:
+
+- protected: nom (text), edat (enter)
+
+**Getters i Setters**
+
+Fes els Getters i Setters de no i edat
+
+**Mètodes d'instància**:
+
+- toString(): que retorna el format "Participant[nom=NomParticipant, edat=EdatParticipant]"
+
+*Classe Jugador* hereta de Participant, implementa Esportista i Competidor
+
+**Atributs**:
+
+- private: equip(text)
+
+**Mètodes**:
+
+- Implementació d'entrenar mostra un missatge "Entrenant com a jugador"
+- Implementació de competir mostra un missatge "Competint com a jugador"
+- toString(): que retorna el format "Jugador[nom=NomJugador, edat=EdatJugador, equip=EquipJugador]"
+
+*Classe arbitre* hereta de Participant, implementa Competidor
+
+**Atributs**:
+
+- private: nivell(text)
+
+**Mètodes**:
+
+- Implementació de competir mostra un missatge "Supervisant competició"
+- toString(): que retorna el format "Arbitre[nom=NomArbitre, edat=EdatArbitre, nivell=NivellArbitre]"
+
+*Classe Torneig* 
+
+**Atributs**:
+
+- private: participants (ArrayList de Participant)
+
+**Mètodes**:
+
+- afegirParticipant(Participant p): Afegeix un participant al torneig
+- competir(): Crida el mètode competir de tots els competidors
+- entrenar(): Crida el mètode entrenar de tots els esportistes
+- getParticipants(): Retorna la llista de participants
+- printParticipants(): Mostra per consola la llista de participants
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercici0305
+
+# A la carpeta "Deures03" executar el programa
+./run.sh com.exercici0305.Main
+
+# A la carpeta "Deures03" executar el test
+./runTest.sh com.exercicis.TestExercici0305
+
+# Testos individuals
+./runTest.sh com.exercicis.TestExercici0305#testJugadorConstructorAndGetters
+./runTest.sh com.exercicis.TestExercici0305#testJugadorSetters
+./runTest.sh com.exercicis.TestExercici0305#testJugadorToString
+./runTest.sh com.exercicis.TestExercici0305#testJugadorEntrenar
+./runTest.sh com.exercicis.TestExercici0305#testJugadorCompetir
+./runTest.sh com.exercicis.TestExercici0305#testArbitreConstructorAndGetters
+./runTest.sh com.exercicis.TestExercici0305#testArbitreSetters
+./runTest.sh com.exercicis.TestExercici0305#testArbitreToString
+./runTest.sh com.exercicis.TestExercici0305#testArbitreCompetir
+```
+

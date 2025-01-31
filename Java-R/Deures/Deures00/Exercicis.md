@@ -19,7 +19,7 @@ El resultat de calcular -10 - 2 és -12
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0000.java
+# Codi: src/main/java/com/exercicis/Exercici0000
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0000
@@ -58,7 +58,7 @@ System.out.printf(localeUS, "imc = %.2f%n", imc);
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0001.java
+# Codi: src/main/java/com/exercicis/Exercici0001
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0001
@@ -101,7 +101,7 @@ System.out.printf(localeUS, "El valor de %.2f€ són %.2f$%n", euros, dollars);
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0002.java
+# Codi: src/main/java/com/exercicis/Exercici0002
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0002
@@ -156,7 +156,7 @@ System.out.printf(localeUS, "El preu final és: %.2f\n", preuFinal);
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0003.java
+# Codi: src/main/java/com/exercicis/Exercici0003
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0003
@@ -200,7 +200,7 @@ public static String validaContrasenya(String contrasenya)
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0004.java
+# Codi: src/main/java/com/exercicis/Exercici0004
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0004
@@ -265,7 +265,7 @@ Nu pop un (Si)
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0005.java
+# Codi: src/main/java/com/exercicis/Exercici0005
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0005
@@ -321,7 +321,7 @@ Cas 6 (2 adults, 2 nens, 1 gran):   36.00€
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0006.java
+# Codi: src/main/java/com/exercicis/Exercici0006
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0006
@@ -403,7 +403,7 @@ Cas 5 ("sala estàndard", "menú premium", "màgia", 15):                     80
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0007.java
+# Codi: src/main/java/com/exercicis/Exercici0007
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0007
@@ -440,7 +440,7 @@ Nombres imparells entre 2 i 18: [3, 5, 7, 9, 11, 13, 15, 17]
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0008.java
+# Codi: src/main/java/com/exercicis/Exercici0008
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0008
@@ -486,7 +486,7 @@ Resultat:
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0009.java
+# Codi: src/main/java/com/exercicis/Exercici0009
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0009
@@ -535,7 +535,7 @@ Llista imparells dividits per 2: [24.5, 19.5, 5.5, 39.5, 16.5, 34.5, 29.5]
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0010.java
+# Codi: src/main/java/com/exercicis/Exercici0010
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0010
@@ -590,7 +590,7 @@ Noms compostos: [Princess Peach, Iggy Koopa, Donkey Kong]
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0011.java
+# Codi: src/main/java/com/exercicis/Exercici0011
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0011
@@ -697,7 +697,7 @@ Wonders in Turkey:
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0012.java
+# Codi: src/main/java/com/exercicis/Exercici0012
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0012
@@ -812,7 +812,7 @@ Sortida esperada:
 Per executar i testejar el programa:
 
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0013.java
+# Codi: src/main/java/com/exercicis/Exercici0013
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0013
@@ -914,7 +914,7 @@ Moviment més victoriós: PEDRA (100% victòries)
 
 Per executar i testejar el programa:
 ```bash
-# Codi: src/main/java/com/exercicis/Exercici0014.java
+# Codi: src/main/java/com/exercicis/Exercici0014
 
 # A la carpeta "Deures00" executar el programa
 ./run.sh com.exercicis.Exercici0014
