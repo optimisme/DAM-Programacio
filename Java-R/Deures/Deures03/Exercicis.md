@@ -344,7 +344,7 @@ Crea un sistema per gestionar un **torneig esportiu** on diversos participants c
 
 **Getters i Setters**
 
-Fes els Getters i Setters de no i edat
+Fes els Getters i Setters de nom i edat
 
 **Mètodes d'instància**:
 
@@ -410,3 +410,142 @@ Per executar i testejar el programa:
 ./runTest.sh com.exercicis.TestExercici0305#testArbitreCompetir
 ```
 
+# Exercici 0306
+
+Crea un sistema per gestionar un transport marítim on diferents vaixells poden carregar diferents tipus de càrregues i han de complir diferents normatives marítimes. El sistema ha de complir els següents requisits:
+
+*Interfície Transportable*
+
+- mètode 'void getPesTotal()'
+
+*Interfície Reglamentari*
+
+- mètode 'void compleixNormativa()'
+
+*Classe Carrega*
+
+**Atributs**:
+
+- protegits: descripcio (text), pes (double)
+
+**Getters i Setters**
+
+Fes els Getters i Setters de descripció i pes
+
+**Mètodes**:
+
+- toString(): que retorna el format "Carrega[descripcio=..., pes=...]"
+
+*Classe CarregaPerillosa* hereta de Carrega
+
+**Atributs**:
+
+- privats: nivellPerillositat (int entre 0 i 5)
+
+**Getters i Setters**
+
+Fes els Getters i Setters de nivellPerillositat
+
+Si el nivell de perillosistat no està entre 0 i 5 llança l'excepció *IllegalArgumentException("El nivell de perillositat ha de ser entre 0 i 5");*
+
+**Mètodes**:
+
+- toString(): que retorna el format "CarregaPerillosa[descripcio=..., pes=..., nivellPerillositat=...]"
+
+*Classe Vaixell* implementa Transportable
+
+**Atributs**:
+
+- protegits: nom (text), capcacitat (double), carrega (ArrayList de Carrega)
+
+**Getters i Setters**
+
+Fes els Getters i Setters de nom, capacitat
+
+**Mètodes**:
+
+- afegirCarrega(Carrega c): Afegeix una carrega al vaixell
+- getCarregues(): Retorna la llista de carregues
+- getPesTotal(): Calcula el pes total de les carregues
+- toString(): que retorna el format "Vaixell[nom=..., capacitat=..., pesActual=...]"
+
+*Classe VaixellMercaderies* hereta de Vaixell implementa Reglamentari
+
+**Atributs**:
+
+- privats: paisRegistre (text)
+
+**Getters i Setters**
+
+Fes els Getters i Setters de paisRegistre
+
+**Mètodes**:
+
+- compleixNormativa(): Retorna true si el pes total no supera la capacitat del vaixell
+- toString(): que retorna el format "VaixellMercaderies[nom=..., capacitat=..., paisRegistre=...]"
+
+*Classe VaixellPassatgers* hereta de Vaixell implementa Reglamentari
+
+**Atributs**:
+
+- privats: numPassatgers (enter), maxPassatgers (enter)
+
+**Getters i Setters**
+
+Fes els Getters i Setters de numPassatgers i maxPassatgers
+
+**Mètodes**:
+
+- afegirPassatger(): Afegeix un passatger al vaixell, si s'arriba al límit llança l'excepció *IllegalStateException("No es poden afegir més passatgers");*
+- compleixNormativa(): Retorna true si el nombre de passatgers no supera el màxim
+- toString(): que retorna el format "VaixellPassatgers[nom=..., capacitat=..., numPassatgers=..., maxPassatgers=...]"
+
+*Port*
+
+**Atributs**:
+
+- privats: nom (text), vaixells (ArrayList de Vaixell)
+
+**Getters i Setters**
+
+Fes els Getters i Setters de nom
+
+**Mètodes**:
+
+- afegirVaixell(Vaixell v): Afegeix un vaixell al port
+- getVaixells(): Retorna la llista de vaixells
+- printVaixells(): Mostra per consola la llista de vaixells
+- validarNormatives(): Retorna una llista amb els noms dels vaixells, el tipus i si compleixen la normativa
+- printNormatives(): Mostra per consola la llista de vaixells amb la normativa
+- toString(): que retorna el format "VaixellPassatgers[nom=..., capacitat=..., numPassatgers=..., maxPassatgers=...]"
+
+Per executar i testejar el programa:
+
+```bash
+# Codi: src/main/java/com/exercici0306
+
+# A la carpeta "Deures03" executar el programa
+./run.sh com.exercici0306.Main
+
+# A la carpeta "Deures03" executar el test
+./runTest.sh com.exercicis.TestExercici0306
+
+# Testos individuals
+./runTest.sh com.exercicis.TestExercici0306#testCarregaGetters
+./runTest.sh com.exercicis.TestExercici0306#testCarregaSetters
+./runTest.sh com.exercicis.TestExercici0306#testCarregaToString
+./runTest.sh com.exercicis.TestExercici0306#testCarregaPerillosaGetters
+./runTest.sh com.exercicis.TestExercici0306#testCarregaPerillosaSetters
+./runTest.sh com.exercicis.TestExercici0306#testCarregaPerillosaToString
+./runTest.sh com.exercicis.TestExercici0306#testCarregaPerillosaInvalid
+./runTest.sh com.exercicis.TestExercici0306#testVaixellGetters
+./runTest.sh com.exercicis.TestExercici0306#testVaixellSetters
+./runTest.sh com.exercicis.TestExercici0306#testVaixellAfegirCarrega
+./runTest.sh com.exercicis.TestExercici0306#testVaixellGetPesTotal
+./runTest.sh com.exercicis.TestExercici0306#testVaixellToString
+./runTest.sh com.exercicis.TestExercici0306#testVaixellMercaderiesGetters
+./runTest.sh com.exercicis.TestExercici0306#testVaixellMercaderiesNormatiu
+./runTest.sh com.exercicis.TestExercici0306#testVaixellPassatgersGetters
+./runTest.sh com.exercicis.TestExercici0306#testVaixellPassatgersAfegir
+./runTest.sh com.exercicis.TestExercici0306#testVaixellPassatgersNormatiu
+```
