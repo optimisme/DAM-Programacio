@@ -1,12 +1,7 @@
-package com.exercici0305;
+package com.resolt0305;
 
 public class Main {
     public static void main(String[] args) {
-
-        /*
-         * TODO modifica els objectes i interficies
-         * per tal que funcioni aquest codi
-
         Torneig torneig = new Torneig();
 
         Jugador jugador1 = new Jugador("Leo Messi", 35, "PSG");
@@ -25,8 +20,5 @@ public class Main {
 
         System.out.println("\nFase de competició:");
         torneig.competir();
-
-         */
-
     }
 }

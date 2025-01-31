@@ -1,12 +1,7 @@
-package com.exercici0306;
+package com.resolt0306;
 
 public class Main {
     public static void main(String[] args) {
-
-        /*
-         * TODO modifica els objectes i interficies
-         * per tal que funcioni aquest codi
-
         Port port = new Port("Barcelona");
 
         VaixellMercaderies v1 = new VaixellMercaderies("Mercaderies1", 10000, "Espanya");
@@ -23,7 +18,5 @@ public class Main {
 
         port.printVaixells();
         port.printNormatives();
-
-         */
     }
 }
