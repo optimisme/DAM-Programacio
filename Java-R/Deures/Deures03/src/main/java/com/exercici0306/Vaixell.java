@@ -2,6 +2,6 @@ package com.exercici0306;
 
 import java.util.ArrayList;
 
-public class Vaixell implements Transportable {
+public class Vaixell {
     
 }
