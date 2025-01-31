@@ -40,6 +40,34 @@ La sobreescriptura de mètodes es produeix quan una subclasse defineix un mètod
 
 La sobreescriptura permet que la subclasse proporcioni una implementació específica d'un mètode que ja existeix en la superclasse.
 
+### Súper
+
+**super** és una paraula clau que fa referència directa a la superclasse (classe pare) immediata d'una classe. S'utilitza principalment en dos contextos: 
+
+- Cridar a un constructor de la superclasse 
+
+- Accedir a membres (mètodes o camps) de la superclasse que han sigut ocultats o sobrescrits en la subclasse.
+
+```java
+class Pare {
+    Pare() {
+        System.out.println("Constructor de Pare");
+    }
+}
+
+class Fill extends Pare {
+    Fill() {
+        super(); // Crida al constructor de la classe Pare
+        System.out.println("Constructor de Fill");
+    }
+}
+
+public class ExempleSuper {
+    public static void main(String[] args) {
+        new Fill(); // Mostrarà: Constructor de Pare seguit de Constructor de Fill
+    }
+}
+```
 
 ### Exemple 1300
 
@@ -52,7 +80,15 @@ Exemple d'herència amb **'extends'**, una classe pare 'Poligon' defineix les ba
 
 ```java
 public class Poligon {
+
     // Atributs comuns a tots els polígons podrien anar aquí
+    public double x;
+    public double y;
+
+    Poligon(double x, double y) {
+        this.x = x;
+        this.y = y;
+    }
 
     public double calcularArea() {
         return 0; // Implementació genèrica, la idea és sobreescriure en subclasses
@@ -66,7 +102,8 @@ public class Poligon {
 public class Cercle extends Poligon {
     private double radi;
 
-    public Cercle(double radi) {
+    public Cercle(double x, double y, double radi) {
+        super(x, y);
         this.radi = radi;
     }
 
@@ -85,7 +122,8 @@ public class Rectangle extends Poligon {
     private double amplada;
     private double altura;
 
-    public Rectangle(double amplada, double altura) {
+    public Rectangle(double x, double y, double amplada, double altura) {
+        super(x, y);
         this.amplada = amplada;
         this.altura = altura;
     }
@@ -160,35 +198,6 @@ public class Main {
         System.out.println(gerent.getNomComplet() + " - Salari Anual: " + gerent.getSalariAnual());
         gerent.incrementarSalari(10);
         System.out.println("Després de l'increment: " + gerent.getSalariAnual());
-    }
-}
-```
-
-### Súper
-
-**super** és una paraula clau que fa referència directa a la superclasse (classe pare) immediata d'una classe. S'utilitza principalment en dos contextos: 
-
-- Cridar a un constructor de la superclasse 
-
-- Accedir a membres (mètodes o camps) de la superclasse que han sigut ocultats o sobrescrits en la subclasse.
-
-```java
-class Pare {
-    Pare() {
-        System.out.println("Constructor de Pare");
-    }
-}
-
-class Fill extends Pare {
-    Fill() {
-        super(); // Crida al constructor de la classe Pare
-        System.out.println("Constructor de Fill");
-    }
-}
-
-public class ExempleSuper {
-    public static void main(String[] args) {
-        new Fill(); // Mostrarà: Constructor de Pare seguit de Constructor de Fill
     }
 }
 ```
@@ -375,6 +384,13 @@ En un sistema per gestionar vehicles. Es defineix una classe abstracta 'Vehicle'
 
 ```java
 public abstract class Vehicle {
+
+    private String marca;
+
+    public Vehicle(String marca) {
+        this.marca = marca;
+    }
+
     // Aquest mètode abstracte ha de ser implementat per totes les subclasses
     public abstract void accelerar();
     
@@ -388,6 +404,15 @@ public abstract class Vehicle {
 }
 
 public class Cotxe extends Vehicle {
+
+    private String combustible;
+
+    public Cotxe(String marca, String combustible) {
+        // Crida al constructor de Vehicle
+        super(marca);
+        this.combustible = combustible;
+    }
+
     @Override
     public void accelerar() {
         System.out.println("El cotxe accelera.");
@@ -406,6 +431,14 @@ public class Cotxe extends Vehicle {
 }
 
 ```
+
+## Mètodes i atributs protected
+
+Quan es defineix un mètode o un atribut com a **protected**, està disponible per la pròpia classe i les derivades. Així:
+
+- **public** accessible per tothom qui fa servir la instància
+- **protected** accessible per el propi objecte i derivats
+- **private** accessible únicament pel propi objecte
 
 ## Mètodes finals i classes finals
 

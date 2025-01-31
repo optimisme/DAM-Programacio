@@ -1,6 +1,14 @@
 package com.exemple1303;
 
 public class Cotxe extends Vehicle {
+
+    private String combustible;
+
+    public Cotxe(String marca) {
+        super(marca);
+        this.combustible = combustible;
+    }
+
     @Override
     public void accelerar() {
         System.out.println("El cotxe accelera.");

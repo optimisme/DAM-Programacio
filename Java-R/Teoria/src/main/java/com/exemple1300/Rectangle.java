@@ -4,7 +4,8 @@ public class Rectangle extends Poligon {
     private double amplada;
     private double altura;
 
-    public Rectangle(double amplada, double altura) {
+    public Rectangle(double x, double y, double amplada, double altura) {
+        super(x, y);
         this.amplada = amplada;
         this.altura = altura;
     }

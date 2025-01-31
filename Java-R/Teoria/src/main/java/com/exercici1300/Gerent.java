@@ -1,5 +1,18 @@
 package com.exercici1300;
 
-public class Gerent {
+public class Gerent extends Empleat {
     
+    private String departament;
+
+    public Gerent(String nom, String cognom, double salariAnual, String departament) {
+        super(nom, cognom, salariAnual);
+        this.departament = departament;
+    }
+
+    @Override
+    public String getNomComplet() {
+        return super.getNomComplet() + " " + departament;
+    }
 }
+
+
