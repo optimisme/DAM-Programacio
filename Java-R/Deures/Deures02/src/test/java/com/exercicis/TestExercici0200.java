@@ -1,18 +1,34 @@
 package com.exercicis;
 
-import com.testStringUtils.*;
+import com.exercicis.Exercici0200;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
-
 import com.github.stefanbirkner.systemlambda.SystemLambda;
+import com.testStringUtils.TestStringUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Locale;
 
 class TestExercici0200 {
+
+    private Locale defaultLocale;
+
+    @BeforeEach
+    public void setUp() {
+        defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
+    }
+
+    @AfterEach
+    public void tearDown() {
+        Locale.setDefault(defaultLocale);
+    }
 
     @Test
     void testAddImaginariesSimple(TestInfo testInfo) throws Exception {

@@ -5,8 +5,6 @@ import com.exercici0306.*;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.*;
 
-import java.util.Locale;
-
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 import com.testStringUtils.TestStringUtils;
 

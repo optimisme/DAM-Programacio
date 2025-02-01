@@ -9,7 +9,7 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-public class Exercici0201 {
+public class Resolt0201 {
 
     public static Scanner scanner;
     public static Locale defaultLocale;
@@ -60,7 +60,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayEnters
      */
     public static int[] generaArrayEnters(int mida) {
-        return null;
+        int[] array = new int[mida];
+        Random r = new Random();
+        for (int i = 0; i < mida; i++) {
+            array[i] = r.nextInt(100);
+        }
+        return array;
     }
 
     /**
@@ -75,6 +80,23 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostraArrayEstadistiques
      */
     public static void mostraArrayEstadistiques(int[] array) {
+        int max = array[0], min = array[0], suma = 0;
+        for (int n : array) {
+            if (n > max)
+                max = n;
+            if (n < min)
+                min = n;
+            suma += n;
+        }
+        double mitjana = suma / (double) array.length;
+        System.out.print("Array: [");
+        for (int i = 0; i < array.length; i++) {
+            System.out.print(array[i]);
+            if (i < array.length - 1)
+                System.out.print(", ");
+        }
+        System.out.println("]");
+        System.out.println("Màxim: " + max + "  Mínim: " + min + "  Mitjana: " + mitjana);
     }
 
     /**
@@ -86,7 +108,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraLlistaEnters
      */
     public static ArrayList<Integer> generaLlistaEnters(int mida) {
-        return null;
+        ArrayList<Integer> llista = new ArrayList<>();
+        Random r = new Random();
+        for (int i = 0; i < mida; i++) {
+            llista.add(r.nextInt(100));
+        }
+        return llista;
     }
 
     /**
@@ -103,7 +130,17 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostraLlistaEstadistiques
      */
     public static void mostraLlistaEstadistiques(ArrayList<Integer> llista) {
-
+        int max = llista.get(0), min = llista.get(0), suma = 0;
+        for (int n : llista) {
+            if (n > max)
+                max = n;
+            if (n < min)
+                min = n;
+            suma += n;
+        }
+        double mitjana = suma / (double) llista.size();
+        System.out.println("Llista: " + llista);
+        System.out.println("Màxim: " + max + "  Mínim: " + min + "  Mitjana: " + mitjana);
     }
 
     /**
@@ -119,7 +156,23 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraArrayParaulesAmbA
      */
     public static void filtraArrayParaulesAmbA() {
-
+        System.out.println("Escriu 5 paraules separades per ',' o ', ':");
+        String input = scanner.nextLine();
+        String[] paraules = input.replace(", ", ",").split(",");
+        int count = 0;
+        for (String p : paraules) {
+            if (p.toLowerCase().startsWith("a"))
+                count++;
+        }
+        String[] filtrades = new String[count];
+        int index = 0;
+        for (String p : paraules) {
+            if (p.toLowerCase().startsWith("a")) {
+                filtrades[index++] = p;
+            }
+        }
+        String rst = String.join(", ", filtrades);
+        System.out.println("Paraules que comencen amb 'a': " + rst);
     }
        
     /**
@@ -135,7 +188,17 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaParaulesAmbA
      */
     public static void filtraLlistaParaulesAmbA() {
-
+        System.out.println("Escriu 5 paraules separades per ',' o ', ':");
+        String input = scanner.nextLine();
+        String[] paraulesArray = input.replace(", ", ",").split(",");
+        ArrayList<String> paraules = new ArrayList<>(Arrays.asList(paraulesArray));
+        ArrayList<String> filtrades = new ArrayList<>();
+        for (String p : paraules) {
+            if (p.toLowerCase().startsWith("a"))
+                filtrades.add(p);
+        }
+        String rst = String.join(", ", filtrades);
+        System.out.println("Paraules que comencen amb 'a': " + rst);
     }
 
     /**
@@ -147,8 +210,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayDecimals
      */
     public static double[] generaArrayDecimals(int mida) {
-
-        return null;
+        double[] array = new double[mida];
+        Random r = new Random();
+        for (int i = 0; i < mida; i++) {
+            array[i] = r.nextDouble() * 100;
+        }
+        return array;
     }
 
     /**
@@ -160,8 +227,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraArrayDecimalsSuperiors50
      */
     public static ArrayList<Double> generaLlistaDecimals(int mida) {
-
-        return null;
+        ArrayList<Double> llista = new ArrayList<>();
+        Random r = new Random();
+        for (int i = 0; i < mida; i++) {
+            llista.add(r.nextDouble() * 100);
+        }
+        return llista;
     }
 
     /**
@@ -179,7 +250,33 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraLlistaDecimals
      */
     public static void filtraArrayDecimalsSuperiors50(double[] decimals) {
-
+        System.out.print("Array original: [");
+        for (int i = 0; i < decimals.length; i++) {
+            System.out.printf("%.2f", decimals[i]);
+            if (i < decimals.length - 1)
+                System.out.print(", ");
+        }
+        System.out.println("]");
+    
+        int count = 0;
+        for (double d : decimals) {
+            if (d > 50)
+                count++;
+        }
+        double[] filtrats = new double[count];
+        int index = 0;
+        for (double d : decimals) {
+            if (d > 50) {
+                filtrats[index++] = d;
+            }
+        }
+        System.out.print("Valors majors que 50: [");
+        for (int i = 0; i < filtrats.length; i++) {
+            System.out.printf("%.2f", filtrats[i]);
+            if (i < filtrats.length - 1)
+                System.out.print(", ");
+        }
+        System.out.println("]");
     }   
 
     /**
@@ -196,7 +293,29 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaDecimalsSuperiors50
      */
     public static void filtraLlistaDecimalsSuperiors50(ArrayList<Double> decimals) {
-
+        String original = "[";
+        for (int i = 0; i < decimals.size(); i++) {
+            original += String.format("%.2f", decimals.get(i));
+            if (i < decimals.size() - 1)
+                original += ", ";
+        }
+        original += "]";
+        System.out.println("Llista original: " + original);
+        
+        ArrayList<Double> filtrats = new ArrayList<>();
+        for (Double d : decimals) {
+            if (d > 50)
+                filtrats.add(d);
+        }
+        
+        String filtratsStr = "[";
+        for (int i = 0; i < filtrats.size(); i++) {
+            filtratsStr += String.format("%.2f", filtrats.get(i));
+            if (i < filtrats.size() - 1)
+                filtratsStr += ", ";
+        }
+        filtratsStr += "]";
+        System.out.println("Valors majors que 50: " + filtratsStr);
     }
     
     /**
@@ -210,7 +329,11 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostrarLlistaOrdenadesPerEdat
      */
     public static void mostrarLlistaOrdenadesPerEdat(HashMap<String, Integer> persones) {
-
+        ArrayList<String> keys = new ArrayList<>(persones.keySet());
+        keys.sort((k1, k2) -> persones.get(k1).compareTo(persones.get(k2)));
+        for (String key : keys) {
+            System.out.println(key + " (" + persones.get(key) + ")");
+        }
     }
 
     /**
@@ -226,7 +349,15 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostrarFrecuenciaParaules
      */
     public static void mostrarFrecuenciaParaules() {
-
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Introdueix una frase:");
+        String frase = sc.nextLine();
+        String[] paraules = frase.split("\\s+");
+        HashMap<String, Integer> freq = new HashMap<>();
+        for (String p : paraules) {
+            freq.put(p, freq.getOrDefault(p, 0) + 1);
+        }
+        System.out.println("Freqüència de paraules: " + freq);
     }
 
     /**
@@ -242,7 +373,16 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testInvertirMapaClauValor
      */
     public static void invertirMapaClauValor() {
-
+        HashMap<String, Integer> mapa = new HashMap<>();
+        mapa.put("A", 1);
+        mapa.put("B", 2);
+        mapa.put("C", 3);
+        HashMap<Integer, String> invertit = new HashMap<>();
+        for (Map.Entry<String, Integer> e : mapa.entrySet()) {
+            invertit.put(e.getValue(), e.getKey());
+        }
+        System.out.println("Mapa original: " + mapa);
+        System.out.println("Mapa invertit: " + invertit);
     }
 
     /**
@@ -262,7 +402,17 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFusionarMapesSumantValors
      */
     public static void fusionarMapesSumantValors() {
-
+        HashMap<String, Integer> mapa1 = new HashMap<>();
+        mapa1.put("X", 10);
+        mapa1.put("Y", 20);
+        HashMap<String, Integer> mapa2 = new HashMap<>();
+        mapa2.put("Y", 5);
+        mapa2.put("Z", 15);
+        HashMap<String, Integer> fusionat = new HashMap<>(mapa1);
+        for (Map.Entry<String, Integer> e : mapa2.entrySet()) {
+            fusionat.put(e.getKey(), fusionat.getOrDefault(e.getKey(), 0) + e.getValue());
+        }
+        System.out.println("Mapa fusionat: " + fusionat);
     }
 
     /**
@@ -278,7 +428,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testOrdenarMapaPerClaus
      */
     public static void ordenarMapaPerClaus() {
-
+        HashMap<String, Integer> mapa = new HashMap<>();
+        mapa.put("Banana", 3);
+        mapa.put("Poma", 5);
+        mapa.put("Taronja", 2);
+        TreeMap<String, Integer> ordenat = new TreeMap<>(mapa);
+        System.out.println("Mapa ordenat per claus: " + ordenat);
     }
 
     /**
@@ -294,6 +449,17 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testCalcularEstadistiquesNotesEstudiants
      */
     public static void calcularEstadistiquesNotesEstudiants() {
-
+        HashMap<String, Double> estudiants = new HashMap<>();
+        estudiants.put("Anna", 8.5);
+        estudiants.put("Joan", 6.0);
+        estudiants.put("Marc", 7.5);
+        double suma = 0, max = Double.MIN_VALUE, min = Double.MAX_VALUE;
+        for (double nota : estudiants.values()) {
+            suma += nota;
+            if (nota > max) max = nota;
+            if (nota < min) min = nota;
+        }
+        double mitjana = suma / estudiants.size();
+        System.out.println("Mitjana: " + mitjana + ", Màxim: " + max + ", Mínim: " + min);
     }
 }
