@@ -3,9 +3,8 @@ package com.exercici0306;
 public class Main {
     public static void main(String[] args) {
 
-        /*
-         * TODO modifica els objectes i interficies
-         * per tal que funcioni aquest codi
+        /* TODO resol l'exercici per tal que funcioni
+           aquest codi
 
         Port port = new Port("Barcelona");
 
@@ -24,6 +23,6 @@ public class Main {
         port.printVaixells();
         port.printNormatives();
 
-         */
+        */
     }
 }
