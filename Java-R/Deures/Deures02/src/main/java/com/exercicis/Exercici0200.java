@@ -153,7 +153,8 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testTransposeSingleElement
      */
     public static int[][] transpose(int[][] matrix) {
-        return null;
+        int[][] rst = new int[0][0];
+        return rst;
     }
 
     /**
@@ -217,7 +218,8 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testMinMaxAddWithDuplicates
      */
     public static ArrayList<Integer> minMaxAdd(ArrayList<Integer> nums) {
-        return null;
+        ArrayList<Integer> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
@@ -267,7 +269,8 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testMinDistancesNoTargetFound
      */
     public static ArrayList<Integer> minDistances(String text, char target) {
-        return null;
+        ArrayList<Integer> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
@@ -291,6 +294,6 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testFindUniqueNumberNoUnique
      */
     public static Double findUniqueNumber(ArrayList<Double> nums) {
-        return null;
+        return 0.0;
     }
 }

@@ -60,7 +60,8 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayEnters
      */
     public static int[] generaArrayEnters(int mida) {
-        return null;
+        int[] rst = new int[0];
+        return rst;
     }
 
     /**
@@ -86,7 +87,8 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraLlistaEnters
      */
     public static ArrayList<Integer> generaLlistaEnters(int mida) {
-        return null;
+        ArrayList<Integer> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
@@ -147,8 +149,8 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayDecimals
      */
     public static double[] generaArrayDecimals(int mida) {
-
-        return null;
+        double[] rst = new double[0];
+        return rst;
     }
 
     /**
@@ -160,8 +162,8 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraArrayDecimalsSuperiors50
      */
     public static ArrayList<Double> generaLlistaDecimals(int mida) {
-
-        return null;
+        ArrayList<Double> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
