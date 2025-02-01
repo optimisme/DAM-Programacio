@@ -1,5 +1,6 @@
 package com.exercicis;
 import java.util.Scanner;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -346,7 +347,8 @@ public class Exercici0 {
             HashMap<String, Object> condicions) {
         
         // TODO
-        return null;
+        ArrayList<HashMap<String, HashMap<String, Object>>> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
@@ -440,7 +442,8 @@ public class Exercici0 {
             HashMap<String, Object> condicions) {
 
         // TODO
-        return null;
+        ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
@@ -453,7 +456,8 @@ public class Exercici0 {
      */
     public static ArrayList<HashMap<String, Object>> llistarOperacionsClient(String clauClient) {
         // TODO
-        return null;
+        ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
@@ -537,7 +541,8 @@ Impostos:  21% (14.41)                     Total: 83.04
      */
     public static ArrayList<String> taulaOperacionsClient(String clauClient, String ordre) {
         // TODO
-        return null;
+        ArrayList<String> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
@@ -581,7 +586,8 @@ Impostos:  21% (14.41)                     Total: 83.04
      */
     public static ArrayList<String> getLlistarClientsMenu() {
         // TODO
-        return null;
+        ArrayList<String> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
@@ -676,7 +682,8 @@ Impostos:  21% (14.41)                     Total: 83.04
      */
     public static ArrayList<String> llegirFactors(Scanner scanner) {
         // TODO
-        return null;
+        ArrayList<String> rst = new ArrayList<>();
+        return rst;
     }
     
     /**
@@ -726,7 +733,8 @@ Impostos:  21% (14.41)                     Total: 83.04
      */
     public static ArrayList<String> afegirClientMenu(Scanner scanner) {
         // TODO
-        return null;
+        ArrayList<String> rst = new ArrayList<>();
+        return rst;
     }
     
     /**
@@ -770,7 +778,8 @@ Impostos:  21% (14.41)                     Total: 83.04
      */
     public static ArrayList<String> modificarClientMenu(Scanner scanner) {
         // TODO
-        return null;
+        ArrayList<String> rst = new ArrayList<>();
+        return rst;
     }
 
     /**
@@ -794,7 +803,8 @@ Impostos:  21% (14.41)                     Total: 83.04
      */
     public static ArrayList<String> esborrarClientMenu(Scanner scanner) {
         // TODO
-        return null;
+        ArrayList<String> rst = new ArrayList<>();
+        return rst;
     }
 
     /**

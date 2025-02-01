@@ -1,5 +1,6 @@
 package com.exercici0305;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Torneig {
@@ -20,7 +21,8 @@ public class Torneig {
     }
 
     public ArrayList<Participant> getParticipants() {
-        return null;
+        ArrayList<Participant> rst = new ArrayList<>();
+        return rst;
     }
 
     public void printParticipants() {

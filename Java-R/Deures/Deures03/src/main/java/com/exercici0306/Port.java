@@ -1,5 +1,6 @@
 package com.exercici0306;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Port {
@@ -19,7 +20,8 @@ public class Port {
     }
 
     public ArrayList<Vaixell> getVaixells() {
-        return null;
+        ArrayList<Vaixell> rst = new ArrayList<>();
+        return rst;
     }
 
     public void printVaixells() {
@@ -27,7 +29,8 @@ public class Port {
     }
 
     public ArrayList<String> validarNormatives() {
-        return null;
+        ArrayList<String> rst = new ArrayList<>();
+        return rst;
     }
 
     public void printNormatives() {

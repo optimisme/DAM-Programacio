@@ -9,7 +9,8 @@ public class Prestec {
     }
 
     public Llibre getLlibre() {
-        return null;
+        Llibre rst = new Llibre("", new Autor("", ""), 0);
+        return rst;
     }
 
     public void setLlibre(Llibre llibre) {

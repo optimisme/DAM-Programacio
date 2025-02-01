@@ -114,7 +114,8 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testGetHashMapEmptyObject
      */
     public static HashMap<String, Object> getHashMap(String jsonstr) {
-        return null;
+        HashMap<String, Object> rst = new HashMap<>();
+        return rst;
     }
     
     /**
@@ -130,7 +131,8 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testGetArrayListEmptyArray
      */
     public static ArrayList<HashMap<String, Object>> getArrayList(String jsonstr) {
-        return null;
+        ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
+        return rst;
     }
 
     /**

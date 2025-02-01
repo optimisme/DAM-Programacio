@@ -26,7 +26,8 @@ public class Vaixell implements Transportable {
     }
 
     public ArrayList<Carrega> getCarregues() {
-        return null;
+        ArrayList<Carrega> rst = new ArrayList<>();
+        return rst;
     }
 
     @Override

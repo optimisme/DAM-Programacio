@@ -13,7 +13,8 @@ public class Llibre {
     }
 
     public Autor getAutor() {
-        return null;
+        Autor rst = new Autor("", "");
+        return rst;
     }
 
     public void setAutor(Autor autor) {

@@ -29,7 +29,8 @@ public class NumComplex {
     }
 
     public NumComplex conjugat() {
-        return null;
+        NumComplex rst = new NumComplex(0.0, 0.0);
+        return rst;
     }
 
     @Override
@@ -38,18 +39,22 @@ public class NumComplex {
     }
 
     public static NumComplex suma(NumComplex a, NumComplex b) {
-        return null;
+        NumComplex rst = new NumComplex(0.0, 0.0);
+        return rst;
     }
 
     public static NumComplex resta(NumComplex a, NumComplex b) {
-        return null;
+        NumComplex rst = new NumComplex(0.0, 0.0);
+        return rst;
     }
 
     public static NumComplex multiplica(NumComplex a, NumComplex b) {
-        return null;
+        NumComplex rst = new NumComplex(0.0, 0.0);
+        return rst;
     }
 
     public static NumComplex divideix(NumComplex a, NumComplex b) {
-        return null;
+        NumComplex rst = new NumComplex(0.0, 0.0);
+        return rst;
     }
 }
