@@ -47,11 +47,18 @@ Tindrà les següents classes:
 
     * *Table* deriva de *Component*
 
+- **Input**: mostra un quadre on es pot entrar text. Té:
+
+    * Atribut **label** amb un text descriptiu previ a l'entrada de text (en una sola línia)
+    * Mètode **getInput** que rept un *Scanner* i retorna el text entrat amb *nextLine()*
+
 - **Container**: conté una llista de components. Té:
 
     * Atribut **components** que és una llista de components.
 
     * *Container* deriva de *Component*, el seu mètode **render()** ha de mostrar tots els components que conté, del primer fins a l'últim, retallant segons l'espai del propi container.
+
+**Aleshores**:
 
 Fes una aplicació que divideixi un espai de 60x20 en dos, a la part esquerra hi ha un menú amb tres opcions:
 
@@ -60,6 +67,8 @@ Fes una aplicació que divideixi un espai de 60x20 en dos, a la part esquerra hi
 3. Sortir
 
 A la part dreta es mostra el text "Escull una opció".
+
+A la part inferior, de tots dos espais, hi ha un *Input* amb el text "Escull una opció: "
 
 Un cop escollida una opció:
 
