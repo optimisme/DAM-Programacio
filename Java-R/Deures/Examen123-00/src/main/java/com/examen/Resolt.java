@@ -245,7 +245,7 @@ public class Resolt {
      *
      * Aquesta funció verifica si tots els caràcters d'una cadena són dígits numèrics.
      *
-     * @param text Cadena a verificar.
+     * @param title Cadena a verificar.
      * @return `true` si només conté dígits; `false` en cas contrari.
      * 
      * @test ./runTest.sh com.examen.TestExamen#testIsAllDigitsWithOnlyDigits
@@ -345,7 +345,7 @@ public class Resolt {
      *    - `"center"` (o qualsevol altre valor): Calcula els espais necessaris a banda i banda per centrar el text.
      * 4. Retorna el text ajustat amb espais.
      *
-     * @param text El text que s'ha d'ajustar.
+     * @param title El text que s'ha d'ajustar.
      * @param width L'amplada total a la qual s'ha d'ajustar el text.
      * @param alignment L'alineació desitjada (`"left"`, `"right"`, o `"center"`). 
      *                  Si es proporciona un valor desconegut, per defecte serà `"center"`.

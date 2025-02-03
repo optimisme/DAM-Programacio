@@ -5,7 +5,7 @@ En aquest exercici cal fer una llibreria que permeti mostrar textos, taules i me
 
 Calen les següents interfícies:
 
-- **Renderable**: amb un mètode **render()** que mostra el component per pantalla.
+- **Renderable**: amb un mètode **ArrayList<String> render()** que retorna les cadenes de text que formen el component.
 - **Alignable**: amb els mètodes **getAlign()** i **setAlign()** que gestionen l'alignació.
 
 Tindrà les següents classes:
@@ -55,8 +55,9 @@ Tindrà les següents classes:
 - **Container**: conté una llista de components. Té:
 
     * Atribut **components** que és una llista de components.
+    * Metode **draw** que dibuixa el *buffer* a la terminal, primer fa un *clearScreen* i després dibuixa cada linia del *buffer*.
 
-    * *Container* deriva de *Component*, el seu mètode **render()** ha de mostrar tots els components que conté, del primer fins a l'últim, retallant segons l'espai del propi container.
+    * *Container* deriva de *Component*, el seu constructor inicia x,y a (0,0) i el seu mètode **render()** posiciona els *render* de tots els components en un buffer. 
 
 **Aleshores**:
 
