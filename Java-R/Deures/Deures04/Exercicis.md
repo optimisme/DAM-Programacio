@@ -14,7 +14,15 @@ Tindrà les següents classes:
 
     * Atributs **x** i **y**, **width** i **height** que indiquen la posició i mida del component
     * Un metode 'abstracte' **render()** que mostra el component per pantalla, i han d'implementar totes les classes que heredin d'aquesta.
-    Es dibuixen '*' al voltant del component, i es retallen els seus continguts si no hi caben.
+
+    El component ha de quedar emarcat en un quadre format pels caràcters ascii: 
+
+```bash 
+┌─┐                     
+│ │                     
+│ │            
+└─┘
+```
 
     * *Component* Implementa *Renderable*
 
