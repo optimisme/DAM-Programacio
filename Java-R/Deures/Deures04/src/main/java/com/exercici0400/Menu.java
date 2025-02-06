@@ -6,10 +6,10 @@ import java.util.HashMap;
 public class Menu extends Component {
 
     private String title;
-    private HashMap<Integer, Object> items;
+    private HashMap<Integer, String[]> items;
     private boolean lastZero;
     
-    public Menu(int x, int y, int width, int height, String title, HashMap<Integer, Object> items, boolean lastZero) {
+    public Menu(int x, int y, int width, int height, String title, HashMap<Integer, String[]> items, boolean lastZero) {
         super(x, y, width, height);
         this.title = title;
         this.items = items;
@@ -38,6 +38,12 @@ public class Menu extends Component {
 
     public ArrayList<String> render() {
         ArrayList<String> rst = new ArrayList<String>();
+
+        for (int cntLinia = 0; cntLinia < height; cntLinia = cntLinia + 1) {
+            String linia = "x".repeat(width);
+            rst.add(linia);
+        }
+
         return rst;
     } 
 }
