@@ -47,17 +47,19 @@ Tindrà les següents classes:
 
     * *Table* deriva de *Component*
 
-- **Input**: mostra un quadre on es pot entrar text. Té:
-
-    * Atribut **label** amb un text descriptiu previ a l'entrada de text (en una sola línia)
-    * Mètode **getInput** que rept un *Scanner* i retorna el text entrat amb *nextLine()*
-
 - **Container**: conté una llista de components. Té:
 
     * Atribut **components** que és una llista de components.
     * Metode **draw** que dibuixa el *buffer* a la terminal, primer fa un *clearScreen* i després dibuixa cada linia del *buffer*.
 
     * *Container* deriva de *Component*, el seu constructor inicia x,y a (0,0) i el seu mètode **render()** posiciona els *render* de tots els components en un buffer. 
+
+- **Input**: mostra un quadre on es pot entrar text. Té:
+
+    * Atribut **label** amb un text descriptiu previ a l'entrada de text (en una sola línia)
+    * Mètode **getInput** que rept un *Scanner* i retorna el text entrat amb *nextLine()*
+
+    * **Atenció!** No deriva de cap altre objecte!
 
 **Aleshores**:
 
