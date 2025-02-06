@@ -9,7 +9,7 @@ public class Text extends Component implements Alignable {
     private boolean ellipsis;
     private String align;
     
-    Text(int x, int y, int width, int height, String text, int truncate, boolean ellipsis, String align) {
+    public Text(int x, int y, int width, int height, String text, int truncate, boolean ellipsis, String align) {
         super(x, y, width, height);
         this.text = text;
         this.truncate = truncate;

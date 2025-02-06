@@ -3,12 +3,11 @@ package com.exercici0400;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Input extends Component {
+public class Input {
 
     private String label;
     
-    public Input(int x, int y, int width, int height, String label) {
-        super(x, y, width, height);
+    public Input(String label) {
         this.label = label;
     }
 

@@ -39,7 +39,7 @@ public class Container extends Component {
         // Inicia el buffer amb espais blancs
         buffer = new ArrayList<>();
         for (int cnt = 0; cnt < height; cnt = cnt + 1) {
-            String linia = "x".repeat(width);
+            String linia = " ".repeat(width);
             buffer.add(linia);
         }
 

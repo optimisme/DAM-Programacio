@@ -9,7 +9,7 @@ public class Table extends Component {
     private ArrayList<String> aligns;
     private ArrayList<ArrayList<String>> rows;
     
-    Table(int x, int y, int width, int height, ArrayList<String> headers, ArrayList<Integer> widths, ArrayList<String> aligns, ArrayList<ArrayList<String>> rows) {
+    public Table(int x, int y, int width, int height, ArrayList<String> headers, ArrayList<Integer> widths, ArrayList<String> aligns, ArrayList<ArrayList<String>> rows) {
         super(x, y, width, height);
         this.headers = headers;
         this.widths = widths;
