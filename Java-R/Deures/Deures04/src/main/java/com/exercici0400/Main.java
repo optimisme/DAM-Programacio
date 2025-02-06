@@ -2,6 +2,15 @@ package com.exercici0400;
 
 import java.util.ArrayList;
 
+/*
+ Estructura ✅
+ Components 
+ Menús
+ Text
+ Table
+ Input
+ */
+
 public class Main {
     public static void main(String[] args) {
    
