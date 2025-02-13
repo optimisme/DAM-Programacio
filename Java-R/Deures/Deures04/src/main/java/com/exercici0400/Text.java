@@ -52,11 +52,10 @@ public class Text extends Component implements Alignable {
     public ArrayList<String> render() {
         ArrayList<String> rst = new ArrayList<String>();
 
-        int idx = 0;
-        while (idx < text.length()) {
-            String line = text.substring(idx, idx + width);
-            rst.add(line);
-            idx = idx + width;
+        String[] arrText = text.split(" ");
+
+        for (int i = 0; i < height; i++) {
+            rst.add("x".repeat(width));
         }
 
         return rst;
