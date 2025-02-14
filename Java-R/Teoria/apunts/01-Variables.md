@@ -1,4 +1,4 @@
-<div style="display: flex; width: 100%;">
+x<div style="display: flex; width: 100%;">
     <div style="flex: 1; padding: 0px;">
         <p>© Albert Palacios Jiménez, 2023</p>
     </div>
@@ -517,4 +517,24 @@ char c = 'α'; // lletra grega alfa
 if (Character.isAlphabetic(c)) {
     System.out.println("És un caràcter alfabètic.");
 }
+```
+
+## Números aleatòris
+
+Per obtenir números aleatoris es fa servir la llibreria **"Random"**
+
+```java
+import java.util.Random;
+
+
+// ...
+
+
+Random random = new Random();
+random.nextInt(10); // Número aleatori entre 0 (inclòs) i 10 (no inclòs)
+random.nextDouble(100); // Número aleatori entre 0 (inclòs) i 100 (no inclòs)
+
+random.nextInt(5, 10); // Número aleatori entre 5 (inclòs) i 10 (no inclòs)
+random.nextDouble(25, 100); // Número aleatori entre 25 (inclòs) i 100 (no inclòs)
+
 ```

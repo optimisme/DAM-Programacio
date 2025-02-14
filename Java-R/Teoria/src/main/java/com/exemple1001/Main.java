@@ -38,6 +38,8 @@ public class Main {
                         : nomsDones.get(random.nextInt(nomsDones.size()));
                 user.put("nom", nouNom);
 
+                random.nextDouble(25, 100);
+
                 // Actualitzar la data de modificació
                 user.put("ultima_modificacio", formattedDate);
             }

@@ -287,7 +287,7 @@ Després de modificar l'índex [0] a "Adeu": ["Adeu", "tal"]
     // Convertir un array [] cap a ArrayList
     String words = "Lorem,ipsum,sit,amet";
     String[] paraules = words.split(",");
-    ArrayList<String> list = Arrays.asList(paraules);
+    ArrayList<String> list = new ArrayList<String>(Arrays.asList(paraules));
 
     // Convertir un ArrayList en array []
     String[] arr = list.toArray(new String[list.size()]);

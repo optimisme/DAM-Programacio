@@ -4,6 +4,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -155,8 +156,25 @@ public class Exercici0201 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaParaulesAmbA
      */
-    public static void filtraLlistaParaulesAmbA() {
+    static void filtraLlistaParaulesAmbA(Scanner scanner1) {
+        try (scanner1) {
+            System.out.print("Escriu 5 paraules separades per ',' o ', ': ");
+            ArrayList<String> paraules = new ArrayList<>(List.of(scanner1.nextLine().split(", ")));
+            String coma = ", ";
+            
+            System.out.print("\nParaules que comencen amb 'a': ");
 
+            for (int i = 0; i < paraules.size(); i++) {
+                if (paraules.get(i).toLowerCase().startsWith("a")) {
+                    if (i == paraules.size() - 1) {
+                        coma = " ";
+                    }
+                    System.out.print(paraules.get(i) + coma);
+                }
+            }
+            
+        }
+        
     }
 
     /**
