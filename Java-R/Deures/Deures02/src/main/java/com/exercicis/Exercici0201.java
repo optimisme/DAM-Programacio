@@ -1,5 +1,6 @@
 package com.exercicis;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -126,6 +127,7 @@ public class Exercici0201 {
 
         words = words.replace(", ", ",");
         String[] paraules = words.split(",");
+        ArrayList<String> arr = Arrays.asList(paraules);
 
         String filtrades = "";
         for (int cnt = 0; cnt < paraules.length; cnt++) {

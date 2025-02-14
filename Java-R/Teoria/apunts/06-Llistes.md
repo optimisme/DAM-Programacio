@@ -281,6 +281,18 @@ Després d'eliminar l'índex [1]: ["Hola", "tal"]
 Després de modificar l'índex [0] a "Adeu": ["Adeu", "tal"]
 ```
 
+## Conversió entre Array i ArrayList
+
+```java
+    // Convertir un array [] cap a ArrayList
+    String words = "Lorem,ipsum,sit,amet";
+    String[] paraules = words.split(",");
+    ArrayList<String> list = Arrays.asList(paraules);
+
+    // Convertir un ArrayList en array []
+    String[] arr = list.toArray(new String[list.size()]);
+```
+
 ## Diccionaris (Hash-Map)
 
 En Java, un diccionari és conegut com un **HashMap**. És una col·lecció que emmagatzema parelles **clau-valor**.
