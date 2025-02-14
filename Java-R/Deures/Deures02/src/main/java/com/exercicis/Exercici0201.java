@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.Math;
 
 public class Exercici0201 {
 
@@ -186,7 +187,10 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayDecimals
      */
     public static double[] generaArrayDecimals(int mida) {
-        double[] rst = new double[0];
+        double[] rst = new double[mida];
+        for (int i = 0; i < mida; i++) {
+            rst[i] =  Math.random() * 100;
+        }
         return rst;
     }
 

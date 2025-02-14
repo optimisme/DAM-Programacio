@@ -538,3 +538,18 @@ random.nextInt(5, 10); // Número aleatori entre 5 (inclòs) i 10 (no inclòs)
 random.nextDouble(25, 100); // Número aleatori entre 25 (inclòs) i 100 (no inclòs)
 
 ```
+
+Per obtenir números aleatòris fent servir la llibreria **"Math"**:
+
+```java
+import java.util.Math;
+
+
+// ...
+
+
+double num = Math.random() * 100; 
+
+// Math.random dóna sempre un número decimal entre 0 i 1
+
+```
