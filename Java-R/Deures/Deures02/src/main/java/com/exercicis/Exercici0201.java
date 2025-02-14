@@ -121,7 +121,24 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraArrayParaulesAmbA
      */
     public static void filtraArrayParaulesAmbA() {
+        System.out.println("Escriu 5 paraules separades per ',' o ', ':");
+        String words = scanner.nextLine();
 
+        words = words.replace(", ", ",");
+        String[] paraules = words.split(",");
+
+        String filtrades = "";
+        for (int cnt = 0; cnt < paraules.length; cnt++) {
+            String paraula = paraules[cnt];
+            if (paraula.toLowerCase().startsWith("a")){
+                if (filtrades.length()<1){
+                    filtrades = filtrades+paraula;
+                }else{
+                    filtrades = filtrades+", "+paraula;
+                }
+            }
+        }
+        System.out.println("Paraules que comencen amb 'a':" + filtrades);
     }
        
     /**
@@ -268,9 +285,9 @@ public class Exercici0201 {
     }
 
     /**
-     * Ordena un HashMap per les claus mitjançant un TreeMap i mostra el resultat.
+     * Ordena un HashMap per les clausi mostra el resultat.
      * 
-     * Es crea un HashMap amb elements (Banana=3, Poma=5, Taronja=2) i es transfereix a un TreeMap
+     * Es crea un HashMap amb elements (Banana=3, Poma=5, Taronja=2) 
      * per obtenir un ordre natural de les claus (alfabètic).
      * 
      * 
