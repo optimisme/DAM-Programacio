@@ -49,13 +49,43 @@ public class Text extends Component implements Alignable {
         return align;
     }
 
+    private ArrayList<String> wrapText() {
+        int realWidth = width - 2;
+        ArrayList<String> lines = new ArrayList<>();
+        String[] words = text.split(" ");
+        StringBuilder currentLine = new StringBuilder();
+    
+        for (String word : words) {
+            if (currentLine.length() + word.length() + 1 > realWidth) {
+                lines.add(currentLine.toString().trim());
+                currentLine.setLength(0);
+            }
+            if (currentLine.length() > 0) {
+                currentLine.append(" ");
+            }
+            currentLine.append(word);
+        }
+    
+        if (currentLine.length() > 0) {
+            lines.add(currentLine.toString());
+        }
+    
+        return lines;
+    }
+
     public ArrayList<String> render() {
-        ArrayList<String> rst = new ArrayList<String>();
+        ArrayList<String> rst = wrapText();
 
-        String[] arrText = text.split(" ");
+        // Afegir linia buida al principi
+        rst.add(0, " ".repeat(width)); 
 
-        for (int i = 0; i < height; i++) {
-            rst.add("x".repeat(width));
+        // TODO: afegir espai blanc al principi de cada linia
+        // TODO: retallar linies massa llargues
+        // TODO: afegir espais blancs al prinicpi o final segons alineació
+
+        // Afegir linies buides al final
+        for (int i = rst.size(); i < height; i++) {
+            rst.add(" ".repeat(width));
         }
 
         return rst;
