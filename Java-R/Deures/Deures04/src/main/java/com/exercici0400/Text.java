@@ -49,6 +49,9 @@ public class Text extends Component implements Alignable {
         return align;
     }
 
+    // Retorna el text amb els salts de línia
+    // segons l'amplada disponible, cada salt de línia
+    // és un nou element de l'ArrayList
     private ArrayList<String> wrapText() {
         int realWidth = width - 2;
         ArrayList<String> lines = new ArrayList<>();
