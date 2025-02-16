@@ -1,0 +1,62 @@
+[
+    {
+    "nom": "Usain Bolt",
+    "any_naixement": 1986,
+    "pais": "Jamaica",
+    "medalles_olimpiques": {"or": 8, "plata": 0, "bronze": 0}
+    },
+    {
+    "nom": "Michael Phelps",
+    "any_naixement": 1985,
+    "pais": "Estats Units",
+    "medalles_olimpiques": {"or": 23, "plata": 3, "bronze": 2}
+    },
+    {
+    "nom": "Simone Biles",
+    "any_naixement": 1997,
+    "pais": "Estats Units",
+    "medalles_olimpiques": {"or": 4, "plata": 1, "bronze": 2}
+    },
+    {
+    "nom": "Carl Lewis",
+    "any_naixement": 1961,
+    "pais": "Estats Units",
+    "medalles_olimpiques": {"or": 9, "plata": 1, "bronze": 0}
+    },
+    {
+    "nom": "Nadia Comaneci",
+    "any_naixement": 1961,
+    "pais": "Romania",
+    "medalles_olimpiques": {"or": 5, "plata": 3, "bronze": 1}
+    },
+    {
+    "nom": "Mark Spitz",
+    "any_naixement": 1950,
+    "pais": "Estats Units",
+    "medalles_olimpiques": {"or": 9, "plata": 1, "bronze": 1}
+    },
+    {
+    "nom": "Larisa Latynina",
+    "any_naixement": 1934,
+    "pais": "Unió Soviètica",
+    "medalles_olimpiques": {"or": 9, "plata": 5, "bronze": 4}
+    },
+    {
+    "nom": "Paavo Nurmi",
+    "any_naixement": 1897,
+    "pais": "Finlàndia",
+    "medalles_olimpiques": {"or": 9, "plata": 3, "bronze": 0}
+    },
+    {
+    "nom": "Serena Williams",
+    "any_naixement": 1981,
+    "pais": "Estats Units",
+    "medalles_olimpiques": {"or": 4, "plata": 0, "bronze": 0}
+    },
+    {
+    "nom": "Jackie Joyner-Kersee",
+    "any_naixement": 1962,
+    "pais": "Estats Units",
+    "medalles_olimpiques": {"or": 3, "plata": 1, "bronze": 2}
+    }
+]
