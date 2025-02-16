@@ -34,29 +34,18 @@ public class Exercici0202 {
     /**
      * Llegeix l'arxiu de 'filePath' i mostra per consola les dades dels astronautes.
      * 
+     * El format és:
+     * > Astronauta 0:
+     *   Nom: Yuri Gagarin
+     *   Naixement: 1934
+     *   > Astronauta 1:
+     *   Nom: Neil Armstrong
+     *   Naixement: 1930
+     * 
      * @test ./runTest.sh com.exercicis.TestExercici0202#testShowJSONAstronautes
      */
     public static void showJSONAstronautes(String filePath) {
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(filePath)));
 
-            JSONObject jsonObject = new JSONObject(content);
-            JSONArray jsonArray = jsonObject.getJSONArray("astronautes");
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject atronauta = jsonArray.getJSONObject(i);
-
-                String nom = atronauta.getString("nom");
-                int anyNeix = atronauta.getInt("any_naixement");
-
-                System.out.println("> Astronauta " + i + ":");
-                System.out.println("  Nom: " + nom);
-                System.out.println("  Naixement: " + anyNeix);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     /**
@@ -67,27 +56,6 @@ public class Exercici0202 {
      */
     public static ArrayList<HashMap<String, Object>> JSONAstronautesToArrayList(String filePath) {
         ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
-
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(filePath)));
-
-            JSONObject jsonObject = new JSONObject(content);
-            JSONArray jsonArray = jsonObject.getJSONArray("astronautes");
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject atronauta = jsonArray.getJSONObject(i);
-
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("nom", atronauta.getString("nom"));
-                map.put("any_naixement", atronauta.getInt("any_naixement"));
-
-                rst.add(map);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         return rst;
     }
 
@@ -100,37 +68,6 @@ public class Exercici0202 {
      */
      public static ArrayList<HashMap<String, Object>> JSONEsportistesToArrayList(String filePath) {
         ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
-
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(filePath)));
-
-            // Directament la llista d'esportistes
-            JSONArray jsonArray = new JSONArray(content);
-
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject esportista = jsonArray.getJSONObject(i);
-
-                HashMap<String, Object> map = new HashMap<>();
-                map.put("nom", esportista.getString("nom"));
-                map.put("any_naixement", esportista.getInt("any_naixement"));
-                map.put("pais", esportista.getString("pais"));
-
-                // Convertir l'objecte de medalles a un HashMap
-                JSONObject medallesJson = esportista.getJSONObject("medalles_olimpiques");
-                HashMap<String, Integer> medalles = new HashMap<>();
-                medalles.put("or", medallesJson.getInt("or"));
-                medalles.put("plata", medallesJson.getInt("plata"));
-                medalles.put("bronze", medallesJson.getInt("bronze"));
-
-                map.put("medalles", medalles);
-
-                rst.add(map);
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
         return rst;
     }
 
@@ -146,19 +83,6 @@ public class Exercici0202 {
     public static ArrayList<HashMap<String, Object>> ordenarEsportistesPerMedalla(String filePath, String tipusMedalla) {
         // Obtenir la llista d'esportistes des del fitxer JSON
         ArrayList<HashMap<String, Object>> esportistes = JSONEsportistesToArrayList(filePath);
-
-        // Validem que el tipus de medalla sigui correcte
-        if (!tipusMedalla.equals("or") && !tipusMedalla.equals("plata") && !tipusMedalla.equals("bronze")) {
-            throw new IllegalArgumentException("Tipus de medalla invàlid: " + tipusMedalla + ". Usa 'or', 'plata' o 'bronze'.");
-        }
-
-        // Ordenem la llista en ordre descendent segons el tipus de medalla
-        esportistes.sort(Comparator.comparing((HashMap<String, Object> esportista) -> {
-            @SuppressWarnings("unchecked")
-            HashMap<String, Integer> medalles = (HashMap<String, Integer>) esportista.get("medalles");
-            return medalles.get(tipusMedalla);
-        }).reversed()); // Fem .reversed() per obtenir primer els que tenen més medalles
-
         return esportistes;
     }
 
@@ -186,30 +110,5 @@ public class Exercici0202 {
      * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarEsportistesOrdenatsPerBronze
      */
     public static void mostrarEsportistesOrdenatsPerMedalla(String filePath, String tipusMedalla) {
-        // Obtenir la llista ordenada d'esportistes
-        ArrayList<HashMap<String, Object>> esportistes = ordenarEsportistesPerMedalla(filePath, tipusMedalla);
-
-        // Imprimir la capçalera de la taula
-        String tipusFixed = tipusMedalla.substring(0, 1).toUpperCase() + tipusMedalla.substring(1).toLowerCase();
-
-        System.out.println("┌──────────────────────┬─────────────────┬────────────┬────────┐");
-        System.out.printf("│ %-20s │ %-15s │ %-10s │ %-6s │\n", "Nom", "País", "Naixement", tipusFixed);
-        System.out.println("├──────────────────────┼─────────────────┼────────────┼────────┤");
-
-        // Imprimir cada esportista a la taula
-        for (HashMap<String, Object> esportista : esportistes) {
-            String nom = (String) esportista.get("nom");
-            String pais = (String) esportista.get("pais");
-            int anyNaixement = (int) esportista.get("any_naixement");
-
-            @SuppressWarnings("unchecked")
-            HashMap<String, Integer> medalles = (HashMap<String, Integer>) esportista.get("medalles");
-            int numMedalles = medalles.get(tipusMedalla);
-
-            System.out.printf("│ %-20s │ %-15s │ %-10d │ %-6d │\n", nom, pais, anyNaixement, numMedalles);
-        }
-
-        // Tancament de la taula
-        System.out.println("└──────────────────────┴─────────────────┴────────────┴────────┘");
     }
 }
