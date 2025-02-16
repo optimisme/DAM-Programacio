@@ -2,7 +2,9 @@ package com.exercicis;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -349,9 +351,8 @@ public class Resolt0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostrarFrecuenciaParaules
      */
     public static void mostrarFrecuenciaParaules() {
-        Scanner sc = new Scanner(System.in);
         System.out.println("Introdueix una frase:");
-        String frase = sc.nextLine();
+        String frase = scanner.nextLine();
         String[] paraules = frase.split("\\s+");
         HashMap<String, Integer> freq = new HashMap<>();
         for (String p : paraules) {
@@ -416,9 +417,9 @@ public class Resolt0201 {
     }
 
     /**
-     * Ordena un HashMap per les claus mitjançant un TreeMap i mostra el resultat.
+     * Ordena un HashMap per les clausi mostra el resultat.
      * 
-     * Es crea un HashMap amb elements (Banana=3, Poma=5, Taronja=2) i es transfereix a un TreeMap
+     * Es crea un HashMap amb elements (Banana=3, Poma=5, Taronja=2) 
      * per obtenir un ordre natural de les claus (alfabètic).
      * 
      * 
@@ -432,8 +433,19 @@ public class Resolt0201 {
         mapa.put("Banana", 3);
         mapa.put("Poma", 5);
         mapa.put("Taronja", 2);
-        TreeMap<String, Integer> ordenat = new TreeMap<>(mapa);
-        System.out.println("Mapa ordenat per claus: " + ordenat);
+
+        List<String> clausOrdenades = new ArrayList<>(mapa.keySet());
+        Collections.sort(clausOrdenades);
+
+        System.out.print("Mapa ordenat per claus: {");
+        for (int i = 0; i < clausOrdenades.size(); i++) {
+            String clau = clausOrdenades.get(i);
+            System.out.print(clau + "=" + mapa.get(clau));
+            if (i < clausOrdenades.size() - 1) {
+                System.out.print(", ");
+            }
+        }
+        System.out.println("}");
     }
 
     /**
