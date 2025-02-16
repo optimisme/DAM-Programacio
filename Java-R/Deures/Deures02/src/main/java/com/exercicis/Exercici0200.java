@@ -2,6 +2,8 @@ package com.exercicis;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class Exercici0200 {
@@ -53,6 +55,18 @@ public class Exercici0200 {
         scanner.close();
     }
 
+    private static int getImaginaryReal(String num) {
+        int idx = num.lastIndexOf("+");             // Cerca l'últim "+" (en cas de números negatius)
+        if (idx == -1) idx = num.lastIndexOf("-");  // Si no hi ha "+", busca "-"
+        return Integer.parseInt(num.substring(0, idx)); // La part real és tot abans d'aquest índex
+    }
+
+    private static int getImaginary(String num) {
+        int idx = num.lastIndexOf("+");
+        if (idx == -1) idx = num.lastIndexOf("-");  // Cerca el signe de la part imaginària
+        return Integer.parseInt(num.substring(idx, num.length() - 1)); // Extreu la part imaginària
+    }
+
     /**
      * Fes una funció que sumi números inmaginaris 
      * definits per una cadena de text
@@ -76,6 +90,7 @@ public class Exercici0200 {
 
     /**
      * Fes un programa que dibuixi el triangle de pascal
+     * fins a un nivell n, sense espais al final de cada fila
      * 
      * @param int nivells del triangle (0 fins a n)
      * 
@@ -86,7 +101,6 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testDrawPascalFive
      */
     public static void drawPascal(int n) {
-
     }
 
     /**
@@ -103,7 +117,8 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testAddListDecimals
      */
     public static double addList(ArrayList<Double> list) {
-        return 0.0;
+        double rst = 0.0;
+        return rst;
     }
 
     /** 
@@ -120,7 +135,6 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testPrintMatrixEmpty
      */
     public static void printMatrix(int[][] matrix) {
-
     }
 
     /**
@@ -243,7 +257,7 @@ public class Exercici0200 {
      * @test ./runTest.sh com.exercicis.TestExercici0200#testSumaSenseSumarZero
      * @test ./runTest.sh com.exercicis.TestExercici0200#testSumaSenseSumarLargeNumbers
      */
-    public static int sumaSenseSumar(int a, int b) {
+    public static int sumaSenseSumar(int a, int b) {       
         return 0;
     }
 

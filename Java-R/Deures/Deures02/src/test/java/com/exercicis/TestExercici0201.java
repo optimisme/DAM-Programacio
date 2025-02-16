@@ -1,6 +1,5 @@
 package com.exercicis;
 
-import com.exercicis.Exercici0201;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.AfterEach;
