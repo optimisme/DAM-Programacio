@@ -4,11 +4,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class Exercici0200 {
+
+    public static Scanner scanner;
+    public static Locale defaultLocale;
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        scanner = new Scanner(System.in);
+        defaultLocale = Locale.getDefault();
+        Locale.setDefault(Locale.US);
 
         System.out.println(addImaginaries("1+2i", "4+5i"));
 
@@ -52,6 +58,7 @@ public class Exercici0200 {
         System.out.println(findUniqueNumber(new ArrayList<>(Arrays.asList(2.0, 2.0, 1.0))));
         System.out.println(findUniqueNumber(new ArrayList<>(Arrays.asList(4.0, 1.0, 2.0, 1.0, 2.0))));
 
+        Locale.setDefault(defaultLocale);
         scanner.close();
     }
 
