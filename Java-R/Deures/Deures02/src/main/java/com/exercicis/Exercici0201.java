@@ -9,8 +9,6 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.TreeMap;
-import java.util.Math;
 
 public class Exercici0201 {
 
@@ -124,25 +122,6 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraArrayParaulesAmbA
      */
     public static void filtraArrayParaulesAmbA() {
-        System.out.println("Escriu 5 paraules separades per ',' o ', ':");
-        String words = scanner.nextLine();
-
-        words = words.replace(", ", ",");
-        String[] paraules = words.split(",");
-        ArrayList<String> arr = Arrays.asList(paraules);
-
-        String filtrades = "";
-        for (int cnt = 0; cnt < paraules.length; cnt++) {
-            String paraula = paraules[cnt];
-            if (paraula.toLowerCase().startsWith("a")){
-                if (filtrades.length()<1){
-                    filtrades = filtrades+paraula;
-                }else{
-                    filtrades = filtrades+", "+paraula;
-                }
-            }
-        }
-        System.out.println("Paraules que comencen amb 'a':" + filtrades);
     }
        
     /**
@@ -157,25 +136,7 @@ public class Exercici0201 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaParaulesAmbA
      */
-    static void filtraLlistaParaulesAmbA(Scanner scanner1) {
-        try (scanner1) {
-            System.out.print("Escriu 5 paraules separades per ',' o ', ': ");
-            ArrayList<String> paraules = new ArrayList<>(List.of(scanner1.nextLine().split(", ")));
-            String coma = ", ";
-            
-            System.out.print("\nParaules que comencen amb 'a': ");
-
-            for (int i = 0; i < paraules.size(); i++) {
-                if (paraules.get(i).toLowerCase().startsWith("a")) {
-                    if (i == paraules.size() - 1) {
-                        coma = " ";
-                    }
-                    System.out.print(paraules.get(i) + coma);
-                }
-            }
-            
-        }
-        
+    static void filtraLlistaParaulesAmbA() {       
     }
 
     /**
@@ -188,9 +149,6 @@ public class Exercici0201 {
      */
     public static double[] generaArrayDecimals(int mida) {
         double[] rst = new double[mida];
-        for (int i = 0; i < mida; i++) {
-            rst[i] =  Math.random() * 100;
-        }
         return rst;
     }
 

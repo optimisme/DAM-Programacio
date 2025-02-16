@@ -542,7 +542,7 @@ random.nextDouble(25, 100); // Número aleatori entre 25 (inclòs) i 100 (no inc
 Per obtenir números aleatòris fent servir la llibreria **"Math"**:
 
 ```java
-import java.util.Math;
+import java.lang.Math
 
 
 // ...
