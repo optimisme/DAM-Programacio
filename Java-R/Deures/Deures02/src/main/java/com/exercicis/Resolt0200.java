@@ -55,12 +55,24 @@ public class Resolt0200 {
         scanner.close();
     }
 
+    /**
+     * Retorna la part real d'un número imaginari
+     * 
+     * @param num cadena de text amb el número imaginari
+     * @return la part real del número imaginari
+     */
     private static int getImaginaryReal(String num) {
         int idx = num.lastIndexOf("+");             // Cerca l'últim "+" (en cas de números negatius)
         if (idx == -1) idx = num.lastIndexOf("-");  // Si no hi ha "+", busca "-"
         return Integer.parseInt(num.substring(0, idx)); // La part real és tot abans d'aquest índex
     }
 
+    /**
+     * Retorna la part imaginària d'un número imaginari
+     * 
+     * @param num cadena de text amb el número imaginari
+     * @return la part imaginària del número imaginari
+     */
     private static int getImaginary(String num) {
         int idx = num.lastIndexOf("+");
         if (idx == -1) idx = num.lastIndexOf("-");  // Cerca el signe de la part imaginària

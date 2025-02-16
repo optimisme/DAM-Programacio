@@ -15,6 +15,7 @@ public class Exercici0201 {
     public static Scanner scanner;
     public static Locale defaultLocale;
 
+    // ./run.sh com.exercicis.Exercici0201
     public static void main(String[] args) {
         
         scanner = new Scanner(System.in);

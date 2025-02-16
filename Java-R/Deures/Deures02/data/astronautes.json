@@ -1,0 +1,14 @@
+{
+    "astronautes": [
+      {"nom": "Yuri Gagarin", "any_naixement": 1934},
+      {"nom": "Neil Armstrong", "any_naixement": 1930},
+      {"nom": "Buzz Aldrin", "any_naixement": 1930},
+      {"nom": "Sally Ride", "any_naixement": 1951},
+      {"nom": "Chris Hadfield", "any_naixement": 1959},
+      {"nom": "Valentina Tereshkova", "any_naixement": 1937},
+      {"nom": "John Glenn", "any_naixement": 1921},
+      {"nom": "Alan Shepard", "any_naixement": 1923},
+      {"nom": "Mae Jemison", "any_naixement": 1956},
+      {"nom": "Peggy Whitson", "any_naixement": 1960}
+    ]
+  }

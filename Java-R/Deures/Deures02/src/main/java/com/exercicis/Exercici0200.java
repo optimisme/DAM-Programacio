@@ -11,6 +11,8 @@ public class Exercici0200 {
 
     public static Scanner scanner;
     public static Locale defaultLocale;
+
+    // ./run.sh com.exercicis.Exercici0200
     public static void main(String[] args) {
         scanner = new Scanner(System.in);
         defaultLocale = Locale.getDefault();
@@ -62,16 +64,29 @@ public class Exercici0200 {
         scanner.close();
     }
 
+    /**
+     * Retorna la part real d'un número imaginari
+     * 
+     * @param num cadena de text amb el número imaginari
+     * @return la part real del número imaginari
+     */
     private static int getImaginaryReal(String num) {
-        int idx = num.lastIndexOf("+");             // Cerca l'últim "+" (en cas de números negatius)
-        if (idx == -1) idx = num.lastIndexOf("-");  // Si no hi ha "+", busca "-"
-        return Integer.parseInt(num.substring(0, idx)); // La part real és tot abans d'aquest índex
+        // Cerca l'últim "+" (en cas de números negatius)
+        // Si no hi ha "+", busca "-"
+        // La part real és tot abans d'aquest índex
+        return 0; 
     }
 
+    /**
+     * Retorna la part imaginària d'un número imaginari
+     * 
+     * @param num cadena de text amb el número imaginari
+     * @return la part imaginària del número imaginari
+     */
     private static int getImaginary(String num) {
-        int idx = num.lastIndexOf("+");
-        if (idx == -1) idx = num.lastIndexOf("-");  // Cerca el signe de la part imaginària
-        return Integer.parseInt(num.substring(idx, num.length() - 1)); // Extreu la part imaginària
+        // Cerca el signe de la part imaginària
+        // Extreu la part imaginària
+        return 0; 
     }
 
     /**

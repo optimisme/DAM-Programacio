@@ -1,50 +1,55 @@
 package com.exercicis;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Locale;
-import java.util.Map;
-import java.util.Random;
 import java.util.Scanner;
 
+import org.json.JSONObject;
+import org.json.JSONArray;
 
 public class Exercici0202 {
 
     public static Scanner scanner;
     public static Locale defaultLocale;
     
+    // ./run.sh com.exercicis.Exercici0202
     public static void main(String[] args) {
         scanner = new Scanner(System.in);
         defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-
+        showJSONAstronautes("./data/astronautes.json");
 
         Locale.setDefault(defaultLocale);
         scanner.close();
     }
 
     /**
-     * Fes una funció que sumi números inmaginaris 
-     * definits per una cadena de text
+     * Llegeix l'arxiu de 'filePath' i mostra per consola les dades dels astronautes.
      * 
-     *  "1+2i" + "4+5i" = "5+7i"
-     * 
-     * @param String el primer número imaginari
-     * @param String el segon número imaginari
-     * @return String el resultat de la suma
-     * 
-     * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesSimple
-     * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesNegative
-     * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesZero
-     * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesWithZeroRealPart
-     * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesWithZeroImaginaryPart
-     * @test ./runTest.sh com.exercicis.TestExercici0200#testAddImaginariesLargeNumbers
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testShowJSONAstronautes
      */
-    public static String addImaginaries(String num0, String num1) {
-        return "";
+    public static void showJSONAstronautes(String filePath) {
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(filePath)));
+
+            JSONObject jsonObject = new JSONObject(content);
+            JSONArray jsonArray = jsonObject.getJSONArray("astronautes");
+
+            for (int i = 0; i < jsonArray.length(); i++) {
+                JSONObject atronauta = jsonArray.getJSONObject(i);
+
+                String nom = atronauta.getString("nom");
+                int anyNeix = atronauta.getInt("any_naixement");
+
+                System.out.println("> Astronauta " + i + ":");
+                System.out.println("  Nom: " + nom);
+                System.out.println("  Naixement: " + anyNeix);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

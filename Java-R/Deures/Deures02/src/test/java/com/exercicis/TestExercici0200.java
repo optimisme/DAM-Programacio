@@ -430,7 +430,7 @@ class TestExercici0200 {
     void testPrintMatrixSingleElement(TestInfo testInfo) throws Exception {
         try {
             int[][] matrix = {{42}};
-            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim().replace("\r\n", "\n");
             String expected = "42";
 
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -451,7 +451,7 @@ class TestExercici0200 {
     void testPrintMatrixRow(TestInfo testInfo) throws Exception {
         try {
             int[][] matrix = {{1, 2, 3}};
-            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim().replace("\r\n", "\n");
             String expected = "1, 2, 3";
 
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -476,7 +476,7 @@ class TestExercici0200 {
                 {2},
                 {3}
             };
-            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim().replace("\r\n", "\n");
             String expected = """
                 1
                 2
@@ -504,7 +504,7 @@ class TestExercici0200 {
                 {1, 2},
                 {3, 4}
             };
-            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim().replace("\r\n", "\n");
             String expected = """
                 1, 2
                 3, 4
@@ -532,7 +532,7 @@ class TestExercici0200 {
                 {4, 5, 6},
                 {7, 8, 9}
             };
-            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim().replace("\r\n", "\n");
             String expected = """
                 1, 2, 3
                 4, 5, 6
@@ -557,7 +557,7 @@ class TestExercici0200 {
     void testPrintMatrixEmpty(TestInfo testInfo) throws Exception {
         try {
             int[][] matrix = {};
-            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0200.printMatrix(matrix)).trim().replace("\r\n", "\n");
             String expected = "";
 
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -579,7 +579,7 @@ class TestExercici0200 {
         for (int[] row : matrix) {
             sb.append(Arrays.toString(row)).append("\n");
         }
-        return sb.toString().trim();
+        return sb.toString().trim().replace("\r\n", "\n");
     }
 
     @Test

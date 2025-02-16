@@ -54,12 +54,12 @@ class TestExercici0201 {
     void testMostraArrayEstadistiques(TestInfo testInfo) throws Exception {
         try {
             int[] arr = {1, 2, 3, 4, 5};
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.mostraArrayEstadistiques(arr)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.mostraArrayEstadistiques(arr)).trim().replace("\r\n", "\n");
             
             String expected = """
                 Array: [1, 2, 3, 4, 5]
                 Màxim: 5  Mínim: 1  Mitjana: 3.0
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             String diff = TestStringUtils.findFirstDifference(output, expected);
             assertTrue(diff.compareTo("identical") == 0, 
@@ -97,12 +97,12 @@ class TestExercici0201 {
     void testMostraLlistaEstadistiques(TestInfo testInfo) throws Exception {
         try {
             ArrayList<Integer> list = new ArrayList<>(Arrays.asList(10, 20, 30));
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.mostraLlistaEstadistiques(list)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.mostraLlistaEstadistiques(list)).trim().replace("\r\n", "\n");
     
             String expected = """
                 Llista: [10, 20, 30]
                 Màxim: 30  Mínim: 10  Mitjana: 20.0
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             String diff = TestStringUtils.findFirstDifference(output, expected);
             assertTrue(diff.compareTo("identical") == 0,
@@ -131,7 +131,7 @@ class TestExercici0201 {
             Exercici0201.scanner = new Scanner(System.in);
     
             // Captura la sortida
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.filtraArrayParaulesAmbA()).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.filtraArrayParaulesAmbA()).trim().replace("\r\n", "\n");
     
             // Restaura l'entrada original
             System.setIn(originalSystemIn);
@@ -140,7 +140,7 @@ class TestExercici0201 {
             String expected = """
                 Escriu 5 paraules separades per ',' o ', ':
                 Paraules que comencen amb 'a': apple, apricot, avocado
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Compara la sortida amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -170,7 +170,7 @@ class TestExercici0201 {
             Exercici0201.scanner = new Scanner(System.in);
     
             // Captura la sortida
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.filtraLlistaParaulesAmbA()).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.filtraLlistaParaulesAmbA()).trim().replace("\r\n", "\n");
     
             // Restaura l'entrada original
             System.setIn(originalSystemIn);
@@ -179,7 +179,7 @@ class TestExercici0201 {
             String expected = """
                 Escriu 5 paraules separades per ',' o ', ':
                 Paraules que comencen amb 'a': apple, apricot, avocado
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Compara la sortida amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -218,12 +218,12 @@ class TestExercici0201 {
     void testFiltraArrayDecimalsSuperiors50(TestInfo testInfo) throws Exception {
         try {
             double[] decimals = {10.0, 60.0, 50.0, 75.5};
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.filtraArrayDecimalsSuperiors50(decimals)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.filtraArrayDecimalsSuperiors50(decimals)).trim().replace("\r\n", "\n");
     
             String expected = """
                 Array original: [10.00, 60.00, 50.00, 75.50]
                 Valors majors que 50: [60.00, 75.50]
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -262,12 +262,12 @@ class TestExercici0201 {
     void testFiltraLlistaDecimalsSuperiors50(TestInfo testInfo) throws Exception {
         try {
             ArrayList<Double> list = new ArrayList<>(Arrays.asList(10.0, 60.0, 50.0, 75.5));
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.filtraLlistaDecimalsSuperiors50(list)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.filtraLlistaDecimalsSuperiors50(list)).trim().replace("\r\n", "\n");
     
             String expected = """
                 Llista original: [10.00, 60.00, 50.00, 75.50]
                 Valors majors que 50: [60.00, 75.50]
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -292,13 +292,13 @@ class TestExercici0201 {
             persones.put("Joan", 30);
             persones.put("Marc", 20);
     
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.mostrarLlistaOrdenadesPerEdat(persones)).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.mostrarLlistaOrdenadesPerEdat(persones)).trim().replace("\r\n", "\n");
     
             String expected = """
                 Marc (20)
                 Anna (25)
                 Joan (30)
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -328,7 +328,7 @@ class TestExercici0201 {
             Exercici0201.scanner = new Scanner(System.in);
     
             // Captura la sortida
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.mostrarFrecuenciaParaules()).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.mostrarFrecuenciaParaules()).trim().replace("\r\n", "\n");
     
             // Restaura l'entrada original
             System.setIn(originalSystemIn);
@@ -339,7 +339,7 @@ class TestExercici0201 {
                 Freqüència de paraules:
                 hello=2
                 world=1
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -360,13 +360,13 @@ class TestExercici0201 {
     void testInvertirMapaClauValor(TestInfo testInfo) throws Exception {
         try {
             // Captura la sortida de la funció
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.invertirMapaClauValor()).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.invertirMapaClauValor()).trim().replace("\r\n", "\n");
     
             // Valida el resultat esperat
             String expected = """
                 Mapa original: {A=1, B=2, C=3}
                 Mapa invertit: {1=A, 2=B, 3=C}
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -387,12 +387,12 @@ class TestExercici0201 {
     void testFusionarMapesSumantValors(TestInfo testInfo) throws Exception {
         try {
             // Captura la sortida de la funció
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.fusionarMapesSumantValors()).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.fusionarMapesSumantValors()).trim().replace("\r\n", "\n");
     
             // Valida el resultat esperat
             String expected = """
                 Mapa fusionat: {X=10, Y=25, Z=15}
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -413,12 +413,12 @@ class TestExercici0201 {
     void testOrdenarMapaPerClaus(TestInfo testInfo) throws Exception {
         try {
             // Captura la sortida de la funció
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.ordenarMapaPerClaus()).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.ordenarMapaPerClaus()).trim().replace("\r\n", "\n");
     
             // Valida el resultat esperat
             String expected = """
                 Mapa ordenat per claus: {Banana=3, Poma=5, Taronja=2}
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -439,12 +439,12 @@ class TestExercici0201 {
     void testCalcularEstadistiquesNotesEstudiants(TestInfo testInfo) throws Exception {
         try {
             // Captura la sortida de la funció
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.calcularEstadistiquesNotesEstudiants()).trim();
+            String output = SystemLambda.tapSystemOut(() -> Exercici0201.calcularEstadistiquesNotesEstudiants()).trim().replace("\r\n", "\n");
     
             // Valida el resultat esperat
             String expected = """
                 Mitjana: 7.333333333333333, Màxim: 8.5, Mínim: 6.0
-                """.trim();
+                """.trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
