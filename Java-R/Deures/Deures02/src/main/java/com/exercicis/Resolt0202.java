@@ -162,9 +162,9 @@ public class Resolt0202 {
             HashMap<?, ?> medalles0 = (HashMap<?, ?>) esportista0.get("medalles");
             HashMap<?, ?> medalles1 = (HashMap<?, ?>) esportista1.get("medalles");
 
-            // Com que hem fet servir HashMap<?, ?>, cal fer instanceof per comprovar el tipus
-            Integer a = medalles0.get(tipusMedalla) instanceof Integer ? (Integer) medalles0.get(tipusMedalla) : 0;
-            Integer b = medalles1.get(tipusMedalla) instanceof Integer ? (Integer) medalles1.get(tipusMedalla) : 0;
+            // Com que hem fet servir HashMap<?, ?>, cal definir el tipus (Integer)
+            Integer a = (Integer) medalles0.get(tipusMedalla);
+            Integer b = (Integer) medalles1.get(tipusMedalla);
 
             // Ordenar en ordre descendent
             return b.compareTo(a);
