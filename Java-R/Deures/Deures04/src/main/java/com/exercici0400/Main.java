@@ -16,8 +16,8 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
    
-        Text txt0 = new Text(1, 1, 20, 8, "Lorem ipsum dolor sit amet, consectetur adipiscing elit", 3, false, "left");
-        Text txt1 = new Text(22, 1, 25, 8, "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium", 3, false, "left");
+        Text txt0 = new Text(1, 1, 20, 8, "Txt0", "Lorem ipsum dolor sit amet, consectetur adipiscing elit", 3, false, "left");
+        Text txt1 = new Text(22, 1, 25, 8, "Txt1", "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium", 3, false, "center");
 
 /* Exemple Menu
         HashMap<Integer, MenuItem> mapMnu = new HashMap<>();
@@ -27,8 +27,8 @@ public class Main {
         mapMnu.put(2, new MenuItem("Alinear dreta", new String[]{"dreta", "right"}));
         mapMnu.put(3, new MenuItem("Alineció centrada", new String[]{"centrat", "center"}));
 
-        Menu mnu0 = new Menu(1, 1, 20, 8, "Titol menú", mapMnu, false);
-        Menu mnu1 = new Menu(22, 1, 25, 8, "Titol menú", mapMnu, true);
+        Menu mnu0 = new Menu(1, 1, 20, 8, "Mn0", "Titol menú", mapMnu, false);
+        Menu mnu1 = new Menu(22, 1, 25, 8, "Mn1", "Titol menú", mapMnu, true);
 */
 
 

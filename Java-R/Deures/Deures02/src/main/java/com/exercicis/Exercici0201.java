@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 
 public class Exercici0201 {
 
@@ -16,11 +17,11 @@ public class Exercici0201 {
 
     // ./run.sh com.exercicis.Exercici0201
     public static void main(String[] args) {
-        
+
         scanner = new Scanner(System.in);
         defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
-        
+        /* 
         int[] arrEnters = generaArrayEnters(10);
         mostraArrayEstadistiques(arrEnters);
 
@@ -35,19 +36,20 @@ public class Exercici0201 {
 
         ArrayList<Double> lstDecimals = generaLlistaDecimals(15);
         filtraLlistaDecimalsSuperiors50(lstDecimals);
+*/
 
         HashMap<String, Integer> persones = new HashMap<>();
         persones.put("Anna", 25);
         persones.put("Joan", 30);
         persones.put("Marc", 20);
         mostrarLlistaOrdenadesPerEdat(persones);
-
+/* 
         mostrarFrecuenciaParaules();
         invertirMapaClauValor();
         fusionarMapesSumantValors();
         ordenarMapaPerClaus();
         calcularEstadistiquesNotesEstudiants();
-
+*/
         Locale.setDefault(defaultLocale);
         scanner.close();
     }
@@ -148,8 +150,12 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraArrayDecimals
      */
     public static double[] generaArrayDecimals(int mida) {
-        double[] rst = new double[mida];
-        return rst;
+        double[] array = new double[mida];
+        Random r = new Random();
+        for (int i = 0; i < mida; i++) {
+            array[i] = r.nextDouble() * 100;
+        }
+        return array;
     }
 
     /**
@@ -162,6 +168,10 @@ public class Exercici0201 {
      */
     public static ArrayList<Double> generaLlistaDecimals(int mida) {
         ArrayList<Double> rst = new ArrayList<>();
+        for (int cnt = 0; cnt < mida; cnt++) {
+            Random rd = new Random();
+            rst.add(rd.nextDouble(100));
+        }
         return rst;
     }
 
@@ -181,6 +191,24 @@ public class Exercici0201 {
      */
     public static void filtraArrayDecimalsSuperiors50(double[] decimals) {
 
+        String array = "";
+        String valors = "";
+        
+        for (int i = 0; i < decimals.length; i++) {
+            array += String.format("%.2f, ", decimals[i]);
+        }
+        array = array.substring(0, array.length() - 2) + "]";
+        
+        for (int j = 0; j < decimals.length; j++) {
+            if (decimals[j] > 50) {
+                valors += String.format("%.2f, ", decimals[j]);        
+            }
+        }
+
+        valors = valors.substring(0, valors.length() - 2) + "]";
+
+        System.out.println("Array original: [" + array);
+        System.out.println("Valors majors que 50: [" +valors);
     }   
 
     /**
@@ -197,7 +225,23 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaDecimalsSuperiors50
      */
     public static void filtraLlistaDecimalsSuperiors50(ArrayList<Double> decimals) {
+        String llista = "";
+        String valors = "";
 
+        for (int i = 0; i < decimals.size(); i++) {
+            llista += String.format("%.2f, ", decimals.get(i));
+        }
+        llista = llista.substring(0, llista.length() - 2) + "]";
+
+        for (int j = 0; j < decimals.size(); j++) {
+            if (decimals.get(j) > 50) {
+                valors += String.format("%.2f, ", decimals.get(j));
+            }
+        }
+        valors = valors.substring(0, valors.length() - 2) + "]";
+
+        System.out.println("Llista original: [" + llista);
+        System.out.println("Valors majors que 50: [" + valors);
     }
     
     /**
@@ -211,7 +255,20 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostrarLlistaOrdenadesPerEdat
      */
     public static void mostrarLlistaOrdenadesPerEdat(HashMap<String, Integer> persones) {
+        
+        Set<String> claus = persones.keySet();
+        ArrayList<String> keys = new ArrayList<>(claus);
 
+        keys.sort((nom0, nom1) -> {
+            Integer edat0 = persones.get(nom0);
+            Integer edat1 = persones.get(nom1);
+            return edat0.compareTo(edat1);
+        });
+
+        for (int cnt = 0; cnt < keys.size(); cnt = cnt + 1) {
+            String key = keys.get(cnt);
+            System.out.println(key + " (" + persones.get(key) + ")");
+        }
     }
 
     /**

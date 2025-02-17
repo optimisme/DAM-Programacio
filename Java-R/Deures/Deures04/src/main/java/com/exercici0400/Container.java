@@ -8,7 +8,7 @@ public class Container extends Component {
     private ArrayList<Component> components;
 
     public Container(int width, int height, ArrayList<Component> components) {
-        super(0, 0, width, height);
+        super(0, 0, width, height, "");
 
         this.components = components;
     }
@@ -31,14 +31,24 @@ public class Container extends Component {
         return rst;
     } 
 
-    private ArrayList<String> addBorder(ArrayList<String> buffCmp) {
+    private ArrayList<String> addBorder(String title, int widthCmp, ArrayList<String> buffCmp) {
         ArrayList<String> rst = new ArrayList<>();
 
         for (int cntLine = 0; cntLine < buffCmp.size(); cntLine = cntLine + 1) {
             String line = buffCmp.get(cntLine);
             if (cntLine == 0) {
-                // Primea linia
-                line = "┌" + "─".repeat(line.length() - 2) + "┐";
+                // Primea linia (titol)
+                if (title.length() > (widthCmp - 2)) {
+                    title = title.substring(0, widthCmp - 2);
+                }
+                
+                int titleLines = line.length() - title.length() - 2;
+                if (titleLines < 0) {
+                    titleLines = 0;
+                }
+
+                line = "┌" + title + "─".repeat(titleLines) + "┐";
+
             } else if (cntLine == (buffCmp.size() - 1)) {
                 // Última linia
                 line = "└" + "─".repeat(line.length() - 2) + "┘";
@@ -70,7 +80,7 @@ public class Container extends Component {
         for (Component cmp : components) {
             ArrayList<String> buffCmp = cmp.render();
 
-            buffCmp = addBorder(buffCmp);
+            buffCmp = addBorder(cmp.getTitle(), cmp.width, buffCmp);
 
             int posY = cmp.getY();
             for (String lineCmp : buffCmp) {

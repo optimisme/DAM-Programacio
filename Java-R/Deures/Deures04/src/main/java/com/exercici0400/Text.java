@@ -9,8 +9,8 @@ public class Text extends Component implements Alignable {
     private boolean ellipsis;
     private String align;
     
-    public Text(int x, int y, int width, int height, String text, int truncate, boolean ellipsis, String align) {
-        super(x, y, width, height);
+    public Text(int x, int y, int width, int height, String title, String text, int truncate, boolean ellipsis, String align) {
+        super(x, y, width, height, title);
         this.text = text;
         this.truncate = truncate;
         this.ellipsis = ellipsis;
@@ -82,13 +82,35 @@ public class Text extends Component implements Alignable {
         // Afegir linia buida al principi
         rst.add(0, " ".repeat(width)); 
 
-        // TODO: afegir espai blanc al principi de cada linia
-        // TODO: retallar linies massa llargues
-        // TODO: afegir espais blancs al prinicpi o final segons alineació
-
         // Afegir linies buides al final
         for (int i = rst.size(); i < height; i++) {
             rst.add(" ".repeat(width));
+        }
+
+        // Asignar text segons alineació 
+        for (int i = 1; i < height; i++) {
+            String ln = rst.get(i).trim();
+            if (null != align) {
+                int espais = width - ln.length() - 1;
+                switch (align) {
+                    case "left" -> {
+                        rst.set(i, " " + ln + " ".repeat(espais));
+                    }
+                    case "right" -> {
+                        rst.set(i, " ".repeat(espais) + ln + " ");
+                        }
+                    case "center" -> {
+                        espais = (espais + 1) / 2;
+                        int espaisLeft = espais;
+                        int espaisRight = espais;
+                        if (((espais * 2) + ln.length()) < width) {
+                            espaisRight += 1;
+                        }
+                        rst.set(i, " ".repeat(espaisLeft) + ln + " ".repeat(espaisRight));
+                        }
+                    default -> { }
+                }
+            }
         }
 
         return rst;

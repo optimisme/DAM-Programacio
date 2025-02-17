@@ -8,12 +8,14 @@ abstract public class Component implements Renderable {
     protected int y;
     protected int width;
     protected int height;
+    private String title;
 
-    public Component(int x, int y, int width, int height) {
+    public Component(int x, int y, int width, int height, String title) {
         this.x = x;
         this.y = y;
         this.width = width;
         this.height = height;
+        this.title = title;
     }
 
     public void setX(int x) {
@@ -45,6 +47,15 @@ abstract public class Component implements Renderable {
 
     public int getHeight() {
         return height;
+    }
+
+
+    public void setTitle(String value) {
+        this.title = value;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     abstract public ArrayList<String> render();

@@ -13,15 +13,16 @@ Tindrà les següents classes:
 - **Component**: tots els components de la interfície deriven d'aquesta classe. Té:
 
     * Atributs **x** i **y**, **width** i **height** que indiquen la posició i mida del component
+    * Atribut **title** que és el títol que es mostra a la part superior del marc
     * Un metode 'abstracte' **render()** que mostra el component per pantalla, i han d'implementar totes les classes que heredin d'aquesta.
 
     El component ha de quedar emarcat en un quadre format pels caràcters ascii: 
 
 ```bash 
-┌─┐                     
-│ │                     
-│ │            
-└─┘
+┌titol─┐                     
+│      │                     
+│      │            
+└──────┘
 ```
 
     * *Component* Implementa *Renderable*
@@ -29,17 +30,22 @@ Tindrà les següents classes:
 - **Text**: mostra un text per pantalla. Té:
 
     * Atribut **text** que és el text a mostrar
-    * Atribut **truncate** enter les linies màximes del text
-    * Atribut **ellipsis** booleà que afegeix ... si el text no hi cap sencer
-    * Atribut privat **align** que indica l'alignació del text (esquerra, dreta, centre)
+    * Atribut privat **align** que indica l'alignació del text ("left", "right", "center")
 
     * *Text* Implementa *Alignable*
     * *Text* deriva de *Component*
 
+- **MenuItem**: conté informació d'un ítem de menu. Té:
+
+    * Atribut **title** el text que es mostra per pantalla
+    * Atribut **keyWords** les paraules claus que activen aquella opció.
+
+    * **Atenció!** No deriva de cap altre objecte!
+
 - **Menu**: mostra un menú per pantalla. Té:
 
     * Atribut **title** que és el títol del menú
-    * Atribut **items** que és un HashMap amb els items del menú organitzats per un enter que és la clau. Els ítems del menú han de contenir el text a mostrar i una llista de paraules claues que poden ser seleccionades.
+    * Atribut **items** que és un HashMap amb els **MenuItem** del menú organitzats per un enter que és la clau. 
     * Atribut **lastZero** booleà que indica si la opció 0 és la última a mostrar-se.
 
     * Mètode **getSelection** que rep com a paràmetre un text i retorna un enter amb la opció seleccionada. El text pot contenir un número o una paraula clau que ajuda a escollir la opció. Si retorna -1 és que no s'ha identificat cap opció.
@@ -60,7 +66,8 @@ Tindrà les següents classes:
     * Atribut **components** que és una llista de components.
     * Metode **draw** que dibuixa el *buffer* a la terminal, primer fa un *clearScreen* i després dibuixa cada linia del *buffer*.
 
-    * *Container* deriva de *Component*, el seu constructor inicia x,y a (0,0) i el seu mètode **render()** posiciona els *render* de tots els components en un buffer. 
+    * *Container* deriva de *Component*, el seu constructor inicia x,y a (0,0) amb titol a "". 
+    * El seu mètode **render()** posiciona els *render* de tots els components en un buffer. 
 
 - **Input**: mostra un quadre on es pot entrar text. Té:
 
