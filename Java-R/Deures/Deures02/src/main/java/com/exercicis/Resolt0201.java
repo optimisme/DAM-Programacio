@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Random;
@@ -433,7 +432,7 @@ public class Resolt0201 {
         mapa.put("Poma", 5);
         mapa.put("Taronja", 2);
 
-        List<String> clausOrdenades = new ArrayList<>(mapa.keySet());
+        ArrayList<String> clausOrdenades = new ArrayList<>(mapa.keySet());
         Collections.sort(clausOrdenades);
 
         System.out.print("Mapa ordenat per claus: {");
