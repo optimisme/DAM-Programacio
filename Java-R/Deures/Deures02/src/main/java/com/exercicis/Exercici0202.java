@@ -3,6 +3,7 @@ package com.exercicis;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -24,8 +25,8 @@ public class Exercici0202 {
 
         showJSONAstronautes("./data/astronautes.json");
 
-        mostrarEsportistesOrdenatsPerMedalla("./data/esportistes.json", "or");
-        mostrarEsportistesOrdenatsPerMedalla("./data/esportistes.json", "plata");
+        showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "or");
+        showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "plata");
 
         Locale.setDefault(defaultLocale);
         scanner.close();
@@ -66,7 +67,7 @@ public class Exercici0202 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0202#JSONEsportistesToArrayList
      */
-     public static ArrayList<HashMap<String, Object>> JSONEsportistesToArrayList(String filePath) {
+    public static ArrayList<HashMap<String, Object>> JSONEsportistesToArrayList(String filePath) {
         ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
         return rst;
     }
@@ -74,6 +75,9 @@ public class Exercici0202 {
     /**
      * Llegeix l'arxiu JSON i retorna una llista d'esportistes ordenada per una medalla específica (or, plata o bronze).
      *
+     * Si el tipus no és "or", "plata" o "bronze" llança una excepció IllegalArgumentException. Amb el text:
+     * "Tipus de medalla invàlid: {tipusMedalla}. Tipus vàlids: 'or', 'plata' o 'bronze'."
+     * 
      * @param filePath Ruta de l'arxiu JSON amb les dades dels esportistes.
      * @param tipusMedalla Tipus de medalla per ordenar: "or", "plata" o "bronze".
      * @return Llista ordenada d'esportistes segons el nombre de medalles especificat.
@@ -105,10 +109,10 @@ public class Exercici0202 {
      * @param filePath Ruta de l'arxiu JSON amb les dades dels esportistes.
      * @param tipusMedalla Tipus de medalla per ordenar: "or", "plata" o "bronze".
      * 
-     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarEsportistesOrdenatsPerOr
-     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarEsportistesOrdenatsPerPlata
-     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarEsportistesOrdenatsPerBronze
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testShowEsportistesOrdenatsPerOr
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testShowEsportistesOrdenatsPerPlata
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testShowEsportistesOrdenatsPerBronze
      */
-    public static void mostrarEsportistesOrdenatsPerMedalla(String filePath, String tipusMedalla) {
+    public static void showEsportistesOrdenatsPerMedalla(String filePath, String tipusMedalla) {
     }
 }

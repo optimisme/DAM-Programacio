@@ -217,15 +217,15 @@ class TestExercici0202 {
     }
 
     @Test
-    void testMostrarEsportistesOrdenatsPerOr(TestInfo testInfo) {
+    void testShowEsportistesOrdenatsPerOr(TestInfo testInfo) {
         try {
             String filePath = "./data/esportistes.json";
 
-            String outputOr = SystemLambda.tapSystemOut(() ->
-                Exercici0202.mostrarEsportistesOrdenatsPerMedalla(filePath, "or")
+            String output = SystemLambda.tapSystemOut(() ->
+                Exercici0202.showEsportistesOrdenatsPerMedalla(filePath, "or")
             ).trim().replace("\r\n", "\n").replaceAll("\\s{2,}", " ");
 
-            String expectedOr = """
+            String expected = """
                 ┌──────────────────────┬─────────────────┬────────────┬────────┐
                 │ Nom                  │ País            │ Naixement  │ Or     │
                 ├──────────────────────┼─────────────────┼────────────┼────────┤
@@ -242,7 +242,10 @@ class TestExercici0202 {
                 └──────────────────────┴─────────────────┴────────────┴────────┘
                 """.trim().replace("\r\n", "\n").replaceAll("\\s{2,}", " ");
 
-            assertTrue(TestStringUtils.findFirstDifference(outputOr, expectedOr).equals("identical"));
+            String diff = TestStringUtils.findFirstDifference(output, expected);
+            assertTrue(diff.compareTo("identical") == 0, 
+                ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -254,15 +257,15 @@ class TestExercici0202 {
     }
 
     @Test
-    void testMostrarEsportistesOrdenatsPerPlata(TestInfo testInfo) {
+    void testShowEsportistesOrdenatsPerPlata(TestInfo testInfo) {
         try {
             String filePath = "./data/esportistes.json";
 
-            String outputPlata = SystemLambda.tapSystemOut(() ->
-                Exercici0202.mostrarEsportistesOrdenatsPerMedalla(filePath, "plata")
+            String output = SystemLambda.tapSystemOut(() ->
+                Exercici0202.showEsportistesOrdenatsPerMedalla(filePath, "plata")
             ).trim().replace("\r\n", "\n").replaceAll("\\s{2,}", " ");
 
-            String expectedPlata = """
+            String expected = """
                 ┌──────────────────────┬─────────────────┬────────────┬────────┐
                 │ Nom                  │ País            │ Naixement  │ Plata  │
                 ├──────────────────────┼─────────────────┼────────────┼────────┤
@@ -279,7 +282,10 @@ class TestExercici0202 {
                 └──────────────────────┴─────────────────┴────────────┴────────┘
                 """.trim().replace("\r\n", "\n").replaceAll("\\s{2,}", " ");
 
-            assertTrue(TestStringUtils.findFirstDifference(outputPlata, expectedPlata).equals("identical"));
+            String diff = TestStringUtils.findFirstDifference(output, expected);
+            assertTrue(diff.compareTo("identical") == 0, 
+                ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -291,15 +297,15 @@ class TestExercici0202 {
     }
 
     @Test
-    void testMostrarEsportistesOrdenatsPerBronze(TestInfo testInfo) {
+    void testShowEsportistesOrdenatsPerBronze(TestInfo testInfo) {
         try {
             String filePath = "./data/esportistes.json";
 
-            String outputBronze = SystemLambda.tapSystemOut(() ->
-                Exercici0202.mostrarEsportistesOrdenatsPerMedalla(filePath, "bronze")
+            String output = SystemLambda.tapSystemOut(() ->
+                Exercici0202.showEsportistesOrdenatsPerMedalla(filePath, "bronze")
             ).trim().replace("\r\n", "\n").replaceAll("\\s{2,}", " ");
 
-            String expectedBronze = """
+            String expected = """
                 ┌──────────────────────┬─────────────────┬────────────┬────────┐
                 │ Nom                  │ País            │ Naixement  │ Bronze │
                 ├──────────────────────┼─────────────────┼────────────┼────────┤
@@ -309,14 +315,17 @@ class TestExercici0202 {
                 │ Jackie Joyner-Kersee │ Estats Units    │ 1962       │ 2      │
                 │ Nadia Comaneci       │ Romania         │ 1961       │ 1      │
                 │ Mark Spitz           │ Estats Units    │ 1950       │ 1      │
+                │ Usain Bolt           │ Jamaica         │ 1986       │ 0      │
                 │ Carl Lewis           │ Estats Units    │ 1961       │ 0      │
                 │ Paavo Nurmi          │ Finlàndia       │ 1897       │ 0      │
-                │ Usain Bolt           │ Jamaica         │ 1986       │ 0      │
                 │ Serena Williams      │ Estats Units    │ 1981       │ 0      │
                 └──────────────────────┴─────────────────┴────────────┴────────┘
                 """.trim().replace("\r\n", "\n").replaceAll("\\s{2,}", " ");
 
-            assertTrue(TestStringUtils.findFirstDifference(outputBronze, expectedBronze).equals("identical"));
+            String diff = TestStringUtils.findFirstDifference(output, expected);
+            assertTrue(diff.compareTo("identical") == 0, 
+                ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
+            System.out.println("Test passed, succeeded!");
 
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());

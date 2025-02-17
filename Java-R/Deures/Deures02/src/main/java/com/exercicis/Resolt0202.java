@@ -24,8 +24,8 @@ public class Resolt0202 {
 
         showJSONAstronautes("./data/astronautes.json");
 
-        mostrarEsportistesOrdenatsPerMedalla("./data/esportistes.json", "or");
-        mostrarEsportistesOrdenatsPerMedalla("./data/esportistes.json", "plata");
+        showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "or");
+        showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "plata");
 
         Locale.setDefault(defaultLocale);
         scanner.close();
@@ -92,13 +92,13 @@ public class Resolt0202 {
     }
 
     /**
-     * Llegeix l'arxiu de 'filePath', retorna un ArrayList amb les dades dels esportistes
-     * Les dades han d'estar en un HashMap amb: nom, any_naixement, pais i medalles
-     * Les medalles de la clau 'medalles' han d'estar en un HashMap amb les claus "or", "plata" i "bronze"
-     * 
-     * @test ./runTest.sh com.exercicis.TestExercici0202#JSONEsportistesToArrayList
-     */
-     public static ArrayList<HashMap<String, Object>> JSONEsportistesToArrayList(String filePath) {
+    * Llegeix l'arxiu de 'filePath', retorna un ArrayList amb les dades dels esportistes
+    * Les dades han d'estar en un HashMap amb: nom, any_naixement, pais i medalles
+    * Les medalles de la clau 'medalles' han d'estar en un HashMap amb les claus "or", "plata" i "bronze"
+    * 
+    * @test ./runTest.sh com.exercicis.TestExercici0202#JSONEsportistesToArrayList
+    */
+    public static ArrayList<HashMap<String, Object>> JSONEsportistesToArrayList(String filePath) {
         ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
 
         try {
@@ -117,6 +117,7 @@ public class Resolt0202 {
 
                 // Convertir l'objecte de medalles a un HashMap
                 JSONObject medallesJson = esportista.getJSONObject("medalles_olimpiques");
+                
                 HashMap<String, Integer> medalles = new HashMap<>();
                 medalles.put("or", medallesJson.getInt("or"));
                 medalles.put("plata", medallesJson.getInt("plata"));
@@ -137,6 +138,9 @@ public class Resolt0202 {
     /**
      * Llegeix l'arxiu JSON i retorna una llista d'esportistes ordenada per una medalla específica (or, plata o bronze).
      *
+     * Si el tipus no és "or", "plata" o "bronze" llança una excepció IllegalArgumentException. Amb el text:
+     * "Tipus de medalla invàlid: {tipusMedalla}. Tipus vàlids: 'or', 'plata' o 'bronze'."
+     * 
      * @param filePath Ruta de l'arxiu JSON amb les dades dels esportistes.
      * @param tipusMedalla Tipus de medalla per ordenar: "or", "plata" o "bronze".
      * @return Llista ordenada d'esportistes segons el nombre de medalles especificat.
@@ -147,17 +151,22 @@ public class Resolt0202 {
         // Obtenir la llista d'esportistes des del fitxer JSON
         ArrayList<HashMap<String, Object>> esportistes = JSONEsportistesToArrayList(filePath);
 
-        // Validem que el tipus de medalla sigui correcte
         if (!tipusMedalla.equals("or") && !tipusMedalla.equals("plata") && !tipusMedalla.equals("bronze")) {
-            throw new IllegalArgumentException("Tipus de medalla invàlid: " + tipusMedalla + ". Usa 'or', 'plata' o 'bronze'.");
+            throw new IllegalArgumentException("Tipus de medalla invàlid: " + tipusMedalla + ". Tipus vàlids: 'or', 'plata' o 'bronze'.");
         }
 
         // Ordenem la llista en ordre descendent segons el tipus de medalla
-        esportistes.sort(Comparator.comparing((HashMap<String, Object> esportista) -> {
+        esportistes.sort((esportista0, esportista1) -> {
             @SuppressWarnings("unchecked")
-            HashMap<String, Integer> medalles = (HashMap<String, Integer>) esportista.get("medalles");
-            return medalles.get(tipusMedalla);
-        }).reversed()); // Fem .reversed() per obtenir primer els que tenen més medalles
+            HashMap<String, Integer> medalles0 = (HashMap<String, Integer>) esportista0.get("medalles");
+            @SuppressWarnings("unchecked")
+            HashMap<String, Integer> medalles1 = (HashMap<String, Integer>) esportista1.get("medalles");
+
+            Integer a = medalles0.getOrDefault(tipusMedalla, 0);
+            Integer b = medalles1.getOrDefault(tipusMedalla, 0);
+
+            return b.compareTo(a);
+        });
 
         return esportistes;
     }
@@ -181,11 +190,11 @@ public class Resolt0202 {
      * @param filePath Ruta de l'arxiu JSON amb les dades dels esportistes.
      * @param tipusMedalla Tipus de medalla per ordenar: "or", "plata" o "bronze".
      * 
-     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarEsportistesOrdenatsPerOr
-     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarEsportistesOrdenatsPerPlata
-     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarEsportistesOrdenatsPerBronze
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testShowEsportistesOrdenatsPerOr
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testShowEsportistesOrdenatsPerPlata
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testShowEsportistesOrdenatsPerBronze
      */
-    public static void mostrarEsportistesOrdenatsPerMedalla(String filePath, String tipusMedalla) {
+    public static void showEsportistesOrdenatsPerMedalla(String filePath, String tipusMedalla) {
         // Obtenir la llista ordenada d'esportistes
         ArrayList<HashMap<String, Object>> esportistes = ordenarEsportistesPerMedalla(filePath, tipusMedalla);
 
