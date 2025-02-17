@@ -3,6 +3,7 @@ package com.exercicis;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -157,14 +158,15 @@ public class Resolt0202 {
 
         // Ordenem la llista en ordre descendent segons el tipus de medalla
         esportistes.sort((esportista0, esportista1) -> {
-            @SuppressWarnings("unchecked")
-            HashMap<String, Integer> medalles0 = (HashMap<String, Integer>) esportista0.get("medalles");
-            @SuppressWarnings("unchecked")
-            HashMap<String, Integer> medalles1 = (HashMap<String, Integer>) esportista1.get("medalles");
+            // Fer HashMap<?, ?> enlloc de HashMap<String, Integer> evita warnings de tipus
+            HashMap<?, ?> medalles0 = (HashMap<?, ?>) esportista0.get("medalles");
+            HashMap<?, ?> medalles1 = (HashMap<?, ?>) esportista1.get("medalles");
 
-            Integer a = medalles0.getOrDefault(tipusMedalla, 0);
-            Integer b = medalles1.getOrDefault(tipusMedalla, 0);
+            // Com que hem fet servir HashMap<?, ?>, cal fer instanceof per comprovar el tipus
+            Integer a = medalles0.get(tipusMedalla) instanceof Integer ? (Integer) medalles0.get(tipusMedalla) : 0;
+            Integer b = medalles1.get(tipusMedalla) instanceof Integer ? (Integer) medalles1.get(tipusMedalla) : 0;
 
+            // Ordenar en ordre descendent
             return b.compareTo(a);
         });
 
