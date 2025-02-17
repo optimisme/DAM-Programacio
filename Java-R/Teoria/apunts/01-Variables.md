@@ -521,7 +521,7 @@ if (Character.isAlphabetic(c)) {
 
 ## Números aleatòris
 
-Per obtenir números aleatoris es fa servir la llibreria **"Random"**
+Per obtenir números aleatoris es pot fer servir la llibreria **"Random"**
 
 ```java
 import java.util.Random;
@@ -539,7 +539,7 @@ random.nextDouble(25, 100); // Número aleatori entre 25 (inclòs) i 100 (no inc
 
 ```
 
-Per obtenir números aleatòris fent servir la llibreria **"Math"**:
+Per obtenir números aleatòris també es pot fer servir la llibreria **"Math"**:
 
 ```java
 import java.lang.Math
