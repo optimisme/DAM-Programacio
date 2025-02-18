@@ -26,6 +26,7 @@ public class Exercici0202 {
         Locale.setDefault(Locale.US);
 
         //showJSONAstronautes("./data/astronautes.json");
+        JSONAstronautesToArrayList("./data/astronautes.json");
 
         // showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "or");
         // showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "plata");
@@ -84,8 +85,7 @@ public class Exercici0202 {
      * @test ./runTest.sh com.exercicis.TestExercici0202#testShowJSONAstronautes
      */
     public static void showJSONAstronautes(String filePath) {
-
-    }
+    } 
 
     /**
      * Llegeix l'arxiu de 'filePath', retorna un ArrayList amb les dades dels astronautes
@@ -103,7 +103,7 @@ public class Exercici0202 {
      * Les dades han d'estar en un HashMap amb: nom, any_naixement, pais i medalles
      * Les medalles de la clau 'medalles' han d'estar en un HashMap amb les claus "or", "plata" i "bronze"
      * 
-     * @test ./runTest.sh com.exercicis.TestExercici0202#JSONEsportistesToArrayList
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testJSONEsportistesToArrayList
      */
     public static ArrayList<HashMap<String, Object>> JSONEsportistesToArrayList(String filePath) {
         ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
