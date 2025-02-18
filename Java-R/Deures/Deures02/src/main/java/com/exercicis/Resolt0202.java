@@ -38,7 +38,6 @@ public class Resolt0202 {
 
         ArrayList<HashMap<String, Object>> dades = new ArrayList<>();
 
-        // Definim característiques addicionals per cada massa d'aigua
         ArrayList<String> caracteristiquesPacific = new ArrayList<>();
         caracteristiquesPacific.add("És l'oceà més gran del món");
         caracteristiquesPacific.add("Conté la fossa de les Marianes, la més profunda del món");
@@ -52,7 +51,6 @@ public class Resolt0202 {
         caracteristiquesMediterrani.add("És un mar gairebé tancat");
         caracteristiquesMediterrani.add("Connecta amb l'oceà Atlàntic a través de l'estret de Gibraltar");
 
-        // Afegim mars i oceans amb característiques específiques
         dades.add(crearMassaAigua("Oceà Pacífic", "oceà", 168723000, 10924, caracteristiquesPacific));
         dades.add(crearMassaAigua("Oceà Atlàntic", "oceà", 85133000, 8486, caracteristiquesAtlantic));
         dades.add(crearMassaAigua("Oceà Índic", "oceà", 70560000, 7450, new ArrayList<>()));
