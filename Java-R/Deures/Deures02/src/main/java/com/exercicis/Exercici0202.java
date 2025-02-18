@@ -222,11 +222,6 @@ public class Exercici0202 {
      */
     public static HashMap<String, Object> crearMassaAigua(String nom, String tipus, double superficie_km2, double profunditat_max_m, ArrayList<String> caracteristiques) {
         HashMap<String, Object> massaAigua = new HashMap<>();
-        massaAigua.put("nom", nom);
-        massaAigua.put("tipus", tipus);
-        massaAigua.put("superficie_km2", superficie_km2);
-        massaAigua.put("profunditat_max_m", profunditat_max_m);
-        massaAigua.put("caracteristiques", caracteristiques); // Afegim la llista d'informació addicional
         return massaAigua;
     }
 
@@ -255,14 +250,5 @@ public class Exercici0202 {
      */
     public static void generarJSON(ArrayList<HashMap<String, Object>> dades, String filePath) throws IOException {
 
-        // Convertim el HashMap a JSONObject
-        JSONArray json = new JSONArray(dades);
-
-        // Escrivim el JSON a un fitxer
-        try (FileWriter file = new FileWriter(filePath)) {
-            file.write(json.toString(4)); // JSON amb indentació de 4 espais
-        }
-
-        System.out.println("Arxiu JSON generat correctament a: " + filePath);
     }
 }
