@@ -433,11 +433,7 @@ public class Resolt0201 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0201#testCalcularEstadistiquesNotesEstudiants
      */
-    public static void calcularEstadistiquesNotesEstudiants() {
-        HashMap<String, Double> estudiants = new HashMap<>();
-        estudiants.put("Anna", 8.5);
-        estudiants.put("Joan", 6.0);
-        estudiants.put("Marc", 7.5);
+    public static void calcularEstadistiquesNotesEstudiants(HashMap<String, Double> estudiants) {
         double suma = 0, max = Double.MIN_VALUE, min = Double.MAX_VALUE;
         for (double nota : estudiants.values()) {
             suma += nota;

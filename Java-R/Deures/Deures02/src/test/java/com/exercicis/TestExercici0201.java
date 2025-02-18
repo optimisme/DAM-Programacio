@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import static org.junit.jupiter.api.Assertions.*;
+
+import com.exercicis.Exercici0201;
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 import com.testStringUtils.TestStringUtils;
 
@@ -407,21 +409,26 @@ class TestExercici0201 {
     }
     
     @Test
-    void testCalcularEstadistiquesNotesEstudiants(TestInfo testInfo) throws Exception {
+    void testCalcularEstadistiquesNotesEstudiants(TestInfo testInfo) {
         try {
-            // Captura la sortida de la funció
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.calcularEstadistiquesNotesEstudiants()).trim().replace("\r\n", "\n");
-    
-            // Valida el resultat esperat
-            String expected = """
-                Mitjana: 7.333333333333333, Màxim: 8.5, Mínim: 6.0
-                """.trim().replace("\r\n", "\n");
-    
-            // Comparació amb TestStringUtils.findFirstDifference()
+            HashMap<String, Double> notes = new HashMap<>();
+            notes.put("Anna", 7.5);
+            notes.put("Joan", 9.0);
+            notes.put("Pere", 5.8);
+            notes.put("Maria", 8.2);
+            notes.put("Carla", 6.7);
+
+            String output = SystemLambda.tapSystemOut(() -> 
+                Exercici0201.calcularEstadistiquesNotesEstudiants(notes)
+            ).trim().replace("\r\n", "\n");
+
+            String expected = "Mitjana: 7.44, Máxim: 9.0, Mínim: 5.8";
+
+            // Comparació amb TestStringUtils
             String diff = TestStringUtils.findFirstDifference(output, expected);
             assertTrue(diff.compareTo("identical") == 0, 
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
-    
+
             System.out.println("Test passed, succeeded!");
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -430,5 +437,5 @@ class TestExercici0201 {
             System.out.println("Test encountered an error: " + testInfo.getDisplayName());
             e.printStackTrace();
         }
-    }    
+    }   
 }

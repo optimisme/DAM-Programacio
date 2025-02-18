@@ -50,15 +50,15 @@ public class Exercici0201 {
 
         // ordenarMapaPerClaus();
 
-        HashMap<String, Integer> notes = new HashMap<>();
-        notes.put("Anna", 7);
-        notes.put("Joan", 6);
-        notes.put("Marta", 8);
-        notes.put("Pere", 4);
-        notes.put("Enric", 2);
-        notes.put("Amparo", 6);
-        notes.put("Olga", 9);
-        notes.put("Manel", 2);
+        HashMap<String, Double> notes = new HashMap<>();
+        notes.put("Anna", 7.5);
+        notes.put("Joan", 6.8);
+        notes.put("Marta", 8.2);
+        notes.put("Pere", 4.1);
+        notes.put("Enric", 2.0);
+        notes.put("Amparo", 6.9);
+        notes.put("Olga", 9.0);
+        notes.put("Manel", 2.2);
 
         calcularEstadistiquesNotesEstudiants(notes);
 
@@ -272,23 +272,6 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFusionarMapesSumantValors
      */
     public static void fusionarMapesSumantValors() {
-        HashMap<String, Integer> mapa1 = new HashMap<>();
-        HashMap<String, Integer> mapa2 = new HashMap<>();
-        mapa1.put("X", 10);
-        mapa1.put("Y", 20);
-        mapa2.put("Y", 5);
-        mapa2.put("Z", 15);
-        
-        HashMap<String, Integer> mapaFusionat = new HashMap<>(mapa1);
-        
-        for (String clau : mapa2.keySet()) {
-            if (mapaFusionat.containsKey(clau)) {
-                mapaFusionat.put(clau, mapaFusionat.get(clau) + mapa2.get(clau));
-            } else {
-                mapaFusionat.put(clau, mapa2.get(clau));
-            }
-        }
-        System.out.println("Mapa fusionat: " + mapaFusionat);
     }
 
     /**
@@ -297,13 +280,11 @@ public class Exercici0201 {
      * Es defineix un HashMap on la clau és el nom de l'estudiant i el valor la seva nota.
      * El mètode calcula la mitjana, la nota màxima i la nota mínima i les mostra per pantalla.
      * 
-     * 
-     * Es mostra per pantalla:
+     * Es mostra per pantalla amb 2 decimals:
      * "Mitjana: [valor], Màxim: [valor], Mínim: [valor]".
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0201#testCalcularEstadistiquesNotesEstudiants
      */
-    public static void calcularEstadistiquesNotesEstudiants(HashMap<String, Integer> notes) {
-
+    public static void calcularEstadistiquesNotesEstudiants(HashMap<String, Double> notes) {
     }
 }
