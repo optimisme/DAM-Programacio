@@ -35,11 +35,13 @@ public class Exercici0202 {
         //mostrarPlanetesOrdenats("./data/planetes.json", "massa");
         //mostrarPlanetesOrdenats("./data/planetes.json", "distància");
 
+        /*
         try {
             generarJSON("./data/aigua.json");
         } catch (IOException e) {
             e.printStackTrace();
         }
+        */
 
         Locale.setDefault(defaultLocale);
         scanner.close();
