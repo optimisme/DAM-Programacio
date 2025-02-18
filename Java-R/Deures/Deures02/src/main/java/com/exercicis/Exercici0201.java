@@ -46,11 +46,22 @@ public class Exercici0201 {
         mostrarFrecuenciaParaules();
         invertirMapaClauValor();
  */
-        fusionarMapesSumantValors();
-/* 
-        ordenarMapaPerClaus();
-        calcularEstadistiquesNotesEstudiants();
-*/
+        // fusionarMapesSumantValors();
+
+        // ordenarMapaPerClaus();
+
+        HashMap<String, Integer> notes = new HashMap<>();
+        notes.put("Anna", 7);
+        notes.put("Joan", 6);
+        notes.put("Marta", 8);
+        notes.put("Pere", 4);
+        notes.put("Enric", 2);
+        notes.put("Amparo", 6);
+        notes.put("Olga", 9);
+        notes.put("Manel", 2);
+
+        calcularEstadistiquesNotesEstudiants(notes);
+
         Locale.setDefault(defaultLocale);
         scanner.close();
     }
@@ -292,7 +303,7 @@ public class Exercici0201 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0201#testCalcularEstadistiquesNotesEstudiants
      */
-    public static void calcularEstadistiquesNotesEstudiants() {
+    public static void calcularEstadistiquesNotesEstudiants(HashMap<String, Integer> notes) {
 
     }
 }
