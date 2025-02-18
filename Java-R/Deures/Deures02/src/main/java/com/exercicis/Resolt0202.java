@@ -1,5 +1,6 @@
 package com.exercicis;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -350,5 +351,90 @@ public class Resolt0202 {
         }
 
         System.out.println("└──────────────┴────────────┴──────────────┴────────────────┘");
+    }
+    
+
+    /**
+     * Crea un HashMap que representa una massa d'aigua amb característiques addicionals.
+     * 
+     * @param nom Nom del mar o oceà.
+     * @param tipus Tipus (mar o oceà).
+     * @param superficie_km2 Superfície en km².
+     * @param profunditat_max_m Profunditat màxima en metres.
+     * @param caracteristiques Llista d'informació addicional sobre el mar o oceà.
+     * @return Un HashMap amb les dades del mar o oceà.
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testCrearMassaAigua
+     */
+    public static HashMap<String, Object> crearMassaAigua(String nom, String tipus, double superficie_km2, double profunditat_max_m, ArrayList<String> caracteristiques) {
+        HashMap<String, Object> massaAigua = new HashMap<>();
+        massaAigua.put("nom", nom);
+        massaAigua.put("tipus", tipus);
+        massaAigua.put("superficie_km2", superficie_km2);
+        massaAigua.put("profunditat_max_m", profunditat_max_m);
+        massaAigua.put("caracteristiques", caracteristiques); // Afegim la llista d'informació addicional
+        return massaAigua;
+    }
+
+    /**
+     * Genera un arxiu JSON amb la informació de mars i oceans. Identat amb "4 espais":
+     * [
+     *     {
+     *         "nom": "Oceà Pacífic",
+     *          "tipus": "oceà",
+     *          "profunditat_max_m": 10924,
+     *          "superficie_km2": 1.68723E8,
+     *          "caracteristiques": [
+     *              "És l'oceà més gran del món",
+     *              "Conté la fossa de les Marianes, la més profunda del món",
+     *              "Conté una illa de plàstics contaminants."
+     *         ]
+     *      },
+     *      {
+     *          "nom": "Oceà Atlàntic",
+     *          "tipus": "oceà", ...
+     * 
+     * @param filePath Ruta de l'arxiu JSON a crear.
+     * @throws IOException Si hi ha algun problema amb l'escriptura de l'arxiu.
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testGenerarJSON
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testValidarFormatJSON
+     */
+    public static void generarJSON(String filePath) throws IOException {
+
+        ArrayList<HashMap<String, Object>> dades = new ArrayList<>();
+
+        // Definim característiques addicionals per cada massa d'aigua
+        ArrayList<String> caracteristiquesPacific = new ArrayList<>();
+        caracteristiquesPacific.add("És l'oceà més gran del món");
+        caracteristiquesPacific.add("Conté la fossa de les Marianes, la més profunda del món");
+        caracteristiquesPacific.add("Conté una illa de plàstics contaminants.");
+
+        ArrayList<String> caracteristiquesAtlantic = new ArrayList<>();
+        caracteristiquesAtlantic.add("Separa Amèrica d'Europa i Àfrica");
+        caracteristiquesAtlantic.add("Conté el famós Triangle de les Bermudes");
+
+        ArrayList<String> caracteristiquesMediterrani = new ArrayList<>();
+        caracteristiquesMediterrani.add("És un mar gairebé tancat");
+        caracteristiquesMediterrani.add("Connecta amb l'oceà Atlàntic a través de l'estret de Gibraltar");
+
+        // Afegim mars i oceans amb característiques específiques
+        dades.add(crearMassaAigua("Oceà Pacífic", "oceà", 168723000, 10924, caracteristiquesPacific));
+        dades.add(crearMassaAigua("Oceà Atlàntic", "oceà", 85133000, 8486, caracteristiquesAtlantic));
+        dades.add(crearMassaAigua("Oceà Índic", "oceà", 70560000, 7450, new ArrayList<>()));
+        dades.add(crearMassaAigua("Oceà Àrtic", "oceà", 15558000, 5450, new ArrayList<>()));
+        dades.add(crearMassaAigua("Mar Mediterrani", "mar", 2500000, 5121, caracteristiquesMediterrani));
+        dades.add(crearMassaAigua("Mar Carib", "mar", 2754000, 7686, new ArrayList<>()));
+        dades.add(crearMassaAigua("Mar de la Xina Meridional", "mar", 3500000, 5560, new ArrayList<>()));
+
+        // Convertim el HashMap a JSONObject
+        JSONArray json = new JSONArray(dades);
+
+        // Escrivim el JSON a un fitxer
+        try (FileWriter file = new FileWriter(filePath)) {
+            file.write(json.toString(4)); // JSON amb indentació de 4 espais
+        }
+
+        System.out.println("Arxiu JSON generat correctament a: " + filePath);
     }
 }

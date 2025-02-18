@@ -1,5 +1,6 @@
 package com.exercicis;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -33,6 +34,12 @@ public class Exercici0202 {
         //mostrarPlanetesOrdenats("./data/planetes.json", "radi");
         //mostrarPlanetesOrdenats("./data/planetes.json", "massa");
         //mostrarPlanetesOrdenats("./data/planetes.json", "distància");
+
+        try {
+            generarJSON("./data/aigua.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Locale.setDefault(defaultLocale);
         scanner.close();
@@ -174,5 +181,49 @@ public class Exercici0202 {
      * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarPlanetesOrdenatsDistancia
      */
     public static void mostrarPlanetesOrdenats(String filePath, String columnaOrdenacio) {
+    }
+
+    /**
+     * Crea un HashMap que representa una massa d'aigua amb característiques addicionals.
+     * 
+     * @param nom Nom del mar o oceà.
+     * @param tipus Tipus (mar o oceà).
+     * @param superficie_km2 Superfície en km².
+     * @param profunditat_max_m Profunditat màxima en metres.
+     * @param caracteristiques Llista d'informació addicional sobre el mar o oceà.
+     * @return Un HashMap amb les dades del mar o oceà.
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testCrearMassaAigua
+     */
+    public static HashMap<String, Object> crearMassaAigua(String nom, String tipus, double superficie_km2, double profunditat_max_m, ArrayList<String> caracteristiques) {
+        HashMap<String, Object> massaAigua = new HashMap<>();
+        return massaAigua;
+    }
+
+    /**
+     * Genera un arxiu JSON amb la informació de mars i oceans. Identat amb "4 espais":
+     * [
+     *     {
+     *         "nom": "Oceà Pacífic",
+     *          "tipus": "oceà",
+     *          "profunditat_max_m": 10924,
+     *          "superficie_km2": 1.68723E8,
+     *          "caracteristiques": [
+     *              "És l'oceà més gran del món",
+     *              "Conté la fossa de les Marianes, la més profunda del món",
+     *              "Conté una illa de plàstics contaminants."
+     *         ]
+     *      },
+     *      {
+     *          "nom": "Oceà Atlàntic",
+     *          "tipus": "oceà", ...
+     * 
+     * @param filePath Ruta de l'arxiu JSON a crear.
+     * @throws IOException Si hi ha algun problema amb l'escriptura de l'arxiu.
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testGenerarJSON
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testValidarFormatJSON
+     */
+    public static void generarJSON(String filePath) throws IOException {
     }
 }
