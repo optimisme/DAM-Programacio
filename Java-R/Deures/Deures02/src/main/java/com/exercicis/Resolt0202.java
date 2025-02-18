@@ -1,5 +1,6 @@
 package com.exercicis;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Locale;
@@ -222,5 +223,132 @@ public class Resolt0202 {
 
         // Tancament de la taula
         System.out.println("└──────────────────────┴─────────────────┴────────────┴────────┘");
+    }
+
+    /**
+     * Llegeix l'arxiu JSON i converteix la informació dels planetes en una llista d'objectes HashMap.
+     * 
+     * Cada planeta es representa com un HashMap amb les claus:
+     * - "nom" -> String amb el nom del planeta.
+     * - "dades_fisiques" -> HashMap amb:
+     *     - "radi_km" -> Double amb el radi en quilòmetres.
+     *     - "massa_kg" -> Double amb la massa en kilograms.
+     * - "orbita" -> HashMap amb:
+     *     - "distancia_mitjana_km" -> Double amb la distància mitjana al Sol en quilòmetres.
+     *     - "periode_orbital_dies" -> Double amb el període orbital en dies.
+     * 
+     * @param filePath Ruta de l'arxiu JSON amb les dades dels planetes.
+     * @return Una ArrayList de HashMap amb la informació dels planetes.
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testJSONPlanetesToArrayList
+     */
+    public static ArrayList<HashMap<String, Object>> JSONPlanetesToArrayList(String filePath) {
+        ArrayList<HashMap<String, Object>> planetesList = new ArrayList<>();
+
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(filePath)));
+            JSONObject jsonObject = new JSONObject(content);
+            JSONArray planetes = jsonObject.getJSONArray("planetes");
+
+            for (int i = 0; i < planetes.length(); i++) {
+                JSONObject planeta = planetes.getJSONObject(i);
+                HashMap<String, Object> planetaMap = new HashMap<>();
+
+                planetaMap.put("nom", planeta.getString("nom"));
+                
+                JSONObject dadesFisiques = planeta.getJSONObject("dades_fisiques");
+                HashMap<String, Number> dadesFisiquesMap = new HashMap<>();
+                dadesFisiquesMap.put("radi_km", dadesFisiques.getDouble("radi_km"));
+                dadesFisiquesMap.put("massa_kg", dadesFisiques.getDouble("massa_kg"));
+
+                planetaMap.put("dades_fisiques", dadesFisiquesMap);
+
+                JSONObject orbita = planeta.getJSONObject("orbita");
+                HashMap<String, Number> orbitaMap = new HashMap<>();
+                orbitaMap.put("distancia_mitjana_km", orbita.getDouble("distancia_mitjana_km"));
+                orbitaMap.put("periode_orbital_dies", orbita.getDouble("periode_orbital_dies"));
+
+                planetaMap.put("orbita", orbitaMap);
+
+                planetesList.add(planetaMap);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return planetesList;
+    }
+
+    /**
+     * Mostra una taula amb els planetes ordenats segons una columna especificada.
+     * 
+     * Els valors vàlids per a la columna d'ordenació són:
+     * - "nom" -> Ordena alfabèticament pel nom del planeta.
+     * - "radi" -> Ordena numèricament pel radi del planeta.
+     * - "massa" -> Ordena numèricament per la massa del planeta.
+     * - "distància" -> Ordena numèricament per la distància mitjana al Sol.
+     * 
+     * El format de la taula ha de fer servir els caràcters: "┌", "┬", "┐", "├", "┼", "┤", "└", "┴" i "┘".
+     * 
+     * Ex.:
+     * ┌──────────────┬────────────┬──────────────┬────────────────┐
+     * │ Nom          │ Radi (km)  │ Massa (kg)   │ Distància (km) │
+     * ├──────────────┼────────────┼──────────────┼────────────────┤
+     * │ Mercuri      │ 2439.7     │ 3.3011e23    │ 57910000       │
+     * │ Venus        │ 6051.8     │ 4.8675e24    │ 108200000      │
+     * └──────────────┴────────────┴──────────────┴────────────────┘
+     * 
+     * @param filePath Ruta de l'arxiu JSON amb les dades dels planetes.
+     * @param columnaOrdenacio La columna per la qual es vol ordenar ("nom", "radi", "massa", "distància").
+     * 
+     * @throws IllegalArgumentException si el paràmetre de columna és invàlid.
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarPlanetesOrdenatsNom
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarPlanetesOrdenatsRadi
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarPlanetesOrdenatsMassa
+     * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarPlanetesOrdenatsDistancia
+     */
+    public static void mostrarPlanetesOrdenats(String filePath, String columnaOrdenacio) {
+        ArrayList<HashMap<String, Object>> planetes = JSONPlanetesToArrayList(filePath);
+
+        planetes.sort((p1, p2) -> {
+            switch (columnaOrdenacio) {
+                case "nom":
+                    return ((String) p1.get("nom")).compareTo((String) p2.get("nom"));
+                case "radi":
+                    return Double.compare(
+                        ((HashMap<String, Number>) p1.get("dades_fisiques")).get("radi_km").doubleValue(),
+                        ((HashMap<String, Number>) p2.get("dades_fisiques")).get("radi_km").doubleValue()
+                    );
+                case "massa":
+                    return Double.compare(
+                        ((HashMap<String, Number>) p1.get("dades_fisiques")).get("massa_kg").doubleValue(),
+                        ((HashMap<String, Number>) p2.get("dades_fisiques")).get("massa_kg").doubleValue()
+                    );
+                case "distància":
+                    return Double.compare(
+                        ((HashMap<String, Number>) p1.get("orbita")).get("distancia_mitjana_km").doubleValue(),
+                        ((HashMap<String, Number>) p2.get("orbita")).get("distancia_mitjana_km").doubleValue()
+                    );
+                default:
+                    throw new IllegalArgumentException("Columna d'ordenació invàlida: " + columnaOrdenacio +
+                            ". Valors vàlids: 'nom', 'radi', 'massa', 'distància'.");
+            }
+        });
+
+        System.out.println("┌──────────────┬────────────┬──────────────┬────────────────┐");
+        System.out.println("│ Nom          │ Radi (km)  │ Massa (kg)   │ Distància (km) │");
+        System.out.println("├──────────────┼────────────┼──────────────┼────────────────┤");
+
+        for (HashMap<String, Object> planeta : planetes) {
+            String nom = (String) planeta.get("nom");
+            double radi = ((HashMap<String, Number>) planeta.get("dades_fisiques")).get("radi_km").doubleValue();
+            double massa = ((HashMap<String, Number>) planeta.get("dades_fisiques")).get("massa_kg").doubleValue();
+            double distancia = ((HashMap<String, Number>) planeta.get("orbita")).get("distancia_mitjana_km").doubleValue();
+
+            System.out.printf("│ %-12s │ %-10.1f │ %-12.3e │ %-14.0f │%n", nom, radi, massa, distancia);
+        }
+
+        System.out.println("└──────────────┴────────────┴──────────────┴────────────────┘");
     }
 }

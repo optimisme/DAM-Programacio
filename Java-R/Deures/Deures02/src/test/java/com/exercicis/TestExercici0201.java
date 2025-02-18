@@ -336,10 +336,7 @@ class TestExercici0201 {
             // Valida el resultat esperat
             String expected = """
                 Introdueix una frase:
-                Freqüència de paraules:
-                hello=2
-                world=1
-                """.trim().replace("\r\n", "\n");
+                Freqüència de paraules: {world=1, hello=2}""".trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()
             String diff = TestStringUtils.findFirstDifference(output, expected);
@@ -392,32 +389,6 @@ class TestExercici0201 {
             // Valida el resultat esperat
             String expected = """
                 Mapa fusionat: {X=10, Y=25, Z=15}
-                """.trim().replace("\r\n", "\n");
-    
-            // Comparació amb TestStringUtils.findFirstDifference()
-            String diff = TestStringUtils.findFirstDifference(output, expected);
-            assertTrue(diff.compareTo("identical") == 0, 
-                ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
-    
-            System.out.println("Test passed, succeeded!");
-        } catch (AssertionError e) {
-            System.out.println("Test failed: " + testInfo.getDisplayName());
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
-            e.printStackTrace();
-        }
-    }
-    
-    @Test
-    void testOrdenarMapaPerClaus(TestInfo testInfo) throws Exception {
-        try {
-            // Captura la sortida de la funció
-            String output = SystemLambda.tapSystemOut(() -> Exercici0201.ordenarMapaPerClaus()).trim().replace("\r\n", "\n");
-    
-            // Valida el resultat esperat
-            String expected = """
-                Mapa ordenat per claus: {Banana=3, Poma=5, Taronja=2}
                 """.trim().replace("\r\n", "\n");
     
             // Comparació amb TestStringUtils.findFirstDifference()

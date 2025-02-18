@@ -36,17 +36,18 @@ public class Exercici0201 {
 
         ArrayList<Double> lstDecimals = generaLlistaDecimals(15);
         filtraLlistaDecimalsSuperiors50(lstDecimals);
-*/
+
 
         HashMap<String, Integer> persones = new HashMap<>();
         persones.put("Anna", 25);
         persones.put("Joan", 30);
         persones.put("Marc", 20);
         mostrarLlistaOrdenadesPerEdat(persones);
-/* 
         mostrarFrecuenciaParaules();
         invertirMapaClauValor();
+ */
         fusionarMapesSumantValors();
+/* 
         ordenarMapaPerClaus();
         calcularEstadistiquesNotesEstudiants();
 */
@@ -151,10 +152,6 @@ public class Exercici0201 {
      */
     public static double[] generaArrayDecimals(int mida) {
         double[] array = new double[mida];
-        Random r = new Random();
-        for (int i = 0; i < mida; i++) {
-            array[i] = r.nextDouble() * 100;
-        }
         return array;
     }
 
@@ -168,10 +165,6 @@ public class Exercici0201 {
      */
     public static ArrayList<Double> generaLlistaDecimals(int mida) {
         ArrayList<Double> rst = new ArrayList<>();
-        for (int cnt = 0; cnt < mida; cnt++) {
-            Random rd = new Random();
-            rst.add(rd.nextDouble(100));
-        }
         return rst;
     }
 
@@ -190,25 +183,6 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testGeneraLlistaDecimals
      */
     public static void filtraArrayDecimalsSuperiors50(double[] decimals) {
-
-        String array = "";
-        String valors = "";
-        
-        for (int i = 0; i < decimals.length; i++) {
-            array += String.format("%.2f, ", decimals[i]);
-        }
-        array = array.substring(0, array.length() - 2) + "]";
-        
-        for (int j = 0; j < decimals.length; j++) {
-            if (decimals[j] > 50) {
-                valors += String.format("%.2f, ", decimals[j]);        
-            }
-        }
-
-        valors = valors.substring(0, valors.length() - 2) + "]";
-
-        System.out.println("Array original: [" + array);
-        System.out.println("Valors majors que 50: [" +valors);
     }   
 
     /**
@@ -225,23 +199,6 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFiltraLlistaDecimalsSuperiors50
      */
     public static void filtraLlistaDecimalsSuperiors50(ArrayList<Double> decimals) {
-        String llista = "";
-        String valors = "";
-
-        for (int i = 0; i < decimals.size(); i++) {
-            llista += String.format("%.2f, ", decimals.get(i));
-        }
-        llista = llista.substring(0, llista.length() - 2) + "]";
-
-        for (int j = 0; j < decimals.size(); j++) {
-            if (decimals.get(j) > 50) {
-                valors += String.format("%.2f, ", decimals.get(j));
-            }
-        }
-        valors = valors.substring(0, valors.length() - 2) + "]";
-
-        System.out.println("Llista original: [" + llista);
-        System.out.println("Valors majors que 50: [" + valors);
     }
     
     /**
@@ -255,20 +212,6 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostrarLlistaOrdenadesPerEdat
      */
     public static void mostrarLlistaOrdenadesPerEdat(HashMap<String, Integer> persones) {
-        
-        Set<String> claus = persones.keySet();
-        ArrayList<String> keys = new ArrayList<>(claus);
-
-        keys.sort((nom0, nom1) -> {
-            Integer edat0 = persones.get(nom0);
-            Integer edat1 = persones.get(nom1);
-            return edat0.compareTo(edat1);
-        });
-
-        for (int cnt = 0; cnt < keys.size(); cnt = cnt + 1) {
-            String key = keys.get(cnt);
-            System.out.println(key + " (" + persones.get(key) + ")");
-        }
     }
 
     /**
@@ -283,8 +226,7 @@ public class Exercici0201 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0201#testMostrarFrecuenciaParaules
      */
-    public static void mostrarFrecuenciaParaules() {
-
+    public static void mostrarFrecuenciaParaules() {  
     }
 
     /**
@@ -300,8 +242,7 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testInvertirMapaClauValor
      */
     public static void invertirMapaClauValor() {
-
-    }
+    } 
 
     /**
      * Fusiona dos HashMap sumant els valors de les claus comuns.
@@ -320,23 +261,23 @@ public class Exercici0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testFusionarMapesSumantValors
      */
     public static void fusionarMapesSumantValors() {
-
-    }
-
-    /**
-     * Ordena un HashMap per les clausi mostra el resultat.
-     * 
-     * Es crea un HashMap amb elements (Banana=3, Poma=5, Taronja=2) 
-     * per obtenir un ordre natural de les claus (alfabètic).
-     * 
-     * 
-     * Es mostra per pantalla:
-     * "Mapa ordenat per claus: {Banana=3, Poma=5, Taronja=2}".
-     * 
-     * @test ./runTest.sh com.exercicis.TestExercici0201#testOrdenarMapaPerClaus
-     */
-    public static void ordenarMapaPerClaus() {
-
+        HashMap<String, Integer> mapa1 = new HashMap<>();
+        HashMap<String, Integer> mapa2 = new HashMap<>();
+        mapa1.put("X", 10);
+        mapa1.put("Y", 20);
+        mapa2.put("Y", 5);
+        mapa2.put("Z", 15);
+        
+        HashMap<String, Integer> mapaFusionat = new HashMap<>(mapa1);
+        
+        for (String clau : mapa2.keySet()) {
+            if (mapaFusionat.containsKey(clau)) {
+                mapaFusionat.put(clau, mapaFusionat.get(clau) + mapa2.get(clau));
+            } else {
+                mapaFusionat.put(clau, mapa2.get(clau));
+            }
+        }
+        System.out.println("Mapa fusionat: " + mapaFusionat);
     }
 
     /**

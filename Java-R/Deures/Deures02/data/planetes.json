@@ -1,0 +1,48 @@
+{
+    "planetes": [
+        {
+            "nom": "Mercuri",
+            "dades_fisiques": {
+                "radi_km": 2439.7,
+                "massa_kg": 3.3011e23
+            },
+            "orbita": {
+                "distancia_mitjana_km": 57910000,
+                "periode_orbital_dies": 87.97
+            }
+        },
+        {
+            "nom": "Venus",
+            "dades_fisiques": {
+                "radi_km": 6051.8,
+                "massa_kg": 4.8675e24
+            },
+            "orbita": {
+                "distancia_mitjana_km": 108200000,
+                "periode_orbital_dies": 224.7
+            }
+        },
+        {
+            "nom": "Terra",
+            "dades_fisiques": {
+                "radi_km": 6371.0,
+                "massa_kg": 5.97237e24
+            },
+            "orbita": {
+                "distancia_mitjana_km": 149600000,
+                "periode_orbital_dies": 365.25
+            }
+        },
+        {
+            "nom": "Mart",
+            "dades_fisiques": {
+                "radi_km": 3389.5,
+                "massa_kg": 6.4171e23
+            },
+            "orbita": {
+                "distancia_mitjana_km": 227900000,
+                "periode_orbital_dies": 687
+            }
+        }
+    ]
+}

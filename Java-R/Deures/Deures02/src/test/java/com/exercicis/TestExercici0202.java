@@ -335,4 +335,116 @@ class TestExercici0202 {
             e.printStackTrace();
         }
     }
+
+    @Test
+    void testJSONPlanetesToArrayList(TestInfo testInfo) {
+        try {
+            String filePath = "./data/planetes.json";
+            ArrayList<HashMap<String, Object>> result = Exercici0202.JSONPlanetesToArrayList(filePath);
+
+            assertNotNull(result, "La llista retornada no hauria de ser null.");
+            assertFalse(result.isEmpty(), "La llista retornada no hauria d'estar buida.");
+            assertEquals(4, result.size(), "El nombre de planetes no coincideix amb l'esperat.");
+
+            // Validació dels primers 3 planetes com a exemple
+            assertEquals("Mercuri", result.get(0).get("nom"));
+            assertEquals(2439.7, ((HashMap<String, Number>) result.get(0).get("dades_fisiques")).get("radi_km"));
+            assertEquals(3.3011e23, ((HashMap<String, Number>) result.get(0).get("dades_fisiques")).get("massa_kg"));
+
+            assertEquals("Venus", result.get(1).get("nom"));
+            assertEquals(6051.8, ((HashMap<String, Number>) result.get(1).get("dades_fisiques")).get("radi_km"));
+            assertEquals(4.8675e24, ((HashMap<String, Number>) result.get(1).get("dades_fisiques")).get("massa_kg"));
+
+            assertEquals("Terra", result.get(2).get("nom"));
+            assertEquals(6371.0, ((HashMap<String, Number>) result.get(2).get("dades_fisiques")).get("radi_km"));
+            assertEquals(5.97237e24, ((HashMap<String, Number>) result.get(2).get("dades_fisiques")).get("massa_kg"));
+
+            System.out.println("Test passed, succeeded!");
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
+    }
+
+    private void validarSortidaTaula(String columnaOrdenacio, String expected, TestInfo testInfo) {
+        try {
+            String filePath = "./data/planetes.json";
+
+            String output = SystemLambda.tapSystemOut(() ->
+                Exercici0202.mostrarPlanetesOrdenats(filePath, columnaOrdenacio)
+            ).trim().replace("\r\n", "\n");
+
+            // Comparació amb TestStringUtils.findFirstDifference()
+            String diff = TestStringUtils.findFirstDifference(output, expected.trim());
+            assertTrue(diff.compareTo("identical") == 0, 
+                ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
+
+            System.out.println("Test passed for column: " + columnaOrdenacio);
+        } catch (AssertionError e) {
+            System.out.println("Test failed: " + testInfo.getDisplayName());
+            System.out.println(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    void testMostrarPlanetesOrdenatsNom(TestInfo testInfo) {
+        validarSortidaTaula("nom", """
+        ┌──────────────┬────────────┬──────────────┬────────────────┐
+        │ Nom          │ Radi (km)  │ Massa (kg)   │ Distància (km) │
+        ├──────────────┼────────────┼──────────────┼────────────────┤
+        │ Mart         │ 3389.5     │ 6.417e+23    │ 227900000      │
+        │ Mercuri      │ 2439.7     │ 3.301e+23    │ 57910000       │
+        │ Terra        │ 6371.0     │ 5.972e+24    │ 149600000      │
+        │ Venus        │ 6051.8     │ 4.868e+24    │ 108200000      │
+        └──────────────┴────────────┴──────────────┴────────────────┘
+        """.trim().replace("\r\n", "\n"), testInfo);
+    }
+
+    @Test
+    void testMostrarPlanetesOrdenatsRadi(TestInfo testInfo) {
+        validarSortidaTaula("radi", """
+        ┌──────────────┬────────────┬──────────────┬────────────────┐
+        │ Nom          │ Radi (km)  │ Massa (kg)   │ Distància (km) │
+        ├──────────────┼────────────┼──────────────┼────────────────┤
+        │ Mercuri      │ 2439.7     │ 3.301e+23    │ 57910000       │
+        │ Mart         │ 3389.5     │ 6.417e+23    │ 227900000      │
+        │ Venus        │ 6051.8     │ 4.868e+24    │ 108200000      │
+        │ Terra        │ 6371.0     │ 5.972e+24    │ 149600000      │
+        └──────────────┴────────────┴──────────────┴────────────────┘
+        """.trim().replace("\r\n", "\n"), testInfo);
+    }
+
+    @Test
+    void testMostrarPlanetesOrdenatsMassa(TestInfo testInfo) {
+        validarSortidaTaula("massa", """
+        ┌──────────────┬────────────┬──────────────┬────────────────┐
+        │ Nom          │ Radi (km)  │ Massa (kg)   │ Distància (km) │
+        ├──────────────┼────────────┼──────────────┼────────────────┤
+        │ Mercuri      │ 2439.7     │ 3.301e+23    │ 57910000       │
+        │ Mart         │ 3389.5     │ 6.417e+23    │ 227900000      │
+        │ Venus        │ 6051.8     │ 4.868e+24    │ 108200000      │
+        │ Terra        │ 6371.0     │ 5.972e+24    │ 149600000      │
+        └──────────────┴────────────┴──────────────┴────────────────┘
+        """.trim().replace("\r\n", "\n"), testInfo);
+    }
+
+    @Test
+    void testMostrarPlanetesOrdenatsDistancia(TestInfo testInfo) {
+        validarSortidaTaula("distància", """
+        ┌──────────────┬────────────┬──────────────┬────────────────┐
+        │ Nom          │ Radi (km)  │ Massa (kg)   │ Distància (km) │
+        ├──────────────┼────────────┼──────────────┼────────────────┤
+        │ Mercuri      │ 2439.7     │ 3.301e+23    │ 57910000       │
+        │ Venus        │ 6051.8     │ 4.868e+24    │ 108200000      │
+        │ Terra        │ 6371.0     │ 5.972e+24    │ 149600000      │
+        │ Mart         │ 3389.5     │ 6.417e+23    │ 227900000      │
+        └──────────────┴────────────┴──────────────┴────────────────┘
+        """.trim().replace("\r\n", "\n"), testInfo);
+    }
 }

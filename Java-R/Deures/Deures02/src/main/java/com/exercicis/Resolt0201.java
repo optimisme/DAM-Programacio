@@ -44,7 +44,6 @@ public class Resolt0201 {
         mostrarFrecuenciaParaules();
         invertirMapaClauValor();
         fusionarMapesSumantValors();
-        ordenarMapaPerClaus();
         calcularEstadistiquesNotesEstudiants();
 
         Locale.setDefault(defaultLocale);
@@ -351,12 +350,20 @@ public class Resolt0201 {
     public static void mostrarFrecuenciaParaules() {
         System.out.println("Introdueix una frase:");
         String frase = scanner.nextLine();
-        String[] paraules = frase.split("\\s+");
+
+        frase = frase.replace(",", "").replace(".", "");
+        
+        String[] paraules = frase.split(" ");
         HashMap<String, Integer> freq = new HashMap<>();
-        for (String p : paraules) {
-            freq.put(p, freq.getOrDefault(p, 0) + 1);
+        for (String paraula : paraules) {
+            if (freq.containsKey(paraula)) {
+                freq.put(paraula, freq.get(paraula) + 1);
+            } else {
+                freq.put(paraula, 1);
+            }
         }
         System.out.println("Freqüència de paraules: " + freq);
+        
     }
 
     /**
@@ -412,38 +419,6 @@ public class Resolt0201 {
             fusionat.put(e.getKey(), fusionat.getOrDefault(e.getKey(), 0) + e.getValue());
         }
         System.out.println("Mapa fusionat: " + fusionat);
-    }
-
-    /**
-     * Ordena un HashMap per les clausi mostra el resultat.
-     * 
-     * Es crea un HashMap amb elements (Banana=3, Poma=5, Taronja=2) 
-     * per obtenir un ordre natural de les claus (alfabètic).
-     * 
-     * 
-     * Es mostra per pantalla:
-     * "Mapa ordenat per claus: {Banana=3, Poma=5, Taronja=2}".
-     * 
-     * @test ./runTest.sh com.exercicis.TestExercici0201#testOrdenarMapaPerClaus
-     */
-    public static void ordenarMapaPerClaus() {
-        HashMap<String, Integer> mapa = new HashMap<>();
-        mapa.put("Banana", 3);
-        mapa.put("Poma", 5);
-        mapa.put("Taronja", 2);
-
-        ArrayList<String> clausOrdenades = new ArrayList<>(mapa.keySet());
-        Collections.sort(clausOrdenades);
-
-        System.out.print("Mapa ordenat per claus: {");
-        for (int i = 0; i < clausOrdenades.size(); i++) {
-            String clau = clausOrdenades.get(i);
-            System.out.print(clau + "=" + mapa.get(clau));
-            if (i < clausOrdenades.size() - 1) {
-                System.out.print(", ");
-            }
-        }
-        System.out.println("}");
     }
 
     /**
