@@ -25,10 +25,48 @@ public class Resolt0202 {
         defaultLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        showJSONAstronautes("./data/astronautes.json");
+        //showJSONAstronautes("./data/astronautes.json");
 
-        showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "or");
-        showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "plata");
+        // showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "or");
+        // showEsportistesOrdenatsPerMedalla("./data/esportistes.json", "plata");
+
+        //mostrarPlanetesOrdenats("./data/planetes.json", "nom");
+        //mostrarPlanetesOrdenats("./data/planetes.json", "radi");
+        //mostrarPlanetesOrdenats("./data/planetes.json", "massa");
+        //mostrarPlanetesOrdenats("./data/planetes.json", "distància");
+
+
+        ArrayList<HashMap<String, Object>> dades = new ArrayList<>();
+
+        // Definim característiques addicionals per cada massa d'aigua
+        ArrayList<String> caracteristiquesPacific = new ArrayList<>();
+        caracteristiquesPacific.add("És l'oceà més gran del món");
+        caracteristiquesPacific.add("Conté la fossa de les Marianes, la més profunda del món");
+        caracteristiquesPacific.add("Conté una illa de plàstics contaminants.");
+
+        ArrayList<String> caracteristiquesAtlantic = new ArrayList<>();
+        caracteristiquesAtlantic.add("Separa Amèrica d'Europa i Àfrica");
+        caracteristiquesAtlantic.add("Conté el famós Triangle de les Bermudes");
+
+        ArrayList<String> caracteristiquesMediterrani = new ArrayList<>();
+        caracteristiquesMediterrani.add("És un mar gairebé tancat");
+        caracteristiquesMediterrani.add("Connecta amb l'oceà Atlàntic a través de l'estret de Gibraltar");
+
+        // Afegim mars i oceans amb característiques específiques
+        dades.add(crearMassaAigua("Oceà Pacífic", "oceà", 168723000, 10924, caracteristiquesPacific));
+        dades.add(crearMassaAigua("Oceà Atlàntic", "oceà", 85133000, 8486, caracteristiquesAtlantic));
+        dades.add(crearMassaAigua("Oceà Índic", "oceà", 70560000, 7450, new ArrayList<>()));
+        dades.add(crearMassaAigua("Oceà Àrtic", "oceà", 15558000, 5450, new ArrayList<>()));
+        dades.add(crearMassaAigua("Mar Mediterrani", "mar", 2500000, 5121, caracteristiquesMediterrani));
+        dades.add(crearMassaAigua("Mar Carib", "mar", 2754000, 7686, new ArrayList<>()));
+        dades.add(crearMassaAigua("Mar de la Xina Meridional", "mar", 3500000, 5560, new ArrayList<>()));
+
+        try {
+            generarJSON(dades, "./data/aigua.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
 
         Locale.setDefault(defaultLocale);
         scanner.close();
@@ -397,35 +435,9 @@ public class Resolt0202 {
      * @param filePath Ruta de l'arxiu JSON a crear.
      * @throws IOException Si hi ha algun problema amb l'escriptura de l'arxiu.
      * 
-     * @test ./runTest.sh com.exercicis.TestExercici0202#testGenerarJSON
      * @test ./runTest.sh com.exercicis.TestExercici0202#testValidarFormatJSON
      */
-    public static void generarJSON(String filePath) throws IOException {
-
-        ArrayList<HashMap<String, Object>> dades = new ArrayList<>();
-
-        // Definim característiques addicionals per cada massa d'aigua
-        ArrayList<String> caracteristiquesPacific = new ArrayList<>();
-        caracteristiquesPacific.add("És l'oceà més gran del món");
-        caracteristiquesPacific.add("Conté la fossa de les Marianes, la més profunda del món");
-        caracteristiquesPacific.add("Conté una illa de plàstics contaminants.");
-
-        ArrayList<String> caracteristiquesAtlantic = new ArrayList<>();
-        caracteristiquesAtlantic.add("Separa Amèrica d'Europa i Àfrica");
-        caracteristiquesAtlantic.add("Conté el famós Triangle de les Bermudes");
-
-        ArrayList<String> caracteristiquesMediterrani = new ArrayList<>();
-        caracteristiquesMediterrani.add("És un mar gairebé tancat");
-        caracteristiquesMediterrani.add("Connecta amb l'oceà Atlàntic a través de l'estret de Gibraltar");
-
-        // Afegim mars i oceans amb característiques específiques
-        dades.add(crearMassaAigua("Oceà Pacífic", "oceà", 168723000, 10924, caracteristiquesPacific));
-        dades.add(crearMassaAigua("Oceà Atlàntic", "oceà", 85133000, 8486, caracteristiquesAtlantic));
-        dades.add(crearMassaAigua("Oceà Índic", "oceà", 70560000, 7450, new ArrayList<>()));
-        dades.add(crearMassaAigua("Oceà Àrtic", "oceà", 15558000, 5450, new ArrayList<>()));
-        dades.add(crearMassaAigua("Mar Mediterrani", "mar", 2500000, 5121, caracteristiquesMediterrani));
-        dades.add(crearMassaAigua("Mar Carib", "mar", 2754000, 7686, new ArrayList<>()));
-        dades.add(crearMassaAigua("Mar de la Xina Meridional", "mar", 3500000, 5560, new ArrayList<>()));
+    public static void generarJSON(ArrayList<HashMap<String, Object>> dades, String filePath) throws IOException {
 
         // Convertim el HashMap a JSONObject
         JSONArray json = new JSONArray(dades);

@@ -1,0 +1,29 @@
+[
+    {
+        "nom": "Oceà Pacífic",
+        "tipus": "oceà",
+        "profunditat_max_m": 10924,
+        "superficie_km2": 1.68723E8,
+        "caracteristiques": [
+            "És l'oceà més gran del món",
+            "Conté la fossa de les Marianes, la més profunda del món"
+        ]
+    },
+    {
+        "nom": "Oceà Atlàntic",
+        "tipus": "oceà",
+        "profunditat_max_m": 8486,
+        "superficie_km2": 8.5133E7,
+        "caracteristiques": [
+            "Separa Amèrica d'Europa i Àfrica",
+            "Conté el famós Triangle de les Bermudes"
+        ]
+    },
+    {
+        "nom": "Oceà Índic",
+        "tipus": "oceà",
+        "profunditat_max_m": 7450,
+        "superficie_km2": 7.056E7,
+        "caracteristiques": []
+    }
+]

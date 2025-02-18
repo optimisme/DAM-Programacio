@@ -417,18 +417,19 @@ class TestExercici0201 {
             notes.put("Pere", 5.8);
             notes.put("Maria", 8.2);
             notes.put("Carla", 6.7);
-
-            String output = SystemLambda.tapSystemOut(() -> 
-                Exercici0201.calcularEstadistiquesNotesEstudiants(notes)
-            ).trim().replace("\r\n", "\n");
-
-            String expected = "Mitjana: 7.44, Máxim: 9.0, Mínim: 5.8";
-
+    
+            // Captura la sortida de consola
+            String output = SystemLambda.tapSystemOut(() -> {
+                Exercici0201.calcularEstadistiquesNotesEstudiants(notes);
+            }).trim().replace("\r\n", "\n");
+    
+            String expected = "Mitjana: 7.44, Màxim: 9.0, Mínim: 5.8";
+    
             // Comparació amb TestStringUtils
             String diff = TestStringUtils.findFirstDifference(output, expected);
-            assertTrue(diff.compareTo("identical") == 0, 
+            assertTrue(diff.equals("identical"),
                 ">>>>>>>>>> Diff found >>>>>>>>>\n" + diff + "<<<<<<<<< Diff end <<<<<<<<<<<\n");
-
+    
             System.out.println("Test passed, succeeded!");
         } catch (AssertionError e) {
             System.out.println("Test failed: " + testInfo.getDisplayName());
@@ -437,5 +438,6 @@ class TestExercici0201 {
             System.out.println("Test encountered an error: " + testInfo.getDisplayName());
             e.printStackTrace();
         }
-    }   
+    }
+
 }

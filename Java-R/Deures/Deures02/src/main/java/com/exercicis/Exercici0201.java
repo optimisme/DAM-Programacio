@@ -285,6 +285,7 @@ public class Exercici0201 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0201#testCalcularEstadistiquesNotesEstudiants
      */
-    public static void calcularEstadistiquesNotesEstudiants(HashMap<String, Double> notes) {
+    public static void calcularEstadistiquesNotesEstudiants(HashMap<String, Double> estudiants) {
     }
+    
 }

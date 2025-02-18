@@ -486,42 +486,25 @@ class TestExercici0202 {
     }
 
     @Test
-    void testGenerarJSON(TestInfo testInfo) {
-        try {
-            Exercici0202.generarJSON(PATH_AIGUA);
-
-            assertTrue(Files.exists(Paths.get(PATH_AIGUA)), "L'arxiu JSON no ha estat generat correctament.");
-
-            String jsonContent = new String(Files.readAllBytes(Paths.get(PATH_AIGUA)));
-            JSONArray jsonArray = new JSONArray(jsonContent);
-
-            assertFalse(jsonArray.isEmpty(), "El JSON generat no hauria d'estar buit.");
-            assertEquals(7, jsonArray.length(), "El nombre d'objectes al JSON no coincideix amb l'esperat.");
-
-            JSONObject pacific = jsonArray.getJSONObject(0);
-            assertEquals("Oceà Pacífic", pacific.getString("nom"), "El nom de l'oceà Pacífic no coincideix.");
-            assertEquals("oceà", pacific.getString("tipus"), "El tipus de l'oceà Pacífic no coincideix.");
-            assertEquals(168723000.0, pacific.getDouble("superficie_km2"), 0.001, "La superfície del Pacífic no coincideix.");
-            assertEquals(10924.0, pacific.getDouble("profunditat_max_m"), 0.001, "La profunditat del Pacífic no coincideix.");
-
-            JSONArray caracteristiquesPacific = pacific.getJSONArray("caracteristiques");
-            assertTrue(caracteristiquesPacific.length() >= 3, "El nombre de característiques de l'oceà Pacífic no és correcte.");
-            assertTrue(caracteristiquesPacific.toList().contains("És l'oceà més gran del món"), "Falta una característica esperada.");
-
-            System.out.println("Test passed, succeeded!");
-        } catch (AssertionError e) {
-            System.out.println("Test failed: " + testInfo.getDisplayName());
-            System.out.println(e.getMessage());
-        } catch (Exception e) {
-            System.out.println("Test encountered an error: " + testInfo.getDisplayName());
-            e.printStackTrace();
-        }
-    }
-
-    @Test
     void testValidarFormatJSON(TestInfo testInfo) {
         try {
-            Exercici0202.generarJSON(PATH_AIGUA);
+            ArrayList<HashMap<String, Object>> dades = new ArrayList<>();
+
+            // Definim característiques addicionals per cada massa d'aigua
+            ArrayList<String> caracteristiquesPacific = new ArrayList<>();
+            caracteristiquesPacific.add("És l'oceà més gran del món");
+            caracteristiquesPacific.add("Conté la fossa de les Marianes, la més profunda del món");
+    
+            ArrayList<String> caracteristiquesAtlantic = new ArrayList<>();
+            caracteristiquesAtlantic.add("Separa Amèrica d'Europa i Àfrica");
+            caracteristiquesAtlantic.add("Conté el famós Triangle de les Bermudes");
+    
+            // Afegim mars i oceans amb característiques específiques
+            dades.add(Exercici0202.crearMassaAigua("Oceà Pacífic", "oceà", 168723000, 10924, caracteristiquesPacific));
+            dades.add(Exercici0202.crearMassaAigua("Oceà Atlàntic", "oceà", 85133000, 8486, caracteristiquesAtlantic));
+            dades.add(Exercici0202.crearMassaAigua("Oceà Índic", "oceà", 70560000, 7450, new ArrayList<>()));
+    
+            Exercici0202.generarJSON(dades, PATH_AIGUA);
 
             String output = new String(Files.readAllBytes(Paths.get(PATH_AIGUA))).trim().replace("\r\n", "\n");
             String expected = """
@@ -533,8 +516,7 @@ class TestExercici0202 {
         "superficie_km2": 1.68723E8,
         "caracteristiques": [
             "És l'oceà més gran del món",
-            "Conté la fossa de les Marianes, la més profunda del món",
-            "Conté una illa de plàstics contaminants."
+            "Conté la fossa de les Marianes, la més profunda del món"
         ]
     },
     {
@@ -552,37 +534,6 @@ class TestExercici0202 {
         "tipus": "oceà",
         "profunditat_max_m": 7450,
         "superficie_km2": 7.056E7,
-        "caracteristiques": []
-    },
-    {
-        "nom": "Oceà Àrtic",
-        "tipus": "oceà",
-        "profunditat_max_m": 5450,
-        "superficie_km2": 1.5558E7,
-        "caracteristiques": []
-    },
-    {
-        "nom": "Mar Mediterrani",
-        "tipus": "mar",
-        "profunditat_max_m": 5121,
-        "superficie_km2": 2500000,
-        "caracteristiques": [
-            "És un mar gairebé tancat",
-            "Connecta amb l'oceà Atlàntic a través de l'estret de Gibraltar"
-        ]
-    },
-    {
-        "nom": "Mar Carib",
-        "tipus": "mar",
-        "profunditat_max_m": 7686,
-        "superficie_km2": 2754000,
-        "caracteristiques": []
-    },
-    {
-        "nom": "Mar de la Xina Meridional",
-        "tipus": "mar",
-        "profunditat_max_m": 5560,
-        "superficie_km2": 3500000,
         "caracteristiques": []
     }
 ]

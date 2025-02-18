@@ -44,7 +44,18 @@ public class Resolt0201 {
         mostrarFrecuenciaParaules();
         invertirMapaClauValor();
         fusionarMapesSumantValors();
-        calcularEstadistiquesNotesEstudiants();
+
+        HashMap<String, Double> notes = new HashMap<>();
+        notes.put("Anna", 7.5);
+        notes.put("Joan", 6.8);
+        notes.put("Marta", 8.2);
+        notes.put("Pere", 4.1);
+        notes.put("Enric", 2.0);
+        notes.put("Amparo", 6.9);
+        notes.put("Olga", 9.0);
+        notes.put("Manel", 2.2);
+
+        calcularEstadistiquesNotesEstudiants(notes);
 
         Locale.setDefault(defaultLocale);
         scanner.close();
@@ -434,13 +445,21 @@ public class Resolt0201 {
      * @test ./runTest.sh com.exercicis.TestExercici0201#testCalcularEstadistiquesNotesEstudiants
      */
     public static void calcularEstadistiquesNotesEstudiants(HashMap<String, Double> estudiants) {
-        double suma = 0, max = Double.MIN_VALUE, min = Double.MAX_VALUE;
+        if (estudiants.isEmpty()) {
+            System.out.println("No hi ha dades.");
+            return;
+        }
+    
+        Double suma = 0.0;
+        Double max = Double.NEGATIVE_INFINITY;
+        Double min = Double.POSITIVE_INFINITY;
         for (double nota : estudiants.values()) {
             suma += nota;
             if (nota > max) max = nota;
             if (nota < min) min = nota;
         }
         double mitjana = suma / estudiants.size();
-        System.out.println("Mitjana: " + mitjana + ", Màxim: " + max + ", Mínim: " + min);
+        System.out.println("Mitjana: " + String.format("%.2f", mitjana) + ", Màxim: " + max + ", Mínim: " + min);
     }
+    
 }
