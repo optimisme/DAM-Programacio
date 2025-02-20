@@ -19,6 +19,14 @@ public class Table extends Component {
 
     public ArrayList<String> render() {
         ArrayList<String> rst = new ArrayList<String>();
+
+        // Afegir linia buida al principi
+        rst.add(0, " ".repeat(width)); 
+
+        // Asignar text segons alineació 
+        for (int i = 1; i < height; i++) {
+            rst.add(i, "x".repeat(width));
+        }
         return rst;
     } 
 }
