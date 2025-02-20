@@ -18,7 +18,7 @@ Tindrà les següents classes:
 
     El component ha de quedar emarcat en un quadre format pels caràcters ascii: 
 
-```bash 
+```text 
 ┌titol─┐                     
 │      │                     
 │      │            
@@ -62,7 +62,7 @@ Tindrà les següents classes:
     * *Table* deriva de *Component*
 
 
-```bash 
+```text 
 ┌titol──────────────┐                     
 │col0 |  col1| col2 │  
 │─────┼──────┼──────│                 
