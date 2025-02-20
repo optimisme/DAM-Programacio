@@ -61,6 +61,17 @@ Tindrà les següents classes:
 
     * *Table* deriva de *Component*
 
+
+```bash 
+┌titol──────────────┐                     
+│col0 |  col1| col2 │  
+│─────┼──────┼──────│                 
+│1    |  hola|  in  │ 
+│2    |    hi|  out │  
+│3    |   hej| amws │            
+└───────────────────┘
+```
+
 - **Container**: conté una llista de components. Té:
 
     * Atribut **components** que és una llista de components.
