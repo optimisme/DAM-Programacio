@@ -66,7 +66,7 @@ Tindrà les següents classes:
 ┌titol──────────────┐                     
 │col0 |  col1| col2 │  
 │─────┼──────┼──────│                 
-│1    |  hola|  in  │ 
+│1    |  hola|  si  │ 
 │2    |    hi|  out │  
 │3    |   hej| amws │            
 └───────────────────┘
