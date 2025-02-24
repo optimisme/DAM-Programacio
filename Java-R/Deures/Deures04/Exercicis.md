@@ -65,7 +65,7 @@ Tindrà les següents classes:
 headers: "col0", "col1", "col2"
 widths: 5, 6, 7
 aligns: "left", "right" i "center"
-rows: [[1, "hola", "si"], [2, "hi", "out"], [3, "hej", "amws"]]
+rows: [["1", "hola", "si"], ["2", "hi", "out"], ["3", "hej", "amws"]]
 
 La taula esperada és:
 ┌titol──────────────┐                     
