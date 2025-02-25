@@ -34,11 +34,9 @@ public class Exercici0203 {
         validarURL(url1); 
         
         try {
-            ArrayList<HashMap<String, Object>> monuments = loadMonuments("./data/patrimoni.json");
+            ArrayList<HashMap<String, Object>> monuments = loadMonuments("./data/monuments.json");
             ArrayList<HashMap<String, Object>> monumentsOrdenats = ordenaMonuments(monuments, "nom");
             ArrayList<HashMap<String, Object>> monumentsFiltrats = filtraMonuments(monuments, "categoria", "cultural");
-
-
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -46,10 +44,11 @@ public class Exercici0203 {
             e.printStackTrace();
         }
 
-
-        // Generar baralla cartes en un HashMap
-
-        // Guardar baralla cartes en arxiu JSON
+        try {
+            guardaBaralla("./data/baralla.json");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
         Locale.setDefault(defaultLocale);
         scanner.close();
@@ -462,8 +461,10 @@ public class Exercici0203 {
      * { "pal": "copes", "número": 10 }
      * 
      * @return Un ArrayList que conté les 40 cartes de la baralla en ordre aleatori.
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0203#testGeneraBaralla
      */
-    public static ArrayList<HashMap<String, Object>> generaBarallaEspanyola() {
+    public static ArrayList<HashMap<String, Object>> generaBaralla() {
         String[] pals = {"oros", "copes", "espases", "bastos"};
         int[] numeros = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}; 
 
@@ -483,5 +484,28 @@ public class Exercici0203 {
         return baralla;
     }
 
-    
+    /**
+     * Guarda la informació d'una baralla espanyola a 'filePath'
+     * 
+     * @param filePath
+     * @throws IOException si hi ha algun error amb l'escriptura de l'arxiu forçant un 'try/catch'
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0203#testGuardaBaralla
+     */
+    public static void guardaBaralla(String filePath) throws IOException {
+        ArrayList<HashMap<String, Object>> baralla = generaBaralla();
+        JSONArray jsonArray = new JSONArray();
+
+        for (HashMap<String, Object> carta : baralla) {
+            JSONObject cartaJSON = new JSONObject(carta);
+            jsonArray.put(cartaJSON);
+        }
+
+        // Escriure al fitxer JSON
+        try (FileWriter file = new FileWriter(filePath)) {
+            file.write(jsonArray.toString(4)); // Format JSON amb indentació de 4 espais
+        } catch (IOException e) {
+            throw new IOException("Error guardant la baralla al fitxer: " + filePath, e);
+        }
+    }
 }
