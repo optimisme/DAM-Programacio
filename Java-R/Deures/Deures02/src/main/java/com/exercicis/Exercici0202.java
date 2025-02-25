@@ -247,7 +247,7 @@ public class Exercici0202 {
      * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarPlanetesOrdenatsMassa
      * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarPlanetesOrdenatsDistancia
      */
-    public static void mostrarPlanetesOrdenats(String filePath, String columnaOrdenacio) {
+    public static void mostrarPlanetesOrdenats(String filePath, String columnaOrdenacio) throws IllegalArgumentException {
     }
 
     /**

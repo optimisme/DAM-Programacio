@@ -186,7 +186,7 @@ public class Resolt0202 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0202#testOrdenarEsportistesPerMedalla
      */
-    public static ArrayList<HashMap<String, Object>> ordenarEsportistesPerMedalla(String filePath, String tipusMedalla) {
+    public static ArrayList<HashMap<String, Object>> ordenarEsportistesPerMedalla(String filePath, String tipusMedalla) throws IllegalArgumentException {
         // Obtenir la llista d'esportistes des del fitxer JSON
         ArrayList<HashMap<String, Object>> esportistes = JSONEsportistesToArrayList(filePath);
 
@@ -345,7 +345,7 @@ public class Resolt0202 {
      * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarPlanetesOrdenatsMassa
      * @test ./runTest.sh com.exercicis.TestExercici0202#testMostrarPlanetesOrdenatsDistancia
      */
-    public static void mostrarPlanetesOrdenats(String filePath, String columnaOrdenacio) {
+    public static void mostrarPlanetesOrdenats(String filePath, String columnaOrdenacio) throws IllegalArgumentException {
         ArrayList<HashMap<String, Object>> planetes = JSONPlanetesToArrayList(filePath);
 
         planetes.sort((p1, p2) -> {

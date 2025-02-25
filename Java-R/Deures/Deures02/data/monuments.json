@@ -3,7 +3,7 @@
       {
         "nom": "Gran Muralla Xinesa",
         "pais": "Xina",
-        "categoria": "Cultural",
+        "categoria": "Monumental",
         "detalls": {
           "any_declaracio": 1987,
           "coordenades": {
@@ -29,7 +29,7 @@
       {
         "nom": "Catedral de Notre-Dame",
         "pais": "França",
-        "categoria": "Cultural",
+        "categoria": "Monumental",
         "detalls": {
           "any_declaracio": 1991,
           "coordenades": {

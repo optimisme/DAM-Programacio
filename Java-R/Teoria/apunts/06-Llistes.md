@@ -1076,3 +1076,48 @@ Finalment:
 - Aplica un *filter* per mostrar la taula resultant amb els animals que pesen més de 100Kg.
 - Aplica un *map* per mostrar la taula resultant amb els noms dels animals en majúscules.
 - Aplica un *filter* i un *map* per mostrar la taula resultant amb els animals que viuen menys o igual a 30 anys, posa-hi un nou atribut *cal* (Columna "Cal") que és el resultat dividir els anys de vida pel pes de l'animal.
+
+## Barrejar
+
+Per barrejar els elements d'un **ArrayList** es pot fer amb *Collections.shuffle*
+
+### Exemple 0613
+
+Fes anar l'exemple amb:
+```bash
+./run.sh com.exemple0613.Main
+```
+
+```java
+List<String> animals = new ArrayList<>(Arrays.asList("gat", "gos", "dinosaure", "formiga"));
+Collections.shuffle(animals); 
+System.out.println(animals);
+```
+
+Per barrejar els elements d'un **array []** es pot convertir en un *ArrayList*.
+
+### Exemple 0614
+
+Fes anar l'exemple amb:
+```bash
+./run.sh com.exemple0614.Main
+```
+
+```java
+int[] numbers = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+// Convertir l'array a una llista per poder fer shuffle
+ArrayList<Integer> numberList = new ArrayList<>(Arrays.stream(numbers)
+                                    .boxed() // Converteix int a Integer
+                                    .collect(Collectors.toList()));
+
+Collections.shuffle(numberList); // Barreja aleatòriament
+
+// Convertir la llista de nou a int[]
+int[] shuffledNumbers = numberList.stream()
+                                    .mapToInt(Integer::intValue)
+                                    .toArray();
+
+System.out.println("Original: " + Arrays.toString(numbers));
+System.out.println("Barrejat: " + Arrays.toString(shuffledNumbers));
+```
