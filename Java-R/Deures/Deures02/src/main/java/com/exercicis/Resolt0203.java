@@ -150,22 +150,24 @@ public class Resolt0203 {
                         detallsMap.put(clau, valor);
                     }
 
+                    // Afegir la resta d'atributs a 'altres'
+                    for (String clau : monumentJSON.keySet()) {
+                        if (!monumentMap.containsKey(clau) && !clau.equals("detalls")) {
+                            Object valor = monumentJSON.get(clau);
+                            altres.put("clau", clau);
+                            altres.put("valor", valor);
+                            break;
+                        }
+                    }
+
+                    if (!altres.isEmpty()) {
+                        detallsMap.put("altres", altres);
+                    }
+
                     monumentMap.put("detalls", detallsMap);
                 }
 
-                // Afegir la resta d'atributs a 'altres'
-                for (String clau : monumentJSON.keySet()) {
-                    if (!monumentMap.containsKey(clau) && !clau.equals("detalls")) {
-                        Object valor = monumentJSON.get(clau);
-                        altres.put("clau", clau);
-                        altres.put("valor", valor);
-                        break;
-                    }
-                }
 
-                if (!altres.isEmpty()) {
-                    monumentMap.put("altres", altres);
-                }
 
                 rst.add(monumentMap);
             }

@@ -36,7 +36,7 @@ public class Exercici0202 {
         //mostrarPlanetesOrdenats("./data/planetes.json", "massa");
         //mostrarPlanetesOrdenats("./data/planetes.json", "distància");
 
-/* 
+
         ArrayList<HashMap<String, Object>> dades = new ArrayList<>();
 
         ArrayList<String> caracteristiquesPacific = new ArrayList<>();
@@ -64,7 +64,7 @@ public class Exercici0202 {
             generarJSON(dades, "./data/aigua.json");
         } catch (IOException e) {
             e.printStackTrace();
-        }*/
+        }
 
 
         Locale.setDefault(defaultLocale);
@@ -264,6 +264,11 @@ public class Exercici0202 {
      */
     public static HashMap<String, Object> crearMassaAigua(String nom, String tipus, double superficie_km2, double profunditat_max_m, ArrayList<String> caracteristiques) {
         HashMap<String, Object> massaAigua = new HashMap<>();
+        massaAigua.put("nom", nom);
+        massaAigua.put("tipus", tipus);
+        massaAigua.put("superficie_km2", superficie_km2);
+        massaAigua.put("profunditat_max_m", profunditat_max_m);
+        massaAigua.put("caracteristiques", caracteristiques);
         return massaAigua;
     }
 
@@ -291,6 +296,16 @@ public class Exercici0202 {
      * @test ./runTest.sh com.exercicis.TestExercici0202#testValidarFormatJSON
      */
     public static void generarJSON(ArrayList<HashMap<String, Object>> dades, String filePath) throws IOException {
+
+        JSONArray jsonArray = new JSONArray(dades);
+
+        try (FileWriter file = new FileWriter(filePath)) {
+            file.write(jsonArray.toString(4));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Arxiu de mar i oceans creat correctament.");
 
     }
 }

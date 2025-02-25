@@ -74,7 +74,26 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testValidarURL
      */
     public static boolean validarURL(String url) {
-        return false;
+        if (url == null || url.isEmpty() || url.contains(" ")) {
+            return false;
+        } else if (!url.startsWith("http://") && !url.startsWith("https://")){
+            return false;
+        }
+
+        String senseProtocol = url.substring(url.indexOf("://") + 3);
+
+        String domini = "";
+        if (senseProtocol.contains("/")) {
+            domini = senseProtocol.split("/", 2)[0];
+        } else {
+            domini = senseProtocol;
+        }
+
+        if (!domini.contains(".") || domini.startsWith(".") || domini.endsWith(".")) {
+            return false;
+        }
+        
+        return true;
     }
 
     /**
