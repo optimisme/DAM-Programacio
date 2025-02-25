@@ -19,6 +19,28 @@ public class Table extends Component {
 
     public ArrayList<String> render() {
         ArrayList<String> rst = new ArrayList<String>();
+
+        // Afegir linia buida al principi
+        rst.add(0, " ".repeat(width)); 
+
+        String capcelera = "";
+        for (int cnt = 0; cnt < headers.size(); cnt = cnt + 1) {
+            String header = headers.get(cnt);
+            int width = widths.get(cnt);
+
+            capcelera = capcelera + header;
+            
+            if (cnt < (headers.size() - 1)) {
+                capcelera = capcelera + "|";
+            }
+        }
+        rst.add(1, " " + capcelera + " ");
+
+
+        for (int i = 2; i < height; i++) {
+            rst.add(i, "x".repeat(width));
+        }
+
         return rst;
     } 
 }

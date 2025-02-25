@@ -18,7 +18,7 @@ Tindrà les següents classes:
 
     El component ha de quedar emarcat en un quadre format pels caràcters ascii: 
 
-```bash 
+```text 
 ┌titol─┐                     
 │      │                     
 │      │            
@@ -60,6 +60,22 @@ Tindrà les següents classes:
     * Atribut **rows** que és una llista de llistes amb les dades de les files
 
     * *Table* deriva de *Component*
+
+```text 
+headers: "col0", "col1", "col2"
+widths: 5, 6, 7
+aligns: "left", "right" i "center"
+rows: [["1a", "hola", "si"], ["2a", "hi", "out"], ["3b", "hej", "amws"]]
+
+La taula esperada és:
+┌titol──────────────┐                     
+│col0 |  col1| col2 │  
+│─────┼──────┼──────│                 
+│1a   |  hola|  si  │ 
+│2a   |    hi|  out │  
+│3b   |   hej| amws │            
+└───────────────────┘
+```
 
 - **Container**: conté una llista de components. Té:
 
