@@ -1,0 +1,57 @@
+{
+    "monuments": [
+      {
+        "nom": "Gran Muralla Xinesa",
+        "pais": "Xina",
+        "categoria": "Cultural",
+        "detalls": {
+          "any_declaracio": 1987,
+          "coordenades": {
+            "latitud": 40.4319,
+            "longitud": 116.5704
+          },
+          "extensio": "21,196 km"
+        }
+      },
+      {
+        "nom": "Machu Picchu",
+        "pais": "Perú",
+        "categoria": "Cultural",
+        "detalls": {
+          "any_declaracio": 1983,
+          "coordenades": {
+            "latitud": -13.1631,
+            "longitud": -72.5450
+          },
+          "alçada": "2,430 m sobre el nivell del mar"
+        }
+      },
+      {
+        "nom": "Catedral de Notre-Dame",
+        "pais": "França",
+        "categoria": "Cultural",
+        "detalls": {
+          "any_declaracio": 1991,
+          "coordenades": {
+            "latitud": 48.852968,
+            "longitud": 2.349902
+          },
+          "estat_actual": "En restauració després de l'incendi de 2019"
+        }
+      },
+      {
+        "nom": "Parc Nacional de Serengeti",
+        "pais": "Tanzània",
+        "categoria": "Natural",
+        "detalls": {
+          "any_declaracio": 1981,
+          "coordenades": {
+            "latitud": -2.333333,
+            "longitud": 34.833333
+          },
+          "superficie": "14,763 km²"
+        }
+      }
+    ]
+  }
+  

@@ -244,7 +244,7 @@ public class Exercici0202 {
      *          "tipus": "oceà", ...
      * 
      * @param filePath Ruta de l'arxiu JSON a crear.
-     * @throws IOException Si hi ha algun problema amb l'escriptura de l'arxiu.
+     * @throws IOException Si hi ha algun problema amb l'escriptura de l'arxiu forçant un try/catch
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0202#testValidarFormatJSON
      */
