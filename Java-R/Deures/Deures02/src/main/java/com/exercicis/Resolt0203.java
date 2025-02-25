@@ -15,13 +15,13 @@ import java.util.List;
 import org.json.JSONObject;
 import org.json.JSONArray;
 
-public class Exercici0203 {
+public class Resolt0203 {
 
     public static Scanner scanner;
     public static Locale defaultLocale;
     
     // Fes anar el 'main' de l'exercici amb:
-    // ./run.sh com.exercicis.Exercici0203
+    // ./run.sh com.exercicis.Resolt0203
     public static void main(String[] args) {
         scanner = new Scanner(System.in);
         defaultLocale = Locale.getDefault();
@@ -74,7 +74,31 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testValidarURL
      */
     public static boolean validarURL(String url) {
-        return false;
+
+        if (url == null || url.isEmpty()) return false;
+
+        // No ha de contenir espais
+        if (url.contains(" ")) {
+            return false;
+        }
+
+        // Ha de començar amb http:// o https://
+        if (!url.startsWith("http://") && !url.startsWith("https://")) {
+            return false;
+        }
+
+        // Eliminar el protocol per validar el domini
+        String senseProtocol = url.substring(url.indexOf("://") + 3);
+        
+        // Comprovar si té almenys un "/"
+        String domini = senseProtocol.contains("/") ? senseProtocol.split("/", 2)[0] : senseProtocol;
+        
+        // El domini ha de tenir almenys un punt i no començar/acabar en punt
+        if (!domini.contains(".") || domini.startsWith(".") || domini.endsWith(".")) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
@@ -96,6 +120,59 @@ public class Exercici0203 {
      */
     public static ArrayList<HashMap<String, Object>> loadMonuments(String filePath) throws IOException {
         ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
+
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(filePath)));
+            JSONObject jsonObject = new JSONObject(content);
+            JSONArray monumentsArray = jsonObject.getJSONArray("monuments");
+
+            for (int i = 0; i < monumentsArray.length(); i++) {
+                JSONObject monumentJSON = monumentsArray.getJSONObject(i);
+                HashMap<String, Object> monumentMap = new HashMap<>();
+                HashMap<String, Object> altres = new HashMap<>();
+
+                // Atributs principals
+                String[] clausPrincipals = {"nom", "pais", "categoria"};
+
+                for (String clau : clausPrincipals) {
+                    if (monumentJSON.has(clau)) {
+                        monumentMap.put(clau, monumentJSON.getString(clau));
+                    }
+                }
+
+                // Processar 'detalls'
+                if (monumentJSON.has("detalls")) {
+                    JSONObject detallsJSON = monumentJSON.getJSONObject("detalls");
+                    HashMap<String, Object> detallsMap = new HashMap<>();
+
+                    for (String clau : detallsJSON.keySet()) {
+                        Object valor = detallsJSON.get(clau);
+                        detallsMap.put(clau, valor);
+                    }
+
+                    monumentMap.put("detalls", detallsMap);
+                }
+
+                // Afegir la resta d'atributs a 'altres'
+                for (String clau : monumentJSON.keySet()) {
+                    if (!monumentMap.containsKey(clau) && !clau.equals("detalls")) {
+                        Object valor = monumentJSON.get(clau);
+                        altres.put("clau", clau);
+                        altres.put("valor", valor);
+                        break;
+                    }
+                }
+
+                if (!altres.isEmpty()) {
+                    monumentMap.put("altres", altres);
+                }
+
+                rst.add(monumentMap);
+            }
+        } catch (IOException e) {
+            throw new IOException("Error llegint el fitxer JSON: " + filePath, e);
+        }
+
         return rst;
     }
 
@@ -118,6 +195,26 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGetMonumentValue
      */
     private static Object getMonumentValue(HashMap<String, Object> monument, String key) {
+        if (monument == null) return null;
+    
+        if (key.equals("nom") || key.equals("pais") || key.equals("categoria")) {
+            return monument.get(key);
+        } else if (key.equals("any")) {
+            HashMap<?, ?> detalls = (HashMap<?, ?>) monument.get("detalls");
+            if (detalls != null) {
+                Object any = detalls.get("any_declaracio");
+                return any instanceof Number ? ((Number) any).intValue() : null;
+            }
+        } else if (key.equals("latitud") || key.equals("longitud")) {
+            HashMap<?, ?> detalls = (HashMap<?, ?>) monument.get("detalls");
+            if (detalls != null) {
+                HashMap<?, ?> coordenades = (HashMap<?, ?>) detalls.get("coordenades");
+                if (coordenades != null) {
+                    Object valor = coordenades.get(key);
+                    return valor instanceof Number ? ((Number) valor).doubleValue() : null;
+                }
+            }
+        }
         return null;
     }
     
@@ -132,6 +229,11 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testIsValidValue
      */
     private static boolean isValid(String value, String[] validValues) {
+        for (String valid : validValues) {
+            if (valid.equals(value)) {
+                return true;
+            }
+        }
         return false;
     }
 
@@ -148,8 +250,29 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testOrdenaMonuments
      */
     public static ArrayList<HashMap<String, Object>> ordenaMonuments(ArrayList<HashMap<String, Object>> monuments, String sortKey) throws IllegalArgumentException {
-
+        // Validació dels camps
+        String[] validKeys = {"nom", "any", "latitud", "longitud"};
+        if (!isValid(sortKey, validKeys)) {
+            throw new IllegalArgumentException("Invalid sort key: " + sortKey);
+        }
+    
         ArrayList<HashMap<String, Object>> rst = new ArrayList<>(monuments);
+        rst.sort((m1, m2) -> {
+            Object val1 = getMonumentValue(m1, sortKey);
+            Object val2 = getMonumentValue(m2, sortKey);
+    
+            if (val1 == null) return 1;
+            if (val2 == null) return -1;
+    
+            if (val1 instanceof String && val2 instanceof String) {
+                return ((String) val1).compareToIgnoreCase((String) val2);
+            } else if (val1 instanceof Number && val2 instanceof Number) {
+                return Double.compare(((Number) val1).doubleValue(), ((Number) val2).doubleValue());
+            }
+    
+            return 0;
+        });
+    
         return rst;
     }
 
@@ -167,8 +290,20 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testOrdenaMonuments
      */
     public static ArrayList<HashMap<String, Object>> filtraMonuments(ArrayList<HashMap<String, Object>> monuments, String filterKey, String filterValue) throws IllegalArgumentException {
-
-        return new ArrayList<>();
+        if (!isValid(filterKey, new String[]{"nom", "pais", "categoria"})) {
+            throw new IllegalArgumentException("Invalid filter key: " + filterKey);
+        }
+    
+        ArrayList<HashMap<String, Object>> filteredMonuments = new ArrayList<>(
+            monuments.stream()
+                .filter(monument -> {
+                    Object value = getMonumentValue(monument, filterKey);
+                    return value instanceof String && ((String) value).equalsIgnoreCase(filterValue);
+                })
+                .collect(Collectors.toList())
+        );
+    
+        return filteredMonuments;
     }
 
     /**
@@ -185,7 +320,19 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGeneraMarcTaula
      */
     public static String generaMarcTaula(int[] columnWidths, char[] separators) {
-        return "";
+        StringBuilder result = new StringBuilder();
+        result.append(separators[0]); 
+    
+        for (int i = 0; i < columnWidths.length; i++) {
+            result.append("─".repeat(columnWidths[i])); 
+            if (i < columnWidths.length - 1) {
+                result.append(separators[1]); 
+            }
+        }
+    
+        result.append(separators[2]); 
+    
+        return result.toString();
     }
 
     /**
@@ -207,7 +354,11 @@ public class Exercici0203 {
      * @return Una cadena de text formatejada representant una fila de la taula.
      */
     private static String formatRow(String[] values, int[] columnWidths) {
-        return "";
+        StringBuilder row = new StringBuilder("│");
+        for (int i = 0; i < values.length; i++) {
+            row.append(String.format(" %-" + columnWidths[i] + "s │", values[i]));
+        }
+        return row.toString();
     }
 
     /**
@@ -234,7 +385,13 @@ public class Exercici0203 {
      *         o una cadena buida si no es troben les dades.
      */
     private static String getCoordsString(HashMap<String, Object> monument) {
-
+        if (monument.containsKey("detalls")) {
+            HashMap<?, ?> detalls = (HashMap<?, ?>) monument.get("detalls");
+            if (detalls.containsKey("coordenades")) {
+                HashMap<?, ?> coords = (HashMap<?, ?>) detalls.get("coordenades");
+                return coords.get("latitud") + "," + coords.get("longitud");
+            }
+        }
         return "";
     }
 
@@ -257,7 +414,39 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testTaulaMonuments
      */
     public static void taulaMonuments(ArrayList<HashMap<String, Object>> monuments) {
-        
+        // Definició de les columnes
+        String[] columnTitles = {"Nom", "Pais", "Any", "Coords"};
+        int numColumns = columnTitles.length;
+
+        // Determinar l'amplada de cada columna
+        int[] columnWidths = new int[numColumns];
+        for (int i = 0; i < numColumns; i++) {
+            columnWidths[i] = columnTitles[i].length(); // Mida mínima = nom de la columna
+        }
+
+        for (HashMap<String, Object> monument : monuments) {
+            columnWidths[0] = Math.max(columnWidths[0], monument.get("nom").toString().length());
+            columnWidths[1] = Math.max(columnWidths[1], monument.get("pais").toString().length());
+            columnWidths[2] = Math.max(columnWidths[2], monument.get("detalls") != null ? monument.get("detalls").toString().length() : 0);
+            columnWidths[3] = Math.max(columnWidths[3], getCoordsString(monument).length());
+        }
+
+        // Crear i mostrar la taula
+        System.out.println(generaMarcTaula(columnWidths, new char[]{'┌', '┬', '┐'}));
+        System.out.println(formatRow(columnTitles, columnWidths));
+        System.out.println(generaMarcTaula(columnWidths, new char[]{'├', '┼', '┤'}));
+
+        for (HashMap<String, Object> monument : monuments) {
+            String[] row = {
+                monument.get("nom").toString(),
+                monument.get("pais").toString(),
+                monument.get("detalls") != null ? monument.get("detalls").toString() : "",
+                getCoordsString(monument)
+            };
+            System.out.println(formatRow(row, columnWidths));
+        }
+
+        System.out.println(generaMarcTaula(columnWidths, new char[]{'└', '┴', '┘'}));
     }
 
     /**
@@ -278,7 +467,21 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGeneraBaralla
      */
     public static ArrayList<HashMap<String, Object>> generaBaralla() {
+        String[] pals = {"oros", "copes", "espases", "bastos"};
+        int[] numeros = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12}; 
+
         ArrayList<HashMap<String, Object>> baralla = new ArrayList<>();
+
+        for (String pal : pals) {
+            for (int numero : numeros) {
+                HashMap<String, Object> carta = new HashMap<>();
+                carta.put("pal", pal);
+                carta.put("número", numero);
+                baralla.add(carta);
+            }
+        }
+
+        Collections.shuffle(baralla); // Barreja les cartes aleatòriament
 
         return baralla;
     }
@@ -292,6 +495,19 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGuardaBaralla
      */
     public static void guardaBaralla(String filePath) throws IOException {
+        ArrayList<HashMap<String, Object>> baralla = generaBaralla();
+        JSONArray jsonArray = new JSONArray();
 
+        for (HashMap<String, Object> carta : baralla) {
+            JSONObject cartaJSON = new JSONObject(carta);
+            jsonArray.put(cartaJSON);
+        }
+
+        // Escriure al fitxer JSON
+        try (FileWriter file = new FileWriter(filePath)) {
+            file.write(jsonArray.toString(4)); // Format JSON amb indentació de 4 espais
+        } catch (IOException e) {
+            throw new IOException("Error guardant la baralla al fitxer: " + filePath, e);
+        }
     }
 }
