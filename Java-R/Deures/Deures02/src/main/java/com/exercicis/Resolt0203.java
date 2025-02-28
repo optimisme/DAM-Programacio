@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 
 import org.json.JSONObject;
 import org.json.JSONArray;
@@ -35,8 +34,16 @@ public class Resolt0203 {
         
         try {
             ArrayList<HashMap<String, Object>> monuments = loadMonuments("./data/monuments.json");
-            ArrayList<HashMap<String, Object>> monumentsOrdenats = ordenaMonuments(monuments, "nom");
-            ArrayList<HashMap<String, Object>> monumentsFiltrats = filtraMonuments(monuments, "categoria", "cultural");
+            //ArrayList<HashMap<String, Object>> monumentsOrdenats = ordenaMonuments(monuments, "nom");
+            //ArrayList<HashMap<String, Object>> monumentsFiltrats = filtraMonuments(monuments, "categoria", "cultural");
+            System.out.println(getMonumentValue(monuments.get(2), "nom"));
+            System.out.println(getMonumentValue(monuments.get(2), "pais"));
+            System.out.println(getMonumentValue(monuments.get(2), "categoria"));
+            System.out.println(getMonumentValue(monuments.get(2), "any"));
+            System.out.println(getMonumentValue(monuments.get(2), "longitud"));
+
+            System.out.println(getCoordsString((monuments.get(2))));
+            taulaMonuments(monuments);
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -62,7 +69,7 @@ public class Resolt0203 {
      * - No pot ser null ni una cadena de text buida
      * - No pot contenir espais
      * - Ha de començar amb 'http://' o 'https://'
-     * - El domini ha de contenir almenys un punt 
+     * - El domini ha de contenir almenys un punt (excepte localhost)
      * - El domini no pot començar ni acabar amb un punt
      * 
      * URLs vàlides: ["http://example.com", "https://www.google.com", "https://sub.domini.cat/pagina", "http://localhost:8080", "http://www.ieti.cat:8080/horaris"]
@@ -87,14 +94,13 @@ public class Resolt0203 {
             return false;
         }
 
-        // Eliminar el protocol per validar el domini
+        // Eliminar el protocol i el port per validar el domini
         String senseProtocol = url.substring(url.indexOf("://") + 3);
-        
-        // Comprovar si té almenys un "/"
-        String domini = senseProtocol.contains("/") ? senseProtocol.split("/", 2)[0] : senseProtocol;
+        String sensePort = senseProtocol.contains(":") ? senseProtocol.split(":", 2)[0] : senseProtocol;
+        String domini = sensePort.contains("/") ? sensePort.split("/", 2)[0] : sensePort;
         
         // El domini ha de tenir almenys un punt i no començar/acabar en punt
-        if (!domini.contains(".") || domini.startsWith(".") || domini.endsWith(".")) {
+        if ((!domini.contains(".") && !domini.equals("localhost")) || domini.startsWith(".") || domini.endsWith(".")) {
             return false;
         }
 
@@ -120,61 +126,46 @@ public class Resolt0203 {
      */
     public static ArrayList<HashMap<String, Object>> loadMonuments(String filePath) throws IOException {
         ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
+        String content = new String(Files.readAllBytes(Paths.get(filePath)));
+        JSONArray monumentsArray = new JSONObject(content).getJSONArray("monuments");
+        for (int i = 0; i < monumentsArray.length(); i++) {
+            JSONObject monument = monumentsArray.getJSONObject(i);
+            HashMap<String, Object> monumentHM = new HashMap<>();
 
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(filePath)));
-            JSONObject jsonObject = new JSONObject(content);
-            JSONArray monumentsArray = jsonObject.getJSONArray("monuments");
-
-            for (int i = 0; i < monumentsArray.length(); i++) {
-                JSONObject monumentJSON = monumentsArray.getJSONObject(i);
-                HashMap<String, Object> monumentMap = new HashMap<>();
-                HashMap<String, Object> altres = new HashMap<>();
-
-                // Atributs principals
-                String[] clausPrincipals = {"nom", "pais", "categoria"};
-
-                for (String clau : clausPrincipals) {
-                    if (monumentJSON.has(clau)) {
-                        monumentMap.put(clau, monumentJSON.getString(clau));
-                    }
-                }
-
-                // Processar 'detalls'
-                if (monumentJSON.has("detalls")) {
-                    JSONObject detallsJSON = monumentJSON.getJSONObject("detalls");
+            for (String key : monument.keySet()) {
+                if (key.equals("nom") || key.equals("pais") || key.equals("categoria")) {
+                    monumentHM.put(key, monument.get(key));
+                } else if (key.equals("detalls")) {
+                    JSONObject detalls = monument.getJSONObject(key);
                     HashMap<String, Object> detallsMap = new HashMap<>();
+                    HashMap<String, Object> altres = new HashMap<>();
+                    for (String detallsKey : detalls.keySet()) {
+                        if (detallsKey.equals("coordenades")) {
+                            HashMap<String, Object> coordsMap = new HashMap<>();
+                            JSONObject coordenadesJSON = detalls.getJSONObject("coordenades");
+                            Double lat = coordenadesJSON.getDouble("latitud");
+                            Double lon =  coordenadesJSON.getDouble("longitud");
+                            coordsMap.put("latitud", lat);
+                            coordsMap.put("longitud",lon);
+                            detallsMap.put("coordenades", coordsMap);
 
-                    for (String clau : detallsJSON.keySet()) {
-                        Object valor = detallsJSON.get(clau);
-                        detallsMap.put(clau, valor);
-                    }
-
-                    // Afegir la resta d'atributs a 'altres'
-                    for (String clau : monumentJSON.keySet()) {
-                        if (!monumentMap.containsKey(clau) && !clau.equals("detalls")) {
-                            Object valor = monumentJSON.get(clau);
-                            altres.put("clau", clau);
-                            altres.put("valor", valor);
-                            break;
+                        } else if (detallsKey.equals("any_declaracio")) {
+                                int any =  detalls.getInt("any_declaracio");
+                                detallsMap.put("any_declaracio", any);
+                        } else {
+                            HashMap<String, Object> altre = new HashMap<>();
+                            altre.put("clau", detallsKey);
+                            altre.put("valor", detalls.get(detallsKey));
+                            altres.put(detallsKey, altre);
                         }
+                        
                     }
-
-                    if (!altres.isEmpty()) {
-                        detallsMap.put("altres", altres);
-                    }
-
-                    monumentMap.put("detalls", detallsMap);
+                    detallsMap.put("altres", altres);
+                    monumentHM.put(key, detallsMap);
                 }
-
-
-
-                rst.add(monumentMap);
             }
-        } catch (IOException e) {
-            throw new IOException("Error llegint el fitxer JSON: " + filePath, e);
+            rst.add(monumentHM);
         }
-
         return rst;
     }
 
@@ -196,31 +187,26 @@ public class Resolt0203 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGetMonumentValue
      */
-    private static Object getMonumentValue(HashMap<String, Object> monument, String key) {
-        if (monument == null) return null;
-    
-        if (key.equals("nom") || key.equals("pais") || key.equals("categoria")) {
+    static Object getMonumentValue(HashMap<String,Object> monument, String key) {
+
+        switch (key) {
+            case "nom", "pais", "categoria" -> {
             return monument.get(key);
-        } else if (key.equals("any")) {
-            HashMap<?, ?> detalls = (HashMap<?, ?>) monument.get("detalls");
-            if (detalls != null) {
-                Object any = detalls.get("any_declaracio");
-                return any instanceof Number ? ((Number) any).intValue() : null;
             }
-        } else if (key.equals("latitud") || key.equals("longitud")) {
-            HashMap<?, ?> detalls = (HashMap<?, ?>) monument.get("detalls");
-            if (detalls != null) {
-                HashMap<?, ?> coordenades = (HashMap<?, ?>) detalls.get("coordenades");
-                if (coordenades != null) {
-                    Object valor = coordenades.get(key);
-                    return valor instanceof Number ? ((Number) valor).doubleValue() : null;
-                }
+            case "any" -> {
+            HashMap<String, Object> detalls = (HashMap<String, Object>) monument.get("detalls");
+            return detalls != null ? detalls.get("any_declaracio") : null;
+            }
+            case "latitud", "longitud" -> {
+            HashMap<String, Object> detalls = (HashMap<String, Object>) monument.get("detalls");
+            HashMap<String, Object> coordenades = (HashMap<String, Object>) detalls.get("coordenades");
+            return coordenades != null ? coordenades.get(key) : null;
+
             }
         }
         return null;
     }
     
-
     /**
      * Comprova si un valor es troba dins d'una llista de valors vàlids.
      * 
@@ -346,55 +332,50 @@ public class Resolt0203 {
      *
      * Exemples:
      * formatRow(new String[]{"Nom", "País", "Any"}, new int[]{10, 6, 4});
-     * Retorna: "│ Nom       │ País  │ Any  │"
+     * Retorna: "│ Nom       │ País  │ Any │"
      *
      * formatRow(new String[]{"Machu Picchu", "Perú", "1983"}, new int[]{10, 6, 4});
-     * Retorna: "│ Machu Picchu │ Perú  │ 1983 │"
+     * Retorna: "│ Machu Picc│ Perú  │ 1983│"
      *
      * @param values Array amb els valors de cada columna.
      * @param columnWidths Array amb l'amplada de cada columna.
      * @return Una cadena de text formatejada representant una fila de la taula.
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0203#testFormatRow
      */
     private static String formatRow(String[] values, int[] columnWidths) {
         StringBuilder row = new StringBuilder("│");
         for (int i = 0; i < values.length; i++) {
-            row.append(String.format(" %-" + columnWidths[i] + "s │", values[i]));
+            String value = values[i] == null ? "" : values[i];
+            if (value.length() > columnWidths[i]) {
+                value = value.substring(0, columnWidths[i]);
+            }
+            row.append(String.format("%-" + columnWidths[i] + "s", value)).append("│");
         }
         return row.toString();
     }
+    
 
     /**
      * Obté una representació en format text de les coordenades d'un monument.
      *
-     * La funció busca dins de la clau "detalls" del monument i accedeix a 
-     * "coordenades", d'on obté la "latitud" i "longitud". 
-     * Si algun d'aquests valors no és present, retorna una cadena buida.
-     *
-     * Exemple de monument:
-     * {
-     *   "detalls": {
-     *     "coordenades": {
-     *       "latitud": "40.4",
-     *       "longitud": "116.5"
-     *     }
-     *   }
-     * }
+     * Fa servir la funció 'getMonumentValue'
      * 
      * Crida a getCoordsString(monument) → Retorna "40.4,116.5"
      *
      * @param monument HashMap que representa un monument.
      * @return Una cadena de text amb les coordenades en format "latitud,longitud",
      *         o una cadena buida si no es troben les dades.
+     * 
+     * @test ./runTest.sh com.exercicis.TestExercici0203#testGetCoordsString
      */
-    private static String getCoordsString(HashMap<String, Object> monument) {
-        if (monument.containsKey("detalls")) {
-            HashMap<?, ?> detalls = (HashMap<?, ?>) monument.get("detalls");
-            if (detalls.containsKey("coordenades")) {
-                HashMap<?, ?> coords = (HashMap<?, ?>) detalls.get("coordenades");
-                return coords.get("latitud") + "," + coords.get("longitud");
-            }
-        }
-        return "";
+    static String getCoordsString(HashMap<String, Object> monument) {
+        Object latObj = getMonumentValue(monument, "latitud");
+        Object lonObj = getMonumentValue(monument, "longitud");
+        Double lat = ((Number) latObj).doubleValue();
+        Double lon = ((Number) lonObj).doubleValue();
+        if (latObj == null || lonObj == null) return "";
+        return String.format("%.1f,%.1f", lat, lon);
     }
 
     /**
@@ -403,12 +384,14 @@ public class Resolt0203 {
      * El format de la taula ha de fer servir els caràcters: "┌", "┬", "┐", "├", "┼", "┤", "└", "┴" i "┘".
      * 
      * Ex.:
-     * ┌────────────────┬────────────┬──────┬────────────────┐
-     * │ Nom            │ Pais       │ Any  │ Coords         │
-     * ├────────────────┼────────────┼──────┼────────────────┤
-     * │ Gran Muralla C.│ Xina       │ 1987 │ 40.4,116.5     │
-     * │ Machu Picchu   │ Perú       │ 1983 │ -13.1,-72.5    │
-     * └────────────────┴────────────┴──────┴────────────────┘
+     * ┌──────────────┬─────┬────┬────────────┐
+     * │Nom           │Pais │Any │Coords      │
+     * ├──────────────┼─────┼────┼────────────┤
+     * │Gran Muralla X│Xina │1987│40.4,116.6  │
+     * │Machu Picchu  │Perú │1983│-13.2,-72.5 │
+     * │Catedral de No│Franç│1991│48.9,2.3    │
+     * │Parc Nacional │Tanzà│1981│-2.3,34.8   │
+     * └──────────────┴─────┴────┴────────────┘
      * 
      * @param monuments llista dels monuments     
      * @param columnaOrdenacio La columna per la qual es vol ordenar ("nom", "radi", "massa", "distància").
@@ -418,21 +401,8 @@ public class Resolt0203 {
     public static void taulaMonuments(ArrayList<HashMap<String, Object>> monuments) {
         // Definició de les columnes
         String[] columnTitles = {"Nom", "Pais", "Any", "Coords"};
-        int numColumns = columnTitles.length;
-
-        // Determinar l'amplada de cada columna
-        int[] columnWidths = new int[numColumns];
-        for (int i = 0; i < numColumns; i++) {
-            columnWidths[i] = columnTitles[i].length(); // Mida mínima = nom de la columna
-        }
-
-        for (HashMap<String, Object> monument : monuments) {
-            columnWidths[0] = Math.max(columnWidths[0], monument.get("nom").toString().length());
-            columnWidths[1] = Math.max(columnWidths[1], monument.get("pais").toString().length());
-            columnWidths[2] = Math.max(columnWidths[2], monument.get("detalls") != null ? monument.get("detalls").toString().length() : 0);
-            columnWidths[3] = Math.max(columnWidths[3], getCoordsString(monument).length());
-        }
-
+        int[] columnWidths = {14, 5, 4, 12};
+ 
         // Crear i mostrar la taula
         System.out.println(generaMarcTaula(columnWidths, new char[]{'┌', '┬', '┐'}));
         System.out.println(formatRow(columnTitles, columnWidths));
@@ -440,9 +410,9 @@ public class Resolt0203 {
 
         for (HashMap<String, Object> monument : monuments) {
             String[] row = {
-                monument.get("nom").toString(),
-                monument.get("pais").toString(),
-                monument.get("detalls") != null ? monument.get("detalls").toString() : "",
+                getMonumentValue(monument, "nom").toString(),
+                getMonumentValue(monument, "pais").toString(),
+                getMonumentValue(monument, "any").toString(),
                 getCoordsString(monument)
             };
             System.out.println(formatRow(row, columnWidths));
@@ -493,8 +463,6 @@ public class Resolt0203 {
      * 
      * @param filePath
      * @throws IOException si hi ha algun error amb l'escriptura de l'arxiu forçant un 'try/catch'
-     * 
-     * @test ./runTest.sh com.exercicis.TestExercici0203#testGuardaBaralla
      */
     public static void guardaBaralla(String filePath) throws IOException {
         ArrayList<HashMap<String, Object>> baralla = generaBaralla();
