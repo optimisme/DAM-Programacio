@@ -328,10 +328,10 @@ public class Resolt0203 {
      *
      * Exemples:
      * formatRow(new String[]{"Nom", "País", "Any"}, new int[]{10, 6, 4});
-     * Retorna: "│ Nom       │ País  │ Any │"
+     * Retorna: "│Nom       │País  │Any │"
      *
      * formatRow(new String[]{"Machu Picchu", "Perú", "1983"}, new int[]{10, 6, 4});
-     * Retorna: "│ Machu Picc│ Perú  │ 1983│"
+     * Retorna: "│Machu Picc│Perú  │1983│"
      *
      * @param values Array amb els valors de cada columna.
      * @param columnWidths Array amb l'amplada de cada columna.
