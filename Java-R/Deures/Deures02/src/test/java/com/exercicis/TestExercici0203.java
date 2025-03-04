@@ -303,7 +303,7 @@ class TestExercici0203 {
     void testFiltraMonuments(TestInfo testInfo) {
         try {
             ArrayList<HashMap<String, Object>> monuments = new ArrayList<>();
-            
+        
             HashMap<String, Object> m1 = new HashMap<>();
             m1.put("nom", "Monument A");
             m1.put("pais", "Country A");
@@ -325,14 +325,14 @@ class TestExercici0203 {
             ArrayList<HashMap<String, Object>> filteredNom = Exercici0203.filtraMonuments(monuments, "nom", "Monument B");
             assertEquals(1, filteredNom.size());
             assertEquals("Monument B", filteredNom.get(0).get("nom"));
-            
+           
             ArrayList<HashMap<String, Object>> filteredPais = Exercici0203.filtraMonuments(monuments, "pais", "Country A");
             assertEquals(2, filteredPais.size());
             for (HashMap<String, Object> m : filteredPais) {
                 assertEquals("Country A", m.get("pais"));
             }
             
-            ArrayList<HashMap<String, Object>> filteredCategoria = Exercici0203.filtraMonuments(monuments, "categoria", "category a");
+            ArrayList<HashMap<String, Object>> filteredCategoria = Exercici0203.filtraMonuments(monuments, "categoria", "Category A");
             assertEquals(2, filteredCategoria.size());
             for (HashMap<String, Object> m : filteredCategoria) {
                 assertEquals("Category A", m.get("categoria"));

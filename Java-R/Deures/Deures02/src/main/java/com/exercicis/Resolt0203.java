@@ -275,23 +275,19 @@ public class Resolt0203 {
      * 
      * @throws IllegalArgumentException si el paràmetre de columna és invàlid (no força un 'try/catch')
      * 
-     * @test ./runTest.sh com.exercicis.TestExercici0203#testOrdenaMonuments
+     * @test ./runTest.sh com.exercicis.TestExercici0203#testFiltraMonuments
      */
     public static ArrayList<HashMap<String, Object>> filtraMonuments(ArrayList<HashMap<String, Object>> monuments, String filterKey, String filterValue) throws IllegalArgumentException {
+        ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
         if (!isValid(filterKey, new String[]{"nom", "pais", "categoria"})) {
-            throw new IllegalArgumentException("Invalid filter key: " + filterKey);
+            throw new IllegalArgumentException("Columna invalida");
         }
-    
-        ArrayList<HashMap<String, Object>> filteredMonuments = new ArrayList<>(
-            monuments.stream()
-                .filter(monument -> {
-                    Object value = getMonumentValue(monument, filterKey);
-                    return value instanceof String && ((String) value).equalsIgnoreCase(filterValue);
-                })
-                .collect(Collectors.toList())
-        );
-    
-        return filteredMonuments;
+        for (HashMap<String, Object> monument : monuments) {
+            if (getMonumentValue(monument, filterKey).toString().equals(filterValue)) {
+                rst.add(monument);
+            }
+        }
+        return rst;
     }
 
     /**
