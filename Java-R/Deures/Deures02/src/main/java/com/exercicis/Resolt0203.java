@@ -216,7 +216,7 @@ public class Resolt0203 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0203#testIsValidValue
      */
-    private static boolean isValid(String value, String[] validValues) {
+    public static boolean isValid(String value, String[] validValues) {
         for (String valid : validValues) {
             if (valid.equals(value)) {
                 return true;
@@ -343,7 +343,7 @@ public class Resolt0203 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0203#testFormatRow
      */
-    private static String formatRow(String[] values, int[] columnWidths) {
+    public static String formatRow(String[] values, int[] columnWidths) {
         StringBuilder row = new StringBuilder("│");
         for (int i = 0; i < values.length; i++) {
             String value = values[i] == null ? "" : values[i];

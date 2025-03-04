@@ -8,6 +8,7 @@ import java.util.Locale;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 
@@ -216,8 +217,8 @@ public class Exercici0203 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0203#testIsValidValue
      */
-    private static boolean isValid(String value, String[] validValues) {
-        return false;
+    public static boolean isValid(String value, String[] validValues) {
+        return Arrays.asList(validValues).indexOf(value) != -1;
     }
 
     /**
@@ -292,7 +293,7 @@ public class Exercici0203 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0203#testFormatRow
      */
-    private static String formatRow(String[] values, int[] columnWidths) {
+    public static String formatRow(String[] values, int[] columnWidths) {
         return "";
     }
     
