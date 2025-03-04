@@ -43,8 +43,8 @@ public class Exercici0203 {
             System.out.println(getMonumentValue(monuments.get(2), "any"));
             System.out.println(getMonumentValue(monuments.get(2), "longitud"));
 
-            System.out.println(getCoordsString((monuments.get(2))));
-            taulaMonuments(monuments);
+            //System.out.println(getCoordsString((monuments.get(2))));
+            //taulaMonuments(monuments);
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -218,6 +218,7 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testIsValidValue
      */
     public static boolean isValid(String value, String[] validValues) {
+        if (validValues.length == 0) return false;
         return Arrays.asList(validValues).indexOf(value) != -1;
     }
 
@@ -234,7 +235,25 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testOrdenaMonuments
      */
     public static ArrayList<HashMap<String, Object>> ordenaMonuments(ArrayList<HashMap<String, Object>> monuments, String sortKey) throws IllegalArgumentException {
-        ArrayList<HashMap<String, Object>> rst = new ArrayList<>();    
+        ArrayList<HashMap<String, Object>> rst = new ArrayList<>(monuments);    
+        if (!isValid(sortKey, new String[]{"nom", "any", "latitud", "longitud"})) {
+            throw new IllegalArgumentException("Columna invalida");
+        }
+        Collections.sort(rst, (m1, m2) -> {
+            Object value1 = getMonumentValue(m1, sortKey);
+            Object value2 = getMonumentValue(m2, sortKey);
+
+            if (sortKey.equals("nom")) {
+                return ((String) value1).compareTo((String) value2);
+            } else if (sortKey.equals("any")) {
+                return ((Integer) value1).compareTo((Integer) value2);
+            } else {
+                return ((Double) value1).compareTo((Double) value2);
+            }
+
+        });
+
+        
         return rst;
     }
 
@@ -311,7 +330,7 @@ public class Exercici0203 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGetCoordsString
      */
-    static String getCoordsString(HashMap<String, Object> monument) {
+    public static String getCoordsString(HashMap<String, Object> monument) {
         return "";
     }
 

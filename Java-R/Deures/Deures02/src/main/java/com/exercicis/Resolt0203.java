@@ -369,7 +369,7 @@ public class Resolt0203 {
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGetCoordsString
      */
-    static String getCoordsString(HashMap<String, Object> monument) {
+    public static String getCoordsString(HashMap<String, Object> monument) {
         Object latObj = getMonumentValue(monument, "latitud");
         Object lonObj = getMonumentValue(monument, "longitud");
         Double lat = ((Number) latObj).doubleValue();
