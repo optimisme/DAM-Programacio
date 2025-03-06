@@ -35,16 +35,19 @@ public class Exercici0203 {
         
         try {
             ArrayList<HashMap<String, Object>> monuments = loadMonuments("./data/monuments.json");
-            //ArrayList<HashMap<String, Object>> monumentsOrdenats = ordenaMonuments(monuments, "nom");
-            //ArrayList<HashMap<String, Object>> monumentsFiltrats = filtraMonuments(monuments, "categoria", "cultural");
-            System.out.println(getMonumentValue(monuments.get(2), "nom"));
-            System.out.println(getMonumentValue(monuments.get(2), "pais"));
-            System.out.println(getMonumentValue(monuments.get(2), "categoria"));
-            System.out.println(getMonumentValue(monuments.get(2), "any"));
-            System.out.println(getMonumentValue(monuments.get(2), "longitud"));
+            ArrayList<HashMap<String, Object>> monumentsOrdenats = ordenaMonuments(monuments, "nom");
+            ArrayList<HashMap<String, Object>> monumentsFiltrats = filtraMonuments(monuments, "categoria", "Monumental");
+            //System.out.println(getMonumentValue(monuments.get(2), "nom"));
+            //System.out.println(getMonumentValue(monuments.get(2), "pais"));
+            //System.out.println(getMonumentValue(monuments.get(2), "categoria"));
+            //System.out.println(getMonumentValue(monuments.get(2), "any"));
+            //System.out.println(getMonumentValue(monuments.get(2), "longitud"));
 
             //System.out.println(getCoordsString((monuments.get(2))));
-            //taulaMonuments(monuments);
+
+            taulaMonuments(monumentsOrdenats);
+            taulaMonuments(monumentsFiltrats);
+
 
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
@@ -332,7 +335,22 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testFormatRow
      */
     public static String formatRow(String[] values, int[] columnWidths) {
-        return "";
+        String rst = "";
+        for (int i = 0; i < values.length; i = i + 1) { 
+            rst += "│";
+            String value = values[i];
+            if (value.length() > columnWidths[i]) {
+                value = value.substring(0, columnWidths[i]);
+            }
+            rst += value;
+            int spaceCount = columnWidths[i] - value.length();
+            if (spaceCount > 0) {
+                rst += " ".repeat(spaceCount);
+            }
+            
+        }
+        rst += "│";
+        return rst;
     }
     
 
@@ -350,7 +368,14 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGetCoordsString
      */
     public static String getCoordsString(HashMap<String, Object> monument) {
-        return "";
+        Double latitud = (Double) getMonumentValue(monument, "latitud");
+        Double longitud = (Double) getMonumentValue(monument, "longitud");
+
+        if (latitud == null || longitud == null){
+            return " ";
+        }
+        
+        return String.format("%.1f,%.1f", latitud, longitud);
     }
 
     /**
@@ -374,6 +399,36 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testTaulaMonuments
      */
     public static void taulaMonuments(ArrayList<HashMap<String, Object>> monuments) {
+        StringBuilder rst = new StringBuilder();
+        
+        int [] columnWidths = {15, 10, 5, 10};
+
+        char[] separators = {'┌', '┬', '┐'};
+        rst.append(generaMarcTaula(columnWidths, separators)).append("\n");
+        
+        String[] headers = {"Nom", "Pais", "Any", "Coords"};
+        rst.append(formatRow(headers, columnWidths)).append("\n");
+        
+        char[] separators1 = {'├', '┼', '┤'};
+        rst.append(generaMarcTaula(columnWidths, separators1)).append("\n");
+
+        for (int i = 0; i < monuments.size(); i++) {
+            HashMap<String, Object> monument = monuments.get(i);
+            String nom = (String) getMonumentValue(monument, "nom");
+            String pais = (String) getMonumentValue(monument, "pais");
+            String any = String.valueOf(getMonumentValue(monument, "any"));
+            String coords = getCoordsString(monument);
+
+            String[] rowValues = {nom, pais, any, coords};
+            rst.append(formatRow(rowValues, columnWidths)).append("\n");
+        }
+
+        separators[0] = '└';
+        separators[1] = '┴';
+        separators[2] = '┘';
+        rst.append(generaMarcTaula(columnWidths, separators)).append("\n");
+
+        System.out.println(rst);
     }
 
     /**
