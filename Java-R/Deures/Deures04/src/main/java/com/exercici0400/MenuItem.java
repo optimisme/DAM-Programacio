@@ -1,6 +1,7 @@
 package com.exercici0400;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MenuItem {
 
@@ -28,5 +29,12 @@ public class MenuItem {
         this.keyWords = keyWords;
     }
     
-    
+    /**
+     * Retorna si la paraula està a KeyWords
+     * @param word paraula a analitzar
+     * @return true si ha trobat la paraula
+     */
+    public boolean isInKeyWords(String word) {
+        return Arrays.asList(keyWords).contains(word);
+    }
 }

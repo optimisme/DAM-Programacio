@@ -40,6 +40,8 @@ Tindrà les següents classes:
     * Atribut **title** el text que es mostra per pantalla
     * Atribut **keyWords** les paraules claus que activen aquella opció.
 
+    * Mètode **isInKeyWords** que rep com a paràmetre un text i retorna true si està dins del keyWords.
+
     * **Atenció!** No deriva de cap altre objecte!
 
 - **Menu**: mostra un menú per pantalla. Té:

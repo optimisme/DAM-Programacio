@@ -297,7 +297,18 @@ public class Exercici0203 {
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGeneraMarcTaula
      */
     public static String generaMarcTaula(int[] columnWidths, char[] separators) {
-        return "";
+        StringBuilder rst = new StringBuilder();
+
+        rst.append(separators[0]);
+        for (int i = 0; i < columnWidths.length; i++) {
+            rst.append(("─").repeat(columnWidths[i]));
+            if (i < columnWidths.length - 1) {
+                rst.append(separators[1]);
+            }
+        }
+        rst.append(separators[2]);
+
+        return rst.toString();
     }
 
     /**

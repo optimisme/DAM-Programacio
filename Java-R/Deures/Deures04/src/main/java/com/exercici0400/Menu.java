@@ -2,8 +2,6 @@ package com.exercici0400;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Set;
-
 
 public class Menu extends Component {
 
@@ -25,6 +23,13 @@ public class Menu extends Component {
     }
 
     public int getSelection(String text) {
+        for (int i = 0; i < items.size(); i++) {
+            MenuItem item = items.get(i);
+
+            if (item.isInKeyWords(text) || text.equalsIgnoreCase(Integer.toString(i))) {
+                return i;
+            }
+        }
         return -1;
     }
 
