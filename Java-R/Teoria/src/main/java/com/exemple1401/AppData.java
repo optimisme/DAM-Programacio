@@ -3,19 +3,29 @@ package com.exemple1401;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-class AppData {
+/**
+ * Classe que gestiona la connexió a la base de dades MySQL utilitzant el patró Singleton.
+ * Proporciona mètodes per connectar, tancar la connexió, executar actualitzacions, inserir registres
+ * i realitzar consultes transformant el ResultSet en un ArrayList de HashMap.
+ */
+public class AppData {
     private static AppData instance;
     private Connection conn;
 
+    /**
+     * Constructor privat que estableix la connexió a la base de dades.
+     */
     private AppData() {
         // Connecta al crear la primera instància
         connect();
     }
 
-    // Singleton
+    /**
+     * Retorna la instància única d'AppData.
+     *
+     * @return la instància de AppData.
+     */
     public static AppData getInstance() {
         if (instance == null) {
             instance = new AppData();
@@ -23,6 +33,11 @@ class AppData {
         return instance;
     }
 
+    /**
+     * Estableix la connexió amb la base de dades MySQL.
+     * Utilitza la URL, l'usuari i la contrasenya especificats.
+     * Desactiva l'autocommit per permetre el control manual de les transaccions.
+     */
     private void connect() {
         String url = "jdbc:mysql://localhost:3308/world?useSSL=false&allowPublicKeyRetrieval=true";
         String user = "root";
@@ -31,13 +46,16 @@ class AppData {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(url, user, password);
-            conn.setAutoCommit(false); // Desactiva l'autocommit per permetre control manual de transaccions
+            conn.setAutoCommit(false); // Desactiva l'autocommit per control manual de transaccions
         } catch (ClassNotFoundException | SQLException e) {
             System.out.println("Error connectant a la base de dades MySQL.");
             e.printStackTrace();
         }
     }
 
+    /**
+     * Tanca la connexió amb la base de dades.
+     */
     public void close() {
         try {
             if (conn != null) {
@@ -48,6 +66,12 @@ class AppData {
         }
     }
 
+    /**
+     * Executa una actualització (INSERT, UPDATE, DELETE, etc.) a la base de dades.
+     * Realitza un commit dels canvis. En cas d'error, es fa rollback.
+     *
+     * @param sql la sentència SQL d'actualització a executar.
+     */
     public void update(String sql) {
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(sql);
@@ -62,6 +86,14 @@ class AppData {
             }
         }
     }
+
+    /**
+     * Executa una inserció a la base de dades i retorna l'identificador generat.
+     * En cas d'error, es fa rollback i es retorna -1.
+     *
+     * @param sql la sentència SQL d'inserció a executar.
+     * @return l'identificador generat o -1 si hi ha hagut un error.
+     */
     public int insertAndGetId(String sql) {
         int generatedId = -1;
         try (Statement stmt = conn.createStatement()) {
@@ -82,8 +114,16 @@ class AppData {
         return generatedId;
     }
 
-    public List<Map<String, Object>> query(String sql) {
-        List<Map<String, Object>> resultList = new ArrayList<>();
+    /**
+     * Realitza una consulta a la base de dades i transforma el ResultSet en un ArrayList de HashMap.
+     * Cada HashMap representa una fila, on les claus són els noms de les columnes i els valors són els
+     * objectes corresponents.
+     *
+     * @param sql la sentència SQL de consulta.
+     * @return un ArrayList de HashMap amb les files resultants de la consulta.
+     */
+    public ArrayList<HashMap<String, Object>> query(String sql) {
+        ArrayList<HashMap<String, Object>> resultList = new ArrayList<>();
 
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -91,7 +131,7 @@ class AppData {
             int columnCount = metaData.getColumnCount();
 
             while (rs.next()) {
-                Map<String, Object> row = new HashMap<>();
+                HashMap<String, Object> row = new HashMap<>();
                 for (int i = 1; i <= columnCount; i++) {
                     row.put(metaData.getColumnLabel(i), rs.getObject(i));
                 }
