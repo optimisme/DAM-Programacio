@@ -331,6 +331,21 @@ public class AppData {
     }
 }
 ```
+
+### PRIMARY KEY i AUTOINCREMENT
+
+A **sqlite** es defineix la clau primària amb autoincrement de manera diferent a mySQL:
+
+```sql
+CREATE TABLE IF NOT EXISTS COMPANY(
+   id INTEGER PRIMARY KEY AUTOINCREMENT,
+   name TEXT NOT NULL,
+   age INT NOT NULL,
+   address CHAR(50),
+   salary REAL
+);
+```
+
 ### FOREIGN KEY a "sqlite"
 
 A **sqlite** es defineix la *FOREIGN KEY** de manera diferent a mySQL:
