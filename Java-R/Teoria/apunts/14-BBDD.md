@@ -331,6 +331,28 @@ public class AppData {
     }
 }
 ```
+### FOREIGN KEY a "sqlite"
+
+A **sqlite** es defineix la *FOREIGN KEY** de manera diferent a mySQL:
+
+```sql
+CREATE TABLE artist(
+  artistid    INTEGER PRIMARY KEY, 
+  artistname  TEXT
+);
+CREATE TABLE track(
+  trackid     INTEGER,
+  trackname   TEXT, 
+  trackartist INTEGER     -- Referencia a artist.artistid
+);
+CREATE TABLE track(
+  trackid     INTEGER, 
+  trackname   TEXT, 
+  trackartist INTEGER,
+  FOREIGN KEY(trackartist) REFERENCES artist(artistid)
+);
+```
+
 
 ## Base de dades MySQL
 
