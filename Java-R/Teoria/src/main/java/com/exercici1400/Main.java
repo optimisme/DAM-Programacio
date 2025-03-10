@@ -1,8 +1,12 @@
 package com.exercici1400;
 
 public class Main {
+
+    // Executar l'exericici amb:
+    // ./run.sh com.exercici1400.Mai
+    
     public static void main(String[] args) {
-        AppData db = AppData.getInstance("./data/exercici1400.sqlite");
+        AppData db = AppData.getInstance();
 
         // Crear taules
         Biblioteca.crearTaulaEditorials();
