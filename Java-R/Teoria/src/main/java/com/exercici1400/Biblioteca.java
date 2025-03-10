@@ -7,15 +7,10 @@ import java.util.Locale;
 public class Biblioteca {
 
     public static void crearTaulaEditorials() {
-        AppData db = AppData.getInstance();
-        db.update("DROP TABLE IF EXISTS Editorials;");
+        // TODO 
         String sql = """
-            CREATE TABLE IF NOT EXISTS Editorials (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                nom TEXT NOT NULL
-            );
         """;
-        db.update(sql);
+        AppData.getInstance().update(sql);
     }
 
     public static void crearTaulaLlibres() {

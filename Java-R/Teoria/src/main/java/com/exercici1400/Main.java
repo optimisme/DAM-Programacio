@@ -2,7 +2,7 @@ package com.exercici1400;
 
 public class Main {
     public static void main(String[] args) {
-        AppData db = AppData.getInstance();
+        AppData db = AppData.getInstance("./data/exercici1400.sqlite");
 
         // Crear taules
         Biblioteca.crearTaulaEditorials();
