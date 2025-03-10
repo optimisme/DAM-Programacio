@@ -3,8 +3,10 @@ package com.exercici1400;
 public class Main {
 
     // Executar l'exericici amb:
-    // ./run.sh com.exercici1400.Mai
-    
+    // ./run.sh com.exercici1400.Main
+
+    // Editar l'arxiu de configuració 'sqlite' a la funció 'connect' de 'AppData'
+
     public static void main(String[] args) {
         AppData db = AppData.getInstance();
 
