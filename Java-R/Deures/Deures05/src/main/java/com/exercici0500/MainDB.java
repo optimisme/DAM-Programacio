@@ -15,8 +15,10 @@ public class MainDB {
         Cinema.crearTaulaSales();
 
         // Afegir directors
-        Cinema.afegirDirector("Director A", "País X");
-        Cinema.afegirDirector("Director B", "País Y");
+        int id0 = Cinema.afegirDirector("Director A", "País X");
+        System.out.println("S'ha afegit un nou director amb id: " + id0);
+        int id1 = Cinema.afegirDirector("Director B", "País Y");
+        System.out.println("S'ha afegit un nou director amb id: " + id1);
 
         // Afegir pel·lícules
         Cinema.afegirPeli("Film A", 2020, 120, 1);

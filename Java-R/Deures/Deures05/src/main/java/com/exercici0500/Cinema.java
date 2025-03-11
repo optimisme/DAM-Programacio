@@ -17,6 +17,12 @@ public class Cinema {
     public static void crearTaulaSales() {
     }
 
+    /**
+     * Afegeix un nou director
+     * @param nomDirector
+     * @param nacionalitat
+     * @return l'identificador del director afegit
+     */
     public static int afegirDirector(String nomDirector, String nacionalitat) {
         return 0;
     }
