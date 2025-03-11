@@ -235,7 +235,7 @@ protected int id;
 protected String nom;
 protected int edat;
 protected String pais;
-protected boolean equip;
+final private boolean equip;
 ```
 
 ```java
@@ -252,7 +252,6 @@ protected int id;
 protected String nom;
 protected int edat;
 protected String pais;
-protected boolean equip;
 ```
 
 ```java
@@ -272,7 +271,6 @@ protected int id;
 protected String nom;
 protected int edat;
 protected String pais;
-protected boolean equip;
 ```
 
 ```java
