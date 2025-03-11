@@ -35,7 +35,18 @@ public class Cinema {
     }
 
     public static void crearTaulaSales() {
-        
+        AppData db = AppData.getInstance();
+        db.update("DROP TABLE IF EXISTS sales");
+        String sql = """
+            CREATE TABLE IF NOT EXISTS sales (
+                id_sala INTEGER PRIMARY KEY AUTOINCREMENT,
+                nom_sala TEXT NOT NULL,
+                capacitat INTEGER NOT NULL,
+                id_peli INTEGER,
+                FOREIGN KEY(id_peli) REFERENCES pelis(id_peli)
+            );
+        """;
+        db.update(sql);
     }
 
     /**
@@ -45,25 +56,31 @@ public class Cinema {
      * @return l'identificador del director afegit
      */
     public static int afegirDirector(String nomDirector, String nacionalitat) {
-        return 0;
+        AppData db = AppData.getInstance();
+        String sql = String.format("INSERT INTO directors (nom, nacionalitat) VALUES ('%s','%s')",nomDirector,nacionalitat);
+        return db.insertAndGetId(sql);
     }
 
     public static int afegirPeli(String titol, int any, int duracio, int idDirector) {
-        return 0;
+        AppData db = AppData.getInstance();
+        String sql = String.format("INSERT INTO pelis (titol, any_estrena, durada, id_director) VALUES ('%s','%d','%d','%d')",titol, any, duracio ,idDirector);
+        return db.insertAndGetId(sql);
     }
 
     public static int afegirSala(String nomSala, int capacitat, int idPeli) {
-        return 0;
-    }
+        AppData db = AppData.getInstance();
+        String sql = String.format("INSERT INTO sales (nom_sala, capacitat, id_peli) VALUES ('%s', %d, %d)", nomSala, capacitat, idPeli);
+        return db.insertAndGetId(sql);
+    } 
 
     /**
      * Mostra una taula amb informació dels directors:
-     * ┌────────────┬──────────────┐
-     * │ Nom        │ Nacionalitat │
-     * ├────────────┼──────────────┤
-     * │ Director A │ País X       │
-     * │ Director B │ País Y       │
-     * └────────────┴──────────────┘
+     * ┌───────────┬─────────────┐
+     * │Nom        │Nacionalitat │
+     * ├───────────┼─────────────┤
+     * │Director A │País X       │
+     * │Director B │País Y       │
+     * └───────────┴─────────────┘
      */
     public static void llistarTaulaDirectors() {
     }
@@ -77,14 +94,14 @@ public class Cinema {
     /**
      * Mostra una fitxa amb informació de les pelis:
      * 
-     * ┌─────────────────────────┐
-     * │ Film A                  │
-     * ├──────────┬──────────────┤
-     * │ Id       │ 1            │
-     * │ Direcció │ Director A   │
-     * │ Any      │ 2020         │
-     * │ Duració  │ 120 minuts   │
-     * └──────────┴──────────────┘
+     * ┌───────────────────────┐
+     * │Film A                 │
+     * ├─────────┬─────────────┤
+     * │Id       │1            │
+     * │Direcció │Director A   │
+     * │Any      │2020         │
+     * │Duració  │120 minuts   │
+     * └─────────┴─────────────┘
      */
     public static void llistarInfoPeli(int idLlibre) {
     }
