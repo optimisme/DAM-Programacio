@@ -434,7 +434,7 @@ public class Exercici0203 {
     /**
      * Genera una baralla de cartes espanyola i la retorna en un ArrayList ordenat aleatòriament.
      * 
-     * La baralla consta de 40 cartes, amb quatre pals: "oros", "copes", "espases" i "bastos".
+     * La baralla consta de 48 cartes, amb quatre pals: "oros", "copes", "espases" i "bastos".
      * Cada pal té cartes numerades de l'1 al 12.
      * 
      * Cada carta es representa com un HashMap amb dues claus:
@@ -444,7 +444,7 @@ public class Exercici0203 {
      * Exemple de sortida d'una carta:
      * { "pal": "copes", "número": 10 }
      * 
-     * @return Un ArrayList que conté les 40 cartes de la baralla en ordre aleatori.
+     * @return Un ArrayList que conté les 48 cartes de la baralla en ordre aleatori.
      * 
      * @test ./runTest.sh com.exercicis.TestExercici0203#testGeneraBaralla
      */
