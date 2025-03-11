@@ -1,13 +1,13 @@
 package com.exercici0500;
 
-public class MainDB {
+public class Main {
 
     // Fes anar aquest programa amb:
-    // ./run.sh com.exercici0500.MainDB
+    // ./run.sh com.exercici0500.Main
     
     public static void main(String[] args) {
         AppData db = AppData.getInstance();
-        db.connect("./data/cinema.sqlite");
+        db.connect("./data/dbCinema.sqlite");
 
         // Crear taules
         Cinema.crearTaulaDirectors();
@@ -44,6 +44,9 @@ public class MainDB {
         int idPeli = 1;
         System.out.println("\nInformació de la Peli: " + idPeli);
         Cinema.llistarInfoPeli(idPeli);
+
+        // Guardar informació de les pelis en un ".json"
+        Cinema.pelisToJSON("./data/pelis.json");
 
         // Tancar la connexió amb la base de dades (del singleton)
         db.close();

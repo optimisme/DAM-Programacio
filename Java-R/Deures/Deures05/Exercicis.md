@@ -4,7 +4,7 @@
 
 Utilitzant el patró Singleton 'AppData' i una base de dades sqlite, desenvolupa una aplicació per a un cinema que no només gestioni les pel·lícules i els directors sinó també les sales on es projecten aquestes pel·lícules.
 
-S'ha de guardar la informació a l'arxiu **'./data/cinema.sqlite'**
+S'ha de guardar la informació a l'arxiu **'./data/dbCinema.sqlite'**
 
 Cada peli estarà relacionada amb un director mitjançant claus foranes per establir relacions entre les taules. A més, hi haurà una relació entre les pel·lícules i les sales on es projecten, permetent saber en quina sala es pot veure cada film.
 
@@ -126,7 +126,7 @@ ID: 1, Títol: Film A, Any d'Estrena: 2020, Durada: 120 minuts, Director: Direct
 
 ## Guardar dades en un .json
 
-Fes servir la base de dades anterior ('./data/cinema.sqlite') per generar un *.json* amb la informació de totes les películes que hi ha a la base de dades:
+Fes servir la base de dades anterior ('./data/dbCinema.sqlite') per generar un *.json* amb la informació de totes les películes que hi ha a la base de dades:
 
 ```json
 [
@@ -154,7 +154,7 @@ public class MainSaveJSON {
 
 Fent servir el Singleton 'AppData' i una base de dades *sqlite*, desenvolupa una aplicació que gestioni restaurants, clients i serveis.
 
-S'ha de guardar la informació a l'arxiu **'./data/restaurants.sqlite'**
+S'ha de guardar la informació a l'arxiu **'./data/dbRestaurants.sqlite'**
 
 **Taula restaurants:**
 
@@ -191,7 +191,7 @@ Defineix també les funcions de l'arxiu **Restaurants.java**.
 
 # Exercici 0502
 
-Utilitzant el patró Singleton 'AppData' i una base de dades sqlite, desenvolupa una aplicació per modelar informació dels *Jocs Olímpics* a l'arxiu: **'./data/olimpiades.sqlite'**
+Utilitzant el patró Singleton 'AppData' i una base de dades sqlite, desenvolupa una aplicació per modelar informació dels *Jocs Olímpics* a l'arxiu: **'./data/dbOlimpiades.sqlite'**
 
 **Taula atletes**
 ```sql
