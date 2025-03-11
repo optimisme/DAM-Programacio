@@ -53,6 +53,7 @@ public class Cinema {
      * ┌─────────────────────────┐
      * │ Film A                  │
      * ├──────────┬──────────────┤
+     * │ Id       │ 1            │
      * │ Direcció │ Director A   │
      * │ Any      │ 2020         │
      * │ Duració  │ 120 minuts   │
