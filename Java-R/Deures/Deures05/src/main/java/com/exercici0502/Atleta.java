@@ -8,7 +8,7 @@ public class Atleta {
     protected String nom;
     protected int edat;
     protected String pais;
-    protected boolean equip;
+    final private boolean equip;
 
     public Atleta(int id, String nom, int edat, String pais, boolean equip) {
         this.id = id;
