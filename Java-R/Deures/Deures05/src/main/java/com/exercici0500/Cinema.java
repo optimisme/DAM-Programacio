@@ -54,7 +54,6 @@ public class Cinema {
      * │ Any      │ 2020         │
      * │ Duració  │ 120 minuts   │
      * └──────────┴──────────────┘
-     * fent el marc amb els caràcters: ┌ ─ ┐ ├ ┼ ┤ │ └ ─ ┘
      */
     public static void llistarInfoPeli(int idLlibre) {
     }
