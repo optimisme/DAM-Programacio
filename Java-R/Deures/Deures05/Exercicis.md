@@ -188,3 +188,241 @@ expenditure (REAL) : El cost del servei
 Els camps 'id_restaurant' i 'id_client' es relacionen amb les respectives taules.
 
 Defineix també les funcions de l'arxiu **Restaurants.java**.
+
+# Exercici 0502
+
+Utilitzant el patró Singleton 'AppData' i una base de dades sqlite, desenvolupa una aplicació per modelar informació dels *Jocs Olímpics* a l'arxiu: **'./data/olimpiades.sqlite'**
+
+**Taula atletes**
+```sql
+id_atleta (INTEGER) : Clau primària, autoincrement.
+nom (TEXT) : Nom de l’atleta.
+edat (INTEGER) : Edat de l’atleta.
+pais (TEXT) : País de l’atleta.
+equip (BOOLEAN) : `TRUE` si l’atleta competeix en equip, `FALSE` si competeix individualment.
+```
+
+**Taula esports**
+```sql
+id_esport (INTEGER) : Clau primària, autoincrement.
+nom (TEXT) : Nom de l’esport.
+categoria (TEXT) : Categoria de l’esport (ex: Atletisme, Natació, Gimnàstica, etc.).
+```
+
+**Taula competicions**
+```sql
+id_competicio (INTEGER) : Clau primària, autoincrement.
+id_esport (INTEGER) : Clau forana cap a `esports`.
+lloc (TEXT) : Lloc on es desenvolupa la competició.
+data (DATE) : Data de la competició.
+```
+
+**Taula participants**
+```sql
+id_participant (INTEGER) : Clau primària, autoincrement.
+id_atleta (INTEGER) : Clau forana cap a `atletes`.
+id_competicio (INTEGER) : Clau forana cap a `competicions`.
+posicio (INTEGER) : Posició final de l’atleta/equip en la competició.
+medalla (TEXT) : 'Or', 'Plata', 'Bronze' o NULL si no ha guanyat medalla.
+```
+
+Cal modelar la informació anterior a *Java* amb les següents classes:
+
+**Atleta**:
+```java
+// Atributs
+protected int id;
+protected String nom;
+protected int edat;
+protected String pais;
+protected boolean equip;
+```
+
+```java
+// Mètodes
+public Atleta(int id, String nom, int edat, String pais, boolean equip)
+public void updateDB();
+public abstract String toString();
+```
+
+**AtletaIndividual** (derivada d'Atleta):
+```java
+// Atributs
+protected int id;
+protected String nom;
+protected int edat;
+protected String pais;
+protected boolean equip;
+```
+
+```java
+// Mètodes
+public AtletaIndividual(int id, String nom, int edat, String pais)
+
+// Format de les dades: 
+// "ID: " + id + ", Nom: " + nom + ", Edat: " + edat + ", País: " + pais + ", Tipus: Individual"
+@Override
+public String toString();
+```
+
+**AtletaEquip** (derivada d'Atleta):
+```java
+// Atributs
+protected int id;
+protected String nom;
+protected int edat;
+protected String pais;
+protected boolean equip;
+```
+
+```java
+// Mètodes
+public AtletaEquip(int id, String nom, int edat, String pais)
+
+// Format de les dades: 
+// "ID: " + id + ", Nom: " + nom + ", Edat: " + edat + ", País: " + pais + ", Tipus: Equip"
+@Override
+public String toString();
+```
+
+**Esport**:
+```java
+// Atributs
+private int id;
+private String nom;
+private String categoria;
+```
+
+```java
+// Mètodes
+public Esport(int id, String nom, String categoria)
+
+public void updateDB();
+
+// Format de les dades: 
+// "ID: " + id + ", Esport: " + nom + ", Categoria: " + categoria
+@Override
+public String toString();
+```
+
+**Competicio**:
+```java
+// Atributs
+private int id;
+private Esport esport;
+private String lloc;
+private String data;
+```
+
+```java
+// Mètodes
+public Competicio(int id, Esport esport, String lloc, String data)
+
+public void updateDB();
+
+// Format de les dades: 
+// "ID: " + id + ", Esport: " + esport.nom + ", Lloc: " + lloc + ", Data: " + data
+@Override
+public String toString();
+```
+
+**Participant**:
+```java
+// Atributs
+private int id;
+private Atleta atleta;
+private Competicio competicio;
+private int posicio;
+private String medalla;
+```
+
+```java
+// Mètodes
+public Participant(int id, Atleta atleta, Competicio competicio, int posicio, String medalla)
+
+public void updateDB();
+
+// Format de les dades: 
+// "ID: " + id + ", Atleta: " + atleta.nom + ", Competicio: " + competicio.id + ", Posició: " + posicio + ", Medalla: " + medalla
+@Override
+public String toString();
+```
+
+**Olimpiades**:
+```java
+// Atributs
+private ArrayList<Atleta> atletes;
+private ArrayList<Esport> esports;
+private ArrayList<Competicio> competicions;
+private ArrayList<Participant> participants;
+
+// Mètodes
+public Olimpiades()
+public void crearTaules()
+public Atleta afegirAtleta(String nom, int edat, String pais, boolean equip)
+public Esport afegirEsport(String nom, String categoria)
+public Competicio afegirCompeticio(Esport esport, String lloc, String data)
+public void llistarAtletes()
+public void mostrarMedaller()
+```
+
+Cal provar-ho amb aquest *"Main"*:
+```java
+public class Main {
+    public static void main(String[] args) {
+        AppData db = AppData.getInstance();
+
+        Olimpiades olm = new Olimpiades();
+
+        olm.crearTaules();
+
+        Atleta atleta1 = olm.afegirAtleta("Usain Bolt", 34, "Jamaica", false);
+        Atleta atleta2 = olm.afegirAtleta("Michael Phelps", 36, "EUA", false);
+
+        Esport atletisme = olm.afegirEsport("Atletisme", "Velocitat");
+        Esport natacio = olm.afegirEsport("Natació", "Aigua");
+
+        Competicio competicio1 = olm.afegirCompeticio(atletisme, "Estadi Olímpic", "2024-07-23");
+        Competicio competicio2 = olm.afegirCompeticio(natacio, "Piscina Olímpica", "2024-07-24");
+
+        olm.afegirParticipant(atleta1, competicio1, 1, "Or");
+        olm.afegirParticipant(atleta2, competicio2, 1, "Or");
+
+        System.out.println("\nAtletes:");
+        olm.llistarAtletes();
+
+        System.out.println("\nMedaller:");
+        olm.mostrarMedaller();
+
+        db.close();
+    }
+}
+```
+
+Quan es modifiquen dades dels objectes *Java* s'han de modificar també els camps a la base de dades, per mantenir-ho sincronitzat. Fes servir aquest mètode *updateDB* com a exemple, s'ha dexecutar cada vegada que es fa un 'setter'
+
+```java
+public class Atleta {
+    protected int id;
+    protected String nom;
+    protected int edat;
+    protected String pais;
+    protected boolean equip;
+
+    public Atleta(int id, String nom, int edat, String pais, boolean equip) {
+        this.id = id;
+        this.nom = nom;
+        this.edat = edat;
+        this.pais = pais;
+        this.equip = equip;
+    }
+    
+    public void updateDB() {
+        String sql = String.format(
+            "UPDATE atletes SET nom='%s', edat=%d, pais='%s', equip=%b WHERE id_atleta=%d;",
+            nom, edat, pais, equip, id
+        );
+        AppData.getInstance().update(sql);
+    }
+}
+```
