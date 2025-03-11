@@ -15,18 +15,22 @@ public class MainDB {
         Cinema.crearTaulaSales();
 
         // Afegir directors
-        int id0 = Cinema.afegirDirector("Director A", "País X");
-        System.out.println("S'ha afegit un nou director amb id: " + id0);
-        int id1 = Cinema.afegirDirector("Director B", "País Y");
-        System.out.println("S'ha afegit un nou director amb id: " + id1);
+        int dir0 = Cinema.afegirDirector("Director A", "País X");
+        System.out.println("S'ha afegit un nou director amb id: " + dir0);
+        int dir1 = Cinema.afegirDirector("Director B", "País Y");
+        System.out.println("S'ha afegit un nou director amb id: " + dir1);
 
         // Afegir pel·lícules
-        Cinema.afegirPeli("Film A", 2020, 120, 1);
-        Cinema.afegirPeli("Film B", 2018, 110, 2);
+        int pel0 = Cinema.afegirPeli("Film A", 2020, 120, 1);
+        System.out.println("S'ha afegit una nova peli amb id: " + pel0);
+        int pel1 = Cinema.afegirPeli("Film B", 2018, 110, 2);
+        System.out.println("S'ha afegit una nova peli amb id: " + pel1);
 
         // Afegir sales
-        Cinema.afegirSala("Sala 1", 150, 1);
-        Cinema.afegirSala("Sala 2", 200, 2);
+        int salY = Cinema.afegirSala("Sala 1", 150, 1);
+        System.out.println("S'ha afegit una nova sala amb id: " + salY);
+        int salZ = Cinema.afegirSala("Sala 2", 200, 2);
+        System.out.println("S'ha afegit una nova sala amb id: " + salZ);
 
         System.out.println("\nDirectors:");
         Cinema.llistarTaulaDirectors();

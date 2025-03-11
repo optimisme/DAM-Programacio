@@ -3,19 +3,26 @@ package com.exercici0501;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
-class AppData {
+/**
+ * Classe que gestiona la connexió a la base de dades utilitzant el patró Singleton.
+ * Proporciona mètodes per connectar, tancar la connexió, actualitzar dades, inserir registres
+ * i realitzar consultes transformant el ResultSet en una llista de HashMap.
+ */
+public class AppData {
     private static AppData instance;
     private Connection conn;
 
-    private AppData() {
-        // Connecta al crear la primera instància
-        connect();
-    }
+    /**
+     * Constructor privat que crea la connexió a la base de dades.
+     */
+    private AppData() { }
 
-    // Singleton
+    /**
+     * Obté la instància única de AppData (Singleton).
+     *
+     * @return la instància d'AppData.
+     */
     public static AppData getInstance() {
         if (instance == null) {
             instance = new AppData();
@@ -23,32 +30,48 @@ class AppData {
         return instance;
     }
 
-    private void connect() {
-        String url = "jdbc:sqlite:dades.sqlite"; // Nom de l'arxiu amb les dades 'dades.sqlite'
+    /**
+     * Estableix la connexió amb la base de dades SQLite.
+     * L'arxiu de la base de dades és "./data/exercici1400.sqlite".
+     * Es desactiva l'autocommit per permetre el control manual de transaccions.
+     */
+    public void connect(String filePath) {
+        String url = "jdbc:sqlite:" + filePath;
         try {
             conn = DriverManager.getConnection(url);
-            conn.setAutoCommit(false); // Desactiva l'autocommit per permetre control manual de transaccions
+            conn.setAutoCommit(false);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Tanca la connexió a la base de dades.
+     */
     public void close() {
         try {
-            if (conn != null) conn.close();
+            if (conn != null) {
+                conn.close();
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
     }
 
+    /**
+     * Executa una actualització a la base de dades (INSERT, UPDATE, DELETE, etc.).
+     * Es realitza un commit dels canvis i, en cas d'error, es fa rollback.
+     *
+     * @param sql la sentència SQL d'actualització a executar.
+     */
     public void update(String sql) {
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(sql);
-            conn.commit(); // Confirma els canvis
+            conn.commit();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             try {
-                conn.rollback(); // Reverteix els canvis en cas d'error
+                conn.rollback();
             } catch (SQLException ex) {
                 System.out.println("Error en fer rollback.");
                 ex.printStackTrace();
@@ -56,23 +79,27 @@ class AppData {
         }
     }
 
+    /**
+     * Executa una inserció a la base de dades i retorna l'identificador generat.
+     * Es realitza el commit de la transacció i, en cas d'error, es fa rollback.
+     *
+     * @param sql la sentència SQL d'inserció a executar.
+     * @return l'identificador generat per la fila inserida, o -1 en cas d'error.
+     */
     public int insertAndGetId(String sql) {
         int generatedId = -1;
         try (Statement stmt = conn.createStatement()) {
-            // Execute the update
             stmt.executeUpdate(sql);
-            conn.commit();  // Make sure to commit the transaction if auto-commit is disabled
-    
-            // Query the last inserted row ID
+            conn.commit();
             try (ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid()")) {
                 if (rs.next()) {
-                    generatedId = rs.getInt(1); // Retrieve the last inserted ID
+                    generatedId = rs.getInt(1);
                 }
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             try {
-                conn.rollback(); // Rollback the transaction in case of error
+                conn.rollback();
             } catch (SQLException ex) {
                 System.out.println("Error during rollback.");
                 ex.printStackTrace();
@@ -80,20 +107,22 @@ class AppData {
         }
         return generatedId;
     }
-    
-    // Aquesta funció transforma el ResultSet en un Map<String, Object>
-    // per fer l'accés a la informació més genèric
-    public List<Map<String, Object>> query(String sql) {
-        List<Map<String, Object>> resultList = new ArrayList<>();
 
-        // try-with-resources tancarà el ResultSet quan acabi el bloc
+    /**
+     * Realitza una consulta a la base de dades i transforma el ResultSet en una ArrayList de HashMap.
+     * Cada HashMap representa una fila amb claus que corresponen als noms de columna.
+     *
+     * @param sql la sentència SQL de consulta.
+     * @return una ArrayList de HashMap amb els resultats de la consulta.
+     */
+    public ArrayList<HashMap<String, Object>> query(String sql) {
+        ArrayList<HashMap<String, Object>> resultList = new ArrayList<>();
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
-
             while (rs.next()) {
-                Map<String, Object> row = new HashMap<>();
+                HashMap<String, Object> row = new HashMap<>();
                 for (int i = 1; i <= columnCount; i++) {
                     row.put(metaData.getColumnLabel(i), rs.getObject(i));
                 }
