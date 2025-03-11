@@ -60,16 +60,20 @@ public class Menu extends Component {
                 rst.add(fixLine(linia));
             } else {
                 if (lastZero && doneZero == false && items.get(0) != null) {
-                    String line = " " + "0." + items.get(0).getTitle();
-                    rst.add(fixLine(line));
+                    String linia0 = " " + "0." + items.get(0).getTitle();
+                    rst.add(fixLine(linia0));
                     doneZero = true;
+                } else {
+                    String liniaBuida = " ".repeat(width);
+                    rst.add(liniaBuida);
                 }
-                String linia = " ".repeat(width);
-                rst.add(linia);
             } 
         }
-        
-        return rst;
 
+        if (!lastZero) {
+            rst.remove(rst.size() - 1);
+        }
+
+        return rst;
     } 
 }
