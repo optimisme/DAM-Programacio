@@ -21,13 +21,15 @@ public class Biblioteca {
         AppData db = AppData.getInstance();
         db.update("DROP TABLE IF EXISTS Llibres");
 
-        String sql = "CREATE TABLE IF NOT EXISTS Llibres (" +
-            " id_llibre INTEGER PRIMARY KEY AUTOINCREMENT," +
-            " titol TEXT NOT NULL," +
-            " autor TEXT," +
-            " any_publicacio INTEGER," +
-            " id_editorial INTEGER," +
-            " FOREIGN KEY(id_editorial) REFERENCES Editorials(id_editorial))";
+        String sql = """
+        CREATE TABLE IF NOT EXISTS Llibres (
+            id_llibre INTEGER PRIMARY KEY AUTOINCREMENT,
+            titol TEXT NOT NULL,
+            autor TEXT,
+            any_publicacio INTEGER,
+            id_editorial INTEGER,
+            FOREIGN KEY(id_editorial) REFERENCES Editorials(id_editorial))
+            """;
         AppData.getInstance().update(sql);
     }
 

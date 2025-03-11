@@ -36,10 +36,12 @@ public class Main {
         db.update("DROP TABLE IF EXISTS animals");
 
         // Crear la taula 'animals'
-        db.update("CREATE TABLE IF NOT EXISTS animals (" +
-                "especie TEXT NOT NULL," +
-                "longevitat INTEGER," +
-                "numeropotes INTEGER)");
+        db.update("""
+            CREATE TABLE IF NOT EXISTS animals (
+                especie TEXT NOT NULL,
+                longevitat INTEGER,
+                numeropotes INTEGER)
+                """);
 
         // Inserir dades a la taula 'animals'
         db.update("INSERT INTO animals (especie, longevitat, numeropotes) VALUES ('Gos', 14, 4)");

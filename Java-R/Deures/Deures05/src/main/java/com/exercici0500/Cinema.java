@@ -9,12 +9,33 @@ public class Cinema {
      * Crea la taula "directors", si ja existeix primer l'esborra
      */
     public static void crearTaulaDirectors() {
+        AppData db = AppData.getInstance();
+        db.update("DROP TABLE IF EXISTS directors");
+        String sqlCreate = """
+            CREATE TABLE directors (
+                id_directory INTEGER PRIMARY KEY AUTOINCREMENT,
+                nom TEXT NOT NULL,
+                nacionalitat TEXT NOT NULL)
+                """;
+        db.update(sqlCreate);
     }
 
     public static void crearTaulaPelis() {
+        AppData db = AppData.getInstance();
+        db.update("DROP TABLE IF EXISTS pelis");
+        db.update("""
+                CREATE TABLE IF NOT EXISTS pelis(
+                id_peli INT AUTO_INCREMENT PRIMARY KEY,
+                titol TEXT NOT NULL,
+                any_estrena INTEGER,
+                durada INTEGER,
+                id_director INTEGER,
+                FOREIGN KEY(id_director) REFERENCES directors(id_director))
+                """);
     }
 
     public static void crearTaulaSales() {
+        
     }
 
     /**
