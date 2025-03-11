@@ -7,34 +7,49 @@ import java.util.Locale;
 public class Biblioteca {
 
     public static void crearTaulaEditorials() {
-        // TODO 
+        AppData db = AppData.getInstance();
+        db.update("DROP TABLE IF EXISTS Editorials");
         String sql = """
+            CREATE TABLE IF NOT EXISTS Editorials (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                nom TEXT NOT NULL
+            );
         """;
-        AppData.getInstance().update(sql);
+        db.update(sql);
     }
 
     public static void crearTaulaLlibres() {
-        // TODO 
-        String sql = """
-        """;
+        AppData db = AppData.getInstance();
+        db.update("DROP TABLE IF EXISTS Llibres");
+
+        String sql = "CREATE TABLE IF NOT EXISTS Llibres (" +
+            " id_llibre INTEGER PRIMARY KEY AUTOINCREMENT," +
+            " titol TEXT NOT NULL," +
+            " autor TEXT," +
+            " any_publicacio INTEGER," +
+            " id_editorial INTEGER," +
+            " FOREIGN KEY(id_editorial) REFERENCES Editorials(id_editorial))";
         AppData.getInstance().update(sql);
     }
 
     public static void afegirEditorial(String nom) {
-        // TODO 
-        String sql = String.format("", nom);
-        AppData.getInstance().update(sql);
+        AppData db = AppData.getInstance();
+        String sql = String.format("INSERT INTO Editorials (nom) VALUES ('%s')", nom);
+        db.update(sql);
     }
 
     public static void afegirLlibre(String titol, String autor, int anyPublicacio, int idEditorial) {
-         // TODO 
-        String sql = String.format("", titol, autor, anyPublicacio, idEditorial
-        );
+        String sql = String.format("INSERT INTO Llibres (titol, autor, any_publicacio, id_editorial) VALUES ('%s', '%s', %d, %d)", titol, autor, anyPublicacio, idEditorial);
         AppData.getInstance().update(sql);
     }
 
     public static void llistarTaulaEditorials() {
-        // TODO 
+        AppData db = AppData.getInstance();
+        String sql = "SELECT * FROM Editorials";
+        ArrayList<HashMap<String, Object>> result = db.query(sql); 
+        for (HashMap<String, Object> row : result) {
+            System.out.println("ID: " + row.get("id") + " Nom: " + row.get("nom")); 
+        }
     }
 
     public static void llistarTaulaLlibres() {

@@ -95,7 +95,7 @@ class TestExamen {
         Nota real:    %s
         **************************************************
         """.formatted(formulaDecimal, formulaReal));
-}
+    }
 
     @Test
     void testGetHashMapSimpleObject(TestInfo testInfo) throws Exception {

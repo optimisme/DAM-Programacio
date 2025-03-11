@@ -87,13 +87,6 @@ La taula esperada és:
     * *Container* deriva de *Component*, el seu constructor inicia x,y a (0,0) amb titol a "". 
     * El seu mètode **render()** posiciona els *render* de tots els components en un buffer. 
 
-- **Input**: mostra un quadre on es pot entrar text. Té:
-
-    * Atribut **label** amb un text descriptiu previ a l'entrada de text (en una sola línia)
-    * Mètode **getInput** que rept un *Scanner* i retorna el text entrat amb *nextLine()*
-
-    * **Atenció!** No deriva de cap altre objecte!
-
 **Aleshores**:
 
 Fes una aplicació que divideixi un espai de 60x20 en dos, a la part esquerra hi ha un menú amb tres opcions:
@@ -104,7 +97,7 @@ Fes una aplicació que divideixi un espai de 60x20 en dos, a la part esquerra hi
 
 A la part dreta es mostra el text "Escull una opció".
 
-A la part inferior, de tots dos espais, hi ha un *Input* amb el text "Escull una opció: "
+A la part inferior, de tots dos espais, demana una opció amb el text: "Escull una opció: "
 
 Un cop escollida una opció:
 
