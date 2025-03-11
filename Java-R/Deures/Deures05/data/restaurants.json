@@ -1,0 +1,145 @@
+{
+    "restaurants": [
+      {
+        "id_restaurant": 1,
+        "name": "Quimeta",
+        "kind": "Cuina casolana",
+        "tables": 8,
+        "pricing": "30"
+      },
+      {
+        "id_restaurant": 2,
+        "name": "Cal Pepet",
+        "kind": "Bar",
+        "tables": 5,
+        "pricing": "15"
+      },
+      {
+        "id_restaurant": 3,
+        "name": "DongFang",
+        "kind": "Xinès",
+        "tables": 15,
+        "pricing": "12"
+      },
+      {
+        "id_restaurant": 4,
+        "name": "La Taula d'Or",
+        "kind": "Mediterrània",
+        "tables": 10,
+        "pricing": "25"
+      },
+      {
+        "id_restaurant": 5,
+        "name": "El Raco",
+        "kind": "Italià",
+        "tables": 7,
+        "pricing": "20"
+      }
+    ],
+    "clients": [
+      {
+        "id_client": 1,
+        "name": "Anna Garcia",
+        "birth": "1985-04-23",
+        "isVIP": false
+      },
+      {
+        "name": "Jordi López",
+        "birth": "1990-11-02",
+        "isVIP": true
+      },
+      {
+        "name": "Maria Puig",
+        "birth": "1978-06-15",
+        "isVIP": false
+      },
+      {
+        "name": "Pau Ferrer",
+        "birth": "2000-09-09",
+        "isVIP": true
+      },
+      {
+        "name": "Sergi Soler",
+        "birth": "1982-03-12",
+        "isVIP": false
+      },
+      {
+        "name": "Laura Molina",
+        "birth": "1995-12-30",
+        "isVIP": false
+      },
+      {
+        "name": "Marc Vidal",
+        "birth": "1988-07-18",
+        "isVIP": true
+      },
+      {
+        "name": "Claudia Ruiz",
+        "birth": "1992-01-05",
+        "isVIP": false
+      }
+    ],
+    "services": [
+      {
+        "idRestaurant": 0,
+        "idClient": 1,
+        "date": "2023-03-10",
+        "expenditure": 45.5
+      },
+      {
+        "idRestaurant": 1,
+        "idClient": 0,
+        "date": "2023-03-11",
+        "expenditure": 20.0
+      },
+      {
+        "idRestaurant": 2,
+        "idClient": 2,
+        "date": "2023-03-12",
+        "expenditure": 30.0
+      },
+      {
+        "idRestaurant": 3,
+        "idClient": 3,
+        "date": "2023-03-13",
+        "expenditure": 50.0
+      },
+      {
+        "idRestaurant": 4,
+        "idClient": 4,
+        "date": "2023-03-14",
+        "expenditure": 25.0
+      },
+      {
+        "idRestaurant": 0,
+        "idClient": 5,
+        "date": "2023-03-15",
+        "expenditure": 35.75
+      },
+      {
+        "idRestaurant": 1,
+        "idClient": 6,
+        "date": "2023-03-16",
+        "expenditure": 15.0
+      },
+      {
+        "idRestaurant": 2,
+        "idClient": 7,
+        "date": "2023-03-17",
+        "expenditure": 40.0
+      },
+      {
+        "idRestaurant": 3,
+        "idClient": 1,
+        "date": "2023-03-18",
+        "expenditure": 60.0
+      },
+      {
+        "idRestaurant": 4,
+        "idClient": 2,
+        "date": "2023-03-19",
+        "expenditure": 55.0
+      }
+    ]
+  }
+  
