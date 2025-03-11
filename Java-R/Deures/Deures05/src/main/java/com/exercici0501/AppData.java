@@ -1,4 +1,4 @@
-package com.project;
+package com.exercici0501;
 
 import java.sql.*;
 import java.util.ArrayList;

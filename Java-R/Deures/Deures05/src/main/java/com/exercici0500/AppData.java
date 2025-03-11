@@ -1,27 +1,27 @@
-package com.exemple1401;
+package com.exercici0500;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Classe que gestiona la connexió a la base de dades MySQL utilitzant el patró Singleton.
- * Proporciona mètodes per connectar, tancar la connexió, executar actualitzacions, inserir registres
- * i realitzar consultes transformant el ResultSet en un ArrayList de HashMap.
+ * Classe que gestiona la connexió a la base de dades utilitzant el patró Singleton.
+ * Proporciona mètodes per connectar, tancar la connexió, actualitzar dades, inserir registres
+ * i realitzar consultes transformant el ResultSet en una llista de HashMap.
  */
 public class AppData {
     private static AppData instance;
     private Connection conn;
 
     /**
-     * Constructor privat que estableix la connexió a la base de dades.
+     * Constructor privat que crea la connexió a la base de dades.
      */
-    private AppData() {  }
+    private AppData() { }
 
     /**
-     * Retorna la instància única d'AppData.
+     * Obté la instància única de AppData (Singleton).
      *
-     * @return la instància de AppData.
+     * @return la instància d'AppData.
      */
     public static AppData getInstance() {
         if (instance == null) {
@@ -31,27 +31,22 @@ public class AppData {
     }
 
     /**
-     * Estableix la connexió amb la base de dades MySQL.
-     * Utilitza la URL, l'usuari i la contrasenya especificats.
-     * Desactiva l'autocommit per permetre el control manual de les transaccions.
+     * Estableix la connexió amb la base de dades SQLite.
+     * L'arxiu de la base de dades és "./data/exercici1400.sqlite".
+     * Es desactiva l'autocommit per permetre el control manual de transaccions.
      */
-    public void connect(String path) {
-        String url = "jdbc:mysql:" + path;
-        String user = "root";
-        String password = "pwd";
-
+    public void connect(String filePath) {
+        String url = "jdbc:sqlite:" + filePath;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            conn = DriverManager.getConnection(url, user, password);
-            conn.setAutoCommit(false); // Desactiva l'autocommit per control manual de transaccions
-        } catch (ClassNotFoundException | SQLException e) {
-            System.out.println("Error connectant a la base de dades MySQL.");
-            e.printStackTrace();
+            conn = DriverManager.getConnection(url);
+            conn.setAutoCommit(false);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
         }
     }
 
     /**
-     * Tanca la connexió amb la base de dades.
+     * Tanca la connexió a la base de dades.
      */
     public void close() {
         try {
@@ -64,41 +59,15 @@ public class AppData {
     }
 
     /**
-     * Executa una actualització (INSERT, UPDATE, DELETE, etc.) a la base de dades.
-     * Realitza un commit dels canvis. En cas d'error, es fa rollback.
+     * Executa una actualització a la base de dades (INSERT, UPDATE, DELETE, etc.).
+     * Es realitza un commit dels canvis i, en cas d'error, es fa rollback.
      *
      * @param sql la sentència SQL d'actualització a executar.
      */
     public void update(String sql) {
         try (Statement stmt = conn.createStatement()) {
             stmt.executeUpdate(sql);
-            conn.commit(); // Confirma els canvis
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-            try {
-                conn.rollback(); // Reverteix els canvis en cas d'error
-            } catch (SQLException ex) {
-                System.out.println("Error en fer rollback.");
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    /**
-     * Executa una inserció a la base de dades i retorna l'identificador generat.
-     * En cas d'error, es fa rollback i es retorna -1.
-     *
-     * @param sql la sentència SQL d'inserció a executar.
-     * @return l'identificador generat o -1 si hi ha hagut un error.
-     */
-    public int insertAndGetId(String sql) {
-        int generatedId = -1;
-        try (Statement stmt = conn.createStatement()) {
-            stmt.executeUpdate(sql, Statement.RETURN_GENERATED_KEYS);
-            ResultSet rs = stmt.getGeneratedKeys();
-            if (rs.next()) {
-                generatedId = rs.getInt(1); // Obtenir el primer camp com a ID generat
-            }
+            conn.commit();
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             try {
@@ -108,25 +77,50 @@ public class AppData {
                 ex.printStackTrace();
             }
         }
+    }
+
+    /**
+     * Executa una inserció a la base de dades i retorna l'identificador generat.
+     * Es realitza el commit de la transacció i, en cas d'error, es fa rollback.
+     *
+     * @param sql la sentència SQL d'inserció a executar.
+     * @return l'identificador generat per la fila inserida, o -1 en cas d'error.
+     */
+    public int insertAndGetId(String sql) {
+        int generatedId = -1;
+        try (Statement stmt = conn.createStatement()) {
+            stmt.executeUpdate(sql);
+            conn.commit();
+            try (ResultSet rs = stmt.executeQuery("SELECT last_insert_rowid()")) {
+                if (rs.next()) {
+                    generatedId = rs.getInt(1);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+                System.out.println("Error during rollback.");
+                ex.printStackTrace();
+            }
+        }
         return generatedId;
     }
 
     /**
-     * Realitza una consulta a la base de dades i transforma el ResultSet en un ArrayList de HashMap.
-     * Cada HashMap representa una fila, on les claus són els noms de les columnes i els valors són els
-     * objectes corresponents.
+     * Realitza una consulta a la base de dades i transforma el ResultSet en una ArrayList de HashMap.
+     * Cada HashMap representa una fila amb claus que corresponen als noms de columna.
      *
      * @param sql la sentència SQL de consulta.
-     * @return un ArrayList de HashMap amb les files resultants de la consulta.
+     * @return una ArrayList de HashMap amb els resultats de la consulta.
      */
     public ArrayList<HashMap<String, Object>> query(String sql) {
         ArrayList<HashMap<String, Object>> resultList = new ArrayList<>();
-
         try (Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
-
             while (rs.next()) {
                 HashMap<String, Object> row = new HashMap<>();
                 for (int i = 1; i <= columnCount; i++) {

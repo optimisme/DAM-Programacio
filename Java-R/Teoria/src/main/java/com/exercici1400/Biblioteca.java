@@ -2,7 +2,6 @@ package com.exercici1400;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class Biblioteca {
 
@@ -43,6 +42,9 @@ public class Biblioteca {
         AppData.getInstance().update(sql);
     }
 
+    /**
+     * Mostra informació de la llista d'editorals en format taula
+     */
     public static void llistarTaulaEditorials() {
         AppData db = AppData.getInstance();
         String sql = "SELECT * FROM Editorials";
@@ -52,10 +54,16 @@ public class Biblioteca {
         }
     }
 
+    /**
+     * Mostra informació de la llista de llibres en format taula
+     */
     public static void llistarTaulaLlibres() {
         // TODO 
     }
 
+    /** 
+     * Mostra informació d'un llibre en format etiqueta
+     */
     public static void llistarInfoLlibre(int idLlibre) {
         // TODO 
     }

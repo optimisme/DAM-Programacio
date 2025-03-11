@@ -16,9 +16,7 @@ public class AppData {
     /**
      * Constructor privat que crea la connexió a la base de dades.
      */
-    private AppData() {
-        connect();
-    }
+    private AppData() { }
 
     /**
      * Obté la instància única de AppData (Singleton).
@@ -37,8 +35,8 @@ public class AppData {
      * L'arxiu de la base de dades és "./data/exercici1400.sqlite".
      * Es desactiva l'autocommit per permetre el control manual de transaccions.
      */
-    private void connect() {
-        String url = "jdbc:sqlite:./data/exercici1400.sqlite";
+    public void connect(String filePath) {
+        String url = "jdbc:sqlite:" + filePath;
         try {
             conn = DriverManager.getConnection(url);
             conn.setAutoCommit(false);

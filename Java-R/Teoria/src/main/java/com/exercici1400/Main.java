@@ -9,6 +9,7 @@ public class Main {
 
     public static void main(String[] args) {
         AppData db = AppData.getInstance();
+        db.connect("./data/exercici1400.sqlite");
 
         // Crear taules
         Biblioteca.crearTaulaEditorials();

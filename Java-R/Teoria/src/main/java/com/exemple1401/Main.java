@@ -17,6 +17,7 @@ public class Main {
 
         // Crear el singleton (això es connecta a la base de dades)
         AppData db = AppData.getInstance();
+        db.connect("//localhost:3308/world?useSSL=false&allowPublicKeyRetrieval=true");
 
         System.out.println("\nLlistar totes les taules:");
         llistarTaules();
