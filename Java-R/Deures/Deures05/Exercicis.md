@@ -399,7 +399,10 @@ public class Main {
 }
 ```
 
-Quan es modifiquen dades dels objectes *Java* s'han de modificar també els camps a la base de dades, per mantenir-ho sincronitzat. Fes servir aquest mètode *updateDB* com a exemple, s'ha dexecutar cada vegada que es fa un 'setter'
+Quan es modifiquen dades dels objectes *Java* s'han de modificar també els camps a la base de dades, per mantenir-ho sincronitzat. Fes servir aquest mètode *updateDB* com a exemple:
+
+- S'ha d'executar *updateDB* cada vegada que es fa un 'setter'.
+- S'ha de fer un *INSERT* cada vegada que s'afegeix un element a les llistes de *Olimpiades*
 
 ```java
 public class Atleta {
