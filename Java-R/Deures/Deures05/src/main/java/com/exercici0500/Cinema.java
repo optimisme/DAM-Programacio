@@ -5,6 +5,9 @@ import java.util.HashMap;
 
 public class Cinema {
 
+    /**
+     * Crea la taula "directors", si ja existeix primer l'esborra
+     */
     public static void crearTaulaDirectors() {
     }
 
@@ -62,6 +65,5 @@ public class Cinema {
      * Guarda la informacio de les películes en un arxiu ".json"
      */
     public static void pelisToJSON(String path) {
-
     }
 }
