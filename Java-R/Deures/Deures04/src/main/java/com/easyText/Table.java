@@ -1,4 +1,4 @@
-package com.exercici0400;
+package com.easyText;
 
 import java.util.ArrayList;
 

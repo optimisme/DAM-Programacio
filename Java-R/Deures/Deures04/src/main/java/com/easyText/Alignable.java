@@ -1,4 +1,4 @@
-package com.exercici0400;
+package com.easyText;
 
 public interface Alignable {
     String getAlign();

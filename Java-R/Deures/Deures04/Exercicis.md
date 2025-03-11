@@ -114,3 +114,10 @@ Dins d'una opció escollida, a la part esquerra el menú mostra:
 0. Tornar
 
 I modifica el text o textos de la taula segons l'opció escollida.
+
+## Llibreria 'easyText'
+
+Crea una carpeta 'easyText' i mou tots els arxius de la llibreria (tots excepte el Main.java) cap a aquesta nova carpeta.
+
+- Renombra els paquets a 'package com.easyText;'
+- Des de l'antic Main importa la nova llibreria 'import com.easyText.*;'

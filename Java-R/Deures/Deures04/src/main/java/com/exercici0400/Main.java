@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import com.easyText.*;
+
 public class Main { 
 
     // ./run.sh com.exercici0400.Main
