@@ -224,7 +224,7 @@ public class Cinema {
     } 
 
     /**
-     * Mostra una taula amb informació de les Salies:
+     * Mostra una taula amb informació de les Sales:
      * ┌──────────────┬────────────────┬────────────────────┬──────────────┬────────────────┐
      * │Id Sala       │Nom             │Capacitat           │Id Peli       │Titol           │
      * ├──────────────┼────────────────┼────────────────────┼──────────────┼────────────────┤
