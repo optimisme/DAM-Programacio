@@ -193,7 +193,7 @@ public class Cinema {
     public static void llistarTaulaPelis() {
 
         AppData db = AppData.getInstance();
-        String sql = "SELECT * FROM pelis p join directors d on p.id_director = d.id_director";
+        String sql = "SELECT * FROM pelis p JOIN directors d ON p.id_director = d.id_director";
         ArrayList<HashMap<String, Object>> table = db.query(sql);
         
         int[] columnWidths = {5, 10, 14, 10, 14, 14};
@@ -234,7 +234,7 @@ public class Cinema {
      */
     public static void llistarTaulaSales() {
         AppData db = AppData.getInstance();
-        String sql = "SELECT * FROM sales s join pelis p on s.id_peli=p.id_peli";
+        String sql = "SELECT * FROM sales s JOIN pelis p ON s.id_peli=p.id_peli";
         ArrayList<HashMap<String, Object>> table = db.query(sql);
         
         int[] columnWidths = {14, 16,20,14,16};
