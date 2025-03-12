@@ -11,7 +11,7 @@ public class Main {
     
     public static void main(String[] args) {
         AppData db = AppData.getInstance();
-        db.connect("./data/restaurants.sqlite");
+        db.connect("./data/dbRestaurants.sqlite");
 
         Restaurants.crearTaules();
         Restaurants.loadData("./data/restaurants.json");

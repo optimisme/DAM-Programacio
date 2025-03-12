@@ -11,6 +11,7 @@ public class Main {
     
     public static void main(String[] args) {
         AppData db = AppData.getInstance();
+        db.connect("./data/dbOlimpiades.sqlite");
 
         Olimpiades olm = new Olimpiades();
 
