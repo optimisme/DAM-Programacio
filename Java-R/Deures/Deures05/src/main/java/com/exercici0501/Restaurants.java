@@ -39,7 +39,7 @@ public class Restaurants {
         db.update(sql1);
         db.update("DROP TABLE IF EXISTS services");
         String sql2 = """
-            CREATE TABLE IF NOT EXISTS directors (
+            CREATE TABLE IF NOT EXISTS services (
                 id_servei INTEGER PRIMARY KEY AUTOINCREMENT,
                 id_restaurant INTEGER NOT NULL,
                 id_client INTEGER NOT NULL,
