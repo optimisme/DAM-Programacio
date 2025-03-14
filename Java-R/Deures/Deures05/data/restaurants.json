@@ -38,7 +38,6 @@
     ],
     "clients": [
       {
-        "id_client": 1,
         "name": "Anna Garcia",
         "birth": "1985-04-23",
         "isVIP": false
@@ -81,62 +80,62 @@
     ],
     "services": [
       {
-        "idRestaurant": 0,
-        "idClient": 1,
+        "id_restaurant": 0,
+        "id_client": 1,
         "date": "2023-03-10",
         "expenditure": 45.5
       },
       {
-        "idRestaurant": 1,
-        "idClient": 0,
+        "id_restaurant": 1,
+        "id_client": 0,
         "date": "2023-03-11",
         "expenditure": 20.0
       },
       {
-        "idRestaurant": 2,
-        "idClient": 2,
+        "id_restaurant": 2,
+        "id_client": 2,
         "date": "2023-03-12",
         "expenditure": 30.0
       },
       {
-        "idRestaurant": 3,
-        "idClient": 3,
+        "id_restaurant": 3,
+        "id_client": 3,
         "date": "2023-03-13",
         "expenditure": 50.0
       },
       {
-        "idRestaurant": 4,
-        "idClient": 4,
+        "id_restaurant": 4,
+        "id_client": 4,
         "date": "2023-03-14",
         "expenditure": 25.0
       },
       {
-        "idRestaurant": 0,
-        "idClient": 5,
+        "id_restaurant": 0,
+        "id_client": 5,
         "date": "2023-03-15",
         "expenditure": 35.75
       },
       {
-        "idRestaurant": 1,
-        "idClient": 6,
+        "id_restaurant": 1,
+        "id_client": 6,
         "date": "2023-03-16",
         "expenditure": 15.0
       },
       {
-        "idRestaurant": 2,
-        "idClient": 7,
+        "id_restaurant": 2,
+        "id_client": 7,
         "date": "2023-03-17",
         "expenditure": 40.0
       },
       {
-        "idRestaurant": 3,
-        "idClient": 1,
+        "id_restaurant": 3,
+        "id_client": 1,
         "date": "2023-03-18",
         "expenditure": 60.0
       },
       {
-        "idRestaurant": 4,
-        "idClient": 2,
+        "id_restaurant": 4,
+        "id_client": 2,
         "date": "2023-03-19",
         "expenditure": 55.0
       }
