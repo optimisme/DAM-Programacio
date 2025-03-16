@@ -4,6 +4,17 @@ import java.util.Locale;
 import java.util.Scanner;
 
 public class Resolt0002 {
+    /**
+     * Fes anar l'exercici amb:
+     * ./run.sh com.exercicis.Exercici0002
+     * 
+     * Passa el test de l'exercici amb:
+     * ./runTest.sh com.exercicis.TestExercici0002
+     * 
+     * Fes anar la solució amb:
+     * ./run.sh com.exercicis.Resolt0002
+     * 
+     */
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Locale localeUS = Locale.US;
