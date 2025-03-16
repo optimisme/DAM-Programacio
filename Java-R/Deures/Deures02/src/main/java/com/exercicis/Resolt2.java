@@ -1,4 +1,4 @@
-package com.examen;
+package com.exercicis;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
 
-public class Main {
+public class Resolt2 {
 
     static ArrayList<HashMap<String, Object>> mortgages = new ArrayList<>();
     
@@ -114,8 +114,12 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testGetHashMapEmptyObject
      */
     public static HashMap<String, Object> getHashMap(String jsonstr) {
-        HashMap<String, Object> rst = new HashMap<>();
-        return rst;
+        JSONObject obj = new JSONObject(jsonstr);
+        HashMap<String, Object> map = new HashMap<>();
+        for (String key : obj.keySet()) {
+            map.put(key, obj.get(key));
+        }
+        return map;
     }
     
     /**
@@ -131,8 +135,12 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testGetArrayListEmptyArray
      */
     public static ArrayList<HashMap<String, Object>> getArrayList(String jsonstr) {
-        ArrayList<HashMap<String, Object>> rst = new ArrayList<>();
-        return rst;
+        JSONArray arr = new JSONArray(jsonstr);
+        ArrayList<HashMap<String, Object>> list = new ArrayList<>();
+        for (int i = 0; i < arr.length(); i++) {
+            list.add(new HashMap<>(arr.getJSONObject(i).toMap()));
+        }
+        return list;
     }
 
     /**
@@ -147,7 +155,8 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testLoadMortgages
      */
     public static void loadMortgages(String fileName) throws IOException {
-
+        String content = new String(Files.readAllBytes(Paths.get(fileName)));
+        mortgages = getArrayList(content);
     }
 
     /**
@@ -165,6 +174,12 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testEmptyClientName
      */
     static boolean isValidClientName(String name) {
+        String allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàèéíòóúÀÈÉÍÒÓÚïÏüÜ ";
+        for (char c : name.toCharArray()) {
+            if (allowedChars.indexOf(c) == -1) {
+                return false;
+            }
+        }
         return true;
     }
 
@@ -184,7 +199,13 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testEmptyBankName
      */
     static boolean isValidBankName(String name) {
-        return false;
+        String allowedChars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZàèéíòóúÀÈÉÍÒÓÚïÏüÜ0123456789- ";
+        for (char c : name.toCharArray()) {
+            if (allowedChars.indexOf(c) == -1) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -200,7 +221,7 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testInvalidPaymentsLessThanFive
      */
     public static boolean isValidPayments(int payments) {
-        return false;
+        return (payments >= 5);
     }
     
     /**
@@ -216,7 +237,7 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testInvalidValueLessThan50000
      */
     public static boolean isValidValue(double value) {
-        return false;
+        return value > 50000;
     }
 
     /**
@@ -224,7 +245,7 @@ public class Main {
      *
      * Aquesta funció verifica si tots els caràcters d'una cadena són dígits numèrics.
      *
-     * @param text Cadena a verificar.
+     * @param title Cadena a verificar.
      * @return `true` si només conté dígits; `false` en cas contrari.
      * 
      * @test ./runTest.sh com.examen.TestExamen#testIsAllDigitsWithOnlyDigits
@@ -232,6 +253,9 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testIsAllDigitsWithEmptyString
      */
     private static boolean isAllDigits(String text) {
+        for (int i = 0; i < text.length(); i++) {
+            if (!Character.isDigit(text.charAt(i))) return false;
+        }
         return true;
     }
 
@@ -253,13 +277,54 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testInvalidDay
      * @test ./runTest.sh com.examen.TestExamen#testInvalidDayInFebruaryNonLeap
      * @test ./runTest.sh com.examen.TestExamen#testValidDateInFebruaryLeapYear
-     * 
      * @test ./runTest.sh com.examen.TestExamen#testValidTimeBoundaries
      * @test ./runTest.sh com.examen.TestExamen#testInvalidHourTooHigh
      * @test ./runTest.sh com.examen.TestExamen#testInvalidMinuteTooHigh
      * @test ./runTest.sh com.examen.TestExamen#testInvalidSecondTooHigh
      */
     public static boolean isValidDate(String dateTime) {
+        if (dateTime == null || dateTime.length() != 19) return false;
+        if (dateTime.charAt(4) != '-' || dateTime.charAt(7) != '-' || dateTime.charAt(10) != 'T' 
+            || dateTime.charAt(13) != ':' || dateTime.charAt(16) != ':') return false;
+
+        String datePart = dateTime.substring(0, 10);
+        String timePart = dateTime.substring(11);
+
+        // Validate date
+        String yearStr = datePart.substring(0, 4);
+        String monthStr = datePart.substring(5, 7);
+        String dayStr = datePart.substring(8, 10);
+        if (!isAllDigits(yearStr) || !isAllDigits(monthStr) || !isAllDigits(dayStr)) return false;
+
+        int year = Integer.parseInt(yearStr);
+        int month = Integer.parseInt(monthStr);
+        int day = Integer.parseInt(dayStr);
+        if (year < 1000 || year > 9999) return false;
+        if (month < 1 || month > 12) return false;
+        if (day < 1 || day > 31) return false;
+        if ((month == 4 || month == 6 || month == 9 || month == 11) && day > 30) return false;
+        if (month == 2) {
+            boolean leap = (year % 4 == 0 && year % 100 != 0) || (year % 400 == 0);
+            if (leap) {
+                if (day > 29) return false;
+            } else {
+                if (day > 28) return false;
+            }
+        }
+
+        // Validate time
+        String hourStr = timePart.substring(0, 2);
+        String minuteStr = timePart.substring(3, 5);
+        String secondStr = timePart.substring(6);
+        if (!isAllDigits(hourStr) || !isAllDigits(minuteStr) || !isAllDigits(secondStr)) return false;
+
+        int hour = Integer.parseInt(hourStr);
+        int minute = Integer.parseInt(minuteStr);
+        int second = Integer.parseInt(secondStr);
+        if (hour < 0 || hour > 23) return false;
+        if (minute < 0 || minute > 59) return false;
+        if (second < 0 || second > 59) return false;
+
         return true;
     }
     
@@ -280,7 +345,7 @@ public class Main {
      *    - `"center"` (o qualsevol altre valor): Calcula els espais necessaris a banda i banda per centrar el text.
      * 4. Retorna el text ajustat amb espais.
      *
-     * @param text El text que s'ha d'ajustar.
+     * @param title El text que s'ha d'ajustar.
      * @param width L'amplada total a la qual s'ha d'ajustar el text.
      * @param alignment L'alineació desitjada (`"left"`, `"right"`, o `"center"`). 
      *                  Si es proporciona un valor desconegut, per defecte serà `"center"`.
@@ -294,7 +359,21 @@ public class Main {
      * @test ./runTest.sh com.examen.TestExamen#testAlignTextExactWidth
      */
     static String alignText(String text, int width, String alignment) {
-        return "";
+        int padding = width - text.length();
+        if (text.length() > width) {
+            return text.substring(0, width - 1) + ".";
+        }
+        switch (alignment.toLowerCase()) {
+            case "left":
+                return text + " ".repeat(padding);
+            case "right":
+                return " ".repeat(padding) + text;
+            case "center":
+            default:
+                int leftPadding = padding / 2;
+                int rightPadding = padding - leftPadding;
+                return " ".repeat(leftPadding) + text + " ".repeat(rightPadding);
+        }
     }
 
     /**
@@ -347,5 +426,53 @@ public class Main {
      */
     static void listMortgages(String sortBy) {
    
+        if (mortgages.isEmpty()) {
+            System.out.println("No mortgages available.");
+            return;
+        }
+    
+        mortgages.sort((m1, m2) -> {
+            Object val1 = m1.get(sortBy);
+            Object val2 = m2.get(sortBy);
+    
+            if (val1 instanceof Number && val2 instanceof Number) {
+                return Double.compare(((Number) val1).doubleValue(), ((Number) val2).doubleValue());
+            } else {
+                return val1.toString().compareTo(val2.toString());
+            }
+        });
+        System.out.println("Mortgages list sorted by: \"" + sortBy + "\"");
+
+        String[] headers = {"Bank", "Client", "Payments", "Value", "Interest", "Total", "Payment", "Modified"};
+        int[] columnWidths = {16, 12, 8, 10, 10, 10, 10, 21};
+        String[] columnAligns = {"left", "left", "center", "right", "right", "right", "right", "center"};
+    
+        // Print centered headers with column separators
+        System.out.print("|");
+        for (int i = 0; i < headers.length; i++) {
+            System.out.print(alignText(headers[i], columnWidths[i], "center") + "|");
+        }
+        System.out.println();
+    
+        // Print separator line
+        System.out.print("+");
+        for (int width : columnWidths) {
+            System.out.print("-".repeat(width) + "+");
+        }
+        System.out.println();
+    
+        // Print each mortgage row with column separators
+        for (HashMap<String, Object> mortgage : mortgages) {
+            System.out.print("|");
+            System.out.print(alignText(mortgage.get("bank").toString(), columnWidths[0], columnAligns[0]) + "|");
+            System.out.print(alignText(mortgage.get("name").toString(), columnWidths[1], columnAligns[1]) + "|");
+            System.out.print(alignText(String.valueOf(Integer.parseInt(mortgage.get("payments").toString())), columnWidths[2], columnAligns[2]) + "|");
+            System.out.print(alignText(String.format("%.2f", Double.parseDouble(mortgage.get("value").toString())), columnWidths[3], columnAligns[3]) + "|");
+            System.out.print(alignText(String.format("%.2f", Double.parseDouble(mortgage.get("interest").toString())), columnWidths[4], columnAligns[4]) + "|");
+            System.out.print(alignText(String.format("%.2f", Double.parseDouble(mortgage.get("total").toString())), columnWidths[5], columnAligns[5]) + "|");
+            System.out.print(alignText(String.format("%.2f", Double.parseDouble(mortgage.get("payment").toString())), columnWidths[6], columnAligns[6]) + "|");
+            System.out.print(alignText(mortgage.get("modified").toString(), columnWidths[7], columnAligns[7]) + "|");
+            System.out.println();
+        }
     }
 }

@@ -231,7 +231,7 @@ class TestExercici0304 {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                Main.main(new String[]{});
+                Exercici2.main(new String[]{});
             });
 
             text = text.replace("\r\n", "\n");

@@ -38,3 +38,7 @@ Aquí hi ha un exemple del "Resolt1"
 </video>
 </center>
 <br/>
+
+# Exercici 2
+
+Soluciona l'exercici segons els comentaris de cada funció, assegura't que passa els testos

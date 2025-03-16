@@ -1,8 +1,0 @@
-
-## Apunta aquí les teves dades:
-
-
-
-**Nom i Cognoms:** ????
-
-**DNI/NIF:** ????

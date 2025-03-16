@@ -29,7 +29,7 @@ class TestExercici0300 {
         try {
             String text = SystemLambda.tapSystemOut(() -> {
                 String[] args = {};
-                Main.main(args);
+                Exercici2.main(args);
             });
 
             text = text.replace("\r\n", "\n");

@@ -1,4 +1,4 @@
-package com.examen;
+package com.exercicis;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -16,7 +16,7 @@ import org.junit.jupiter.api.TestInfo;
 import com.github.stefanbirkner.systemlambda.SystemLambda;
 import com.testStringUtils.TestStringUtils;
 
-class TestExamen {
+class TestExercici2 {
 
     private Locale originalLocale;
 
@@ -67,14 +67,14 @@ class TestExamen {
         originalLocale = Locale.getDefault();
         Locale.setDefault(Locale.US);
 
-        Main.isTestEnvironment = true;
-        Main.mortgages = new ArrayList<>();
+        Exercici2.isTestEnvironment = true;
+        Exercici2.mortgages = new ArrayList<>();
     }
 
     @AfterEach
     void tearDown() {
         Locale.setDefault(originalLocale);
-        Main.isTestEnvironment = false;
+        Exercici2.isTestEnvironment = false;
     }
 
     @AfterAll
@@ -104,7 +104,7 @@ class TestExamen {
         try {
             String text = SystemLambda.tapSystemOut(() -> {
                 String json = "{\"key1\":\"value1\",\"key2\":2,\"key3\":true}";
-                HashMap<String, Object> result = Main.getHashMap(json);
+                HashMap<String, Object> result = Exercici2.getHashMap(json);
 
                 if (result == null) {
                     System.out.println("Hashmap is null.");
@@ -148,7 +148,7 @@ class TestExamen {
         try {
             String text = SystemLambda.tapSystemOut(() -> {
                 String json = "{}";
-                HashMap<String, Object> result = Main.getHashMap(json);
+                HashMap<String, Object> result = Exercici2.getHashMap(json);
 
                 if (result == null) {
                     System.out.println("Hashmap is null.");
@@ -189,7 +189,7 @@ class TestExamen {
         try {
             String text = SystemLambda.tapSystemOut(() -> {
                 String json = "[{\"key1\":\"value1\"},{\"key2\":2},{\"key3\":true}]";
-                ArrayList<HashMap<String, Object>> result = Main.getArrayList(json);
+                ArrayList<HashMap<String, Object>> result = Exercici2.getArrayList(json);
 
                 if (result == null) {
                     System.out.println("Arraylist is null");
@@ -241,7 +241,7 @@ class TestExamen {
         try {
             String text = SystemLambda.tapSystemOut(() -> {
                 String json = "[]";
-                ArrayList<HashMap<String, Object>> result = Main.getArrayList(json);
+                ArrayList<HashMap<String, Object>> result = Exercici2.getArrayList(json);
 
                 if (result == null) {
                     System.out.println("Arraylist is null");
@@ -283,13 +283,13 @@ class TestExamen {
             String filePath = "./data/mortgages.json";
 
             // Carregar les hipoteques
-            Main.loadMortgages(filePath);
+            Exercici2.loadMortgages(filePath);
 
             // Validar la mida de la llista
-            assertEquals(10, Main.mortgages.size(), "La llista de hipoteques hauria de contenir 10 elements.");
+            assertEquals(10, Exercici2.mortgages.size(), "La llista de hipoteques hauria de contenir 10 elements.");
 
             // Validar la primera hipoteca
-            HashMap<String, Object> first = Main.mortgages.get(0);
+            HashMap<String, Object> first = Exercici2.mortgages.get(0);
             assertEquals("Banc Sabadell", first.get("bank"), "El banc de la primera hipoteca no coincideix.");
             assertEquals("Pau García", first.get("name"), "El nom del client de la primera hipoteca no coincideix.");
             assertEquals(300, first.get("payments"), "El nombre de pagaments de la primera hipoteca no coincideix.");
@@ -301,7 +301,7 @@ class TestExamen {
             assertEquals("2024-02-29T10:00:00", first.get("modified"), "La data modificada de la primera hipoteca no coincideix.");
 
             // Validar l'última hipoteca
-            HashMap<String, Object> last = Main.mortgages.get(9);
+            HashMap<String, Object> last = Exercici2.mortgages.get(9);
             assertEquals("Ayamatta Bank 3", last.get("bank"), "El banc de l'última hipoteca no coincideix.");
             assertEquals("Eirik Karlsson", last.get("name"), "El nom del client de l'última hipoteca no coincideix.");
             assertEquals(360, last.get("payments"), "El nombre de pagaments de l'última hipoteca no coincideix.");
@@ -330,7 +330,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidClientName("John Doe");
+                boolean result = Exercici2.isValidClientName("John Doe");
                 System.out.println(result ? "Valid client name." : "Invalid client name.");
             });
         
@@ -365,8 +365,8 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                System.out.println(Main.isValidClientName("Pau García") ? "Valid client name with accents." : "Invalid client name.");
-                System.out.println(Main.isValidClientName("Àlex Àlvarez") ? "Valid client name with accents." : "Invalid client name.");
+                System.out.println(Exercici2.isValidClientName("Pau García") ? "Valid client name with accents." : "Invalid client name.");
+                System.out.println(Exercici2.isValidClientName("Àlex Àlvarez") ? "Valid client name with accents." : "Invalid client name.");
             });
         
             text = text.replace("\r\n", "\n");
@@ -401,7 +401,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidClientName("John Doe2");
+                boolean result = Exercici2.isValidClientName("John Doe2");
                 System.out.println(result ? "Valid client name with numbers." : "Invalid client name with numbers.");
             });
         
@@ -435,8 +435,8 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                System.out.println(Main.isValidClientName("John_Doe") ? "Valid client name with special characters." : "Invalid client name with special characters.");
-                System.out.println(Main.isValidClientName("M@ry") ? "Valid client name with special characters." : "Invalid client name with special characters.");
+                System.out.println(Exercici2.isValidClientName("John_Doe") ? "Valid client name with special characters." : "Invalid client name with special characters.");
+                System.out.println(Exercici2.isValidClientName("M@ry") ? "Valid client name with special characters." : "Invalid client name with special characters.");
             });
         
             text = text.replace("\r\n", "\n");
@@ -471,7 +471,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidClientName("");
+                boolean result = Exercici2.isValidClientName("");
                 System.out.println(result ? "Valid empty client name." : "Invalid empty client name.");
             });
         
@@ -506,7 +506,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidBankName("Citibank");
+                boolean result = Exercici2.isValidBankName("Citibank");
                 System.out.println(result ? "Valid bank name." : "Invalid bank name.");
             });
         
@@ -541,7 +541,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidBankName("Banc Sabadell 123");
+                boolean result = Exercici2.isValidBankName("Banc Sabadell 123");
                 System.out.println(result ? "Valid bank name with accents and numbers." : "Invalid bank name.");
             });
         
@@ -576,7 +576,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidBankName("Bank-XYZ");
+                boolean result = Exercici2.isValidBankName("Bank-XYZ");
                 System.out.println(result ? "Valid bank name with dash." : "Invalid bank name.");
             });
         
@@ -608,8 +608,8 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                System.out.println(Main.isValidBankName("Bank@123") ? "Valid bank name with special characters." : "Invalid bank name with special characters.");
-                System.out.println(Main.isValidBankName("Bank#Name") ? "Valid bank name with special characters." : "Invalid bank name with special characters.");
+                System.out.println(Exercici2.isValidBankName("Bank@123") ? "Valid bank name with special characters." : "Invalid bank name with special characters.");
+                System.out.println(Exercici2.isValidBankName("Bank#Name") ? "Valid bank name with special characters." : "Invalid bank name with special characters.");
             });
         
             text = text.replace("\r\n", "\n");
@@ -644,7 +644,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidBankName("");
+                boolean result = Exercici2.isValidBankName("");
                 System.out.println(result ? "Valid empty bank name." : "Invalid empty bank name.");
             });
         
@@ -679,7 +679,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidPayments(5);
+                boolean result = Exercici2.isValidPayments(5);
                 System.out.println(result ? "Valid payments: 5." : "Invalid payments: 5.");
             });
         
@@ -714,7 +714,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidPayments(10);
+                boolean result = Exercici2.isValidPayments(10);
                 System.out.println(result ? "Valid payments: 10." : "Invalid payments: 10.");
             });
         
@@ -749,7 +749,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidPayments(4);
+                boolean result = Exercici2.isValidPayments(4);
                 System.out.println(result ? "Valid payments: 4." : "Invalid payments: 4.");
             });
         
@@ -784,7 +784,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidValue(50000.01);
+                boolean result = Exercici2.isValidValue(50000.01);
                 System.out.println(result ? "Valid value: 50000.01." : "Invalid value: 50000.01.");
             });
         
@@ -819,7 +819,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidValue(50000.00);
+                boolean result = Exercici2.isValidValue(50000.00);
                 System.out.println(result ? "Valid value: 50000.00." : "Invalid value: 50000.00.");
             });
         
@@ -854,7 +854,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                boolean result = Main.isValidValue(30000.00);
+                boolean result = Exercici2.isValidValue(30000.00);
                 System.out.println(result ? "Valid value: 30000.00." : "Invalid value: 30000.00.");
             });
         
@@ -889,7 +889,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                java.lang.reflect.Method method = Main.class.getDeclaredMethod("isAllDigits", String.class);
+                java.lang.reflect.Method method = Exercici2.class.getDeclaredMethod("isAllDigits", String.class);
                 method.setAccessible(true);
                 boolean result = (Boolean) method.invoke(null, "123456");
                 System.out.println(result ? "All digits." : "Contains non-digit characters.");
@@ -926,7 +926,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                java.lang.reflect.Method method = Main.class.getDeclaredMethod("isAllDigits", String.class);
+                java.lang.reflect.Method method = Exercici2.class.getDeclaredMethod("isAllDigits", String.class);
                 method.setAccessible(true);
                 boolean result = (Boolean) method.invoke(null, "123a456");
                 System.out.println(result ? "All digits." : "Contains non-digit characters.");
@@ -963,7 +963,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                java.lang.reflect.Method method = Main.class.getDeclaredMethod("isAllDigits", String.class);
+                java.lang.reflect.Method method = Exercici2.class.getDeclaredMethod("isAllDigits", String.class);
                 method.setAccessible(true);
                 boolean result = (Boolean) method.invoke(null, "");
                 System.out.println(result ? "Empty string is valid." : "Empty string is invalid.");
@@ -1000,8 +1000,8 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                System.out.println(Main.isValidDate("2023-01-01T00:00:00") ? "Valid time boundary: 00:00:00." : "Invalid time boundary: 00:00:00.");
-                System.out.println(Main.isValidDate("2023-01-01T23:59:59") ? "Valid time boundary: 23:59:59." : "Invalid time boundary: 23:59:59.");
+                System.out.println(Exercici2.isValidDate("2023-01-01T00:00:00") ? "Valid time boundary: 00:00:00." : "Invalid time boundary: 00:00:00.");
+                System.out.println(Exercici2.isValidDate("2023-01-01T23:59:59") ? "Valid time boundary: 23:59:59." : "Invalid time boundary: 23:59:59.");
             });
 
             text = text.replace("\r\n", "\n");
@@ -1036,7 +1036,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                System.out.println(Main.isValidDate("2023-01-01T24:00:00") ? "Valid time with hour 24." : "Invalid time with hour 24.");
+                System.out.println(Exercici2.isValidDate("2023-01-01T24:00:00") ? "Valid time with hour 24." : "Invalid time with hour 24.");
             });
 
             text = text.replace("\r\n", "\n");
@@ -1070,7 +1070,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                System.out.println(Main.isValidDate("2023-01-01T12:60:00") ? "Valid time with minute 60." : "Invalid time with minute 60.");
+                System.out.println(Exercici2.isValidDate("2023-01-01T12:60:00") ? "Valid time with minute 60." : "Invalid time with minute 60.");
             });
 
             text = text.replace("\r\n", "\n");
@@ -1104,7 +1104,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                System.out.println(Main.isValidDate("2023-01-01T12:00:60") ? "Valid time with second 60." : "Invalid time with second 60.");
+                System.out.println(Exercici2.isValidDate("2023-01-01T12:00:60") ? "Valid time with second 60." : "Invalid time with second 60.");
             });
 
             text = text.replace("\r\n", "\n");
@@ -1138,7 +1138,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                String result = Main.alignText("Hello", 10, "left");
+                String result = Exercici2.alignText("Hello", 10, "left");
                 System.out.println("Aligned text (left): \"" + result + "\"");
             });
 
@@ -1173,7 +1173,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                String result = Main.alignText("Hello", 10, "right");
+                String result = Exercici2.alignText("Hello", 10, "right");
                 System.out.println("Aligned text (right): \"" + result + "\"");
             });
 
@@ -1208,7 +1208,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                String result = Main.alignText("Hello", 11, "center");
+                String result = Exercici2.alignText("Hello", 11, "center");
                 System.out.println("Aligned text (center): \"" + result + "\"");
             });
 
@@ -1243,7 +1243,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                String result = Main.alignText("HelloWorldTest", 10, "left");
+                String result = Exercici2.alignText("HelloWorldTest", 10, "left");
                 System.out.println("Aligned text (truncate): \"" + result + "\"");
             });
 
@@ -1278,7 +1278,7 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                String result = Main.alignText("Hello", 5, "center");
+                String result = Exercici2.alignText("Hello", 5, "center");
                 System.out.println("Aligned text (exact width): \"" + result + "\"");
             });
 
@@ -1313,8 +1313,8 @@ class TestExamen {
 
         try {
             String text = SystemLambda.tapSystemOut(() -> {
-                Main.mortgages.clear();
-                Main.listMortgages("bank");
+                Exercici2.mortgages.clear();
+                Exercici2.listMortgages("bank");
             });
 
             text = text.replace("\r\n", "\n").trim();
@@ -1348,7 +1348,7 @@ class TestExamen {
 
         try { 
             String text = SystemLambda.tapSystemOut(() -> {
-                Main.mortgages.clear();
+                Exercici2.mortgages.clear();
 
                 HashMap<String, Object> m1 = new HashMap<>();
                 m1.put("bank", "Banc B");
@@ -1370,10 +1370,10 @@ class TestExamen {
                 m2.put("payment", 500.00);
                 m2.put("modified", "2023-01-01T12:00:00");
 
-                Main.mortgages.add(m1);
-                Main.mortgages.add(m2);
+                Exercici2.mortgages.add(m1);
+                Exercici2.mortgages.add(m2);
 
-                Main.listMortgages("bank");
+                Exercici2.listMortgages("bank");
             });
 
             text = text.replace("\r\n", "\n");
@@ -1412,7 +1412,7 @@ class TestExamen {
         try {
             String text = SystemLambda.tapSystemOut(() -> {
                 String[] args = {};
-                Main.main(args);
+                Exercici2.main(args);
             });
             text = text.replace("\r\n", "\n");
 
