@@ -126,13 +126,13 @@ public class Restaurants {
 
     /**
      * Mostra una taula amb informació dels restaurants:
-     * ┌────────────┬─────────────────┬────────┬──────┐
-     * │ Nom        │ Tipus           │ Taules │ Preu │
-     * ├────────────┼─────────────────┼────────┼──────┤
-     * │ Quimeta    │ Cuina casolana  │ 8      │ 30   │
-     * │ Cal Pepet  │ Bar             │ 5      │ 15   │
-     * │ DongFang   │ Xinès           │ 15     │ 12   │
-     * └────────────┴─────────────────┴────────┴──────┘
+     * ┌───────────┬────────────────┬───────┬─────┐
+     * │Nom        │Tipus           │Taules │Preu │
+     * ├───────────┼────────────────┼───────┼─────┤
+     * │Quimeta    │Cuina casolana  │8      │30   │
+     * │Cal Pepet  │Bar             │5      │15   │
+     * │DongFang   │Xinès           │15     │12   │
+     * └───────────┴────────────────┴───────┴─────┘
      */
     public static void llistarTaulaRestautants() {
 
