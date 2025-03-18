@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.security.InvalidParameterException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -29,7 +31,7 @@ public class Restaurants {
         db.update(sql);
         db.update("DROP TABLE IF EXISTS clients");
         String sql1 = """
-            CREATE TABLE IF NOT EXISTS directors (
+            CREATE TABLE IF NOT EXISTS clients (
                 id_client INTEGER PRIMARY KEY AUTOINCREMENT,
                 name TEXT NOT NULL,
                 birth DATE NOT NULL,
@@ -73,6 +75,12 @@ public class Restaurants {
         return db.insertAndGetId(sql);
     }
 
+    /**
+     * Canvia els caràcters ' d'una cadena de text, per ''
+     * per escapar-los en format SQLite 
+     * @param str
+     * @return
+     */
     private static String fixString(String str) {
         String rst =  str.replaceAll("'", "''");
         return rst;
@@ -124,22 +132,104 @@ public class Restaurants {
         System.out.println("Dades carregades correctament");
     }
 
+    public static String formatRow(String[] values, int[] columnWidths) {
+        String rst = "";
+        for (int i = 0; i < values.length; i++) { 
+            rst += "│";
+            String value = values[i];
+            if (value.length() > columnWidths[i]) {
+                value = value.substring(0, columnWidths[i]);
+            }
+            rst += value;
+            int spaceCount = columnWidths[i] - value.length();
+            if (spaceCount > 0) {
+                rst += " ".repeat(spaceCount);
+            }
+            
+        }
+        rst += "│";
+        return rst;
+    }
+
+    public static String generaMarcTaula(int[] columnWidths, char[] separators) {
+        String rst = "";
+        rst += separators[0];
+        for (int i = 0; i < columnWidths.length; i++) {
+            for (int j = 0; j < columnWidths[i]; j++) {
+                rst += '─';
+            }
+            if (i < columnWidths.length - 1) {
+                rst += separators[1];
+            }
+        }
+        rst += separators[2];
+        return rst;
+    }
+
     /**
      * Mostra una taula amb informació dels restaurants:
-     * ┌───────────┬────────────────┬───────┬─────┐
-     * │Nom        │Tipus           │Taules │Preu │
-     * ├───────────┼────────────────┼───────┼─────┤
-     * │Quimeta    │Cuina casolana  │8      │30   │
-     * │Cal Pepet  │Bar             │5      │15   │
-     * │DongFang   │Xinès           │15     │12   │
-     * └───────────┴────────────────┴───────┴─────┘
+     * ┌────────────────────┬────────────────────┬────────┬─────┐
+     * │Nom                 │Tipus               │Taules  │Preu │
+     * ├────────────────────┼────────────────────┼────────┼─────┤
+     * │Quimeta             │Cuina casolana      │8       │30   │
+     * │Cal Pepet           │Bar                 │5       │15   │
+     * │DongFang            │Xinès               │15      │12   │
+     * └────────────────────┴────────────────────┴────────┴─────┘
      */
-    public static void llistarTaulaRestautants() {
+    public static void llistarTaulaRestautants() throws IOException {
+        AppData db = AppData.getInstance();
+        ArrayList<HashMap<String, Object>> restaurants = db.query("SELECT * FROM restaurants");
 
+        String[] titol = {"Nom", "Tipus", "Taules", "Preu"};
+        int[] columnWidths = {20, 20, 8, 5};
+        char[] separadorsTop = {'┌', '┬', '┐'};
+        char[] separadorsMid = {'├', '┼', '┤'};
+        char[] separadorsBot = {'└', '┴', '┘'};
+
+        System.out.println(generaMarcTaula(columnWidths, separadorsTop));
+        System.out.println(formatRow(titol, columnWidths));
+        System.out.println(generaMarcTaula(columnWidths, separadorsMid));
+
+        for (int i = 0; i < restaurants.size(); i++) {
+            HashMap<String, Object> restaurant = new HashMap<>(restaurants.get(i));
+            String[] row = {
+                (String) restaurant.get("name"),
+                (String) restaurant.get("kind"),
+                String.valueOf(restaurant.get("tables")),
+                (String) restaurant.get("pricing")
+            };
+            System.out.println(formatRow(row, columnWidths));
+        }
+
+        System.out.println(generaMarcTaula(columnWidths, separadorsBot));
     }
 
     public static void llisarTaulaClients() {
 
+        AppData db = AppData.getInstance();
+        ArrayList<HashMap<String, Object>> clients = db.query("SELECT * FROM clients");
+
+        String[] titol = {"ID", "Nom", "Data de naixement", "VIP"};
+        int[] columnWidths = {10, 20, 20, 5};
+        char[] separadorsTop = {'┌', '┬', '┐'};
+        char[] separadorsMid = {'├', '┼', '┤'};
+        char[] separadorsBot = {'└', '┴', '┘'};
+
+        System.out.println(generaMarcTaula(columnWidths, separadorsTop));
+        System.out.println(formatRow(titol, columnWidths));
+        System.out.println(generaMarcTaula(columnWidths, separadorsMid));
+
+        for (int i = 0; i < clients.size(); i++) {
+            HashMap<String, Object> client = new HashMap<>(clients.get(i));
+            String[] row = {
+                String.valueOf(client.get("id_client")),
+                (String) client.get("name"),
+                (String) client.get("birth"),
+                (String) client.get("isVIP")
+            };
+            System.out.println(formatRow(row, columnWidths));
+        }
+        System.out.println(generaMarcTaula(columnWidths, separadorsBot));
     }
 
     /**
@@ -150,7 +240,40 @@ public class Restaurants {
      * @param idClient
      */
     public static void llistarTaulaServeis(int idClient) throws InvalidParameterException {
+        AppData db = AppData.getInstance();
+        ArrayList<HashMap<String, Object>> services;
+        
+        if (idClient == -1) {
+            services = db.query("SELECT * FROM services");
+        } else {
+            services = db.query(String.format("SELECT * FROM services WHERE id_client = %d", idClient));
+            if (services.isEmpty()) {
+                throw new InvalidParameterException("Invalid client ID: " + idClient);
+            }
+        }
 
+        String[] titol = {"ID Servei", "ID Restaurant", "ID Client", "Data", "Despesa"};
+        int[] columnWidths = {10, 15, 10, 15, 10};
+        char[] separadorsTop = {'┌', '┬', '┐'};
+        char[] separadorsMid = {'├', '┼', '┤'};
+        char[] separadorsBot = {'└', '┴', '┘'};
+
+        System.out.println(generaMarcTaula(columnWidths, separadorsTop));
+        System.out.println(formatRow(titol, columnWidths));
+        System.out.println(generaMarcTaula(columnWidths, separadorsMid));
+
+        for (HashMap<String, Object> service : services) {
+            String[] row = {
+                String.valueOf(service.get("id_servei")),
+                String.valueOf(service.get("id_restaurant")),
+                String.valueOf(service.get("id_client")),
+                (String) service.get("date"),
+                String.valueOf(service.get("expenditure"))
+            };
+            System.out.println(formatRow(row, columnWidths));
+        }
+
+        System.out.println(generaMarcTaula(columnWidths, separadorsBot));
     }
 
     /** Mostra dues llistes, 
@@ -166,6 +289,28 @@ public class Restaurants {
      * - ??
      */
     public static void llistarMitjanes() {
+        AppData db = AppData.getInstance();
+        ArrayList<HashMap<String, Object>> restaurants = db.query("SELECT * FROM restaurants");
+        double mitjana  = 0;
+        for (HashMap<String, Object> restaurant : restaurants) {
+            mitjana += Double.parseDouble((String) restaurant.get("pricing"));
+        }
+        mitjana = mitjana / restaurants.size();
 
+        System.out.println("Preu mitjà: " + String.format("%.2f", mitjana) + "€");
+        System.out.println("Restautants barats:");
+
+        for (HashMap<String, Object> restaurant : restaurants) {
+            if (Double.parseDouble((String) restaurant.get("pricing")) < mitjana) {
+                System.out.println("- " + (String) restaurant.get("name"));
+            }
+        }
+        System.out.println("Restaurants cars:");
+
+        for (HashMap<String, Object> restaurant : restaurants) {
+            if (Double.parseDouble((String) restaurant.get("pricing")) > mitjana) {
+                System.out.println("- " + (String) restaurant.get("name"));
+            }
+        }
     }
 }

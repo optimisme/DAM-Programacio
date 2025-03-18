@@ -2,8 +2,6 @@ package com.exercici0501;
 
 import java.io.IOException;
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Main {
 
@@ -21,14 +19,19 @@ public class Main {
             e.printStackTrace();
         }
 
-        Restaurants.llistarTaulaRestautants();
-        Restaurants.llisarTaulaClients();
+
         try {
+            Restaurants.llistarTaulaRestautants();
+            Restaurants.llisarTaulaClients();
             Restaurants.llistarTaulaServeis(-1);
             Restaurants.llistarTaulaServeis(2);
+          } catch (IOException e) {
+            e.printStackTrace();
         } catch (InvalidParameterException e) {
             e.printStackTrace();
         }
+
+        Restaurants.llistarMitjanes();
 
         db.close();
     }

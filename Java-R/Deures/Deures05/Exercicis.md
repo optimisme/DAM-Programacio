@@ -241,7 +241,8 @@ final private boolean equip;
 ```java
 // Mètodes
 public Atleta(int id, String nom, int edat, String pais, boolean equip)
-public void updateDB();
+public void updateFromDB();
+public void updateToDB();
 public abstract String toString();
 ```
 
@@ -294,8 +295,8 @@ private String categoria;
 ```java
 // Mètodes
 public Esport(int id, String nom, String categoria)
-
-public void updateDB();
+public void updateFromDB();
+public void updateToDB();
 
 // Format de les dades: 
 // "ID: " + id + ", Esport: " + nom + ", Categoria: " + categoria
@@ -315,8 +316,8 @@ private String data;
 ```java
 // Mètodes
 public Competicio(int id, Esport esport, String lloc, String data)
-
-public void updateDB();
+public void updateFromDB();
+public void updateToDB();
 
 // Format de les dades: 
 // "ID: " + id + ", Esport: " + esport.nom + ", Lloc: " + lloc + ", Data: " + data
@@ -337,8 +338,8 @@ private String medalla;
 ```java
 // Mètodes
 public Participant(int id, Atleta atleta, Competicio competicio, int posicio, String medalla)
-
-public void updateDB();
+public void updateFromDB();
+public void updateToDB();
 
 // Format de les dades: 
 // "ID: " + id + ", Atleta: " + atleta.nom + ", Competicio: " + competicio.id + ", Posició: " + posicio + ", Medalla: " + medalla
@@ -397,9 +398,12 @@ public class Main {
 }
 ```
 
-Quan es modifiquen dades dels objectes *Java* s'han de modificar també els camps a la base de dades, per mantenir-ho sincronitzat. Fes servir aquest mètode *updateDB* com a exemple:
+Quan es demanen dades dels objectes *Java* (amb els getters) s'actualitzen els objectes amb la informació d'aquella fila de la base de dades. Fes servir el mètode *updateFromDB* com exemple.
 
-- S'ha d'executar *updateDB* cada vegada que es fa un 'setter'.
+Quan es modifiquen dades dels objectes *Java* (amb els setters) s'han de modificar també els camps a la base de dades, per mantenir-ho sincronitzat. Fes servir aquest mètode *updateToDB* com a exemple.
+
+- S'ha d'exectuar *updateFromDB* cada vegada que es fa un getter.
+- S'ha d'executar *updateToDB* cada vegada que es fa un 'setter'.
 - S'ha de fer un *INSERT* cada vegada que s'afegeix un element a les llistes de *Olimpiades*
 
 ```java
@@ -418,7 +422,7 @@ public class Atleta {
         this.equip = equip;
     }
     
-    public void updateDB() {
+    public void updateToDB() {
         String sql = String.format(
             "UPDATE atletes SET nom='%s', edat=%d, pais='%s', equip=%b WHERE id_atleta=%d;",
             nom, edat, pais, equip, id
