@@ -1,4 +1,4 @@
-package com.exemple1600;
+package com.exercici1600;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +23,7 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         // Carrega la vista inicial des del fitxer FXML
-        Parent root = FXMLLoader.load(getClass().getResource("/assets/exemple1600.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/assets/exercici1600.fxml"));
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
