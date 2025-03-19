@@ -10,10 +10,10 @@
 
 # JavaFX (4)
 
-## Llistes dinàmiques
-
-## Imatges a les llistes
+## Dades, arxius .json
 
 
+
+## Dades, DDBB .sqlite
 
 

@@ -8,11 +8,11 @@
 </div>
 <br/>
 
-# JavaFX (3)
+# JavaFX (5)
 
-## Vistes
+## Llistes dinàmiques
 
-## Subvistes
+## Imatges a les llistes
 
 
 
