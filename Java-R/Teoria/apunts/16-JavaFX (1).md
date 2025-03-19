@@ -184,6 +184,9 @@ A *Gluon SceneBuilder* les configuracions anteriors es veuen a:
 <br/></center>
 <br/>
 
+**Nota** a l'exemple el controlador és: *"com.exemple1600.Controller"*
+
+
 **Identificador dels elements al codi:** apartat 'Code' valor 'fx:id'
 
 <center><img src="./assets/gluoncodeid.png" style="max-width: 90%; max-height: 200px;" alt="">
