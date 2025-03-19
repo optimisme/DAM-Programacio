@@ -8,7 +8,7 @@
 </div>
 <br/>
 
-# JavaFX
+# JavaFX (1)
 
 JavaFX és una tecnología per crear aplicacions interactives.
 
