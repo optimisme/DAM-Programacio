@@ -82,6 +82,11 @@
             <artifactId>sqlite-jdbc</artifactId>
             <version>3.47.0.0</version>
         </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.33</version> 
+        </dependency>
         <!-- Dependencies for SLF4J -->
         <dependency>
             <groupId>org.slf4j</groupId>

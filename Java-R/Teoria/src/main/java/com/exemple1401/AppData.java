@@ -35,10 +35,8 @@ public class AppData {
      * Utilitza la URL, l'usuari i la contrasenya especificats.
      * Desactiva l'autocommit per permetre el control manual de les transaccions.
      */
-    public void connect(String path) {
+    public void connect(String path, String user, String password) {
         String url = "jdbc:mysql:" + path;
-        String user = "root";
-        String password = "pwd";
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");

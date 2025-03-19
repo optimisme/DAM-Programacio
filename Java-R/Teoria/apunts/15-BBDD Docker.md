@@ -9,6 +9,14 @@ A *Ubuntu* cal descarregar el *.deb* i en un Terminal:
 ```bash
 sudo apt-get update
 sudo apt-get install ./docker-desktop-amd64.deb
+sudo usermod -aG docker $USER
+```
+
+## Instal·lar MySQL al Docker
+
+```bash
+docker pull mysql
+docker run --name mysqlServer -p 3308:3306 -e MYSQL_ROOT_PASSWORD=pwd -d mysql 
 ```
 
 ## Instal·lar base de dades MySQL
@@ -24,8 +32,6 @@ docker exec -i mysqlServer mysql -uroot -ppwd < ./data/world.sql
 
 A Windows:
 ```bash
-docker pull mysql
-docker run --name mysqlServer -p 3308:3306 -e MYSQL_ROOT_PASSWORD=pwd -d mysql
 type ./data/world.sql | docker exec -i mysqlServer mysql -uroot -ppwd
 ```
 
