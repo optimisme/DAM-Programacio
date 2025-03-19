@@ -12,7 +12,7 @@
 
 ## Llistes dinàmiques
 
-## Imatges
+## Imatges a les llistes
 
 
 
