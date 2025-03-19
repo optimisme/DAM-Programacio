@@ -214,3 +214,9 @@ Cridar a la funció *"keyEvent"* quan l'usuari prem una tecla:
 scene.addEventFilter(KeyEvent.ANY, keyEvent -> { keyEvent(keyEvent); });
 ```
 
+### Exercici 1600
+
+Fes un programa que permeti calcular la suma de dos números:
+
+- Amb Gluon modifica *./resources/assets/exercici1600.fxml*
+- Modifica el codi del controlador *./com/exercici1600/Controller.java* 
