@@ -17,6 +17,6 @@
       <Label fx:id="subtitle" minWidth="150.0" prefHeight="17.0" text="Subtitle Text" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="25.0" />
       <ImageView fx:id="img" fitHeight="40.0" fitWidth="50.0" layoutX="5.0" layoutY="-50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0" />
       <Circle fx:id="circle" fill="DODGERBLUE" layoutY="25.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="5.0" />
-      <Pane prefHeight="1.0" style="-fx-background-color: #aaaaaa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Pane prefHeight="2.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
    </children>
 </AnchorPane>

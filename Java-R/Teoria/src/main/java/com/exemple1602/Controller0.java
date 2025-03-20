@@ -57,13 +57,13 @@ public class Controller0 {
                     itemController.setTitle("Horse");
                     itemController.setSubtitle("This is 1");
                     itemController.setImatge("/assets/images/horse.png");
-                    itemController.setCircleColor("green");
+                    itemController.setCircleColor("#0ea800");
                     break;
                 default:
                     itemController.setTitle("Turtle");
                     itemController.setSubtitle("This is 2");
                     itemController.setImatge("/assets/images/turtle.png");
-                    itemController.setCircleColor("blue");
+                    itemController.setCircleColor("#0075fc");
                     break;
             }
     
