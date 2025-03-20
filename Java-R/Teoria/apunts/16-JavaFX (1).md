@@ -78,6 +78,15 @@ Editar interfícies FXML manualment és complicat, ja que cal conèixer els comp
 
 **Nota:** Descarregueu [Gluon SceneBuilder](https://gluonhq.com/products/scene-builder/#download) per editar arxius *.fxml*
 
+A **Ubuntu** pot ser que calgui fer:
+```bash
+wget http://es.archive.ubuntu.com/ubuntu/pool/main/libf/libffi/libffi7_3.3-4_amd64.deb
+sudo dpkg -i libffi7_3.3-4_amd64.deb
+sudo apt --fix-broken install
+sudo apt install libpcre3
+sudo dpkg -i SceneBuilder-23.0.1.deb
+```
+
 ### Gluon, relacionar el controlador i la vista
 
 El controlador correspon a una clase Java, que interactua amb els elements de la vista FXML.
