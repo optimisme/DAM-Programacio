@@ -37,3 +37,4 @@ Els contols permeten interactuar amb l'aplicació.
 - **[TextField](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/TextField.html)**: Mostra un camp d'entrada de text
 
 - **[ImageView](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/image/ImageView.html)**: Permet mostrar imatges a l'aplicació JavaFX
+
