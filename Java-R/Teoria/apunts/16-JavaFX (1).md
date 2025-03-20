@@ -210,7 +210,23 @@ Fes anar l'exercici amb:
 
 ### Exercici 1601
 
-Modifica l'exemple 1600 per fer un programa que fa una suma a partir de dos camps de text:
+Modifica el codi per fer un programa que fa una suma a partir de dos camps de text:
+
+Fes anar l'exercici amb:
+
+```bash
+./run.sh com.exercici1601.Main
+```
+
+<center><img src="./assets/exercici1601.png" style="max-width: 90%; max-height: 200px;" alt="">
+<br/></center>
+<br/>
+
+### Exercici 1601
+
+Modifica el codi per fer un programa que té un "titol" i un "text" i permet guardar la informació a un arxiu "./data/dades1601.json"
+
+Després afegeix un botó "Carregar" que llegeix les dades de l'arxiu *.json* anterior i les mostra als camps del programa.
 
 Fes anar l'exercici amb:
 
