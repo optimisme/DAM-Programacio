@@ -54,18 +54,6 @@ El codi FXML està basat en arxius de text amb format XML, per tant, es poden ed
 </AnchorPane>
 ```
 
-## Exemple 0000
-
-Feu anar l'exemple amb:
-```bash
-./run.sh com.project.Main
-```
-
-O bé a Windows PowerShell:
-```bash
-.\run.ps1 com.project.Main
-```
-
 ## Gluon SceneBuilder
 
 Editar interfícies FXML manualment és complicat, ja que cal conèixer els components del llenguatge. 
@@ -210,25 +198,6 @@ A *Gluon SceneBuilder* les configuracions anteriors es veuen a:
 
 **Nota:** A Windows fer servir './run.ps1'
 
-# Events
-
-A l'escena es poden capturar events, per exemple:
-
-Executar la funció *"actionSetSize"* quan canvia la mida de la finestra:
-```java
-UtilsViews.parentContainer.heightProperty().addListener((observable, oldValue, newvalue) ->{
-           actionSetSize(); 
-});
-```
-
-Cridar a la funció *"keyEvent"* quan l'usuari prem una tecla:
-```java
-scene.addEventFilter(KeyEvent.ANY, keyEvent -> { keyEvent(keyEvent); });
-```
-
 ### Exercici 1600
 
-Fes un programa que permeti calcular la suma de dos números:
-
-- Amb Gluon modifica *./resources/assets/exercici1600.fxml*
-- Modifica el codi del controlador *./com/exercici1600/Controller.java* 
+Modifica l'exemple 1600 per afegir un botó de restar.
