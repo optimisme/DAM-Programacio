@@ -1,4 +1,4 @@
-package com.exemple1601;
+package com.exemple1602;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -18,9 +18,9 @@ public class Main extends Application {
     public void start(Stage stage) throws Exception {
 
         UtilsViews.parentContainer.setStyle("-fx-font: 14 arial;");
-        UtilsViews.addView(getClass(), "View0", "/assets/exemple1601View0.fxml");
-        UtilsViews.addView(getClass(), "View1", "/assets/exemple1601View1.fxml");
-        UtilsViews.addView(getClass(), "View2", "/assets/exemple1601View2.fxml");
+        UtilsViews.addView(getClass(), "View0", "/assets/exemple1602View0.fxml");
+        UtilsViews.addView(getClass(), "View1", "/assets/exemple1602View1.fxml");
+        UtilsViews.addView(getClass(), "View2", "/assets/exemple1602View2.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
 

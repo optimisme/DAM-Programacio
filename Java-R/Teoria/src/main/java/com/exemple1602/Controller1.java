@@ -1,11 +1,11 @@
-package com.exemple1601;
+package com.exemple1602;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 
-public class Controller2 {
+public class Controller1 {
 
     @FXML
     private Button button0, button1, button2;
@@ -41,4 +41,5 @@ public class Controller2 {
     private void animateToView2(ActionEvent event) {
         UtilsViews.setViewAnimating("View2");
     }
+
 }
