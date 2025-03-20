@@ -20,7 +20,7 @@ La classe **'UtilsViews.java'** permet gestionar un conjunt de vistes de manera 
 
 L'exemple '0101' fa servir *'UtilsViews'* per mostrar el canvi entre diferents vistes.
 
-Al main, s'afegeixen les vistes a l'escena. Al afegir cada vista se li dóna un nom (View0, View1, ...) per poder-les referenciar més endavant:
+Al main, s'afegeixen les vistes a l'escena. Al afegir cada vista se li dóna un identificador (View0, View1, ...) per poder-les referenciar més endavant:
 
 ```java
 UtilsViews.parentContainer.setStyle("-fx-font: 14 arial;");
@@ -54,7 +54,7 @@ En el codi anterior:
 <br/></center>
 <br/>
 
-Com que **UtilsViews* fa servir atributs i mètodes estàtics, podem obtenir el controlador d'una vista a partir del seu identificador:
+Amb **UtilsViews*, podem obtenir el controlador d'una vista a partir del seu identificador:
 
 ```java
 // Cal fer cast/transformar al tipus del controlador que s'obté (nom de l'objecte)
@@ -62,6 +62,8 @@ Controller0 ctrl0 = (Controller0) UtilsViews.getController("View0");
 ```
 
 ## Subvistes
+
+A vegades ens interessa mostrar una vista dins d'una altra vista, això és útil a mode de plantilles que mostren informació.
 
 
 
