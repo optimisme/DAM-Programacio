@@ -63,7 +63,9 @@ Controller0 ctrl0 = (Controller0) UtilsViews.getController("View0");
 
 ## Subvistes
 
-A vegades ens interessa mostrar una vista dins d'una altra vista, això és útil a mode de plantilles que mostren informació.
+A vegades ens interessa mostrar una vista dins d'una altra vista, això és útil per poder fer plantilles que mostren informació.
+
+
 
 
 

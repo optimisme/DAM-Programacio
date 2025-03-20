@@ -10,6 +10,8 @@
 
 # JavaFX (5)
 
+Els elements d'una aplicació *JavaFX* no només es poden afegir a partir d'arxius *.fxml*, també es poden afegir programant codi *Java*
+
 ## Llistes dinàmiques
 
 ## Imatges a les llistes

@@ -41,9 +41,4 @@ public class Controller0 {
     private void animateToView2(ActionEvent event) {
         UtilsViews.setViewAnimating("View2");
     }
-
-    @Override
-    public String toString() {
-        return "hola";
-    }
 }
