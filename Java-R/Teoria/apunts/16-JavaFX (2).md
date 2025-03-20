@@ -10,5 +10,5 @@
 
 # JavaFX (2)
 
-## Gluon Scene Builder
+## Scene Builder
 
