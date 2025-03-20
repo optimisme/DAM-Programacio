@@ -48,6 +48,7 @@ public class Controller0 {
             // Netejar el contingut existent
             itemBox.getChildren().clear();
 
+            // Assignar els valors als controls del template
             switch (animal) {
                 case "Cat":
                     itemController.setTitle("Cat");
@@ -68,9 +69,6 @@ public class Controller0 {
                     itemController.setCircleColor("blue");
                     break;
             }
-
-            // Assignar els valors als controls del template
-
 
             // Afegir el nou element a 'yPane'
             itemBox.getChildren().add(itemPane);

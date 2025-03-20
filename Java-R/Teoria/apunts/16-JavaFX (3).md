@@ -65,8 +65,83 @@ Controller0 ctrl0 = (Controller0) UtilsViews.getController("View0");
 
 A vegades ens interessa mostrar una vista dins d'una altra vista, això és útil per poder fer plantilles que mostren informació.
 
+Per carregar una subvista, també obtenim el seu controlador:
+```java
+    URL resource = this.getClass().getResource("/assets/exemple1602Item.fxml");
+    FXMLLoader loader = new FXMLLoader(resource);
+    Parent itemPane = loader.load();
+    ControllerItem itemController = loader.getController();
+```
 
+Al controlador de la *subvista* hem de definir les funcions que *emplenen/modifiquen* els seus camps.
+```java
+public void setTitle(String title) {
+        this.title.setText(title);
+    }
 
+    public void setSubtitle(String subtitle) {
+        this.subtitle.setText(subtitle);
+    }
 
+    public void setImatge(String imagePath) {
+        try {
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+            this.img.setImage(image);
+        } catch (NullPointerException e) {
+            System.err.println("Error loading image asset: " + imagePath);
+            e.printStackTrace();
+        }
+    }
+
+    public void setCircleColor(String color) {
+        circle.setStyle("-fx-fill: " + color);
+    }
+```
+
+Finalment, fem servir el controlador i els setters de la subvista per mostrar-la al nostre element amb les dades que ens interessa.
+
+```java
+private void setDades(String animal) {
+
+        try {
+            // Obtenir el recurs del template .fxml
+            URL resource = this.getClass().getResource("/assets/exemple1602Item.fxml");
+            FXMLLoader loader = new FXMLLoader(resource);
+            Parent itemPane = loader.load();
+            ControllerItem itemController = loader.getController();
+
+            // Netejar el contingut existent
+            itemBox.getChildren().clear();
+
+            // Assignar els valors als controls del template
+            switch (animal) {
+                case "Cat":
+                    itemController.setTitle("Cat");
+                    itemController.setSubtitle("This is 0");
+                    itemController.setImatge("/assets/images/cat.png");
+                    itemController.setCircleColor("red");
+                    break;
+                case "Horse":
+                    itemController.setTitle("Horse");
+                    itemController.setSubtitle("This is 1");
+                    itemController.setImatge("/assets/images/horse.png");
+                    itemController.setCircleColor("green");
+                    break;
+                default:
+                    itemController.setTitle("Turtle");
+                    itemController.setSubtitle("This is 2");
+                    itemController.setImatge("/assets/images/turtle.png");
+                    itemController.setCircleColor("blue");
+                    break;
+            }
+
+            // Afegir el nou element a 'yPane'
+            itemBox.getChildren().add(itemPane);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+```
 
 
