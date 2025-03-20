@@ -135,7 +135,7 @@ private void setDades(String animal) {
                     break;
             }
 
-            // Afegir el nou element a 'yPane'
+            // Afegir el nou element a l'espai que l'hi hem reservat (itemBox)
             itemBox.getChildren().add(itemPane);
 
         } catch (IOException e) {
