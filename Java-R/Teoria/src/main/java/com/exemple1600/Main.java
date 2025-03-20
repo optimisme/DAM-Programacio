@@ -27,7 +27,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
 
         stage.setScene(scene);
-        stage.setTitle("JavaFX App");
+        stage.setTitle("JavaFX Title");
         stage.setWidth(WINDOW_WIDTH);
         stage.setHeight(WINDOW_HEIGHT);
         stage.show();
