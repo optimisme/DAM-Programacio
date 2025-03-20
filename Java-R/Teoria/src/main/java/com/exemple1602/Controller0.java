@@ -44,11 +44,8 @@ public class Controller0 {
             FXMLLoader loader = new FXMLLoader(resource);
             Parent itemPane = loader.load();
             ControllerItem itemController = loader.getController();
-
-            // Netejar el contingut existent
-            itemBox.getChildren().clear();
-
-            // Assignar els valors als controls del template
+    
+            // Assignar els valors al nou element (plantilla)
             switch (animal) {
                 case "Cat":
                     itemController.setTitle("Cat");
@@ -69,10 +66,13 @@ public class Controller0 {
                     itemController.setCircleColor("blue");
                     break;
             }
-
-            // Afegir el nou element a 'yPane'
+    
+            // Netejar el contingut existent
+            itemBox.getChildren().clear();
+    
+            // Afegir el nou element a l'espai que l'hi hem reservat (itemBox)
             itemBox.getChildren().add(itemPane);
-
+    
         } catch (IOException e) {
             e.printStackTrace();
         }

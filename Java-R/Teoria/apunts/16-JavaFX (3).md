@@ -103,44 +103,44 @@ Finalment, fem servir el controlador i els setters de la subvista per mostrar-la
 ```java
 private void setDades(String animal) {
 
-        try {
-            // Obtenir el recurs del template .fxml
-            URL resource = this.getClass().getResource("/assets/exemple1602Item.fxml");
-            FXMLLoader loader = new FXMLLoader(resource);
-            Parent itemPane = loader.load();
-            ControllerItem itemController = loader.getController();
+    try {
+        // Obtenir el recurs del template .fxml
+        URL resource = this.getClass().getResource("/assets/exemple1602Item.fxml");
+        FXMLLoader loader = new FXMLLoader(resource);
+        Parent itemPane = loader.load();
+        ControllerItem itemController = loader.getController();
 
-            // Netejar el contingut existent
-            itemBox.getChildren().clear();
-
-            // Assignar els valors als controls del template
-            switch (animal) {
-                case "Cat":
-                    itemController.setTitle("Cat");
-                    itemController.setSubtitle("This is 0");
-                    itemController.setImatge("/assets/images/cat.png");
-                    itemController.setCircleColor("red");
-                    break;
-                case "Horse":
-                    itemController.setTitle("Horse");
-                    itemController.setSubtitle("This is 1");
-                    itemController.setImatge("/assets/images/horse.png");
-                    itemController.setCircleColor("green");
-                    break;
-                default:
-                    itemController.setTitle("Turtle");
-                    itemController.setSubtitle("This is 2");
-                    itemController.setImatge("/assets/images/turtle.png");
-                    itemController.setCircleColor("blue");
-                    break;
-            }
-
-            // Afegir el nou element a l'espai que l'hi hem reservat (itemBox)
-            itemBox.getChildren().add(itemPane);
-
-        } catch (IOException e) {
-            e.printStackTrace();
+        // Assignar els valors al nou element (plantilla)
+        switch (animal) {
+            case "Cat":
+                itemController.setTitle("Cat");
+                itemController.setSubtitle("This is 0");
+                itemController.setImatge("/assets/images/cat.png");
+                itemController.setCircleColor("red");
+                break;
+            case "Horse":
+                itemController.setTitle("Horse");
+                itemController.setSubtitle("This is 1");
+                itemController.setImatge("/assets/images/horse.png");
+                itemController.setCircleColor("green");
+                break;
+            default:
+                itemController.setTitle("Turtle");
+                itemController.setSubtitle("This is 2");
+                itemController.setImatge("/assets/images/turtle.png");
+                itemController.setCircleColor("blue");
+                break;
         }
+
+        // Netejar el contingut existent
+        itemBox.getChildren().clear();
+
+        // Afegir el nou element a l'espai que l'hi hem reservat (itemBox)
+        itemBox.getChildren().add(itemPane);
+
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
     }
 ```
 
