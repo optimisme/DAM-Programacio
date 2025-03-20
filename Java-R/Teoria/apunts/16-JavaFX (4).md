@@ -8,12 +8,12 @@
 </div>
 <br/>
 
-# JavaFX (4)
+# JavaFX (5)
 
-## Dades, arxius .json
+## Llistes dinàmiques
+
+## Imatges a les llistes
 
 
-
-## Dades, DDBB .sqlite
 
 
