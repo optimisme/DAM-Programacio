@@ -141,10 +141,10 @@ src/main/resources/assets
 
 ### Exemple 1600
 
-**Nota:** Per fer anar l'exemple cal 'Maven'
+Fes anar l'exemple amb:
 
 ```bash
-./run.sh com.project.Main
+./run.sh com.exemple1600.Main
 ```
 
 Aquest exemple mostra com: 
@@ -201,3 +201,23 @@ A *Gluon SceneBuilder* les configuracions anteriors es veuen a:
 ### Exercici 1600
 
 Modifica l'exemple 1600 per afegir un botó de restar.
+
+Fes anar l'exercici amb:
+
+```bash
+./run.sh com.exercici1600.Main
+```
+
+### Exercici 1601
+
+Modifica l'exemple 1600 per fer un programa que fa una suma a partir de dos camps de text:
+
+Fes anar l'exercici amb:
+
+```bash
+./run.sh com.exercici1601.Main
+```
+
+<center><img src="./assets/exercici1601.png" style="max-width: 90%; max-height: 200px;" alt="">
+<br/></center>
+<br/>
