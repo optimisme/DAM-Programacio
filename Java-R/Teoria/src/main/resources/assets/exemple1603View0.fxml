@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: EBEBEB;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple1602.Controller0">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: EBEBEB;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple1603.Controller0">
    <children>
       <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -21,7 +21,7 @@
             <VBox fx:id="itemBox" alignment="CENTER" prefHeight="200.0" prefWidth="100.0" />
             <HBox alignment="CENTER" maxHeight="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Button fx:id="button00" mnemonicParsing="false" onAction="#setDades0" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Cat" textFill="RED">
+                  <Button fx:id="button00" mnemonicParsing="false" onAction="#setDades0" prefHeight="25.0" prefWidth="200.0" text="Cat" textFill="RED">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -29,21 +29,27 @@
                         <Insets right="15.0" />
                      </HBox.margin>
                      <cursor>
-                        <Cursor fx:constant="DEFAULT" />
+                        <Cursor fx:constant="HAND" />
                      </cursor>
                   </Button>
-                  <Button fx:id="button01" mnemonicParsing="false" onAction="#setDades1" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Horse" textFill="#0ea800">
+                  <Button fx:id="button01" mnemonicParsing="false" onAction="#setDades1" prefHeight="25.0" prefWidth="200.0" text="Horse" textFill="#0ea800">
                      <font>
                         <Font size="18.0" />
                      </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
-                  <Button fx:id="button02" mnemonicParsing="false" onAction="#setDades2" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="Turtle" textFill="#0075fc">
+                  <Button fx:id="button02" mnemonicParsing="false" onAction="#setDades2" prefHeight="25.0" prefWidth="200.0" text="Turtle" textFill="#0075fc">
                      <font>
                         <Font size="18.0" />
                      </font>
                      <HBox.margin>
                         <Insets left="15.0" />
                      </HBox.margin>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
                   </Button>
                </children>
             </HBox>

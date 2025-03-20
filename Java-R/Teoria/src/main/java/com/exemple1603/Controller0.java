@@ -1,4 +1,4 @@
-package com.exemple1602;
+package com.exemple1603;
 
 import java.io.IOException;
 import java.net.URL;
@@ -40,7 +40,7 @@ public class Controller0 {
 
         try {
             // Obtenir el recurs del template .fxml
-            URL resource = this.getClass().getResource("/assets/exemple1602Item.fxml");
+            URL resource = this.getClass().getResource("/assets/exemple1603Item.fxml");
             FXMLLoader loader = new FXMLLoader(resource);
             Parent itemPane = loader.load();
             ControllerItem itemController = loader.getController();
