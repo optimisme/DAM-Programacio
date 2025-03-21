@@ -10,10 +10,6 @@
 
 # JavaFX (4)
 
-## Dades, arxius .json
-
-
-
-## Dades, DDBB .sqlite
+## DDBB i taules amb dades
 
 
