@@ -150,7 +150,7 @@ private void setDades(String animal) {
 
 Fes un programa JavaFX amb dues vistes:
 
-**Vista 0**: Ha de mostrar la fitxa amb les dades d'un esportista o music conegut. Carregat a partir d'un arxiu *.json*. Ha de contenir:
+**Vista 0**: Ha de mostrar la fitxa amb les dades d'un personatge reconegut. Carregat a partir d'un arxiu *.json*. Ha de contenir:
 
 - Nom
 - Activitat
@@ -159,3 +159,9 @@ Fes un programa JavaFX amb dues vistes:
 - Foto
 
 **Vista 1**: Ha de mostar un formulari per modificar els camps anteriors i guardar les noves dades a l'arxiu *.json*
+
+Prepara almenys tres arxius *.json* que es poden llegir/escriure amb l'aplicació anterior:
+
+- **music.json** amb la informació d'un músic
+- **cientific.json** amb la informació d'un científic
+- **esportista.json** amb la informació d'un esportista
