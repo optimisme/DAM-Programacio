@@ -26,7 +26,7 @@ Els widgets que permeten tenir altres widgets dins, tenen *"normes"* de posicion
 
 - **[ScrollPane](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/ScrollPane.html)**: Permet afegir un "scroll" per mostrar els widgets fills que queden per fora de l'espai del propi widget *(fora del viewport)*.
 
-## Controls
+## Controls
 
 Els contols permeten interactuar amb l'aplicació.
 
