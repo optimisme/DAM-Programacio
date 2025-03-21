@@ -24,7 +24,7 @@ Els widgets que permeten tenir altres widgets dins, tenen *"normes"* de posicion
 
      **Molt útils** per espaiar i centrar elements, encara que tinguins dins un únic element.
 
-     **A més** afegeixen la opció *Hgrow* o *Vgrow* als fills, el què permet espaiar-los.
+     **A més** afegeixen la opció *Hgrow* o *Vgrow* al layout dels fills, el què permet espaiar-los.
 
 - **[AnchorPane](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/AnchorPane.html)**: Permet posar els widgets fills a una distància dels costats propis. 
 
