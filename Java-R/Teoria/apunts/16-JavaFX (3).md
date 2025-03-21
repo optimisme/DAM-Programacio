@@ -54,7 +54,7 @@ En el codi anterior:
 <br/></center>
 <br/>
 
-Amb **UtilsViews*, podem obtenir el controlador d'una vista a partir del seu identificador:
+Amb **UtilsViews**, podem obtenir el controlador d'una vista a partir del seu identificador:
 
 ```java
 // Cal fer cast/transformar al tipus del controlador que s'obté (nom de l'objecte)
