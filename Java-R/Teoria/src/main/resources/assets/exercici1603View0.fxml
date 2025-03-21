@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici1603.Controller0">
+   <children>
+      <HBox maxHeight="100.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
+         <children>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button disable="true" mnemonicParsing="false" onAction="#animateToView0" prefHeight="25.0" prefWidth="200.0" text="View0 anim">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#animateToView1" prefHeight="25.0" prefWidth="200.0" text="View1 anim">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <Text layoutX="253.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View 0" wrappingWidth="328.13671875" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="65.0">
+         <font>
+            <Font name="Lato Black" size="55.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
