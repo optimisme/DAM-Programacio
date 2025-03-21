@@ -12,9 +12,11 @@
 
 Els elements d'una aplicació *JavaFX* no només es poden afegir a partir d'arxius *.fxml*, també es poden afegir programant codi *Java*
 
-## Llistes dinàmiques
+## Funció al iniciar una vista
 
-## Imatges a les llistes
+## Elements programàtics
+
+## Llistes dinàmiques
 
 
 
