@@ -52,7 +52,7 @@ public class Controller {
         File selectedFile = fileChooser.showSaveDialog(stage);
         if (selectedFile != null) {
             try {
-                String jsonData = txt.getText(); // "txt.getText()" és el text .json que es vol guardar
+                String jsonData = txt.getText(); // "txt.getText()" conté el text .json que es vol guardar
                 if (jsonData.substring(0, 1).equalsIgnoreCase("[")) {
                     JSONArray json = new JSONArray(jsonData);
                     Files.write(selectedFile.toPath(), json.toString(4).getBytes());
