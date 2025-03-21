@@ -169,4 +169,3 @@ Prepara almenys tres arxius *.json* que es poden llegir/escriure amb l'aplicaci√
 Comprova que els tres arxius *.json* es poden obrir i modificar amb l'aplicaci√≥.
 
 Guarda les imatges a la carpeta: **"src/main/resources/assets/exercici1603/"**
-
