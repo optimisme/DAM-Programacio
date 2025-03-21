@@ -53,7 +53,9 @@ public class Controller {
         if (selectedFile != null) {
             try {
                 String jsonData = txt.getText();
-                if (jsonData.substring(0, 1) == "[") {
+                System.out.println(jsonData);
+                System.out.println();
+                if (jsonData.substring(0, 1).equalsIgnoreCase("[")) {
                     JSONArray json = new JSONArray(jsonData);
                     Files.write(selectedFile.toPath(), json.toString(4).getBytes());
                 } else {
