@@ -77,14 +77,21 @@ Aquest exemple mostra com escollir arxius del sistema d'arxius:
     // Guarda la informació d'un quadre de text tipus "TextArea" en un arxiu ".json"
     @FXML
     private void actionSaveJSON() {
-        Stage stage = (Stage) txt.getScene().getWindow();
+        Stage stage = (Stage) buttonSaveJSON.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arxius JSON", "*.json"));
         File selectedFile = fileChooser.showSaveDialog(stage);
         if (selectedFile != null) {
             try {
-                Files.write(selectedFile.toPath(), txt.getText().getBytes());
+                String jsonData = txt.getText();
+                if (jsonData.substring(0, 1).equalsIgnoreCase("[")) {
+                    JSONArray json = new JSONArray(jsonData);
+                    Files.write(selectedFile.toPath(), json.toString(4).getBytes());
+                } else {
+                    JSONObject json = new JSONObject(jsonData);
+                    Files.write(selectedFile.toPath(), json.toString(4).getBytes());
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
