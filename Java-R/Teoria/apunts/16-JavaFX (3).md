@@ -162,9 +162,9 @@ Fes un programa JavaFX amb dues vistes:
 
 Prepara almenys tres arxius *.json* que es poden llegir/escriure amb l'aplicació anterior:
 
-- **music.json** amb la informació d'un músic
-- **cientific.json** amb la informació d'un científic
-- **esportista.json** amb la informació d'un esportista
+- **./data/music.json** amb la informació d'un músic
+- **./data/cientific.json** amb la informació d'un científic
+- **./data/esportista.json** amb la informació d'un esportista
 
 Comprova que els tres arxius *.json* es poden obrir i modificar amb l'aplicació.
 
