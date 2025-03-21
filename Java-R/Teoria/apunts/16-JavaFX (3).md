@@ -146,7 +146,7 @@ private void setDades(String animal) {
     }
 ```
 
-## Exemple 1604
+## Exercici 1603
 
 Fes un programa JavaFX amb dues vistes:
 
@@ -155,7 +155,7 @@ Fes un programa JavaFX amb dues vistes:
 - Nom
 - Activitat
 - Data de naixament
-- Explicació de les efimèrides
+- Text explicatiu
 - Foto
 
 **Vista B**: Ha de mostar un formulari per modificar els camps anteriors i guardar les noves dades a l'arxiu *.json*
