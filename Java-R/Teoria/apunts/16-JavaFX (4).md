@@ -18,6 +18,3 @@ Els elements d'una aplicació *JavaFX* no només es poden afegir a partir d'arxi
 
 ## Llistes dinàmiques
 
-
-
-
