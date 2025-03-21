@@ -53,8 +53,13 @@ public class Controller {
         if (selectedFile != null) {
             try {
                 String jsonData = txt.getText();
-                JSONObject json = new JSONObject(jsonData);
-                Files.write(selectedFile.toPath(), json.toString(4).getBytes());
+                if (jsonData.substring(0, 1) == "[") {
+                    JSONArray json = new JSONArray(jsonData);
+                    Files.write(selectedFile.toPath(), json.toString(4).getBytes());
+                } else {
+                    JSONObject json = new JSONObject(jsonData);
+                    Files.write(selectedFile.toPath(), json.toString(4).getBytes());
+                }
             } catch (IOException e) {
                 e.printStackTrace();
             }
