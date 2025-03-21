@@ -59,7 +59,7 @@ Aquest exemple mostra com escollir arxius del sistema d'arxius:
     // Carrega un arxiu .json a un quadre de text tipus "TextArea"
     @FXML
     private void actionLoadJSON() {
-        Stage stage = (Stage) txt.getScene().getWindow();
+        Stage stage = (Stage) buttonLoadJSON.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arxius JSON", "*.json"));
@@ -101,7 +101,7 @@ Aquest exemple mostra com escollir arxius del sistema d'arxius:
     // Carrega una imatge del sistema en un element tipus "ImageView"
     @FXML
     private void actionLoadImage() {
-        Stage stage = (Stage) txt.getScene().getWindow();
+        Stage stage = (Stage) buttonLoadImage.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imatges", "*.png", "*.jpg", "*.jpeg", "*.gif"));
