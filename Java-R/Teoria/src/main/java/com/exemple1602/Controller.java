@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -13,6 +14,9 @@ import javafx.stage.Stage;
 public class Controller {
 
     @FXML
+    private Button buttonLoadJSON, buttonSaveJSON, buttonLoadImage;
+
+    @FXML
     private TextArea txt;
 
     @FXML
@@ -20,7 +24,7 @@ public class Controller {
 
     @FXML
     private void actionLoadJSON() {
-        Stage stage = (Stage) txt.getScene().getWindow();
+        Stage stage = (Stage) buttonLoadJSON.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arxius JSON", "*.json"));
@@ -37,7 +41,7 @@ public class Controller {
 
     @FXML
     private void actionSaveJSON() {
-        Stage stage = (Stage) txt.getScene().getWindow();
+        Stage stage = (Stage) buttonSaveJSON.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arxius JSON", "*.json"));
@@ -53,7 +57,7 @@ public class Controller {
 
     @FXML
     private void actionLoadImage() {
-        Stage stage = (Stage) txt.getScene().getWindow();
+        Stage stage = (Stage) buttonLoadImage.getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imatges", "*.png", "*.jpg", "*.jpeg", "*.gif"));
