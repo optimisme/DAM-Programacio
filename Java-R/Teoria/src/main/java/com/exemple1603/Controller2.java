@@ -4,15 +4,8 @@ import com.utils.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.layout.AnchorPane;
 
 public class Controller2 {
-
-    @FXML
-    private Button button0, button1, button2;
-    @FXML
-    private AnchorPane container;
 
     @FXML
     private void toView0(ActionEvent event) {
