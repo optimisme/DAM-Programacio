@@ -1,4 +1,6 @@
-package com.exemple1602;
+package com.exemple1603;
+
+import com.utils.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,9 +1,14 @@
 package com.exemple1603;
 
+import com.utils.UtilsViews;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+// Fes anar aquest exemple amb
+// ./run.sh com.exemple1603.Main
 
 public class Main extends Application {
 
@@ -19,6 +24,8 @@ public class Main extends Application {
 
         UtilsViews.parentContainer.setStyle("-fx-font: 14 arial;");
         UtilsViews.addView(getClass(), "View0", "/assets/exemple1603View0.fxml");
+        UtilsViews.addView(getClass(), "View1", "/assets/exemple1603View1.fxml");
+        UtilsViews.addView(getClass(), "View2", "/assets/exemple1603View2.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
 

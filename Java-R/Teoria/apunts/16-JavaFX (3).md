@@ -16,7 +16,7 @@ A **JavaFX** la gestió de Vistes amb JavaFX cal fer-la des del codi manualment.
 
 La classe **'UtilsViews.java'** permet gestionar un conjunt de vistes de manera senzilla.
 
-## Exemple 1602
+## Exemple 1603
 
 L'exemple '0101' fa servir *'UtilsViews'* per mostrar el canvi entre diferents vistes.
 
@@ -24,9 +24,9 @@ Al main, s'afegeixen les vistes a l'escena. Al afegir cada vista se li dóna un 
 
 ```java
 UtilsViews.parentContainer.setStyle("-fx-font: 14 arial;");
-UtilsViews.addView(getClass(), "View0", "/assets/exemple1602View0.fxml");
-UtilsViews.addView(getClass(), "View1", "/assets/exemple1602View1.fxml");
-UtilsViews.addView(getClass(), "View2", "/assets/exemple1602View2.fxml");
+UtilsViews.addView(getClass(), "View0", "/assets/exemple1603View0.fxml");
+UtilsViews.addView(getClass(), "View1", "/assets/exemple1603View1.fxml");
+UtilsViews.addView(getClass(), "View2", "/assets/exemple1603View2.fxml");
 
 Scene scene = new Scene(UtilsViews.parentContainer);
 ```
@@ -50,7 +50,7 @@ En el codi anterior:
 - **UtilsViews.setView("View2")** canvia a la vista 'View2' sense animació
 - **UtilsViews.setViewAnimating("View0")** canvia de vista 'View0' amb animació
 
-<center><img src="./assets/exemple1602.gif" style="max-width: 90%; max-height: 350px;" alt="">
+<center><img src="./assets/exemple1603.gif" style="max-width: 90%; max-height: 350px;" alt="">
 <br/></center>
 <br/>
 
@@ -65,11 +65,11 @@ Controller0 ctrl0 = (Controller0) UtilsViews.getController("View0");
 
 A vegades ens interessa mostrar una vista dins d'una altra vista, això és útil per poder fer plantilles que mostren informació.
 
-## Exemple 1603
+## Exemple 1604
 
 Per carregar una subvista, també obtenim el seu controlador:
 ```java
-    URL resource = this.getClass().getResource("/assets/exemple1603Item.fxml");
+    URL resource = this.getClass().getResource("/assets/exemple1604Item.fxml");
     FXMLLoader loader = new FXMLLoader(resource);
     Parent itemPane = loader.load();
     ControllerItem itemController = loader.getController();
@@ -107,7 +107,7 @@ private void setDades(String animal) {
 
     try {
         // Obtenir el recurs del template .fxml
-        URL resource = this.getClass().getResource("/assets/exemple1603Item.fxml");
+        URL resource = this.getClass().getResource("/assets/exemple1604Item.fxml");
         FXMLLoader loader = new FXMLLoader(resource);
         Parent itemPane = loader.load();
         ControllerItem itemController = loader.getController();
@@ -146,4 +146,16 @@ private void setDades(String animal) {
     }
 ```
 
+## Exemple 1604
 
+Fes un programa JavaFX amb dues vistes:
+
+**Vista A**: Ha de mostrar la fitxa amb les dades d'un esportista o music conegut. Carregat a partir d'un arxiu *.json*. Ha de contenir:
+
+- Nom
+- Activitat
+- Data de naixament
+- Explicació de les efimèrides
+- Foto
+
+**Vista B**: Ha de mostar un formulari per modificar els camps anteriors i guardar les noves dades a l'arxiu *.json*

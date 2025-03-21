@@ -1,80 +1,46 @@
 package com.exemple1603;
 
-import java.io.IOException;
-import java.net.URL;
+import com.utils.*;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 
 public class Controller0 {
 
     @FXML
-    private Button button00, button01, button02;
+    private Button button0, button1, button2;
     @FXML
     private AnchorPane container;
 
     @FXML
-    private VBox itemBox;
-
-    @FXML
-    private void setDades0(ActionEvent event) {
-        setDades("Cat");
+    private void toView0(ActionEvent event) {
+        UtilsViews.setView("View0");
     }
 
     @FXML
-    private void setDades1(ActionEvent event) {
-        setDades("Horse");
+    private void toView1(ActionEvent event) {
+        UtilsViews.setView("View1");
     }
 
     @FXML
-    private void setDades2(ActionEvent event) {
-        setDades("Turtle");
+    private void toView2(ActionEvent event) {
+        UtilsViews.setView("View2");
     }
 
-    private void setDades(String animal) {
+    @FXML
+    private void animateToView0(ActionEvent event) {
+        UtilsViews.setViewAnimating("View0");
+    }
 
-        try {
-            // Obtenir el recurs del template .fxml
-            URL resource = this.getClass().getResource("/assets/exemple1603Item.fxml");
-            FXMLLoader loader = new FXMLLoader(resource);
-            Parent itemPane = loader.load();
-            ControllerItem itemController = loader.getController();
-    
-            // Assignar els valors al nou element (plantilla)
-            switch (animal) {
-                case "Cat":
-                    itemController.setTitle("Cat");
-                    itemController.setSubtitle("This is 0");
-                    itemController.setImatge("/assets/images/cat.png");
-                    itemController.setCircleColor("red");
-                    break;
-                case "Horse":
-                    itemController.setTitle("Horse");
-                    itemController.setSubtitle("This is 1");
-                    itemController.setImatge("/assets/images/horse.png");
-                    itemController.setCircleColor("#0ea800");
-                    break;
-                default:
-                    itemController.setTitle("Turtle");
-                    itemController.setSubtitle("This is 2");
-                    itemController.setImatge("/assets/images/turtle.png");
-                    itemController.setCircleColor("#0075fc");
-                    break;
-            }
-    
-            // Netejar el contingut existent
-            itemBox.getChildren().clear();
-    
-            // Afegir el nou element a l'espai que l'hi hem reservat (itemBox)
-            itemBox.getChildren().add(itemPane);
-    
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    @FXML
+    private void animateToView1(ActionEvent event) {
+        UtilsViews.setViewAnimating("View1");
+    }
+
+    @FXML
+    private void animateToView2(ActionEvent event) {
+        UtilsViews.setViewAnimating("View2");
     }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #00552F;" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple1602.Controller1">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #0033B2;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple1603.Controller1">
    <children>
       <HBox maxHeight="100.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0">
          <children>
@@ -31,7 +31,7 @@
             </VBox>
             <VBox alignment="BOTTOM_CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="button11" mnemonicParsing="false" onAction="#toView1" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="View1">
+                  <Button fx:id="button11" disable="true" mnemonicParsing="false" onAction="#toView1" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="View1">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -39,7 +39,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="button1" mnemonicParsing="false" onAction="#animateToView1" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="View1 anim">
+                  <Button fx:id="button1" disable="true" mnemonicParsing="false" onAction="#animateToView1" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="View1 anim">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -48,7 +48,7 @@
             </VBox>
             <VBox alignment="BOTTOM_RIGHT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
-                  <Button fx:id="button21" disable="true" mnemonicParsing="false" onAction="#toView2" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="View2" VBox.vgrow="ALWAYS">
+                  <Button fx:id="button21" mnemonicParsing="false" onAction="#toView2" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="View2" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -56,7 +56,7 @@
                         <Insets bottom="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="button2" disable="true" mnemonicParsing="false" onAction="#animateToView2" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="View2 anim" VBox.vgrow="ALWAYS">
+                  <Button fx:id="button2" mnemonicParsing="false" onAction="#animateToView2" prefHeight="25.0" prefWidth="200.0" style="-fx-background-color: white;" text="View2 anim" VBox.vgrow="ALWAYS">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -65,7 +65,7 @@
             </VBox>
          </children>
       </HBox>
-      <Text fill="WHITE" layoutX="253.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View 2" wrappingWidth="328.13671875" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="65.0">
+      <Text fill="WHITE" layoutX="253.0" layoutY="209.0" strokeType="OUTSIDE" strokeWidth="0.0" text="View 1" wrappingWidth="328.13671875" AnchorPane.leftAnchor="45.0" AnchorPane.topAnchor="65.0">
          <font>
             <Font name="Lato Black" size="55.0" />
          </font>

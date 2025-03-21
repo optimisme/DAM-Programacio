@@ -38,3 +38,49 @@ Els contols permeten interactuar amb l'aplicació.
 
 - **[ImageView](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/image/ImageView.html)**: Permet mostrar imatges a l'aplicació JavaFX
 
+## File Chooser
+
+El *File Chooser* permet escollir un arxiu del sistema d'arxius.
+
+Aquest Objecte permet:
+
+- Escollir arxius en mode **lectura**
+- Escollir arxius en mode **escriptura**
+
+```java
+// Escollir un arxiu per llegir-lo
+FileChooser jsonChooser = new FileChooser();
+jsonChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arxius JSON", "*.json"));
+File selectedFile = jsonChooser.showOpenDialog(stage);
+if (selectedFile != null) {
+    String content = new String(Files.readAllBytes(selectedFile.toPath()));
+    JSONArray jsonArray = new JSONArray(content); // O JSONObject segons calgui
+}
+
+// Escollir un nom d'arxiu per guardar-hi informació
+FileChooser fileChooser = new FileChooser();
+fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arxius JSON", "*.json"));
+File selectedFile = fileChooser.showSaveDialog(stage);
+if (selectedFile != null) {
+    Files.write(selectedFile.toPath(), jsonArray.toString(4).getBytes());
+    // Suposoa que jsonArray és una llista amb la informació que volem guardar
+}
+
+// Escollir una imatge i mostrar-la en un ImageView
+FileChooser imageChooser = new FileChooser();
+imageChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Imatges", "*.png", "*.jpg", "*.jpeg", "*.gif"));
+File selectedFile = imageChooser.showOpenDialog(stage);
+if (selectedFile != null) {
+    try {
+        Image image = new Image(selectedFile.toURI().toString());
+        imageView.setImage(image);
+    } catch (Exception e) {
+        System.err.println("Error carregant la imatge: " + selectedFile.getAbsolutePath());
+        e.printStackTrace();
+    }
+}
+
+```
+
+## Exemple 1602
+
