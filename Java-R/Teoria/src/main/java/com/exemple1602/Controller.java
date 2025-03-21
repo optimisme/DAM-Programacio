@@ -36,7 +36,7 @@ public class Controller {
         if (selectedFile != null) {
             try {
                 String content = new String(Files.readAllBytes(selectedFile.toPath()));
-                txt.setText(content);
+                txt.setText(content); // "content" és el text que s'ha llegit de l'arxiu
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -52,7 +52,7 @@ public class Controller {
         File selectedFile = fileChooser.showSaveDialog(stage);
         if (selectedFile != null) {
             try {
-                String jsonData = txt.getText();
+                String jsonData = txt.getText(); // "txt.getText()" és el text .json que es vol guardar
                 if (jsonData.substring(0, 1).equalsIgnoreCase("[")) {
                     JSONArray json = new JSONArray(jsonData);
                     Files.write(selectedFile.toPath(), json.toString(4).getBytes());
