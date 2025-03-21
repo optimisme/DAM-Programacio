@@ -14,7 +14,7 @@ Els elements d'una aplicació *JavaFX* no només es poden afegir a partir d'arxi
 
 ## Funció al iniciar una vista
 
-## Elements programàtics
+## Elements programàtics
 
 ## Llistes dinàmiques
 
