@@ -3,6 +3,10 @@ package com.exemple1602;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -48,7 +52,9 @@ public class Controller {
         File selectedFile = fileChooser.showSaveDialog(stage);
         if (selectedFile != null) {
             try {
-                Files.write(selectedFile.toPath(), txt.getText().getBytes());
+                String jsonData = txt.getText();
+                JSONObject json = new JSONObject(jsonData);
+                Files.write(selectedFile.toPath(), json.toString(4).getBytes());
             } catch (IOException e) {
                 e.printStackTrace();
             }
