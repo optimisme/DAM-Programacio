@@ -20,7 +20,7 @@ La manera d'organitzar els elements (widgets) de la interfície depèn dels prop
 
 Els widgets que permeten tenir altres widgets dins, tenen *"normes"* de posicionament.
 
-- **[HBox](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/HBox.html) i [VBox](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/VBox.html)**: Posisionen els widgets fills en vertical o hortizontal. **Molt útils** per espaiar i centrar elements, encara que sigui amb un HBox o VBox amb un únic element.
+- **[HBox](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/HBox.html) i [VBox](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/VBox.html)**: Posisionen els widgets fills en vertical o hortizontal. **Molt útils** per espaiar i centrar elements, encara que tinguins dins un únic element.
 
 - **[AnchorPane](https://docs.oracle.com/javase/8/javafx/api/javafx/scene/layout/AnchorPane.html)**: Permet posar els widgets fills a una distància dels costats propis. 
 
