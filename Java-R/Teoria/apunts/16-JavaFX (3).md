@@ -61,6 +61,30 @@ Amb **UtilsViews**, podem obtenir el controlador d'una vista a partir del seu id
 Controller0 ctrl0 = (Controller0) UtilsViews.getController("View0");
 ```
 
+## Exercici 1603
+
+Fes un programa JavaFX amb dues vistes:
+
+**Vista 0**: Ha de mostrar la fitxa amb les dades d'un personatge reconegut. Carregat a partir d'un arxiu *.json*. Ha de contenir:
+
+- Nom
+- Activitat
+- Data de naixament
+- Text explicatiu
+- Foto
+
+**Vista 1**: Ha de mostar un formulari per modificar els camps anteriors i guardar les noves dades a l'arxiu *.json*
+
+Prepara almenys tres arxius *.json* que es poden llegir/escriure amb l'aplicació anterior:
+
+- **./data/music.json** amb la informació d'un músic
+- **./data/cientific.json** amb la informació d'un científic
+- **./data/esportista.json** amb la informació d'un esportista
+
+Comprova que els tres arxius *.json* es poden obrir i modificar amb l'aplicació.
+
+Guarda les imatges a la carpeta: **"src/main/resources/assets/exercici1603/"**
+
 ## Subvistes
 
 A vegades ens interessa mostrar una vista dins d'una altra vista, això és útil per poder fer plantilles que mostren informació.
@@ -145,27 +169,3 @@ private void setDades(String animal) {
     }
     }
 ```
-
-## Exercici 1603
-
-Fes un programa JavaFX amb dues vistes:
-
-**Vista 0**: Ha de mostrar la fitxa amb les dades d'un personatge reconegut. Carregat a partir d'un arxiu *.json*. Ha de contenir:
-
-- Nom
-- Activitat
-- Data de naixament
-- Text explicatiu
-- Foto
-
-**Vista 1**: Ha de mostar un formulari per modificar els camps anteriors i guardar les noves dades a l'arxiu *.json*
-
-Prepara almenys tres arxius *.json* que es poden llegir/escriure amb l'aplicació anterior:
-
-- **./data/music.json** amb la informació d'un músic
-- **./data/cientific.json** amb la informació d'un científic
-- **./data/esportista.json** amb la informació d'un esportista
-
-Comprova que els tres arxius *.json* es poden obrir i modificar amb l'aplicació.
-
-Guarda les imatges a la carpeta: **"src/main/resources/assets/exercici1603/"**
