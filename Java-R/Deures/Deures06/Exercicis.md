@@ -2,7 +2,7 @@
 
 Fes un programa JavaFX amb dues vistes:
 
-**Vista 0**: Ha de mostrar la fitxa amb les dades d'un personatge reconegut. Carregat a partir d'un arxiu *.json*. Ha de contenir:
+**Vista Fitxa**: Ha de mostrar la fitxa amb les dades d'un personatge reconegut. Carregat a partir d'un arxiu *.json*. Ha de contenir:
 
 - Nom
 - Activitat
@@ -10,7 +10,7 @@ Fes un programa JavaFX amb dues vistes:
 - Text explicatiu
 - Foto
 
-**Vista 1**: Ha de mostar un formulari per modificar els camps anteriors i guardar les noves dades a l'arxiu *.json*
+**Vista Formulari**: Ha de mostar un formulari per modificar els camps anteriors i guardar les noves dades a l'arxiu *.json*
 
 Prepara almenys tres arxius *.json* que es poden llegir/escriure amb l'aplicació anterior:
 
