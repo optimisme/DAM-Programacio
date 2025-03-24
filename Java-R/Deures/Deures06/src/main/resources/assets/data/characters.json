@@ -1,0 +1,86 @@
+[
+    {
+        "name": "Mario",
+        "image": "character_mario.png",
+        "color": "red",
+        "game": "Super Mario Bros"
+    },
+    {
+        "name": "Luigi",
+        "image": "character_luigi.png",
+        "color": "green",
+        "game": "Luigi's Mansion"
+    },
+    {
+        "name": "Peach",
+        "image": "character_peach.png",
+        "color": "pink",
+        "game": "Super Mario Party"
+    },
+    {
+        "name": "Inkling",
+        "image": "character_inkling.png",
+        "color": "orange",
+        "game": "Splatoon"
+    },
+    {
+        "name": "Link",
+        "image": "character_link.png",
+        "color": "green",
+        "game": "The Legend of Zelda"
+    },
+    {
+        "name": "Samus Aran",
+        "image": "character_samus.png",
+        "color": "orange",
+        "game": "Metroid"
+    },
+    {
+        "name": "Donkey Kong",
+        "image": "character_dk.png",
+        "color": "brown",
+        "game": "Donkey Kong"
+    },
+    {
+        "name": "Pikachu",
+        "image": "character_pikachu.png",
+        "color": "yellow",
+        "game": "Pokémon"
+    },
+    {
+        "name": "Bowser",
+        "image": "character_bowser.png",
+        "color": "yellow",
+        "game": "Super Mario Bros"
+    },
+    {
+        "name": "Fox",
+        "image": "character_fox.png",
+        "color": "brown",
+        "game": "Pokémon"
+    },
+    {
+        "name": "Pikachu",
+        "image": "character_pikachu.png",
+        "color": "brown",
+        "game": "Metroid"
+    },
+    {
+        "name": "Kirby",
+        "image": "character_kirby.png",
+        "color": "pink",
+        "game": "Kirby"
+    },
+    {
+        "name": "Olimar",
+        "image": "character_olimar.png",
+        "color": "grey",
+        "game": "Pikmin"
+    },
+    {
+        "name": "Wario",
+        "image": "character_wario.png",
+        "color": "grey",
+        "game": "Super Mario Kart"
+    }
+]

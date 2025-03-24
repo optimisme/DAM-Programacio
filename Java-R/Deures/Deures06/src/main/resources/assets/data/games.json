@@ -1,0 +1,52 @@
+[
+    {
+    "name": "Super Mario Bros",
+    "year": 1985,
+    "type": "Plataformes",
+    "plot": "Super Mario Bros. és un icònic joc de plataformes creat per Nintendo. El jugador assumeix el paper de Mario o Luigi, i ha de recórrer nivells plens d'enemics i obstacles per rescatar la princesa Peach del malvat Bowser.",
+    "image": "game_smb.png"
+    },
+    {
+    "name": "The Legend of Zelda",
+    "year": 1986,
+    "type": "Acció-Aventura",
+    "plot": "The Legend of Zelda ofereix aventures èpiques amb un toc d'exploració i resolució de puzles. El jugador controla Link, un heroi que ha de derrotar a enemics, resoldre puzles i recórrer regnes per salvar la princesa Zelda i derrotar el mal.",
+    "image": "game_zelda.png"
+    },
+    {
+    "name": "Pokémon Red i Blue",
+    "year": 1996,
+    "type": "RPG (Role-Playing Game)",
+    "plot": "Pokémon és una sèrie de jocs on els jugadors capturen i entrenen criatures conegudes com a Pokémon. L'objectiu és arribar a ser un Mestre Pokémon, derrotant altres entrenadors i completant la Pokèdex atrapant totes les diferents espècies de Pokémon.",
+    "image": "game_pred.jpeg"
+    },
+    {
+    "name": "Mario Kart 64",
+    "year": 1996,
+    "type": "Carreres",
+    "plot": "Mario Kart és una sèrie de jocs de carreres amb personatges de l'univers de Mario. Els jugadors competeixen utilitzant diversos objectes i armes per guanyar avantatges i arribar primer a la línia de meta.",
+    "image": "game_smk.jpeg"
+    },
+    {
+    "name": "Metroid",
+    "year": 1986,
+    "type": "Acció-Aventura",
+    "plot": "Metroid és una sèrie que segueix les aventures de Samus Aran, una cazadora de recompenses espacial. Els jocs combinen elements d'exploració, acció i puzles, amb un focus en l'ambientació de ciència-ficció.",
+    "image": "game_metroid.jpeg"
+    },
+    {
+    "name": "Pikmin",
+    "year": 2001,
+    "type": "Estratègia",
+    "plot": "Pikmin és una sèrie de jocs d'estratègia on el jugador controla un astronauta anomenat Capità Olimar, que ha d'explorar un planeta desconegut i utilitzar criatures anomenades Pikmin per resoldre puzles i superar obstacles.",
+    "image": "game_pikmin.png"
+    },
+    {
+    "name": "Donkey Kong",
+    "year": 1981,
+    "type": "Plataformes",
+    "plot": "Donkey Kong és una franquícia de jocs de plataformes que va ser el debut del personatge Donkey Kong. Els jocs segueixen les aventures de Donkey Kong i altres personatges mentre es llancen a través de nivells plens d'acció i puzles.",
+    "image": "game_dk.png"
+    }
+]
+  

@@ -1,0 +1,58 @@
+[
+    {
+        "name": "Nintendo Switch",
+        "date": "2017-3-3",
+        "procesador": "4xARM Cortex-A57",
+        "color": "black",
+        "units_sold": 70000000,
+        "image": "nintendo_switch.png"
+    },
+    {
+        "name": "Wii U",
+        "date": "2012-11-18",
+        "procesador": "IBM PowerPC 750",
+        "color": "black",
+        "units_sold": 14000000,
+        "image": "nintendo_wiiu.png"
+    },
+    {
+        "name": "Wii",
+        "date": "2006-11-19",
+        "procesador": "IBM PowerPC 750",
+        "color": "white",
+        "units_sold": 101000000,
+        "image": "nintendo_wii.png"
+    },
+    {
+        "name": "GameCube",
+        "date": "2001-11-14",
+        "procesador": "IBM PowerPC Gekko",
+        "color": "purple",
+        "units_sold": 22000000,
+        "image": "nintendo_gamecube.png"
+    },
+    {
+        "name": "Nintendo 64",
+        "date": "1996-6-23",
+        "procesador": "NEC VR4300",
+        "color": "black",
+        "units_sold": 33000000,
+        "image": "nintendo_64.png"
+    },
+    {
+        "name": "Super Nintendo",
+        "date": "1990-11-21",
+        "procesador": "Ricoh 5A22",
+        "color": "grey",
+        "units_sold": 50000000,
+        "image": "nintendo_sn.png"
+    },
+    {
+        "name": "NES",
+        "date": "1983-6-15",
+        "procesador": "Ricoh 2A03",
+        "color": "white",
+        "units_sold": 62000000,
+        "image": "nintendo_nes.png"
+    }
+]
