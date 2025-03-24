@@ -103,7 +103,33 @@ Quan es vol mostrar la llista amb la informació de les estacions de l'any, s'ag
 
 Quan es vol mostrar la llista amb informació d'animals, enlloc d'una simple etiqueta es fa servir una *subVista* a partir de **'exemple1606Item.fxml'**.
 
-Gràcies al seu controlador, es posen les dades de cada ítem un a un, i es generen tants items com són necessaris segons la llista:
+Al controlador de item definim les funcions per "settejar" els valors de cada element:
+
+```java
+ public void setTitle(String title) {
+        this.title.setText(title);
+    }
+
+    public void setSubtitle(String subtitle) {
+        this.subtitle.setText(subtitle);
+    }
+
+    public void setImatge(String imagePath) {
+        try {
+            Image image = new Image(Objects.requireNonNull(getClass().getResourceAsStream(imagePath)));
+            this.img.setImage(image);
+        } catch (NullPointerException e) {
+            System.err.println("Error loading image asset: " + imagePath);
+            e.printStackTrace();
+        }
+    }
+
+    public void setCircleColor(String color) {
+        circle.setStyle("-fx-fill: " + color);
+    }
+```
+
+Així, gràcies al controlador de item, es posen les dades de cada ítem un a un, i es generen tants items com són necessaris segons la llista:
 
 ```java
     @FXML
