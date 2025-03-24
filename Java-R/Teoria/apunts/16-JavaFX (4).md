@@ -12,6 +12,24 @@
 
 Els elements d'una aplicació *JavaFX* no només es poden afegir a partir d'arxius *.fxml*, també es poden afegir programant codi *Java*
 
+Alguns elements de *JavaFX* poden tenir múltiples elements fills, com per exemple *VBox*, *HBox*, ...
+
+Aquests elements tenen funcions per esborrar o afegir fills programàticament:
+
+```xml
+<!-- Exemple d'element amb múltiples fills -->
+<VBox fx:id="yPane" />
+```
+
+```java
+// Esborrar tots els fills d'un element
+yPane.getChildren().clear();
+
+// Afegir un 'label' fill a un element
+Label label = new Label("hola");
+yPane.getChildren().add(label);
+```
+
 ## Funció d'inici de vista
 
 En un controlador, la funció **'initialize'** es crida quan s'inicia una vista, **no** és obligatòri sobre escriure-la, però és útil si necessitem executar codi quan es carrega l'arxiu *.fxml*.
