@@ -1,6 +1,30 @@
 # Exercici 0600
 
-Modifica el codi de la carpeta **'exercici0600'** i afegeix els arxius necessaris a la carpeta **'assets'**, per tal de fer una aplicació *JavaFX* semblant (no igual) a la següent demo:
+Fes un programa JavaFX amb dues vistes:
+
+**Vista 0**: Ha de mostrar la fitxa amb les dades d'un personatge reconegut. Carregat a partir d'un arxiu *.json*. Ha de contenir:
+
+- Nom
+- Activitat
+- Data de naixament
+- Text explicatiu
+- Foto
+
+**Vista 1**: Ha de mostar un formulari per modificar els camps anteriors i guardar les noves dades a l'arxiu *.json*
+
+Prepara almenys tres arxius *.json* que es poden llegir/escriure amb l'aplicació anterior:
+
+- **./data/music.json** amb la informació d'un músic
+- **./data/cientific.json** amb la informació d'un científic
+- **./data/esportista.json** amb la informació d'un esportista
+
+Comprova que els tres arxius *.json* es poden obrir i modificar amb l'aplicació.
+
+Guarda les imatges a la carpeta: **"src/main/resources/assets/images0600/"**
+
+# Exercici 0601
+
+Modifica el codi de la carpeta **'exercici0601'** i afegeix els arxius necessaris a la carpeta **'assets'**, per tal de fer una aplicació *JavaFX* semblant (no igual) a la següent demo:
 
 <center>
 <video width="275" height="480" controls>
