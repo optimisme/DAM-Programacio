@@ -5,7 +5,6 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import org.json.JSONArray;
@@ -55,18 +54,15 @@ public class Controller implements Initializable {
 
     @FXML
     private void setSeasons(ActionEvent event) {
-        ArrayList<String> list = new ArrayList<>();
-        for (String name : seasons) {
-            list.add(name);
-        }
-
+        // Esborrar la llista anterior
         yPane.getChildren().clear();
-        for (String s : list) {
-            Label label = new Label(s);
+
+        // Generar la nova llista
+        for (String name : seasons) {
+            Label label = new Label(name);
             label.setStyle("-fx-border-color: red;");
             yPane.getChildren().add(label);
         }
-
     }
 
     @FXML
@@ -113,5 +109,4 @@ public class Controller implements Initializable {
             yPane.getChildren().add(itemTemplate);
         }
     }
-
 }

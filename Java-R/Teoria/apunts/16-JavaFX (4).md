@@ -49,14 +49,96 @@ En aquest exemple es pot veure com:
 
 ## Llistes dinàmiques
 
-Fent servir *'Subvistes'* com a plantilles, es poden generar llistes d'elements de manera programàtica (programant al codi):
+Quan tenim una informació en forma de llista, no podem saber quants elements haurem de mostrar.
+
+Així que cal generar-los de manera dinàmica.
 
 ## Exemple 1606
 
-En aquest exemple es llegeix la informació de l'arxiu **'animals.json'** al iniciar-se la vista:
+En aquest exemple es llegeix la informació de l'arxiu **'/assets/exemple1606Animals.json'** al iniciar-se la vista gràcies a la funció **'initialitze'**:
 
 ```java
-@Override
-    
+    private URL itemTemplate;
+
+    // Called when the FXML file is loaded
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        try {
+            // Obtenir el recurs del template .fxml
+            itemTemplate = this.getClass().getResource("/assets/exemple1606Item.fxml");
+
+            // Obtenir la informació dels animals
+            URL jsonFileURL = getClass().getResource("/assets/exemple1606Animals.json");
+            Path path = Paths.get(jsonFileURL.toURI());
+            String content = new String(Files.readAllBytes(path), StandardCharsets.UTF_8);
+            jsonInfo = new JSONArray(content);
+
+            // Actualitza la UI amb els valors inicials de les estacions
+            setSeasons(null);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+```
+
+Quan es vol mostrar la llista amb la informació de les estacions de l'any, s'agafa la informació de la variable **seasons** i es generen les etiquetes dinàmicament.
+
+```java
+    private String seasons[] = { "Summer", "Autumn", "Winter", "Spring" };
+
+    @FXML
+    private void setSeasons(ActionEvent event) {
+        // Esborrar la llista anterior
+        yPane.getChildren().clear();
+
+        // Generar la nova llista
+        for (String name : seasons) {
+            Label label = new Label(name);
+            label.setStyle("-fx-border-color: red;");
+            yPane.getChildren().add(label);
+        }
+    }
+```
+
+Quan es vol mostrar la llista amb informació d'animals, enlloc d'una simple etiqueta es fa servir una *subVista* a partir de **'exemple1606Item.fxml'**.
+
+Gràcies al seu controlador, es posen les dades de cada ítem un a un, i es generen tants items com són necessaris segons la llista:
+
+```java
+    @FXML
+    private void setAnimals(ActionEvent event) throws Exception {
+
+        // Obtenir el recurs del template .fxml
+        URL resource = this.getClass().getResource("/assets/exemple1606Item.fxml");
+
+        // Netejar el contingut existent
+        yPane.getChildren().clear();
+
+        // Iterar sobre els elements del JSONArray 'jsonInfo' (ja carregat a initialize)
+        for (int i = 0; i < jsonInfo.length(); i++) {
+            // Obtenir l'objecte JSON individual (season)
+            JSONObject season = jsonInfo.getJSONObject(i);
+
+            // Extreure la informació necessària del JSON
+            String category = season.getString("category");
+            String name = season.getString("animal");
+            String color = season.getString("color");
+
+            // Carregar el template de 'exemple1606Item.fxml'
+            FXMLLoader loader = new FXMLLoader(resource);
+            Parent itemTemplate = loader.load();
+            ControllerItem itemController = loader.getController();
+
+            // Assignar els valors als controls del template
+            itemController.setTitle(name);
+            itemController.setSubtitle(category);
+            itemController.setImatge("/assets/images/" + name.toLowerCase() + ".png");
+            itemController.setCircleColor(color);
+
+            // Afegir el nou element a 'yPane'
+            yPane.getChildren().add(itemTemplate);
+        }
+    }
 ```
 
