@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" minHeight="-Infinity" prefHeight="50.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exemple1606.ControllerItem">
+   <children>
+      <Label fx:id="title" prefHeight="25.0" text="TitleText" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Label fx:id="subtitle" minWidth="150.0" prefHeight="17.0" text="Subtitle Text" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="25.0" />
+      <ImageView fx:id="img" fitHeight="40.0" fitWidth="50.0" layoutX="5.0" layoutY="-50.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="5.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="5.0" />
+      <Circle fx:id="circle" fill="DODGERBLUE" layoutY="25.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" AnchorPane.rightAnchor="5.0" />
+      <Pane prefHeight="1.0" style="-fx-background-color: #aaaaaa;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   </children>
+</AnchorPane>
