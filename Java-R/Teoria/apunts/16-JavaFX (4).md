@@ -58,15 +58,10 @@ Així que cal generar-los de manera dinàmica.
 En aquest exemple es llegeix la informació de l'arxiu **'/assets/exemple1606Animals.json'** al iniciar-se la vista gràcies a la funció **'initialitze'**:
 
 ```java
-    private URL itemTemplate;
-
     // Called when the FXML file is loaded
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            // Obtenir el recurs del template .fxml
-            itemTemplate = this.getClass().getResource("/assets/exemple1606Item.fxml");
-
             // Obtenir la informació dels animals
             URL jsonFileURL = getClass().getResource("/assets/exemple1606Animals.json");
             Path path = Paths.get(jsonFileURL.toURI());
