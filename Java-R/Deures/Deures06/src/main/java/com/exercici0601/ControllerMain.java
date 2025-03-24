@@ -1,4 +1,4 @@
-package com.exercici0600;
+package com.exercici0601;
 
 import com.utils.*;
 
@@ -19,10 +19,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-public class ControllerCharacters {
+public class ControllerMain {
 
     @FXML
-    private void toViewMain(MouseEvent event) {
-        UtilsViews.setViewAnimating("ViewMain");
+    private void toViewCharacters(MouseEvent event) {
+        System.out.println("To View Characters");
+        UtilsViews.setViewAnimating("ViewCharacters");
     }
 }
