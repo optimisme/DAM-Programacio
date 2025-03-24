@@ -4,7 +4,7 @@ Modifica el codi de la carpeta **'exercici0600'** i afegeix els arxius necessari
 
 <center>
 <video width="275" height="480" controls>
-  <source src="./assets/viewsmallpreview.mov" type="video/mp4">
+  <source src="./assets/viewPreview.mov" type="video/mp4">
   El teu navegador no suporta la reproducció de vídeo.
 </video>
 </center>
