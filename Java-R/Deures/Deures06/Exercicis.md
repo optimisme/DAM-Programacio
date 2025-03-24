@@ -1,6 +1,6 @@
 # Exercici 0600
 
-Modifica el codi de la carpeta **'exercici0600'** i afegeix els arxius necessaris a la carpeta **'assets'**, per tal de fer una aplicació *JavaFX* semblant a la següent demo:
+Modifica el codi de la carpeta **'exercici0600'** i afegeix els arxius necessaris a la carpeta **'assets'**, per tal de fer una aplicació *JavaFX* semblant (no igual) a la següent demo:
 
 <center>
 <video width="275" height="480" controls>
