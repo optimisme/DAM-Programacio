@@ -36,6 +36,7 @@ public class Controller implements Initializable {
         choiceBox.getItems().addAll(weekdays);
         choiceBox.setValue(weekdays[0]);
         choiceBox.setOnAction((event) -> {
+            // Posar el text al label, de la opció que ha escollit l'usuari al choicebox
             choiceLabel.setText(choiceBox.getSelectionModel().getSelectedItem());
         });
     }

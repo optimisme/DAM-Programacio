@@ -86,13 +86,13 @@ public class Controller implements Initializable {
 
         // Iterar sobre els elements del JSONArray 'jsonInfo' (ja carregat a initialize)
         for (int i = 0; i < jsonInfo.length(); i++) {
-            // Obtenir l'objecte JSON individual (season)
-            JSONObject season = jsonInfo.getJSONObject(i);
+            // Obtenir l'objecte JSON individual (animal)
+            JSONObject animal = jsonInfo.getJSONObject(i);
 
             // Extreure la informació necessària del JSON
-            String category = season.getString("category");
-            String name = season.getString("animal");
-            String color = season.getString("color");
+            String category = animal.getString("category");
+            String name = animal.getString("animal");
+            String color = animal.getString("color");
 
             // Carregar el template de 'exemple1606Item.fxml'
             FXMLLoader loader = new FXMLLoader(resource);

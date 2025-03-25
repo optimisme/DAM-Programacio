@@ -10,7 +10,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 // Fes anar l'exemple amb:
-// ./run.sh com.exercici0600.Main
+// ./run.sh com.exercici0601.Main
 
 public class Main extends Application {
 
