@@ -25,8 +25,8 @@ public class ControllerInici {
         if (selectedFile != null) {
             AppData db = AppData.getInstance();
             db.connect(selectedFile.toPath().toString());
-            ControllerTaula ct = (ControllerTaula) UtilsViews.getController("ViewTaula");
-            ct.loadTables();
+            ControllerTaula ctrlTaula = (ControllerTaula) UtilsViews.getController("ViewTaula");
+            ctrlTaula.loadTables("");
             UtilsViews.setViewAnimating("ViewTaula");
         }
     }

@@ -41,12 +41,14 @@ public class Main extends Application {
             Image icon = new Image("file:icons/icon.png");
             stage.getIcons().add(icon);
         }
+    }
 
+    // Aquesta funció es crida quan es tanca l'aplicació
+    @Override
+    public void stop() throws Exception {
         AppData db = AppData.getInstance();
-        //db.connect("./data/exemple1400.sqlite");
-
-        // Tancar la connexió amb la base de dades (del singleton)
         db.close();
+        super.stop();
     }
 
     public static void main(String[] args) {

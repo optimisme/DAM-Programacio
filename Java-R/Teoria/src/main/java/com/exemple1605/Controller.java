@@ -48,7 +48,7 @@ public class Controller implements Initializable {
 
         choiceBox.getItems().clear();
         choiceBox.getItems().addAll(weekdays);
-        choiceBox.setValue(value);
+        choiceBox.getSelectionModel().selectFirst();
 
         choiceLabel.setText(value);
     }
@@ -60,7 +60,7 @@ public class Controller implements Initializable {
 
         choiceBox.getItems().clear();
         choiceBox.getItems().addAll(months);
-        choiceBox.setValue(value);
+        choiceBox.getSelectionModel().selectFirst();
 
         choiceLabel.setText(value);
     }

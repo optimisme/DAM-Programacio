@@ -4,7 +4,7 @@ public class Cotxe extends Vehicle {
 
     private String combustible;
 
-    public Cotxe(String marca) {
+    public Cotxe(String marca, String combustible) {
         super(marca);
         this.combustible = combustible;
     }

@@ -2,7 +2,7 @@ package com.exemple1303;
 
 public class Main {
     public static void main(String[] args) {
-        Vehicle cotxe = new Cotxe("Audi");
+        Vehicle cotxe = new Cotxe("Audi", "Diesel");
         cotxe.encendre();
         cotxe.accelerar();
         cotxe.frenar();
