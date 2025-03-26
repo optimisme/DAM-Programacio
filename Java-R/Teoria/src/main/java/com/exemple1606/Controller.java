@@ -27,7 +27,7 @@ public class Controller implements Initializable {
     @FXML
     private AnchorPane container;
     @FXML
-    private VBox yPane = new VBox();
+    private VBox list = new VBox();
 
     private String seasons[] = { "Summer", "Autumn", "Winter", "Spring" };
     private String brands[] = { "Audi", "BMW", "Citroen", "Fiat", "Ford", "Honda", "Hyundai", "Kia", "Mazda", "Mercedes",
@@ -55,23 +55,23 @@ public class Controller implements Initializable {
     @FXML
     private void setSeasons(ActionEvent event) {
         // Esborrar la llista anterior
-        yPane.getChildren().clear();
+        list.getChildren().clear();
 
         // Generar la nova llista
         for (String name : seasons) {
             Label label = new Label(name);
             label.setStyle("-fx-border-color: red;");
-            yPane.getChildren().add(label);
+            list.getChildren().add(label);
         }
     }
 
     @FXML
     private void setBrands(ActionEvent event) {
-        yPane.getChildren().clear();
+        list.getChildren().clear();
         for (String s : brands) {
             Label label = new Label(s);
             label.setStyle("-fx-border-color: black;");
-            yPane.getChildren().add(label);
+            list.getChildren().add(label);
         }
     }
 
@@ -82,7 +82,7 @@ public class Controller implements Initializable {
         URL resource = this.getClass().getResource("/assets/exemple1606Item.fxml");
 
         // Netejar el contingut existent
-        yPane.getChildren().clear();
+        list.getChildren().clear();
 
         // Iterar sobre els elements del JSONArray 'jsonInfo' (ja carregat a initialize)
         for (int i = 0; i < jsonInfo.length(); i++) {
@@ -106,7 +106,7 @@ public class Controller implements Initializable {
             itemController.setCircleColor(color);
 
             // Afegir el nou element a 'yPane'
-            yPane.getChildren().add(itemTemplate);
+            list.getChildren().add(itemTemplate);
         }
     }
 }

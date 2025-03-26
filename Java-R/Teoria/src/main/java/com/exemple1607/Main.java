@@ -1,4 +1,4 @@
-package com.exemple1606;
+package com.exemple1607;
 
 import com.utils.*;
 
@@ -8,7 +8,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 // Fes anar l'exemple amb:
-// ./run.sh com.exemple1606.Main
+// ./run.sh com.exemple1607.Main
 
 public class Main extends Application {
 
@@ -22,7 +22,8 @@ public class Main extends Application {
 
         // Carrega la vista inicial des del fitxer FXML
         UtilsViews.parentContainer.setStyle("-fx-font: 14 arial;");
-        UtilsViews.addView(getClass(), "Desktop", "/assets/exemple1606.fxml");
+        UtilsViews.addView(getClass(), "ViewInici", "/assets/exemple1607Inici.fxml");
+        UtilsViews.addView(getClass(), "ViewTaula", "/assets/exemple1607Taula.fxml");
 
         Scene scene = new Scene(UtilsViews.parentContainer);
 
@@ -40,6 +41,12 @@ public class Main extends Application {
             Image icon = new Image("file:icons/icon.png");
             stage.getIcons().add(icon);
         }
+
+        AppData db = AppData.getInstance();
+        //db.connect("./data/exemple1400.sqlite");
+
+        // Tancar la connexió amb la base de dades (del singleton)
+        db.close();
     }
 
     public static void main(String[] args) {
