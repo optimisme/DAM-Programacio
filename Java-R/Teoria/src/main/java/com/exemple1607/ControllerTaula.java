@@ -121,7 +121,11 @@ public class ControllerTaula implements Initializable {
 
         // Fer la taula editable
         makeTableEditable(table, row -> {
-            setModifiedRow(row);
+            String selectedTable = choiceBox.getSelectionModel().getSelectedItem();
+            boolean modified = setModifiedRow(selectedTable, row);
+            if (modified) {
+                setLabelInfo(row);
+            }
         });
     }
     
@@ -144,25 +148,28 @@ public class ControllerTaula implements Initializable {
         }
     }
 
-    // Funció que actualitza la base de dades quan es modifica una fila
-    private void setModifiedRow(HashMap<String, Object> rowData) {
-        String currentTable = choiceBox.getSelectionModel().getSelectedItem();
-
-        if (rowData == null || currentTable == null) return;
+    /** Funció que actualitza la base de dades quan es modifica una fila
+     *  @param tableName nom de la taula
+     *  @param rowData dades de la fila a actualitzar
+     *  @return true si s'ha fet el canvi
+     *  */ 
+    private boolean setModifiedRow(String tableName, HashMap<String, Object> rowData) {
+        
+        if (rowData == null || tableName == null) return false;
     
         // Definir el valor 'idValue' segons la clau primària de la taula
         String idKey = "id";
-        if (currentTable.equals("Llibres")) {
+        if (tableName.equals("Llibres")) {
             idKey = "id_llibre";
         }
 
         Object idValue = rowData.get(idKey);
         if (!(idValue instanceof Integer)) {
             System.out.println("No es pot actualitzar: no hi ha clau primària '" + idKey + "'");
-            return;
+            return false;
         }
     
-        StringBuilder sql = new StringBuilder("UPDATE " + currentTable + " SET ");
+        StringBuilder sql = new StringBuilder("UPDATE " + tableName + " SET ");
         ArrayList<String> assignments = new ArrayList<>();
     
         for (String key : rowData.keySet()) {
@@ -182,7 +189,9 @@ public class ControllerTaula implements Initializable {
         sql.append(" WHERE ").append(idKey).append(" = ").append(idValue);
     
         AppData.getInstance().update(sql.toString());
-        System.out.println("Actualitzat: " + sql);
+        System.out.println("Actualitzat: " + sql);  
+        
+        return true;
     }
     
     // Transforma una taula en editable
