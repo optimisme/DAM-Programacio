@@ -175,6 +175,7 @@ public class ControllerTaula implements Initializable {
             Object value = rowData.get(key);
             if (setClause.length() > 0) setClause.append(", ");
     
+            // Adaptar la query a "sqlite"
             if (value == null) {
                 setClause.append(String.format("%s = NULL", key));
             } else if (value instanceof Number) {
