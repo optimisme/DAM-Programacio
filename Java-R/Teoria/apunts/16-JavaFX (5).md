@@ -14,7 +14,7 @@
 
 La interacció amb bases de dades es fa igual que amb les aplicacions de text.
 
-Enlloc d'aturar la connexió amb la base de dades al final del main, s'ha d'aturar quan es tanca l'aplicació. A JavaFX la funció **stop()** es crida quan l'usuari tanca l'aplicació:
+**Però** enlloc d'aturar la connexió amb la base de dades al final del main, s'ha d'aturar quan es tanca l'aplicació. A JavaFX la funció **stop()** es crida quan l'usuari tanca l'aplicació:
 
 ```java
     @Override
