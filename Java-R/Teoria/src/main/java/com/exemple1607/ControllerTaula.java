@@ -44,6 +44,11 @@ public class ControllerTaula implements Initializable {
         });
     }
 
+    /**
+     * Llista les taules de la base de dades al 'choiceBox'
+     * @param selectedTable taula que s'ha d'escollir (si existeix), o "" per la primera taula
+     * @param selectedRow fila que s'ha de marcar (si existeix), o -1 si no se'n selecciona cap
+     */
     public void loadTables(String selectedTable, int selectedRow) {
         // Obtenir el nom de les taules de la base de dades
         AppData db = AppData.getInstance();
@@ -76,6 +81,10 @@ public class ControllerTaula implements Initializable {
         }
     }
         
+    /**
+     * Mostra una taula a la TableView 'table'
+     * @param tableName nom de la taula a mostrar
+     */
     @FXML
     private void setTable(String tableName) {
 
@@ -122,13 +131,24 @@ public class ControllerTaula implements Initializable {
         // Fer la taula editable
         makeTableEditable(table, row -> {
             String selectedTable = choiceBox.getSelectionModel().getSelectedItem();
-            boolean modified = setModifiedRow(selectedTable, row);
+
+            // Definir el nom de la clau primària, segons la taula
+            String keyName = "id";
+            if (tableName.equals("Llibres")) {
+                keyName = "id_llibre";
+            }
+            boolean modified = setModifiedRow(selectedTable, keyName, row);
             if (modified) {
                 setLabelInfo(row);
             }
         });
     }
     
+    /**
+     * Carrega de nou les dades de la base de dades
+     * si hi ha una taula o fila sel·leccionades, intenta mantenir-les
+     * @param event
+     */
     @FXML
     public void reload(ActionEvent event) {
         String selectedTable = choiceBox.getSelectionModel().getSelectedItem();
@@ -137,7 +157,11 @@ public class ControllerTaula implements Initializable {
         loadTables(selectedTable, selectedRow);
     }
 
-    // Funció que actualitza el label amb les dades de la fila seleccionada o mostra "Cap fila escollida"
+    /**
+     * Mostra la informació de la fila sel·lecionada al labe inferior
+     * Si no hi ha cap fila escollida mostra "Cap fila escollida"
+     * @param rowData
+     */
     private void setLabelInfo(HashMap<String, Object> rowData) {
         if (rowData == null) {
             label.setText("Cap fila escollida");
@@ -148,29 +172,25 @@ public class ControllerTaula implements Initializable {
         }
     }
 
-    /** Funció que actualitza la base de dades quan es modifica una fila
-     *  @param tableName nom de la taula
-     *  @param rowData dades de la fila a actualitzar
-     *  @return true si s'ha fet el canvi
-     *  */ 
-    private boolean setModifiedRow(String tableName, HashMap<String, Object> rowData) {
+    /** 
+     * Actualitza la base de dades quan es modifica una fila
+     * @param tableName nom de la taula
+     * @param rowData dades de la fila a actualitzar
+     * @return true si s'ha fet el canvi
+     */ 
+    private boolean setModifiedRow(String tableName, String keyName, HashMap<String, Object> rowData) {
 
         if (rowData == null || tableName == null) return false;
-    
-        String idKey = "id";
-        if (tableName.equals("Llibres")) {
-            idKey = "id_llibre";
-        }
-    
-        Object idValue = rowData.get(idKey);
+
+        Object idValue = rowData.get(keyName);
         if (!(idValue instanceof Integer)) {
-            System.out.println("No es pot actualitzar: no hi ha clau primària '" + idKey + "'");
+            System.out.println("No es pot actualitzar: no hi ha clau primària '" + keyName + "'");
             return false;
         }
     
         StringBuilder setClause = new StringBuilder();
         for (String key : rowData.keySet()) {
-            if (key.equals(idKey)) continue;
+            if (key.equals(keyName)) continue;
     
             Object value = rowData.get(key);
             if (setClause.length() > 0) setClause.append(", ");
@@ -186,14 +206,18 @@ public class ControllerTaula implements Initializable {
             }
         }
     
-        String sql = String.format("UPDATE %s SET %s WHERE %s = %s", tableName, setClause, idKey, idValue);
+        String sql = String.format("UPDATE %s SET %s WHERE %s = %s", tableName, setClause, keyName, idValue);
         AppData.getInstance().update(sql);
         System.out.println("Actualitzat: " + sql);
     
         return true;
     }
         
-    // Transforma una taula en editable
+    /** 
+     * Transforma una taula en editable
+     * @param table, taula que ha de ser editable
+     * @param onEdit, mètode a executar quan s'ha editat una fila
+     */ 
     public static void makeTableEditable(TableView<HashMap<String, Object>> table, Consumer<HashMap<String, Object>> onEdit) {
         table.setEditable(true);
 
