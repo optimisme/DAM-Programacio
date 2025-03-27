@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
 
 public class ControllerTaula implements Initializable {
@@ -41,7 +42,7 @@ public class ControllerTaula implements Initializable {
         });
     }
 
-    public void loadTables(String selectedTable) {
+    public void loadTables(String selectedTable, int selectedRow) {
         // Obtenir el nom de les taules de la base de dades
         AppData db = AppData.getInstance();
         String sql = "SELECT name FROM sqlite_master WHERE type='table' AND name <> 'sqlite_sequence'";
@@ -65,6 +66,11 @@ public class ControllerTaula implements Initializable {
             // Escollir la primera taula
             choiceBox.getSelectionModel().selectFirst();
             setTable(tableNames.get(0));
+        }
+
+        // Escollir la fila 
+        if (selectedRow >= 0 && selectedRow < table.getItems().size()) {
+            table.getSelectionModel().select(selectedRow);
         }
     }
         
@@ -115,7 +121,9 @@ public class ControllerTaula implements Initializable {
     @FXML
     public void reload(ActionEvent event) {
         String selectedTable = choiceBox.getSelectionModel().getSelectedItem();
-        loadTables(selectedTable);
+        int selectedRow = table.getSelectionModel().getSelectedIndex();
+        
+        loadTables(selectedTable, selectedRow);
     }
 
     // Funció que actualitza el label amb les dades de la fila seleccionada o mostra "Cap fila escollida"
