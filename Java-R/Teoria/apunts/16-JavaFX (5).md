@@ -27,6 +27,12 @@ Enlloc d'aturar la connexió amb la base de dades al final del main, s'ha d'atur
 
 ## Exemple 1607
 
+Per fer anar l'exemple:
+
+```bash
+./run.sh com.exemple1607.Main
+```
+
 Cal escollir un arxiu **".sqlite"** al iniciar l'aplicació. 
 
 <center><img src="./assets/exemple1607.png" style="max-width: 90%; max-height: 500px;" alt="">
