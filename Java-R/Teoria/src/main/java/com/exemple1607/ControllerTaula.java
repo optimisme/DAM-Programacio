@@ -192,6 +192,7 @@ public class ControllerTaula implements Initializable {
         if (table.getItems().isEmpty()) return;
 
         for (TableColumn<HashMap<String, Object>, ?> tc : table.getColumns()) {
+            @SuppressWarnings("unchecked")
             TableColumn<HashMap<String, Object>, Object> col = (TableColumn<HashMap<String, Object>, Object>) tc;
             String key = col.getText();
             Object sampleValue = table.getItems().get(0).get(key);
