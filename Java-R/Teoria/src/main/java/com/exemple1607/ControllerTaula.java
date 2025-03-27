@@ -154,46 +154,44 @@ public class ControllerTaula implements Initializable {
      *  @return true si s'ha fet el canvi
      *  */ 
     private boolean setModifiedRow(String tableName, HashMap<String, Object> rowData) {
-        
+
         if (rowData == null || tableName == null) return false;
     
-        // Definir el valor 'idValue' segons la clau primària de la taula
         String idKey = "id";
         if (tableName.equals("Llibres")) {
             idKey = "id_llibre";
         }
-
+    
         Object idValue = rowData.get(idKey);
         if (!(idValue instanceof Integer)) {
             System.out.println("No es pot actualitzar: no hi ha clau primària '" + idKey + "'");
             return false;
         }
     
-        StringBuilder sql = new StringBuilder("UPDATE " + tableName + " SET ");
-        ArrayList<String> assignments = new ArrayList<>();
-    
+        StringBuilder setClause = new StringBuilder();
         for (String key : rowData.keySet()) {
-            if (key.equals(idKey)) continue; 
+            if (key.equals(idKey)) continue;
     
             Object value = rowData.get(key);
+            if (setClause.length() > 0) setClause.append(", ");
+    
             if (value == null) {
-                assignments.add(key + " = NULL");
+                setClause.append(String.format("%s = NULL", key));
             } else if (value instanceof Number) {
-                assignments.add(key + " = " + value);
+                setClause.append(String.format("%s = %s", key, value));
             } else {
-                assignments.add(key + " = '" + value.toString().replace("'", "''") + "'");
+                String escaped = value.toString().replace("'", "''");
+                setClause.append(String.format("%s = '%s'", key, escaped));
             }
         }
     
-        sql.append(String.join(", ", assignments));
-        sql.append(" WHERE ").append(idKey).append(" = ").append(idValue);
+        String sql = String.format("UPDATE %s SET %s WHERE %s = %s", tableName, setClause, idKey, idValue);
+        AppData.getInstance().update(sql);
+        System.out.println("Actualitzat: " + sql);
     
-        AppData.getInstance().update(sql.toString());
-        System.out.println("Actualitzat: " + sql);  
-        
         return true;
     }
-    
+        
     // Transforma una taula en editable
     public static void makeTableEditable(TableView<HashMap<String, Object>> table, Consumer<HashMap<String, Object>> onEdit) {
         table.setEditable(true);
