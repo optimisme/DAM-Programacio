@@ -63,7 +63,7 @@ public class ControllerTaula implements Initializable {
             choiceBox.getSelectionModel().select(selectedTable);
             setTable(selectedTable);
 
-            // Escollir la fila 
+            // Escollir la fila 'selectedRow'
             if (selectedRow >= 0 && selectedRow < table.getItems().size()) {
                 table.getSelectionModel().select(selectedRow);
             }
