@@ -62,15 +62,15 @@ public class ControllerTaula implements Initializable {
             // Escollir la taula 'selectedTable'
             choiceBox.getSelectionModel().select(selectedTable);
             setTable(selectedTable);
+
+            // Escollir la fila 
+            if (selectedRow >= 0 && selectedRow < table.getItems().size()) {
+                table.getSelectionModel().select(selectedRow);
+            }
         } else {
             // Escollir la primera taula
             choiceBox.getSelectionModel().selectFirst();
             setTable(tableNames.get(0));
-        }
-
-        // Escollir la fila 
-        if (selectedRow >= 0 && selectedRow < table.getItems().size()) {
-            table.getSelectionModel().select(selectedRow);
         }
     }
         
@@ -122,7 +122,7 @@ public class ControllerTaula implements Initializable {
     public void reload(ActionEvent event) {
         String selectedTable = choiceBox.getSelectionModel().getSelectedItem();
         int selectedRow = table.getSelectionModel().getSelectedIndex();
-        
+
         loadTables(selectedTable, selectedRow);
     }
 
