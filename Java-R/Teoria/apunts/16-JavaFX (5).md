@@ -33,6 +33,35 @@ Cal escollir un arxiu **".sqlite"** al iniciar l'aplicació.
 <br/></center>
 <br/>
 
+Quan s'escull un arxiu **".sqlite"**:
+
+- S'obre la connexió amb la base de dades
+- Es carrega la informació de les taules (sense cap sel·lecció de taula o fila)
+- Es canvia a la vista "ViewTaula"
+
+```java
+    @FXML
+    public void selectFile(ActionEvent event) {
+        // Escollir un arxiu "*.sqlite*
+        Stage stage = (Stage) buttonSelectFile.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arxius .sqlite", "*.sqlite"));
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            // Obrir connexió amb la base de dades
+            AppData db = AppData.getInstance();
+            db.connect(selectedFile.toPath().toString());
+
+            // Carregar la informació de les taules (sense sel·lecció)
+            ControllerTaula ctrlTaula = (ControllerTaula) UtilsViews.getController("ViewTaula");
+            ctrlTaula.loadTables("", -1);
+
+            // Canviar a la vista "ViewTaula"
+            UtilsViews.setViewAnimating("ViewTaula");
+        }
+    }
+```
 
 Al iniciar la vista, es defineix que el **'CoiceBox'** canvii les dades de la taula **'TableView'** quan l'usuari canvia d'opció. Això es fa a la funció **initialize**:
 
