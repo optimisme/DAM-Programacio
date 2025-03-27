@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.function.Consumer;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
@@ -15,6 +16,8 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.StringConverter;
 
 public class ControllerTaula implements Initializable {
 
@@ -115,6 +118,11 @@ public class ControllerTaula implements Initializable {
         table.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             setLabelInfo(newSelection);
         });
+
+        // Fer la taula editable
+        makeTableEditable(table, row -> {
+            setModifiedRow(row);
+        });
     }
     
     @FXML
@@ -133,6 +141,89 @@ public class ControllerTaula implements Initializable {
             StringBuilder info = new StringBuilder();
             rowData.forEach((key, value) -> info.append(key).append(": ").append(value).append("  "));
             label.setText(info.toString());
+        }
+    }
+
+    // Funció que actualitza la base de dades quan es modifica una fila
+    private void setModifiedRow(HashMap<String, Object> rowData) {
+        String currentTable = choiceBox.getSelectionModel().getSelectedItem();
+
+        if (rowData == null || currentTable == null) return;
+    
+        // Definir el valor 'idValue' segons la clau primària de la taula
+        String idKey = "id";
+        if (currentTable.equals("Llibres")) {
+            idKey = "id_llibre";
+        }
+
+        Object idValue = rowData.get(idKey);
+        if (!(idValue instanceof Integer)) {
+            System.out.println("No es pot actualitzar: no hi ha clau primària '" + idKey + "'");
+            return;
+        }
+    
+        StringBuilder sql = new StringBuilder("UPDATE " + currentTable + " SET ");
+        ArrayList<String> assignments = new ArrayList<>();
+    
+        for (String key : rowData.keySet()) {
+            if (key.equals(idKey)) continue; 
+    
+            Object value = rowData.get(key);
+            if (value == null) {
+                assignments.add(key + " = NULL");
+            } else if (value instanceof Number) {
+                assignments.add(key + " = " + value);
+            } else {
+                assignments.add(key + " = '" + value.toString().replace("'", "''") + "'");
+            }
+        }
+    
+        sql.append(String.join(", ", assignments));
+        sql.append(" WHERE ").append(idKey).append(" = ").append(idValue);
+    
+        AppData.getInstance().update(sql.toString());
+        System.out.println("Actualitzat: " + sql);
+    }
+    
+    // Transforma una taula en editable
+    public static void makeTableEditable(TableView<HashMap<String, Object>> table, Consumer<HashMap<String, Object>> onEdit) {
+        table.setEditable(true);
+
+        if (table.getItems().isEmpty()) return;
+
+        for (TableColumn<HashMap<String, Object>, ?> tc : table.getColumns()) {
+            TableColumn<HashMap<String, Object>, Object> col = (TableColumn<HashMap<String, Object>, Object>) tc;
+            String key = col.getText();
+            Object sampleValue = table.getItems().get(0).get(key);
+
+            StringConverter<Object> converter;
+
+            if (sampleValue instanceof Integer) {
+                converter = new StringConverter<>() {
+                    public String toString(Object o) { return o == null ? "" : o.toString(); }
+                    public Object fromString(String s) {
+                        try { return Integer.parseInt(s); } catch (Exception e) { return 0; }
+                    }
+                };
+            } else if (sampleValue instanceof Double) {
+                converter = new StringConverter<>() {
+                    public String toString(Object o) { return o == null ? "" : o.toString(); }
+                    public Object fromString(String s) {
+                        try { return Double.parseDouble(s); } catch (Exception e) { return 0.0; }
+                    }
+                };
+            } else {
+                converter = new StringConverter<>() {
+                    public String toString(Object o) { return o == null ? "" : o.toString(); }
+                    public Object fromString(String s) { return s; }
+                };
+            }
+
+            col.setCellFactory(TextFieldTableCell.forTableColumn(converter));
+            col.setOnEditCommit(e -> {
+                e.getRowValue().put(key, e.getNewValue());
+                onEdit.accept(e.getRowValue());
+            });
         }
     }
 }
