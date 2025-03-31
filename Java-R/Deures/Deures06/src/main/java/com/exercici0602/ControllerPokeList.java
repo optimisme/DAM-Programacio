@@ -44,6 +44,7 @@ public class ControllerPokeList {
             HashMap<String, Object> pokemon = llistaPokemons.get(i);
 
             // Extreure la informació necessària del JSON
+            int number = (int) pokemon.get("number");
             String name = (String) pokemon.get("name");
             String type = (String) pokemon.get("type");
             String imagePath = (String) pokemon.get("image");
@@ -55,6 +56,7 @@ public class ControllerPokeList {
             ControllerPokeItem itemController = loader.getController();
 
             // Assignar els valors als controls del template
+            itemController.setNumber(number);
             itemController.setTitle(name);
             itemController.setSubtitle(type);
             itemController.setImatge(imagePath);

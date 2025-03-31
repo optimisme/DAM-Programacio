@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="50.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici0602.ControllerPokeItem">
+<AnchorPane maxHeight="50.0" onMouseClicked="#toViewCard" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.exercici0602.ControllerPokeItem">
    <children>
       <Label fx:id="title" prefHeight="25.0" text="TitleText" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="0.0">
          <font>
