@@ -62,7 +62,7 @@ L'aplicació ha de tenir tres vistes:
 
   - Té el botó 'Delete' per esborrar el Pokémon de la llista, 
   
-  - Té el botó 'Edit' per modificar-ne la informació. 
+  - Té el botó 'Edit' per modificar-ne la informació, anant a la vista 'viewPokeForm'.
   
   - I té fletxes 'Previous' i 'Next' per recórrer les fitxes de tots els Pokémons sense tornar a la vista 'viewPokeList'.
 
@@ -73,5 +73,7 @@ L'aplicació ha de tenir tres vistes:
   - Si s'afegeix, no mostra l'identificador. I mostra un botó 'Add'
 
   - Si s'edita la informació d'un Pokémon que ja existeix, mostra el botó 'Update'.
+
+  - Té un botó 'Back' per tornar a la vista 'viewPokeCard'.
 
   - Permet escollir una imatge ".png" del sistema operatiu, i la copia a la carpeta 'data/pokeImages' renombrant-la amb el nom del Pokémon sense espais.
