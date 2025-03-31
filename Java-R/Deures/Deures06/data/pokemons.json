@@ -1,0 +1,163 @@
+[
+    {
+      "number": 1,
+      "name": "Bulbasaur",
+      "type": "Planta/Verí",
+      "ability": "Overgrow",
+      "height": "0.7 m",
+      "weight": "6.9 kg",
+      "category": "Seed",
+      "image": "data/pokeImages/bulbasaur.png"
+    },
+    {
+      "number": 2,
+      "name": "Ivysaur",
+      "type": "Planta/Verí",
+      "ability": "Overgrow",
+      "height": "1.0 m",
+      "weight": "13.0 kg",
+      "category": "Seed",
+      "image": "data/pokeImages/ivysaur.png"
+    },
+    {
+      "number": 3,
+      "name": "Venusaur",
+      "type": "Planta/Verí",
+      "ability": "Overgrow",
+      "height": "2.0 m",
+      "weight": "100.0 kg",
+      "category": "Seed",
+      "image": "data/pokeImages/venusaur.png"
+    },
+    {
+      "number": 4,
+      "name": "Charmander",
+      "type": "Foc",
+      "ability": "Blaze",
+      "height": "0.6 m",
+      "weight": "8.5 kg",
+      "category": "Lizard",
+      "image": "data/pokeImages/charmander.png"
+    },
+    {
+      "number": 5,
+      "name": "Charmeleon",
+      "type": "Foc",
+      "ability": "Blaze",
+      "height": "1.1 m",
+      "weight": "19.0 kg",
+      "category": "Flame",
+      "image": "data/pokeImages/charmeleon.png"
+    },
+    {
+      "number": 6,
+      "name": "Charizard",
+      "type": "Foc/Volador",
+      "ability": "Blaze",
+      "height": "1.7 m",
+      "weight": "90.5 kg",
+      "category": "Flame",
+       "image": "data/pokeImages/charizard.png"
+    },
+    {
+      "number": 7,
+      "name": "Squirtle",
+      "type": "Aigua",
+      "ability": "Torrent",
+      "height": "0.5 m",
+      "weight": "9.0 kg",
+      "category": "Tiny Turtle",
+       "image": "data/pokeImages/squirtle.png"
+    },
+    {
+      "number": 8,
+      "name": "Wartortle",
+      "type": "Aigua",
+      "ability": "Torrent",
+      "height": "1.0 m",
+      "weight": "22.5 kg",
+      "category": "Turtle",
+       "image": "data/pokeImages/wartortle.png"
+    },
+    {
+      "number": 9,
+      "name": "Blastoise",
+      "type": "Aigua",
+      "ability": "Torrent",
+      "height": "1.6 m",
+      "weight": "85.5 kg",
+      "category": "Shellfish",
+       "image": "data/pokeImages/blastoise.png"
+    },
+    {
+      "number": 10,
+      "name": "Caterpie",
+      "type": "Insecte",
+      "ability": "Shield Dust",
+      "height": "0.3 m",
+      "weight": "2.9 kg",
+      "category": "Worm",
+       "image": "data/pokeImages/caterpie.png"
+    },
+    {
+      "number": 11,
+      "name": "Metapod",
+      "type": "Insecte",
+      "ability": "Shed Skin",
+      "height": "0.7 m",
+      "weight": "9.9 kg",
+      "category": "Cocoon",
+      "image": "data/pokeImages/metapod.png"
+    },
+    {
+      "number": 12,
+      "name": "Butterfree",
+      "type": "Insecte/Volador",
+      "ability": "Compound Eyes",
+      "height": "1.1 m",
+      "weight": "32.0 kg",
+      "category": "Butterfly",
+      "image": "data/pokeImages/butterfree.png"
+    },
+    {
+      "number": 13,
+      "name": "Weedle",
+      "type": "Insecte/Verí",
+      "ability": "Shield Dust",
+      "height": "0.3 m",
+      "weight": "3.2 kg",
+      "category": "Hairy Bug",
+      "image": "data/pokeImages/weedle.png"
+    },
+    {
+      "number": 14,
+      "name": "Kakuna",
+      "type": "Insecte/Verí",
+      "ability": "Shed Skin",
+      "height": "0.6 m",
+      "weight": "10.0 kg",
+      "category": "Cocoon",
+      "image": "data/pokeImages/kakuna.png"
+    },
+    {
+      "number": 15,
+      "name": "Beedrill",
+      "type": "Insecte/Verí",
+      "ability": "Swarm",
+      "height": "1.0 m",
+      "weight": "29.5 kg",
+      "category": "Poison Bee",
+       "image": "data/pokeImages/beedrill.png"
+    },
+    {
+      "number": 25,
+      "name": "Pikachu",
+      "type": "Elèctric",
+      "ability": "Static",
+      "height": "0.4 m",
+      "weight": "6.0 kg",
+      "category": "Mouse",
+      "image": "data/pokeImages/pikachu.png"
+    }    
+]
+  
