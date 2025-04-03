@@ -48,7 +48,6 @@ public class ControllerPokeItem {
 
     @FXML
     public void toViewCard(MouseEvent event) {
-        System.out.println("hola:" + this.number);
         ControllerPokeCard ctrl = (ControllerPokeCard) UtilsViews.getController("ViewCard");
         ctrl.loadPokemon(this.number);
         UtilsViews.setViewAnimating("ViewCard");

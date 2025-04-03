@@ -64,6 +64,7 @@
                   <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="50.0" HBox.hgrow="ALWAYS">
                      <children>
                         <Label fx:id="labelAbility" text="Ability" />
+                        <Label fx:id="labelCategory" text="Category" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
@@ -79,7 +80,17 @@
                   </VBox>
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="labelWeigth" text="Weigth" />
+                        <HBox prefHeight="100.0" prefWidth="200.0">
+                           <children>
+                              <Label text="Height:">
+                                 <HBox.margin>
+                                    <Insets right="10.0" />
+                                 </HBox.margin>
+                              </Label>
+                              <Label fx:id="labelHeight" text="Height" />
+                           </children>
+                        </HBox>
+                        <Label fx:id="labelWeigth1" text="Weigth" />
                      </children>
                   </VBox>
                </children>
