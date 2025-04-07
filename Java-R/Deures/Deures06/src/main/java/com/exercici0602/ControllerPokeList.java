@@ -68,6 +68,8 @@ public class ControllerPokeList {
 
     @FXML
     public void addPokemon(ActionEvent event) {
-        //TODO
+        ControllerPokeForm ctrl = (ControllerPokeForm) UtilsViews.getController("ViewForm");
+        ctrl.setStatus(ControllerPokeForm.STATUS_ADD, -1);
+        UtilsViews.setViewAnimating("ViewForm");
     }
 }
