@@ -6,12 +6,20 @@ import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.ResourceBundle;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Callable;
+import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -19,6 +27,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 
 public class ControllerPokeForm implements Initializable {
 
@@ -26,6 +35,9 @@ public class ControllerPokeForm implements Initializable {
     public static final String STATUS_EDIT = "edit";
     private String status = "";
     private int number = -1;
+
+    @FXML
+    private Label labelSaved = new Label();
 
     @FXML
     private TextField fieldName = new TextField();
@@ -37,7 +49,8 @@ public class ControllerPokeForm implements Initializable {
     private TextField fieldCategory = new TextField();
     
     @FXML
-    private TextField fieldType = new TextField();
+    private ChoiceBox choiceType = new ChoiceBox();
+    final String pokemonTypes[] = {"Planta/Verí", "Foc", "Foc/Volador", "Aigua", "Insecte", "Insecte/Volador", "Insecte/Verí", "Elèctric"};
   
     @FXML
     private TextField fieldHeight = new TextField();
@@ -50,6 +63,9 @@ public class ControllerPokeForm implements Initializable {
 
     @FXML
     private ImageView imgPokemon;
+
+    @FXML
+    private Button buttonDelete = new Button();
 
     @FXML
     private Button buttonAdd = new Button();
@@ -73,19 +89,27 @@ public class ControllerPokeForm implements Initializable {
     public void setStatus(String value, int number) {
         this.status = value;
         this.number = number;
+
+        choiceType.getItems().clear();
+        choiceType.getItems().addAll(Arrays.asList(pokemonTypes));
+
+        labelSaved.setVisible(false);
+
         if (this.status.equalsIgnoreCase(STATUS_ADD)) {
+            buttonDelete.setVisible(false);
             buttonAdd.setVisible(true);
             buttonUpdate.setVisible(false);
 
             fieldName.clear();
             fieldAbility.clear();
             fieldCategory.clear();
-            fieldType.clear();
+            choiceType.getSelectionModel().select(pokemonTypes[0]);
             fieldHeight.clear();
             fieldWeight.clear();
             imgPokemon.setImage(null);
         }
         if (this.status.equalsIgnoreCase(STATUS_EDIT)) {
+            buttonDelete.setVisible(true);
             buttonAdd.setVisible(false);
             buttonUpdate.setVisible(true);
 
@@ -98,7 +122,7 @@ public class ControllerPokeForm implements Initializable {
                 fieldName.setText((String) pokemon.get("name"));
                 fieldAbility.setText((String) pokemon.get("ability"));
                 fieldCategory.setText((String) pokemon.get("category"));
-                fieldType.setText((String) pokemon.get("type"));
+                choiceType.getSelectionModel().select((String) pokemon.get("type"));
                 fieldHeight.setText((String) pokemon.get("height"));
                 fieldWeight.setText((String) pokemon.get("weight"));
 
@@ -118,9 +142,13 @@ public class ControllerPokeForm implements Initializable {
     @FXML
     public void goBack(MouseEvent event) {
         if (this.status.equalsIgnoreCase(STATUS_ADD)) {
+            ControllerPokeList ctrl = (ControllerPokeList) UtilsViews.getController("ViewList");
+            ctrl.loadList();
             UtilsViews.setViewAnimating("ViewList");
         }
         if (this.status.equalsIgnoreCase(STATUS_EDIT)) {
+            ControllerPokeCard ctrl = (ControllerPokeCard) UtilsViews.getController("ViewCard");
+            ctrl.loadPokemon(this.number);
             UtilsViews.setViewAnimating("ViewCard");
         }
     }
@@ -132,11 +160,69 @@ public class ControllerPokeForm implements Initializable {
 
     @FXML
     public void add(ActionEvent event) {
-        
+        String name = fieldName.getText();
+        String type = (String) choiceType.getSelectionModel().getSelectedItem();
+        String ability = fieldAbility.getText();
+        String height = fieldHeight.getText();
+        String weight = fieldWeight.getText();
+        String category = fieldCategory.getText();
+        String image = "";
+
+        AppData db = AppData.getInstance();
+        String sql = String.format("INSERT INTO pokemons (name, type, ability, height, weight, category, image) VALUES ('%s','%s','%s','%s','%s','%s','%s')", name, type, ability, height, weight, category, image);
+        db.update(sql);
+
+        setStatus(STATUS_ADD, -1);
+
+        labelSaved.setVisible(true);
+        setTimeout(2500, () -> {
+            labelSaved.setVisible(false);
+        });
     }
 
     @FXML
     public void update(ActionEvent event) {
-        
+        String name = fieldName.getText();
+        String type = (String) choiceType.getSelectionModel().getSelectedItem();
+        String ability = fieldAbility.getText();
+        String height = fieldHeight.getText();
+        String weight = fieldWeight.getText();
+        String category = fieldCategory.getText();
+        String image = "";
+
+        AppData db = AppData.getInstance();
+        String sql = String.format("UPDATE pokemons SET name = '%s', type = '%s', ability = '%s', height = '%s', weight = '%s', category = '%s', image = '%s' WHERE number = '%d'", name, type, ability, height, weight, category, image, this.number);
+        db.update(sql);
+
+        labelSaved.setVisible(true);
+        setTimeout(2500, () -> {
+            labelSaved.setVisible(false);
+        });
+    }
+    
+    private void setTimeout(int milliseconds, Runnable task) {
+        Timer timer = new Timer();
+        timer.schedule(
+            new TimerTask() {
+                @Override
+                public void run() {
+                    task.run();
+                }
+            }, milliseconds
+        );
+    }
+    
+    @FXML
+    public void delete(ActionEvent event) {
+        AppData db = AppData.getInstance();
+        String sql = String.format("DELETE FROM pokemons WHERE number = '%d'", this.number);
+        db.update(sql);
+
+        setStatus(STATUS_ADD, -1);
+
+        labelSaved.setVisible(true);
+        setTimeout(2500, () -> {
+            labelSaved.setVisible(false);
+        });
     }
 }

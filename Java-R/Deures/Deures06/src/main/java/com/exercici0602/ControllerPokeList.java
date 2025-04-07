@@ -48,7 +48,6 @@ public class ControllerPokeList {
             String name = (String) pokemon.get("name");
             String type = (String) pokemon.get("type");
             String imagePath = (String) pokemon.get("image");
-            System.out.println(name);
 
             // Carregar el template
             FXMLLoader loader = new FXMLLoader(resource);
