@@ -3,8 +3,11 @@ package com.exercici0602;
 import com.utils.*;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -35,6 +38,7 @@ public class ControllerPokeForm implements Initializable {
     public static final String STATUS_EDIT = "edit";
     private String status = "";
     private int number = -1;
+    private String imagePath = "";
 
     @FXML
     private Label labelSaved = new Label();
@@ -73,6 +77,9 @@ public class ControllerPokeForm implements Initializable {
     @FXML
     private Button buttonUpdate = new Button();
 
+    @FXML
+    private Button buttonSelectFile = new Button();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Path imagePath = null;
@@ -107,6 +114,7 @@ public class ControllerPokeForm implements Initializable {
             fieldHeight.clear();
             fieldWeight.clear();
             imgPokemon.setImage(null);
+            this.imagePath = "";
         }
         if (this.status.equalsIgnoreCase(STATUS_EDIT)) {
             buttonDelete.setVisible(true);
@@ -126,13 +134,13 @@ public class ControllerPokeForm implements Initializable {
                 fieldHeight.setText((String) pokemon.get("height"));
                 fieldWeight.setText((String) pokemon.get("weight"));
 
-                String imagePath = (String) pokemon.get("image");
+                this.imagePath = (String) pokemon.get("image");
                 try {
-                    File file = new File(imagePath);
+                    File file = new File(this.imagePath);
                     Image image = new Image(file.toURI().toString());
                     this.imgPokemon.setImage(image);
                 } catch (NullPointerException e) {
-                    System.err.println("Error loading image asset: " + imagePath);
+                    System.err.println("Error loading image asset: " + this.imagePath);
                     e.printStackTrace();
                 }
             }
@@ -155,7 +163,27 @@ public class ControllerPokeForm implements Initializable {
 
     @FXML
     public void selectFile(ActionEvent event) {
+        Stage stage = (Stage) buttonSelectFile.getScene().getWindow();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.dir")));
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Arxius d'imatge", "*.png", "*.jpg", "*.jpeg"));
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            String fileName = selectedFile.getName();
+            String destination = System.getProperty("user.dir") + "/data/pokeImages/" + fileName;
+            File destinationFile = new File(destination);
+            try {
+                Files.copy(selectedFile.toPath(), destinationFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+                this.imagePath = "data/pokeImages/" + fileName;
 
+                File file = new File(this.imagePath);
+                Image image = new Image(file.toURI().toString());
+                this.imgPokemon.setImage(image);
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @FXML
@@ -166,7 +194,7 @@ public class ControllerPokeForm implements Initializable {
         String height = fieldHeight.getText();
         String weight = fieldWeight.getText();
         String category = fieldCategory.getText();
-        String image = "";
+        String image = this.imagePath;
 
         AppData db = AppData.getInstance();
         String sql = String.format("INSERT INTO pokemons (name, type, ability, height, weight, category, image) VALUES ('%s','%s','%s','%s','%s','%s','%s')", name, type, ability, height, weight, category, image);
@@ -188,7 +216,7 @@ public class ControllerPokeForm implements Initializable {
         String height = fieldHeight.getText();
         String weight = fieldWeight.getText();
         String category = fieldCategory.getText();
-        String image = "";
+        String image = this.imagePath;
 
         AppData db = AppData.getInstance();
         String sql = String.format("UPDATE pokemons SET name = '%s', type = '%s', ability = '%s', height = '%s', weight = '%s', category = '%s', image = '%s' WHERE number = '%d'", name, type, ability, height, weight, category, image, this.number);

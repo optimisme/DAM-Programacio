@@ -43,12 +43,12 @@
                <children>
                   <VBox alignment="CENTER_LEFT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button fx:id="buttonPrevious" mnemonicParsing="false" onAction="#previous" text="Previous" />
+                        <Button fx:id="buttonPrevious" mnemonicParsing="false" onAction="#previous" style="-fx-base: orange;" text="Previous" />
                      </children>
                   </VBox>
                   <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                      <children>
-                        <Button fx:id="buttonNext" mnemonicParsing="false" onAction="#next" text="Next" />
+                        <Button fx:id="buttonNext" mnemonicParsing="false" onAction="#next" style="-fx-base: orange;" text="Next" />
                      </children>
                   </VBox>
                </children>
