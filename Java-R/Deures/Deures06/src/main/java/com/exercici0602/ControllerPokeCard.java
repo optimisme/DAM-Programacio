@@ -2,7 +2,6 @@ package com.exercici0602;
 
 import com.utils.*;
 
-import java.io.File;
 import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -17,8 +16,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 public class ControllerPokeCard implements Initializable {
 

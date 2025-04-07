@@ -14,9 +14,6 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Callable;
-import java.util.concurrent.TimeUnit;
-import java.util.function.Function;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,7 +27,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.event.ActionEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
 public class ControllerPokeForm implements Initializable {
 
@@ -53,7 +49,7 @@ public class ControllerPokeForm implements Initializable {
     private TextField fieldCategory = new TextField();
     
     @FXML
-    private ChoiceBox choiceType = new ChoiceBox();
+    private ChoiceBox<String> choiceType = new ChoiceBox<String>();
     final String pokemonTypes[] = {"Planta/Verí", "Foc", "Foc/Volador", "Aigua", "Insecte", "Insecte/Volador", "Insecte/Verí", "Elèctric"};
   
     @FXML

@@ -1,14 +1,11 @@
 package com.exercici0602;
 
 import java.io.File;
-import java.nio.file.Path;
-import java.util.Objects;
 
 import com.utils.UtilsViews;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
-import javafx.scene.shape.Circle;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
