@@ -1,0 +1,162 @@
+[
+    {
+        "number": 1,
+        "image": "data/pokeImages/bulbasaur.png",
+        "name": "Bulbasaur",
+        "weight": "6.9 kg",
+        "ability": "Overgrow",
+        "type": "Planta/Verí",
+        "category": "Seed",
+        "height": "0.7 m"
+    },
+    {
+        "number": 2,
+        "image": "data/pokeImages/ivysaur.png",
+        "name": "Ivysaur",
+        "weight": "13.0 kg",
+        "ability": "Overgrow",
+        "type": "Planta/Verí",
+        "category": "Seed",
+        "height": "1.0 m"
+    },
+    {
+        "number": 3,
+        "image": "data/pokeImages/venusaur.png",
+        "name": "Venusaur",
+        "weight": "100.0 kg",
+        "ability": "Overgrow",
+        "type": "Planta/Verí",
+        "category": "Seed",
+        "height": "2.0 m"
+    },
+    {
+        "number": 4,
+        "image": "data/pokeImages/charmander.png",
+        "name": "Charmander",
+        "weight": "8.5 kg",
+        "ability": "Blaze",
+        "type": "Foc",
+        "category": "Lizard",
+        "height": "0.6 m"
+    },
+    {
+        "number": 5,
+        "image": "data/pokeImages/charmeleon.png",
+        "name": "Charmeleon",
+        "weight": "19.0 kg",
+        "ability": "Blaze",
+        "type": "Foc",
+        "category": "Flame",
+        "height": "1.1 m"
+    },
+    {
+        "number": 6,
+        "image": "data/pokeImages/charizard.png",
+        "name": "Charizard",
+        "weight": "90.5 kg",
+        "ability": "Blaze",
+        "type": "Foc/Volador",
+        "category": "Flame",
+        "height": "1.7 m"
+    },
+    {
+        "number": 7,
+        "image": "data/pokeImages/squirtle.png",
+        "name": "Squirtle",
+        "weight": "9.0 kg",
+        "ability": "Torrent",
+        "type": "Aigua",
+        "category": "Tiny Turtle",
+        "height": "0.5 m"
+    },
+    {
+        "number": 8,
+        "image": "data/pokeImages/wartortle.png",
+        "name": "Wartortle",
+        "weight": "22.5 kg",
+        "ability": "Torrent",
+        "type": "Aigua",
+        "category": "Turtle",
+        "height": "1.0 m"
+    },
+    {
+        "number": 9,
+        "image": "data/pokeImages/blastoise.png",
+        "name": "Blastoise",
+        "weight": "85.5 kg",
+        "ability": "Torrent",
+        "type": "Aigua",
+        "category": "Shellfish",
+        "height": "1.6 m"
+    },
+    {
+        "number": 10,
+        "image": "data/pokeImages/caterpie.png",
+        "name": "Caterpie",
+        "weight": "2.9 kg",
+        "ability": "Shield Dust",
+        "type": "Insecte",
+        "category": "Worm",
+        "height": "0.3 m"
+    },
+    {
+        "number": 11,
+        "image": "data/pokeImages/metapod.png",
+        "name": "Metapod",
+        "weight": "9.9 kg",
+        "ability": "Shed Skin",
+        "type": "Insecte",
+        "category": "Cocoon",
+        "height": "0.7 m"
+    },
+    {
+        "number": 12,
+        "image": "data/pokeImages/butterfree.png",
+        "name": "Butterfree",
+        "weight": "32.0 kg",
+        "ability": "Compound Eyes",
+        "type": "Insecte/Volador",
+        "category": "Butterfly",
+        "height": "1.1 m"
+    },
+    {
+        "number": 13,
+        "image": "data/pokeImages/weedle.png",
+        "name": "Weedle",
+        "weight": "3.2 kg",
+        "ability": "Shield Dust",
+        "type": "Insecte/Verí",
+        "category": "Hairy Bug",
+        "height": "0.3 m"
+    },
+    {
+        "number": 14,
+        "image": "data/pokeImages/kakuna.png",
+        "name": "Kakuna",
+        "weight": "10.0 kg",
+        "ability": "Shed Skin",
+        "type": "Insecte/Verí",
+        "category": "Cocoon",
+        "height": "0.6 m"
+    },
+    {
+        "number": 15,
+        "image": "data/pokeImages/beedrill.png",
+        "name": "Beedrill",
+        "weight": "29.5 kg",
+        "ability": "Swarm",
+        "type": "Insecte/Verí",
+        "category": "Poison Bee",
+        "height": "1.0 m"
+    },
+    {
+        "number": 25,
+        "image": "data/pokeImages/pikachu.png",
+        "name": "Pikachu",
+        "weight": "6.0 kg",
+        "ability": "Static",
+        "type": "Elèctric",
+        "category": "Mouse",
+        "height": "0.4 m"
+    }
+]
