@@ -235,6 +235,14 @@ Igualment, tots els arxius que formen part del paquet, han de d'indicar-ho a la 
 package com.exemple000;
 ```
 
+### Versió de les llibreries Maven
+
+Les llibreries **Maven** s'actualitzen constantment, sobretot per motius de seguretat.
+
+Si a l'arxiu **.pom** surt un avís de versió insegura, **només cap actualitzar-la a la última versió segura**.
+
+Visual Studio Code permet fer aquesta actualització fàcilment amb la opció "Fix Issue"
+
 ### Noms d'arxiu .java
 
 En JAVA els noms d'arxiu han de coincidir amb el nom de la classe/objecte que en declara el codi.
